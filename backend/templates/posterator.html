@@ -1,8 +1,9 @@
 {% if message %}
 <h2> {{message}} </h2>
 {%endif%}
-<h1> Add a Node </h1>
-<form action="/addNode" method=post>
+<h1> Create a Node </h1>
+<form action="/nodes" method=post>
+  <dd><input type="hidden" name="_method" value="put" />
   <dl>
     <dt>Node Content:
     <textarea name=contents rows=5 cols=40></textarea>
@@ -12,8 +13,9 @@
   </dl>
 </form>
 
-<h1> Add a Link </h1>
-<form action="/addLink" method=post>
+<h1> Create a Link </h1>
+<form action="/nodeLinks" method=post>
+  <input type="hidden" name="_method" value="put" />
   <dl>
     <dt>Link Name:
     <dd><input type=text size=30 name=name>

@@ -2,6 +2,7 @@ import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, flash, render_template, jsonify
 from contextlib import closing
+from flask_restful import Resource, Api, reqparse
 
 # configuration
 DATABASE = 'db/course-dashboard.db'
@@ -12,6 +13,7 @@ PASSWORD = 'default'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+api = Api(app)
 
 #---------------------DB Support methods---------------------
 def connect_db():
@@ -29,33 +31,50 @@ def teardown_request(exception):
         db.close()
 
 #---------------------Rest API---------------------
-@app.route('/addNode', methods=['POST'])
-def addNode():
-    g.db.execute('insert into nodes (contents, renderer) values (?, ?)', 
-                [request.form['contents'], request.form['renderer']])
-    g.db.commit()
-    # g.db.execute('insert into entries (title, text) values (?, ?)',
-    #              [request.form['title'], request.form['text']])
-    g.db.commit()
-    #return redirect(url_for('posterator'), message='New node was successfully created')
-    return jsonify(message='New node was successfully created')
-
-@app.route('/addLink', methods=['POST'])
-def addLink():
-    res = ''
-    try:
-        g.db.execute('insert into links values (?, ?, ?)', 
-            [request.form['origin'], request.form['name'], request.form['dest']]) 
+class Node(Resource):
+    def post(self):
+        if request.form['_method'] == 'put':
+            return self.put()
+        else:
+            # g.db.execute('insert into nodes (contents, renderer) values (?, ?)', 
+            #             [request.form['contents'], request.form['renderer']])
+            # g.db.commit()
+            return "FOO" #jsonify(message='New node was successfully created')
+    def put(self):
+        g.db.execute('insert into nodes (contents, renderer) values (?, ?)', 
+                    [request.form['contents'], request.form['renderer']])
         g.db.commit()
-        res = 'New link was successfully created'
-    except Exception, e:
-        res = 'Origin or Destination Nodes do not exist!'
-    
-    return jsonify(message=res)
+        return jsonify(message='New node was successfully created')
+
+class Link(Resource):
+    def post(self):
+        if request.form['_method'] == 'put':
+            return self.put()
+        else:
+            # g.db.execute('insert into nodes (contents, renderer) values (?, ?)', 
+            #             [request.form['contents'], request.form['renderer']])
+            # g.db.commit()
+            return "FOO" #jsonify(message='New node was successfully created')
+    def put(self):
+        res = ''
+        try:
+            g.db.execute('insert into links values (?, ?, ?)', 
+                [request.form['origin'], request.form['name'], request.form['dest']]) 
+            g.db.commit()
+            res = 'New link was successfully created'
+        except Exception, e:
+            res = 'Origin or Destination Nodes do not exist!'
+        
+        return jsonify(message=res)
 
 @app.route('/posterator', methods=['GET'])
-def add_entry():
+def posterator():
     return render_template('posterator.html')
+
+api.add_resource(Node, '/nodes')
+api.add_resource(Link, '/nodeLinks')
+
+# @app.route('/addNode', methods=['POST'])
 
 if __name__ == '__main__':
     app.run(debug=True)
