@@ -1,0 +1,28 @@
+{% if message %}
+<h2> {{message}} </h2>
+{%endif%}
+<h1> Add a Node </h1>
+<form action="/addNode" method=post>
+  <dl>
+    <dt>Node Content:
+    <textarea name=contents rows=5 cols=40></textarea>
+    <dt>Node Renderer:
+    <dd><input type=text size=30 name=renderer>
+    <dd><input type=submit value=Share>
+  </dl>
+</form>
+
+<h1> Add a Link </h1>
+<form action="/addLink" method=post>
+  <dl>
+    <dt>Link Name:
+    <dd><input type=text size=30 name=name>
+    <dt>Origin Node ID:
+    <dd><input type=text size=30 name=origin>
+    <dt>Destination Node ID:
+    <dd><input type=text size=30 name=dest>
+    <dd><input type=submit value=Share>
+  </dl>
+</form>
+
+
