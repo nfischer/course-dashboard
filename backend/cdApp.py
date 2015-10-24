@@ -20,6 +20,7 @@ def connect_db():
 @app.before_request
 def before_request():
     g.db = connect_db()
+    g.db.execute("PRAGMA foreign_keys = ON;")
 
 @app.teardown_request
 def teardown_request(exception):
@@ -41,10 +42,16 @@ def addNode():
 
 @app.route('/addLink', methods=['POST'])
 def addLink():
-    g.db.execute('insert into links values (?, ?)', 
-        [request.form['origin'], request.form['name'], request.form['dest']]) 
-    g.db.commit()
-    return {'message' : 'New link was successfully created'}
+    res = ''
+    try:
+        g.db.execute('insert into links values (?, ?, ?)', 
+            [request.form['origin'], request.form['name'], request.form['dest']]) 
+        g.db.commit()
+        res = 'New link was successfully created'
+    except Exception, e:
+        res = 'Origin or Destination Nodes do not exist!'
+    
+    return jsonify(message=res)
 
 @app.route('/posterator', methods=['GET'])
 def add_entry():

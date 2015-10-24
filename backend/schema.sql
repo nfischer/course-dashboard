@@ -9,6 +9,7 @@ CREATE TABLE links (
     origin int, 
     name varchar(100), 
     dest int,
-    foreign key(origin) references nodes(origin),
-    foreign key(dest) references nodes(dest)
+    foreign key(origin) references nodes(node_id),
+    foreign key(dest) references nodes(node_id)
 );
+PRAGMA foreign_keys = ON;
