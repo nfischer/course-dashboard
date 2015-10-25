@@ -37,6 +37,8 @@ $ sqlite3 db/course-dashboard.db < schema.sql # start a fresh database
 $ python cdApp.py # launch the backend
 ```
 
+### Python
+
 Then in another terminal, you can launch python to interact with the database:
 
 ```Python
@@ -47,6 +49,11 @@ $ python
 >>> # more commands here...
 >>> exit()
 ```
+
+### HTML interface
+
+As an alternative, you can launch your web browser and point it to
+http://localhost:5000/posterator and use the interface there.
 
 Contributing
 ------------
