@@ -1,15 +1,37 @@
 /* @flow */
 import { ReduceStore } from 'flux/utils';
 import { Dispatcher } from 'flux';
+import { Map } from 'immutable';
 
 import Action from '../Action/action.js';
 import Node from '../Models/node.js';
 import dispatcher from '../dispatcher.js';
 import columnStore from './columnstore.js';
 
-class NodeStore extends ReduceStore<?Node> {
+/*
 
-  getInitialState() : ?Node {
+{
+  node_id: "sjkahfkasdjfha",
+  contents: "foo, bar",
+  renderer: "Resource",
+  children: {
+    "tag": "lsdkjlkjslkfjasdlkfj",
+
+  }
+}
+
+*/
+
+class NodeStoreState {
+  constructor(rootId, nodes){
+    this.rootId = rootId;
+    this.nodes = nodes;
+  }
+}
+
+class NodeStore extends ReduceStore<?NodeStoreState> {
+
+  getInitialState() : ?NodeStoreState {
     return null;
   }
 
@@ -17,7 +39,7 @@ class NodeStore extends ReduceStore<?Node> {
     super.__invokeOnDispatch(payload);
   }
 
-  reduce(state: ?LayerStoreState, action: Action) : ?LayerStoreState {
+  reduce(state: ?LayerStoreState, action: Action) : ?NodeStoreState {
     let newState = Object.assign({}, state);
     switch(action.name){
     case "open":
