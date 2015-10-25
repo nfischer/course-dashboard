@@ -9,12 +9,43 @@ Inspiration
 Installation
 ------------
 
+To run our database, you'll need `sqlite3` as well as `pip`:
+
+```
+$ sudo apt-get install sqlite3
+$ sudo apt-get install python-pip
+```
+
 To install `flask` for the backend framework, you'll need to install two
 packages with `pip`:
 
 ```
 $ sudo pip install Flask
 $ sudo pip install flask-restful
+```
+
+Backend
+-------
+
+To begin testing the backend by itself, you can try running the following
+commands:
+
+```
+$ cd backend/
+$ mkdir db/ # only do this once
+$ sqlite3 db/course-dashboard.db < schema.sql # start a fresh database
+$ python cdApp.py # launch the backend
+```
+
+Then in another terminal, you can launch python to interact with the database:
+
+```Python
+$ python
+>>> from requests import put, get
+>>> put('http://localhost:5000/nodes', data={'contents': 'foo', 'renderer': 'bar'}).json()
+>>> # output should be: {u'message': u'New node was successfully created'}
+>>> # more commands here...
+>>> exit()
 ```
 
 Contributing
