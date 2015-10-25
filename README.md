@@ -53,7 +53,8 @@ $ python
 ### HTML interface
 
 As an alternative, you can launch your web browser and point it to
-http://localhost:5000/posterator and use the interface there.
+[http://localhost:5000/posterator](http://localhost:5000/posterator) and use the
+interface there.
 
 Contributing
 ------------
