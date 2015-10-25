@@ -36,13 +36,13 @@ class Node(Resource):
         if request.form['_method'] == 'put':
             return self.put()
         else:
-            # g.db.execute('insert into nodes (contents, renderer) values (?, ?)', 
+            # g.db.execute('insert into nodes (contents, renderer) values (?, ?)',
             #             [request.form['contents'], request.form['renderer']])
             # g.db.commit()
             return "FOO" #jsonify(message='New node was successfully created')
     def put(self):
-        g.db.execute('insert into nodes (contents, renderer) values (?, ?)', 
-                    [request.form['contents'], request.form['renderer']])
+        g.db.execute('insert into nodes (contents, renderer) values (?, ?)',
+                     [request.form['contents'], request.form['renderer']])
         g.db.commit()
         return jsonify(message='New node was successfully created')
 
@@ -51,20 +51,21 @@ class Link(Resource):
         if request.form['_method'] == 'put':
             return self.put()
         else:
-            # g.db.execute('insert into nodes (contents, renderer) values (?, ?)', 
+            # g.db.execute('insert into nodes (contents, renderer) values (?, ?)',
             #             [request.form['contents'], request.form['renderer']])
             # g.db.commit()
             return "FOO" #jsonify(message='New node was successfully created')
     def put(self):
         res = ''
         try:
-            g.db.execute('insert into links values (?, ?, ?)', 
-                [request.form['origin'], request.form['name'], request.form['dest']]) 
+            g.db.execute('insert into links values (?, ?, ?)',
+                         [request.form['origin'], request.form['name'],
+                          request.form['dest']])
             g.db.commit()
             res = 'New link was successfully created'
         except Exception, e:
             res = 'Origin or Destination Nodes do not exist!'
-        
+
         return jsonify(message=res)
 
 @app.route('/posterator', methods=['GET'])

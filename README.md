@@ -6,6 +6,17 @@ A simplified way of organizing all information and materials for a course
 Inspiration
 -----------
 
+Installation
+------------
+
+To install `flask` for the backend framework, you'll need to install two
+packages with `pip`:
+
+```
+$ sudo pip install Flask
+$ sudo pip install flask-restful
+```
+
 Contributing
 ------------
 
