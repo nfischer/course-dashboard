@@ -8,7 +8,7 @@ class Open extends Action{
   }
 }
 
-export default function open(data: Object) : void {
-  let action = new Open(data);
+export default function open(nodes, links) {
+  let action = new Open({nodes, links});
   dispatcher.dispatch(action);
 }

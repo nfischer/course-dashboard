@@ -31,7 +31,7 @@ class NodeStoreState {
 }
 
 class NodeStore extends ReduceStore<?NodeStoreState> {
-  
+
   getInitialState() : ?NodeStoreState {
     return null;
   }
@@ -45,18 +45,18 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
     switch(action.name){
     case "open":
       //TODO: handle creation of tree given data format from server
-      var idx;
-      var nodesList = action.data;
-      var numNodes = nodesList.keys().length();
+      let idx;
+      let nodesList = action.data.nodes;
+      let numNodes = nodesList.length;
       if (numNodes > 0) {
-      	  newState.rootID = nodesList[0].id;
-      	  newState.nodes[nodesList[0].id] = nodesList[0];
+      	  newState.rootId = nodesList[0].id;
+      	  newState.nodes = newState.nodes.set(nodesList[0].id, nodesList[0]);
       }
       for (idx = 1; idx < numNodes; idx++) {
-      	  newState.nodes[nodesList[idx].id] = nodesList[idx];
+      	  newState.nodes = newState.nodes.set(nodesList[idx].id], nodesList[idx]);
       }
       break;
-    case "addResource": 
+    case "addResource":
       //TODO: insert created node into tree at appropriate place
       // I think we need the id of the parent node
     case "editResource":

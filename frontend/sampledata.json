@@ -1,0 +1,139 @@
+{
+  "nodes": [
+    {
+      "id": "0",
+      "contents": "",
+      "renderer": "Timeline",
+      "children": {
+        "week 1": "1",
+        "week 2": "2",
+        "week 3": "3"
+      }
+    },
+    {
+      "id": "1",
+      "contents": "",
+      "renderer": "Week",
+      "children": {
+        "topics": "4",
+        "announcements": "5",
+        "assignments": "6"
+      }
+    },
+    {
+      "id": "2",
+      "contents": "",
+      "renderer": "Week",
+      "children": {}
+    },
+    {
+      "id": "3",
+      "contents": "",
+      "renderer": "Week",
+      "children": {}
+    },
+    {
+      "id": "6",
+      "contents": "#Assignments",
+      "renderer": "List",
+      "children": {
+        "Background Survey": "16"
+      }
+    },
+    {
+      "id": "16",
+      "contents": "please fill out the [background survey](https://ccle.ucla.edu/mod/resource/view.php?id=885527) and bring it to class.",
+      "renderer": "Assignment",
+      "children": {}
+    },
+    {
+      "id": "5",
+      "contents": "[piazza](https://piazza.com/class/if44ov1fn5a505)",
+      "renderer": "Announcements",
+      "children": {}
+    },
+    {
+      "id": "4",
+      "contents": "",
+      "renderer": "List",
+      "children": {
+        "introduction": "7",
+        "design notation": "8",
+        "information hiding": "9"
+      }
+    },
+    {
+      "id": "7",
+      "contents": "#Introduction",
+      "renderer": "Topic",
+      "children": {
+        "resources": "10"
+      }
+    },
+    {
+      "id": "10",
+      "contents": "",
+      "renderer": "List",
+      "children": {
+        "syllabus": "11"
+      }
+    },
+    {
+      "id": "11",
+      "contents": "[http://web.cs.ucla.edu/~miryung/teaching/CS130-Fall2015/main.html](http://web.cs.ucla.edu/~miryung/teaching/CS130-Fall2015/main.html)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "8",
+      "contents": "#Design Notation (UML)",
+      "renderer": "Topic",
+      "children": {
+        "resources": "12"
+      }
+    },
+    {
+      "id": "12",
+      "contents": "",
+      "renderer": "List",
+      "children": {
+        "administrator added": "13",
+        "draw.io": "14"
+      }
+    },
+    {
+      "id": "13",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078167/mod_resource/content/3/Lecture1-UML.pdf)\n[Overview of UML](http://www.ibm.com/developerworks/rational/library/769.html)\n[UML Tutorial](http://users.ece.utexas.edu/~miryung/teaching/EE461L-Spring2012/labs/uml.html)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "14",
+      "contents": "Hey guys, check out [draw.io](https://www.draw.io/) for UML diagramming that's integrated with google docs!",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "9",
+      "contents": "#Design Principles: Information Hiding",
+      "renderer": "Topic",
+      "children": {
+        "resources": "15"
+      }
+    },
+    {
+      "id": "15",
+      "contents": "",
+      "renderer": "List",
+      "children": {
+        "administrator added": "16"
+      }
+    },
+    {
+      "id": "16",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078168/mod_resource/content/1/Lecture2-InformationHiding.pdf)\n[Parnas Paper](http://dl.acm.org/citation.cfm?id=361623)",
+      "renderer": "Resource",
+      "children": {}
+    }
+  ]
+}
