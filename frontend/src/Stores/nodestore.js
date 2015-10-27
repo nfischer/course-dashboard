@@ -31,6 +31,8 @@ class NodeStoreState {
 
 class NodeStore extends ReduceStore<?NodeStoreState> {
 
+  var nodeTree = {};
+  
   getInitialState() : ?NodeStoreState {
     return null;
   }
@@ -44,12 +46,26 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
     switch(action.name){
     case "open":
       //TODO: handle creation of tree given data format from server
+      var idx;
+      var nodesList = action.data;
+      var numNodes = nodesList.keys().length();
+      var linksList = action.links;
+      
+      for (idx = 0; idx < numNodes; idx++) {
+      	  insertNode(nodesList[idx], linksList[idx]);
+      }
+      break;
     case "addResource":
       //TODO: insert created node into tree at appropriate place
+      insertNode(action.data, action.links);
     case "editResource":
       //TODO: edit node
     case "removeResource":
       //TODO: delete node
+    }
+    
+    insertNode(node: Node, link: Object) {
+    	//TODO: add node to nodeTree
     }
 
     return state;
