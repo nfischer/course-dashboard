@@ -22,10 +22,11 @@ import columnStore from './columnstore.js';
 
 */
 
+//add to NodeStoreState by appending to map
 class NodeStoreState {
-  constructor(rootId, nodes){
+  constructor(rootId){
     this.rootId = rootId;
-    this.nodes = nodes;
+    this.nodes = new Map();
   }
 }
 
