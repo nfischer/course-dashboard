@@ -30,8 +30,6 @@ class NodeStoreState {
 }
 
 class NodeStore extends ReduceStore<?NodeStoreState> {
-
-  var nodeTree = {};
   
   getInitialState() : ?NodeStoreState {
     return null;
