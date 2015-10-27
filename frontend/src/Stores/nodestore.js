@@ -47,26 +47,24 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
       var idx;
       var nodesList = action.data;
       var numNodes = nodesList.keys().length();
-      var linksList = action.links;
-      
-      for (idx = 0; idx < numNodes; idx++) {
-      	  insertNode(nodesList[idx], linksList[idx]);
+      if (numNodes > 0) {
+      	  newState.rootID = nodesList[0].id;
+      	  newState.nodes[nodesList[0].id] = nodesList[0];
+      }
+      for (idx = 1; idx < numNodes; idx++) {
+      	  newState.nodes[nodesList[idx].id] = nodesList[idx];
       }
       break;
-    case "addResource":
+    case "addResource": 
       //TODO: insert created node into tree at appropriate place
-      insertNode(action.data, action.links);
+      // I think we need the id of the parent node
     case "editResource":
       //TODO: edit node
     case "removeResource":
       //TODO: delete node
     }
-    
-    insertNode(node: Node, link: Object) {
-    	//TODO: add node to nodeTree
-    }
 
-    return state;
+    return newState;
   }
 }
 
