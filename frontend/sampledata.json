@@ -1,4 +1,5 @@
 {
+  "rootId": "0",
   "nodes": [
     {
       "id": "0",
@@ -34,14 +35,14 @@
     },
     {
       "id": "6",
-      "contents": "#Assignments",
+      "contents": "Assignments\n==",
       "renderer": "List",
       "children": {
-        "Background Survey": "16"
+        "Background Survey": "17"
       }
     },
     {
-      "id": "16",
+      "id": "17",
       "contents": "please fill out the [background survey](https://ccle.ucla.edu/mod/resource/view.php?id=885527) and bring it to class.",
       "renderer": "Assignment",
       "children": {}
@@ -64,7 +65,7 @@
     },
     {
       "id": "7",
-      "contents": "#Introduction",
+      "contents": "Introduction\n==",
       "renderer": "Topic",
       "children": {
         "resources": "10"
@@ -86,7 +87,7 @@
     },
     {
       "id": "8",
-      "contents": "#Design Notation (UML)",
+      "contents": "Design Notation (UML)\n==",
       "renderer": "Topic",
       "children": {
         "resources": "12"
@@ -103,7 +104,7 @@
     },
     {
       "id": "13",
-      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078167/mod_resource/content/3/Lecture1-UML.pdf)\n[Overview of UML](http://www.ibm.com/developerworks/rational/library/769.html)\n[UML Tutorial](http://users.ece.utexas.edu/~miryung/teaching/EE461L-Spring2012/labs/uml.html)",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078167/mod_resource/content/3/Lecture1-UML.pdf)\n\n[Overview of UML](http://www.ibm.com/developerworks/rational/library/769.html)\n\n[UML Tutorial](http://users.ece.utexas.edu/~miryung/teaching/EE461L-Spring2012/labs/uml.html)",
       "renderer": "Resource",
       "children": {}
     },
@@ -115,7 +116,7 @@
     },
     {
       "id": "9",
-      "contents": "#Design Principles: Information Hiding",
+      "contents": "Design Principles: Information Hiding\n==",
       "renderer": "Topic",
       "children": {
         "resources": "15"
@@ -131,7 +132,7 @@
     },
     {
       "id": "16",
-      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078168/mod_resource/content/1/Lecture2-InformationHiding.pdf)\n[Parnas Paper](http://dl.acm.org/citation.cfm?id=361623)",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078168/mod_resource/content/1/Lecture2-InformationHiding.pdf)\n\n[Parnas Paper](http://dl.acm.org/citation.cfm?id=361623)",
       "renderer": "Resource",
       "children": {}
     }

@@ -3,10 +3,9 @@ import { ReduceStore } from 'flux/utils';
 import { Dispatcher } from 'flux';
 import { Map } from 'immutable';
 
-import Action from '../Action/action.js';
+import Action from '../Actions/action.js';
 import Node from '../Models/node.js';
 import dispatcher from '../dispatcher.js';
-import columnStore from './columnstore.js';
 
 /*
 
@@ -24,7 +23,10 @@ import columnStore from './columnstore.js';
 
 //add to NodeStoreState by appending to map
 class NodeStoreState {
-  constructor(rootId){
+  rootId: string;
+  nodes: Map<string, string>;
+
+  constructor(rootId: string){
     this.rootId = rootId;
     this.nodes = new Map();
   }
@@ -41,20 +43,13 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
   }
 
   reduce(state: ?LayerStoreState, action: Action) : ?NodeStoreState {
-    let newState = Object.assign({}, state);
     switch(action.name){
     case "open":
-      //TODO: handle creation of tree given data format from server
-      let idx;
-      let nodesList = action.data.nodes;
-      let numNodes = nodesList.length;
-      if (numNodes > 0) {
-      	  newState.rootId = nodesList[0].id;
-      	  newState.nodes = newState.nodes.set(nodesList[0].id, nodesList[0]);
-      }
-      for (idx = 1; idx < numNodes; idx++) {
-      	  newState.nodes = newState.nodes.set(nodesList[idx].id], nodesList[idx]);
-      }
+      //handle creation of tree given data format from server
+      let newState = state || new NodeStoreState(action.data.rootId);//Object.assign({}, state);
+      action.data.nodes.forEach(node => {
+        newState.nodes = newState.nodes.set(node.id, new Node(node));
+      });
       break;
     case "addResource":
       //TODO: insert created node into tree at appropriate place

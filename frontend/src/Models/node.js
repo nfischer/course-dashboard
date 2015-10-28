@@ -1,9 +1,15 @@
+/* @flow */
+
 export default class Node {
-	
-	constructor(id, contents, renderer){
-		this.id = id;
-		this.contents = contents;
-		this.renderer = renderer;
-		this.children = {};
+	id: string;
+	contents: string;
+	renderer: string;
+	children: Object;
+
+	constructor(node: Object){
+		this.id = node.id;
+		this.contents = node.contents;
+		this.renderer = node.renderer;
+		this.children = node.children;
 	}
 }

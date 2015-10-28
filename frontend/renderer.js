@@ -21,10 +21,10 @@ var Renderer = React.createClass({
             return (
                 <div className="node">
                     <div className="contents">
-                        {this.props.graph.contents}
+                        {this.props.node.contents}
                     </div>
                     <div className="children">
-                        {mapObject(this.props.graph.children, callback)}
+                        {mapObject(this.props.node.children, callback)}
                     </div>
                 </div>);
         }

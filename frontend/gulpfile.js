@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     babelify = require('babelify'),
     brfs = require('brfs'),
     browserify = require('browserify'),
+    resolutions = require('browserify-resolutions'),
     watchify = require('watchify'),
     source = require('vinyl-source-stream'),
     partial = require('partial'),
@@ -19,6 +20,7 @@ var b = browserify({
     basedir: 'src/',
     debug: true
   })
+  .plugin(resolutions, '*')
   .transform(babelify);
 
 function watch_browser(){

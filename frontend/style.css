@@ -1,0 +1,83 @@
+@import url('node_modules/normalize.css/normalize.css');
+@import url('node_modules/bootstrap/dist/css/bootstrap.min.css');
+
+@font-face {
+    font-family: 'League Spartan';
+    src: url('leaguespartan-bold.eot');
+    src: url('leaguespartan-bold.eot?#iefix') format('embedded-opentype'),
+         url('leaguespartan-bold.woff2') format('woff2'),
+         url('leaguespartan-bold.woff') format('woff'),
+         url('leaguespartan-bold.ttf') format('truetype'),
+         url('leaguespartan-bold.svg#league_spartanbold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+body {
+    font-family: 'League Spartan', serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+week {
+    border: 1px solid black;
+    display: block;
+/*     padding: 20px; */
+/*     width: 1500px; */
+}
+
+week > children {
+    flex-direction: row;
+}
+
+children {
+    padding: 10px;
+
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+
+/*     width: 100%; */
+}
+
+week > children > list, week > children > announcements {
+    min-width: 300px;
+    margin: 20px 10px;
+    border: 2px solid black;
+}
+
+list, announcements{
+/*     display: inline-block; */
+    display: block;
+    border: 1px solid red;
+    padding: 0px 10px;
+}
+
+
+
+.contents, contents {
+    width: 100%;
+}
+
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+.listelement {
+    display: block;
+    border-bottom: 1px dotted black;
+}
+
+a {
+    text-decoration: none;
+    color: hsla(215, 100%, 43%, 1);
+}
