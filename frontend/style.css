@@ -36,7 +36,8 @@
 }
 
 body {
-    font-family: 'Goudy', serif;
+    font-family: sans-serif;
+    font-weight: bold;
     font-size: 18px;
     display: flex;
     flex-direction: column;
@@ -48,14 +49,38 @@ h1, h2, h3, h4, h5 {
   font-family: 'League Spartan', sans-serif;
 }
 
+.node {
+    background: white;
+}
+
 week {
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+}
+
+
+div.appArea {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+}
+
+collapsedweek, .listelement {
+    cursor: pointer;
+}
+
+fullweek {
+    border: 2px solid black;
     display: block;
+    margin: 20px 0px;
 /*     padding: 20px; */
 /*     width: 1500px; */
 }
 
-week > children {
+fullweek > children {
     flex-direction: row;
 }
 
@@ -70,19 +95,26 @@ children {
 /*     width: 100%; */
 }
 
-week > children > list, week > children > announcements {
+form {
+    border-bottom: 1px solid hsla(0,0%,80%,1);
+}
+
+fullweek > children > list, fullweek > children > announcements {
     min-width: 300px;
     margin: 20px 10px;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 list, announcements{
 /*     display: inline-block; */
     display: block;
-    border: 1px solid red;
+/*     border: 1px solid red; */
     padding: 0px 10px;
 }
 
+announcements {
+    padding-top: 10px;
+}
 
 
 .contents, contents {
@@ -101,6 +133,10 @@ h2 {
 .listelement {
     display: block;
     border-bottom: 1px dotted black;
+}
+
+.listelement:last-child {
+    border-bottom: none;
 }
 
 a {

@@ -50,7 +50,8 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
       action.data.nodes.forEach(node => {
         newState.nodes = newState.nodes.set(node.id, new Node(node));
       });
-      break;
+
+      return newState;
     case "addResource":
       //TODO: insert created node into tree at appropriate place
       // I think we need the id of the parent node
@@ -60,7 +61,7 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
       //TODO: delete node
     }
 
-    return newState;
+    return state;
   }
 }
 

@@ -8,6 +8,7 @@ import marked from 'marked';
 
 import nodeStore from '../Stores/nodestore.js';
 import getRenderedElement from './createelement.js';
+import expandWeek from '../Actions/expandweek.js';
 
 import titleCaps from '../utils/titlecaps.js';
 
@@ -33,13 +34,57 @@ export class Renderer extends React.Component{ //default renderer
                             [
                               <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
                               <children>
-                                  {mapObject(this.props.node.children, function(id: string, tag: string, obj: Object) {
-                                    return getRenderedElement(tag, nodeStore.getState().nodes.get(id));
-                                  })}
+                                  {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
+                                    getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
+                                  )}
                               </children>
                             ])
       );
     }
+  }
+}
+
+export class Week extends React.Component {
+  constructor(){
+    super();
+  }
+  render() : React.Element {
+    let fullyRendered = React.createElement("fullweek",
+                          {className: "node"},
+                          [
+                            <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
+                            <children>
+                                {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
+                                  getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
+                                )}
+                            </children>
+                          ]);
+
+    return (
+      <week>{
+        this.props.ui.currentWeek !== this.props.tag ?
+          <WeekCollapsed tag={this.props.tag} onClick={this.expand.bind(this)}/> :
+          fullyRendered
+      }</week>
+    );
+  }
+
+  expand(event){
+    expandWeek(this.props.tag);
+  }
+}
+
+export class WeekCollapsed extends React.Component{
+  render() : React.Component {
+    let w = 160;
+    return (
+      <collapsedweek onClick={this.props.onClick}>
+        <svg height={w} width={w}>
+          <circle cx={w/2} cy={w/2} r={w/2-5} stroke="black" strokeWidth="3" fill="white" />
+          <text  x="50%" y="50%" dy="5px" textAnchor="middle" fill="black">{this.props.tag}</text>
+        </svg>
+      </collapsedweek>
+    );
   }
 }
 
@@ -49,9 +94,9 @@ export class List extends React.Component {
       <list>
         <h1>{titleCaps(this.props.tag)}</h1>
         {
-          mapObject(this.props.node.children, function(id: string, tag: string){
-            return <ListElement tag={tag} node={nodeStore.getState().nodes.get(id)} />;
-          })
+          mapObject(this.props.node.children, (id: string, tag: string) =>
+            <ListElement tag={tag} node={nodeStore.getState().nodes.get(id)} ui={this.props.ui} />
+          )
         }
       </list>
     )
@@ -75,7 +120,7 @@ export class ListElement extends React.Component {
                             <h2>{titleCaps(this.props.tag)}</h2>,
                             <Modal show={this.state.show} onHide={this.close.bind(this)}>
                               <ModalBody>
-                                {getRenderedElement(this.props.tag, this.props.node)}
+                                {getRenderedElement(this.props.tag, this.props.node, this.props.ui)}
                               </ModalBody>
                             </Modal>
                           ])
@@ -83,7 +128,6 @@ export class ListElement extends React.Component {
   }
 
   handleClick(event){
-    console.log(event);
     this.setState({show: true});
   }
 
@@ -99,9 +143,9 @@ export class EditableList extends React.Component {
         <h1>{titleCaps(this.props.tag)}</h1>
         <ListElementInput onClick={this.addNewChild.bind(this)}/>
         {
-          mapObject(this.props.node.children, function(id: string, tag: string){
-            return <ListElement tag={tag} node={nodeStore.getState().nodes.get(id)} />;
-          })
+          mapObject(this.props.node.children, (id: string, tag: string) =>
+            <ListElement tag={tag} node={nodeStore.getState().nodes.get(id)} />
+          )
         }
       </list>
     )

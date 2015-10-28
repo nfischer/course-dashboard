@@ -5,6 +5,7 @@ import jQuery from 'jquery';
 
 import open from './Actions/open.js';
 import nodeStore from './Stores/nodestore.js';
+import uiStateStore from './Stores/uistatestore.js';
 import Node from './Models/node.js';
 import getRenderedElement from './Components/createelement.js';
 
@@ -13,7 +14,7 @@ var filename = "http://localhost:8000/sampledata.json";
 class ApplicationComponent extends React.Component{
   constructor(){
     super();
-    this.state = {rootId: null, nodes: null};
+    this.state = {nodes: null, ui: null};
   }
 
   componentDidMount() : void {
@@ -28,17 +29,20 @@ class ApplicationComponent extends React.Component{
   }
 
   static getStores(){
-    return [nodeStore];
+    return [nodeStore, uiStateStore];
   }
 
   static calculateState(prevState){
-    return nodeStore.getState();
+    return {
+      nodes: nodeStore.getState(),
+      ui: uiStateStore.getState()
+    };
   }
 
   render() : React.Component {
-    if(this.state && this.state.rootId){
-      let root = this.state.nodes.get(this.state.rootId);
-      return getRenderedElement("root", root);
+    if(this.state.nodes && this.state.ui){
+      let root = this.state.nodes.nodes.get(this.state.nodes.rootId);
+      return getRenderedElement("root", root, this.state.ui);
     } else {
       return <span/>
     }
