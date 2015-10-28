@@ -74,7 +74,7 @@
     {
       "id": "10",
       "contents": "",
-      "renderer": "List",
+      "renderer": "EditableList",
       "children": {
         "syllabus": "11"
       }
@@ -96,7 +96,7 @@
     {
       "id": "12",
       "contents": "",
-      "renderer": "List",
+      "renderer": "EditableList",
       "children": {
         "administrator added": "13",
         "draw.io": "14"
@@ -125,7 +125,7 @@
     {
       "id": "15",
       "contents": "",
-      "renderer": "List",
+      "renderer": "EditableList",
       "children": {
         "administrator added": "16"
       }
