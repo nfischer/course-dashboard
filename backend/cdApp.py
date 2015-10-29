@@ -1,8 +1,8 @@
 import sqlite3
-from flask import Flask, request, session, g, redirect, url_for, \
-     abort, flash, render_template, jsonify
-from contextlib import closing
-from flask_restful import Resource, Api, reqparse
+from flask import Flask, request, g, render_template, \
+    jsonify #, flash, url_for, session, abort, redirect
+# from contextlib import closing
+from flask_restful import Resource, Api # , reqparse
 
 # configuration
 DATABASE = 'db/course-dashboard.db'
@@ -37,6 +37,7 @@ def dict_factory(cursor, row):
     for idx, col in enumerate(cursor.description):
         d[col[0]] = row[idx]
     return d
+
 #---------------------Rest API---------------------
 class Node(Resource):
     def post(self):
@@ -46,26 +47,64 @@ class Node(Resource):
             # g.db.execute('insert into nodes (contents, renderer) values (?, ?)',
             #             [request.form['contents'], request.form['renderer']])
             # g.db.commit()
-            return "FOO" #jsonify(message='New node was successfully created')
+            return 'Not implemented' #jsonify(message='New node was successfully created')
     def put(self):
-        g.db.execute('insert into nodes (contents, renderer) values (?, ?)',
+        """
+        This inserts a new node into the database, with the node_id
+        automatically assigned
+        """
+        g.db.execute('INSERT INTO nodes (contents, renderer) values (?, ?)',
                      [request.form['contents'], request.form['renderer']])
         g.db.commit()
-        return jsonify(message='New node was successfully created')
+        return jsonify(message='New node was successfully created', id='1')
 
 class Tree(Resource):
-    def get(self):
-        return {"nodes":3}
+    def post(self, node_id):
+        """This rpc updates/edits a node"""
+        try:
+            g.db.execute('UPDATE nodes SET contents=(?), renderer=(?) WHERE node_id = (?)', [request.form['contents'], request.form['renderer'],  node_id])
+
+            # Delete the old links
+            g.db.execute('DELETE FROM links WHERE origin = (?)', node_id)
+
+            # TODO(nfischer): fix this to add links (currently not working)
+            # for child in request.form['children']:
+                # print type(jsonify(child))
+                # print request.form['children']
+                # child_name = child.key()
+                # child_id = child.value()
+                # g.db.execute('INSERT INTOlinks VALUES (?, ?, ?)', [node_id, child_name, child_id])
+            g.db.commit() # Only commit if everything succeeds
+        except Exception as e:
+            print str(e)
+            return jsonify(message='Error when editing your node')
+        return jsonify(message='Successfully updated node %s' % node_id)
+
     def get(self, node_id):
-        cur = g.db.execute("SELECT * FROM nodes WHERE node_id=(?) " , node_id)
-        rv = cur.fetchall()[0]
-        cur = g.db.execute("SELECT name, dest FROM links WHERE origin=(?) ", node_id)
+        """This will access a node referenced by node_id"""
+
+        # Fetch a sqlite3.Cursor from the database
+        cursor = g.db.execute("SELECT * FROM nodes WHERE node_id=(?) ", node_id)
+
+        if cursor.rowcount > 1:
+            return jsonify(message='Node ID is not unique')
+
+        try:
+            ret_node = cursor.fetchall()[0]
+        except IndexError:
+            return jsonify(message='Node %s is not present in table' % node_id)
+
+        # Find the children of this node
+        cursor = g.db.execute("SELECT name, dest FROM links WHERE origin=(?) ", node_id)
         children = {}
-        for k,val in enumerate(cur.fetchall()):
-            children[val['name']] = val['dest']
-        rv['children'] = children
-        cur.close()
-        return rv
+        # for k, val in enumerate(cursor.fetchall()):
+
+        # Map each child name to an ID
+        for child in cursor.fetchall():
+            children[child['name']] = child['dest']
+        ret_node['children'] = children
+        cursor.close()
+        return ret_node
 
 class Link(Resource):
     def post(self):
@@ -75,7 +114,8 @@ class Link(Resource):
             # g.db.execute('insert into nodes (contents, renderer) values (?, ?)',
             #             [request.form['contents'], request.form['renderer']])
             # g.db.commit()
-            return "FOO" #jsonify(message='New node was successfully created')
+            return 'Not implemented: Editing a link' #jsonify(message='New node was successfully created')
+
     def put(self):
         res = ''
         try:
@@ -85,7 +125,7 @@ class Link(Resource):
             g.db.commit()
             res = 'New link was successfully created'
         except Exception, e:
-            res = 'Origin or Destination Nodes do not exist!'
+            res = 'Origin or destination nodes do not exist!'
 
         return jsonify(message=res)
 
