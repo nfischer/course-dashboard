@@ -49,4 +49,26 @@ Nodes
 
 ### Editing a node
 
- - Still in progress
+ - end point: `/nodes/tree/<id>` where `<id>` is some integer
+ - request: HTTP POST
+ - data (input):
+```
+{
+  "contents": "new contents",
+  "renderer": "new renderer",
+  "children":
+  {
+    "foo": "1",
+    "bar": "2",
+    ...
+  }
+}
+```
+ - return data:
+```
+{
+  "message": "Successfully updated node 1"
+}
+```
+ - Warning: this is not yet fully implemented. It will currently delete all
+   links to child nodes and not reestablish them
