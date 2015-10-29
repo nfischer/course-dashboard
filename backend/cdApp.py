@@ -199,7 +199,7 @@ def posterator():
     return render_template('posterator.html')
 
 api.add_resource(Node,'/node/', '/node/<node_id>')
-api.add_resource(Children,'/node/<node_id>', '/node/children/<node_id>')
+api.add_resource(Children,'/node/children/<node_id>', '/node/children/<node_id>')
 api.add_resource(Tree, '/nodes/tree')
 api.add_resource(Link, '/nodeLinks')
 
