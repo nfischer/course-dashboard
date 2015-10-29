@@ -38,6 +38,28 @@ def dict_factory(cursor, row):
         d[col[0]] = row[idx]
     return d
 
+#---------------------HTTP Errors---------------------
+
+class InvalidUsage(Exception):
+    status_code = 400
+
+    def __init__(self, message, status_code=None, payload=None):
+        Exception.__init__(self)
+        self.message = message
+        if status_code is not None:
+            self.status_code = status_code
+        self.payload = payload
+
+    def to_dict(self):
+        http_resp = dict(self.payload or ())
+        http_resp['message'] = self.message
+        return http_resp
+
+@app.errorhandler(InvalidUsage)
+def handle_invalid_usage(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
+    return response
 #---------------------Rest API---------------------
 class Node(Resource):
     def post(self):
@@ -47,7 +69,8 @@ class Node(Resource):
             # g.db.execute('insert into nodes (contents, renderer) values (?, ?)',
             #             [request.form['contents'], request.form['renderer']])
             # g.db.commit()
-            return 'Not implemented' #jsonify(message='New node was successfully created')
+            raise InvalidUsage('Not implemented', status_code=500)
+            # return 'Not implemented' #jsonify(message='New node was successfully created')
     def put(self):
         """
         This inserts a new node into the database, with the node_id
@@ -77,22 +100,28 @@ class Tree(Resource):
             g.db.commit() # Only commit if everything succeeds
         except Exception as e:
             print str(e)
-            return jsonify(message='Error when editing your node')
+            # return jsonify(message='Error when editing your node')
+            raise InvalidUsage('Error when editing your node')
         return jsonify(message='Successfully updated node %s' % node_id)
 
     def get(self, node_id):
         """This will access a node referenced by node_id"""
 
         # Fetch a sqlite3.Cursor from the database
-        cursor = g.db.execute("SELECT * FROM nodes WHERE node_id=(?) ", node_id)
+        try:
+            cursor = g.db.execute("SELECT * FROM nodes WHERE node_id=(?) ", node_id)
+        except Exception:
+            raise InvalidUsage('Node could not be found')
 
         if cursor.rowcount > 1:
-            return jsonify(message='Node ID is not unique')
+            # return jsonify(message='Node ID is not unique')
+            raise InvalidUsage('Node ID is not unique')
 
         try:
             ret_node = cursor.fetchall()[0]
         except IndexError:
-            return jsonify(message='Node %s is not present in table' % node_id)
+            raise InvalidUsage('Node %s is not present in the table' % node_id)
+            # return jsonify(message='Node %s is not present in table' % node_id)
 
         # Find the children of this node
         cursor = g.db.execute("SELECT name, dest FROM links WHERE origin=(?) ", node_id)
@@ -114,7 +143,8 @@ class Link(Resource):
             # g.db.execute('insert into nodes (contents, renderer) values (?, ?)',
             #             [request.form['contents'], request.form['renderer']])
             # g.db.commit()
-            return 'Not implemented: Editing a link' #jsonify(message='New node was successfully created')
+            raise InvalidUsage('Not implemented: Editing a link', status_code=500)
+            # return 'Not implemented: Editing a link' #jsonify(message='New node was successfully created')
 
     def put(self):
         res = ''
