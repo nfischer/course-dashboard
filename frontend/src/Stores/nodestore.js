@@ -52,9 +52,14 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
       });
 
       return newState;
-    case "addResource":
+    case "addNode":
       //TODO: insert created node into tree at appropriate place
-      // I think we need the id of the parent node
+      //parent node links are updated as a part of comitting changes to db
+      let newNode = action.data;
+      let newState = state;
+      newState.nodes = newState.nodes.set(newNode.id, newNode);
+
+      return newState;
     case "editResource":
       //TODO: edit node
     case "removeResource":

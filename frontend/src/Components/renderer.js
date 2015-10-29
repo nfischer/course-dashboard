@@ -9,6 +9,7 @@ import marked from 'marked';
 import nodeStore from '../Stores/nodestore.js';
 import getRenderedElement from './createelement.js';
 import expandWeek from '../Actions/expandweek.js';
+import addNode from '../Actions/addnode.js';
 
 import titleCaps from '../utils/titlecaps.js';
 
@@ -153,7 +154,7 @@ export class EditableList extends React.Component {
 
   addNewChild(title: string, markdown: string){
     console.log("addNewChild", title, markdown);
-    //call action to add resource
+    addNode(this.props.node, title, markdown, "Resource");
   }
 }
 

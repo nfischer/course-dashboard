@@ -5,7 +5,7 @@ function getNode(nodeId: string){}
 function overwriteNode(node: Node){}
 function createNode(node: Node){} //undefined id becomes defined. same with children
 
-function addNewChild(node: Node, tag: string, markdown: string, renderer: string, callback: any){
+export function addNewChild(node: Node, tag: string, markdown: string, renderer: string, callback: any){
   let child = new Node({
     contents: markdown,
     renderer
