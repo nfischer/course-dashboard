@@ -113,7 +113,6 @@ class Tree(Resource):
             raise InvalidUsage('Error when editing your node')
         return jsonify(message='Successfully updated node %s' % node_id)
 
-<<<<<<< HEAD
     #DEPRECATED
     # def get(self, node_id):
     #     """This will access a node referenced by node_id"""
@@ -148,7 +147,7 @@ class Tree(Resource):
         rv["nodes"] = cursor.fetchall()
         rv["rootId"] = 0
         return rv;
-=======
+
     def get(self, node_id):
         """This will access a node referenced by node_id"""
 
@@ -179,7 +178,6 @@ class Tree(Resource):
         ret_node['children'] = children
         cursor.close()
         return ret_node
->>>>>>> cd26cc4347ade768306004ea3b67f898e8ca7347
 
 class Link(Resource):
     def post(self):
