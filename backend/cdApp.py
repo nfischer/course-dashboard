@@ -134,7 +134,7 @@ def posterator():
     return render_template('posterator.html')
 
 api.add_resource(Node, '/nodes')
-api.add_resource(Tree, '/nodes/Tree', '/nodes/tree/<node_id>')
+api.add_resource(Tree, '/nodes/tree', '/nodes/tree/<node_id>')
 api.add_resource(Link, '/nodeLinks')
 
 # @app.route('/addNode', methods=['POST'])
