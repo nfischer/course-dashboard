@@ -41,14 +41,13 @@ export class Renderer extends React.Component{ //default renderer
       return (
         React.createElement(this.props.node.renderer,
                             {className: "node"},
-                            [
-                              <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
-                              <children>
-                                  {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
-                                    getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
-                                  )}
-                              </children>
-                            ])
+                            <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
+                            <children>
+                                {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
+                                  getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
+                                )}
+                            </children>
+                           )
       );
     }
   }
@@ -61,14 +60,13 @@ export class Week extends React.Component {
   render() : React.Element {
     let fullyRendered = React.createElement("fullweek",
                           {className: "node"},
-                          [
-                            <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
-                            <children>
-                                {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
-                                  getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
-                                )}
-                            </children>
-                          ]);
+                          <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
+                          <children>
+                              {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
+                                getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
+                              )}
+                          </children>
+                          );
 
     return (
       <week>{
@@ -105,7 +103,7 @@ export class List extends React.Component {
         <h1>{titleCaps(this.props.tag)}</h1>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>
-            <ListElement tag={tag} node={nodeStore.getState().nodes.get(id)} ui={this.props.ui} />
+            <ListElement tag={tag} key={id} node={nodeStore.getState().nodes.get(id)} ui={this.props.ui} />
           )
         }
       </list>
@@ -126,14 +124,13 @@ export class ListElement extends React.Component {
       React.createElement(this.props.node.renderer,
                           {onClick: this.handleClick.bind(this),
                            className: "listelement"},
-                          [
-                            <h2>{titleCaps(this.props.tag)}</h2>,
-                            <Modal show={this.state.show} onHide={this.close.bind(this)}>
-                              <ModalBody>
-                                {getRenderedElement(this.props.tag, this.props.node, this.props.ui)}
-                              </ModalBody>
-                            </Modal>
-                          ])
+                          <h2>{titleCaps(this.props.tag)}</h2>,
+                          <Modal show={this.state.show} onHide={this.close.bind(this)}>
+                            <ModalBody>
+                              {getRenderedElement(this.props.tag, this.props.node, this.props.ui)}
+                            </ModalBody>
+                          </Modal>
+                          )
     );
   }
 

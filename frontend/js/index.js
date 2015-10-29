@@ -51620,6 +51620,8 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 
 exports['default'] = addNode;
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -51638,28 +51640,32 @@ var _ModelsNodeJs = require('../Models/node.js');
 
 var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
 
+var _utilsWebapiJs = require('../utils/webapi.js');
+
+var WebAPI = _interopRequireWildcard(_utilsWebapiJs);
+
 var AddNode = (function (_Action) {
   _inherits(AddNode, _Action);
 
   function AddNode(node) {
     _classCallCheck(this, AddNode);
 
-    _get(Object.getPrototypeOf(AddNode.prototype), 'constructor', this).call(this, "expandWeek", node);
+    _get(Object.getPrototypeOf(AddNode.prototype), 'constructor', this).call(this, "addNode", node);
   }
 
   return AddNode;
 })(_actionJs2['default']);
 
 function addNode(node, title, markdown, renderer) {
-  WebAPI.addNewChild(this.props.node, title, markdown, "Resource", function (node) {
-    var action = new ExpandWeek(node);
+  WebAPI.addNewChild(node, title, markdown, "Resource", function (node) {
+    var action = new AddNode(node);
     _dispatcherJs2['default'].dispatch(action);
   });
 }
 
 module.exports = exports['default'];
 
-},{"../Models/node.js":421,"../dispatcher.js":425,"./action.js":415}],417:[function(require,module,exports){
+},{"../Models/node.js":421,"../dispatcher.js":425,"../utils/webapi.js":428,"./action.js":415}],417:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -51782,6 +51788,7 @@ function getRenderedElement(tag, node, ui) {
   var renderClass = RENDERERS.hasOwnProperty(renderer) ? RENDERERS[renderer] : RENDERERS["Renderer"];
   return _react2['default'].createElement(renderClass, {
     className: "node",
+    key: node.id, //this should work because a node cannot link to another node twice
     tag: tag,
     node: node,
     ui: ui
@@ -51885,13 +51892,13 @@ var Renderer = (function (_React$Component) {
         //leaf
         return _react2['default'].createElement(this.props.node.renderer, { className: "node" }, _react2['default'].createElement('contents', { dangerouslySetInnerHTML: { __html: (0, _marked2['default'])(this.props.node.contents) } }));
       } else {
-        return _react2['default'].createElement(this.props.node.renderer, { className: "node" }, [_react2['default'].createElement('contents', { dangerouslySetInnerHTML: { __html: (0, _marked2['default'])(this.props.node.contents) } }), _react2['default'].createElement(
+        return _react2['default'].createElement(this.props.node.renderer, { className: "node" }, _react2['default'].createElement('contents', { dangerouslySetInnerHTML: { __html: (0, _marked2['default'])(this.props.node.contents) } }), _react2['default'].createElement(
           'children',
           null,
           mapObject(this.props.node.children, function (id, tag, obj) {
             return (0, _createelementJs2['default'])(tag, _StoresNodestoreJs2['default'].getState().nodes.get(id), _this.props.ui);
           })
-        )]);
+        ));
       }
     }
   }]);
@@ -51915,13 +51922,13 @@ var Week = (function (_React$Component2) {
     value: function render() {
       var _this2 = this;
 
-      var fullyRendered = _react2['default'].createElement("fullweek", { className: "node" }, [_react2['default'].createElement('contents', { dangerouslySetInnerHTML: { __html: (0, _marked2['default'])(this.props.node.contents) } }), _react2['default'].createElement(
+      var fullyRendered = _react2['default'].createElement("fullweek", { className: "node" }, _react2['default'].createElement('contents', { dangerouslySetInnerHTML: { __html: (0, _marked2['default'])(this.props.node.contents) } }), _react2['default'].createElement(
         'children',
         null,
         mapObject(this.props.node.children, function (id, tag, obj) {
           return (0, _createelementJs2['default'])(tag, _StoresNodestoreJs2['default'].getState().nodes.get(id), _this2.props.ui);
         })
-      )]);
+      ));
 
       return _react2['default'].createElement(
         'week',
@@ -51999,7 +52006,7 @@ var List = (function (_React$Component4) {
           (0, _utilsTitlecapsJs2['default'])(this.props.tag)
         ),
         mapObject(this.props.node.children, function (id, tag) {
-          return _react2['default'].createElement(ListElement, { tag: tag, node: _StoresNodestoreJs2['default'].getState().nodes.get(id), ui: _this3.props.ui });
+          return _react2['default'].createElement(ListElement, { tag: tag, key: id, node: _StoresNodestoreJs2['default'].getState().nodes.get(id), ui: _this3.props.ui });
         })
       );
     }
@@ -52026,7 +52033,7 @@ var ListElement = (function (_React$Component5) {
     key: 'render',
     value: function render() {
       return _react2['default'].createElement(this.props.node.renderer, { onClick: this.handleClick.bind(this),
-        className: "listelement" }, [_react2['default'].createElement(
+        className: "listelement" }, _react2['default'].createElement(
         'h2',
         null,
         (0, _utilsTitlecapsJs2['default'])(this.props.tag)
@@ -52038,7 +52045,7 @@ var ListElement = (function (_React$Component5) {
           null,
           (0, _createelementJs2['default'])(this.props.tag, this.props.node, this.props.ui)
         )
-      )]);
+      ));
     }
   }, {
     key: 'handleClick',
@@ -52539,7 +52546,77 @@ function upper(word) {
 }
 module.exports = exports["default"];
 
-},{}]},{},[426])
+},{}],428:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.addNewChild = addNewChild;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _ModelsNodeJs = require('../Models/node.js');
+
+var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
+
+//this is a module exclusively for sending specific actions to the web api.
+//more specific actions can be implemented here in terms of a general api
+
+function getNode(nodeId) {}
+
+function overwriteNode(node) {
+  var deferred = _jquery2['default'].Deferred();
+  setTimeout(function () {
+    deferred.resolve({ message: "overwritten" });
+  }, 100);
+  return deferred.promise();
+}
+
+var nextid = 5000;
+function createNode(node) {
+  //mock for creation process
+  var deferred = _jquery2['default'].Deferred();
+  setTimeout(function () {
+    var newnode = Object.assign({}, node);
+    newnode.id = (nextid++).toString();
+    newnode.children = {};
+    deferred.resolve(newnode);
+  }, 100);
+  return deferred.promise();
+} //undefined id becomes defined. same with children
+
+function addNewChild(node, tag, markdown, renderer, callback) {
+  var child = new _ModelsNodeJs2['default']({
+    contents: markdown,
+    renderer: renderer
+  });
+  var initialized_child = undefined;
+
+  createNode(child) //create node
+  .then(function (data) {
+    //modify parent
+    console.log(data);
+    initialized_child = new _ModelsNodeJs2['default'](data);
+    node.children[tag] = initialized_child.id;
+    return overwriteNode(node);
+  }, function (jqXHR, textStatus, errorThrown) {
+    console.error(textStatus);
+    throw errorThrown;
+  }).then(function (data) {
+    //call passed in callback
+    callback(initialized_child);
+  }, function (jqXHR, textStatus, errorThrown) {
+    console.error(textStatus);
+    throw errorThrown;
+  });
+}
+
+},{"../Models/node.js":421,"jquery":21}]},{},[426])
 
 
 //# sourceMappingURL=index.js.map

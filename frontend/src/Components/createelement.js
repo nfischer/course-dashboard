@@ -10,6 +10,7 @@ export default function getRenderedElement(tag: string, node: Object, ui: Object
   return React.createElement(renderClass,
                              {
                                className: "node",
+                               key: node.id, //this should work because a node cannot link to another node twice
                                tag,
                                node,
                                ui
