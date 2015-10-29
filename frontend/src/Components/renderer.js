@@ -13,6 +13,15 @@ import addNode from '../Actions/addnode.js';
 
 import titleCaps from '../utils/titlecaps.js';
 
+var mdRenderer = new marked.Renderer();
+mdRenderer.link = function(href: string, title: string, text: string){
+  return `<a href="${href}" title="${title}" target="_blank">${text}</a>`;
+};
+marked.setOptions({
+  renderer: mdRenderer
+});
+
+
 function mapObject(obj: Object, callback: any) : Array<any> { // replace any
     return Object.keys(obj).map(function(value, index, array) {
         return callback(obj[value], value, obj);

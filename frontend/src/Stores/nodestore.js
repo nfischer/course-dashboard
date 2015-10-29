@@ -56,7 +56,7 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
       //TODO: insert created node into tree at appropriate place
       //parent node links are updated as a part of comitting changes to db
       let newNode = action.data;
-      let newState = state;
+      newState = state;
       newState.nodes = newState.nodes.set(newNode.id, newNode);
 
       return newState;

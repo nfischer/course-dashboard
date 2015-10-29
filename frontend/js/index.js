@@ -51618,6 +51618,56 @@ Object.defineProperty(exports, '__esModule', {
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
+exports['default'] = addNode;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _actionJs = require('./action.js');
+
+var _actionJs2 = _interopRequireDefault(_actionJs);
+
+var _dispatcherJs = require('../dispatcher.js');
+
+var _dispatcherJs2 = _interopRequireDefault(_dispatcherJs);
+
+var _ModelsNodeJs = require('../Models/node.js');
+
+var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
+
+var AddNode = (function (_Action) {
+  _inherits(AddNode, _Action);
+
+  function AddNode(node) {
+    _classCallCheck(this, AddNode);
+
+    _get(Object.getPrototypeOf(AddNode.prototype), 'constructor', this).call(this, "expandWeek", node);
+  }
+
+  return AddNode;
+})(_actionJs2['default']);
+
+function addNode(node, title, markdown, renderer) {
+  WebAPI.addNewChild(this.props.node, title, markdown, "Resource", function (node) {
+    var action = new ExpandWeek(node);
+    _dispatcherJs2['default'].dispatch(action);
+  });
+}
+
+module.exports = exports['default'];
+
+},{"../Models/node.js":421,"../dispatcher.js":425,"./action.js":415}],417:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
 exports['default'] = expandWeek;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -51657,7 +51707,7 @@ function expandWeek(tag) {
 
 module.exports = exports['default'];
 
-},{"../Models/node.js":420,"../dispatcher.js":424,"./action.js":415}],417:[function(require,module,exports){
+},{"../Models/node.js":421,"../dispatcher.js":425,"./action.js":415}],418:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -51707,7 +51757,7 @@ function open(rootId, nodes) {
 
 module.exports = exports['default'];
 
-},{"../Models/node.js":420,"../dispatcher.js":424,"./action.js":415,"immutable":20}],418:[function(require,module,exports){
+},{"../Models/node.js":421,"../dispatcher.js":425,"./action.js":415,"immutable":20}],419:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -51740,7 +51790,7 @@ function getRenderedElement(tag, node, ui) {
 
 module.exports = exports['default'];
 
-},{"./renderer.js":419,"react":414}],419:[function(require,module,exports){
+},{"./renderer.js":420,"react":414}],420:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -51793,9 +51843,21 @@ var _ActionsExpandweekJs = require('../Actions/expandweek.js');
 
 var _ActionsExpandweekJs2 = _interopRequireDefault(_ActionsExpandweekJs);
 
+var _ActionsAddnodeJs = require('../Actions/addnode.js');
+
+var _ActionsAddnodeJs2 = _interopRequireDefault(_ActionsAddnodeJs);
+
 var _utilsTitlecapsJs = require('../utils/titlecaps.js');
 
 var _utilsTitlecapsJs2 = _interopRequireDefault(_utilsTitlecapsJs);
+
+var mdRenderer = new _marked2['default'].Renderer();
+mdRenderer.link = function (href, title, text) {
+  return '<a href="' + href + '" title="' + title + '" target="_blank">' + text + '</a>';
+};
+_marked2['default'].setOptions({
+  renderer: mdRenderer
+});
 
 function mapObject(obj, callback) {
   // replace any
@@ -52025,7 +52087,7 @@ var EditableList = (function (_React$Component6) {
     key: 'addNewChild',
     value: function addNewChild(title, markdown) {
       console.log("addNewChild", title, markdown);
-      //call action to add resource
+      (0, _ActionsAddnodeJs2['default'])(this.props.node, title, markdown, "Resource");
     }
   }]);
 
@@ -52072,7 +52134,7 @@ var ListElementInput = (function (_React$Component7) {
 
 exports.ListElementInput = ListElementInput;
 
-},{"../Actions/expandweek.js":416,"../Stores/nodestore.js":421,"../utils/titlecaps.js":426,"./createelement.js":418,"marked":22,"react":414,"react-bootstrap/lib/ButtonInput":25,"react-bootstrap/lib/Input":31,"react-bootstrap/lib/Modal":33,"react-bootstrap/lib/ModalBody":34}],420:[function(require,module,exports){
+},{"../Actions/addnode.js":416,"../Actions/expandweek.js":417,"../Stores/nodestore.js":422,"../utils/titlecaps.js":427,"./createelement.js":419,"marked":22,"react":414,"react-bootstrap/lib/ButtonInput":25,"react-bootstrap/lib/Input":31,"react-bootstrap/lib/Modal":33,"react-bootstrap/lib/ModalBody":34}],421:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52093,7 +52155,7 @@ var Node = function Node(node) {
 exports["default"] = Node;
 module.exports = exports["default"];
 
-},{}],421:[function(require,module,exports){
+},{}],422:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -52182,9 +52244,14 @@ var NodeStore = (function (_ReduceStore) {
           });
 
           return newState;
-        case "addResource":
-        //TODO: insert created node into tree at appropriate place
-        // I think we need the id of the parent node
+        case "addNode":
+          //TODO: insert created node into tree at appropriate place
+          //parent node links are updated as a part of comitting changes to db
+          var newNode = action.data;
+          newState = state;
+          newState.nodes = newState.nodes.set(newNode.id, newNode);
+
+          return newState;
         case "editResource":
         //TODO: edit node
         case "removeResource":
@@ -52202,7 +52269,7 @@ var nodeStore = new NodeStore(_dispatcherJs2['default']);
 exports['default'] = nodeStore;
 module.exports = exports['default'];
 
-},{"../Actions/action.js":415,"../Models/node.js":420,"../dispatcher.js":424,"flux":2,"flux/utils":19,"immutable":20}],422:[function(require,module,exports){
+},{"../Actions/action.js":415,"../Models/node.js":421,"../dispatcher.js":425,"flux":2,"flux/utils":19,"immutable":20}],423:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -52276,7 +52343,7 @@ var uiStateStore = new UIStateStore(_dispatcherJs2['default']);
 exports['default'] = uiStateStore;
 module.exports = exports['default'];
 
-},{"../Actions/action.js":415,"../Models/node.js":420,"../dispatcher.js":424,"flux":2,"flux/utils":19,"immutable":20}],423:[function(require,module,exports){
+},{"../Actions/action.js":415,"../Models/node.js":421,"../dispatcher.js":425,"flux":2,"flux/utils":19,"immutable":20}],424:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -52379,7 +52446,7 @@ var ApplicationContainer = _fluxUtils.Container.create(ApplicationComponent);
 exports['default'] = ApplicationContainer;
 module.exports = exports['default'];
 
-},{"./Actions/open.js":417,"./Components/createelement.js":418,"./Models/node.js":420,"./Stores/nodestore.js":421,"./Stores/uistatestore.js":422,"flux/utils":19,"jquery":21,"react":414}],424:[function(require,module,exports){
+},{"./Actions/open.js":418,"./Components/createelement.js":419,"./Models/node.js":421,"./Stores/nodestore.js":422,"./Stores/uistatestore.js":423,"flux/utils":19,"jquery":21,"react":414}],425:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -52392,7 +52459,7 @@ var dispatcher = new _flux.Dispatcher();
 exports['default'] = dispatcher;
 module.exports = exports['default'];
 
-},{"flux":2}],425:[function(require,module,exports){
+},{"flux":2}],426:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -52420,7 +52487,7 @@ global.$ = _jquery2['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./application.js":423,"jquery":21,"react":414,"react-dom":259}],426:[function(require,module,exports){
+},{"./application.js":424,"jquery":21,"react":414,"react-dom":259}],427:[function(require,module,exports){
 /*
  * Title Caps
  *
@@ -52472,7 +52539,7 @@ function upper(word) {
 }
 module.exports = exports["default"];
 
-},{}]},{},[425])
+},{}]},{},[426])
 
 
 //# sourceMappingURL=index.js.map
