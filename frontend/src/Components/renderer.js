@@ -60,6 +60,7 @@ export class Week extends React.Component {
   render() : React.Element {
     let fullyRendered = React.createElement("fullweek",
                           {className: "node"},
+                          <h1 onClick={this.collapse.bind(this)}>{titleCaps(this.props.tag)}</h1>,
                           <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
                           <children>
                               {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
@@ -79,6 +80,10 @@ export class Week extends React.Component {
 
   expand(event){
     expandWeek(this.props.tag);
+  }
+
+  collapse(event){
+    expandWeek("");
   }
 }
 
@@ -151,7 +156,7 @@ export class EditableList extends React.Component {
         <ListElementInput onClick={this.addNewChild.bind(this)}/>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>
-            <ListElement tag={tag} node={nodeStore.getState().nodes.get(id)} />
+            <ListElement key={id} tag={tag} node={nodeStore.getState().nodes.get(id)} />
           )
         }
       </list>

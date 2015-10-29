@@ -51922,7 +51922,11 @@ var Week = (function (_React$Component2) {
     value: function render() {
       var _this2 = this;
 
-      var fullyRendered = _react2['default'].createElement("fullweek", { className: "node" }, _react2['default'].createElement('contents', { dangerouslySetInnerHTML: { __html: (0, _marked2['default'])(this.props.node.contents) } }), _react2['default'].createElement(
+      var fullyRendered = _react2['default'].createElement("fullweek", { className: "node" }, _react2['default'].createElement(
+        'h1',
+        { onClick: this.collapse.bind(this) },
+        (0, _utilsTitlecapsJs2['default'])(this.props.tag)
+      ), _react2['default'].createElement('contents', { dangerouslySetInnerHTML: { __html: (0, _marked2['default'])(this.props.node.contents) } }), _react2['default'].createElement(
         'children',
         null,
         mapObject(this.props.node.children, function (id, tag, obj) {
@@ -51940,6 +51944,11 @@ var Week = (function (_React$Component2) {
     key: 'expand',
     value: function expand(event) {
       (0, _ActionsExpandweekJs2['default'])(this.props.tag);
+    }
+  }, {
+    key: 'collapse',
+    value: function collapse(event) {
+      (0, _ActionsExpandweekJs2['default'])("");
     }
   }]);
 
@@ -52086,7 +52095,7 @@ var EditableList = (function (_React$Component6) {
         ),
         _react2['default'].createElement(ListElementInput, { onClick: this.addNewChild.bind(this) }),
         mapObject(this.props.node.children, function (id, tag) {
-          return _react2['default'].createElement(ListElement, { tag: tag, node: _StoresNodestoreJs2['default'].getState().nodes.get(id) });
+          return _react2['default'].createElement(ListElement, { key: id, tag: tag, node: _StoresNodestoreJs2['default'].getState().nodes.get(id) });
         })
       );
     }

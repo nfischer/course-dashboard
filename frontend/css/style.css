@@ -109,6 +109,14 @@ fullweek > children > list, fullweek > children > announcements {
     border: 1px solid black;
 }
 
+fullweek > h1 {
+/*     margin-left: 20px; */
+    text-align:center;
+    width: 100%;
+    margin-bottom: -15px;
+    cursor: pointer;
+}
+
 list, announcements{
 /*     display: inline-block; */
     display: block;
