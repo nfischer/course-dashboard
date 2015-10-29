@@ -91,7 +91,7 @@ class Node(Resource):
         return cursor.fetchone()
 
 class Children(Resource):
-    def put(self, node_id):
+    def put(self):
         g.db.execute('INSERT INTO children (parent_id, children) values (?, ?)',
                      [request.form['id'], request.form['children']])
         g.db.commit()
@@ -199,7 +199,7 @@ def posterator():
     return render_template('posterator.html')
 
 api.add_resource(Node,'/node/', '/node/<node_id>')
-api.add_resource(Children,'/node/children/<node_id>', '/node/children/<node_id>')
+api.add_resource(Children,'/node/children/', '/node/children/<node_id>')
 api.add_resource(Tree, '/nodes/tree')
 api.add_resource(Link, '/nodeLinks')
 
