@@ -139,6 +139,11 @@ class Tree(Resource):
     #     ret_node['children'] = children
     #     cursor.close()
     #     return ret_node
+
+
+    # /nodes/tree
+    # returns the tree of nodes
+    # rootId is hard coded right now. Need clarification on that
     def get(selft):
         cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, c.children 
                               FROM nodes AS n LEFT JOIN children AS c 
@@ -147,37 +152,6 @@ class Tree(Resource):
         rv["nodes"] = cursor.fetchall()
         rv["rootId"] = 0
         return rv;
-
-    def get(self, node_id):
-        """This will access a node referenced by node_id"""
-
-        # Fetch a sqlite3.Cursor from the database
-        try:
-            cursor = g.db.execute("SELECT * FROM nodes WHERE node_id=(?) ", node_id)
-        except Exception:
-            raise InvalidUsage('Node could not be found')
-
-        if cursor.rowcount > 1:
-            # return jsonify(message='Node ID is not unique')
-            raise InvalidUsage('Node ID is not unique')
-
-        try:
-            ret_node = cursor.fetchall()[0]
-        except IndexError:
-            raise InvalidUsage('Node %s is not present in the table' % node_id)
-            # return jsonify(message='Node %s is not present in table' % node_id)
-
-        # Find the children of this node
-        cursor = g.db.execute("SELECT name, dest FROM links WHERE origin=(?) ", node_id)
-        children = {}
-        # for k, val in enumerate(cursor.fetchall()):
-
-        # Map each child name to an ID
-        for child in cursor.fetchall():
-            children[child['name']] = child['dest']
-        ret_node['children'] = children
-        cursor.close()
-        return ret_node
 
 class Link(Resource):
     def post(self):
@@ -207,7 +181,7 @@ class Link(Resource):
 def posterator():
     return render_template('posterator.html')
 
-api.add_resource(Node, '/nodes' , '/node/<node_id>')
+api.add_resource(Node, '/node/<node_id>')
 api.add_resource(Tree, '/nodes/tree')
 api.add_resource(Link, '/nodeLinks')
 
