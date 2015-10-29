@@ -19,7 +19,7 @@ class UIState {
 class UIStateStore extends ReduceStore<?UIState> {
 
   getInitialState() : ?UIState {
-    return new UIState("week 1");
+    return new UIState("");
   }
 
   reduce(state: ?UIState, action: Action) : ?UIState {

@@ -6,40 +6,57 @@ import Node from '../Models/node.js';
 //complex actions can be defined here in terms of the basic RESTful API
 
 //Primitive actions supported by webapi.
-//currently, most of these are mocked out.
 //----------------------------------------
-function getNode(nodeId: string){}
 
-function overwriteNode(node: Node){
-  var deferred = $.Deferred();
-  setTimeout(function(){
-    deferred.resolve({message: "overwritten"});
-  }, 100);
-  return deferred.promise();
+var mainUrl = "";
+
+function getNode(nodeId: string){
+  let endpoint = mainUrl + `/node/${nodeId}`;
+  return $.ajax(endpoint,{
+    method: "GET",
+    dataType: "json"
+  });
 }
 
-var nextid = 5000;
-function createNode(node: Node){ //mock for creation process
-  var deferred = $.Deferred();
-  setTimeout(function(){
-    let newnode = Object.assign({}, node);
-    newnode.id = (nextid++).toString();
-    newnode.children = {};
-    deferred.resolve(newnode);
-  }, 100);
-  return deferred.promise();
-} //undefined id becomes defined. same with children
+function overwriteNode(node: Node){
+  let endpoint = mainUrl + `/node/${node.id}`;
+  return $.ajax(endpoint, {
+    method: "POST",
+    data: node,
+    dataType: "json"
+  });
+}
 
-var filename = "http://localhost:8000/sampledata.json";
+function overwriteChildren(node: Node){
+  let endpoint = mainUrl + `/node/children/${node.id}`;
+  return $.ajax(endpoint, {
+    method: "POST",
+    data: node.children,
+    dataType: "json"
+  })
+}
+
+function createNode(node: Node){ //mock for creation process
+  let endpoint = mainUrl + "/node";
+  return $.ajax(endpoint, {
+    method: "PUT",
+    data: node,
+    dataType: "json"
+  });
+}
+
+//currently rootId and depth are ignored
 function getTree(rootId = null, depth = null){
-  return $.ajax({
-    url: filename,
-    dataType: 'json',
+  let endpoint = mainUrl + "/nodes/tree";
+  return $.ajax(endpoint,{
+    method: "GET",
+    dataType: "json"
   });
 }
 
 
 //More complex actions defined in terms of primitives
+// promises are used to make the order of asynchronous steps more transparent
 //---------------------------------------------------
 export function addNewChild(node: Node, tag: string, markdown: string, renderer: string, callback: any){
   let child = new Node({
@@ -51,9 +68,14 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
   createNode(child) //create node
     .then((data) => { //modify parent
       console.log(data);
+
+      data.contents = child.contents;
+      data.renderer = child.renderer;
+      data.children = {};
+
       initialized_child = new Node(data);
       node.children[tag] = initialized_child.id;
-      return overwriteNode(node);
+      return overwriteChildren(node);
     }, (jqXHR, textStatus, errorThrown) => {
       console.error(textStatus);
       throw errorThrown;

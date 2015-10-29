@@ -52344,7 +52344,7 @@ var UIStateStore = (function (_ReduceStore) {
   _createClass(UIStateStore, [{
     key: 'getInitialState',
     value: function getInitialState() {
-      return new UIState("week 1");
+      return new UIState("");
     }
   }, {
     key: 'reduce',
@@ -52583,42 +52583,61 @@ var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
 //complex actions can be defined here in terms of the basic RESTful API
 
 //Primitive actions supported by webapi.
-//currently, most of these are mocked out.
-function getNode(nodeId) {}
+//----------------------------------------
 
-function overwriteNode(node) {
-  var deferred = _jquery2['default'].Deferred();
-  setTimeout(function () {
-    deferred.resolve({ message: "overwritten" });
-  }, 100);
-  return deferred.promise();
+var mainUrl = "";
+
+function getNode(nodeId) {
+  var endpoint = mainUrl + ('/node/' + nodeId);
+  return _jquery2['default'].ajax(endpoint, {
+    method: "GET",
+    dataType: "json"
+  });
 }
 
-var nextid = 5000;
+function overwriteNode(node) {
+  var endpoint = mainUrl + ('/node/' + node.id);
+  return _jquery2['default'].ajax(endpoint, {
+    method: "POST",
+    data: node,
+    dataType: "json"
+  });
+}
+
+function overwriteChildren(node) {
+  var endpoint = mainUrl + ('/node/children/' + node.id);
+  return _jquery2['default'].ajax(endpoint, {
+    method: "POST",
+    data: node.children,
+    dataType: "json"
+  });
+}
+
 function createNode(node) {
   //mock for creation process
-  var deferred = _jquery2['default'].Deferred();
-  setTimeout(function () {
-    var newnode = Object.assign({}, node);
-    newnode.id = (nextid++).toString();
-    newnode.children = {};
-    deferred.resolve(newnode);
-  }, 100);
-  return deferred.promise();
-} //undefined id becomes defined. same with children
+  var endpoint = mainUrl + "/node";
+  return _jquery2['default'].ajax(endpoint, {
+    method: "PUT",
+    data: node,
+    dataType: "json"
+  });
+}
 
-var filename = "http://localhost:8000/sampledata.json";
+//currently rootId and depth are ignored
 function getTree() {
   var rootId = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
   var depth = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
-  return _jquery2['default'].ajax({
-    url: filename,
-    dataType: 'json'
+  var endpoint = mainUrl + "/nodes/tree";
+  return _jquery2['default'].ajax(endpoint, {
+    method: "GET",
+    dataType: "json"
   });
 }
 
 //More complex actions defined in terms of primitives
+// promises are used to make the order of asynchronous steps more transparent
+//---------------------------------------------------
 
 function addNewChild(node, tag, markdown, renderer, callback) {
   var child = new _ModelsNodeJs2['default']({
@@ -52631,9 +52650,14 @@ function addNewChild(node, tag, markdown, renderer, callback) {
   .then(function (data) {
     //modify parent
     console.log(data);
+
+    data.contents = child.contents;
+    data.renderer = child.renderer;
+    data.children = {};
+
     initialized_child = new _ModelsNodeJs2['default'](data);
     node.children[tag] = initialized_child.id;
-    return overwriteNode(node);
+    return overwriteChildren(node);
   }, function (jqXHR, textStatus, errorThrown) {
     console.error(textStatus);
     throw errorThrown;
