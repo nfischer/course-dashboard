@@ -56,6 +56,7 @@ class Node(Resource):
 class Tree(Resource):
     def get(self):
         return {"nodes":3}
+
     def get(self, node_id):
         cur = g.db.execute("SELECT * FROM nodes WHERE node_id=(?) " , node_id)
         rv = cur.fetchall()[0]
@@ -94,7 +95,7 @@ def posterator():
     return render_template('posterator.html')
 
 api.add_resource(Node, '/nodes')
-api.add_resource(Tree, '/nodes/Tree', '/nodes/tree/<node_id>')
+api.add_resource(Tree, '/nodes/tree', '/nodes/tree/<node_id>')
 api.add_resource(Link, '/nodeLinks')
 
 # @app.route('/addNode', methods=['POST'])
