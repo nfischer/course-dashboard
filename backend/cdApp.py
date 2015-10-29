@@ -63,11 +63,10 @@ def handle_invalid_usage(error):
 #---------------------Rest API---------------------
 class Node(Resource):
     def post(self, node_id):
-        g.db.execute('''UPDATE nodes,children 
-                        SET nodes.contents=(?),nodes.renderer=(?),children.children=(?) 
-                        WHERE nodes.id=(?) AND childre.parent_id=(?)''',
-                        [request.form['contents'], request.form['renderer'], 
-                        request.form['children'], node_id, node_id])
+        g.db.execute('''UPDATE nodes 
+                        SET contents=(?),renderer=(?) 
+                        WHERE id=(?)''',
+                        [request.form['contents'], request.form['renderer'], node_id])
         g.db.commit()
         g.db.commit()
         return jsonify(message='Node was successfully updated.', id='1')
@@ -97,6 +96,15 @@ class Children(Resource):
                      [request.form['id'], request.form['children']])
         g.db.commit()
         return jsonify(message='Children were successfully added to the node', id='1')
+
+    def post(self, node_id):
+        g.db.execute('''UPDATE children 
+                        SET children=(?) 
+                        WHERE parent_id=(?)''', [request.form['children'], node_id])
+        g.db.commit()
+        
+        return jsonify(message='Children were successfully updated.')
+
 
 class Tree(Resource):
     def post(self, node_id):
@@ -191,7 +199,7 @@ def posterator():
     return render_template('posterator.html')
 
 api.add_resource(Node,'/node/', '/node/<node_id>')
-api.add_resource(Children,'/node/<node_id>' '/node/children/<node_id>')
+api.add_resource(Children,'/node/<node_id>', '/node/children/<node_id>')
 api.add_resource(Tree, '/nodes/tree')
 api.add_resource(Link, '/nodeLinks')
 
