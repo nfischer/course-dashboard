@@ -2,6 +2,7 @@ import React from 'react';
 
 import * as RENDERERS from './renderer.js';
 
+//dynamically creates an element of a specified class based on if that class is available in the renderer module
 export default function getRenderedElement(tag: string, node: Object, ui: Object){
   let renderer = node.renderer.trim() === '' ? "Renderer" : node.renderer;
   let renderClass = RENDERERS.hasOwnProperty(renderer) ?

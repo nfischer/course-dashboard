@@ -15,6 +15,7 @@ class UIState {
   }
 }
 
+//stores global UI state, which is made available to all nodes in the render tree.
 class UIStateStore extends ReduceStore<?UIState> {
 
   getInitialState() : ?UIState {

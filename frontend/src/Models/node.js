@@ -1,5 +1,6 @@
 /* @flow */
 
+//internal model for a Node. used across the frontend
 export default class Node {
 	id: string;
 	contents: string;

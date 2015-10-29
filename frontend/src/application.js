@@ -4,12 +4,14 @@ import { Container } from 'flux/utils';
 import jQuery from 'jquery';
 
 import open from './Actions/open.js';
+import * as WebAPI from './utils/webapi.js';
+
 import nodeStore from './Stores/nodestore.js';
 import uiStateStore from './Stores/uistatestore.js';
-import Node from './Models/node.js';
-import getRenderedElement from './Components/createelement.js';
 
-var filename = "http://localhost:8000/sampledata.json";
+import Node from './Models/node.js';
+
+import getRenderedElement from './Components/createelement.js';
 
 class ApplicationComponent extends React.Component{
   constructor(){
@@ -18,13 +20,8 @@ class ApplicationComponent extends React.Component{
   }
 
   componentDidMount() : void {
-    jQuery.ajax({
-      url: filename,
-      dataType: 'json',
-    }).then((data) => {
+    WebAPI.getInitialTree(function(data){
       open(data.rootId, data.nodes);
-    }, (jqXHR, textStatus, errorThrown) => {
-      console.error(textStatus);
     });
   }
 

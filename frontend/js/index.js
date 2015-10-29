@@ -51783,6 +51783,8 @@ var _rendererJs = require('./renderer.js');
 
 var RENDERERS = _interopRequireWildcard(_rendererJs);
 
+//dynamically creates an element of a specified class based on if that class is available in the renderer module
+
 function getRenderedElement(tag, node, ui) {
   var renderer = node.renderer.trim() === '' ? "Renderer" : node.renderer;
   var renderClass = RENDERERS.hasOwnProperty(renderer) ? RENDERERS[renderer] : RENDERERS["Renderer"];
@@ -51873,6 +51875,8 @@ function mapObject(obj, callback) {
   });
 }
 
+//Default renderer. this is the component that is added if no component is specified for a given renderer
+
 var Renderer = (function (_React$Component) {
   _inherits(Renderer, _React$Component);
 
@@ -51882,9 +51886,10 @@ var Renderer = (function (_React$Component) {
     _get(Object.getPrototypeOf(Renderer.prototype), 'constructor', this).apply(this, arguments);
   }
 
+  //Week renderer. if this week is the current one in the ui state, then the week is shown expanded. otherwise, a collapsedweek is shown.
+
   _createClass(Renderer, [{
     key: 'render',
-    //default renderer
     value: function render() {
       var _this = this;
 
@@ -51966,6 +51971,8 @@ var WeekCollapsed = (function (_React$Component3) {
     _get(Object.getPrototypeOf(WeekCollapsed.prototype), 'constructor', this).apply(this, arguments);
   }
 
+  //List renderer. List items are shown in a modal dialog
+
   _createClass(WeekCollapsed, [{
     key: 'render',
     value: function render() {
@@ -52037,6 +52044,9 @@ var ListElement = (function (_React$Component5) {
       show: false
     };
   }
+
+  //Editable list renderer: same as a list, except that elements can be added.
+  //currently only adds "Resource" nodes, but will allow for more in the future
 
   _createClass(ListElement, [{
     key: 'render',
@@ -52151,6 +52161,9 @@ var ListElementInput = (function (_React$Component7) {
 exports.ListElementInput = ListElementInput;
 
 },{"../Actions/addnode.js":416,"../Actions/expandweek.js":417,"../Stores/nodestore.js":422,"../utils/titlecaps.js":427,"./createelement.js":419,"marked":22,"react":414,"react-bootstrap/lib/ButtonInput":25,"react-bootstrap/lib/Input":31,"react-bootstrap/lib/Modal":33,"react-bootstrap/lib/ModalBody":34}],421:[function(require,module,exports){
+
+
+//internal model for a Node. used across the frontend
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52206,20 +52219,6 @@ var _dispatcherJs = require('../dispatcher.js');
 
 var _dispatcherJs2 = _interopRequireDefault(_dispatcherJs);
 
-/*
-
-{
-  node_id: "sjkahfkasdjfha",
-  contents: "foo, bar",
-  renderer: "Resource",
-  children: {
-    "tag": "lsdkjlkjslkfjasdlkfj",
-
-  }
-}
-
-*/
-
 //add to NodeStoreState by appending to map
 
 var NodeStoreState = function NodeStoreState(rootId) {
@@ -52227,7 +52226,11 @@ var NodeStoreState = function NodeStoreState(rootId) {
 
   this.rootId = rootId;
   this.nodes = new _immutable.Map();
-};
+}
+
+//this store contains the internal representation of all nodes in use by the frontend.
+//the tree/graph can be traversed by starting at a root and looking up children in the map of id->node.
+;
 
 var NodeStore = (function (_ReduceStore) {
   _inherits(NodeStore, _ReduceStore);
@@ -52324,7 +52327,10 @@ var UIState = function UIState(currentWeek) {
   _classCallCheck(this, UIState);
 
   this.currentWeek = currentWeek;
-};
+}
+
+//stores global UI state, which is made available to all nodes in the render tree.
+;
 
 var UIStateStore = (function (_ReduceStore) {
   _inherits(UIStateStore, _ReduceStore);
@@ -52370,6 +52376,8 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -52390,6 +52398,10 @@ var _ActionsOpenJs = require('./Actions/open.js');
 
 var _ActionsOpenJs2 = _interopRequireDefault(_ActionsOpenJs);
 
+var _utilsWebapiJs = require('./utils/webapi.js');
+
+var WebAPI = _interopRequireWildcard(_utilsWebapiJs);
+
 var _StoresNodestoreJs = require('./Stores/nodestore.js');
 
 var _StoresNodestoreJs2 = _interopRequireDefault(_StoresNodestoreJs);
@@ -52406,8 +52418,6 @@ var _ComponentsCreateelementJs = require('./Components/createelement.js');
 
 var _ComponentsCreateelementJs2 = _interopRequireDefault(_ComponentsCreateelementJs);
 
-var filename = "http://localhost:8000/sampledata.json";
-
 var ApplicationComponent = (function (_React$Component) {
   _inherits(ApplicationComponent, _React$Component);
 
@@ -52421,13 +52431,8 @@ var ApplicationComponent = (function (_React$Component) {
   _createClass(ApplicationComponent, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _jquery2['default'].ajax({
-        url: filename,
-        dataType: 'json'
-      }).then(function (data) {
+      WebAPI.getInitialTree(function (data) {
         (0, _ActionsOpenJs2['default'])(data.rootId, data.nodes);
-      }, function (jqXHR, textStatus, errorThrown) {
-        console.error(textStatus);
       });
     }
   }, {
@@ -52462,7 +52467,7 @@ var ApplicationContainer = _fluxUtils.Container.create(ApplicationComponent);
 exports['default'] = ApplicationContainer;
 module.exports = exports['default'];
 
-},{"./Actions/open.js":418,"./Components/createelement.js":419,"./Models/node.js":421,"./Stores/nodestore.js":422,"./Stores/uistatestore.js":423,"flux/utils":19,"jquery":21,"react":414}],425:[function(require,module,exports){
+},{"./Actions/open.js":418,"./Components/createelement.js":419,"./Models/node.js":421,"./Stores/nodestore.js":422,"./Stores/uistatestore.js":423,"./utils/webapi.js":428,"flux/utils":19,"jquery":21,"react":414}],425:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -52562,6 +52567,7 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 exports.addNewChild = addNewChild;
+exports.getInitialTree = getInitialTree;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -52574,8 +52580,10 @@ var _ModelsNodeJs = require('../Models/node.js');
 var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
 
 //this is a module exclusively for sending specific actions to the web api.
-//more specific actions can be implemented here in terms of a general api
+//complex actions can be defined here in terms of the basic RESTful API
 
+//Primitive actions supported by webapi.
+//currently, most of these are mocked out.
 function getNode(nodeId) {}
 
 function overwriteNode(node) {
@@ -52599,6 +52607,19 @@ function createNode(node) {
   return deferred.promise();
 } //undefined id becomes defined. same with children
 
+var filename = "http://localhost:8000/sampledata.json";
+function getTree() {
+  var rootId = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+  var depth = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+
+  return _jquery2['default'].ajax({
+    url: filename,
+    dataType: 'json'
+  });
+}
+
+//More complex actions defined in terms of primitives
+
 function addNewChild(node, tag, markdown, renderer, callback) {
   var child = new _ModelsNodeJs2['default']({
     contents: markdown,
@@ -52619,6 +52640,15 @@ function addNewChild(node, tag, markdown, renderer, callback) {
   }).then(function (data) {
     //call passed in callback
     callback(initialized_child);
+  }, function (jqXHR, textStatus, errorThrown) {
+    console.error(textStatus);
+    throw errorThrown;
+  });
+}
+
+function getInitialTree(callback) {
+  getTree().then(function (data) {
+    callback(data);
   }, function (jqXHR, textStatus, errorThrown) {
     console.error(textStatus);
     throw errorThrown;

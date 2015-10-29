@@ -28,7 +28,8 @@ function mapObject(obj: Object, callback: any) : Array<any> { // replace any
     });
 }
 
-export class Renderer extends React.Component{ //default renderer
+//Default renderer. this is the component that is added if no component is specified for a given renderer
+export class Renderer extends React.Component{
   render() : React.Element {
     if (Object.keys(this.props.node.children).length == 0) { //leaf
       return (
@@ -53,6 +54,7 @@ export class Renderer extends React.Component{ //default renderer
   }
 }
 
+//Week renderer. if this week is the current one in the ui state, then the week is shown expanded. otherwise, a collapsedweek is shown.
 export class Week extends React.Component {
   constructor(){
     super();
@@ -101,6 +103,7 @@ export class WeekCollapsed extends React.Component{
   }
 }
 
+//List renderer. List items are shown in a modal dialog
 export class List extends React.Component {
   render() : React.Element {
     return (
@@ -148,6 +151,8 @@ export class ListElement extends React.Component {
   }
 }
 
+//Editable list renderer: same as a list, except that elements can be added.
+//currently only adds "Resource" nodes, but will allow for more in the future
 export class EditableList extends React.Component {
   render() : React.Element {
     return (

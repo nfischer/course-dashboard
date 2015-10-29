@@ -7,20 +7,6 @@ import Action from '../Actions/action.js';
 import Node from '../Models/node.js';
 import dispatcher from '../dispatcher.js';
 
-/*
-
-{
-  node_id: "sjkahfkasdjfha",
-  contents: "foo, bar",
-  renderer: "Resource",
-  children: {
-    "tag": "lsdkjlkjslkfjasdlkfj",
-
-  }
-}
-
-*/
-
 //add to NodeStoreState by appending to map
 class NodeStoreState {
   rootId: string;
@@ -32,6 +18,8 @@ class NodeStoreState {
   }
 }
 
+//this store contains the internal representation of all nodes in use by the frontend.
+//the tree/graph can be traversed by starting at a root and looking up children in the map of id->node.
 class NodeStore extends ReduceStore<?NodeStoreState> {
 
   getInitialState() : ?NodeStoreState {

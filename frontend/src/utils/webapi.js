@@ -3,8 +3,11 @@ import $ from 'jquery';
 import Node from '../Models/node.js';
 
 //this is a module exclusively for sending specific actions to the web api.
-//more specific actions can be implemented here in terms of a general api
+//complex actions can be defined here in terms of the basic RESTful API
 
+//Primitive actions supported by webapi.
+//currently, most of these are mocked out.
+//----------------------------------------
 function getNode(nodeId: string){}
 
 function overwriteNode(node: Node){
@@ -27,6 +30,17 @@ function createNode(node: Node){ //mock for creation process
   return deferred.promise();
 } //undefined id becomes defined. same with children
 
+var filename = "http://localhost:8000/sampledata.json";
+function getTree(rootId = null, depth = null){
+  return $.ajax({
+    url: filename,
+    dataType: 'json',
+  });
+}
+
+
+//More complex actions defined in terms of primitives
+//---------------------------------------------------
 export function addNewChild(node: Node, tag: string, markdown: string, renderer: string, callback: any){
   let child = new Node({
     contents: markdown,
@@ -50,4 +64,13 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
       console.error(textStatus);
       throw errorThrown;
     });
+}
+
+export function getInitialTree(callback: any){
+  getTree().then((data) => {
+    callback(data);
+  }, (jqXHR, textStatus, errorThrown) => {
+    console.error(textStatus);
+    throw errorThrown;
+  });
 }
