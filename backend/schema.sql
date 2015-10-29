@@ -11,14 +11,14 @@ CREATE TABLE `links` (
     `name` varchar(100) NOT NULL,
     `dest` int,
     foreign key(origin) references nodes(node_id),
-    foreign key(dest) references nodes(node_id)
+    foreign key(dest) references nodes(id)
 );
 
 CREATE TABLE `children` (
 	`parent_id`	INTEGER NOT NULL,
 	`children`	TEXT,
 	PRIMARY KEY(parent_id),
-	FOREIGN KEY(`parent_id`) REFERENCES nodes ( 'node_id' )
+	FOREIGN KEY(`parent_id`) REFERENCES nodes ( 'id' )
 );
 
 
