@@ -56,6 +56,23 @@ As an alternative, you can launch your web browser and point it to
 [http://localhost:5000/posterator](http://localhost:5000/posterator) and use the
 interface there.
 
+Frontend
+--------
+
+The frontend is written using node.js and browserify. In order to build, execute the following commands from the frontend directory:
+
+```
+npm install
+gulp build_browser
+python -m SimpleHTTPServer
+```
+
+The page should now be available at [http://localhost:8000](http://localhost:8000).
+
+### Migration
+
+To serve the frontend code from a backend of your choice, simply copy index.html, the css directory, and the js directory to the location of your choice.
+
 Contributing
 ------------
 

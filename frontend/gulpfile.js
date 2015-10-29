@@ -36,7 +36,7 @@ var updateBundle = function(b){
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./dist_browser'));
+    .pipe(gulp.dest('./js'));
 };
 
 gulp.task('build_browser', partial(updateBundle, b));
