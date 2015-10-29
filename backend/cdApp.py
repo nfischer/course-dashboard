@@ -58,6 +58,15 @@ class Node(Resource):
         g.db.commit()
         return jsonify(message='New node was successfully created', id='1')
 
+    # takes a node_id
+    # returns a single node
+    # if node_id out of range, returns null
+    def get(self, node_id):
+        cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, c.children 
+                              FROM nodes AS n LEFT JOIN children AS c 
+                              ON n.id = c.parent_id WHERE id=(?)''', node_id)
+        return cursor.fetchone()
+
 class Tree(Resource):
     def post(self, node_id):
         """This rpc updates/edits a node"""
@@ -80,31 +89,40 @@ class Tree(Resource):
             return jsonify(message='Error when editing your node')
         return jsonify(message='Successfully updated node %s' % node_id)
 
-    def get(self, node_id):
-        """This will access a node referenced by node_id"""
+    #DEPRECATED
+    # def get(self, node_id):
+    #     """This will access a node referenced by node_id"""
 
-        # Fetch a sqlite3.Cursor from the database
-        cursor = g.db.execute("SELECT * FROM nodes WHERE node_id=(?) ", node_id)
+    #     # Fetch a sqlite3.Cursor from the database
+    #     cursor = g.db.execute("SELECT * FROM nodes WHERE node_id=(?) ", node_id)
 
-        if cursor.rowcount > 1:
-            return jsonify(message='Node ID is not unique')
+    #     if cursor.rowcount > 1:
+    #         return jsonify(message='Node ID is not unique')
 
-        try:
-            ret_node = cursor.fetchall()[0]
-        except IndexError:
-            return jsonify(message='Node %s is not present in table' % node_id)
+    #     try:
+    #         ret_node = cursor.fetchall()[0]
+    #     except IndexError:
+    #         return jsonify(message='Node %s is not present in table' % node_id)
 
-        # Find the children of this node
-        cursor = g.db.execute("SELECT name, dest FROM links WHERE origin=(?) ", node_id)
-        children = {}
-        # for k, val in enumerate(cursor.fetchall()):
+    #     # Find the children of this node
+    #     cursor = g.db.execute("SELECT name, dest FROM links WHERE origin=(?) ", node_id)
+    #     children = {}
+    #     # for k, val in enumerate(cursor.fetchall()):
 
-        # Map each child name to an ID
-        for child in cursor.fetchall():
-            children[child['name']] = child['dest']
-        ret_node['children'] = children
-        cursor.close()
-        return ret_node
+    #     # Map each child name to an ID
+    #     for child in cursor.fetchall():
+    #         children[child['name']] = child['dest']
+    #     ret_node['children'] = children
+    #     cursor.close()
+    #     return ret_node
+    def get(selft):
+        cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, c.children 
+                              FROM nodes AS n LEFT JOIN children AS c 
+                              ON n.id = c.parent_id''');
+        rv = {}
+        rv["nodes"] = cursor.fetchall()
+        rv["rootId"] = 0
+        return rv;
 
 class Link(Resource):
     def post(self):
@@ -133,8 +151,8 @@ class Link(Resource):
 def posterator():
     return render_template('posterator.html')
 
-api.add_resource(Node, '/nodes')
-api.add_resource(Tree, '/nodes/tree', '/nodes/tree/<node_id>')
+api.add_resource(Node, '/nodes' , '/node/<node_id>')
+api.add_resource(Tree, '/nodes/tree')
 api.add_resource(Link, '/nodeLinks')
 
 # @app.route('/addNode', methods=['POST'])
