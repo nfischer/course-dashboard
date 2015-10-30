@@ -99,7 +99,6 @@ class Children(Resource):
     def put(self, node_id):
         # TODO(nfischer): Fix this to work with multi-digit node_ids (use %s
         # formatting)
-        print type(request.form['children']) # DEBUG
         g.db.execute('INSERT INTO children (parent_id, children) values (?, ?)',
                      [node_id, request.form['children']])
         g.db.commit()
@@ -108,7 +107,6 @@ class Children(Resource):
     def post(self, node_id):
         # TODO(nfischer): Fix this to work with multi-digit node_ids (use %s
         # formatting)
-        print type(request.form['children']) # DEBUG
         g.db.execute('''UPDATE children 
                         SET children=(?) 
                         WHERE parent_id=(?)''', [request.form['children'], node_id])
