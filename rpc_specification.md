@@ -13,7 +13,7 @@ Nodes
 
 ### Adding a node
 
- - end point: `/nodes`
+ - end point: `/node/`
  - request: HTTP PUT
  - data (input):
 ```
@@ -32,7 +32,7 @@ Nodes
 
 ### Accessing a node
 
- - end point: `/nodes/tree/<id>` where `<id>` is some integer
+ - end point: `/node/<id>` where `<id>` is some integer
  - request: HTTP GET
  - data (input): none
  - return data:
@@ -49,7 +49,7 @@ Nodes
 
 ### Editing a node
 
- - end point: `/nodes/tree/<id>` where `<id>` is some integer
+ - end point: `/node/<id>` where `<id>` is some integer
  - request: HTTP POST
  - data (input):
 ```

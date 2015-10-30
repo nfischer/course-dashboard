@@ -66,9 +66,9 @@ class Node(Resource):
         g.db.execute('''UPDATE nodes 
                         SET contents=(?),renderer=(?) 
                         WHERE id=(?)''',
-                        [request.form['contents'], request.form['renderer'], node_id])
+                     [request.form['contents'], request.form['renderer'], node_id])
         g.db.commit()
-        return jsonify(message='Node was successfully updated.', id='1')
+        return jsonify(message='Node was successfully updated.', id=node_id)
 
     def put(self):
         """
@@ -77,8 +77,8 @@ class Node(Resource):
         """
         g.db.execute('INSERT INTO nodes (contents, renderer) VALUES(?, ?)',
                      [request.form['contents'], request.form['renderer']])
-        g.db.commit()
         cursor = g.db.execute('SELECT id FROM nodes ORDER BY id DESC limit 1')
+        g.db.commit()
         ret_id = cursor.fetchone()
         return jsonify(message='New node was successfully created', id=ret_id['id'])
 
@@ -86,10 +86,16 @@ class Node(Resource):
     # returns a single node
     # if node_id out of range, returns null
     def get(self, node_id):
+        print "<%s>" % node_id
+        print type(node_id)
+        node_id = str(node_id)
         cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, c.children 
                               FROM nodes AS n LEFT JOIN children AS c 
-                              ON n.id = c.parent_id WHERE id=(?)''', node_id)
-        return cursor.fetchone()
+                              ON n.id = c.parent_id WHERE id=%s''' % node_id)
+        return_val = cursor.fetchone()
+        if return_val is None:
+            raise InvalidUsage('node_id is out of range')
+        return return_val
 
 class Children(Resource):
     def put(self):
@@ -99,11 +105,13 @@ class Children(Resource):
         return jsonify(message='Children were successfully added to the node', id='1')
 
     def post(self, node_id):
+        # TODO(nfischer): Fix this to work with multi-digit node_ids (use %s
+        # formatting)
         g.db.execute('''UPDATE children 
                         SET children=(?) 
                         WHERE parent_id=(?)''', [request.form['children'], node_id])
         g.db.commit()
-        
+
         return jsonify(message='Children were successfully updated.')
 
 
@@ -111,8 +119,10 @@ class Tree(Resource):
     def post(self, node_id):
         """This rpc updates/edits a node"""
         try:
-            g.db.execute('UPDATE nodes SET contents=(?), renderer=(?) WHERE node_id = (?)', 
-                        [request.form['contents'], request.form['renderer'],  node_id])
+            # TODO(nfischer): Fix this to work with multi-digit node_ids (use %s
+            # formatting)
+            g.db.execute('UPDATE nodes SET contents=(?), renderer=(?) WHERE node_id = (?)',
+                         [request.form['contents'], request.form['renderer'], node_id])
 
             # Delete the old links
             g.db.execute('DELETE FROM links WHERE origin = (?)', node_id)
@@ -132,14 +142,17 @@ class Tree(Resource):
         return jsonify(message='Successfully updated node %s' % node_id)
 
 
+    # /nodes/tree
+    # returns the tree of nodes
+    # rootId is hard coded right now. Need clarification on that
     def get(self):
         cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, c.children 
                               FROM nodes AS n LEFT JOIN children AS c 
-                              ON n.id = c.parent_id''');
+                              ON n.id = c.parent_id''')
         rv = {}
         rv["nodes"] = cursor.fetchall()
         rv["rootId"] = 0
-        return rv;
+        return rv
 
 class Link(Resource):
     def post(self):
