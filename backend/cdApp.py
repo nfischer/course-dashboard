@@ -102,7 +102,7 @@ class Children(Resource):
         g.db.execute('INSERT INTO children (parent_id, children) values (?, ?)',
                      [request.form['id'], request.form['children']])
         g.db.commit()
-        return jsonify(message='Children were successfully added to the node', id='1')
+        return jsonify(message='Children were successfully added to the node', id=request.form['id'])
 
     def post(self, node_id):
         # TODO(nfischer): Fix this to work with multi-digit node_ids (use %s
