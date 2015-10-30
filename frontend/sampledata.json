@@ -1,0 +1,424 @@
+{
+  "rootId": "0",
+  "nodes": [
+    {
+      "id": "0",
+      "contents": "",
+      "renderer": "Timeline",
+      "children": {
+        "week 1": "1",
+        "week 2": "2",
+        "week 3": "3"
+      }
+    },
+    {
+      "id": "1",
+      "contents": "",
+      "renderer": "Week",
+      "children": {
+        "topics": "4",
+        "announcements": "5",
+        "assignments": "6"
+      }
+    },
+    {
+      "id": "6",
+      "contents": "Assignments\n==",
+      "renderer": "List",
+      "children": {
+        "Background Survey": "17"
+      }
+    },
+    {
+      "id": "17",
+      "contents": "please fill out the [background survey](https://ccle.ucla.edu/mod/resource/view.php?id=885527) and bring it to class.",
+      "renderer": "Assignment",
+      "children": {}
+    },
+    {
+      "id": "5",
+      "contents": "[piazza](https://piazza.com/class/if44ov1fn5a505)",
+      "renderer": "Announcements",
+      "children": {}
+    },
+    {
+      "id": "4",
+      "contents": "",
+      "renderer": "List",
+      "children": {
+        "introduction": "7",
+        "design notation": "8",
+        "information hiding": "9"
+      }
+    },
+    {
+      "id": "7",
+      "contents": "Introduction\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "10"
+      }
+    },
+    {
+      "id": "10",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "syllabus": "11"
+      }
+    },
+    {
+      "id": "11",
+      "contents": "[http://web.cs.ucla.edu/~miryung/teaching/CS130-Fall2015/main.html](http://web.cs.ucla.edu/~miryung/teaching/CS130-Fall2015/main.html)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "8",
+      "contents": "Design Notation (UML)\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "12"
+      }
+    },
+    {
+      "id": "12",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "administrator added": "13",
+        "draw.io": "14"
+      }
+    },
+    {
+      "id": "13",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078167/mod_resource/content/3/Lecture1-UML.pdf)\n\n[Overview of UML](http://www.ibm.com/developerworks/rational/library/769.html)\n\n[UML Tutorial](http://users.ece.utexas.edu/~miryung/teaching/EE461L-Spring2012/labs/uml.html)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "14",
+      "contents": "Hey guys, check out [draw.io](https://www.draw.io/) for UML diagramming that's integrated with google docs!",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "9",
+      "contents": "Design Principles: Information Hiding\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "15"
+      }
+    },
+    {
+      "id": "15",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "administrator added": "16"
+      }
+    },
+    {
+      "id": "16",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078168/mod_resource/content/1/Lecture2-InformationHiding.pdf)\n\n[Parnas Paper](http://dl.acm.org/citation.cfm?id=361623)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "2",
+      "contents": "",
+      "renderer": "Week",
+      "children": {
+        "topics": "18",
+        "announcements": "19",
+        "assignments": "20"
+      }
+    },
+    {
+      "id": "18",
+      "contents": "",
+      "renderer": "List",
+      "children": {
+        "Strategy" : "21",
+        "Observer" : "22",
+        "Mediator " : "23",
+        "Abstract Factory" : "24",
+        "Factory Method" : "25"
+      }
+    },
+    {
+      "id": "19",
+      "contents": "[piazza](https://piazza.com/class/if44ov1fn5a505)",
+      "renderer": "Announcements",
+      "children": {}
+    },
+    {
+      "id": "20",
+      "contents": "",
+      "renderer": "List",
+      "children": {
+      }
+    },
+    {
+      "id": "21",
+      "contents": "Strategy\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "26"
+      }
+    },
+    {
+      "id": "26",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "slides": "31"
+      }
+    },
+    {
+      "id": "31",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078171/mod_resource/content/2/Lecture3-DesignPatternPartA-StrategyObserverMediator.pdf)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "22",
+      "contents": "Observer\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "27"
+      }
+    },
+    {
+      "id": "27",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "slides": "31"
+      }
+    },
+    {
+      "id": "32",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078168/mod_resource/content/1/Lecture2-InformationHiding.pdf)\n\n[Parnas Paper](http://dl.acm.org/citation.cfm?id=361623)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "23",
+      "contents": "Mediator\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "28"
+      }
+    },
+    {
+      "id": "28",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "slides": "31"
+      }
+    },
+    {
+      "id": "33",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078168/mod_resource/content/1/Lecture2-InformationHiding.pdf)\n\n[Parnas Paper](http://dl.acm.org/citation.cfm?id=361623)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "24",
+      "contents": "Abstract Factory\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "29"
+      }
+    },
+    {
+      "id": "29",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "slides": "34"
+      }
+    },
+    {
+      "id": "34",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078174/mod_resource/content/3/Lecture4-DesignPatternPartB-FactoryAbstractFactory.pdf)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "25",
+      "contents": "Factory Method\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "30"
+      }
+    },
+    {
+      "id": "30",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "slides": "34"
+      }
+    },
+    {
+      "id": "35",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078168/mod_resource/content/1/Lecture2-InformationHiding.pdf)\n\n[Parnas Paper](http://dl.acm.org/citation.cfm?id=361623)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "3",
+      "contents": "",
+      "renderer": "Week",
+      "children": {
+        "topics": "36",
+        "announcements": "37",
+        "assignments": "38"
+      }
+    },
+    {
+      "id": "36",
+      "contents": "[skeleton code snippets](https://ccle.ucla.edu/pluginfile.php/1078188/mod_resource/content/0/CS130DesignPatternSkeletons.pdf)",
+      "renderer": "List",
+      "children": {
+        "Singleton" : "39",
+        "Command" : "40",
+        "Adaptor " : "41",
+        "Template Method" : "42",
+        "State" : "43",
+        "Flyweight" : "44"
+      }
+    },
+    {
+      "id": "39",
+      "contents": "Singleton\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "46"
+      }
+    },
+    {
+      "id": "46",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "slides": "47"
+      }
+    },
+    {
+      "id": "47",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078178/mod_resource/content/1/Lecture5-DesignPatternPartC-SingletonCommandAdaptorFacade.pdf)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "40",
+      "contents": "Command\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "48"
+      }
+    },
+    {
+      "id": "48",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "slides": "47"
+      }
+    },
+    {
+      "id": "41",
+      "contents": "Adaptor\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "49"
+      }
+    },
+    {
+      "id": "49",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "slides": "47"
+      }
+    },
+    {
+      "id": "42",
+      "contents": "Template Method\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "50"
+      }
+    },
+    {
+      "id": "50",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "slides": "51"
+      }
+    },
+    {
+      "id": "51",
+      "contents": "[slides](https://ccle.ucla.edu/pluginfile.php/1078179/mod_resource/content/4/Lecture6-DesignPatternPartD-TemplateMethodStateFlyweight.pdf)",
+      "renderer": "Resource",
+      "children": {}
+    },
+    {
+      "id": "43",
+      "contents": "State\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "52"
+      }
+    },
+    {
+      "id": "52",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "slides": "51"
+      }
+    },
+    {
+      "id": "44",
+      "contents": "Flyweight\n==",
+      "renderer": "Topic",
+      "children": {
+        "resources": "53"
+      }
+    },
+    {
+      "id": "53",
+      "contents": "",
+      "renderer": "EditableList",
+      "children": {
+        "slides": "51"
+      }
+    },
+    {
+      "id": "37",
+      "contents": "[piazza](https://piazza.com/class/if44ov1fn5a505)",
+      "renderer": "Announcements",
+      "children": {}
+    },
+    {
+      "id": "38",
+      "contents": "",
+      "renderer": "List",
+      "children": {
+        "Assignment 1" : "45"
+      }
+    },
+    {
+      "id": "45",
+      "contents": "[Assignment 1](https://ccle.ucla.edu/mod/assign/view.php?id=865284) is due on Wednesday 11:59 PM.",
+      "renderer": "Assignment",
+      "children": {}
+    }
+  ]
+}

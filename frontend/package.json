@@ -1,0 +1,53 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "frontend for Course Dashboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nfischer/course-dashboard.git"
+  },
+  "author": "ucla cs 130",
+  "license": "ISC",
+  "dependencies": {
+    "babel-runtime": "^5.8.25",
+    "bootstrap": "^3.3.5",
+    "classnames": "^2.2.0",
+    "dom-helpers": "^2.4.0",
+    "flux": "^2.1.1",
+    "immutable": "^3.7.5",
+    "jquery": "^2.1.4",
+    "marked": "^0.3.5",
+    "normalize.css": "^3.0.3",
+    "react": "^0.14.0",
+    "react-bootstrap": "^0.27.3",
+    "react-dom": "^0.14.0"
+  },
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "brfs": "^1.4.1",
+    "browserify": "^11.2.0",
+    "browserify-resolutions": "^1.0.6",
+    "chai": "^3.3.0",
+    "concat-stream": "^1.5.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.6",
+    "gulp-watch": "^4.3.5",
+    "invariant": "^2.1.1",
+    "merge-stream": "^1.0.0",
+    "mocha": "^2.3.3",
+    "orchestrator": "^0.3.7",
+    "partial": "0.0.3",
+    "source-map-support": "^0.3.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.4.0"
+  }
+}
