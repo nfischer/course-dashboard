@@ -52175,10 +52175,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Node = function Node(node) {
 	_classCallCheck(this, Node);
 
-	this.id = node.id;
+	if (typeof node.id === "string") {
+		this.id = node.id;
+	} else if (typeof node.id === "number") {
+		this.id = node.id.toString();
+	}
 	this.contents = node.contents;
 	this.renderer = node.renderer;
-	this.children = node.children;
+	if (typeof node.children === "string") {
+		this.children = JSON.parse(node.children);
+	}
+	this.children = node.children ? node.children : {};
 };
 
 exports["default"] = Node;
@@ -52259,6 +52266,7 @@ var NodeStore = (function (_ReduceStore) {
           //handle creation of tree given data format from server
           var newState = state || new NodeStoreState(action.data.rootId); //Object.assign({}, state);
           action.data.nodes.forEach(function (node) {
+            node.id = typeof node.id === "string" ? node.id : node.id.toString();
             newState.nodes = newState.nodes.set(node.id, new _ModelsNodeJs2['default'](node));
           });
 
@@ -52267,6 +52275,7 @@ var NodeStore = (function (_ReduceStore) {
           //TODO: insert created node into tree at appropriate place
           //parent node links are updated as a part of comitting changes to db
           var newNode = action.data;
+          newNode.id = typeof newNode.id === "string" ? newNode.id : newNode.id.toString();
           newState = state;
           newState.nodes = newState.nodes.set(newNode.id, newNode);
 
@@ -52484,6 +52493,8 @@ module.exports = exports['default'];
 (function (global){
 'use strict';
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _react = require('react');
@@ -52498,6 +52509,10 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+var _utilsWebapiJs = require('./utils/webapi.js');
+
+var WEBAPI = _interopRequireWildcard(_utilsWebapiJs);
+
 var _applicationJs = require('./application.js');
 
 var _applicationJs2 = _interopRequireDefault(_applicationJs);
@@ -52505,10 +52520,11 @@ var _applicationJs2 = _interopRequireDefault(_applicationJs);
 _reactDom2['default'].render(_react2['default'].createElement(_applicationJs2['default'], null), document.getElementById('appArea'));
 
 global.$ = _jquery2['default'];
+global.WEBAPI = WEBAPI;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./application.js":424,"jquery":21,"react":414,"react-dom":259}],427:[function(require,module,exports){
+},{"./application.js":424,"./utils/webapi.js":428,"jquery":21,"react":414,"react-dom":259}],427:[function(require,module,exports){
 /*
  * Title Caps
  *
@@ -52588,7 +52604,7 @@ var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
 var mainUrl = "";
 
 function getNode(nodeId) {
-  var endpoint = mainUrl + ('/node/' + nodeId);
+  var endpoint = mainUrl + ('/node/' + nodeId + '/');
   return _jquery2['default'].ajax(endpoint, {
     method: "GET",
     dataType: "json"
@@ -52596,7 +52612,7 @@ function getNode(nodeId) {
 }
 
 function overwriteNode(node) {
-  var endpoint = mainUrl + ('/node/' + node.id);
+  var endpoint = mainUrl + ('/node/' + node.id + '/');
   return _jquery2['default'].ajax(endpoint, {
     method: "POST",
     data: node,
@@ -52604,18 +52620,19 @@ function overwriteNode(node) {
   });
 }
 
-function overwriteChildren(node) {
-  var endpoint = mainUrl + ('/node/children/' + node.id);
+function overwriteChildren(node, create) {
+  var endpoint = mainUrl + ('/children/' + node.id + '/');
+  var data = { children: JSON.stringify(node.children) };
   return _jquery2['default'].ajax(endpoint, {
-    method: "POST",
-    data: node.children,
+    method: create ? "PUT" : "POST",
+    data: data,
     dataType: "json"
   });
 }
 
 function createNode(node) {
   //mock for creation process
-  var endpoint = mainUrl + "/node";
+  var endpoint = mainUrl + "/node/";
   return _jquery2['default'].ajax(endpoint, {
     method: "PUT",
     data: node,
@@ -52628,7 +52645,7 @@ function getTree() {
   var rootId = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
   var depth = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
-  var endpoint = mainUrl + "/nodes/tree";
+  var endpoint = mainUrl + "/tree/";
   return _jquery2['default'].ajax(endpoint, {
     method: "GET",
     dataType: "json"
@@ -52656,8 +52673,9 @@ function addNewChild(node, tag, markdown, renderer, callback) {
     data.children = {};
 
     initialized_child = new _ModelsNodeJs2['default'](data);
+    var create = Object.keys(node.children).length === 0;
     node.children[tag] = initialized_child.id;
-    return overwriteChildren(node);
+    return overwriteChildren(node, create);
   }, function (jqXHR, textStatus, errorThrown) {
     console.error(textStatus);
     throw errorThrown;

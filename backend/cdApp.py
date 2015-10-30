@@ -11,7 +11,7 @@ SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config.from_object(__name__)
 api = Api(app)
 
@@ -158,6 +158,7 @@ class Link(Resource):
 @app.route('/posterator', methods=['GET'])
 def posterator():
     return render_template('posterator.html')
+
 
 api.add_resource(Node, '/node/', '/node/<node_id>/')
 api.add_resource(Children, '/children/<node_id>/')

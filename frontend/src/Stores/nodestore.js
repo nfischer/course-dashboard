@@ -36,6 +36,7 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
       //handle creation of tree given data format from server
       let newState = state || new NodeStoreState(action.data.rootId);//Object.assign({}, state);
       action.data.nodes.forEach(node => {
+        node.id = (typeof node.id === "string") ? node.id : node.id.toString();
         newState.nodes = newState.nodes.set(node.id, new Node(node));
       });
 
@@ -44,6 +45,7 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
       //TODO: insert created node into tree at appropriate place
       //parent node links are updated as a part of comitting changes to db
       let newNode = action.data;
+      newNode.id = (typeof newNode.id === "string") ? newNode.id : newNode.id.toString();
       newState = state;
       newState.nodes = newState.nodes.set(newNode.id, newNode);
 

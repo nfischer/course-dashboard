@@ -8,12 +8,16 @@ export default class Node {
 	children: Object;
 
 	constructor(node: Object){
-		this.id = node.id;
+		if(typeof node.id === "string"){
+			this.id = node.id;
+		} else if(typeof node.id === "number"){
+			this.id = node.id.toString();
+		}
 		this.contents = node.contents;
 		this.renderer = node.renderer;
 		if(typeof node.children === "string"){
 			this.children = JSON.parse(node.children);
 		}
-		this.children = node.children;
+		this.children = node.children ? node.children : {};
 	}
 }
