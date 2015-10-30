@@ -23,7 +23,7 @@ marked.setOptions({
 
 
 function mapObject(obj: Object, callback: any) : Array<any> { // replace any
-    return Object.keys(obj).map(function(value, index, array) {
+    return Object.keys(obj).sort().map(function(value, index, array) {
         return callback(obj[value], value, obj);
     });
 }

@@ -128,7 +128,7 @@ class Tree(Resource):
                                   ON n.id = c.parent_id''')
             tree = {}
             tree["nodes"] = cursor.fetchall()
-            tree["rootId"] = '0'
+            tree["rootId"] = '54'
             return tree
         except Exception:
             raise InvalidUsage('Unable to find the tree', status_code=500)

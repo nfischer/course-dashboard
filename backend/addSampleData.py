@@ -54,6 +54,6 @@ if __name__ == '__main__':
     for node in nlist:
         myid = int(node['id'])
         mychildren = node['children']
-        add_children(myid, mychildren)
+        add_children(myid, json.dumps(mychildren))
 
 

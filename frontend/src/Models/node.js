@@ -17,7 +17,8 @@ export default class Node {
 		this.renderer = node.renderer;
 		if(typeof node.children === "string"){
 			this.children = JSON.parse(node.children);
+		} else {
+			this.children = node.children ? node.children : {};
 		}
-		this.children = node.children ? node.children : {};
 	}
 }
