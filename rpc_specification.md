@@ -32,7 +32,7 @@ Nodes
 
 ### Accessing a node
 
- - end point: `/node/<id>` where `<id>` is some integer
+ - end point: `/node/<id>/` where `<id>` is some integer
  - request: HTTP GET
  - data (input): none
  - return data:
@@ -49,7 +49,7 @@ Nodes
 
 ### Editing a node
 
- - end point: `/node/<id>` where `<id>` is some integer
+ - end point: `/node/<id>/` where `<id>` is some integer
  - request: HTTP POST
  - data (input):
 ```
@@ -72,3 +72,67 @@ Nodes
 ```
  - Warning: this is not yet fully implemented. It will currently delete all
    links to child nodes and not reestablish them
+
+Children
+--------
+
+### Adding children
+
+ - end point: `/children/<id>/` where `id` is the parent's id
+ - request: HTTP PUT
+ - data (input):
+```
+{
+  "children": "7",
+}
+```
+ - return data:
+```
+{
+  "message": "Children were successfully added to the node",
+  "id": "4"
+}
+```
+
+### Editing a node's children
+
+ - end point: `/children/<id>/` where `id` is the parent's id
+ - request: HTTP POST
+ - data (input):
+```
+{
+  "children": "7",
+}
+```
+ - return data:
+```
+{
+  "message": "Children were successfully updated.",
+  "id": "4"
+}
+```
+
+Tree
+----
+
+### Accessing all nodes (aka the tree)
+
+ - end point: `/tree/`
+ - request: HTTP GET
+ - data (input): none
+ - return data:
+```
+{
+  "rootId": "0",
+  "nodes":
+    [
+      {
+        "renderer": "r",
+        "children": "2",
+        "contents": "foo",
+        "id": 1
+      },
+      ... more nodes
+    ]
+}
+```

@@ -86,8 +86,6 @@ class Node(Resource):
     # returns a single node
     # if node_id out of range, returns null
     def get(self, node_id):
-        print "<%s>" % node_id
-        print type(node_id)
         node_id = str(node_id)
         cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, c.children 
                               FROM nodes AS n LEFT JOIN children AS c 
@@ -98,61 +96,44 @@ class Node(Resource):
         return return_val
 
 class Children(Resource):
-    def put(self):
+    def put(self, node_id):
+        # TODO(nfischer): Fix this to work with multi-digit node_ids (use %s
+        # formatting)
+        print type(request.form['children']) # DEBUG
         g.db.execute('INSERT INTO children (parent_id, children) values (?, ?)',
-                     [request.form['id'], request.form['children']])
+                     [node_id, request.form['children']])
         g.db.commit()
-        return jsonify(message='Children were successfully added to the node', id=request.form['id'])
+        return jsonify(message='Children were successfully added to the node', id=node_id)
 
     def post(self, node_id):
         # TODO(nfischer): Fix this to work with multi-digit node_ids (use %s
         # formatting)
+        print type(request.form['children']) # DEBUG
         g.db.execute('''UPDATE children 
                         SET children=(?) 
                         WHERE parent_id=(?)''', [request.form['children'], node_id])
         g.db.commit()
 
-        return jsonify(message='Children were successfully updated.')
+        return jsonify(message='Children were successfully updated.', id=node_id)
 
 
 class Tree(Resource):
-    def post(self, node_id):
-        """This rpc updates/edits a node"""
-        try:
-            # TODO(nfischer): Fix this to work with multi-digit node_ids (use %s
-            # formatting)
-            g.db.execute('UPDATE nodes SET contents=(?), renderer=(?) WHERE node_id = (?)',
-                         [request.form['contents'], request.form['renderer'], node_id])
-
-            # Delete the old links
-            g.db.execute('DELETE FROM links WHERE origin = (?)', node_id)
-
-            # TODO(nfischer): fix this to add links (currently not working)
-            # for child in request.form['children']:
-                # print type(jsonify(child))
-                # print request.form['children']
-                # child_name = child.key()
-                # child_id = child.value()
-                # g.db.execute('INSERT INTOlinks VALUES (?, ?, ?)', [node_id, child_name, child_id])
-            g.db.commit() # Only commit if everything succeeds
-        except Exception as e:
-            print str(e)
-            # return jsonify(message='Error when editing your node')
-            raise InvalidUsage('Error when editing your node')
-        return jsonify(message='Successfully updated node %s' % node_id)
-
-
-    # /nodes/tree
-    # returns the tree of nodes
-    # rootId is hard coded right now. Need clarification on that
     def get(self):
-        cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, c.children 
-                              FROM nodes AS n LEFT JOIN children AS c 
-                              ON n.id = c.parent_id''')
-        rv = {}
-        rv["nodes"] = cursor.fetchall()
-        rv["rootId"] = 0
-        return rv
+        """
+        Endpoint: /tree/
+        Returns the tree of nodes
+        rootId is hard coded right now. Need clarification on that
+        """
+        try:
+            cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, c.children 
+                                  FROM nodes AS n LEFT JOIN children AS c 
+                                  ON n.id = c.parent_id''')
+            tree = {}
+            tree["nodes"] = cursor.fetchall()
+            tree["rootId"] = '0'
+            return tree
+        except Exception:
+            raise InvalidUsage('Unable to find the tree', status_code=500)
 
 class Link(Resource):
     def post(self):
@@ -166,26 +147,24 @@ class Link(Resource):
             # return 'Not implemented: Editing a link' #jsonify(message='New node was successfully created')
 
     def put(self):
-        res = ''
         try:
             g.db.execute('insert into links values (?, ?, ?)',
                          [request.form['origin'], request.form['name'],
                           request.form['dest']])
             g.db.commit()
-            res = 'New link was successfully created'
-        except Exception, e:
-            res = 'Origin or destination nodes do not exist!'
-
-        return jsonify(message=res)
+            result = 'New link was successfully created'
+            return jsonify(message=result)
+        except Exception:
+            raise InvalidUsage('Origin or destination nodes could not be found')
 
 @app.route('/posterator', methods=['GET'])
 def posterator():
     return render_template('posterator.html')
 
-api.add_resource(Node,'/node/', '/node/<node_id>')
-api.add_resource(Children,'/node/children/', '/node/children/<node_id>')
-api.add_resource(Tree, '/nodes/tree')
-api.add_resource(Link, '/nodeLinks')
+api.add_resource(Node, '/node/', '/node/<node_id>/')
+api.add_resource(Children, '/children/<node_id>/')
+api.add_resource(Tree, '/tree/')
+api.add_resource(Link, '/link/')
 
 # @app.route('/addNode', methods=['POST'])
 
