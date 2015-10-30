@@ -128,7 +128,7 @@ class Tree(Resource):
                                   ON n.id = c.parent_id''')
             tree = {}
             tree["nodes"] = cursor.fetchall()
-            tree["rootId"] = '54'
+            tree["rootId"] = '54' #this is a HACK. we will be adding a few more endpoints to address the root
             return tree
         except Exception:
             raise InvalidUsage('Unable to find the tree', status_code=500)
