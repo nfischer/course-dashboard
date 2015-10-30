@@ -8,3 +8,8 @@ db/
 
 README.pdf
 *.pdf
+
+node_modules/
+dist_node/
+dist_browser/
+frontend/npm-debug.log

@@ -11,7 +11,7 @@ SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config.from_object(__name__)
 api = Api(app)
 
@@ -128,7 +128,7 @@ class Tree(Resource):
                                   ON n.id = c.parent_id''')
             tree = {}
             tree["nodes"] = cursor.fetchall()
-            tree["rootId"] = '0'
+            tree["rootId"] = '54'
             return tree
         except Exception:
             raise InvalidUsage('Unable to find the tree', status_code=500)
@@ -158,6 +158,7 @@ class Link(Resource):
 @app.route('/posterator', methods=['GET'])
 def posterator():
     return render_template('posterator.html')
+
 
 api.add_resource(Node, '/node/', '/node/<node_id>/')
 api.add_resource(Children, '/children/<node_id>/')
