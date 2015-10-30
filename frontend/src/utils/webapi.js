@@ -30,8 +30,8 @@ function overwriteNode(node: Node){
 function overwriteChildren(node: Node){
   let endpoint = mainUrl + `/node/children/${node.id}`;
   return $.ajax(endpoint, {
-    method: "POST",
-    data: node.children,
+    method: Object.keys(node.children).length > 0 ? "POST" : "PUT",
+    data: JSON.stringify(node.children),
     dataType: "json"
   })
 }
