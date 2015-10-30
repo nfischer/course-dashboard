@@ -24,6 +24,13 @@ $ sudo pip install Flask
 $ sudo pip install flask-restful
 ```
 
+To install gulp for frontend work, you'll need to run:
+
+```
+$ sudo apt-get install npm
+$ sudo npm install gulp -g
+```
+
 Backend
 -------
 
@@ -59,19 +66,22 @@ interface there.
 Frontend
 --------
 
-The frontend is written using node.js and browserify. In order to build, execute the following commands from the frontend directory:
+The frontend is written using node.js and browserify. In order to build, execute
+the following commands from the frontend directory:
 
 ```
 npm install
 gulp build_browser
-python -m SimpleHTTPServer
 ```
 
-The page should now be available at [http://localhost:8000](http://localhost:8000).
+The page should now be available at
+[http://localhost:5000/static/index.html](http://localhost:5000/static/index.html).
 
 ### Migration
 
-To serve the frontend code from a backend of your choice, simply copy index.html, the css directory, and the js directory to the location of your choice.
+To serve the frontend code from a backend of your choice, simply copy
+index.html, the css directory, and the js directory to the location of your
+choice.
 
 Contributing
 ------------
