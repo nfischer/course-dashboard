@@ -7,6 +7,7 @@
 db/
 
 README.pdf
+*.pdf
 
 node_modules/
 dist_node/
