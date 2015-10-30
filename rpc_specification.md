@@ -25,7 +25,8 @@ Nodes
  - return data:
 ```
 {
-  "message": "New node was successfully created"
+  "message": "New node was successfully created",
+  "id": 1
 }
 ```
  - Node ID will be auto-assigned (monotonically increasing)
@@ -38,9 +39,9 @@ Nodes
  - return data:
 ```
 {
-  "children": {},
+  "children": "73",
   "contents": "foo",
-  "node_id": 1,
+  "id": 3,
   "renderer": "bar"
 }
 ```
@@ -67,7 +68,8 @@ Nodes
  - return data:
 ```
 {
-  "message": "Successfully updated node 1"
+  "message": "Node was successfully updated",
+  "id": "1"
 }
 ```
  - Warning: this is not yet fully implemented. It will currently delete all
