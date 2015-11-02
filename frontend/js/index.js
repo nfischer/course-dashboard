@@ -40584,7 +40584,7 @@ var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
 var mainUrl = "";
 
 function getNode(nodeId) {
-  var endpoint = mainUrl + ('/node/' + nodeId + '/');
+  var endpoint = mainUrl + ('/node/get/' + nodeId + '/');
   return _jquery2['default'].ajax(endpoint, {
     method: "GET",
     dataType: "json"
@@ -40592,7 +40592,7 @@ function getNode(nodeId) {
 }
 
 function overwriteNode(node) {
-  var endpoint = mainUrl + ('/node/' + node.id + '/');
+  var endpoint = mainUrl + ('/node/update/' + node.id + '/');
   return _jquery2['default'].ajax(endpoint, {
     method: "POST",
     data: node,
@@ -40602,9 +40602,10 @@ function overwriteNode(node) {
 
 function overwriteChildren(node, create) {
   var endpoint = mainUrl + ('/children/' + node.id + '/');
-  var data = { children: JSON.stringify(node.children) };
+  // Passing in '' as an argument will default to whatever the original value was
+  var data = { contents: '', renderer: '', children: JSON.stringify(node.children) };
   return _jquery2['default'].ajax(endpoint, {
-    method: create ? "PUT" : "POST",
+    method: create ? "POST" : "POST",
     data: data,
     dataType: "json"
   });
@@ -40612,9 +40613,9 @@ function overwriteChildren(node, create) {
 
 function createNode(node) {
   //mock for creation process
-  var endpoint = mainUrl + "/node/";
+  var endpoint = mainUrl + "/node/add/";
   return _jquery2['default'].ajax(endpoint, {
-    method: "PUT",
+    method: "POST",
     data: node,
     dataType: "json"
   });

@@ -4,7 +4,9 @@
 
 # Mac files
 .DS_Store
+
 db/
+*.pyc
 
 README.pdf
 *.pdf
