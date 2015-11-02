@@ -57,12 +57,7 @@ Nodes
 {
   "contents": "new contents",
   "renderer": "new renderer",
-  "children":
-  {
-    "foo": "1",
-    "bar": "2",
-    ...
-  }
+  "children": "{ 'foo': '1', 'bar': '2', ... }"
 }
 ```
  - return data:
@@ -72,8 +67,6 @@ Nodes
   "id": "1"
 }
 ```
- - Warning: this is not yet fully implemented. It will currently delete all
-   links to child nodes and not reestablish them
 
 Children
 --------
