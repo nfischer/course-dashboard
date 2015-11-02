@@ -5,9 +5,10 @@ Python script that, when run, uses API calls to populate the backend with sample
 data
 """
 
+import time
 import os
 import json
-from requests import put, get, post
+from requests import get, post
 
 URL = 'http://localhost:5000'
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
@@ -16,19 +17,33 @@ SAMPLE_JSON_FILE = os.path.join(PROJECT_DIR, 'frontend', 'sampledata.json')
 def create_node(contents='foo', renderer='bar'):
     """Uses the backend API to create a node"""
     node_value = {'contents': contents, 'renderer': renderer}
-    ret = put(os.path.join(URL, 'node/'), data=node_value)
+    ret = post(os.path.join(URL, 'node/add/'), data=node_value)
     # if ret.status_code != 200:
     #     raise AttributeError('Status code: %d' % ret.status_code)
-    print ret.json()
+    return ret
 
-def add_children(parent_id, child_string):
-    children_value = {'children': child_string}
-    ret = put(os.path.join(URL, 'children/', str(parent_id), ''), data=children_value)
+def get_node(node_id):
+    """Uses the backend API to request a node"""
+    node_id = str(node_id)
+    full_url = os.path.join(URL, 'node/get', node_id, '')
+    ret = get(full_url)
+    return ret
 
-    # if ret.status_code != 200:
-    #     raise AttributeError('Status code: %d' % ret.status_code)
-    print ret.json()
+def update_node(node_id, contents='', renderer='', children=''):
+    """Uses the backend API to update a node that already exists"""
+    node_id = str(node_id)
+    old_node = get_node(node_id).json()
+    if contents == '':
+        contents = old_node['contents']
+    if renderer == '':
+        renderer = old_node['renderer']
+    if children == '':
+        children = old_node['children']
+    node_value = {'contents': contents, 'renderer': renderer, 'children': children}
+    ret = post(os.path.join(URL, 'node/update', node_id, ''), data=node_value)
+    return ret
 
+## @private
 def node_compare(node1, node2):
     id1 = int(node1['id'])
     id2 = int(node2['id'])
@@ -49,11 +64,9 @@ if __name__ == '__main__':
     for node in nlist:
         mycontents = node['contents']
         myrenderer = node['renderer']
-        create_node(contents=mycontents, renderer=myrenderer)
+        print create_node(contents=mycontents, renderer=myrenderer).json()
 
     for node in nlist:
         myid = int(node['id'])
-        mychildren = node['children']
-        add_children(myid, json.dumps(mychildren))
-
-
+        mychildren = json.dumps(node['children'])
+        print update_node(myid, children=mychildren).json()

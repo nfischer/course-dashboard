@@ -19,7 +19,7 @@ function getNode(nodeId: string){
 }
 
 function overwriteNode(node: Node){
-  let endpoint = mainUrl + `/node/${node.id}/`;
+  let endpoint = mainUrl + `/node/update/${node.id}/`;
   return $.ajax(endpoint, {
     method: "POST",
     data: node,
@@ -27,20 +27,20 @@ function overwriteNode(node: Node){
   });
 }
 
-function overwriteChildren(node: Node, create: boolean){
-  let endpoint = mainUrl + `/children/${node.id}/`;
+function overwriteChildren(node: Node){
+  let endpoint = mainUrl + `/node/update/${node.id}/`;
   let data = {children: JSON.stringify(node.children)};
   return $.ajax(endpoint, {
-    method: create ? "PUT" : "POST",
+    method: "POST",
     data: data,
     dataType: "json"
   })
 }
 
 function createNode(node: Node){ //mock for creation process
-  let endpoint = mainUrl + "/node/";
+  let endpoint = mainUrl + "/node/add/";
   return $.ajax(endpoint, {
-    method: "PUT",
+    method: "POST",
     data: node,
     dataType: "json"
   });
@@ -75,9 +75,8 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
       data.children = {};
 
       initialized_child = new Node(data);
-      let create = Object.keys(node.children).length === 0;
       node.children[tag] = initialized_child.id;
-      return overwriteChildren(node, create);
+      return overwriteChildren(node);
     }, (jqXHR, textStatus, errorThrown) => {
       console.error(textStatus);
       throw errorThrown;

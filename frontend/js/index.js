@@ -40584,7 +40584,7 @@ var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
 var mainUrl = "";
 
 function getNode(nodeId) {
-  var endpoint = mainUrl + ('/node/' + nodeId + '/');
+  var endpoint = mainUrl + ('/node/get/' + nodeId + '/');
   return _jquery2['default'].ajax(endpoint, {
     method: "GET",
     dataType: "json"
@@ -40592,7 +40592,7 @@ function getNode(nodeId) {
 }
 
 function overwriteNode(node) {
-  var endpoint = mainUrl + ('/node/' + node.id + '/');
+  var endpoint = mainUrl + ('/node/update/' + node.id + '/');
   return _jquery2['default'].ajax(endpoint, {
     method: "POST",
     data: node,
@@ -40600,11 +40600,12 @@ function overwriteNode(node) {
   });
 }
 
-function overwriteChildren(node, create) {
-  var endpoint = mainUrl + ('/children/' + node.id + '/');
-  var data = { children: JSON.stringify(node.children) };
+function overwriteChildren(node) {
+  var endpoint = mainUrl + ('/node/update/' + node.id + '/');
+  // Passing in '' as an argument will default to whatever the original value was
+  var data = { contents: '', renderer: '', children: JSON.stringify(node.children) };
   return _jquery2['default'].ajax(endpoint, {
-    method: create ? "PUT" : "POST",
+    method: "POST",
     data: data,
     dataType: "json"
   });
@@ -40612,9 +40613,9 @@ function overwriteChildren(node, create) {
 
 function createNode(node) {
   //mock for creation process
-  var endpoint = mainUrl + "/node/";
+  var endpoint = mainUrl + "/node/add/";
   return _jquery2['default'].ajax(endpoint, {
-    method: "PUT",
+    method: "POST",
     data: node,
     dataType: "json"
   });
@@ -40653,9 +40654,8 @@ function addNewChild(node, tag, markdown, renderer, callback) {
     data.children = {};
 
     initialized_child = new _ModelsNodeJs2['default'](data);
-    var create = Object.keys(node.children).length === 0;
     node.children[tag] = initialized_child.id;
-    return overwriteChildren(node, create);
+    return overwriteChildren(node);
   }, function (jqXHR, textStatus, errorThrown) {
     console.error(textStatus);
     throw errorThrown;

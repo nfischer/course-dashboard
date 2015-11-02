@@ -13,8 +13,8 @@ Nodes
 
 ### Adding a node
 
- - end point: `/node/`
- - request: HTTP PUT
+ - end point: `/node/add/`
+ - request: HTTP POST
  - data (input):
 ```
 {
@@ -29,11 +29,11 @@ Nodes
   "id": 1
 }
 ```
- - Node ID will be auto-assigned (monotonically increasing)
+ - Node ID will be auto-assigned (constantly increasing)
 
 ### Accessing a node
 
- - end point: `/node/<id>/` where `<id>` is some integer
+ - end point: `/node/get/<id>/` where `<id>` is some integer
  - request: HTTP GET
  - data (input): none
  - return data:
@@ -48,9 +48,9 @@ Nodes
  - No two nodes can have the same ID
  - If you request a non-existent node, you get an exception
 
-### Editing a node
+### Editing/Updating a node
 
- - end point: `/node/<id>/` where `<id>` is some integer
+ - end point: `/node/update/<id>/` where `<id>` is some integer
  - request: HTTP POST
  - data (input):
 ```
@@ -80,39 +80,11 @@ Children
 
 ### Adding children
 
- - end point: `/children/<id>/` where `id` is the parent's id
- - request: HTTP PUT
- - data (input):
-```
-{
-  "children": "7",
-}
-```
- - return data:
-```
-{
-  "message": "Children were successfully added to the node",
-  "id": "4"
-}
-```
+ - Please see "Editing a node"
 
 ### Editing a node's children
 
- - end point: `/children/<id>/` where `id` is the parent's id
- - request: HTTP POST
- - data (input):
-```
-{
-  "children": "7",
-}
-```
- - return data:
-```
-{
-  "message": "Children were successfully updated.",
-  "id": "4"
-}
-```
+ - Please see "Editing a node"
 
 Tree
 ----
