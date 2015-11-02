@@ -40600,12 +40600,12 @@ function overwriteNode(node) {
   });
 }
 
-function overwriteChildren(node, create) {
-  var endpoint = mainUrl + ('/children/' + node.id + '/');
+function overwriteChildren(node) {
+  var endpoint = mainUrl + ('/node/update/' + node.id + '/');
   // Passing in '' as an argument will default to whatever the original value was
   var data = { contents: '', renderer: '', children: JSON.stringify(node.children) };
   return _jquery2['default'].ajax(endpoint, {
-    method: create ? "POST" : "POST",
+    method: "POST",
     data: data,
     dataType: "json"
   });
@@ -40654,9 +40654,8 @@ function addNewChild(node, tag, markdown, renderer, callback) {
     data.children = {};
 
     initialized_child = new _ModelsNodeJs2['default'](data);
-    var create = Object.keys(node.children).length === 0;
     node.children[tag] = initialized_child.id;
-    return overwriteChildren(node, create);
+    return overwriteChildren(node);
   }, function (jqXHR, textStatus, errorThrown) {
     console.error(textStatus);
     throw errorThrown;
