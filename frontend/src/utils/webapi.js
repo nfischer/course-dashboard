@@ -8,13 +8,13 @@ import Node from '../Models/node.js';
 //Primitive actions supported by webapi.
 //----------------------------------------
 
-// TODO(nate): This is a hardcoded <course_id>. Change this dynamically during
+// TODO(nate): This is a hardcoded <courseId>. Change this dynamically during
 // runtime based on which course we're actually viewing
-var course_id = "42";
+var courseId = "42";
 var mainUrl = "";
 
 function getNode(nodeId: string){
-  let endpoint = mainUrl + '/' + course_id + `/node/${nodeId}/`;
+  let endpoint = mainUrl + `/${courseId}/node/${nodeId}/`;
   return $.ajax(endpoint,{
     method: "GET",
     dataType: "json"
@@ -22,7 +22,7 @@ function getNode(nodeId: string){
 }
 
 function overwriteNode(node: Node){
-  let endpoint = mainUrl + '/' + course_id + `/node/update/${node.id}/`;
+  let endpoint = mainUrl + `/${courseId}/node/update/${node.id}/`;
   let data = {contents: node.contents, renderer: node.renderer, children: JSON.stringify(node.children)};
   return $.ajax(endpoint, {
     method: "POST",
@@ -33,7 +33,7 @@ function overwriteNode(node: Node){
 
 // @deprecated
 function overwriteChildren(node: Node){
-  let endpoint = mainUrl + '/' + course_id + `/node/update/${node.id}/`;
+  let endpoint = mainUrl + `/${courseId}/node/update/${node.id}/`;
   let data = {children: JSON.stringify(node.children)};
   return $.ajax(endpoint, {
     method: "POST",
@@ -43,7 +43,7 @@ function overwriteChildren(node: Node){
 }
 
 function createNode(node: Node){ //mock for creation process
-  let endpoint = mainUrl + "/" + course_id + "/node/add/";
+  let endpoint = mainUrl + `/${courseId}/node/add/`;
   return $.ajax(endpoint, {
     method: "POST",
     data: node,
@@ -53,7 +53,7 @@ function createNode(node: Node){ //mock for creation process
 
 //currently rootId and depth are ignored
 function getTree(rootId = null, depth = null){
-  let endpoint = mainUrl + "/" + course_id  + "/tree/";
+  let endpoint = mainUrl + `/${courseId}/tree/`;
   return $.ajax(endpoint,{
     method: "GET",
     dataType: "json"

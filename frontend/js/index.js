@@ -40608,13 +40608,13 @@ var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
 //Primitive actions supported by webapi.
 //----------------------------------------
 
-// TODO(nate): This is a hardcoded <course_id>. Change this dynamically during
+// TODO(nate): This is a hardcoded <courseId>. Change this dynamically during
 // runtime based on which course we're actually viewing
-var course_id = "42";
+var courseId = "42";
 var mainUrl = "";
 
 function getNode(nodeId) {
-  var endpoint = mainUrl + '/' + course_id + ('/node/' + nodeId + '/');
+  var endpoint = mainUrl + ('/' + courseId + '/node/' + nodeId + '/');
   return _jquery2['default'].ajax(endpoint, {
     method: "GET",
     dataType: "json"
@@ -40622,7 +40622,7 @@ function getNode(nodeId) {
 }
 
 function overwriteNode(node) {
-  var endpoint = mainUrl + '/' + course_id + ('/node/update/' + node.id + '/');
+  var endpoint = mainUrl + ('/' + courseId + '/node/update/' + node.id + '/');
   var data = { contents: node.contents, renderer: node.renderer, children: JSON.stringify(node.children) };
   return _jquery2['default'].ajax(endpoint, {
     method: "POST",
@@ -40633,7 +40633,7 @@ function overwriteNode(node) {
 
 // @deprecated
 function overwriteChildren(node) {
-  var endpoint = mainUrl + '/' + course_id + ('/node/update/' + node.id + '/');
+  var endpoint = mainUrl + ('/' + courseId + '/node/update/' + node.id + '/');
   var data = { children: JSON.stringify(node.children) };
   return _jquery2['default'].ajax(endpoint, {
     method: "POST",
@@ -40644,7 +40644,7 @@ function overwriteChildren(node) {
 
 function createNode(node) {
   //mock for creation process
-  var endpoint = mainUrl + "/" + course_id + "/node/add/";
+  var endpoint = mainUrl + ('/' + courseId + '/node/add/');
   return _jquery2['default'].ajax(endpoint, {
     method: "POST",
     data: node,
@@ -40657,7 +40657,7 @@ function getTree() {
   var rootId = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
   var depth = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
-  var endpoint = mainUrl + "/" + course_id + "/tree/";
+  var endpoint = mainUrl + ('/' + courseId + '/tree/');
   return _jquery2['default'].ajax(endpoint, {
     method: "GET",
     dataType: "json"
