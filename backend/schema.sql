@@ -7,6 +7,7 @@ CREATE TABLE `nodes` (
     `renderer` VARCHAR(50),
     `course_id` INTEGER,
     `isalive` INTEGER,
+    `isroot` INTEGER,
     `children` TEXT
 );
 CREATE TABLE `links` (

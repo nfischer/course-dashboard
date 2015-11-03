@@ -158,6 +158,34 @@ class Tree(Resource):
         except Exception:
             raise InvalidUsage('Unable to find the tree', status_code=500)
 
+class Root(Resource):
+    def post(self, course_id, operation, root_id):
+        if operation == 'set':
+            g.db.execute('''UPDATE nodes 
+                            SET isroot=1 
+                            WHERE id=%s AND course_id=%s AND isalive=1''' % (root_id, course_id))
+            g.db.commit()
+            return jsonify(message='Successfully labeled node as a root.', id=root_id)
+        elif operation == 'delete':
+            g.db.execute('''UPDATE nodes 
+                            SET isroot=0 
+                            WHERE id=%s AND course_id=%s AND isalive=1''' % (root_id, course_id))
+            g.db.commit()
+            return jsonify(message='Successfully removed root label.', id=root_id)
+        else:
+            raise InvalidUsage('Unknown operation type')
+
+    def get(self, course_id, operation):
+        if operation != 'get':
+            raise InvalidUsage('Unknown operation type')
+
+        cursor = g.db.execute('''SELECT id, renderer 
+                              FROM nodes
+                              WHERE course_id = %s AND isalive=1 AND isroot=1''' % course_id)
+        root_list = cursor.fetchall()
+        return root_list
+
+
 # @deprecated
 # class Link(Resource):
 #     def post(self):
@@ -190,6 +218,7 @@ api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<ope
 # api.add_resource(Children, '/children/<operation>/<node_id>/')
 api.add_resource(Tree, '/<course_id>/tree/')
 # api.add_resource(Link, '/link/')
+api.add_resource(Root, '/<course_id>/root/<operation>/', '/<course_id>/root/<operation>/<root_id>/')
 
 # @app.route('/addNode', methods=['POST'])
 

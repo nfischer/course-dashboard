@@ -96,3 +96,52 @@ Tree
     ]
 }
 ```
+
+Root
+----
+
+### Viewing the list of tree roots
+
+ - end point: `/root/get/`
+ - request: HTTP GET
+ - data (input): none
+ - return data:
+```
+[
+  {
+    "id": 3,
+    "renderer": "bar"
+  },
+  {
+    "id": 8,
+    "renderer": "foo"
+  }
+  ...
+]
+```
+
+### Setting a node to be a root
+
+ - end point: `/root/set/<id>/` where `<id>` is some integer
+ - request: HTTP POST
+ - data (input): None
+ - return data:
+```
+{
+  "message": "Successfully labeled node as a root.",
+  "id": "1"
+}
+```
+
+### Setting a node to no longer be a root (deletion)
+
+ - end point: `/root/delete/<id>/` where `<id>` is some integer
+ - request: HTTP POST
+ - data (input): None
+ - return data:
+```
+{
+  "message": "Successfully removed root label.",
+  "id": "1"
+}
+```
