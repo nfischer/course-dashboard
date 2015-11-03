@@ -154,6 +154,10 @@ export class ListElement extends React.Component {
 //Editable list renderer: same as a list, except that elements can be added.
 //currently only adds "Resource" nodes, but will allow for more in the future
 export class EditableList extends React.Component {
+  componentWillReceiveProps(){
+    console.log("updated editableList");
+  }
+
   render() : React.Element {
     return (
       <list>
