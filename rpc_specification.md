@@ -48,22 +48,15 @@ Nodes
  - No two nodes can have the same ID
  - If you request a non-existent node, you get an exception
 
-### Editing/Updating a node
+### Deleting a node
 
- - end point: `/node/update/<id>/` where `<id>` is some integer
+ - end point: `/node/delete/<id>/` where `<id>` is some integer
  - request: HTTP POST
- - data (input):
-```
-{
-  "contents": "new contents",
-  "renderer": "new renderer",
-  "children": "{ 'foo': '1', 'bar': '2', ... }"
-}
-```
+ - data (input): None
  - return data:
 ```
 {
-  "message": "Node was successfully updated",
+  "message": "Node was successfully deleted.",
   "id": "1"
 }
 ```

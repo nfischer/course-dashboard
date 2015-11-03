@@ -6,6 +6,7 @@ CREATE TABLE `nodes` (
     `contents` VARCHAR(300),
     `renderer` VARCHAR(50),
     `course_id` INTEGER,
+    `isalive` INTEGER,
     `children` TEXT
 );
 CREATE TABLE `links` (
