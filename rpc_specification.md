@@ -13,7 +13,7 @@ Nodes
 
 ### Adding a node
 
- - end point: `/node/add/`
+ - end point: `/<course_id>/node/add/`, where `<course_id>` is some integer
  - request: HTTP POST
  - data (input):
 ```
@@ -33,7 +33,8 @@ Nodes
 
 ### Accessing a node
 
- - end point: `/node/get/<id>/` where `<id>` is some integer
+ - end point: `/<course_id>/node/get/<id>/` where `<course_id>` and `<id>` are
+   some integers
  - request: HTTP GET
  - data (input): none
  - return data:
@@ -50,7 +51,8 @@ Nodes
 
 ### Deleting a node
 
- - end point: `/node/delete/<id>/` where `<id>` is some integer
+ - end point: `/<course_id>/node/delete/<id>/` where `<course_id>` and `<id>`
+   are some integers
  - request: HTTP POST
  - data (input): None
  - return data:
@@ -77,7 +79,7 @@ Tree
 
 ### Accessing all nodes (aka the tree)
 
- - end point: `/tree/`
+ - end point: `/<course_id>/tree/`, where `<course_id>` is some integer
  - request: HTTP GET
  - data (input): none
  - return data:
@@ -102,7 +104,7 @@ Root
 
 ### Viewing the list of tree roots
 
- - end point: `/root/get/`
+ - end point: `/<course_id>/root/get/`, where `<course_id>` is some integer
  - request: HTTP GET
  - data (input): none
  - return data:
@@ -122,7 +124,7 @@ Root
 
 ### Setting a node to be a root
 
- - end point: `/root/set/<id>/` where `<id>` is some integer
+ - end point: `/<course_id>/root/set/<id>/` where `<id>` is some integer
  - request: HTTP POST
  - data (input): None
  - return data:
@@ -135,7 +137,8 @@ Root
 
 ### Setting a node to no longer be a root (deletion)
 
- - end point: `/root/delete/<id>/` where `<id>` is some integer
+ - end point: `/<course_id>/root/delete/<id>/` where `<course_id>` and `<id>`
+   are some integers
  - request: HTTP POST
  - data (input): None
  - return data:
