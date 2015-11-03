@@ -62,15 +62,15 @@ def handle_invalid_usage(error):
     return response
 #---------------------Rest API---------------------
 class Node(Resource):
-    def post(self, operation, node_id=0):
+    def post(self, course_id, operation, node_id=0):
         """
         This inserts a new node or updates the node with <node_id>
         """
         if operation == 'add':
             DEFAULT_CHILDREN = '{}'
-            g.db.execute('INSERT INTO nodes (contents, renderer, children) VALUES(?, ?, ?)',
-                         [request.form['contents'], request.form['renderer'], DEFAULT_CHILDREN])
-            cursor = g.db.execute('SELECT id FROM nodes ORDER BY id DESC limit 1')
+            g.db.execute('INSERT INTO nodes (contents, renderer, children, course_id) VALUES(?, ?, ?, ?)',
+                         [request.form['contents'], request.form['renderer'], DEFAULT_CHILDREN, course_id])
+            cursor = g.db.execute('SELECT id FROM nodes WHERE course_id=%s ORDER BY id DESC limit 1' % course_id)
             g.db.commit()
             ret_id = cursor.fetchone()
             return jsonify(message='New node was successfully created', id=ret_id['id'])
@@ -82,7 +82,7 @@ class Node(Resource):
                 children = request.form['children']
                 g.db.execute('''UPDATE nodes 
                                 SET contents=(?),renderer=(?),children=(?) 
-                                WHERE id=%s''' % node_id,
+                                WHERE id=%s AND course_id=%s''' % (node_id, course_id),
                              [contents, renderer, children])
             except Exception as e:
                 print str(e)
@@ -92,7 +92,7 @@ class Node(Resource):
         else:
             raise InvalidUsage('Unknown operation type')
 
-    def get(self, operation, node_id):
+    def get(self, course_id, operation, node_id):
         """
         @param node_id
         @returns a single node
@@ -104,7 +104,7 @@ class Node(Resource):
         node_id = str(node_id)
         cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, n.children 
                               FROM nodes AS n 
-                              WHERE n.id=%s''' % node_id)
+                              WHERE n.id=%s AND n.course_id=%s''' % (node_id, course_id))
         return_val = cursor.fetchone()
         if return_val is None:
             raise InvalidUsage('node_id is out of range')
@@ -135,15 +135,16 @@ class Node(Resource):
 
 
 class Tree(Resource):
-    def get(self):
+    def get(self, course_id):
         """
-        Endpoint: /tree/
+        Endpoint: /<course_id>/tree/
         Returns the tree of nodes
         rootId is hard coded right now. Need clarification on that
         """
         try:
             cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, n.children 
-                                  FROM nodes AS n''')
+                                  FROM nodes AS n
+                                  WHERE n.course_id = %s''' % course_id)
             tree = {}
             tree["nodes"] = cursor.fetchall()
             tree["rootId"] = '54' #this is a HACK. we will be adding a few more endpoints to address the root
@@ -179,9 +180,9 @@ def posterator():
     return render_template('posterator.html')
 
 
-api.add_resource(Node, '/node/<operation>/', '/node/<operation>/<node_id>/')
+api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<operation>/<node_id>/')
 # api.add_resource(Children, '/children/<operation>/<node_id>/')
-api.add_resource(Tree, '/tree/')
+api.add_resource(Tree, '/<course_id>/tree/')
 # api.add_resource(Link, '/link/')
 
 # @app.route('/addNode', methods=['POST'])

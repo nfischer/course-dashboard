@@ -8,10 +8,13 @@ import Node from '../Models/node.js';
 //Primitive actions supported by webapi.
 //----------------------------------------
 
+// TODO(nate): This is a hardcoded <courseId>. Change this dynamically during
+// runtime based on which course we're actually viewing
+var courseId = "42";
 var mainUrl = "";
 
 function getNode(nodeId: string){
-  let endpoint = mainUrl + `/node/${nodeId}/`;
+  let endpoint = mainUrl + `/${courseId}/node/${nodeId}/`;
   return $.ajax(endpoint,{
     method: "GET",
     dataType: "json"
@@ -19,16 +22,18 @@ function getNode(nodeId: string){
 }
 
 function overwriteNode(node: Node){
-  let endpoint = mainUrl + `/node/update/${node.id}/`;
+  let endpoint = mainUrl + `/${courseId}/node/update/${node.id}/`;
+  let data = {contents: node.contents, renderer: node.renderer, children: JSON.stringify(node.children)};
   return $.ajax(endpoint, {
     method: "POST",
-    data: node,
+    data: data,
     dataType: "json"
   });
 }
 
+// @deprecated
 function overwriteChildren(node: Node){
-  let endpoint = mainUrl + `/node/update/${node.id}/`;
+  let endpoint = mainUrl + `/${courseId}/node/update/${node.id}/`;
   let data = {children: JSON.stringify(node.children)};
   return $.ajax(endpoint, {
     method: "POST",
@@ -38,7 +43,7 @@ function overwriteChildren(node: Node){
 }
 
 function createNode(node: Node){ //mock for creation process
-  let endpoint = mainUrl + "/node/add/";
+  let endpoint = mainUrl + `/${courseId}/node/add/`;
   return $.ajax(endpoint, {
     method: "POST",
     data: node,
@@ -48,7 +53,7 @@ function createNode(node: Node){ //mock for creation process
 
 //currently rootId and depth are ignored
 function getTree(rootId = null, depth = null){
-  let endpoint = mainUrl + "/tree/";
+  let endpoint = mainUrl + `/${courseId}/tree/`;
   return $.ajax(endpoint,{
     method: "GET",
     dataType: "json"
@@ -76,7 +81,7 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
 
       initialized_child = new Node(data);
       node.children[tag] = initialized_child.id;
-      return overwriteChildren(node);
+      return overwriteNode(node);
     }, (jqXHR, textStatus, errorThrown) => {
       console.error(textStatus);
       throw errorThrown;

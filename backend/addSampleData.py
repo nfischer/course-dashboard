@@ -5,12 +5,11 @@ Python script that, when run, uses API calls to populate the backend with sample
 data
 """
 
-import time
 import os
 import json
 from requests import get, post
 
-URL = 'http://localhost:5000'
+URL = 'http://localhost:5000/42'
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 SAMPLE_JSON_FILE = os.path.join(PROJECT_DIR, 'frontend', 'sampledata.json')
 
@@ -18,8 +17,6 @@ def create_node(contents='foo', renderer='bar'):
     """Uses the backend API to create a node"""
     node_value = {'contents': contents, 'renderer': renderer}
     ret = post(os.path.join(URL, 'node/add/'), data=node_value)
-    # if ret.status_code != 200:
-    #     raise AttributeError('Status code: %d' % ret.status_code)
     return ret
 
 def get_node(node_id):

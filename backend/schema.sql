@@ -5,6 +5,7 @@ CREATE TABLE `nodes` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT,
     `contents` VARCHAR(300),
     `renderer` VARCHAR(50),
+    `course_id` INTEGER,
     `children` TEXT
 );
 CREATE TABLE `links` (
