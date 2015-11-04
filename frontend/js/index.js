@@ -40246,6 +40246,7 @@ var NodeStore = (function (_ReduceStore) {
   }, {
     key: 'reduce',
     value: function reduce(state, action) {
+      //TODO: make the state enforcably immutable
       switch (action.name) {
         case "open":
           //handle creation of tree given data format from server
@@ -40447,7 +40448,6 @@ var ApplicationComponent = (function (_React$Component) {
   }, {
     key: 'calculateState',
     value: function calculateState(prevState) {
-      console.log("global state changed");
       return {
         nodes: _StoresNodestoreJs2['default'].getState(),
         ui: _StoresUistatestoreJs2['default'].getState()
@@ -40657,8 +40657,6 @@ function addNewChild(node, tag, markdown, renderer, callback) {
   createNode(child) //create node
   .then(function (data) {
     //modify parent
-    console.log(data);
-
     data.contents = child.contents;
     data.renderer = child.renderer;
     data.children = {};
