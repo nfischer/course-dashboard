@@ -40,6 +40,12 @@ def update_node(node_id, contents='', renderer='', children=''):
     ret = post(os.path.join(URL, 'node/update', node_id, ''), data=node_value)
     return ret
 
+def delete_node(node_id):
+    """Uses the backend API to delete a node that already exists"""
+    node_id = str(node_id)
+    ret = post(os.path.join(URL, 'node/delete', node_id, ''), data={})
+    return ret
+
 ## @private
 def node_compare(node1, node2):
     id1 = int(node1['id'])
