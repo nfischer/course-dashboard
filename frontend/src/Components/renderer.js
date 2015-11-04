@@ -154,6 +154,7 @@ export class ListElement extends React.Component {
 //Editable list renderer: same as a list, except that elements can be added.
 //currently only adds "Resource" nodes, but will allow for more in the future
 export class EditableList extends React.Component {
+
   render() : React.Element {
     return (
       <list>
@@ -169,7 +170,6 @@ export class EditableList extends React.Component {
   }
 
   addNewChild(title: string, markdown: string){
-    console.log("addNewChild", title, markdown);
     addNode(this.props.node, title, markdown, "Resource");
   }
 }
@@ -187,9 +187,6 @@ export class ListElementInput extends React.Component {
 
   clickWrapper(){
     let title=this.refs["title"].getValue(), value=this.refs["contents"].getValue();
-
-    console.log("clickwrapper");
-    console.log(title, value);
     this.props.onClick(title, value);
   }
 }

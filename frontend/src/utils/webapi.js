@@ -73,8 +73,6 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
 
   createNode(child) //create node
     .then((data) => { //modify parent
-      console.log(data);
-
       data.contents = child.contents;
       data.renderer = child.renderer;
       data.children = {};

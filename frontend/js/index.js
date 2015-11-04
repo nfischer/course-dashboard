@@ -40118,7 +40118,6 @@ var EditableList = (function (_React$Component6) {
   }, {
     key: 'addNewChild',
     value: function addNewChild(title, markdown) {
-      console.log("addNewChild", title, markdown);
       (0, _ActionsAddnodeJs2['default'])(this.props.node, title, markdown, "Resource");
     }
   }]);
@@ -40154,9 +40153,6 @@ var ListElementInput = (function (_React$Component7) {
     value: function clickWrapper() {
       var title = this.refs["title"].getValue(),
           value = this.refs["contents"].getValue();
-
-      console.log("clickwrapper");
-      console.log(title, value);
       this.props.onClick(title, value);
     }
   }]);
@@ -40268,6 +40264,7 @@ var NodeStore = (function (_ReduceStore) {
   }, {
     key: 'reduce',
     value: function reduce(state, action) {
+      //TODO: make the state enforcably immutable
       switch (action.name) {
         case "open":
           //handle creation of tree given data format from server
@@ -40283,8 +40280,8 @@ var NodeStore = (function (_ReduceStore) {
           //parent node links are updated as a part of comitting changes to db
           var newNode = action.data;
           newNode.id = typeof newNode.id === "string" ? newNode.id : newNode.id.toString();
-          newState = state;
-          newState.nodes = newState.nodes.set(newNode.id, newNode);
+          newState = new NodeStoreState(state.rootId);
+          newState.nodes = state.nodes.set(newNode.id, newNode);
 
           return newState;
         case "editResource":
@@ -40678,8 +40675,6 @@ function addNewChild(node, tag, markdown, renderer, callback) {
   createNode(child) //create node
   .then(function (data) {
     //modify parent
-    console.log(data);
-
     data.contents = child.contents;
     data.renderer = child.renderer;
     data.children = {};
