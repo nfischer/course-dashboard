@@ -1,9 +1,11 @@
 /* @flow */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Modal from 'react-bootstrap/lib/Modal';
 import ModalBody from 'react-bootstrap/lib/ModalBody';
 import Input from 'react-bootstrap/lib/Input';
 import ButtonInput from 'react-bootstrap/lib/ButtonInput';
+import Alert from 'react-bootstrap/lib/Alert';
 import marked from 'marked';
 
 import nodeStore from '../Stores/nodestore.js';
@@ -174,19 +176,65 @@ export class EditableList extends React.Component {
   }
 }
 
-export class ListElementInput extends React.Component {
+class ListElementInput extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      alert: null
+    };
+  }
+
   render() : React.Component { //add type that is element or component
     return (
-      <form>
-        <Input type="text" ref="title" placeholder="title"/>
-        <Input type="textarea" ref="contents" placeholder="type markdown here"/>
-        <ButtonInput type="reset" value="Create" onClick={this.clickWrapper.bind(this)}/>
-      </form>
+      <listelementinput>
+        {this.state.alert ? this.state.alert : <placeholder/>}
+        <form ref="formelement">
+          <Input type="text" ref="title" placeholder="title"/>
+          <Input type="textarea" ref="contents" placeholder="type markdown here"/>
+          <ButtonInput value="Create" onClick={this.clickWrapper.bind(this)}/>
+        </form>
+      </listelementinput>
     );
   }
 
   clickWrapper(){
-    let title=this.refs["title"].getValue(), value=this.refs["contents"].getValue();
-    this.props.onClick(title, value);
+    let title=this.refs["title"].getValue().trim(), value=this.refs["contents"].getValue();
+    if(title === ""){
+      this.setState({alert: <AlertDismissable text="ERROR: must have a title"
+                                              onDismiss={this.onDismiss.bind(this)}/>});
+    } else {
+      ReactDOM.findDOMNode(this.refs["formelement"]).reset();
+      this.props.onClick(title, value);
+    }
+  }
+
+  onDismiss(){
+    this.setState({alert: []});
+  }
+}
+
+class AlertDismissable extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      alertVisible: true
+    };
+  }
+
+  render(){
+    if(this.state.alertVisible){
+      return (
+        <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss.bind(this)} dismissAfter={2000}>
+          <p>{this.props.text}</p>
+        </Alert>
+      );
+    } else {
+      return <placeholder/>;
+    }
+  }
+
+  handleAlertDismiss(){
+    this.setState({alertVisible: false});
+    this.props.onDismiss();
   }
 }
