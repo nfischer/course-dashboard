@@ -39821,17 +39821,17 @@ var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
 var Open = (function (_Action) {
   _inherits(Open, _Action);
 
-  function Open(rootId, nodes) {
+  function Open(rootId, nodes, userInfo) {
     _classCallCheck(this, Open);
 
-    _get(Object.getPrototypeOf(Open.prototype), 'constructor', this).call(this, "open", { rootId: rootId, nodes: nodes });
+    _get(Object.getPrototypeOf(Open.prototype), 'constructor', this).call(this, "open", { rootId: rootId, nodes: nodes, userInfo: userInfo });
   }
 
   return Open;
 })(_actionJs2['default']);
 
-function open(rootId, nodes) {
-  var action = new Open(rootId, nodes);
+function open(rootId, nodes, userInfo) {
+  var action = new Open(rootId, nodes, userInfo);
   _dispatcherJs2['default'].dispatch(action);
 }
 
@@ -40495,12 +40495,23 @@ var UIStateStore = (function (_ReduceStore) {
   }, {
     key: 'reduce',
     value: function reduce(state, action) {
+      var newState = undefined;
       switch (action.name) {
+        case "open":
+          //TODO: this is really ugly. may want to use Object.assign
+          newState = new UIState(state.currentWeek);
+          newState.piazza_username = action.data.userInfo.piazza_username;
+          newState.piazza_password = action.data.userInfo.piazza_password;
+          break;
         case "expandWeek":
-          return new UIState(action.data);
+          //TODO: this is really ugly. may want to use Object.assign
+          newState = new UIState(action.data);
+          newState.piazza_username = state.piazza_username;
+          newState.piazza_password = state.piazza_password;
+          break;
       }
 
-      return state;
+      return newState;
     }
   }]);
 
@@ -40577,13 +40588,14 @@ var ApplicationComponent = (function (_React$Component) {
   _createClass(ApplicationComponent, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      WebAPI.getInitialTree(function (data) {
-        (0, _ActionsOpenJs2['default'])(data.rootId, data.nodes);
+      WebAPI.init(function (tree, userInfo) {
+        (0, _ActionsOpenJs2['default'])(tree.rootId, tree.nodes, userInfo);
       });
     }
   }, {
     key: 'render',
     value: function render() {
+      console.log(this.state.ui);
       if (this.state.nodes && this.state.ui) {
         var root = this.state.nodes.nodes.get(this.state.nodes.rootId);
         return (0, _ComponentsCreateelementJs2['default'])("root", root, this.state.ui);
@@ -40720,7 +40732,7 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 exports.addNewChild = addNewChild;
-exports.getInitialTree = getInitialTree;
+exports.init = init;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -40742,6 +40754,10 @@ var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
 // runtime based on which course we're actually viewing
 var courseId = "42";
 var mainUrl = "";
+
+// TODO(saketh): This is a hardcoded user id. change this dynamically during
+// runtime based on which user is actually viewing
+var userId = 1;
 
 function getNode(nodeId) {
   var endpoint = mainUrl + ('/' + courseId + '/node/' + nodeId + '/');
@@ -40794,6 +40810,15 @@ function getTree() {
   });
 }
 
+//gets user credentials
+function getUserInfo(userId) {
+  var endpoint = mainUrl + '/static/piazza-credentials.json';
+  return _jquery2['default'].ajax(endpoint, {
+    method: "GET",
+    dataType: "json"
+  });
+}
+
 //More complex actions defined in terms of primitives
 // promises are used to make the order of asynchronous steps more transparent
 //---------------------------------------------------
@@ -40827,9 +40852,16 @@ function addNewChild(node, tag, markdown, renderer, callback) {
   });
 }
 
-function getInitialTree(callback) {
+function init(callback) {
+  var tree = undefined;
   getTree().then(function (data) {
-    callback(data);
+    tree = data;
+    return getUserInfo(userId);
+  }, function (jqXHR, textStatus, errorThrown) {
+    console.error(textStatus);
+    throw errorThrown;
+  }).then(function (userInfo) {
+    callback(tree, userInfo);
   }, function (jqXHR, textStatus, errorThrown) {
     console.error(textStatus);
     throw errorThrown;

@@ -15,6 +15,9 @@ import addNode from '../Actions/addnode.js';
 
 import titleCaps from '../utils/titlecaps.js';
 
+//TODO: this is hardcoded. fix plz
+var classId = "if44ov1fn5a505";
+
 var mdRenderer = new marked.Renderer();
 mdRenderer.link = function(href: string, title: string, text: string){
   return `<a href="${href}" title="${title}" target="_blank">${text}</a>`;
@@ -102,6 +105,16 @@ export class WeekCollapsed extends React.Component{
         </svg>
       </collapsedweek>
     );
+  }
+}
+
+export class Announcements extends React.Component{ //this should pretty much behave like a list
+  componentWillMount(){
+    //initiate fetch based on filter here
+  }
+
+  render(){
+    //render here
   }
 }
 

@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import piazza from 'piazza-api';
 
 import Node from '../Models/node.js';
 
@@ -12,6 +13,10 @@ import Node from '../Models/node.js';
 // runtime based on which course we're actually viewing
 var courseId = "42";
 var mainUrl = "";
+
+// TODO(saketh): This is a hardcoded user id. change this dynamically during
+// runtime based on which user is actually viewing
+var userId = 1;
 
 function getNode(nodeId: string){
   let endpoint = mainUrl + `/${courseId}/node/${nodeId}/`;
@@ -60,6 +65,15 @@ function getTree(rootId = null, depth = null){
   });
 }
 
+//gets user credentials
+function getUserInfo(userId: number){
+  let endpoint = mainUrl + `/static/piazza-credentials.json`;
+  return $.ajax(endpoint, {
+    method: "GET",
+    dataType: "json"
+  });
+}
+
 
 //More complex actions defined in terms of primitives
 // promises are used to make the order of asynchronous steps more transparent
@@ -92,11 +106,20 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
     });
 }
 
-export function getInitialTree(callback: any){
+export function init(callback: any){
+  let tree;
   getTree().then((data) => {
-    callback(data);
+    tree = data;
+    return getUserInfo(userId);
   }, (jqXHR, textStatus, errorThrown) => {
     console.error(textStatus);
     throw errorThrown;
+  }).then((userInfo) => {
+    return piazza.login(userInfo.piazza_username, userInfo.piazza_password);
+  }, (jqXHR, textStatus, errorThrown) => {
+    console.error(textStatus);
+    throw errorThrown;
+  }).then((user) => {
+    callback(tree, user);
   });
 }
