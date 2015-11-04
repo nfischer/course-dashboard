@@ -30,7 +30,6 @@ class ApplicationComponent extends React.Component{
   }
 
   static calculateState(prevState){
-    console.log("global state changed");
     return {
       nodes: nodeStore.getState(),
       ui: uiStateStore.getState()
