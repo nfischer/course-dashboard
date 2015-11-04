@@ -80,8 +80,8 @@ class Node(Resource):
                 contents = request.form['contents']
                 renderer = request.form['renderer']
                 children = request.form['children']
-                g.db.execute('''UPDATE nodes 
-                                SET contents=(?),renderer=(?),children=(?) 
+                g.db.execute('''UPDATE nodes
+                                SET contents=(?),renderer=(?),children=(?)
                                 WHERE id=%s AND course_id=%s AND isalive=1''' % (node_id, course_id),
                              [contents, renderer, children])
             except Exception as e:
@@ -90,8 +90,8 @@ class Node(Resource):
             g.db.commit()
             return jsonify(message='Node was successfully updated.', id=node_id)
         elif operation == 'delete':
-            g.db.execute('''UPDATE nodes 
-                            SET isalive=0 
+            g.db.execute('''UPDATE nodes
+                            SET isalive=0
                             WHERE id=%s AND course_id=%s''' % (node_id, course_id))
             g.db.commit()
             return jsonify(message='Node was successfully deleted.', id=node_id)
@@ -108,8 +108,8 @@ class Node(Resource):
             raise InvalidUsage('Unknown operation')
 
         node_id = str(node_id)
-        cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, n.children 
-                              FROM nodes AS n 
+        cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, n.children
+                              FROM nodes AS n
                               WHERE n.id=%s AND n.course_id=%s AND n.isalive=1''' % (node_id, course_id))
         return_val = cursor.fetchone()
         if return_val is None:
@@ -133,8 +133,8 @@ class Node(Resource):
     #     """
     #     # TODO(nfischer): Fix this to work with multi-digit node_ids (use %s
     #     # formatting)
-    #     g.db.execute('''UPDATE children 
-    #                     SET children=(?) 
+    #     g.db.execute('''UPDATE children
+    #                     SET children=(?)
     #                     WHERE parent_id=(?)''', [request.form['children'], node_id])
     #     g.db.commit()
     #     return jsonify(message='Children were successfully updated.', id=node_id)
@@ -148,7 +148,7 @@ class Tree(Resource):
         rootId is hard coded right now. Need clarification on that
         """
         try:
-            cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, n.children 
+            cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, n.children
                                   FROM nodes AS n
                                   WHERE n.course_id = %s AND n.isalive=1''' % course_id)
             tree = {}
@@ -161,14 +161,14 @@ class Tree(Resource):
 class Root(Resource):
     def post(self, course_id, operation, root_id):
         if operation == 'set':
-            g.db.execute('''UPDATE nodes 
-                            SET isroot=1 
+            g.db.execute('''UPDATE nodes
+                            SET isroot=1
                             WHERE id=%s AND course_id=%s AND isalive=1''' % (root_id, course_id))
             g.db.commit()
             return jsonify(message='Successfully labeled node as a root.', id=root_id)
         elif operation == 'delete':
-            g.db.execute('''UPDATE nodes 
-                            SET isroot=0 
+            g.db.execute('''UPDATE nodes
+                            SET isroot=0
                             WHERE id=%s AND course_id=%s AND isalive=1''' % (root_id, course_id))
             g.db.commit()
             return jsonify(message='Successfully removed root label.', id=root_id)
@@ -179,7 +179,7 @@ class Root(Resource):
         if operation != 'get':
             raise InvalidUsage('Unknown operation type')
 
-        cursor = g.db.execute('''SELECT id, renderer 
+        cursor = g.db.execute('''SELECT id, renderer
                               FROM nodes
                               WHERE course_id = %s AND isalive=1 AND isroot=1''' % course_id)
         root_list = cursor.fetchall()
