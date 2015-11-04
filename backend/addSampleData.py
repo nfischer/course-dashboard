@@ -70,6 +70,12 @@ def add_course(piazza_id):
         raise ValueError('Unable to add piazza id %s' % piazza_id)
     return ret
 
+def add_root(root_id):
+    """Uses the backend API to add a root to the tree"""
+    root_id = str(root_id)
+    ret = post(os.path.join(URL, 'root/set', root_id, ''), data={})
+    return ret
+
 ## @private
 def node_compare(node1, node2):
     id1 = int(node1['id'])
