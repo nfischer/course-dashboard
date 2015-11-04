@@ -23,7 +23,4 @@ backend/lib
 backend/local
 backend/pip-selfcheck.json
 
-<<<<<<< 15e18cc8991e254ee9e955bbe15e1ea9f2553f26
 npm-debug.log
-=======
->>>>>>> working on modifying backend and frontend to support piazza

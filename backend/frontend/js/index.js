@@ -1,10 +1,22 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/assign"), __esModule: true };
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"core-js/library/fn/object/assign":10}],2:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/create"), __esModule: true };
 },{"core-js/library/fn/object/create":11}],3:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/set-prototype-of"), __esModule: true };
 },{"core-js/library/fn/object/set-prototype-of":12}],4:[function(require,module,exports){
+=======
+},{"core-js/library/fn/object/assign":12}],2:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/object/create"), __esModule: true };
+},{"core-js/library/fn/object/create":13}],3:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/object/is-frozen"), __esModule: true };
+},{"core-js/library/fn/object/is-frozen":14}],4:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/object/keys"), __esModule: true };
+},{"core-js/library/fn/object/keys":15}],5:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/object/set-prototype-of"), __esModule: true };
+},{"core-js/library/fn/object/set-prototype-of":16}],6:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 "use strict";
 
 exports["default"] = function (instance, Constructor) {
@@ -14,7 +26,11 @@ exports["default"] = function (instance, Constructor) {
 };
 
 exports.__esModule = true;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],5:[function(require,module,exports){
+=======
+},{}],7:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 "use strict";
 
 var _Object$assign = require("babel-runtime/core-js/object/assign")["default"];
@@ -34,7 +50,11 @@ exports["default"] = _Object$assign || function (target) {
 };
 
 exports.__esModule = true;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"babel-runtime/core-js/object/assign":1}],6:[function(require,module,exports){
+=======
+},{"babel-runtime/core-js/object/assign":1}],8:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 "use strict";
 
 var _Object$create = require("babel-runtime/core-js/object/create")["default"];
@@ -58,7 +78,11 @@ exports["default"] = function (subClass, superClass) {
 };
 
 exports.__esModule = true;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"babel-runtime/core-js/object/create":2,"babel-runtime/core-js/object/set-prototype-of":3}],7:[function(require,module,exports){
+=======
+},{"babel-runtime/core-js/object/create":2,"babel-runtime/core-js/object/set-prototype-of":5}],9:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 "use strict";
 
 exports["default"] = function (obj) {
@@ -68,7 +92,11 @@ exports["default"] = function (obj) {
 };
 
 exports.__esModule = true;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],8:[function(require,module,exports){
+=======
+},{}],10:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 "use strict";
 
 exports["default"] = function (obj) {
@@ -76,6 +104,7 @@ exports["default"] = function (obj) {
     return obj;
   } else {
     var newObj = {};
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 
     if (obj != null) {
       for (var key in obj) {
@@ -254,6 +283,71 @@ var $        = require('./$')
   , toObject = require('./$.to-object')
   , IObject  = require('./$.iobject');
 
+=======
+
+    if (obj != null) {
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+      }
+    }
+
+    newObj["default"] = obj;
+    return newObj;
+  }
+};
+
+exports.__esModule = true;
+},{}],11:[function(require,module,exports){
+"use strict";
+
+exports["default"] = function (obj, keys) {
+  var target = {};
+
+  for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;
+    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+    target[i] = obj[i];
+  }
+
+  return target;
+};
+
+exports.__esModule = true;
+},{}],12:[function(require,module,exports){
+require('../../modules/es6.object.assign');
+module.exports = require('../../modules/$.core').Object.assign;
+},{"../../modules/$.core":21,"../../modules/es6.object.assign":33}],13:[function(require,module,exports){
+var $ = require('../../modules/$');
+module.exports = function create(P, D){
+  return $.create(P, D);
+};
+},{"../../modules/$":29}],14:[function(require,module,exports){
+require('../../modules/es6.object.is-frozen');
+module.exports = require('../../modules/$.core').Object.isFrozen;
+},{"../../modules/$.core":21,"../../modules/es6.object.is-frozen":34}],15:[function(require,module,exports){
+require('../../modules/es6.object.keys');
+module.exports = require('../../modules/$.core').Object.keys;
+},{"../../modules/$.core":21,"../../modules/es6.object.keys":35}],16:[function(require,module,exports){
+require('../../modules/es6.object.set-prototype-of');
+module.exports = require('../../modules/$.core').Object.setPrototypeOf;
+},{"../../modules/$.core":21,"../../modules/es6.object.set-prototype-of":36}],17:[function(require,module,exports){
+module.exports = function(it){
+  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+  return it;
+};
+},{}],18:[function(require,module,exports){
+var isObject = require('./$.is-object');
+module.exports = function(it){
+  if(!isObject(it))throw TypeError(it + ' is not an object!');
+  return it;
+};
+},{"./$.is-object":28}],19:[function(require,module,exports){
+// 19.1.2.1 Object.assign(target, source, ...)
+var $        = require('./$')
+  , toObject = require('./$.to-object')
+  , IObject  = require('./$.iobject');
+
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // should work with symbols and should have deterministic property order (V8 bug)
 module.exports = require('./$.fails')(function(){
   var a = Object.assign
@@ -282,7 +376,141 @@ module.exports = require('./$.fails')(function(){
   }
   return T;
 } : Object.assign;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./$":24,"./$.fails":20,"./$.iobject":22,"./$.to-object":27}],26:[function(require,module,exports){
+=======
+},{"./$":29,"./$.fails":25,"./$.iobject":27,"./$.to-object":32}],20:[function(require,module,exports){
+var toString = {}.toString;
+
+module.exports = function(it){
+  return toString.call(it).slice(8, -1);
+};
+},{}],21:[function(require,module,exports){
+var core = module.exports = {version: '1.2.3'};
+if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+},{}],22:[function(require,module,exports){
+// optional / simple context binding
+var aFunction = require('./$.a-function');
+module.exports = function(fn, that, length){
+  aFunction(fn);
+  if(that === undefined)return fn;
+  switch(length){
+    case 1: return function(a){
+      return fn.call(that, a);
+    };
+    case 2: return function(a, b){
+      return fn.call(that, a, b);
+    };
+    case 3: return function(a, b, c){
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function(/* ...args */){
+    return fn.apply(that, arguments);
+  };
+};
+},{"./$.a-function":17}],23:[function(require,module,exports){
+var global    = require('./$.global')
+  , core      = require('./$.core')
+  , PROTOTYPE = 'prototype';
+var ctx = function(fn, that){
+  return function(){
+    return fn.apply(that, arguments);
+  };
+};
+var $def = function(type, name, source){
+  var key, own, out, exp
+    , isGlobal = type & $def.G
+    , isProto  = type & $def.P
+    , target   = isGlobal ? global : type & $def.S
+        ? global[name] : (global[name] || {})[PROTOTYPE]
+    , exports  = isGlobal ? core : core[name] || (core[name] = {});
+  if(isGlobal)source = name;
+  for(key in source){
+    // contains in native
+    own = !(type & $def.F) && target && key in target;
+    if(own && key in exports)continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    if(isGlobal && typeof target[key] != 'function')exp = source[key];
+    // bind timers to global for call from export context
+    else if(type & $def.B && own)exp = ctx(out, global);
+    // wrap global constructors for prevent change them in library
+    else if(type & $def.W && target[key] == out)!function(C){
+      exp = function(param){
+        return this instanceof C ? new C(param) : C(param);
+      };
+      exp[PROTOTYPE] = C[PROTOTYPE];
+    }(out);
+    else exp = isProto && typeof out == 'function' ? ctx(Function.call, out) : out;
+    // export
+    exports[key] = exp;
+    if(isProto)(exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
+  }
+};
+// type bitmap
+$def.F = 1;  // forced
+$def.G = 2;  // global
+$def.S = 4;  // static
+$def.P = 8;  // proto
+$def.B = 16; // bind
+$def.W = 32; // wrap
+module.exports = $def;
+},{"./$.core":21,"./$.global":26}],24:[function(require,module,exports){
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function(it){
+  if(it == undefined)throw TypeError("Can't call method on  " + it);
+  return it;
+};
+},{}],25:[function(require,module,exports){
+module.exports = function(exec){
+  try {
+    return !!exec();
+  } catch(e){
+    return true;
+  }
+};
+},{}],26:[function(require,module,exports){
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
+  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+},{}],27:[function(require,module,exports){
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var cof = require('./$.cof');
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+  return cof(it) == 'String' ? it.split('') : Object(it);
+};
+},{"./$.cof":20}],28:[function(require,module,exports){
+module.exports = function(it){
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+},{}],29:[function(require,module,exports){
+var $Object = Object;
+module.exports = {
+  create:     $Object.create,
+  getProto:   $Object.getPrototypeOf,
+  isEnum:     {}.propertyIsEnumerable,
+  getDesc:    $Object.getOwnPropertyDescriptor,
+  setDesc:    $Object.defineProperty,
+  setDescs:   $Object.defineProperties,
+  getKeys:    $Object.keys,
+  getNames:   $Object.getOwnPropertyNames,
+  getSymbols: $Object.getOwnPropertySymbols,
+  each:       [].forEach
+};
+},{}],30:[function(require,module,exports){
+// most Object methods by ES6 should accept primitives
+module.exports = function(KEY, exec){
+  var $def = require('./$.def')
+    , fn   = (require('./$.core').Object || {})[KEY] || Object[KEY]
+    , exp  = {};
+  exp[KEY] = exec(fn);
+  $def($def.S + $def.F * require('./$.fails')(function(){ fn(1); }), 'Object', exp);
+};
+},{"./$.core":21,"./$.def":23,"./$.fails":25}],31:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
 var getDesc  = require('./$').getDesc
@@ -309,12 +537,17 @@ module.exports = {
     }({}, false) : undefined),
   check: check
 };
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./$":24,"./$.an-object":14,"./$.ctx":17,"./$.is-object":23}],27:[function(require,module,exports){
+=======
+},{"./$":29,"./$.an-object":18,"./$.ctx":22,"./$.is-object":28}],32:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // 7.1.13 ToObject(argument)
 var defined = require('./$.defined');
 module.exports = function(it){
   return Object(defined(it));
 };
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./$.defined":19}],28:[function(require,module,exports){
 // 19.1.3.1 Object.assign(target, source)
 var $def = require('./$.def');
@@ -330,6 +563,36 @@ $def($def.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
 =======
 },{"./$.def":23,"./$.set-proto":31}],37:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./$.defined":24}],33:[function(require,module,exports){
+// 19.1.3.1 Object.assign(target, source)
+var $def = require('./$.def');
+
+$def($def.S + $def.F, 'Object', {assign: require('./$.assign')});
+},{"./$.assign":19,"./$.def":23}],34:[function(require,module,exports){
+// 19.1.2.12 Object.isFrozen(O)
+var isObject = require('./$.is-object');
+
+require('./$.object-sap')('isFrozen', function($isFrozen){
+  return function isFrozen(it){
+    return isObject(it) ? $isFrozen ? $isFrozen(it) : false : true;
+  };
+});
+},{"./$.is-object":28,"./$.object-sap":30}],35:[function(require,module,exports){
+// 19.1.2.14 Object.keys(O)
+var toObject = require('./$.to-object');
+
+require('./$.object-sap')('keys', function($keys){
+  return function keys(it){
+    return $keys(toObject(it));
+  };
+});
+},{"./$.object-sap":30,"./$.to-object":32}],36:[function(require,module,exports){
+// 19.1.3.19 Object.setPrototypeOf(O, proto)
+var $def = require('./$.def');
+$def($def.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
+},{"./$.def":23,"./$.set-proto":31}],37:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 
 },{}],38:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
@@ -18564,8 +18827,10 @@ module.exports={
     "hash.js": "^1.0.0",
     "inherits": "^2.0.1"
   },
-  "gitHead": "d86cd2a8178f7e7cecbd6dd92eea084e2ab44c13",
+  "readme": "# Elliptic [![Build Status](https://secure.travis-ci.org/indutny/elliptic.png)](http://travis-ci.org/indutny/elliptic)\n\nFast elliptic-curve cryptography in a plain javascript implementation.\n\nNOTE: Please take a look at http://safecurves.cr.yp.to/ before choosing a curve\nfor your cryptography operations.\n\n## Incentive\n\nECC is much slower than regular RSA cryptography, the JS implementations are\neven more slower.\n\n## Benchmarks\n\n```bash\n$ node benchmarks/index.js\nBenchmarking: sign\nelliptic#sign x 262 ops/sec ±0.51% (177 runs sampled)\neccjs#sign x 55.91 ops/sec ±0.90% (144 runs sampled)\n------------------------\nFastest is elliptic#sign\n========================\nBenchmarking: verify\nelliptic#verify x 113 ops/sec ±0.50% (166 runs sampled)\neccjs#verify x 48.56 ops/sec ±0.36% (125 runs sampled)\n------------------------\nFastest is elliptic#verify\n========================\nBenchmarking: gen\nelliptic#gen x 294 ops/sec ±0.43% (176 runs sampled)\neccjs#gen x 62.25 ops/sec ±0.63% (129 runs sampled)\n------------------------\nFastest is elliptic#gen\n========================\nBenchmarking: ecdh\nelliptic#ecdh x 136 ops/sec ±0.85% (156 runs sampled)\n------------------------\nFastest is elliptic#ecdh\n========================\n```\n\n## API\n\n### ECDSA\n\n```javascript\nvar EC = require('elliptic').ec;\n\n// Create and initialize EC context\n// (better do it once and reuse it)\nvar ec = new EC('secp256k1');\n\n// Generate keys\nvar key = ec.genKeyPair();\n\n// Sign message (must be an array, or it'll be treated as a hex sequence)\nvar msg = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];\nvar signature = key.sign(msg);\n\n// Export DER encoded signature in Array\nvar derSign = signature.toDER();\n\n// Verify signature\nconsole.log(key.verify(msg, derSign));\n```\n\n### ECDH\n\n```javascript\n// Generate keys\nvar key1 = ec.genKeyPair();\nvar key2 = ec.genKeyPair();\n\nvar shared1 = key1.derive(key2.getPublic());\nvar shared2 = key2.derive(key1.getPublic());\n\nconsole.log('Both shared secrets are BN instances');\nconsole.log(shared1.toString(16));\nconsole.log(shared2.toString(16));\n```\n\nNOTE: `.derive()` returns a [BN][1] instance.\n\n## Supported curves\n\nElliptic.js support following curve types:\n\n* Short Weierstrass\n* Montgomery\n* Edwards\n* Twisted Edwards\n\nFollowing curve 'presets' are embedded into the library:\n\n* `secp256k1`\n* `p192`\n* `p224`\n* `p256`\n* `curve25519`\n* `ed25519`\n\nNOTE: That `curve25519` could not be used for ECDSA, use `ed25519` instead.\n\n### Implementation details\n\nECDSA is using deterministic `k` value generation as per [RFC6979][0]. Most of\nthe curve operations are performed on non-affine coordinates (either projective\nor extended), various windowing techniques are used for different cases.\n\nAll operations are performed in reduction context using [bn.js][1], hashing is\nprovided by [hash.js][2]\n\n### Related projects\n\n* [eccrypto][3]: isomorphic implementation of ECDSA, ECDH and ECIES for both\n  browserify and node (uses `elliptic` for browser and [secp256k1-node][4] for\n  node)\n\n#### LICENSE\n\nThis software is licensed under the MIT License.\n\nCopyright Fedor Indutny, 2014.\n\nPermission is hereby granted, free of charge, to any person obtaining a\ncopy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to permit\npersons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included\nin all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\nOR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN\nNO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,\nDAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR\nOTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n[0]: http://tools.ietf.org/html/rfc6979\n[1]: https://github.com/indutny/bn.js\n[2]: https://github.com/indutny/hash.js\n[3]: https://github.com/bitchan/eccrypto\n[4]: https://github.com/wanderer/secp256k1-node\n",
+  "readmeFilename": "README.md",
   "_id": "elliptic@3.1.0",
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
   "_shasum": "c21682ef762769b56a74201609105da11d5f60cc",
   "_from": "elliptic@^3.0.0",
   "_npmVersion": "2.11.0",
@@ -18586,6 +18851,9 @@ module.exports={
   },
   "directories": {},
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-3.1.0.tgz"
+=======
+  "_from": "elliptic@>=3.0.0 <4.0.0"
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 }
 
 },{}],113:[function(require,module,exports){
@@ -49047,6 +49315,7 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{}],315:[function(require,module,exports){
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 var exports = module.exports = function() {
 	var fn = arguments[0];	
 	var args = [].concat.apply([],arguments).slice(1);
@@ -49073,6 +49342,8 @@ exports.rapply = function() {
 };
 
 },{}],316:[function(require,module,exports){
+=======
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var _ = require("lodash");
 
 var School = require("./School");
@@ -49184,7 +49455,11 @@ Class.prototype.search = function(query) {
 }
 
 module.exports = Class;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"../petty":416,"./Content":317,"./FeedItem":318,"./School":319,"lodash":321}],317:[function(require,module,exports){
+=======
+},{"../petty":415,"./Content":316,"./FeedItem":317,"./School":318,"lodash":320}],316:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var _ = require("lodash");
 
 var callPetty = require("../petty");
@@ -49275,7 +49550,11 @@ Content.prototype.getFollowups = function() {
 }
 
 module.exports = Content;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"../petty":416,"lodash":321}],318:[function(require,module,exports){
+=======
+},{"../petty":415,"lodash":320}],317:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var Content = require("./Content");
 var callPetty = require("../petty")
 
@@ -49304,14 +49583,22 @@ FeedItem.prototype.toContent = function() {
 }
 
 module.exports = FeedItem;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"../petty":416,"./Content":317}],319:[function(require,module,exports){
+=======
+},{"../petty":415,"./Content":316}],318:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var School = function(name, id) {
 	this.id = id;
 	this.name = name;
 }
 
 module.exports = School;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],320:[function(require,module,exports){
+=======
+},{}],319:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var _ = require("lodash");
 
 var Class = require("./Class");
@@ -49357,7 +49644,11 @@ User.prototype.isTakingClass = function(class_id) {
 }
 
 module.exports = User;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"../petty":416,"./Class":316,"lodash":321}],321:[function(require,module,exports){
+=======
+},{"../petty":415,"./Class":315,"lodash":320}],320:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (global){
 /**
  * @license
@@ -61713,7 +62004,11 @@ module.exports = User;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],322:[function(require,module,exports){
+=======
+},{}],321:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Copyright 2010-2012 Mikeal Rogers
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
@@ -61871,7 +62166,11 @@ Object.defineProperty(request, 'debug', {
   }
 })
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./lib/cookies":324,"./lib/helpers":327,"./request":415,"extend":348}],323:[function(require,module,exports){
+=======
+},{"./lib/cookies":323,"./lib/helpers":326,"./request":414,"extend":347}],322:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict'
 
 var caseless = require('caseless')
@@ -62041,7 +62340,11 @@ Auth.prototype.onResponse = function (response) {
 
 exports.Auth = Auth
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./helpers":327,"caseless":345,"node-uuid":400}],324:[function(require,module,exports){
+=======
+},{"./helpers":326,"caseless":344,"node-uuid":399}],323:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict'
 
 var tough = require('tough-cookie')
@@ -62082,7 +62385,11 @@ exports.jar = function(store) {
   return new RequestJar(store)
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"tough-cookie":407}],325:[function(require,module,exports){
+=======
+},{"tough-cookie":406}],324:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 'use strict'
 
@@ -62166,7 +62473,11 @@ module.exports = getProxyFromURI
 
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"_process":249}],326:[function(require,module,exports){
+=======
+},{"_process":249}],325:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict'
 
 var fs = require('fs')
@@ -62373,7 +62684,11 @@ Har.prototype.options = function (options) {
 
 exports.Har = Har
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"fs":37,"har-validator":352,"querystring":253,"util":280}],327:[function(require,module,exports){
+=======
+},{"fs":37,"har-validator":351,"querystring":253,"util":280}],326:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process,Buffer){
 'use strict'
 
@@ -62452,7 +62767,11 @@ exports.defer                 = deferMethod()
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"_process":249,"buffer":53,"crypto":57,"json-stringify-safe":396}],328:[function(require,module,exports){
+=======
+},{"_process":249,"buffer":53,"crypto":57,"json-stringify-safe":395}],327:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (Buffer){
 'use strict'
 
@@ -62566,7 +62885,11 @@ exports.Multipart = Multipart
 
 }).call(this,require("buffer").Buffer)
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"buffer":53,"combined-stream":346,"isstream":395,"node-uuid":400}],329:[function(require,module,exports){
+=======
+},{"buffer":53,"combined-stream":345,"isstream":394,"node-uuid":399}],328:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (Buffer){
 'use strict'
 
@@ -62718,7 +63041,11 @@ exports.OAuth = OAuth
 
 }).call(this,require("buffer").Buffer)
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"buffer":53,"caseless":345,"crypto":57,"node-uuid":400,"oauth-sign":401,"qs":402,"url":278}],330:[function(require,module,exports){
+=======
+},{"buffer":53,"caseless":344,"crypto":57,"node-uuid":399,"oauth-sign":400,"qs":401,"url":278}],329:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict'
 
 var qs = require('qs')
@@ -62771,7 +63098,11 @@ Querystring.prototype.unescape = querystring.unescape
 
 exports.Querystring = Querystring
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"qs":402,"querystring":253}],331:[function(require,module,exports){
+=======
+},{"qs":401,"querystring":253}],330:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict'
 
 var url = require('url')
@@ -62927,7 +63258,11 @@ Redirect.prototype.onResponse = function (response) {
 
 exports.Redirect = Redirect
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"url":278}],332:[function(require,module,exports){
+=======
+},{"url":278}],331:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict'
 
 var url = require('url')
@@ -63112,7 +63447,11 @@ Tunnel.defaultProxyHeaderWhiteList = defaultProxyHeaderWhiteList
 Tunnel.defaultProxyHeaderExclusiveList = defaultProxyHeaderExclusiveList
 exports.Tunnel = Tunnel
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"tunnel-agent":414,"url":278}],333:[function(require,module,exports){
+=======
+},{"tunnel-agent":413,"url":278}],332:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 
 /*!
  *  Copyright 2010 LearnBoost <dev@learnboost.com>
@@ -63326,7 +63665,11 @@ function canonicalizeResource (resource) {
 }
 module.exports.canonicalizeResource = canonicalizeResource
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"crypto":57,"url":278}],334:[function(require,module,exports){
+=======
+},{"crypto":57,"url":278}],333:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (Buffer){
 var DuplexStream = require('readable-stream/duplex')
   , util         = require('util')
@@ -63547,11 +63890,19 @@ module.exports = BufferList
 
 }).call(this,require("buffer").Buffer)
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"buffer":53,"readable-stream/duplex":335,"util":280}],335:[function(require,module,exports){
 arguments[4][254][0].apply(exports,arguments)
 },{"./lib/_stream_duplex.js":336,"dup":254}],336:[function(require,module,exports){
 arguments[4][255][0].apply(exports,arguments)
 },{"./_stream_readable":337,"./_stream_writable":338,"core-util-is":339,"dup":255,"inherits":340,"process-nextick-args":342}],337:[function(require,module,exports){
+=======
+},{"buffer":53,"readable-stream/duplex":334,"util":280}],334:[function(require,module,exports){
+arguments[4][254][0].apply(exports,arguments)
+},{"./lib/_stream_duplex.js":335,"dup":254}],335:[function(require,module,exports){
+arguments[4][255][0].apply(exports,arguments)
+},{"./_stream_readable":336,"./_stream_writable":337,"core-util-is":338,"dup":255,"inherits":339,"process-nextick-args":341}],336:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 'use strict';
 
@@ -64529,7 +64880,11 @@ function indexOf (xs, x) {
 
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./_stream_duplex":336,"_process":249,"buffer":53,"core-util-is":339,"events":243,"inherits":340,"isarray":341,"process-nextick-args":342,"string_decoder/":343,"util":39}],338:[function(require,module,exports){
+=======
+},{"./_stream_duplex":335,"_process":249,"buffer":53,"core-util-is":338,"events":243,"inherits":339,"isarray":340,"process-nextick-args":341,"string_decoder/":342,"util":39}],337:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, encoding, cb), and it'll handle all
 // the drain event emission and buffering.
@@ -65058,7 +65413,11 @@ function endWritable(stream, state, cb) {
   state.ended = true;
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./_stream_duplex":336,"buffer":53,"core-util-is":339,"events":243,"inherits":340,"process-nextick-args":342,"util-deprecate":344}],339:[function(require,module,exports){
+=======
+},{"./_stream_duplex":335,"buffer":53,"core-util-is":338,"events":243,"inherits":339,"process-nextick-args":341,"util-deprecate":343}],338:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -65169,11 +65528,19 @@ function objectToString(o) {
 }
 }).call(this,{"isBuffer":require("../../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")})
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"../../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246}],340:[function(require,module,exports){
 arguments[4][245][0].apply(exports,arguments)
 },{"dup":245}],341:[function(require,module,exports){
 arguments[4][247][0].apply(exports,arguments)
 },{"dup":247}],342:[function(require,module,exports){
+=======
+},{"../../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246}],339:[function(require,module,exports){
+arguments[4][245][0].apply(exports,arguments)
+},{"dup":245}],340:[function(require,module,exports){
+arguments[4][247][0].apply(exports,arguments)
+},{"dup":247}],341:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 'use strict';
 module.exports = nextTick;
@@ -65191,9 +65558,15 @@ function nextTick(fn) {
 
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"_process":249}],343:[function(require,module,exports){
 arguments[4][277][0].apply(exports,arguments)
 },{"buffer":53,"dup":277}],344:[function(require,module,exports){
+=======
+},{"_process":249}],342:[function(require,module,exports){
+arguments[4][277][0].apply(exports,arguments)
+},{"buffer":53,"dup":277}],343:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (global){
 
 /**
@@ -65265,7 +65638,11 @@ function config (name) {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],345:[function(require,module,exports){
+=======
+},{}],344:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 function Caseless (dict) {
   this.dict = dict || {}
 }
@@ -65333,7 +65710,11 @@ module.exports.httpify = function (resp, headers) {
   return c
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],346:[function(require,module,exports){
+=======
+},{}],345:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (Buffer){
 var util = require('util');
 var Stream = require('stream').Stream;
@@ -65526,7 +65907,11 @@ CombinedStream.prototype._emitError = function(err) {
 
 }).call(this,{"isBuffer":require("../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")})
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"delayed-stream":347,"stream":267,"util":280}],347:[function(require,module,exports){
+=======
+},{"../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"delayed-stream":346,"stream":267,"util":280}],346:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var Stream = require('stream').Stream;
 var util = require('util');
 
@@ -65635,7 +66020,11 @@ DelayedStream.prototype._checkIfMaxDataSizeExceeded = function() {
   this.emit('error', new Error(message));
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"stream":267,"util":280}],348:[function(require,module,exports){
+=======
+},{"stream":267,"util":280}],347:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var hasOwn = Object.prototype.hasOwnProperty;
@@ -65723,7 +66112,11 @@ module.exports = function extend() {
 };
 
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],349:[function(require,module,exports){
+=======
+},{}],348:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports = ForeverAgent
 ForeverAgent.SSL = ForeverAgentSSL
 
@@ -65863,9 +66256,15 @@ function createConnectionSSL (port, host, options) {
   return tls.connect(options);
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"http":268,"https":244,"net":37,"tls":37,"util":280}],350:[function(require,module,exports){
 module.exports = FormData;
 },{}],351:[function(require,module,exports){
+=======
+},{"http":268,"https":244,"net":37,"tls":37,"util":280}],349:[function(require,module,exports){
+module.exports = FormData;
+},{}],350:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict'
 
 function ValidationError (errors) {
@@ -65877,7 +66276,11 @@ ValidationError.prototype = Error.prototype
 
 module.exports = ValidationError
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],352:[function(require,module,exports){
+=======
+},{}],351:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict'
 
 var Promise = require('pinkie-promise')
@@ -65901,7 +66304,11 @@ Object.keys(schemas).map(function (name) {
   module.exports[name] = promisify(schemas[name])
 })
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./runner":353,"./schemas":361,"pinkie-promise":377}],353:[function(require,module,exports){
+=======
+},{"./runner":352,"./schemas":360,"pinkie-promise":376}],352:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict'
 
 var schemas = require('./schemas')
@@ -65932,7 +66339,11 @@ module.exports = function (schema, data, cb) {
   return valid
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./error":351,"./schemas":361,"is-my-json-valid":371}],354:[function(require,module,exports){
+=======
+},{"./error":350,"./schemas":360,"is-my-json-valid":370}],353:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "properties": {
     "beforeRequest": {
@@ -65947,7 +66358,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],355:[function(require,module,exports){
+=======
+},{}],354:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "oneOf": [{
     "type": "object",
@@ -65980,7 +66395,11 @@ module.exports={
   }]
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],356:[function(require,module,exports){
+=======
+},{}],355:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -66009,7 +66428,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],357:[function(require,module,exports){
+=======
+},{}],356:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -66045,7 +66468,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],358:[function(require,module,exports){
+=======
+},{}],357:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -66065,7 +66492,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],359:[function(require,module,exports){
+=======
+},{}],358:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "optional": true,
@@ -66118,7 +66549,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],360:[function(require,module,exports){
+=======
+},{}],359:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -66131,7 +66566,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],361:[function(require,module,exports){
+=======
+},{}],360:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict'
 
 var schemas = {
@@ -66182,7 +66621,11 @@ schemas.har.properties.log = schemas.log
 
 module.exports = schemas
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./cache.json":354,"./cacheEntry.json":355,"./content.json":356,"./cookie.json":357,"./creator.json":358,"./entry.json":359,"./har.json":360,"./log.json":362,"./page.json":363,"./pageTimings.json":364,"./postData.json":365,"./record.json":366,"./request.json":367,"./response.json":368,"./timings.json":369}],362:[function(require,module,exports){
+=======
+},{"./cache.json":353,"./cacheEntry.json":354,"./content.json":355,"./cookie.json":356,"./creator.json":357,"./entry.json":358,"./har.json":359,"./log.json":361,"./page.json":362,"./pageTimings.json":363,"./postData.json":364,"./record.json":365,"./request.json":366,"./response.json":367,"./timings.json":368}],361:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -66218,7 +66661,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],363:[function(require,module,exports){
+=======
+},{}],362:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "optional": true,
@@ -66250,7 +66697,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],364:[function(require,module,exports){
+=======
+},{}],363:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "properties": {
@@ -66268,7 +66719,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],365:[function(require,module,exports){
+=======
+},{}],364:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "optional": true,
@@ -66311,7 +66766,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],366:[function(require,module,exports){
+=======
+},{}],365:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -66331,7 +66790,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],367:[function(require,module,exports){
+=======
+},{}],366:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -66388,7 +66851,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],368:[function(require,module,exports){
+=======
+},{}],367:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -66442,7 +66909,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],369:[function(require,module,exports){
+=======
+},{}],368:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "required": [
     "send",
@@ -66484,7 +66955,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],370:[function(require,module,exports){
+=======
+},{}],369:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 exports['date-time'] = /^\d{4}-(?:0[0-9]{1}|1[0-2]{1})-[0-9]{2}[tT ]\d{2}:\d{2}:\d{2}(\.\d+)?([zZ]|[+-]\d{2}:\d{2})$/
 exports['date'] = /^\d{4}-(?:0[0-9]{1}|1[0-2]{1})-[0-9]{2}$/
 exports['time'] = /^\d{2}:\d{2}:\d{2}$/
@@ -66500,7 +66975,11 @@ exports['style'] = /\s*(.+?):\s*([^;]+);?/g
 exports['phone'] = /^\+(?:[0-9] ?){6,14}[0-9]$/
 exports['utc-millisec'] = /^[0-9]+(\.?[0-9]+)?$/
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],371:[function(require,module,exports){
+=======
+},{}],370:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var genobj = require('generate-object-property')
 var genfun = require('generate-function')
 var jsonpointer = require('jsonpointer')
@@ -67077,7 +67556,11 @@ module.exports.filter = function(schema, opts) {
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./formats":370,"generate-function":372,"generate-object-property":373,"jsonpointer":375,"xtend":376}],372:[function(require,module,exports){
+=======
+},{"./formats":369,"generate-function":371,"generate-object-property":372,"jsonpointer":374,"xtend":375}],371:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var util = require('util')
 
 var INDENT_START = /[\{\[]/
@@ -67140,7 +67623,11 @@ module.exports = function() {
   return line
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"util":280}],373:[function(require,module,exports){
+=======
+},{"util":280}],372:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var isProperty = require('is-property')
 
 var gen = function(obj, prop) {
@@ -67154,13 +67641,21 @@ gen.property = function (prop) {
 
 module.exports = gen
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"is-property":374}],374:[function(require,module,exports){
+=======
+},{"is-property":373}],373:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 "use strict"
 function isProperty(str) {
   return /^[$A-Z\_a-z\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05d0-\u05ea\u05f0-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u08a0\u08a2-\u08ac\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0977\u0979-\u097f\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c33\u0c35-\u0c39\u0c3d\u0c58\u0c59\u0c60\u0c61\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d05-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d60\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e87\u0e88\u0e8a\u0e8d\u0e94-\u0e97\u0e99-\u0e9f\u0ea1-\u0ea3\u0ea5\u0ea7\u0eaa\u0eab\u0ead-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f4\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f0\u1700-\u170c\u170e-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1877\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191c\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19c1-\u19c7\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4b\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1ce9-\u1cec\u1cee-\u1cf1\u1cf5\u1cf6\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126\u2128\u212a-\u212d\u212f-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2c2e\u2c30-\u2c5e\u2c60-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u2e2f\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309d-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312d\u3131-\u318e\u31a0-\u31ba\u31f0-\u31ff\u3400-\u4db5\u4e00-\u9fcc\ua000-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua697\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua78e\ua790-\ua793\ua7a0-\ua7aa\ua7f8-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa80-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uabc0-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc][$A-Z\_a-z\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05d0-\u05ea\u05f0-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u08a0\u08a2-\u08ac\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0977\u0979-\u097f\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c33\u0c35-\u0c39\u0c3d\u0c58\u0c59\u0c60\u0c61\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d05-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d60\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e87\u0e88\u0e8a\u0e8d\u0e94-\u0e97\u0e99-\u0e9f\u0ea1-\u0ea3\u0ea5\u0ea7\u0eaa\u0eab\u0ead-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f4\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f0\u1700-\u170c\u170e-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1877\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191c\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19c1-\u19c7\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4b\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1ce9-\u1cec\u1cee-\u1cf1\u1cf5\u1cf6\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126\u2128\u212a-\u212d\u212f-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2c2e\u2c30-\u2c5e\u2c60-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u2e2f\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309d-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312d\u3131-\u318e\u31a0-\u31ba\u31f0-\u31ff\u3400-\u4db5\u4e00-\u9fcc\ua000-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua697\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua78e\ua790-\ua793\ua7a0-\ua7aa\ua7f8-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa80-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uabc0-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc0-9\u0300-\u036f\u0483-\u0487\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7\u0610-\u061a\u064b-\u0669\u0670\u06d6-\u06dc\u06df-\u06e4\u06e7\u06e8\u06ea-\u06ed\u06f0-\u06f9\u0711\u0730-\u074a\u07a6-\u07b0\u07c0-\u07c9\u07eb-\u07f3\u0816-\u0819\u081b-\u0823\u0825-\u0827\u0829-\u082d\u0859-\u085b\u08e4-\u08fe\u0900-\u0903\u093a-\u093c\u093e-\u094f\u0951-\u0957\u0962\u0963\u0966-\u096f\u0981-\u0983\u09bc\u09be-\u09c4\u09c7\u09c8\u09cb-\u09cd\u09d7\u09e2\u09e3\u09e6-\u09ef\u0a01-\u0a03\u0a3c\u0a3e-\u0a42\u0a47\u0a48\u0a4b-\u0a4d\u0a51\u0a66-\u0a71\u0a75\u0a81-\u0a83\u0abc\u0abe-\u0ac5\u0ac7-\u0ac9\u0acb-\u0acd\u0ae2\u0ae3\u0ae6-\u0aef\u0b01-\u0b03\u0b3c\u0b3e-\u0b44\u0b47\u0b48\u0b4b-\u0b4d\u0b56\u0b57\u0b62\u0b63\u0b66-\u0b6f\u0b82\u0bbe-\u0bc2\u0bc6-\u0bc8\u0bca-\u0bcd\u0bd7\u0be6-\u0bef\u0c01-\u0c03\u0c3e-\u0c44\u0c46-\u0c48\u0c4a-\u0c4d\u0c55\u0c56\u0c62\u0c63\u0c66-\u0c6f\u0c82\u0c83\u0cbc\u0cbe-\u0cc4\u0cc6-\u0cc8\u0cca-\u0ccd\u0cd5\u0cd6\u0ce2\u0ce3\u0ce6-\u0cef\u0d02\u0d03\u0d3e-\u0d44\u0d46-\u0d48\u0d4a-\u0d4d\u0d57\u0d62\u0d63\u0d66-\u0d6f\u0d82\u0d83\u0dca\u0dcf-\u0dd4\u0dd6\u0dd8-\u0ddf\u0df2\u0df3\u0e31\u0e34-\u0e3a\u0e47-\u0e4e\u0e50-\u0e59\u0eb1\u0eb4-\u0eb9\u0ebb\u0ebc\u0ec8-\u0ecd\u0ed0-\u0ed9\u0f18\u0f19\u0f20-\u0f29\u0f35\u0f37\u0f39\u0f3e\u0f3f\u0f71-\u0f84\u0f86\u0f87\u0f8d-\u0f97\u0f99-\u0fbc\u0fc6\u102b-\u103e\u1040-\u1049\u1056-\u1059\u105e-\u1060\u1062-\u1064\u1067-\u106d\u1071-\u1074\u1082-\u108d\u108f-\u109d\u135d-\u135f\u1712-\u1714\u1732-\u1734\u1752\u1753\u1772\u1773\u17b4-\u17d3\u17dd\u17e0-\u17e9\u180b-\u180d\u1810-\u1819\u18a9\u1920-\u192b\u1930-\u193b\u1946-\u194f\u19b0-\u19c0\u19c8\u19c9\u19d0-\u19d9\u1a17-\u1a1b\u1a55-\u1a5e\u1a60-\u1a7c\u1a7f-\u1a89\u1a90-\u1a99\u1b00-\u1b04\u1b34-\u1b44\u1b50-\u1b59\u1b6b-\u1b73\u1b80-\u1b82\u1ba1-\u1bad\u1bb0-\u1bb9\u1be6-\u1bf3\u1c24-\u1c37\u1c40-\u1c49\u1c50-\u1c59\u1cd0-\u1cd2\u1cd4-\u1ce8\u1ced\u1cf2-\u1cf4\u1dc0-\u1de6\u1dfc-\u1dff\u200c\u200d\u203f\u2040\u2054\u20d0-\u20dc\u20e1\u20e5-\u20f0\u2cef-\u2cf1\u2d7f\u2de0-\u2dff\u302a-\u302f\u3099\u309a\ua620-\ua629\ua66f\ua674-\ua67d\ua69f\ua6f0\ua6f1\ua802\ua806\ua80b\ua823-\ua827\ua880\ua881\ua8b4-\ua8c4\ua8d0-\ua8d9\ua8e0-\ua8f1\ua900-\ua909\ua926-\ua92d\ua947-\ua953\ua980-\ua983\ua9b3-\ua9c0\ua9d0-\ua9d9\uaa29-\uaa36\uaa43\uaa4c\uaa4d\uaa50-\uaa59\uaa7b\uaab0\uaab2-\uaab4\uaab7\uaab8\uaabe\uaabf\uaac1\uaaeb-\uaaef\uaaf5\uaaf6\uabe3-\uabea\uabec\uabed\uabf0-\uabf9\ufb1e\ufe00-\ufe0f\ufe20-\ufe26\ufe33\ufe34\ufe4d-\ufe4f\uff10-\uff19\uff3f]*$/.test(str)
 }
 module.exports = isProperty
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],375:[function(require,module,exports){
+=======
+},{}],374:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var untilde = function(str) {
   return str.replace(/~./g, function(m) {
     switch (m) {
@@ -67238,7 +67733,11 @@ var set = function(obj, pointer, value) {
 exports.get = get
 exports.set = set
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],376:[function(require,module,exports){
+=======
+},{}],375:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -67259,7 +67758,11 @@ function extend() {
     return target
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],377:[function(require,module,exports){
+=======
+},{}],376:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (global){
 'use strict';
 
@@ -67267,7 +67770,11 @@ module.exports = global.Promise || require('pinkie');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"pinkie":378}],378:[function(require,module,exports){
+=======
+},{"pinkie":377}],377:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var PENDING = 'pending';
@@ -67545,7 +68052,11 @@ Promise.reject = function (reason) {
 
 module.exports = Promise;
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],379:[function(require,module,exports){
+=======
+},{}],378:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /*
     HTTP Hawk Authentication Scheme
     Copyright (c) 2012-2014, Eran Hammer <eran@hammer.io>
@@ -68184,7 +68695,11 @@ if (typeof module !== 'undefined' && module.exports) {
 /* eslint-enable */
 // $lab:coverage:on$
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],380:[function(require,module,exports){
+=======
+},{}],379:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Copyright 2015 Joyent, Inc.
 
 var parser = require('./parser');
@@ -68213,7 +68728,11 @@ module.exports = {
   verifyHMAC: verify.verifyHMAC
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./parser":381,"./signer":382,"./util":383,"./verify":384}],381:[function(require,module,exports){
+=======
+},{"./parser":380,"./signer":381,"./util":382,"./verify":383}],380:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Copyright 2012 Joyent, Inc.  All rights reserved.
 
 var assert = require('assert-plus');
@@ -68519,7 +69038,11 @@ module.exports = {
 
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"assert-plus":391,"util":280}],382:[function(require,module,exports){
+=======
+},{"assert-plus":390,"util":280}],381:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Copyright 2012 Joyent, Inc.  All rights reserved.
 
 var assert = require('assert-plus');
@@ -68699,7 +69222,11 @@ module.exports = {
 
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"assert-plus":391,"crypto":57,"http":268,"util":280}],383:[function(require,module,exports){
+=======
+},{"assert-plus":390,"crypto":57,"http":268,"util":280}],382:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (Buffer){
 // Copyright 2012 Joyent, Inc.  All rights reserved.
 
@@ -69010,7 +69537,11 @@ module.exports = {
 
 }).call(this,require("buffer").Buffer)
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"asn1":390,"assert-plus":391,"buffer":53,"crypto":57,"ctype":394}],384:[function(require,module,exports){
+=======
+},{"asn1":389,"assert-plus":390,"buffer":53,"crypto":57,"ctype":393}],383:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Copyright 2015 Joyent, Inc.
 
 var assert = require('assert-plus');
@@ -69068,7 +69599,11 @@ module.exports = {
   }
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"assert-plus":391,"crypto":57}],385:[function(require,module,exports){
+=======
+},{"assert-plus":390,"crypto":57}],384:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 
@@ -69083,7 +69618,11 @@ module.exports = {
 
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],386:[function(require,module,exports){
+=======
+},{}],385:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 var errors = require('./errors');
@@ -69112,7 +69651,11 @@ for (var e in errors) {
     module.exports[e] = errors[e];
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./errors":385,"./reader":387,"./types":388,"./writer":389}],387:[function(require,module,exports){
+=======
+},{"./errors":384,"./reader":386,"./types":387,"./writer":388}],386:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (Buffer){
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
@@ -69384,7 +69927,11 @@ module.exports = Reader;
 
 }).call(this,{"isBuffer":require("../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")})
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"./errors":385,"./types":388,"assert":38}],388:[function(require,module,exports){
+=======
+},{"../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"./errors":384,"./types":387,"assert":38}],387:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 
@@ -69422,7 +69969,11 @@ module.exports = {
   Context: 128
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],389:[function(require,module,exports){
+=======
+},{}],388:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (Buffer){
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
@@ -69744,7 +70295,11 @@ module.exports = Writer;
 
 }).call(this,require("buffer").Buffer)
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./errors":385,"./types":388,"assert":38,"buffer":53}],390:[function(require,module,exports){
+=======
+},{"./errors":384,"./types":387,"assert":38,"buffer":53}],389:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 // If you have no idea what ASN.1 or BER is, see this:
@@ -69766,7 +70321,11 @@ module.exports = {
 
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./ber/index":386}],391:[function(require,module,exports){
+=======
+},{"./ber/index":385}],390:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (Buffer,process){
 // Copyright (c) 2012, Mark Cavage. All rights reserved.
 
@@ -70016,7 +70575,11 @@ Object.keys(assert).forEach(function (k) {
 
 }).call(this,{"isBuffer":require("../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")},require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"_process":249,"assert":38,"stream":267,"util":280}],392:[function(require,module,exports){
+=======
+},{"../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"_process":249,"assert":38,"stream":267,"util":280}],391:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /*
  * ctf.js
  *
@@ -70263,7 +70826,11 @@ function ctfParseJson(json, ctype)
 
 exports.ctfParseJson = ctfParseJson;
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"assert":38}],393:[function(require,module,exports){
+=======
+},{"assert":38}],392:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /*
  * rm - Feb 2011
  * ctio.js:
@@ -71750,7 +72317,11 @@ exports.rdouble = rdouble;
 exports.wfloat = wfloat;
 exports.wdouble = wdouble;
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"assert":38}],394:[function(require,module,exports){
+=======
+},{"assert":38}],393:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (Buffer){
 /*
  * rm - Feb 2011
@@ -72699,7 +73270,11 @@ exports.wdouble = mod_ctio.wdouble;
 
 }).call(this,require("buffer").Buffer)
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./ctf.js":392,"./ctio.js":393,"assert":38,"buffer":53}],395:[function(require,module,exports){
+=======
+},{"./ctf.js":391,"./ctio.js":392,"assert":38,"buffer":53}],394:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var stream = require('stream')
 
 
@@ -72728,7 +73303,11 @@ module.exports.isReadable = isReadable
 module.exports.isWritable = isWritable
 module.exports.isDuplex   = isDuplex
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"stream":267}],396:[function(require,module,exports){
+=======
+},{"stream":267}],395:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 exports = module.exports = stringify
 exports.getSerialize = serializer
 
@@ -72757,7 +73336,11 @@ function serializer(replacer, cycleReplacer) {
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],397:[function(require,module,exports){
+=======
+},{}],396:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /*!
  * mime-types
  * Copyright(c) 2014 Jonathan Ong
@@ -72947,7 +73530,11 @@ function populateMaps(extensions, types) {
   })
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"mime-db":399,"path":248}],398:[function(require,module,exports){
+=======
+},{"mime-db":398,"path":248}],397:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "application/1d-interleaved-parityfec": {
     "source": "iana"
@@ -79423,7 +80010,11 @@ module.exports={
   }
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],399:[function(require,module,exports){
+=======
+},{}],398:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /*!
  * mime-db
  * Copyright(c) 2014 Jonathan Ong
@@ -79436,7 +80027,11 @@ module.exports={
 
 module.exports = require('./db.json')
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./db.json":398}],400:[function(require,module,exports){
+=======
+},{"./db.json":397}],399:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 //     uuid.js
 //
 //     Copyright (c) 2010-2012 Robert Kieffer
@@ -79685,7 +80280,11 @@ module.exports = require('./db.json')
   }
 }).call(this);
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],401:[function(require,module,exports){
+=======
+},{}],400:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var crypto = require('crypto')
   , qs = require('querystring')
   ;
@@ -79821,7 +80420,11 @@ exports.plaintext = plaintext
 exports.sign = sign
 exports.rfc3986 = rfc3986
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"crypto":57,"querystring":253}],402:[function(require,module,exports){
+=======
+},{"crypto":57,"querystring":253}],401:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Load modules
 
 var Stringify = require('./stringify');
@@ -79838,7 +80441,11 @@ module.exports = {
     parse: Parse
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./parse":403,"./stringify":404}],403:[function(require,module,exports){
+=======
+},{"./parse":402,"./stringify":403}],402:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Load modules
 
 var Utils = require('./utils');
@@ -80027,7 +80634,11 @@ module.exports = function (str, options) {
     return Utils.compact(obj);
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./utils":405}],404:[function(require,module,exports){
+=======
+},{"./utils":404}],403:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Load modules
 
 var Utils = require('./utils');
@@ -80183,7 +80794,11 @@ module.exports = function (obj, options) {
     return keys.join(delimiter);
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./utils":405}],405:[function(require,module,exports){
+=======
+},{"./utils":404}],404:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // Load modules
 
 
@@ -80375,7 +80990,11 @@ exports.isBuffer = function (obj) {
               obj.constructor.isBuffer(obj));
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],406:[function(require,module,exports){
+=======
+},{}],405:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (Buffer){
 var util = require('util')
 var Stream = require('stream')
@@ -80482,7 +81101,11 @@ function alignedWrite(buffer) {
 
 }).call(this,require("buffer").Buffer)
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"buffer":53,"stream":267,"string_decoder":277,"util":280}],407:[function(require,module,exports){
+=======
+},{"buffer":53,"stream":267,"string_decoder":277,"util":280}],406:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -81826,7 +82449,11 @@ module.exports = {
   canonicalDomain: canonicalDomain
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"../package.json":413,"./memstore":408,"./pathMatch":409,"./permuteDomain":410,"./pubsuffix":411,"./store":412,"net":37,"punycode":250,"url":278}],408:[function(require,module,exports){
+=======
+},{"../package.json":412,"./memstore":407,"./pathMatch":408,"./permuteDomain":409,"./pubsuffix":410,"./store":411,"net":37,"punycode":250,"url":278}],407:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -81998,7 +82625,11 @@ MemoryCookieStore.prototype.getAllCookies = function(cb) {
   cb(null, cookies);
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./pathMatch":409,"./permuteDomain":410,"./store":412,"util":280}],409:[function(require,module,exports){
+=======
+},{"./pathMatch":408,"./permuteDomain":409,"./store":411,"util":280}],408:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -82071,7 +82702,11 @@ function pathMatch (reqPath, cookiePath) {
 
 exports.pathMatch = pathMatch;
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],410:[function(require,module,exports){
+=======
+},{}],409:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -82129,7 +82764,11 @@ function permuteDomain (domain) {
 
 exports.permuteDomain = permuteDomain;
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./pubsuffix":411}],411:[function(require,module,exports){
+=======
+},{"./pubsuffix":410}],410:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /****************************************************
  * AUTOMATICALLY GENERATED by generate-pubsuffix.js *
  *                  DO NOT EDIT!                    *
@@ -82229,7 +82868,11 @@ var index = module.exports.index = Object.freeze(
 
 // END of automatically generated file
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"punycode":250}],412:[function(require,module,exports){
+=======
+},{"punycode":250}],411:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -82302,7 +82945,11 @@ Store.prototype.getAllCookies = function(cb) {
   throw new Error('getAllCookies is not implemented (therefore jar cannot be serialized)');
 };
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],413:[function(require,module,exports){
+=======
+},{}],412:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 module.exports={
   "author": {
     "name": "Jeremy Stashewsky",
@@ -82368,7 +83015,7 @@ module.exports={
   "gitHead": "fb1456177c9b51445afa34656eb314c70c2adcd2",
   "_id": "tough-cookie@2.2.0",
   "_shasum": "d4ce661075e5fddb7f20341d3f9931a6fbbadde0",
-  "_from": "tough-cookie@~2.2.0",
+  "_from": "tough-cookie@>=2.2.0 <2.3.0",
   "_npmVersion": "2.11.2",
   "_nodeVersion": "0.12.5",
   "_npmUser": {
@@ -82393,7 +83040,11 @@ module.exports={
   "_resolved": "https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.2.0.tgz"
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],414:[function(require,module,exports){
+=======
+},{}],413:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process,Buffer){
 'use strict'
 
@@ -82639,7 +83290,11 @@ exports.debug = debug // for test
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"_process":249,"assert":38,"buffer":53,"events":243,"http":268,"https":244,"net":37,"tls":37,"util":280}],415:[function(require,module,exports){
+=======
+},{"_process":249,"assert":38,"buffer":53,"events":243,"http":268,"https":244,"net":37,"tls":37,"util":280}],414:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process,Buffer){
 'use strict'
 
@@ -84082,7 +84737,11 @@ module.exports = Request
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./lib/auth":323,"./lib/cookies":324,"./lib/getProxyFromURI":325,"./lib/har":326,"./lib/helpers":327,"./lib/multipart":328,"./lib/oauth":329,"./lib/querystring":330,"./lib/redirect":331,"./lib/tunnel":332,"_process":249,"aws-sign2":333,"bl":334,"buffer":53,"caseless":345,"forever-agent":349,"form-data":350,"hawk":379,"http":268,"http-signature":380,"https":244,"mime-types":397,"stream":267,"stringstream":406,"url":278,"util":280,"zlib":52}],416:[function(require,module,exports){
+=======
+},{"./lib/auth":322,"./lib/cookies":323,"./lib/getProxyFromURI":324,"./lib/har":325,"./lib/helpers":326,"./lib/multipart":327,"./lib/oauth":328,"./lib/querystring":329,"./lib/redirect":330,"./lib/tunnel":331,"_process":249,"aws-sign2":332,"bl":333,"buffer":53,"caseless":344,"forever-agent":348,"form-data":349,"hawk":378,"http":268,"http-signature":379,"https":244,"mime-types":396,"stream":267,"stringstream":405,"url":278,"util":280,"zlib":52}],415:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var request = require("request");
 
 var apiUrl = "https://piazza.com/logic/api";
@@ -84113,7 +84772,11 @@ var callPetty = function(method, params) {
 }
 
 module.exports = callPetty;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"request":322}],417:[function(require,module,exports){
+=======
+},{"request":321}],416:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 var User = require("./models/User");
 var callPetty = require("./petty");
 
@@ -84135,8 +84798,12 @@ module.exports = {
     return loginPromise;
   }
 };
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./models/User":320,"./petty":416}],418:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./models/User":319,"./petty":415}],417:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -84231,11 +84898,15 @@ var Alert = _react2['default'].createClass({
 
 exports['default'] = Alert;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./BootstrapMixin":54,"babel-runtime/helpers/extends":5,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227}],54:[function(require,module,exports){
 =======
 },{"./BootstrapMixin":419,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],419:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./BootstrapMixin":418,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],418:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -84306,11 +84977,15 @@ var BootstrapMixin = {
 
 exports['default'] = BootstrapMixin;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./styleMaps":63,"babel-runtime/helpers/interop-require-default":7,"react":227,"react-prop-types/lib/keyOf":68}],55:[function(require,module,exports){
 =======
 },{"./styleMaps":435,"babel-runtime/helpers/interop-require-default":9,"react":609,"react-prop-types/lib/keyOf":450}],420:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./styleMaps":434,"babel-runtime/helpers/interop-require-default":9,"react":607,"react-prop-types/lib/keyOf":449}],419:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -84436,11 +85111,15 @@ Button.types = types;
 
 exports['default'] = Button;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./BootstrapMixin":54,"babel-runtime/helpers/extends":5,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227,"react-prop-types/lib/elementType":67}],56:[function(require,module,exports){
 =======
 },{"./BootstrapMixin":419,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609,"react-prop-types/lib/elementType":449}],421:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./BootstrapMixin":418,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607,"react-prop-types/lib/elementType":448}],420:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -84530,10 +85209,14 @@ ButtonInput.propTypes = {
 
 exports['default'] = ButtonInput;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Button":55,"./FormGroup":59,"./InputBase":62,"./utils/childrenValueInputValidation":64,"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/extends":5,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"babel-runtime/helpers/object-without-properties":9,"react":227}],57:[function(require,module,exports){
 =======
 },{"./Button":420,"./FormGroup":425,"./InputBase":428,"./utils/childrenValueInputValidation":437,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"react":609}],422:[function(require,module,exports){
+=======
+},{"./Button":419,"./FormGroup":424,"./InputBase":427,"./utils/childrenValueInputValidation":436,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"react":607}],421:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -84653,8 +85336,12 @@ Fade.defaultProps = {
 
 exports['default'] = Fade;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":609,"react-overlays/lib/Transition":442,"react-prop-types/lib/deprecated":448}],423:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":607,"react-overlays/lib/Transition":441,"react-prop-types/lib/deprecated":447}],422:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -84718,11 +85405,15 @@ Static.propTypes = {
 
 exports['default'] = Static;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"../InputBase":62,"../utils/childrenValueInputValidation":64,"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/extends":5,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227}],58:[function(require,module,exports){
 =======
 },{"../InputBase":428,"../utils/childrenValueInputValidation":437,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],424:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"../InputBase":427,"../utils/childrenValueInputValidation":436,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],423:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -84734,11 +85425,15 @@ var _Static2 = require('./Static');
 var _Static3 = _interopRequireDefault(_Static2);
 
 exports.Static = _Static3['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Static":57,"babel-runtime/helpers/interop-require-default":7}],59:[function(require,module,exports){
 =======
 },{"./Static":423,"babel-runtime/helpers/interop-require-default":9}],425:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Static":422,"babel-runtime/helpers/interop-require-default":9}],424:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -84808,11 +85503,15 @@ FormGroup.propTypes = {
 
 exports['default'] = FormGroup;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227}],60:[function(require,module,exports){
 =======
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],426:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],425:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -84871,11 +85570,15 @@ var Glyphicon = _react2['default'].createClass({
 
 exports['default'] = Glyphicon;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"babel-runtime/helpers/extends":5,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227}],61:[function(require,module,exports){
 =======
 },{"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],427:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],426:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -84931,11 +85634,15 @@ Input.propTypes = {
 
 exports['default'] = Input;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./FormControls":58,"./InputBase":62,"./utils/deprecationWarning":65,"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"babel-runtime/helpers/interop-require-wildcard":8,"react":227}],62:[function(require,module,exports){
 =======
 },{"./FormControls":424,"./InputBase":428,"./utils/deprecationWarning":439,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/interop-require-wildcard":10,"react":609}],428:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./FormControls":423,"./InputBase":427,"./utils/deprecationWarning":438,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/interop-require-wildcard":10,"react":607}],427:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -85198,10 +85905,14 @@ InputBase.defaultProps = {
 
 exports['default'] = InputBase;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./FormGroup":59,"./Glyphicon":60,"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/extends":5,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227}],63:[function(require,module,exports){
 =======
 },{"./FormGroup":425,"./Glyphicon":426,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],429:[function(require,module,exports){
+=======
+},{"./FormGroup":424,"./Glyphicon":425,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],428:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /* eslint-disable react/prop-types */
 
 >>>>>>> master
@@ -85419,7 +86130,11 @@ Modal.BACKDROP_TRANSITION_DURATION = 150;
 
 exports['default'] = Modal;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./Fade":422,"./ModalBody":430,"./ModalDialog":431,"./ModalFooter":432,"./ModalHeader":433,"./ModalTitle":434,"./utils/EventListener":436,"./utils/createChainedFunction":438,"./utils/domUtils":440,"babel-runtime/core-js/object/is-frozen":3,"babel-runtime/core-js/object/keys":4,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"classnames":284,"dom-helpers/activeElement":285,"dom-helpers/query/contains":289,"dom-helpers/util/inDOM":292,"dom-helpers/util/scrollbarSize":293,"react":609,"react-dom":453,"react-overlays/lib/Portal":441,"react-prop-types/lib/elementType":449}],430:[function(require,module,exports){
+=======
+},{"./Fade":421,"./ModalBody":429,"./ModalDialog":430,"./ModalFooter":431,"./ModalHeader":432,"./ModalTitle":433,"./utils/EventListener":435,"./utils/createChainedFunction":437,"./utils/domUtils":439,"babel-runtime/core-js/object/is-frozen":3,"babel-runtime/core-js/object/keys":4,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"classnames":284,"dom-helpers/activeElement":285,"dom-helpers/query/contains":289,"dom-helpers/util/inDOM":292,"dom-helpers/util/scrollbarSize":293,"react":607,"react-dom":452,"react-overlays/lib/Portal":440,"react-prop-types/lib/elementType":448}],429:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -85474,7 +86189,11 @@ ModalBody.defaultProps = {
 
 exports['default'] = ModalBody;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],431:[function(require,module,exports){
+=======
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],430:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /* eslint-disable react/prop-types */
 'use strict';
 
@@ -85556,7 +86275,11 @@ var ModalDialog = _react2['default'].createClass({
 
 exports['default'] = ModalDialog;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./BootstrapMixin":419,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],432:[function(require,module,exports){
+=======
+},{"./BootstrapMixin":418,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],431:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -85611,7 +86334,11 @@ ModalFooter.defaultProps = {
 
 exports['default'] = ModalFooter;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],433:[function(require,module,exports){
+=======
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],432:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -85701,7 +86428,11 @@ ModalHeader.defaultProps = {
 
 exports['default'] = ModalHeader;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],434:[function(require,module,exports){
+=======
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],433:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -85756,7 +86487,11 @@ ModalTitle.defaultProps = {
 
 exports['default'] = ModalTitle;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],435:[function(require,module,exports){
+=======
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],434:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -85802,7 +86537,11 @@ var styleMaps = {
 
 exports['default'] = styleMaps;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],436:[function(require,module,exports){
+=======
+},{}],435:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2014 Facebook, Inc.
  *
@@ -85861,7 +86600,11 @@ var EventListener = {
 
 exports['default'] = EventListener;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],437:[function(require,module,exports){
+=======
+},{}],436:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -85888,7 +86631,11 @@ function valueValidation(props, propName, componentName) {
 }
 
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"babel-runtime/helpers/interop-require-default":9,"react":609,"react-prop-types/lib/singlePropFrom":451}],438:[function(require,module,exports){
+=======
+},{"babel-runtime/helpers/interop-require-default":9,"react":607,"react-prop-types/lib/singlePropFrom":450}],437:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Safe chained function
  *
@@ -85930,7 +86677,11 @@ function createChainedFunction() {
 
 exports['default'] = createChainedFunction;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{}],439:[function(require,module,exports){
+=======
+},{}],438:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86003,10 +86754,14 @@ deprecationWarning.wrapper = function (Component) {
 
 exports['default'] = deprecationWarning;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"warning":70}],66:[function(require,module,exports){
 =======
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"warning":452}],440:[function(require,module,exports){
+=======
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"warning":451}],439:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -86074,7 +86829,11 @@ exports['default'] = {
   getSize: getSize
 };
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"babel-runtime/helpers/interop-require-default":9,"dom-helpers/ownerDocument":287,"dom-helpers/ownerWindow":288,"react-dom":453}],441:[function(require,module,exports){
+=======
+},{"babel-runtime/helpers/interop-require-default":9,"dom-helpers/ownerDocument":287,"dom-helpers/ownerWindow":288,"react-dom":452}],440:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -86198,7 +86957,11 @@ var Portal = _react2['default'].createClass({
 
 exports['default'] = Portal;
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"./utils/getContainer":443,"./utils/ownerDocument":444,"react":609,"react-dom":453,"react-prop-types/lib/mountable":446}],442:[function(require,module,exports){
+=======
+},{"./utils/getContainer":442,"./utils/ownerDocument":443,"react":607,"react-dom":452,"react-prop-types/lib/mountable":445}],441:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -86536,7 +87299,11 @@ Transition.defaultProps = {
 };
 
 exports['default'] = Transition;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"classnames":284,"dom-helpers/events/on":286,"dom-helpers/transition/properties":290,"react":609,"react-dom":453}],443:[function(require,module,exports){
+=======
+},{"classnames":284,"dom-helpers/events/on":286,"dom-helpers/transition/properties":290,"react":607,"react-dom":452}],442:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -86554,7 +87321,11 @@ function getContainer(container, defaultContainer) {
 }
 
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"react-dom":453}],444:[function(require,module,exports){
+=======
+},{"react-dom":452}],443:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -86574,8 +87345,12 @@ exports['default'] = function (componentOrElement) {
 };
 
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"dom-helpers/ownerDocument":287,"react-dom":453}],445:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"dom-helpers/ownerDocument":287,"react-dom":452}],444:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -86610,10 +87385,14 @@ function createChainableTypeChecker(validate) {
 
   return chainedCheckType;
 }
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],67:[function(require,module,exports){
 =======
 },{}],446:[function(require,module,exports){
+=======
+},{}],445:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -86641,9 +87420,9 @@ function validate(props, propName, componentName) {
 
 exports['default'] = _common.createChainableTypeChecker(validate);
 module.exports = exports['default'];
-},{"./common":445}],447:[function(require,module,exports){
-arguments[4][445][0].apply(exports,arguments)
-},{"dup":445}],448:[function(require,module,exports){
+},{"./common":444}],446:[function(require,module,exports){
+arguments[4][444][0].apply(exports,arguments)
+},{"dup":444}],447:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -86666,8 +87445,12 @@ function deprecated(propType, explanation) {
 }
 
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 },{"warning":452}],449:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"warning":451}],448:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -86709,11 +87492,15 @@ function validate(props, propName, componentName) {
 
 exports['default'] = _common.createChainableTypeChecker(validate);
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./common":66,"react":227}],68:[function(require,module,exports){
 =======
 },{"./common":447,"react":609}],450:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./common":446,"react":607}],449:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -86742,11 +87529,15 @@ function keyOf(obj) {
 }
 
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./common":66}],69:[function(require,module,exports){
 =======
 },{"./common":447}],451:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./common":446}],450:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Checks if only one of the listed properties is in use. An error is given
  * if multiple have a value
@@ -86785,11 +87576,15 @@ function createSinglePropFromChecker() {
 }
 
 module.exports = exports['default'];
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],70:[function(require,module,exports){
 =======
 },{}],452:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],451:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -86854,20 +87649,28 @@ module.exports = warning;
 
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30}],71:[function(require,module,exports){
 =======
 },{"_process":249}],453:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249}],452:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 module.exports = require('react/lib/ReactDOM');
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"react/lib/ReactDOM":106}],72:[function(require,module,exports){
 =======
 },{"react/lib/ReactDOM":488}],454:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"react/lib/ReactDOM":487}],453:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -86904,11 +87707,15 @@ var AutoFocusUtils = {
 };
 
 module.exports = AutoFocusUtils;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactMount":136,"./findDOMNode":179,"fbjs/lib/focusNode":209}],73:[function(require,module,exports){
 =======
 },{"./ReactMount":518,"./findDOMNode":561,"fbjs/lib/focusNode":591}],455:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactMount":517,"./findDOMNode":559,"fbjs/lib/focusNode":589}],454:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015 Facebook, Inc.
  * All rights reserved.
@@ -87314,11 +88121,15 @@ var BeforeInputEventPlugin = {
 };
 
 module.exports = BeforeInputEventPlugin;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./EventConstants":85,"./EventPropagators":89,"./FallbackCompositionState":90,"./SyntheticCompositionEvent":161,"./SyntheticInputEvent":165,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/keyOf":219}],74:[function(require,module,exports){
 =======
 },{"./EventConstants":467,"./EventPropagators":471,"./FallbackCompositionState":472,"./SyntheticCompositionEvent":543,"./SyntheticInputEvent":547,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/keyOf":601}],456:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./EventConstants":466,"./EventPropagators":470,"./FallbackCompositionState":471,"./SyntheticCompositionEvent":542,"./SyntheticInputEvent":546,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/keyOf":599}],455:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -87458,11 +88269,15 @@ var CSSProperty = {
 };
 
 module.exports = CSSProperty;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],75:[function(require,module,exports){
 =======
 },{}],457:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],456:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -87641,11 +88456,15 @@ ReactPerf.measureMethods(CSSPropertyOperations, 'CSSPropertyOperations', {
 module.exports = CSSPropertyOperations;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./CSSProperty":74,"./ReactPerf":142,"./dangerousStyleValue":176,"_process":30,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/camelizeStyleName":203,"fbjs/lib/hyphenateStyleName":214,"fbjs/lib/memoizeStringOnly":221,"fbjs/lib/warning":226}],76:[function(require,module,exports){
 =======
 },{"./CSSProperty":456,"./ReactPerf":524,"./dangerousStyleValue":558,"_process":249,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/camelizeStyleName":585,"fbjs/lib/hyphenateStyleName":596,"fbjs/lib/memoizeStringOnly":603,"fbjs/lib/warning":608}],458:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./CSSProperty":455,"./ReactPerf":523,"./dangerousStyleValue":556,"_process":249,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/camelizeStyleName":583,"fbjs/lib/hyphenateStyleName":594,"fbjs/lib/memoizeStringOnly":601,"fbjs/lib/warning":606}],457:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -87742,11 +88561,15 @@ PooledClass.addPoolingTo(CallbackQueue);
 module.exports = CallbackQueue;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./PooledClass":94,"_process":30,"fbjs/lib/invariant":215}],77:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./PooledClass":476,"_process":249,"fbjs/lib/invariant":597}],459:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./PooledClass":475,"_process":249,"fbjs/lib/invariant":595}],458:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -88068,11 +88891,15 @@ var ChangeEventPlugin = {
 };
 
 module.exports = ChangeEventPlugin;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./EventConstants":85,"./EventPluginHub":86,"./EventPropagators":89,"./ReactUpdates":154,"./SyntheticEvent":163,"./getEventTarget":185,"./isEventSupported":190,"./isTextInputElement":191,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/keyOf":219}],78:[function(require,module,exports){
 =======
 },{"./EventConstants":467,"./EventPluginHub":468,"./EventPropagators":471,"./ReactUpdates":536,"./SyntheticEvent":545,"./getEventTarget":567,"./isEventSupported":572,"./isTextInputElement":573,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/keyOf":601}],460:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./EventConstants":466,"./EventPluginHub":467,"./EventPropagators":470,"./ReactUpdates":535,"./SyntheticEvent":544,"./getEventTarget":565,"./isEventSupported":570,"./isTextInputElement":571,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/keyOf":599}],459:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -88096,11 +88923,15 @@ var ClientReactRootIndex = {
 };
 
 module.exports = ClientReactRootIndex;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],79:[function(require,module,exports){
 =======
 },{}],461:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],460:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -88233,11 +89064,15 @@ ReactPerf.measureMethods(DOMChildrenOperations, 'DOMChildrenOperations', {
 module.exports = DOMChildrenOperations;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Danger":82,"./ReactMultiChildUpdateTypes":138,"./ReactPerf":142,"./setInnerHTML":195,"./setTextContent":196,"_process":30,"fbjs/lib/invariant":215}],80:[function(require,module,exports){
 =======
 },{"./Danger":464,"./ReactMultiChildUpdateTypes":520,"./ReactPerf":524,"./setInnerHTML":577,"./setTextContent":578,"_process":249,"fbjs/lib/invariant":597}],462:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Danger":463,"./ReactMultiChildUpdateTypes":519,"./ReactPerf":523,"./setInnerHTML":575,"./setTextContent":576,"_process":249,"fbjs/lib/invariant":595}],461:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -88475,11 +89310,15 @@ var DOMProperty = {
 module.exports = DOMProperty;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30,"fbjs/lib/invariant":215}],81:[function(require,module,exports){
 =======
 },{"_process":249,"fbjs/lib/invariant":597}],463:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249,"fbjs/lib/invariant":595}],462:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -88708,11 +89547,15 @@ ReactPerf.measureMethods(DOMPropertyOperations, 'DOMPropertyOperations', {
 module.exports = DOMPropertyOperations;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./DOMProperty":80,"./ReactPerf":142,"./quoteAttributeValueForBrowser":193,"_process":30,"fbjs/lib/warning":226}],82:[function(require,module,exports){
 =======
 },{"./DOMProperty":462,"./ReactPerf":524,"./quoteAttributeValueForBrowser":575,"_process":249,"fbjs/lib/warning":608}],464:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./DOMProperty":461,"./ReactPerf":523,"./quoteAttributeValueForBrowser":573,"_process":249,"fbjs/lib/warning":606}],463:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -88861,11 +89704,15 @@ var Danger = {
 module.exports = Danger;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/createNodesFromMarkup":206,"fbjs/lib/emptyFunction":207,"fbjs/lib/getMarkupWrap":211,"fbjs/lib/invariant":215}],83:[function(require,module,exports){
 =======
 },{"_process":249,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/createNodesFromMarkup":588,"fbjs/lib/emptyFunction":589,"fbjs/lib/getMarkupWrap":593,"fbjs/lib/invariant":597}],465:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/createNodesFromMarkup":586,"fbjs/lib/emptyFunction":587,"fbjs/lib/getMarkupWrap":591,"fbjs/lib/invariant":595}],464:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -88893,11 +89740,15 @@ var keyOf = require('fbjs/lib/keyOf');
 var DefaultEventPluginOrder = [keyOf({ ResponderEventPlugin: null }), keyOf({ SimpleEventPlugin: null }), keyOf({ TapEventPlugin: null }), keyOf({ EnterLeaveEventPlugin: null }), keyOf({ ChangeEventPlugin: null }), keyOf({ SelectEventPlugin: null }), keyOf({ BeforeInputEventPlugin: null })];
 
 module.exports = DefaultEventPluginOrder;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"fbjs/lib/keyOf":219}],84:[function(require,module,exports){
 =======
 },{"fbjs/lib/keyOf":601}],466:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"fbjs/lib/keyOf":599}],465:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -89022,11 +89873,15 @@ var EnterLeaveEventPlugin = {
 };
 
 module.exports = EnterLeaveEventPlugin;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./EventConstants":85,"./EventPropagators":89,"./ReactMount":136,"./SyntheticMouseEvent":167,"fbjs/lib/keyOf":219}],85:[function(require,module,exports){
 =======
 },{"./EventConstants":467,"./EventPropagators":471,"./ReactMount":518,"./SyntheticMouseEvent":549,"fbjs/lib/keyOf":601}],467:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./EventConstants":466,"./EventPropagators":470,"./ReactMount":517,"./SyntheticMouseEvent":548,"fbjs/lib/keyOf":599}],466:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -89119,11 +89974,15 @@ var EventConstants = {
 };
 
 module.exports = EventConstants;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"fbjs/lib/keyMirror":218}],86:[function(require,module,exports){
 =======
 },{"fbjs/lib/keyMirror":600}],468:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"fbjs/lib/keyMirror":598}],467:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -89406,11 +90265,15 @@ var EventPluginHub = {
 module.exports = EventPluginHub;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./EventPluginRegistry":87,"./EventPluginUtils":88,"./ReactErrorUtils":127,"./accumulateInto":173,"./forEachAccumulated":181,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],87:[function(require,module,exports){
 =======
 },{"./EventPluginRegistry":469,"./EventPluginUtils":470,"./ReactErrorUtils":509,"./accumulateInto":555,"./forEachAccumulated":563,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],469:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./EventPluginRegistry":468,"./EventPluginUtils":469,"./ReactErrorUtils":508,"./accumulateInto":554,"./forEachAccumulated":561,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],468:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -89634,11 +90497,15 @@ var EventPluginRegistry = {
 module.exports = EventPluginRegistry;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30,"fbjs/lib/invariant":215}],88:[function(require,module,exports){
 =======
 },{"_process":249,"fbjs/lib/invariant":597}],470:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249,"fbjs/lib/invariant":595}],469:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -89844,11 +90711,15 @@ var EventPluginUtils = {
 module.exports = EventPluginUtils;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./EventConstants":85,"./ReactErrorUtils":127,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],89:[function(require,module,exports){
 =======
 },{"./EventConstants":467,"./ReactErrorUtils":509,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],471:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./EventConstants":466,"./ReactErrorUtils":508,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],470:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -89987,11 +90858,15 @@ var EventPropagators = {
 module.exports = EventPropagators;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./EventConstants":85,"./EventPluginHub":86,"./accumulateInto":173,"./forEachAccumulated":181,"_process":30,"fbjs/lib/warning":226}],90:[function(require,module,exports){
 =======
 },{"./EventConstants":467,"./EventPluginHub":468,"./accumulateInto":555,"./forEachAccumulated":563,"_process":249,"fbjs/lib/warning":608}],472:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./EventConstants":466,"./EventPluginHub":467,"./accumulateInto":554,"./forEachAccumulated":561,"_process":249,"fbjs/lib/warning":606}],471:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -90087,11 +90962,15 @@ assign(FallbackCompositionState.prototype, {
 PooledClass.addPoolingTo(FallbackCompositionState);
 
 module.exports = FallbackCompositionState;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./PooledClass":94,"./getTextContentAccessor":188}],91:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./PooledClass":476,"./getTextContentAccessor":570}],473:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./PooledClass":475,"./getTextContentAccessor":568}],472:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -90322,11 +91201,15 @@ var HTMLDOMPropertyConfig = {
 };
 
 module.exports = HTMLDOMPropertyConfig;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./DOMProperty":80,"fbjs/lib/ExecutionEnvironment":201}],92:[function(require,module,exports){
 =======
 },{"./DOMProperty":462,"fbjs/lib/ExecutionEnvironment":583}],474:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./DOMProperty":461,"fbjs/lib/ExecutionEnvironment":581}],473:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -90464,11 +91347,15 @@ var LinkedValueUtils = {
 module.exports = LinkedValueUtils;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactPropTypeLocations":144,"./ReactPropTypes":145,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],93:[function(require,module,exports){
 =======
 },{"./ReactPropTypeLocations":526,"./ReactPropTypes":527,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],475:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactPropTypeLocations":525,"./ReactPropTypes":526,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],474:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -90516,11 +91403,15 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],94:[function(require,module,exports){
 =======
 },{}],476:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],475:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -90643,11 +91534,15 @@ var PooledClass = {
 module.exports = PooledClass;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30,"fbjs/lib/invariant":215}],95:[function(require,module,exports){
 =======
 },{"_process":249,"fbjs/lib/invariant":597}],477:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249,"fbjs/lib/invariant":595}],476:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -90687,11 +91582,15 @@ assign(React, {
 React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
 
 module.exports = React;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./ReactDOM":106,"./ReactDOMServer":116,"./ReactIsomorphic":134,"./deprecated":177}],96:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./ReactDOM":488,"./ReactDOMServer":498,"./ReactIsomorphic":516,"./deprecated":559}],478:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./ReactDOM":487,"./ReactDOMServer":497,"./ReactIsomorphic":515,"./deprecated":557}],477:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -90731,11 +91630,15 @@ var ReactBrowserComponentMixin = {
 module.exports = ReactBrowserComponentMixin;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactInstanceMap":133,"./findDOMNode":179,"_process":30,"fbjs/lib/warning":226}],97:[function(require,module,exports){
 =======
 },{"./ReactInstanceMap":515,"./findDOMNode":561,"_process":249,"fbjs/lib/warning":608}],479:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactInstanceMap":514,"./findDOMNode":559,"_process":249,"fbjs/lib/warning":606}],478:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -91060,11 +91963,15 @@ ReactPerf.measureMethods(ReactBrowserEventEmitter, 'ReactBrowserEventEmitter', {
 });
 
 module.exports = ReactBrowserEventEmitter;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./EventConstants":85,"./EventPluginHub":86,"./EventPluginRegistry":87,"./Object.assign":93,"./ReactEventEmitterMixin":128,"./ReactPerf":142,"./ViewportMetrics":172,"./isEventSupported":190}],98:[function(require,module,exports){
 =======
 },{"./EventConstants":467,"./EventPluginHub":468,"./EventPluginRegistry":469,"./Object.assign":475,"./ReactEventEmitterMixin":510,"./ReactPerf":524,"./ViewportMetrics":554,"./isEventSupported":572}],480:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./EventConstants":466,"./EventPluginHub":467,"./EventPluginRegistry":468,"./Object.assign":474,"./ReactEventEmitterMixin":509,"./ReactPerf":523,"./ViewportMetrics":553,"./isEventSupported":570}],479:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -91190,11 +92097,15 @@ var ReactChildReconciler = {
 module.exports = ReactChildReconciler;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactReconciler":147,"./instantiateReactComponent":189,"./shouldUpdateReactComponent":197,"./traverseAllChildren":198,"_process":30,"fbjs/lib/warning":226}],99:[function(require,module,exports){
 =======
 },{"./ReactReconciler":529,"./instantiateReactComponent":571,"./shouldUpdateReactComponent":579,"./traverseAllChildren":580,"_process":249,"fbjs/lib/warning":608}],481:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactReconciler":528,"./instantiateReactComponent":569,"./shouldUpdateReactComponent":577,"./traverseAllChildren":578,"_process":249,"fbjs/lib/warning":606}],480:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -91377,11 +92288,15 @@ var ReactChildren = {
 };
 
 module.exports = ReactChildren;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./PooledClass":94,"./ReactElement":123,"./traverseAllChildren":198,"fbjs/lib/emptyFunction":207}],100:[function(require,module,exports){
 =======
 },{"./PooledClass":476,"./ReactElement":505,"./traverseAllChildren":580,"fbjs/lib/emptyFunction":589}],482:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./PooledClass":475,"./ReactElement":504,"./traverseAllChildren":578,"fbjs/lib/emptyFunction":587}],481:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -92156,11 +93071,15 @@ var ReactClass = {
 module.exports = ReactClass;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./ReactComponent":101,"./ReactElement":123,"./ReactNoopUpdateQueue":140,"./ReactPropTypeLocationNames":143,"./ReactPropTypeLocations":144,"_process":30,"fbjs/lib/emptyObject":208,"fbjs/lib/invariant":215,"fbjs/lib/keyMirror":218,"fbjs/lib/keyOf":219,"fbjs/lib/warning":226}],101:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./ReactComponent":483,"./ReactElement":505,"./ReactNoopUpdateQueue":522,"./ReactPropTypeLocationNames":525,"./ReactPropTypeLocations":526,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/keyMirror":600,"fbjs/lib/keyOf":601,"fbjs/lib/warning":608}],483:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./ReactComponent":482,"./ReactElement":504,"./ReactNoopUpdateQueue":521,"./ReactPropTypeLocationNames":524,"./ReactPropTypeLocations":525,"_process":249,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/keyMirror":598,"fbjs/lib/keyOf":599,"fbjs/lib/warning":606}],482:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -92286,11 +93205,15 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = ReactComponent;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactNoopUpdateQueue":140,"./canDefineProperty":175,"_process":30,"fbjs/lib/emptyObject":208,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],102:[function(require,module,exports){
 =======
 },{"./ReactNoopUpdateQueue":522,"./canDefineProperty":557,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],484:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactNoopUpdateQueue":521,"_process":249,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],483:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -92332,11 +93255,15 @@ var ReactComponentBrowserEnvironment = {
 };
 
 module.exports = ReactComponentBrowserEnvironment;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactDOMIDOperations":111,"./ReactMount":136}],103:[function(require,module,exports){
 =======
 },{"./ReactDOMIDOperations":493,"./ReactMount":518}],485:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactDOMIDOperations":492,"./ReactMount":517}],484:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -92391,11 +93318,15 @@ var ReactComponentEnvironment = {
 module.exports = ReactComponentEnvironment;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30,"fbjs/lib/invariant":215}],104:[function(require,module,exports){
 =======
 },{"_process":249,"fbjs/lib/invariant":597}],486:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249,"fbjs/lib/invariant":595}],485:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -93093,11 +94024,15 @@ var ReactCompositeComponent = {
 module.exports = ReactCompositeComponent;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./ReactComponentEnvironment":103,"./ReactCurrentOwner":105,"./ReactElement":123,"./ReactInstanceMap":133,"./ReactPerf":142,"./ReactPropTypeLocationNames":143,"./ReactPropTypeLocations":144,"./ReactReconciler":147,"./ReactUpdateQueue":153,"./shouldUpdateReactComponent":197,"_process":30,"fbjs/lib/emptyObject":208,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],105:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./ReactComponentEnvironment":485,"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactInstanceMap":515,"./ReactPerf":524,"./ReactPropTypeLocationNames":525,"./ReactPropTypeLocations":526,"./ReactReconciler":529,"./ReactUpdateQueue":535,"./shouldUpdateReactComponent":579,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],487:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./ReactComponentEnvironment":484,"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactInstanceMap":514,"./ReactPerf":523,"./ReactPropTypeLocationNames":524,"./ReactPropTypeLocations":525,"./ReactReconciler":528,"./ReactUpdateQueue":534,"./shouldUpdateReactComponent":577,"_process":249,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],486:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -93128,11 +94063,15 @@ var ReactCurrentOwner = {
 };
 
 module.exports = ReactCurrentOwner;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],106:[function(require,module,exports){
 =======
 },{}],488:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],487:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -93228,11 +94167,15 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = React;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactCurrentOwner":105,"./ReactDOMTextComponent":117,"./ReactDefaultInjection":120,"./ReactInstanceHandles":132,"./ReactMount":136,"./ReactPerf":142,"./ReactReconciler":147,"./ReactUpdates":154,"./ReactVersion":155,"./findDOMNode":179,"./renderSubtreeIntoContainer":194,"_process":30,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/warning":226}],107:[function(require,module,exports){
 =======
 },{"./ReactCurrentOwner":487,"./ReactDOMTextComponent":499,"./ReactDefaultInjection":502,"./ReactInstanceHandles":514,"./ReactMount":518,"./ReactPerf":524,"./ReactReconciler":529,"./ReactUpdates":536,"./ReactVersion":537,"./findDOMNode":561,"./renderSubtreeIntoContainer":576,"_process":249,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/warning":608}],489:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactCurrentOwner":486,"./ReactDOMTextComponent":498,"./ReactDefaultInjection":501,"./ReactInstanceHandles":513,"./ReactMount":517,"./ReactPerf":523,"./ReactReconciler":528,"./ReactUpdates":535,"./ReactVersion":536,"./findDOMNode":559,"./renderSubtreeIntoContainer":574,"_process":249,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/warning":606}],488:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -93283,11 +94226,15 @@ var ReactDOMButton = {
 };
 
 module.exports = ReactDOMButton;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],108:[function(require,module,exports){
 =======
 },{}],490:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],489:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -94253,11 +95200,15 @@ assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mix
 module.exports = ReactDOMComponent;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./AutoFocusUtils":72,"./CSSPropertyOperations":75,"./DOMProperty":80,"./DOMPropertyOperations":81,"./EventConstants":85,"./Object.assign":93,"./ReactBrowserEventEmitter":97,"./ReactComponentBrowserEnvironment":102,"./ReactDOMButton":107,"./ReactDOMInput":112,"./ReactDOMOption":113,"./ReactDOMSelect":114,"./ReactDOMTextarea":118,"./ReactMount":136,"./ReactMultiChild":137,"./ReactPerf":142,"./ReactUpdateQueue":153,"./canDefineProperty":175,"./escapeTextContentForBrowser":178,"./isEventSupported":190,"./setInnerHTML":195,"./setTextContent":196,"./validateDOMNesting":199,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/keyOf":219,"fbjs/lib/shallowEqual":224,"fbjs/lib/warning":226}],109:[function(require,module,exports){
 =======
 },{"./AutoFocusUtils":454,"./CSSPropertyOperations":457,"./DOMProperty":462,"./DOMPropertyOperations":463,"./EventConstants":467,"./Object.assign":475,"./ReactBrowserEventEmitter":479,"./ReactComponentBrowserEnvironment":484,"./ReactDOMButton":489,"./ReactDOMInput":494,"./ReactDOMOption":495,"./ReactDOMSelect":496,"./ReactDOMTextarea":500,"./ReactMount":518,"./ReactMultiChild":519,"./ReactPerf":524,"./ReactUpdateQueue":535,"./canDefineProperty":557,"./escapeTextContentForBrowser":560,"./isEventSupported":572,"./setInnerHTML":577,"./setTextContent":578,"./validateDOMNesting":581,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/keyOf":601,"fbjs/lib/shallowEqual":606,"fbjs/lib/warning":608}],491:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./AutoFocusUtils":453,"./CSSPropertyOperations":456,"./DOMProperty":461,"./DOMPropertyOperations":462,"./EventConstants":466,"./Object.assign":474,"./ReactBrowserEventEmitter":478,"./ReactComponentBrowserEnvironment":483,"./ReactDOMButton":488,"./ReactDOMInput":493,"./ReactDOMOption":494,"./ReactDOMSelect":495,"./ReactDOMTextarea":499,"./ReactMount":517,"./ReactMultiChild":518,"./ReactPerf":523,"./ReactUpdateQueue":534,"./escapeTextContentForBrowser":558,"./isEventSupported":570,"./setInnerHTML":575,"./setTextContent":576,"./validateDOMNesting":579,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/keyOf":599,"fbjs/lib/shallowEqual":604,"fbjs/lib/warning":606}],490:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -94438,11 +95389,15 @@ var ReactDOMFactories = mapObject({
 module.exports = ReactDOMFactories;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactElement":123,"./ReactElementValidator":124,"_process":30,"fbjs/lib/mapObject":220}],110:[function(require,module,exports){
 =======
 },{"./ReactElement":505,"./ReactElementValidator":506,"_process":249,"fbjs/lib/mapObject":602}],492:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactElement":504,"./ReactElementValidator":505,"_process":249,"fbjs/lib/mapObject":600}],491:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -94461,11 +95416,15 @@ var ReactDOMFeatureFlags = {
 };
 
 module.exports = ReactDOMFeatureFlags;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],111:[function(require,module,exports){
 =======
 },{}],493:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],492:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -94563,11 +95522,15 @@ ReactPerf.measureMethods(ReactDOMIDOperations, 'ReactDOMIDOperations', {
 module.exports = ReactDOMIDOperations;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./DOMChildrenOperations":79,"./DOMPropertyOperations":81,"./ReactMount":136,"./ReactPerf":142,"_process":30,"fbjs/lib/invariant":215}],112:[function(require,module,exports){
 =======
 },{"./DOMChildrenOperations":461,"./DOMPropertyOperations":463,"./ReactMount":518,"./ReactPerf":524,"_process":249,"fbjs/lib/invariant":597}],494:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./DOMChildrenOperations":460,"./DOMPropertyOperations":462,"./ReactMount":517,"./ReactPerf":523,"_process":249,"fbjs/lib/invariant":595}],493:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -94724,11 +95687,15 @@ function _handleChange(event) {
 module.exports = ReactDOMInput;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./LinkedValueUtils":92,"./Object.assign":93,"./ReactDOMIDOperations":111,"./ReactMount":136,"./ReactUpdates":154,"_process":30,"fbjs/lib/invariant":215}],113:[function(require,module,exports){
 =======
 },{"./LinkedValueUtils":474,"./Object.assign":475,"./ReactDOMIDOperations":493,"./ReactMount":518,"./ReactUpdates":536,"_process":249,"fbjs/lib/invariant":597}],495:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./LinkedValueUtils":473,"./Object.assign":474,"./ReactDOMIDOperations":492,"./ReactMount":517,"./ReactUpdates":535,"_process":249,"fbjs/lib/invariant":595}],494:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -94818,11 +95785,15 @@ var ReactDOMOption = {
 module.exports = ReactDOMOption;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./ReactChildren":99,"./ReactDOMSelect":114,"_process":30,"fbjs/lib/warning":226}],114:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./ReactChildren":481,"./ReactDOMSelect":496,"_process":249,"fbjs/lib/warning":608}],496:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./ReactChildren":480,"./ReactDOMSelect":495,"_process":249,"fbjs/lib/warning":606}],495:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -95014,11 +95985,15 @@ function _handleChange(event) {
 module.exports = ReactDOMSelect;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./LinkedValueUtils":92,"./Object.assign":93,"./ReactMount":136,"./ReactUpdates":154,"_process":30,"fbjs/lib/warning":226}],115:[function(require,module,exports){
 =======
 },{"./LinkedValueUtils":474,"./Object.assign":475,"./ReactMount":518,"./ReactUpdates":536,"_process":249,"fbjs/lib/warning":608}],497:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./LinkedValueUtils":473,"./Object.assign":474,"./ReactMount":517,"./ReactUpdates":535,"_process":249,"fbjs/lib/warning":606}],496:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -95231,11 +96206,15 @@ var ReactDOMSelection = {
 };
 
 module.exports = ReactDOMSelection;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./getNodeForCharacterOffset":187,"./getTextContentAccessor":188,"fbjs/lib/ExecutionEnvironment":201}],116:[function(require,module,exports){
 =======
 },{"./getNodeForCharacterOffset":569,"./getTextContentAccessor":570,"fbjs/lib/ExecutionEnvironment":583}],498:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./getNodeForCharacterOffset":567,"./getTextContentAccessor":568,"fbjs/lib/ExecutionEnvironment":581}],497:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -95262,11 +96241,15 @@ var ReactDOMServer = {
 };
 
 module.exports = ReactDOMServer;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactDefaultInjection":120,"./ReactServerRendering":151,"./ReactVersion":155}],117:[function(require,module,exports){
 =======
 },{"./ReactDefaultInjection":502,"./ReactServerRendering":533,"./ReactVersion":537}],499:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactDefaultInjection":501,"./ReactServerRendering":532,"./ReactVersion":536}],498:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -95397,11 +96380,15 @@ assign(ReactDOMTextComponent.prototype, {
 module.exports = ReactDOMTextComponent;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./DOMChildrenOperations":79,"./DOMPropertyOperations":81,"./Object.assign":93,"./ReactComponentBrowserEnvironment":102,"./ReactMount":136,"./escapeTextContentForBrowser":178,"./setTextContent":196,"./validateDOMNesting":199,"_process":30}],118:[function(require,module,exports){
 =======
 },{"./DOMChildrenOperations":461,"./DOMPropertyOperations":463,"./Object.assign":475,"./ReactComponentBrowserEnvironment":484,"./ReactMount":518,"./escapeTextContentForBrowser":560,"./setTextContent":578,"./validateDOMNesting":581,"_process":249}],500:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./DOMChildrenOperations":460,"./DOMPropertyOperations":462,"./Object.assign":474,"./ReactComponentBrowserEnvironment":483,"./ReactMount":517,"./escapeTextContentForBrowser":558,"./setTextContent":576,"./validateDOMNesting":579,"_process":249}],499:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -95518,11 +96505,15 @@ function _handleChange(event) {
 module.exports = ReactDOMTextarea;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./LinkedValueUtils":92,"./Object.assign":93,"./ReactDOMIDOperations":111,"./ReactUpdates":154,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],119:[function(require,module,exports){
 =======
 },{"./LinkedValueUtils":474,"./Object.assign":475,"./ReactDOMIDOperations":493,"./ReactUpdates":536,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],501:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./LinkedValueUtils":473,"./Object.assign":474,"./ReactDOMIDOperations":492,"./ReactUpdates":535,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],500:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -95590,11 +96581,15 @@ var ReactDefaultBatchingStrategy = {
 };
 
 module.exports = ReactDefaultBatchingStrategy;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./ReactUpdates":154,"./Transaction":171,"fbjs/lib/emptyFunction":207}],120:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./ReactUpdates":536,"./Transaction":553,"fbjs/lib/emptyFunction":589}],502:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./ReactUpdates":535,"./Transaction":552,"fbjs/lib/emptyFunction":587}],501:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -95695,11 +96690,15 @@ module.exports = {
 };
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./BeforeInputEventPlugin":73,"./ChangeEventPlugin":77,"./ClientReactRootIndex":78,"./DefaultEventPluginOrder":83,"./EnterLeaveEventPlugin":84,"./HTMLDOMPropertyConfig":91,"./ReactBrowserComponentMixin":96,"./ReactComponentBrowserEnvironment":102,"./ReactDOMComponent":108,"./ReactDOMTextComponent":117,"./ReactDefaultBatchingStrategy":119,"./ReactDefaultPerf":121,"./ReactEventListener":129,"./ReactInjection":130,"./ReactInstanceHandles":132,"./ReactMount":136,"./ReactReconcileTransaction":146,"./SVGDOMPropertyConfig":156,"./SelectEventPlugin":157,"./ServerReactRootIndex":158,"./SimpleEventPlugin":159,"_process":30,"fbjs/lib/ExecutionEnvironment":201}],121:[function(require,module,exports){
 =======
 },{"./BeforeInputEventPlugin":455,"./ChangeEventPlugin":459,"./ClientReactRootIndex":460,"./DefaultEventPluginOrder":465,"./EnterLeaveEventPlugin":466,"./HTMLDOMPropertyConfig":473,"./ReactBrowserComponentMixin":478,"./ReactComponentBrowserEnvironment":484,"./ReactDOMComponent":490,"./ReactDOMTextComponent":499,"./ReactDefaultBatchingStrategy":501,"./ReactDefaultPerf":503,"./ReactEventListener":511,"./ReactInjection":512,"./ReactInstanceHandles":514,"./ReactMount":518,"./ReactReconcileTransaction":528,"./SVGDOMPropertyConfig":538,"./SelectEventPlugin":539,"./ServerReactRootIndex":540,"./SimpleEventPlugin":541,"_process":249,"fbjs/lib/ExecutionEnvironment":583}],503:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./BeforeInputEventPlugin":454,"./ChangeEventPlugin":458,"./ClientReactRootIndex":459,"./DefaultEventPluginOrder":464,"./EnterLeaveEventPlugin":465,"./HTMLDOMPropertyConfig":472,"./ReactBrowserComponentMixin":477,"./ReactComponentBrowserEnvironment":483,"./ReactDOMComponent":489,"./ReactDOMTextComponent":498,"./ReactDefaultBatchingStrategy":500,"./ReactDefaultPerf":502,"./ReactEventListener":510,"./ReactInjection":511,"./ReactInstanceHandles":513,"./ReactMount":517,"./ReactReconcileTransaction":527,"./SVGDOMPropertyConfig":537,"./SelectEventPlugin":538,"./ServerReactRootIndex":539,"./SimpleEventPlugin":540,"_process":249,"fbjs/lib/ExecutionEnvironment":581}],502:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -95937,11 +96936,15 @@ var ReactDefaultPerf = {
 };
 
 module.exports = ReactDefaultPerf;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./DOMProperty":80,"./ReactDefaultPerfAnalysis":122,"./ReactMount":136,"./ReactPerf":142,"fbjs/lib/performanceNow":223}],122:[function(require,module,exports){
 =======
 },{"./DOMProperty":462,"./ReactDefaultPerfAnalysis":504,"./ReactMount":518,"./ReactPerf":524,"fbjs/lib/performanceNow":605}],504:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./DOMProperty":461,"./ReactDefaultPerfAnalysis":503,"./ReactMount":517,"./ReactPerf":523,"fbjs/lib/performanceNow":603}],503:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -96141,11 +97144,15 @@ var ReactDefaultPerfAnalysis = {
 };
 
 module.exports = ReactDefaultPerfAnalysis;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93}],123:[function(require,module,exports){
 =======
 },{"./Object.assign":475}],505:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474}],504:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -96396,11 +97403,15 @@ ReactElement.isValidElement = function (object) {
 module.exports = ReactElement;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./ReactCurrentOwner":105,"./canDefineProperty":175,"_process":30}],124:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./ReactCurrentOwner":487,"./canDefineProperty":557,"_process":249}],506:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./ReactCurrentOwner":486,"_process":249}],505:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -96685,11 +97696,15 @@ var ReactElementValidator = {
 module.exports = ReactElementValidator;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactCurrentOwner":105,"./ReactElement":123,"./ReactPropTypeLocationNames":143,"./ReactPropTypeLocations":144,"./canDefineProperty":175,"./getIteratorFn":186,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],125:[function(require,module,exports){
 =======
 },{"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactPropTypeLocationNames":525,"./ReactPropTypeLocations":526,"./canDefineProperty":557,"./getIteratorFn":568,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],507:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactPropTypeLocationNames":524,"./ReactPropTypeLocations":525,"./getIteratorFn":566,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],506:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -96741,11 +97756,15 @@ assign(ReactEmptyComponent.prototype, {
 ReactEmptyComponent.injection = ReactEmptyComponentInjection;
 
 module.exports = ReactEmptyComponent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./ReactElement":123,"./ReactEmptyComponentRegistry":126,"./ReactReconciler":147}],126:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./ReactElement":505,"./ReactEmptyComponentRegistry":508,"./ReactReconciler":529}],508:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./ReactElement":504,"./ReactEmptyComponentRegistry":507,"./ReactReconciler":528}],507:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -96794,11 +97813,15 @@ var ReactEmptyComponentRegistry = {
 };
 
 module.exports = ReactEmptyComponentRegistry;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],127:[function(require,module,exports){
 =======
 },{}],509:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],508:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -96887,11 +97910,15 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = ReactErrorUtils;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30}],128:[function(require,module,exports){
 =======
 },{"_process":249}],510:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249}],509:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -96930,11 +97957,15 @@ var ReactEventEmitterMixin = {
 };
 
 module.exports = ReactEventEmitterMixin;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./EventPluginHub":86}],129:[function(require,module,exports){
 =======
 },{"./EventPluginHub":468}],511:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./EventPluginHub":467}],510:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97146,11 +98177,15 @@ var ReactEventListener = {
 };
 
 module.exports = ReactEventListener;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./PooledClass":94,"./ReactInstanceHandles":132,"./ReactMount":136,"./ReactUpdates":154,"./getEventTarget":185,"fbjs/lib/EventListener":200,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/getUnboundedScrollPosition":212}],130:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./PooledClass":476,"./ReactInstanceHandles":514,"./ReactMount":518,"./ReactUpdates":536,"./getEventTarget":567,"fbjs/lib/EventListener":582,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/getUnboundedScrollPosition":594}],512:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./PooledClass":475,"./ReactInstanceHandles":513,"./ReactMount":517,"./ReactUpdates":535,"./getEventTarget":565,"fbjs/lib/EventListener":580,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/getUnboundedScrollPosition":592}],511:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97189,11 +98224,15 @@ var ReactInjection = {
 };
 
 module.exports = ReactInjection;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./DOMProperty":80,"./EventPluginHub":86,"./ReactBrowserEventEmitter":97,"./ReactClass":100,"./ReactComponentEnvironment":103,"./ReactEmptyComponent":125,"./ReactNativeComponent":139,"./ReactPerf":142,"./ReactRootIndex":149,"./ReactUpdates":154}],131:[function(require,module,exports){
 =======
 },{"./DOMProperty":462,"./EventPluginHub":468,"./ReactBrowserEventEmitter":479,"./ReactClass":482,"./ReactComponentEnvironment":485,"./ReactEmptyComponent":507,"./ReactNativeComponent":521,"./ReactPerf":524,"./ReactRootIndex":531,"./ReactUpdates":536}],513:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./DOMProperty":461,"./EventPluginHub":467,"./ReactBrowserEventEmitter":478,"./ReactClass":481,"./ReactComponentEnvironment":484,"./ReactEmptyComponent":506,"./ReactNativeComponent":520,"./ReactPerf":523,"./ReactRootIndex":530,"./ReactUpdates":535}],512:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97318,11 +98357,15 @@ var ReactInputSelection = {
 };
 
 module.exports = ReactInputSelection;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactDOMSelection":115,"fbjs/lib/containsNode":204,"fbjs/lib/focusNode":209,"fbjs/lib/getActiveElement":210}],132:[function(require,module,exports){
 =======
 },{"./ReactDOMSelection":497,"fbjs/lib/containsNode":586,"fbjs/lib/focusNode":591,"fbjs/lib/getActiveElement":592}],514:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactDOMSelection":496,"fbjs/lib/containsNode":584,"fbjs/lib/focusNode":589,"fbjs/lib/getActiveElement":590}],513:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -97628,11 +98671,15 @@ var ReactInstanceHandles = {
 module.exports = ReactInstanceHandles;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactRootIndex":149,"_process":30,"fbjs/lib/invariant":215}],133:[function(require,module,exports){
 =======
 },{"./ReactRootIndex":531,"_process":249,"fbjs/lib/invariant":597}],515:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactRootIndex":530,"_process":249,"fbjs/lib/invariant":595}],514:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97680,11 +98727,15 @@ var ReactInstanceMap = {
 };
 
 module.exports = ReactInstanceMap;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],134:[function(require,module,exports){
 =======
 },{}],516:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],515:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -97762,11 +98813,15 @@ var React = {
 module.exports = React;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./ReactChildren":99,"./ReactClass":100,"./ReactComponent":101,"./ReactDOMFactories":109,"./ReactElement":123,"./ReactElementValidator":124,"./ReactPropTypes":145,"./ReactVersion":155,"./onlyChild":192,"_process":30}],135:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./ReactChildren":481,"./ReactClass":482,"./ReactComponent":483,"./ReactDOMFactories":491,"./ReactElement":505,"./ReactElementValidator":506,"./ReactPropTypes":527,"./ReactVersion":537,"./onlyChild":574,"_process":249}],517:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./ReactChildren":480,"./ReactClass":481,"./ReactComponent":482,"./ReactDOMFactories":490,"./ReactElement":504,"./ReactElementValidator":505,"./ReactPropTypes":526,"./ReactVersion":536,"./onlyChild":572,"_process":249}],516:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97812,11 +98867,15 @@ var ReactMarkupChecksum = {
 };
 
 module.exports = ReactMarkupChecksum;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./adler32":174}],136:[function(require,module,exports){
 =======
 },{"./adler32":556}],518:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./adler32":555}],517:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -98670,11 +99729,15 @@ ReactPerf.measureMethods(ReactMount, 'ReactMount', {
 module.exports = ReactMount;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./DOMProperty":80,"./Object.assign":93,"./ReactBrowserEventEmitter":97,"./ReactCurrentOwner":105,"./ReactDOMFeatureFlags":110,"./ReactElement":123,"./ReactEmptyComponentRegistry":126,"./ReactInstanceHandles":132,"./ReactInstanceMap":133,"./ReactMarkupChecksum":135,"./ReactPerf":142,"./ReactReconciler":147,"./ReactUpdateQueue":153,"./ReactUpdates":154,"./instantiateReactComponent":189,"./setInnerHTML":195,"./shouldUpdateReactComponent":197,"./validateDOMNesting":199,"_process":30,"fbjs/lib/containsNode":204,"fbjs/lib/emptyObject":208,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],137:[function(require,module,exports){
 =======
 },{"./DOMProperty":462,"./Object.assign":475,"./ReactBrowserEventEmitter":479,"./ReactCurrentOwner":487,"./ReactDOMFeatureFlags":492,"./ReactElement":505,"./ReactEmptyComponentRegistry":508,"./ReactInstanceHandles":514,"./ReactInstanceMap":515,"./ReactMarkupChecksum":517,"./ReactPerf":524,"./ReactReconciler":529,"./ReactUpdateQueue":535,"./ReactUpdates":536,"./instantiateReactComponent":571,"./setInnerHTML":577,"./shouldUpdateReactComponent":579,"./validateDOMNesting":581,"_process":249,"fbjs/lib/containsNode":586,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],519:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./DOMProperty":461,"./Object.assign":474,"./ReactBrowserEventEmitter":478,"./ReactCurrentOwner":486,"./ReactDOMFeatureFlags":491,"./ReactElement":504,"./ReactEmptyComponentRegistry":507,"./ReactInstanceHandles":513,"./ReactInstanceMap":514,"./ReactMarkupChecksum":516,"./ReactPerf":523,"./ReactReconciler":528,"./ReactUpdateQueue":534,"./ReactUpdates":535,"./instantiateReactComponent":569,"./setInnerHTML":575,"./shouldUpdateReactComponent":577,"./validateDOMNesting":579,"_process":249,"fbjs/lib/containsNode":584,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],518:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -99174,11 +100237,15 @@ var ReactMultiChild = {
 module.exports = ReactMultiChild;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactChildReconciler":98,"./ReactComponentEnvironment":103,"./ReactCurrentOwner":105,"./ReactMultiChildUpdateTypes":138,"./ReactReconciler":147,"./flattenChildren":180,"_process":30}],138:[function(require,module,exports){
 =======
 },{"./ReactChildReconciler":480,"./ReactComponentEnvironment":485,"./ReactCurrentOwner":487,"./ReactMultiChildUpdateTypes":520,"./ReactReconciler":529,"./flattenChildren":562,"_process":249}],520:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactChildReconciler":479,"./ReactComponentEnvironment":484,"./ReactCurrentOwner":486,"./ReactMultiChildUpdateTypes":519,"./ReactReconciler":528,"./flattenChildren":560,"_process":249}],519:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -99211,11 +100278,15 @@ var ReactMultiChildUpdateTypes = keyMirror({
 });
 
 module.exports = ReactMultiChildUpdateTypes;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"fbjs/lib/keyMirror":218}],139:[function(require,module,exports){
 =======
 },{"fbjs/lib/keyMirror":600}],521:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"fbjs/lib/keyMirror":598}],520:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -99313,11 +100384,15 @@ var ReactNativeComponent = {
 module.exports = ReactNativeComponent;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"_process":30,"fbjs/lib/invariant":215}],140:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"_process":249,"fbjs/lib/invariant":597}],522:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"_process":249,"fbjs/lib/invariant":595}],521:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -99439,11 +100514,15 @@ var ReactNoopUpdateQueue = {
 module.exports = ReactNoopUpdateQueue;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30,"fbjs/lib/warning":226}],141:[function(require,module,exports){
 =======
 },{"_process":249,"fbjs/lib/warning":608}],523:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249,"fbjs/lib/warning":606}],522:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -99538,11 +100617,15 @@ var ReactOwner = {
 module.exports = ReactOwner;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30,"fbjs/lib/invariant":215}],142:[function(require,module,exports){
 =======
 },{"_process":249,"fbjs/lib/invariant":597}],524:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249,"fbjs/lib/invariant":595}],523:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -99642,11 +100725,15 @@ function _noMeasure(objName, fnName, func) {
 module.exports = ReactPerf;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30}],143:[function(require,module,exports){
 =======
 },{"_process":249}],525:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249}],524:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -99674,11 +100761,15 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = ReactPropTypeLocationNames;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30}],144:[function(require,module,exports){
 =======
 },{"_process":249}],526:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249}],525:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -99701,11 +100792,15 @@ var ReactPropTypeLocations = keyMirror({
 });
 
 module.exports = ReactPropTypeLocations;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"fbjs/lib/keyMirror":218}],145:[function(require,module,exports){
 =======
 },{"fbjs/lib/keyMirror":600}],527:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"fbjs/lib/keyMirror":598}],526:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -100062,11 +101157,15 @@ function getClassName(propValue) {
 }
 
 module.exports = ReactPropTypes;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactElement":123,"./ReactPropTypeLocationNames":143,"./getIteratorFn":186,"fbjs/lib/emptyFunction":207}],146:[function(require,module,exports){
 =======
 },{"./ReactElement":505,"./ReactPropTypeLocationNames":525,"./getIteratorFn":568,"fbjs/lib/emptyFunction":589}],528:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactElement":504,"./ReactPropTypeLocationNames":524,"./getIteratorFn":566,"fbjs/lib/emptyFunction":587}],527:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -100218,11 +101317,15 @@ assign(ReactReconcileTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./CallbackQueue":76,"./Object.assign":93,"./PooledClass":94,"./ReactBrowserEventEmitter":97,"./ReactDOMFeatureFlags":110,"./ReactInputSelection":131,"./Transaction":171}],147:[function(require,module,exports){
 =======
 },{"./CallbackQueue":458,"./Object.assign":475,"./PooledClass":476,"./ReactBrowserEventEmitter":479,"./ReactDOMFeatureFlags":492,"./ReactInputSelection":513,"./Transaction":553}],529:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./CallbackQueue":457,"./Object.assign":474,"./PooledClass":475,"./ReactBrowserEventEmitter":478,"./ReactDOMFeatureFlags":491,"./ReactInputSelection":512,"./Transaction":552}],528:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -100330,11 +101433,15 @@ var ReactReconciler = {
 };
 
 module.exports = ReactReconciler;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactRef":148}],148:[function(require,module,exports){
 =======
 },{"./ReactRef":530}],530:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactRef":529}],529:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -100413,11 +101520,15 @@ ReactRef.detachRefs = function (instance, element) {
 };
 
 module.exports = ReactRef;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactOwner":141}],149:[function(require,module,exports){
 =======
 },{"./ReactOwner":523}],531:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactOwner":522}],530:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -100447,11 +101558,15 @@ var ReactRootIndex = {
 };
 
 module.exports = ReactRootIndex;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],150:[function(require,module,exports){
 =======
 },{}],532:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],531:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -100475,11 +101590,15 @@ var ReactServerBatchingStrategy = {
 };
 
 module.exports = ReactServerBatchingStrategy;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],151:[function(require,module,exports){
 =======
 },{}],533:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],532:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -100566,11 +101685,15 @@ module.exports = {
 };
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactDefaultBatchingStrategy":119,"./ReactElement":123,"./ReactInstanceHandles":132,"./ReactMarkupChecksum":135,"./ReactServerBatchingStrategy":150,"./ReactServerRenderingTransaction":152,"./ReactUpdates":154,"./instantiateReactComponent":189,"_process":30,"fbjs/lib/emptyObject":208,"fbjs/lib/invariant":215}],152:[function(require,module,exports){
 =======
 },{"./ReactDefaultBatchingStrategy":501,"./ReactElement":505,"./ReactInstanceHandles":514,"./ReactMarkupChecksum":517,"./ReactServerBatchingStrategy":532,"./ReactServerRenderingTransaction":534,"./ReactUpdates":536,"./instantiateReactComponent":571,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597}],534:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactDefaultBatchingStrategy":500,"./ReactElement":504,"./ReactInstanceHandles":513,"./ReactMarkupChecksum":516,"./ReactServerBatchingStrategy":531,"./ReactServerRenderingTransaction":533,"./ReactUpdates":535,"./instantiateReactComponent":569,"_process":249,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595}],533:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -100658,11 +101781,15 @@ assign(ReactServerRenderingTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./CallbackQueue":76,"./Object.assign":93,"./PooledClass":94,"./Transaction":171,"fbjs/lib/emptyFunction":207}],153:[function(require,module,exports){
 =======
 },{"./CallbackQueue":458,"./Object.assign":475,"./PooledClass":476,"./Transaction":553,"fbjs/lib/emptyFunction":589}],535:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./CallbackQueue":457,"./Object.assign":474,"./PooledClass":475,"./Transaction":552,"fbjs/lib/emptyFunction":587}],534:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -100923,11 +102050,15 @@ var ReactUpdateQueue = {
 module.exports = ReactUpdateQueue;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./ReactCurrentOwner":105,"./ReactElement":123,"./ReactInstanceMap":133,"./ReactUpdates":154,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],154:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactInstanceMap":515,"./ReactUpdates":536,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],536:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactInstanceMap":514,"./ReactUpdates":535,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],535:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -101154,11 +102285,15 @@ var ReactUpdates = {
 module.exports = ReactUpdates;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./CallbackQueue":76,"./Object.assign":93,"./PooledClass":94,"./ReactPerf":142,"./ReactReconciler":147,"./Transaction":171,"_process":30,"fbjs/lib/invariant":215}],155:[function(require,module,exports){
 =======
 },{"./CallbackQueue":458,"./Object.assign":475,"./PooledClass":476,"./ReactPerf":524,"./ReactReconciler":529,"./Transaction":553,"_process":249,"fbjs/lib/invariant":597}],537:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./CallbackQueue":457,"./Object.assign":474,"./PooledClass":475,"./ReactPerf":523,"./ReactReconciler":528,"./Transaction":552,"_process":249,"fbjs/lib/invariant":595}],536:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101172,6 +102307,7 @@ module.exports = ReactUpdates;
 
 'use strict';
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 module.exports = '0.14.2';
 },{}],156:[function(require,module,exports){
@@ -101179,6 +102315,10 @@ module.exports = '0.14.2';
 module.exports = '0.14.1';
 },{}],538:[function(require,module,exports){
 >>>>>>> master
+=======
+module.exports = '0.14.0';
+},{}],537:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101306,11 +102446,15 @@ var SVGDOMPropertyConfig = {
 };
 
 module.exports = SVGDOMPropertyConfig;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./DOMProperty":80}],157:[function(require,module,exports){
 =======
 },{"./DOMProperty":462}],539:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./DOMProperty":461}],538:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101512,11 +102656,15 @@ var SelectEventPlugin = {
 };
 
 module.exports = SelectEventPlugin;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./EventConstants":85,"./EventPropagators":89,"./ReactInputSelection":131,"./SyntheticEvent":163,"./isTextInputElement":191,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/getActiveElement":210,"fbjs/lib/keyOf":219,"fbjs/lib/shallowEqual":224}],158:[function(require,module,exports){
 =======
 },{"./EventConstants":467,"./EventPropagators":471,"./ReactInputSelection":513,"./SyntheticEvent":545,"./isTextInputElement":573,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/getActiveElement":592,"fbjs/lib/keyOf":601,"fbjs/lib/shallowEqual":606}],540:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./EventConstants":466,"./EventPropagators":470,"./ReactInputSelection":512,"./SyntheticEvent":544,"./isTextInputElement":571,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/getActiveElement":590,"fbjs/lib/keyOf":599,"fbjs/lib/shallowEqual":604}],539:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101546,11 +102694,15 @@ var ServerReactRootIndex = {
 };
 
 module.exports = ServerReactRootIndex;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],159:[function(require,module,exports){
 =======
 },{}],541:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],540:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -102141,11 +103293,15 @@ var SimpleEventPlugin = {
 module.exports = SimpleEventPlugin;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./EventConstants":85,"./EventPropagators":89,"./ReactMount":136,"./SyntheticClipboardEvent":160,"./SyntheticDragEvent":162,"./SyntheticEvent":163,"./SyntheticFocusEvent":164,"./SyntheticKeyboardEvent":166,"./SyntheticMouseEvent":167,"./SyntheticTouchEvent":168,"./SyntheticUIEvent":169,"./SyntheticWheelEvent":170,"./getEventCharCode":182,"_process":30,"fbjs/lib/EventListener":200,"fbjs/lib/emptyFunction":207,"fbjs/lib/invariant":215,"fbjs/lib/keyOf":219}],160:[function(require,module,exports){
 =======
 },{"./EventConstants":467,"./EventPropagators":471,"./ReactMount":518,"./SyntheticClipboardEvent":542,"./SyntheticDragEvent":544,"./SyntheticEvent":545,"./SyntheticFocusEvent":546,"./SyntheticKeyboardEvent":548,"./SyntheticMouseEvent":549,"./SyntheticTouchEvent":550,"./SyntheticUIEvent":551,"./SyntheticWheelEvent":552,"./getEventCharCode":564,"_process":249,"fbjs/lib/EventListener":582,"fbjs/lib/emptyFunction":589,"fbjs/lib/invariant":597,"fbjs/lib/keyOf":601}],542:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./EventConstants":466,"./EventPropagators":470,"./ReactMount":517,"./SyntheticClipboardEvent":541,"./SyntheticDragEvent":543,"./SyntheticEvent":544,"./SyntheticFocusEvent":545,"./SyntheticKeyboardEvent":547,"./SyntheticMouseEvent":548,"./SyntheticTouchEvent":549,"./SyntheticUIEvent":550,"./SyntheticWheelEvent":551,"./getEventCharCode":562,"_process":249,"fbjs/lib/EventListener":580,"fbjs/lib/emptyFunction":587,"fbjs/lib/invariant":595,"fbjs/lib/keyOf":599}],541:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102185,11 +103341,15 @@ function SyntheticClipboardEvent(dispatchConfig, dispatchMarker, nativeEvent, na
 SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 module.exports = SyntheticClipboardEvent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./SyntheticEvent":163}],161:[function(require,module,exports){
 =======
 },{"./SyntheticEvent":545}],543:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./SyntheticEvent":544}],542:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102227,11 +103387,15 @@ function SyntheticCompositionEvent(dispatchConfig, dispatchMarker, nativeEvent, 
 SyntheticEvent.augmentClass(SyntheticCompositionEvent, CompositionEventInterface);
 
 module.exports = SyntheticCompositionEvent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./SyntheticEvent":163}],162:[function(require,module,exports){
 =======
 },{"./SyntheticEvent":545}],544:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./SyntheticEvent":544}],543:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102269,11 +103433,15 @@ function SyntheticDragEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeE
 SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./SyntheticMouseEvent":167}],163:[function(require,module,exports){
 =======
 },{"./SyntheticMouseEvent":549}],545:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./SyntheticMouseEvent":548}],544:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -102454,11 +103622,15 @@ PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
 module.exports = SyntheticEvent;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./PooledClass":94,"_process":30,"fbjs/lib/emptyFunction":207,"fbjs/lib/warning":226}],164:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./PooledClass":476,"_process":249,"fbjs/lib/emptyFunction":589,"fbjs/lib/warning":608}],546:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./PooledClass":475,"_process":249,"fbjs/lib/emptyFunction":587,"fbjs/lib/warning":606}],545:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102496,11 +103668,15 @@ function SyntheticFocusEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./SyntheticUIEvent":169}],165:[function(require,module,exports){
 =======
 },{"./SyntheticUIEvent":551}],547:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./SyntheticUIEvent":550}],546:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102539,11 +103715,15 @@ function SyntheticInputEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticEvent.augmentClass(SyntheticInputEvent, InputEventInterface);
 
 module.exports = SyntheticInputEvent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./SyntheticEvent":163}],166:[function(require,module,exports){
 =======
 },{"./SyntheticEvent":545}],548:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./SyntheticEvent":544}],547:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102629,11 +103809,15 @@ function SyntheticKeyboardEvent(dispatchConfig, dispatchMarker, nativeEvent, nat
 SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./SyntheticUIEvent":169,"./getEventCharCode":182,"./getEventKey":183,"./getEventModifierState":184}],167:[function(require,module,exports){
 =======
 },{"./SyntheticUIEvent":551,"./getEventCharCode":564,"./getEventKey":565,"./getEventModifierState":566}],549:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./SyntheticUIEvent":550,"./getEventCharCode":562,"./getEventKey":563,"./getEventModifierState":564}],548:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102707,11 +103891,15 @@ function SyntheticMouseEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./SyntheticUIEvent":169,"./ViewportMetrics":172,"./getEventModifierState":184}],168:[function(require,module,exports){
 =======
 },{"./SyntheticUIEvent":551,"./ViewportMetrics":554,"./getEventModifierState":566}],550:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./SyntheticUIEvent":550,"./ViewportMetrics":553,"./getEventModifierState":564}],549:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102758,11 +103946,15 @@ function SyntheticTouchEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./SyntheticUIEvent":169,"./getEventModifierState":184}],169:[function(require,module,exports){
 =======
 },{"./SyntheticUIEvent":551,"./getEventModifierState":566}],551:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./SyntheticUIEvent":550,"./getEventModifierState":564}],550:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102823,11 +104015,15 @@ function SyntheticUIEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEve
 SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./SyntheticEvent":163,"./getEventTarget":185}],170:[function(require,module,exports){
 =======
 },{"./SyntheticEvent":545,"./getEventTarget":567}],552:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./SyntheticEvent":544,"./getEventTarget":565}],551:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102883,11 +104079,15 @@ function SyntheticWheelEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./SyntheticMouseEvent":167}],171:[function(require,module,exports){
 =======
 },{"./SyntheticMouseEvent":549}],553:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./SyntheticMouseEvent":548}],552:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -103122,11 +104322,15 @@ var Transaction = {
 module.exports = Transaction;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30,"fbjs/lib/invariant":215}],172:[function(require,module,exports){
 =======
 },{"_process":249,"fbjs/lib/invariant":597}],554:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249,"fbjs/lib/invariant":595}],553:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103154,11 +104358,15 @@ var ViewportMetrics = {
 };
 
 module.exports = ViewportMetrics;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],173:[function(require,module,exports){
 =======
 },{}],555:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],554:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -103221,11 +104429,15 @@ function accumulateInto(current, next) {
 module.exports = accumulateInto;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30,"fbjs/lib/invariant":215}],174:[function(require,module,exports){
 =======
 },{"_process":249,"fbjs/lib/invariant":597}],556:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249,"fbjs/lib/invariant":595}],555:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103268,6 +104480,7 @@ function adler32(data) {
 }
 
 module.exports = adler32;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],175:[function(require,module,exports){
 =======
@@ -103309,6 +104522,9 @@ module.exports = canDefineProperty;
 =======
 },{"_process":249}],558:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],556:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103364,11 +104580,15 @@ function dangerousStyleValue(name, value) {
 }
 
 module.exports = dangerousStyleValue;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./CSSProperty":74}],177:[function(require,module,exports){
 =======
 },{"./CSSProperty":456}],559:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./CSSProperty":455}],557:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -103420,11 +104640,15 @@ function deprecated(fnName, newModule, newPackage, ctx, fn) {
 module.exports = deprecated;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"_process":30,"fbjs/lib/warning":226}],178:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"_process":249,"fbjs/lib/warning":608}],560:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"_process":249,"fbjs/lib/warning":606}],558:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103463,11 +104687,15 @@ function escapeTextContentForBrowser(text) {
 }
 
 module.exports = escapeTextContentForBrowser;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],179:[function(require,module,exports){
 =======
 },{}],561:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],559:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -103520,11 +104748,15 @@ function findDOMNode(componentOrElement) {
 module.exports = findDOMNode;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactCurrentOwner":105,"./ReactInstanceMap":133,"./ReactMount":136,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],180:[function(require,module,exports){
 =======
 },{"./ReactCurrentOwner":487,"./ReactInstanceMap":515,"./ReactMount":518,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],562:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactCurrentOwner":486,"./ReactInstanceMap":514,"./ReactMount":517,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],560:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -103576,11 +104808,15 @@ function flattenChildren(children) {
 module.exports = flattenChildren;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./traverseAllChildren":198,"_process":30,"fbjs/lib/warning":226}],181:[function(require,module,exports){
 =======
 },{"./traverseAllChildren":580,"_process":249,"fbjs/lib/warning":608}],563:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./traverseAllChildren":578,"_process":249,"fbjs/lib/warning":606}],561:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103610,11 +104846,15 @@ var forEachAccumulated = function (arr, cb, scope) {
 };
 
 module.exports = forEachAccumulated;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],182:[function(require,module,exports){
 =======
 },{}],564:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],562:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103665,11 +104905,15 @@ function getEventCharCode(nativeEvent) {
 }
 
 module.exports = getEventCharCode;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],183:[function(require,module,exports){
 =======
 },{}],565:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],563:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103773,11 +105017,15 @@ function getEventKey(nativeEvent) {
 }
 
 module.exports = getEventKey;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./getEventCharCode":182}],184:[function(require,module,exports){
 =======
 },{"./getEventCharCode":564}],566:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./getEventCharCode":562}],564:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103822,11 +105070,15 @@ function getEventModifierState(nativeEvent) {
 }
 
 module.exports = getEventModifierState;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],185:[function(require,module,exports){
 =======
 },{}],567:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],565:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103856,11 +105108,15 @@ function getEventTarget(nativeEvent) {
 }
 
 module.exports = getEventTarget;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],186:[function(require,module,exports){
 =======
 },{}],568:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],566:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103901,11 +105157,15 @@ function getIteratorFn(maybeIterable) {
 }
 
 module.exports = getIteratorFn;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],187:[function(require,module,exports){
 =======
 },{}],569:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],567:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103979,11 +105239,15 @@ function getNodeForCharacterOffset(root, offset) {
 }
 
 module.exports = getNodeForCharacterOffset;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],188:[function(require,module,exports){
 =======
 },{}],570:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],568:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104017,11 +105281,15 @@ function getTextContentAccessor() {
 }
 
 module.exports = getTextContentAccessor;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"fbjs/lib/ExecutionEnvironment":201}],189:[function(require,module,exports){
 =======
 },{"fbjs/lib/ExecutionEnvironment":583}],571:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"fbjs/lib/ExecutionEnvironment":581}],569:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -104137,11 +105405,15 @@ function instantiateReactComponent(node) {
 module.exports = instantiateReactComponent;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"./ReactCompositeComponent":104,"./ReactEmptyComponent":125,"./ReactNativeComponent":139,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],190:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"./ReactCompositeComponent":486,"./ReactEmptyComponent":507,"./ReactNativeComponent":521,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],572:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"./ReactCompositeComponent":485,"./ReactEmptyComponent":506,"./ReactNativeComponent":520,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],570:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104202,11 +105474,15 @@ function isEventSupported(eventNameSuffix, capture) {
 }
 
 module.exports = isEventSupported;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"fbjs/lib/ExecutionEnvironment":201}],191:[function(require,module,exports){
 =======
 },{"fbjs/lib/ExecutionEnvironment":583}],573:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"fbjs/lib/ExecutionEnvironment":581}],571:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104247,11 +105523,15 @@ function isTextInputElement(elem) {
 }
 
 module.exports = isTextInputElement;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],192:[function(require,module,exports){
 =======
 },{}],574:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],572:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -104288,11 +105568,15 @@ function onlyChild(children) {
 module.exports = onlyChild;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactElement":123,"_process":30,"fbjs/lib/invariant":215}],193:[function(require,module,exports){
 =======
 },{"./ReactElement":505,"_process":249,"fbjs/lib/invariant":597}],575:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactElement":504,"_process":249,"fbjs/lib/invariant":595}],573:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104319,11 +105603,15 @@ function quoteAttributeValueForBrowser(value) {
 }
 
 module.exports = quoteAttributeValueForBrowser;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./escapeTextContentForBrowser":178}],194:[function(require,module,exports){
 =======
 },{"./escapeTextContentForBrowser":560}],576:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./escapeTextContentForBrowser":558}],574:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104340,11 +105628,15 @@ module.exports = quoteAttributeValueForBrowser;
 var ReactMount = require('./ReactMount');
 
 module.exports = ReactMount.renderSubtreeIntoContainer;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactMount":136}],195:[function(require,module,exports){
 =======
 },{"./ReactMount":518}],577:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactMount":517}],575:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104435,11 +105727,15 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setInnerHTML;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"fbjs/lib/ExecutionEnvironment":201}],196:[function(require,module,exports){
 =======
 },{"fbjs/lib/ExecutionEnvironment":583}],578:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"fbjs/lib/ExecutionEnvironment":581}],576:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104480,11 +105776,15 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setTextContent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./escapeTextContentForBrowser":178,"./setInnerHTML":195,"fbjs/lib/ExecutionEnvironment":201}],197:[function(require,module,exports){
 =======
 },{"./escapeTextContentForBrowser":560,"./setInnerHTML":577,"fbjs/lib/ExecutionEnvironment":583}],579:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./escapeTextContentForBrowser":558,"./setInnerHTML":575,"fbjs/lib/ExecutionEnvironment":581}],577:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104528,11 +105828,15 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 }
 
 module.exports = shouldUpdateReactComponent;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],198:[function(require,module,exports){
 =======
 },{}],580:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],578:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -104725,11 +106029,15 @@ function traverseAllChildren(children, callback, traverseContext) {
 module.exports = traverseAllChildren;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ReactCurrentOwner":105,"./ReactElement":123,"./ReactInstanceHandles":132,"./getIteratorFn":186,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],199:[function(require,module,exports){
 =======
 },{"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactInstanceHandles":514,"./getIteratorFn":568,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],581:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactInstanceHandles":513,"./getIteratorFn":566,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],579:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -105096,11 +106404,15 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = validateDOMNesting;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Object.assign":93,"_process":30,"fbjs/lib/emptyFunction":207,"fbjs/lib/warning":226}],200:[function(require,module,exports){
 =======
 },{"./Object.assign":475,"_process":249,"fbjs/lib/emptyFunction":589,"fbjs/lib/warning":608}],582:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Object.assign":474,"_process":249,"fbjs/lib/emptyFunction":587,"fbjs/lib/warning":606}],580:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -105188,11 +106500,15 @@ var EventListener = {
 module.exports = EventListener;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./emptyFunction":207,"_process":30}],201:[function(require,module,exports){
 =======
 },{"./emptyFunction":589,"_process":249}],583:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./emptyFunction":587,"_process":249}],581:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105229,11 +106545,15 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],202:[function(require,module,exports){
 =======
 },{}],584:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],582:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105266,11 +106586,15 @@ function camelize(string) {
 }
 
 module.exports = camelize;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],203:[function(require,module,exports){
 =======
 },{}],585:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],583:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105311,11 +106635,15 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./camelize":202}],204:[function(require,module,exports){
 =======
 },{"./camelize":584}],586:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./camelize":582}],584:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105371,11 +106699,15 @@ function containsNode(_x, _x2) {
 }
 
 module.exports = containsNode;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./isTextNode":217}],205:[function(require,module,exports){
 =======
 },{"./isTextNode":599}],587:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./isTextNode":597}],585:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105461,11 +106793,15 @@ function createArrayFromMixed(obj) {
 }
 
 module.exports = createArrayFromMixed;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./toArray":225}],206:[function(require,module,exports){
 =======
 },{"./toArray":607}],588:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./toArray":605}],586:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -105553,6 +106889,7 @@ function createNodesFromMarkup(markup, handleScript) {
 module.exports = createNodesFromMarkup;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ExecutionEnvironment":201,"./createArrayFromMixed":205,"./getMarkupWrap":211,"./invariant":215,"_process":30}],207:[function(require,module,exports){
 arguments[4][46][0].apply(exports,arguments)
@@ -105562,6 +106899,11 @@ arguments[4][46][0].apply(exports,arguments)
 arguments[4][308][0].apply(exports,arguments)
 },{"dup":308}],590:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ExecutionEnvironment":581,"./createArrayFromMixed":585,"./getMarkupWrap":591,"./invariant":595,"_process":249}],587:[function(require,module,exports){
+arguments[4][308][0].apply(exports,arguments)
+},{"dup":308}],588:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -105585,11 +106927,15 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = emptyObject;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30}],209:[function(require,module,exports){
 =======
 },{"_process":249}],591:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249}],589:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105616,11 +106962,15 @@ function focusNode(node) {
 }
 
 module.exports = focusNode;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],210:[function(require,module,exports){
 =======
 },{}],592:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],590:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105654,11 +107004,15 @@ function getActiveElement() /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],211:[function(require,module,exports){
 =======
 },{}],593:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],591:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -105757,11 +107111,15 @@ function getMarkupWrap(nodeName) {
 module.exports = getMarkupWrap;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ExecutionEnvironment":201,"./invariant":215,"_process":30}],212:[function(require,module,exports){
 =======
 },{"./ExecutionEnvironment":583,"./invariant":597,"_process":249}],594:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ExecutionEnvironment":581,"./invariant":595,"_process":249}],592:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105800,11 +107158,15 @@ function getUnboundedScrollPosition(scrollable) {
 }
 
 module.exports = getUnboundedScrollPosition;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],213:[function(require,module,exports){
 =======
 },{}],595:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],593:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105838,11 +107200,15 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],214:[function(require,module,exports){
 =======
 },{}],596:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],594:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105882,11 +107248,15 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./hyphenate":213}],215:[function(require,module,exports){
 =======
 },{"./hyphenate":595}],597:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./hyphenate":593}],595:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -105939,11 +107309,15 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"_process":30}],216:[function(require,module,exports){
 =======
 },{"_process":249}],598:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"_process":249}],596:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105967,11 +107341,15 @@ function isNode(object) {
 }
 
 module.exports = isNode;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],217:[function(require,module,exports){
 =======
 },{}],599:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],597:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105997,11 +107375,15 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./isNode":216}],218:[function(require,module,exports){
 =======
 },{"./isNode":598}],600:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./isNode":596}],598:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -106053,11 +107435,15 @@ var keyMirror = function (obj) {
 module.exports = keyMirror;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./invariant":215,"_process":30}],219:[function(require,module,exports){
 =======
 },{"./invariant":597,"_process":249}],601:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./invariant":595,"_process":249}],599:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106093,11 +107479,15 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],220:[function(require,module,exports){
 =======
 },{}],602:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],600:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106149,11 +107539,15 @@ function mapObject(object, callback, context) {
 }
 
 module.exports = mapObject;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],221:[function(require,module,exports){
 =======
 },{}],603:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],601:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106185,11 +107579,15 @@ function memoizeStringOnly(callback) {
 }
 
 module.exports = memoizeStringOnly;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],222:[function(require,module,exports){
 =======
 },{}],604:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],602:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106213,11 +107611,15 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = performance || {};
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./ExecutionEnvironment":201}],223:[function(require,module,exports){
 =======
 },{"./ExecutionEnvironment":583}],605:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./ExecutionEnvironment":581}],603:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106247,6 +107649,7 @@ if (!curPerformance || !curPerformance.now) {
 var performanceNow = curPerformance.now.bind(curPerformance);
 
 module.exports = performanceNow;
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./performance":222}],224:[function(require,module,exports){
 arguments[4][48][0].apply(exports,arguments)
@@ -106256,6 +107659,11 @@ arguments[4][48][0].apply(exports,arguments)
 arguments[4][310][0].apply(exports,arguments)
 },{"dup":310}],607:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./performance":602}],604:[function(require,module,exports){
+arguments[4][310][0].apply(exports,arguments)
+},{"dup":310}],605:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -106316,11 +107724,15 @@ function toArray(obj) {
 module.exports = toArray;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./invariant":215,"_process":30}],226:[function(require,module,exports){
 =======
 },{"./invariant":597,"_process":249}],608:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./invariant":595,"_process":249}],606:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -106381,15 +107793,20 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = warning;
 }).call(this,require('_process'))
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./emptyFunction":207,"_process":30}],227:[function(require,module,exports){
 =======
 },{"./emptyFunction":589,"_process":249}],609:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./emptyFunction":587,"_process":249}],607:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 module.exports = require('./lib/React');
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./lib/React":95}],228:[function(require,module,exports){
 =======
@@ -106969,6 +108386,69 @@ var WebAPI = _interopRequireWildcard(_utilsWebapiJs);
 var AddNode = (function (_Action) {
   _inherits(AddNode, _Action);
 
+=======
+},{"./lib/React":476}],608:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Action = function Action(name, data) {
+  _classCallCheck(this, Action);
+
+  if (this.constructor === Action) {
+    //TODO: make abstract class helper
+    throw new Error("cannot instantiate abstract class Action");
+  }
+  this.name = name;
+  this.data = data;
+};
+
+exports["default"] = Action;
+module.exports = exports["default"];
+
+},{}],609:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+exports['default'] = addNode;
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _actionJs = require('./action.js');
+
+var _actionJs2 = _interopRequireDefault(_actionJs);
+
+var _dispatcherJs = require('../dispatcher.js');
+
+var _dispatcherJs2 = _interopRequireDefault(_dispatcherJs);
+
+var _ModelsNodeJs = require('../Models/node.js');
+
+var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
+
+var _utilsWebapiJs = require('../utils/webapi.js');
+
+var WebAPI = _interopRequireWildcard(_utilsWebapiJs);
+
+var AddNode = (function (_Action) {
+  _inherits(AddNode, _Action);
+
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
   function AddNode(node) {
     _classCallCheck(this, AddNode);
 
@@ -106979,7 +108459,11 @@ var AddNode = (function (_Action) {
 })(_actionJs2['default']);
 
 function addNode(node, title, markdown, renderer) {
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
   WebAPI.addNewChild(node, title, markdown, renderer, function (node) {
+=======
+  WebAPI.addNewChild(node, title, markdown, "Resource", function (node) {
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
     var action = new AddNode(node);
     _dispatcherJs2['default'].dispatch(action);
   });
@@ -106987,6 +108471,7 @@ function addNode(node, title, markdown, renderer) {
 
 module.exports = exports['default'];
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"../Models/node.js":236,"../dispatcher.js":240,"../utils/webapi.js":243,"./action.js":228}],230:[function(require,module,exports){
 'use strict';
@@ -107048,6 +108533,9 @@ module.exports = exports['default'];
 =======
 },{"../Models/node.js":624,"../dispatcher.js":628,"../utils/webapi.js":631,"./action.js":617}],619:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"../Models/node.js":614,"../dispatcher.js":618,"../utils/webapi.js":621,"./action.js":608}],610:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -107095,11 +108583,15 @@ function expandWeek(tag) {
 
 module.exports = exports['default'];
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"../Models/node.js":236,"../dispatcher.js":240,"./action.js":228}],232:[function(require,module,exports){
 =======
 },{"../Models/node.js":624,"../dispatcher.js":628,"./action.js":617}],620:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"../Models/node.js":614,"../dispatcher.js":618,"./action.js":608}],611:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -107236,11 +108728,15 @@ function piazzaPostsFetched(posts) {
 
 module.exports = exports['default'];
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"../Models/node.js":236,"../dispatcher.js":240,"../utils/webapi.js":243,"./action.js":228}],234:[function(require,module,exports){
 =======
 },{"../dispatcher.js":628,"./action.js":617,"immutable":312}],622:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"../Models/node.js":614,"../dispatcher.js":618,"./action.js":608,"immutable":312}],612:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -107276,11 +108772,15 @@ function getRenderedElement(tag, node, ui) {
 
 module.exports = exports['default'];
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./renderer.js":235,"react":227}],235:[function(require,module,exports){
 =======
 },{"./renderer.js":623,"react":609}],623:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./renderer.js":613,"react":607}],613:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -107362,6 +108862,9 @@ var _utilsTitlecapsJs2 = _interopRequireDefault(_utilsTitlecapsJs);
 var _utilsWebapiJs = require('../utils/webapi.js');
 
 var WebAPI = _interopRequireWildcard(_utilsWebapiJs);
+
+//TODO: this is hardcoded. fix plz
+var classId = "if44ov1fn5a505";
 
 var mdRenderer = new _marked2['default'].Renderer();
 mdRenderer.link = function (href, title, text) {
@@ -107854,11 +109357,15 @@ var AlertDismissable = (function (_React$Component9) {
   return AlertDismissable;
 })(_react2['default'].Component);
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"../Actions/addnode.js":229,"../Actions/editnode.js":230,"../Actions/expandweek.js":231,"../Actions/removenode.js":233,"../Stores/nodestore.js":237,"../utils/titlecaps.js":242,"./createelement.js":234,"marked":52,"react":227,"react-bootstrap/lib/Alert":53,"react-bootstrap/lib/ButtonInput":56,"react-bootstrap/lib/Input":61,"react-dom":71}],236:[function(require,module,exports){
 =======
 },{"../Actions/addnode.js":618,"../Actions/expandweek.js":619,"../Models/node.js":624,"../Stores/nodestore.js":625,"../utils/titlecaps.js":630,"../utils/webapi.js":631,"./createelement.js":622,"marked":314,"partial":315,"react":609,"react-bootstrap/lib/Alert":418,"react-bootstrap/lib/ButtonInput":421,"react-bootstrap/lib/Input":427,"react-bootstrap/lib/Modal":429,"react-bootstrap/lib/ModalBody":430,"react-dom":453}],624:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"../Actions/addnode.js":609,"../Actions/expandweek.js":610,"../Stores/nodestore.js":615,"../utils/titlecaps.js":620,"../utils/webapi.js":621,"./createelement.js":612,"marked":314,"react":607,"react-bootstrap/lib/Alert":417,"react-bootstrap/lib/ButtonInput":420,"react-bootstrap/lib/Input":426,"react-bootstrap/lib/Modal":428,"react-bootstrap/lib/ModalBody":429,"react-dom":452}],614:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 
 
 //internal model for a Node. used across the frontend
@@ -107890,11 +109397,15 @@ var Node = function Node(node) {
 exports["default"] = Node;
 module.exports = exports["default"];
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],237:[function(require,module,exports){
 =======
 },{}],625:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],615:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108032,11 +109543,15 @@ var nodeStore = new NodeStore(_dispatcherJs2['default']);
 exports['default'] = nodeStore;
 module.exports = exports['default'];
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"../Actions/action.js":228,"../Models/node.js":236,"../dispatcher.js":240,"../utils/webapi.js":243,"flux":32,"flux/utils":49,"immutable":50}],238:[function(require,module,exports){
 =======
 },{"../Actions/action.js":617,"../Models/node.js":624,"../dispatcher.js":628,"flux":294,"flux/utils":311,"immutable":312}],626:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"../Actions/action.js":608,"../Models/node.js":614,"../dispatcher.js":618,"flux":294,"flux/utils":311,"immutable":312}],616:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108124,11 +109639,15 @@ var uiStateStore = new UIStateStore(_dispatcherJs2['default']);
 exports['default'] = uiStateStore;
 module.exports = exports['default'];
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"../Actions/action.js":228,"../Models/node.js":236,"../dispatcher.js":240,"flux":32,"flux/utils":49,"immutable":50}],239:[function(require,module,exports){
 =======
 },{"../Actions/action.js":617,"../Models/node.js":624,"../dispatcher.js":628,"flux":294,"flux/utils":311,"immutable":312}],627:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"../Actions/action.js":608,"../Models/node.js":614,"../dispatcher.js":618,"flux":294,"flux/utils":311,"immutable":312}],617:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108230,11 +109749,15 @@ var ApplicationContainer = _fluxUtils.Container.create(ApplicationComponent);
 exports['default'] = ApplicationContainer;
 module.exports = exports['default'];
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./Actions/open.js":232,"./Components/createelement.js":234,"./Models/node.js":236,"./Stores/nodestore.js":237,"./Stores/uistatestore.js":238,"./utils/webapi.js":243,"flux/utils":49,"jquery":51,"react":227}],240:[function(require,module,exports){
 =======
 },{"./Actions/open.js":620,"./Components/createelement.js":622,"./Models/node.js":624,"./Stores/nodestore.js":625,"./Stores/uistatestore.js":626,"./utils/webapi.js":631,"flux/utils":311,"jquery":313,"react":609}],628:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./Actions/open.js":611,"./Components/createelement.js":612,"./Models/node.js":614,"./Stores/nodestore.js":615,"./Stores/uistatestore.js":616,"./utils/webapi.js":621,"flux/utils":311,"jquery":313,"react":607}],618:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108247,11 +109770,15 @@ var dispatcher = new _flux.Dispatcher();
 exports['default'] = dispatcher;
 module.exports = exports['default'];
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"flux":32}],241:[function(require,module,exports){
 =======
 },{"flux":294}],629:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"flux":294}],619:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 (function (global){
 'use strict';
 
@@ -108291,11 +109818,15 @@ global.HTTP = http;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"./application.js":239,"./utils/webapi.js":243,"jquery":51,"react":227,"react-dom":71}],242:[function(require,module,exports){
 =======
 },{"./application.js":627,"./utils/webapi.js":631,"jquery":313,"react":609,"react-dom":453,"stream-http":610}],630:[function(require,module,exports){
 >>>>>>> master
+=======
+},{"./application.js":617,"./utils/webapi.js":621,"jquery":313,"react":607,"react-dom":452}],620:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 /*
  * Title Caps
  *
@@ -108347,11 +109878,15 @@ function upper(word) {
 }
 module.exports = exports["default"];
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{}],243:[function(require,module,exports){
 =======
 },{}],631:[function(require,module,exports){
 >>>>>>> master
+=======
+},{}],621:[function(require,module,exports){
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108615,11 +110150,15 @@ function init(callback) {
   });
 }
 
+<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
 <<<<<<< HEAD
 },{"../Models/node.js":236,"jquery":51}]},{},[241])
 =======
 },{"../Actions/piazzapostsfetched.js":621,"../Models/node.js":624,"immutable":312,"jquery":313,"piazza-api":417,"stream-http":610}]},{},[629])
 >>>>>>> master
+=======
+},{"../Models/node.js":614,"jquery":313,"piazza-api":416}]},{},[619])
+>>>>>>> began framework adds for piazza integration:frontend/js/index.js
 
 
 //# sourceMappingURL=index.js.map

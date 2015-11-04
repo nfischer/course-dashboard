@@ -261,6 +261,7 @@ class Course(Resource):
             raise InvalidUsage('Unknown operation type')
 
 
+
 # @app.route('/posterator', methods=['GET'])
 # def posterator():
 #     return render_template('posterator.html')

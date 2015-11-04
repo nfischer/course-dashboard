@@ -22,6 +22,9 @@ import removeNode from '../Actions/removenode.js';
 import titleCaps from '../utils/titlecaps.js';
 import * as WebAPI from '../utils/webapi.js';
 
+//TODO: this is hardcoded. fix plz
+var classId = "if44ov1fn5a505";
+
 var mdRenderer = new marked.Renderer();
 mdRenderer.link = function(href: string, title: string, text: string){
   return `<a href="${href}" title="${title}" target="_blank">${text}</a>`;
