@@ -7,12 +7,12 @@ import Node from '../Models/node.js';
 
 
 class Open extends Action{
-  constructor(rootId: string, nodes: Map<string, Node>){
-    super("open", {rootId, nodes});
+  constructor(rootId: string, nodes: Map<string, Node>, userInfo: Object){
+    super("open", {rootId, nodes, userInfo});
   }
 }
 
-export default function open(rootId: string, nodes: Map<string, Node>) {
-  let action = new Open(rootId, nodes);
+export default function open(rootId: string, nodes: Map<string, Node>, userInfo: Object) {
+  let action = new Open(rootId, nodes, userInfo);
   dispatcher.dispatch(action);
 }

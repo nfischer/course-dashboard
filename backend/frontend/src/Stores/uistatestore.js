@@ -9,7 +9,7 @@ import dispatcher from '../dispatcher.js';
 
 class UIState {
   currentWeek: string;
-  piazzaPosts: List<Object>;
+  piazza_user: Object;
 
   constructor(currentWeek: string){
     this.currentWeek = currentWeek;
@@ -28,19 +28,18 @@ class UIStateStore extends ReduceStore<?UIState> {
     let newState;
     switch(action.name){
     case "open":
-      return new UIState("");
-    case "piazzaPostsFetched":
+      //TODO: this is really ugly. may want to use Object.assign
       newState = new UIState(state.currentWeek);
-      newState.piazzaPosts = action.data.posts;
-      return newState;
+      newState.piazza_user = action.data.user;
+      break;
     case "expandWeek":
       //TODO: this is really ugly. may want to use Object.assign
       newState = new UIState(action.data);
-      newState.piazzaPosts = state.piazzaPosts;
-      return newState;
+      newState.piazza_user = state.piazza_user;
+      break;
     }
 
-    return state;
+    return newState;
   }
 }
 
