@@ -185,6 +185,41 @@ class Root(Resource):
         root_list = cursor.fetchall()
         return root_list
 
+class Course(Resource):
+    def post(self, course_id, operation):
+        if operation == 'setpiazza':
+            try:
+                g.db.execute('''INSERT INTO courses (course_id, piazza_cid) VALUES (?, ?)''',
+                             [int(course_id), request.form['piazza_cid']])
+                g.db.commit()
+                return jsonify(message='Successfully added piazza ID for course', course_id=course_id)
+            except Exception as e:
+                print str(e)
+                raise InvalidUsage('Cannot set more than once')
+        elif operation == 'resetpiazza':
+            cursor = g.db.execute('''UPDATE courses
+                                     SET piazza_cid=(?)
+                                     WHERE course_id=(?)''',
+                                  [request.form['piazza_cid'], int(course_id)])
+            if cursor.rowcount == 0:
+                raise InvalidUsage('Entry not found in database. Please use `setpiazza` instead')
+            g.db.commit()
+            return jsonify(message='Successfully updated piazza ID for course', course_id=course_id)
+        else:
+            raise InvalidUsage('Unknown operation type')
+
+    def get(self, course_id, operation):
+        if operation != 'getpiazza':
+            raise InvalidUsage('Unknown operation type')
+
+        cursor = g.db.execute('''SELECT piazza_cid
+                                 FROM courses
+                                 WHERE course_id=%s''' % course_id)
+        piazza_id_str = cursor.fetchone()
+        if piazza_id_str is None:
+            raise InvalidUsage('Given course does not have a Piazza ID')
+        else:
+            return jsonify(message='Returning piazza ID for course', course_id=course_id, piazza_cid=piazza_id_str)
 
 # @deprecated
 # class Link(Resource):
@@ -219,6 +254,7 @@ api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<ope
 api.add_resource(Tree, '/<course_id>/tree/')
 # api.add_resource(Link, '/link/')
 api.add_resource(Root, '/<course_id>/root/<operation>/', '/<course_id>/root/<operation>/<root_id>/')
+api.add_resource(Course, '/<course_id>/course/<operation>/')
 
 # @app.route('/addNode', methods=['POST'])
 

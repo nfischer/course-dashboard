@@ -1,6 +1,7 @@
 drop table if exists nodes;
 drop table if exists children;
 drop table if exists links;
+drop table if exists courses;
 CREATE TABLE `nodes` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT,
     `contents` VARCHAR(300),
@@ -25,5 +26,9 @@ CREATE TABLE `children` (
     FOREIGN KEY(`parent_id`) REFERENCES nodes ( 'id' )
 );
 
+CREATE TABLE `courses` (
+    `course_id` INTEGER PRIMARY KEY NOT NULL,
+    `piazza_cid` VARCHAR(100) NOT NULL
+);
 
 PRAGMA foreign_keys = ON;
