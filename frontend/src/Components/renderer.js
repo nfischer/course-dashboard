@@ -15,9 +15,6 @@ import addNode from '../Actions/addnode.js';
 
 import titleCaps from '../utils/titlecaps.js';
 
-//TODO: this is hardcoded. fix plz
-var classId = "if44ov1fn5a505";
-
 var mdRenderer = new marked.Renderer();
 mdRenderer.link = function(href: string, title: string, text: string){
   return `<a href="${href}" title="${title}" target="_blank">${text}</a>`;
@@ -25,7 +22,6 @@ mdRenderer.link = function(href: string, title: string, text: string){
 marked.setOptions({
   renderer: mdRenderer
 });
-
 
 function mapObject(obj: Object, callback: any) : Array<any> { // replace any
     return Object.keys(obj).sort().map(function(value, index, array) {
