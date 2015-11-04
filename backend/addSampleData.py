@@ -46,6 +46,12 @@ def delete_node(node_id):
     ret = post(os.path.join(URL, 'node/delete', node_id, ''), data={})
     return ret
 
+def add_root(root_id):
+    """Uses the backend API to add a root to the tree"""
+    root_id = str(root_id)
+    ret = post(os.path.join(URL, 'root/set', root_id, ''), data={})
+    return ret
+
 ## @private
 def node_compare(node1, node2):
     id1 = int(node1['id'])
@@ -73,3 +79,6 @@ if __name__ == '__main__':
         myid = int(node['id'])
         mychildren = json.dumps(node['children'])
         print update_node(myid, children=mychildren).json()
+
+    # Set the root to be node 54
+    print add_root(54).json()
