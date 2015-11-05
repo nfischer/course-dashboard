@@ -24,6 +24,8 @@ def get_node(node_id):
     node_id = str(node_id)
     full_url = os.path.join(URL, 'node/get', node_id, '')
     ret = get(full_url)
+    if ret.status_code != 200:
+        raise ValueError('Unable to get node')
     return ret
 
 def update_node(node_id, contents='', renderer='', children=''):
