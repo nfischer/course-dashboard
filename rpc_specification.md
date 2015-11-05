@@ -148,3 +148,60 @@ Root
   "id": "1"
 }
 ```
+
+Piazza Integration
+------------------
+
+### Adding a Piazza course ID
+
+ - end point: `/<course_id>/course/setpiazza/`, where `<course_id>` is some integer
+ - request: HTTP POST
+ - data (input):
+```
+{
+  "piazza_cid": "123456789"
+}
+```
+ - return data:
+```
+{
+  "message": "Successfully added piazza ID for course",
+  "course_id": "1"
+}
+```
+ - This will fail if the course already has a Piazza ID (because we don't want
+   to overwrite it unless we **really** mean to)
+
+### Restting a Piazza course ID
+
+ - end point: `/<course_id>/course/resetpiazza/` where `<course_id>` is an integer
+ - request: HTTP POST
+ - data (input):
+```
+{
+  "piazza_cid": "123456789"
+}
+```
+ - return data:
+```
+{
+  "message": "Successfully added piazza ID for course",
+  "course_id": "1"
+}
+```
+ - This will fail if the course ID is not already present (by design to prevent
+   this from being accidentally changed)
+
+### Accessing
+
+ - end point: `/<course_id>/course/getpiazza/` where `<course_id>` is some integer
+ - request: HTTP GET
+ - data (input): None
+ - return data:
+```
+{
+  "message": "Returning piazza ID for course",
+  "course_id": "1",
+  "piazza_cid": "123456789"
+}
+```

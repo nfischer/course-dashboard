@@ -17,6 +17,8 @@ def create_node(contents='foo', renderer='bar'):
     """Uses the backend API to create a node"""
     node_value = {'contents': contents, 'renderer': renderer}
     ret = post(os.path.join(URL, 'node/add/'), data=node_value)
+    if ret.status_code != 200:
+        raise ValueError('Unable to create node')
     return ret
 
 def get_node(node_id):
@@ -24,6 +26,8 @@ def get_node(node_id):
     node_id = str(node_id)
     full_url = os.path.join(URL, 'node/get', node_id, '')
     ret = get(full_url)
+    if ret.status_code != 200:
+        raise ValueError('Unable to access node %s' % node_id)
     return ret
 
 def update_node(node_id, contents='', renderer='', children=''):
@@ -38,12 +42,24 @@ def update_node(node_id, contents='', renderer='', children=''):
         children = old_node['children']
     node_value = {'contents': contents, 'renderer': renderer, 'children': children}
     ret = post(os.path.join(URL, 'node/update', node_id, ''), data=node_value)
+    if ret.status_code != 200:
+        raise ValueError('Unable to update node %s' % node_id)
     return ret
 
 def delete_node(node_id):
     """Uses the backend API to delete a node that already exists"""
     node_id = str(node_id)
     ret = post(os.path.join(URL, 'node/delete', node_id, ''), data={})
+    if ret.status_code != 200:
+        raise ValueError('Unable to delete node %s' % node_id)
+    return ret
+
+def add_root(root_id):
+    """Uses the backend API to add a root to the tree"""
+    root_id = str(root_id)
+    ret = post(os.path.join(URL, 'root/set', root_id, ''), data={})
+    if ret.status_code != 200:
+        raise ValueError('Unable to add root %s' % root_id)
     return ret
 
 ## @private
@@ -73,3 +89,6 @@ if __name__ == '__main__':
         myid = int(node['id'])
         mychildren = json.dumps(node['children'])
         print update_node(myid, children=mychildren).json()
+
+    # Set the root to be node 54
+    print add_root(54).json()
