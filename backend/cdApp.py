@@ -193,6 +193,7 @@ class Course(Resource):
     def post(self, course_id, operation):
         if operation == 'setpiazza':
             try:
+                print request.form['piazza_cid']
                 g.db.execute('''INSERT INTO courses
                                 (course_id, piazza_cid) VALUES (?, ?)''',
                              [int(course_id), request.form['piazza_cid']])
@@ -231,10 +232,11 @@ class Course(Resource):
                                      FROM courses
                                      WHERE course_id=(?)''',
                                   [int(course_id)])
-            piazza_id_str = cursor.fetchone()
+            piazza_id_str = cursor.fetchone()['piazza_cid']
             if piazza_id_str is None:
                 raise InvalidUsage('Given course does not have a Piazza ID')
             else: #TODO: handle errors
+                print piazza_id_str
                 p = Piazza()
                 p.user_login(email="sakekasi@ucla.edu", password="password")
                 cls = p.network(piazza_id_str)
@@ -251,18 +253,6 @@ class Course(Resource):
 @app.route('/posterator', methods=['GET'])
 def posterator():
     return render_template('posterator.html')
-
-@app.route('/piazza', methods=['GET'])
-def piazza():
-    p = Piazza()
-    p.user_login(email="sakekasi@ucla.edu", password="password")
-    cs130 = p.network("if44ov1fn5a505")
-
-    def getPosts():
-        for post in cs130.iter_all_posts():
-            yield json.dumps(post)
-
-    return Response(getPosts(), mimetype='application/json')
 
 
 api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<operation>/<node_id>/')
