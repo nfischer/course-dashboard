@@ -196,6 +196,7 @@ class Course(Resource):
     def post(self, course_id, operation):
         if operation == 'setpiazza':
             try:
+                print request.form['piazza_cid']
                 g.db.execute('''INSERT INTO courses
                                 (course_id, piazza_cid) VALUES (?, ?)''',
                              [int(course_id), request.form['piazza_cid']])
