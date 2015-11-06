@@ -108863,9 +108863,6 @@ var _utilsWebapiJs = require('../utils/webapi.js');
 
 var WebAPI = _interopRequireWildcard(_utilsWebapiJs);
 
-//TODO: this is hardcoded. fix plz
-var classId = "if44ov1fn5a505";
-
 var mdRenderer = new _marked2['default'].Renderer();
 mdRenderer.link = function (href, title, text) {
   return '<a href="' + href + '" title="' + title + '" target="_blank">' + text + '</a>';
