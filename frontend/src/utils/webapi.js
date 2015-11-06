@@ -1,7 +1,9 @@
 import $ from 'jquery';
-import piazza from 'piazza-api';
+import * as piazza from 'piazza-api';
 
 import Node from '../Models/node.js';
+
+//TODO: clean up CALLBACK HELL
 
 //this is a module exclusively for sending specific actions to the web api.
 //complex actions can be defined here in terms of the basic RESTful API
@@ -19,7 +21,7 @@ var mainUrl = "";
 var userId = 1;
 
 //TODO: this is hardcoded. fix plz
-var classId = "if44ov1fn5a505";
+export var classId = "if44ov1fn5a505";
 
 function getNode(nodeId: string){
   let endpoint = mainUrl + `/${courseId}/node/${nodeId}/`;
@@ -113,53 +115,70 @@ var piazza_class;
 
 export function init(callback: any){
   let tree;
-  getTree().then((data) => {
-    tree = data;
-    return getUserInfo(userId);
-  }, (jqXHR, textStatus, errorThrown) => {
-    console.error(textStatus);
-    throw errorThrown;
-  }).then((userInfo) => {
-    return piazza.login(userInfo.piazza_username, userInfo.piazza_password);
-  }, (jqXHR, textStatus, errorThrown) => {
-    console.error(textStatus);
-    throw errorThrown;
-  }).then((user) => {
-    piazza_class = user.getClassById(classId);
-    callback(tree, user);
-  }).catch(function(error){
-    console.log(error);
-    throw error;
+  Promise.resolve(
+    getTree().then((data) => {
+      tree = data;
+      return getUserInfo(userId);
+    }, (jqXHR, textStatus, errorThrown) => {
+      console.error("Error requesting tree:",textStatus);
+      throw errorThrown;
+    }).then((userInfo) => {
+      //this promise type is different than jquery promise type. need to address
+        console.log(userInfo.piazza_username, userInfo.piazza_password);
+        return piazza.login(userInfo.piazza_username, userInfo.piazza_password);
+      }, (jqXHR, textStatus, errorThrown) => {
+        console.error("Error requesting user info:", textStatus);
+        throw errorThrown;
+    })
+  ).then((user) => {
+      console.log(user);
+      user.getClassById(classId).then(function(cls){
+        piazza_class = cls;
+      }, function(error){
+        console.error("Error getting class:",error);
+        throw error;
+      });
+      callback(tree, user);
+    }, function(error){
+      console.error("Error getting user:",error);
+      throw error;
   });
 }
 
-var folderData = null;
+var folderData = {};
 
-export function applyTimeFilter({start, end}){ //may want to make this asynchronous
-  if(!folderData){
-    folderData = {};
-
+export function applyTimeFilter({start, end}, callback){ //may want to make this asynchronous
+  let folderData = Object.keys(folderData).length > 0 ?
+    new Promise(function(resolve, reject){
+      resolve( folderData );
+    }) :
     Promise.all(piazza_class.folders.map(piazza_class.filterByFolder.bind(piazza_class)))
       .then(function(foldersFeedItems){
-        foldersFeedItems.forEach((feedItems, i) => {
-          folderData[piazza_class.folders[i]] = feedItems;
-        });
-      }).catch(function(error){
-        console.log(error);
-        throw error;
+          foldersFeedItems.forEach((feedItems, i) => {
+            folderData[piazza_class.folders[i]] = feedItems;
+          });
+
+          return folderData
+        }, function(error){
+          console.error("Error getting folders:", error);
+          throw error;
       });
-  }
 
-  let filtered = [];
-  let startDate = Date.parse(start);
-  let endDate = Date.parse(end);
+  folderData.then((folderData) => {
+      let filtered = [];
+      let startDate = Date.parse(start);
+      let endDate = Date.parse(end);
 
-  for( folder in folderData ){
-    filtered = filtered.concat(folderData[folder].filter(item => {
-      let date = Date.parse(item.lastModified);
-      return start <= date && date <= end;
-    });
-  }
+      for( folder in folderData ){
+        filtered = filtered.concat(folderData[folder].filter(item => {
+          let date = Date.parse(item.lastModified);
+          return start <= date && date <= end;
+        }));
+      }
 
-  return filtered;
+      callback(filtered);
+    }, (error) => {
+      console.error("Error filtering folders:", error);
+      throw error;
+  });
 }

@@ -14,6 +14,7 @@ import expandWeek from '../Actions/expandweek.js';
 import addNode from '../Actions/addnode.js';
 
 import titleCaps from '../utils/titlecaps.js';
+import * as WebAPI from '../utils/webapi.js';
 
 var mdRenderer = new marked.Renderer();
 mdRenderer.link = function(href: string, title: string, text: string){
@@ -105,12 +106,43 @@ export class WeekCollapsed extends React.Component{
 }
 
 export class Announcements extends React.Component{ //this should pretty much behave like a list
+  constructor(){
+    super();
+    this.state = {
+      filteredItems: []
+    };
+  }
+
   componentWillMount(){
-    //initiate fetch based on filter here
+    //not sure if we need to parse the JSON
+    let filter = JSON.parse(this.node.contents);
+    WebAPI.applyTimeFilter(filter, (filteredItems) => {
+      this.setState({filteredItems});
+    });
   }
 
   render(){
-    //render here
+    return (
+      <announcements>
+        <h1>{titleCaps(this.props.tag)}</h1>
+        {
+          this.state.filteredItems.map((item) =>{
+            //create artificial node for this item
+            let artificialNode = new Node({
+              id: "-1",
+              contents: `[${item.content_snippet}](http://piazza.com/class/${WebAPI.classId}?cid=${item.id})`,
+              renderer: "Piazza-Item",
+              children: {}
+            });
+
+            return <ListElement tag={item.title}
+                                key={item.id}
+                                node={artificialNode}
+                                ui={this.props.ui} />
+          })
+        }
+      </announcements>
+    );
   }
 }
 

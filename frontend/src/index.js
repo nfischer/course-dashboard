@@ -6,6 +6,7 @@ import * as WEBAPI from './utils/webapi.js';
 
 import Application from './application.js';
 
+
 ReactDOM.render(
   <Application/>,
   document.getElementById('appArea')
