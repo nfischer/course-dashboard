@@ -98,6 +98,6 @@ if __name__ == '__main__':
         print update_node(myid, children=mychildren).json()
 
     # add the cs 130 course
-    print add_course("if44ov1fn5a505")
+    print add_course("if44ov1fn5a505").json()
     # Set the root to be node 54
     print add_root(54).json()
