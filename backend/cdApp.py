@@ -1,9 +1,9 @@
 import sqlite3
 from flask import Flask, request, g, render_template, \
-    jsonify #, flash, url_for, session, abort, redirect
-# from contextlib import closing
-from flask_restful import Resource, Api # , reqparse
+    jsonify, Response
+from flask_restful import Resource, Api
 import json
+from piazza_api import Piazza
 
 # configuration
 DATABASE = 'db/course-dashboard.db'
@@ -230,6 +230,18 @@ class Course(Resource):
 @app.route('/posterator', methods=['GET'])
 def posterator():
     return render_template('posterator.html')
+
+@app.route('/piazza', methods=['GET'])
+def piazza():
+    p = Piazza()
+    p.user_login(email="sakekasi@ucla.edu", password="password")
+    cs130 = p.network("if44ov1fn5a505")
+
+    def getPosts():
+        for post in cs130.iter_all_posts():
+            yield json.dumps(post)
+
+    return Response(getPosts(), mimetype='application/json')
 
 
 api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<operation>/<node_id>/')

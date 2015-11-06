@@ -20,7 +20,7 @@ var b = browserify({
     basedir: 'src/',
     debug: true
   })
-  .plugin(resolutions, '*')
+  .plugin(resolutions, ['react', 'react-dom', 'jquery'])
   .transform(babelify);
 
 function watch_browser(){
