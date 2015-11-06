@@ -133,7 +133,6 @@ class Node(Resource):
             raise InvalidUsage('node_id is out of range')
         return return_val
 
-
 class Tree(Resource):
     def get(self, course_id):
         """
@@ -252,6 +251,18 @@ class Course(Resource):
 @app.route('/posterator', methods=['GET'])
 def posterator():
     return render_template('posterator.html')
+
+@app.route('/piazza', methods=['GET'])
+def piazza():
+    p = Piazza()
+    p.user_login(email="sakekasi@ucla.edu", password="password")
+    cs130 = p.network("if44ov1fn5a505")
+
+    def getPosts():
+        for post in cs130.iter_all_posts():
+            yield json.dumps(post)
+
+    return Response(getPosts(), mimetype='application/json')
 
 
 api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<operation>/<node_id>/')
