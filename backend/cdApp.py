@@ -201,6 +201,7 @@ class Course(Resource):
                 return jsonify(message='Successfully added piazza ID for course', course_id=course_id)
             except Exception as e:
                 raise InvalidUsage('Cannot set more than once')
+
         elif operation == 'resetpiazza':
             cursor = g.db.execute('''UPDATE courses
                                      SET piazza_cid=(?)
@@ -210,38 +211,47 @@ class Course(Resource):
             if cursor.rowcount == 0:
                 raise InvalidUsage('Entry not found in database. Please use `setpiazza` instead')
             return jsonify(message='Successfully updated piazza ID for course', course_id=course_id)
+
         else:
             raise InvalidUsage('Unknown operation type')
 
     def get(self, course_id, operation):
-        if operation != 'getpiazza':
+        if operation == 'getpiazza':
+            cursor = g.db.execute('''SELECT piazza_cid
+                                     FROM courses
+                                     WHERE course_id=(?)''',
+                                  [int(course_id)])
+            piazza_id_str = cursor.fetchone()
+            if piazza_id_str is None:
+                raise InvalidUsage('Given course does not have a Piazza ID')
+            else:
+                return jsonify(message='Returning piazza ID for course', course_id=course_id, piazza_cid=piazza_id_str)
+
+        elif operation == 'getpiazzaposts':
+            cursor = g.db.execute('''SELECT piazza_cid
+                                     FROM courses
+                                     WHERE course_id=(?)''',
+                                  [int(course_id)])
+            piazza_id_str = cursor.fetchone()
+            if piazza_id_str is None:
+                raise InvalidUsage('Given course does not have a Piazza ID')
+            else: #TODO: handle errors
+                p = Piazza()
+                p.user_login(email="sakekasi@ucla.edu", password="password")
+                cls = p.network(piazza_id_str)
+
+                def getPosts():
+                    for post in cls.iter_all_posts():
+                        yield json.dumps(post)
+
+                return Response(getPosts(), mimetype="application/json")
+        else:
             raise InvalidUsage('Unknown operation type')
 
-        cursor = g.db.execute('''SELECT piazza_cid
-                                 FROM courses
-                                 WHERE course_id=(?)''',
-                              [int(course_id)])
-        piazza_id_str = cursor.fetchone()
-        if piazza_id_str is None:
-            raise InvalidUsage('Given course does not have a Piazza ID')
-        else:
-            return jsonify(message='Returning piazza ID for course', course_id=course_id, piazza_cid=piazza_id_str)
 
 @app.route('/posterator', methods=['GET'])
 def posterator():
     return render_template('posterator.html')
-
-@app.route('/piazza', methods=['GET'])
-def piazza():
-    p = Piazza()
-    p.user_login(email="sakekasi@ucla.edu", password="password")
-    cs130 = p.network("if44ov1fn5a505")
-
-    def getPosts():
-        for post in cs130.iter_all_posts():
-            yield json.dumps(post)
-
-    return Response(getPosts(), mimetype='application/json')
 
 
 api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<operation>/<node_id>/')
