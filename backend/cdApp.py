@@ -223,6 +223,7 @@ class Course(Resource):
                                      FROM courses
                                      WHERE course_id=(?)''',
                                   [int(course_id)])
+
             piazza_id_row = cursor.fetchone()
             if piazza_id_row is None:
                 raise InvalidUsage('Given course does not have a Piazza ID')
