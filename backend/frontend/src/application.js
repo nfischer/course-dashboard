@@ -20,8 +20,8 @@ class ApplicationComponent extends React.Component{
   }
 
   componentDidMount() : void {
-    WebAPI.init(function(tree, user){
-      open(tree.rootId, tree.nodes, user);
+    WebAPI.init(function(tree){
+      open(tree.rootId, tree.nodes);
     });
   }
 

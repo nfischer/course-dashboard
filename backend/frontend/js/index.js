@@ -1,12 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/assign"), __esModule: true };
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"core-js/library/fn/object/assign":10}],2:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/create"), __esModule: true };
-},{"core-js/library/fn/object/create":11}],3:[function(require,module,exports){
-module.exports = { "default": require("core-js/library/fn/object/set-prototype-of"), __esModule: true };
-},{"core-js/library/fn/object/set-prototype-of":12}],4:[function(require,module,exports){
-=======
 },{"core-js/library/fn/object/assign":12}],2:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/create"), __esModule: true };
 },{"core-js/library/fn/object/create":13}],3:[function(require,module,exports){
@@ -16,7 +9,6 @@ module.exports = { "default": require("core-js/library/fn/object/keys"), __esMod
 },{"core-js/library/fn/object/keys":15}],5:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/set-prototype-of"), __esModule: true };
 },{"core-js/library/fn/object/set-prototype-of":16}],6:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
 "use strict";
 
 exports["default"] = function (instance, Constructor) {
@@ -26,11 +18,7 @@ exports["default"] = function (instance, Constructor) {
 };
 
 exports.__esModule = true;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],5:[function(require,module,exports){
-=======
 },{}],7:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
 "use strict";
 
 var _Object$assign = require("babel-runtime/core-js/object/assign")["default"];
@@ -50,11 +38,7 @@ exports["default"] = _Object$assign || function (target) {
 };
 
 exports.__esModule = true;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"babel-runtime/core-js/object/assign":1}],6:[function(require,module,exports){
-=======
 },{"babel-runtime/core-js/object/assign":1}],8:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
 "use strict";
 
 var _Object$create = require("babel-runtime/core-js/object/create")["default"];
@@ -78,11 +62,7 @@ exports["default"] = function (subClass, superClass) {
 };
 
 exports.__esModule = true;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"babel-runtime/core-js/object/create":2,"babel-runtime/core-js/object/set-prototype-of":3}],7:[function(require,module,exports){
-=======
 },{"babel-runtime/core-js/object/create":2,"babel-runtime/core-js/object/set-prototype-of":5}],9:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
 "use strict";
 
 exports["default"] = function (obj) {
@@ -92,11 +72,7 @@ exports["default"] = function (obj) {
 };
 
 exports.__esModule = true;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],8:[function(require,module,exports){
-=======
 },{}],10:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
 "use strict";
 
 exports["default"] = function (obj) {
@@ -104,186 +80,6 @@ exports["default"] = function (obj) {
     return obj;
   } else {
     var newObj = {};
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-
-    if (obj != null) {
-      for (var key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-      }
-    }
-
-    newObj["default"] = obj;
-    return newObj;
-  }
-};
-
-exports.__esModule = true;
-},{}],9:[function(require,module,exports){
-"use strict";
-
-exports["default"] = function (obj, keys) {
-  var target = {};
-
-  for (var i in obj) {
-    if (keys.indexOf(i) >= 0) continue;
-    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
-    target[i] = obj[i];
-  }
-
-  return target;
-};
-
-exports.__esModule = true;
-},{}],10:[function(require,module,exports){
-require('../../modules/es6.object.assign');
-module.exports = require('../../modules/$.core').Object.assign;
-},{"../../modules/$.core":16,"../../modules/es6.object.assign":28}],11:[function(require,module,exports){
-var $ = require('../../modules/$');
-module.exports = function create(P, D){
-  return $.create(P, D);
-};
-},{"../../modules/$":24}],12:[function(require,module,exports){
-require('../../modules/es6.object.set-prototype-of');
-module.exports = require('../../modules/$.core').Object.setPrototypeOf;
-},{"../../modules/$.core":16,"../../modules/es6.object.set-prototype-of":29}],13:[function(require,module,exports){
-module.exports = function(it){
-  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
-  return it;
-};
-},{}],14:[function(require,module,exports){
-var isObject = require('./$.is-object');
-module.exports = function(it){
-  if(!isObject(it))throw TypeError(it + ' is not an object!');
-  return it;
-};
-},{"./$.is-object":23}],15:[function(require,module,exports){
-var toString = {}.toString;
-
-module.exports = function(it){
-  return toString.call(it).slice(8, -1);
-};
-},{}],16:[function(require,module,exports){
-var core = module.exports = {version: '1.2.5'};
-if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-},{}],17:[function(require,module,exports){
-// optional / simple context binding
-var aFunction = require('./$.a-function');
-module.exports = function(fn, that, length){
-  aFunction(fn);
-  if(that === undefined)return fn;
-  switch(length){
-    case 1: return function(a){
-      return fn.call(that, a);
-    };
-    case 2: return function(a, b){
-      return fn.call(that, a, b);
-    };
-    case 3: return function(a, b, c){
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function(/* ...args */){
-    return fn.apply(that, arguments);
-  };
-};
-},{"./$.a-function":13}],18:[function(require,module,exports){
-var global    = require('./$.global')
-  , core      = require('./$.core')
-  , PROTOTYPE = 'prototype';
-var ctx = function(fn, that){
-  return function(){
-    return fn.apply(that, arguments);
-  };
-};
-var $def = function(type, name, source){
-  var key, own, out, exp
-    , isGlobal = type & $def.G
-    , isProto  = type & $def.P
-    , target   = isGlobal ? global : type & $def.S
-        ? global[name] : (global[name] || {})[PROTOTYPE]
-    , exports  = isGlobal ? core : core[name] || (core[name] = {});
-  if(isGlobal)source = name;
-  for(key in source){
-    // contains in native
-    own = !(type & $def.F) && target && key in target;
-    if(own && key in exports)continue;
-    // export native or passed
-    out = own ? target[key] : source[key];
-    // prevent global pollution for namespaces
-    if(isGlobal && typeof target[key] != 'function')exp = source[key];
-    // bind timers to global for call from export context
-    else if(type & $def.B && own)exp = ctx(out, global);
-    // wrap global constructors for prevent change them in library
-    else if(type & $def.W && target[key] == out)!function(C){
-      exp = function(param){
-        return this instanceof C ? new C(param) : C(param);
-      };
-      exp[PROTOTYPE] = C[PROTOTYPE];
-    }(out);
-    else exp = isProto && typeof out == 'function' ? ctx(Function.call, out) : out;
-    // export
-    exports[key] = exp;
-    if(isProto)(exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
-  }
-};
-// type bitmap
-$def.F = 1;  // forced
-$def.G = 2;  // global
-$def.S = 4;  // static
-$def.P = 8;  // proto
-$def.B = 16; // bind
-$def.W = 32; // wrap
-module.exports = $def;
-},{"./$.core":16,"./$.global":21}],19:[function(require,module,exports){
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function(it){
-  if(it == undefined)throw TypeError("Can't call method on  " + it);
-  return it;
-};
-},{}],20:[function(require,module,exports){
-module.exports = function(exec){
-  try {
-    return !!exec();
-  } catch(e){
-    return true;
-  }
-};
-},{}],21:[function(require,module,exports){
-// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-var global = module.exports = typeof window != 'undefined' && window.Math == Math
-  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
-if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
-},{}],22:[function(require,module,exports){
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = require('./$.cof');
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
-  return cof(it) == 'String' ? it.split('') : Object(it);
-};
-},{"./$.cof":15}],23:[function(require,module,exports){
-module.exports = function(it){
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-},{}],24:[function(require,module,exports){
-var $Object = Object;
-module.exports = {
-  create:     $Object.create,
-  getProto:   $Object.getPrototypeOf,
-  isEnum:     {}.propertyIsEnumerable,
-  getDesc:    $Object.getOwnPropertyDescriptor,
-  setDesc:    $Object.defineProperty,
-  setDescs:   $Object.defineProperties,
-  getKeys:    $Object.keys,
-  getNames:   $Object.getOwnPropertyNames,
-  getSymbols: $Object.getOwnPropertySymbols,
-  each:       [].forEach
-};
-},{}],25:[function(require,module,exports){
-// 19.1.2.1 Object.assign(target, source, ...)
-var $        = require('./$')
-  , toObject = require('./$.to-object')
-  , IObject  = require('./$.iobject');
-
-=======
 
     if (obj != null) {
       for (var key in obj) {
@@ -316,21 +112,21 @@ exports.__esModule = true;
 },{}],12:[function(require,module,exports){
 require('../../modules/es6.object.assign');
 module.exports = require('../../modules/$.core').Object.assign;
-},{"../../modules/$.core":21,"../../modules/es6.object.assign":33}],13:[function(require,module,exports){
+},{"../../modules/$.core":20,"../../modules/es6.object.assign":33}],13:[function(require,module,exports){
 var $ = require('../../modules/$');
 module.exports = function create(P, D){
   return $.create(P, D);
 };
-},{"../../modules/$":29}],14:[function(require,module,exports){
+},{"../../modules/$":28}],14:[function(require,module,exports){
 require('../../modules/es6.object.is-frozen');
 module.exports = require('../../modules/$.core').Object.isFrozen;
-},{"../../modules/$.core":21,"../../modules/es6.object.is-frozen":34}],15:[function(require,module,exports){
+},{"../../modules/$.core":20,"../../modules/es6.object.is-frozen":34}],15:[function(require,module,exports){
 require('../../modules/es6.object.keys');
 module.exports = require('../../modules/$.core').Object.keys;
-},{"../../modules/$.core":21,"../../modules/es6.object.keys":35}],16:[function(require,module,exports){
+},{"../../modules/$.core":20,"../../modules/es6.object.keys":35}],16:[function(require,module,exports){
 require('../../modules/es6.object.set-prototype-of');
 module.exports = require('../../modules/$.core').Object.setPrototypeOf;
-},{"../../modules/$.core":21,"../../modules/es6.object.set-prototype-of":36}],17:[function(require,module,exports){
+},{"../../modules/$.core":20,"../../modules/es6.object.set-prototype-of":36}],17:[function(require,module,exports){
 module.exports = function(it){
   if(typeof it != 'function')throw TypeError(it + ' is not a function!');
   return it;
@@ -341,13 +137,132 @@ module.exports = function(it){
   if(!isObject(it))throw TypeError(it + ' is not an object!');
   return it;
 };
-},{"./$.is-object":28}],19:[function(require,module,exports){
+},{"./$.is-object":27}],19:[function(require,module,exports){
+var toString = {}.toString;
+
+module.exports = function(it){
+  return toString.call(it).slice(8, -1);
+};
+},{}],20:[function(require,module,exports){
+var core = module.exports = {version: '1.2.6'};
+if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+},{}],21:[function(require,module,exports){
+// optional / simple context binding
+var aFunction = require('./$.a-function');
+module.exports = function(fn, that, length){
+  aFunction(fn);
+  if(that === undefined)return fn;
+  switch(length){
+    case 1: return function(a){
+      return fn.call(that, a);
+    };
+    case 2: return function(a, b){
+      return fn.call(that, a, b);
+    };
+    case 3: return function(a, b, c){
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function(/* ...args */){
+    return fn.apply(that, arguments);
+  };
+};
+},{"./$.a-function":17}],22:[function(require,module,exports){
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function(it){
+  if(it == undefined)throw TypeError("Can't call method on  " + it);
+  return it;
+};
+},{}],23:[function(require,module,exports){
+var global    = require('./$.global')
+  , core      = require('./$.core')
+  , ctx       = require('./$.ctx')
+  , PROTOTYPE = 'prototype';
+
+var $export = function(type, name, source){
+  var IS_FORCED = type & $export.F
+    , IS_GLOBAL = type & $export.G
+    , IS_STATIC = type & $export.S
+    , IS_PROTO  = type & $export.P
+    , IS_BIND   = type & $export.B
+    , IS_WRAP   = type & $export.W
+    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
+    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
+    , key, own, out;
+  if(IS_GLOBAL)source = name;
+  for(key in source){
+    // contains in native
+    own = !IS_FORCED && target && key in target;
+    if(own && key in exports)continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+    // bind timers to global for call from export context
+    : IS_BIND && own ? ctx(out, global)
+    // wrap global constructors for prevent change them in library
+    : IS_WRAP && target[key] == out ? (function(C){
+      var F = function(param){
+        return this instanceof C ? new C(param) : C(param);
+      };
+      F[PROTOTYPE] = C[PROTOTYPE];
+      return F;
+    // make static versions for prototype methods
+    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+    if(IS_PROTO)(exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
+  }
+};
+// type bitmap
+$export.F = 1;  // forced
+$export.G = 2;  // global
+$export.S = 4;  // static
+$export.P = 8;  // proto
+$export.B = 16; // bind
+$export.W = 32; // wrap
+module.exports = $export;
+},{"./$.core":20,"./$.ctx":21,"./$.global":25}],24:[function(require,module,exports){
+module.exports = function(exec){
+  try {
+    return !!exec();
+  } catch(e){
+    return true;
+  }
+};
+},{}],25:[function(require,module,exports){
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
+  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+},{}],26:[function(require,module,exports){
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var cof = require('./$.cof');
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+  return cof(it) == 'String' ? it.split('') : Object(it);
+};
+},{"./$.cof":19}],27:[function(require,module,exports){
+module.exports = function(it){
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+},{}],28:[function(require,module,exports){
+var $Object = Object;
+module.exports = {
+  create:     $Object.create,
+  getProto:   $Object.getPrototypeOf,
+  isEnum:     {}.propertyIsEnumerable,
+  getDesc:    $Object.getOwnPropertyDescriptor,
+  setDesc:    $Object.defineProperty,
+  setDescs:   $Object.defineProperties,
+  getKeys:    $Object.keys,
+  getNames:   $Object.getOwnPropertyNames,
+  getSymbols: $Object.getOwnPropertySymbols,
+  each:       [].forEach
+};
+},{}],29:[function(require,module,exports){
 // 19.1.2.1 Object.assign(target, source, ...)
 var $        = require('./$')
   , toObject = require('./$.to-object')
   , IObject  = require('./$.iobject');
 
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
 // should work with symbols and should have deterministic property order (V8 bug)
 module.exports = require('./$.fails')(function(){
   var a = Object.assign
@@ -376,141 +291,18 @@ module.exports = require('./$.fails')(function(){
   }
   return T;
 } : Object.assign;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./$":24,"./$.fails":20,"./$.iobject":22,"./$.to-object":27}],26:[function(require,module,exports){
-=======
-},{"./$":29,"./$.fails":25,"./$.iobject":27,"./$.to-object":32}],20:[function(require,module,exports){
-var toString = {}.toString;
-
-module.exports = function(it){
-  return toString.call(it).slice(8, -1);
-};
-},{}],21:[function(require,module,exports){
-var core = module.exports = {version: '1.2.3'};
-if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-},{}],22:[function(require,module,exports){
-// optional / simple context binding
-var aFunction = require('./$.a-function');
-module.exports = function(fn, that, length){
-  aFunction(fn);
-  if(that === undefined)return fn;
-  switch(length){
-    case 1: return function(a){
-      return fn.call(that, a);
-    };
-    case 2: return function(a, b){
-      return fn.call(that, a, b);
-    };
-    case 3: return function(a, b, c){
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function(/* ...args */){
-    return fn.apply(that, arguments);
-  };
-};
-},{"./$.a-function":17}],23:[function(require,module,exports){
-var global    = require('./$.global')
-  , core      = require('./$.core')
-  , PROTOTYPE = 'prototype';
-var ctx = function(fn, that){
-  return function(){
-    return fn.apply(that, arguments);
-  };
-};
-var $def = function(type, name, source){
-  var key, own, out, exp
-    , isGlobal = type & $def.G
-    , isProto  = type & $def.P
-    , target   = isGlobal ? global : type & $def.S
-        ? global[name] : (global[name] || {})[PROTOTYPE]
-    , exports  = isGlobal ? core : core[name] || (core[name] = {});
-  if(isGlobal)source = name;
-  for(key in source){
-    // contains in native
-    own = !(type & $def.F) && target && key in target;
-    if(own && key in exports)continue;
-    // export native or passed
-    out = own ? target[key] : source[key];
-    // prevent global pollution for namespaces
-    if(isGlobal && typeof target[key] != 'function')exp = source[key];
-    // bind timers to global for call from export context
-    else if(type & $def.B && own)exp = ctx(out, global);
-    // wrap global constructors for prevent change them in library
-    else if(type & $def.W && target[key] == out)!function(C){
-      exp = function(param){
-        return this instanceof C ? new C(param) : C(param);
-      };
-      exp[PROTOTYPE] = C[PROTOTYPE];
-    }(out);
-    else exp = isProto && typeof out == 'function' ? ctx(Function.call, out) : out;
-    // export
-    exports[key] = exp;
-    if(isProto)(exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
-  }
-};
-// type bitmap
-$def.F = 1;  // forced
-$def.G = 2;  // global
-$def.S = 4;  // static
-$def.P = 8;  // proto
-$def.B = 16; // bind
-$def.W = 32; // wrap
-module.exports = $def;
-},{"./$.core":21,"./$.global":26}],24:[function(require,module,exports){
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function(it){
-  if(it == undefined)throw TypeError("Can't call method on  " + it);
-  return it;
-};
-},{}],25:[function(require,module,exports){
-module.exports = function(exec){
-  try {
-    return !!exec();
-  } catch(e){
-    return true;
-  }
-};
-},{}],26:[function(require,module,exports){
-// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-var global = module.exports = typeof window != 'undefined' && window.Math == Math
-  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
-if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
-},{}],27:[function(require,module,exports){
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = require('./$.cof');
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
-  return cof(it) == 'String' ? it.split('') : Object(it);
-};
-},{"./$.cof":20}],28:[function(require,module,exports){
-module.exports = function(it){
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-},{}],29:[function(require,module,exports){
-var $Object = Object;
-module.exports = {
-  create:     $Object.create,
-  getProto:   $Object.getPrototypeOf,
-  isEnum:     {}.propertyIsEnumerable,
-  getDesc:    $Object.getOwnPropertyDescriptor,
-  setDesc:    $Object.defineProperty,
-  setDescs:   $Object.defineProperties,
-  getKeys:    $Object.keys,
-  getNames:   $Object.getOwnPropertyNames,
-  getSymbols: $Object.getOwnPropertySymbols,
-  each:       [].forEach
-};
-},{}],30:[function(require,module,exports){
+},{"./$":28,"./$.fails":24,"./$.iobject":26,"./$.to-object":32}],30:[function(require,module,exports){
 // most Object methods by ES6 should accept primitives
+var $export = require('./$.export')
+  , core    = require('./$.core')
+  , fails   = require('./$.fails');
 module.exports = function(KEY, exec){
-  var $def = require('./$.def')
-    , fn   = (require('./$.core').Object || {})[KEY] || Object[KEY]
-    , exp  = {};
+  var fn  = (core.Object || {})[KEY] || Object[KEY]
+    , exp = {};
   exp[KEY] = exec(fn);
-  $def($def.S + $def.F * require('./$.fails')(function(){ fn(1); }), 'Object', exp);
+  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
 };
-},{"./$.core":21,"./$.def":23,"./$.fails":25}],31:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./$.core":20,"./$.export":23,"./$.fails":24}],31:[function(require,module,exports){
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
 var getDesc  = require('./$').getDesc
@@ -537,39 +329,18 @@ module.exports = {
     }({}, false) : undefined),
   check: check
 };
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./$":24,"./$.an-object":14,"./$.ctx":17,"./$.is-object":23}],27:[function(require,module,exports){
-=======
-},{"./$":29,"./$.an-object":18,"./$.ctx":22,"./$.is-object":28}],32:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./$":28,"./$.an-object":18,"./$.ctx":21,"./$.is-object":27}],32:[function(require,module,exports){
 // 7.1.13 ToObject(argument)
 var defined = require('./$.defined');
 module.exports = function(it){
   return Object(defined(it));
 };
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./$.defined":19}],28:[function(require,module,exports){
+},{"./$.defined":22}],33:[function(require,module,exports){
 // 19.1.3.1 Object.assign(target, source)
-var $def = require('./$.def');
+var $export = require('./$.export');
 
-$def($def.S + $def.F, 'Object', {assign: require('./$.object-assign')});
-},{"./$.def":18,"./$.object-assign":25}],29:[function(require,module,exports){
-// 19.1.3.19 Object.setPrototypeOf(O, proto)
-var $def = require('./$.def');
-$def($def.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
-<<<<<<< HEAD
-},{"./$.def":18,"./$.set-proto":26}],30:[function(require,module,exports){
-// shim for using process in browser
-=======
-},{"./$.def":23,"./$.set-proto":31}],37:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./$.defined":24}],33:[function(require,module,exports){
-// 19.1.3.1 Object.assign(target, source)
-var $def = require('./$.def');
-
-$def($def.S + $def.F, 'Object', {assign: require('./$.assign')});
-},{"./$.assign":19,"./$.def":23}],34:[function(require,module,exports){
+$export($export.S + $export.F, 'Object', {assign: require('./$.object-assign')});
+},{"./$.export":23,"./$.object-assign":29}],34:[function(require,module,exports){
 // 19.1.2.12 Object.isFrozen(O)
 var isObject = require('./$.is-object');
 
@@ -578,7 +349,7 @@ require('./$.object-sap')('isFrozen', function($isFrozen){
     return isObject(it) ? $isFrozen ? $isFrozen(it) : false : true;
   };
 });
-},{"./$.is-object":28,"./$.object-sap":30}],35:[function(require,module,exports){
+},{"./$.is-object":27,"./$.object-sap":30}],35:[function(require,module,exports){
 // 19.1.2.14 Object.keys(O)
 var toObject = require('./$.to-object');
 
@@ -589,10 +360,9 @@ require('./$.object-sap')('keys', function($keys){
 });
 },{"./$.object-sap":30,"./$.to-object":32}],36:[function(require,module,exports){
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
-var $def = require('./$.def');
-$def($def.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
-},{"./$.def":23,"./$.set-proto":31}],37:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+var $export = require('./$.export');
+$export($export.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
+},{"./$.export":23,"./$.set-proto":31}],37:[function(require,module,exports){
 
 },{}],38:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
@@ -768,20 +538,10 @@ assert.deepEqual = function deepEqual(actual, expected, message) {
   }
 };
 
-<<<<<<< HEAD
-},{}],31:[function(require,module,exports){
-/*!
-  Copyright (c) 2015 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-/* global define */
-=======
 function _deepEqual(actual, expected) {
   // 7.1. All identical values are equivalent, as determined by ===.
   if (actual === expected) {
     return true;
->>>>>>> master
 
   } else if (util.isBuffer(actual) && util.isBuffer(expected)) {
     if (actual.length != expected.length) return false;
@@ -878,17 +638,6 @@ assert.notDeepEqual = function notDeepEqual(actual, expected, message) {
   }
 };
 
-<<<<<<< HEAD
-},{}],32:[function(require,module,exports){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-=======
 // 9. The strict equality assertion tests strict equality, as determined by ===.
 // assert.strictEqual(actual, expected, message_opt);
 
@@ -976,7 +725,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":280}],39:[function(require,module,exports){
+},{"util/":286}],39:[function(require,module,exports){
 arguments[4][37][0].apply(exports,arguments)
 },{"dup":37}],40:[function(require,module,exports){
 'use strict';
@@ -1702,7 +1451,6 @@ function deflate_stored(s, flush) {
   for (;;) {
     /* Fill the window as much as possible: */
     if (s.lookahead <= 1) {
->>>>>>> master
 
       //Assert(s->strstart < s->w_size+MAX_DIST(s) ||
       //  s->block_start >= (long)s->w_size, "slide too late");
@@ -1711,27 +1459,10 @@ function deflate_stored(s, flush) {
 //        throw  new Error("slide too late");
 //      }
 
-<<<<<<< HEAD
-},{"./lib/Dispatcher":33}],33:[function(require,module,exports){
-(function (process){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule Dispatcher
- * 
- * @preventMunge
- */
-=======
       fill_window(s);
       if (s.lookahead === 0 && flush === Z_NO_FLUSH) {
         return BS_NEED_MORE;
       }
->>>>>>> master
 
       if (s.lookahead === 0) {
         break;
@@ -2185,24 +1916,9 @@ function deflate_rle(s, flush) {
   return BS_BLOCK_DONE;
 }
 
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/invariant":47}],34:[function(require,module,exports){
-(function (process){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule FluxContainer
- * 
-=======
 /* ===========================================================================
  * For Z_HUFFMAN_ONLY, do not look for matches.  Do not maintain a hash table.
  * (It will be regenerated if this run of deflate switches away from Huffman.)
->>>>>>> master
  */
 function deflate_huff(s, flush) {
   var bflush;             /* set if current block must be flushed */
@@ -2540,28 +2256,12 @@ function deflateReset(strm) {
 }
 
 
-<<<<<<< HEAD
-},{"./FluxStoreGroup":39,"_process":30,"fbjs/lib/invariant":47,"fbjs/lib/shallowEqual":48}],35:[function(require,module,exports){
-(function (process){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule FluxMapStore
- * 
- */
-=======
 function deflateSetHeader(strm, head) {
   if (!strm || !strm.state) { return Z_STREAM_ERROR; }
   if (strm.state.wrap !== 2) { return Z_STREAM_ERROR; }
   strm.state.gzhead = head;
   return Z_OK;
 }
->>>>>>> master
 
 
 function deflateInit2(strm, level, method, windowBits, memLevel, strategy) {
@@ -2649,23 +2349,7 @@ function deflate(strm, flush) {
     return strm ? err(strm, Z_STREAM_ERROR) : Z_STREAM_ERROR;
   }
 
-<<<<<<< HEAD
-},{"./FluxReduceStore":37,"_process":30,"fbjs/lib/invariant":47,"immutable":50}],36:[function(require,module,exports){
-(function (process){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule FluxMixinLegacy
- * 
- */
-=======
   s = strm.state;
->>>>>>> master
 
   if (!strm.output ||
       (!strm.input && strm.avail_in !== 0) ||
@@ -2818,37 +2502,6 @@ function deflate(strm, flush) {
         s.status = COMMENT_STATE;
       }
     }
-<<<<<<< HEAD
-  };
-}
-
-function enforceInterface(o) {
-  !o.constructor.calculateState ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Components that use FluxMixinLegacy must implement ' + '`calculateState()` on the statics object') : invariant(false) : undefined;
-}
-
-module.exports = FluxMixinLegacy;
-}).call(this,require('_process'))
-
-},{"./FluxStoreGroup":39,"_process":30,"fbjs/lib/invariant":47}],37:[function(require,module,exports){
-(function (process){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule FluxReduceStore
- * 
- */
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-=======
     else {
       s.status = COMMENT_STATE;
     }
@@ -2857,7 +2510,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
     if (s.gzhead.comment/* != Z_NULL*/) {
       beg = s.pending;  /* start of bytes to update crc */
       //int val;
->>>>>>> master
 
       do {
         if (s.pending === s.pending_buf_size) {
@@ -3390,21 +3042,6 @@ module.exports = function inflate_fast(strm, start) {
   bits -= len << 3;
   hold &= (1 << bits) - 1;
 
-<<<<<<< HEAD
-},{"./FluxStore":38,"./abstractMethod":40,"_process":30,"fbjs/lib/invariant":47}],38:[function(require,module,exports){
-(function (process){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule FluxStore
- * 
- */
-=======
   /* update state and return */
   strm.next_in = _in;
   strm.next_out = _out;
@@ -3414,7 +3051,6 @@ module.exports = function inflate_fast(strm, start) {
   state.bits = bits;
   return;
 };
->>>>>>> master
 
 },{}],46:[function(require,module,exports){
 'use strict';
@@ -3712,25 +3348,9 @@ function fixedtables(state) {
 
     inflate_table(DISTS, state.lens, 0, 32,   distfix, 0, state.work, {bits: 5});
 
-<<<<<<< HEAD
-},{"_process":30,"fbemitter":41,"fbjs/lib/invariant":47}],39:[function(require,module,exports){
-(function (process){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule FluxStoreGroup
- * 
- */
-=======
     /* do this just once */
     virgin = false;
   }
->>>>>>> master
 
   state.lencode = lenfix;
   state.lenbits = 9;
@@ -4901,29 +4521,8 @@ function inflateEnd(strm) {
   return Z_OK;
 }
 
-<<<<<<< HEAD
-module.exports = FluxStoreGroup;
-}).call(this,require('_process'))
-
-},{"_process":30,"fbjs/lib/invariant":47}],40:[function(require,module,exports){
-(function (process){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule abstractMethod
- * 
- */
-
-'use strict';
-=======
 function inflateGetHeader(strm, head) {
   var state;
->>>>>>> master
 
   /* check state */
   if (!strm || !strm.state) { return Z_STREAM_ERROR; }
@@ -4937,17 +4536,6 @@ function inflateGetHeader(strm, head) {
 }
 
 
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/invariant":47}],41:[function(require,module,exports){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-=======
 exports.inflateReset = inflateReset;
 exports.inflateReset2 = inflateReset2;
 exports.inflateResetKeep = inflateResetKeep;
@@ -4968,27 +4556,11 @@ exports.inflateSync = inflateSync;
 exports.inflateSyncPoint = inflateSyncPoint;
 exports.inflateUndermine = inflateUndermine;
 */
->>>>>>> master
 
 },{"../utils/common":40,"./adler32":41,"./crc32":43,"./inffast":45,"./inftrees":47}],47:[function(require,module,exports){
 'use strict';
 
 
-<<<<<<< HEAD
-},{"./lib/BaseEventEmitter":42}],42:[function(require,module,exports){
-(function (process){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule BaseEventEmitter
- * @typechecks
- */
-=======
 var utils = require('../utils/common');
 
 var MAXBITS = 15;
@@ -5082,7 +4654,6 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
    at length counts to determine sub-table sizes when building the
    decoding tables.
    */
->>>>>>> master
 
   /* accumulate lengths for codes (assumes lens[] all in 0..MAXBITS) */
   for (len = 0; len <= MAXBITS; len++) {
@@ -5318,20 +4889,6 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
 },{"../utils/common":40}],48:[function(require,module,exports){
 'use strict';
 
-<<<<<<< HEAD
-},{"./EmitterSubscription":43,"./EventSubscriptionVendor":45,"_process":30,"fbjs/lib/emptyFunction":46,"fbjs/lib/invariant":47}],43:[function(require,module,exports){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- * 
- * @providesModule EmitterSubscription
- * @typechecks
- */
-=======
 module.exports = {
   '2':    'need dictionary',     /* Z_NEED_DICT       2  */
   '1':    'stream end',          /* Z_STREAM_END      1  */
@@ -5343,7 +4900,6 @@ module.exports = {
   '-5':   'buffer error',        /* Z_BUF_ERROR     (-5) */
   '-6':   'incompatible version' /* Z_VERSION_ERROR (-6) */
 };
->>>>>>> master
 
 },{}],49:[function(require,module,exports){
 'use strict';
@@ -5372,23 +4928,7 @@ var Z_UNKNOWN             = 2;
 
 function zero(buf) { var len = buf.length; while (--len >= 0) { buf[len] = 0; } }
 
-<<<<<<< HEAD
-module.exports = EmitterSubscription;
-},{"./EventSubscription":44}],44:[function(require,module,exports){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- * 
- * @providesModule EventSubscription
- * @typechecks
- */
-=======
 // From zutil.h
->>>>>>> master
 
 var STORED_BLOCK = 0;
 var STATIC_TREES = 1;
@@ -5428,25 +4968,9 @@ var MAX_BITS      = 15;
 var Buf_size      = 16;
 /* size of bit buffer in bi_buf */
 
-<<<<<<< HEAD
-module.exports = EventSubscription;
-},{}],45:[function(require,module,exports){
-(function (process){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- * 
- * @providesModule EventSubscriptionVendor
- * @typechecks
-=======
 
 /* ===========================================================================
  * Constants
->>>>>>> master
  */
 
 var MAX_BL_BITS = 7;
@@ -5517,23 +5041,9 @@ var base_length   = new Array(LENGTH_CODES);
 zero(base_length);
 /* First normalized length for each code (0 = MIN_MATCH) */
 
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/invariant":47}],46:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule emptyFunction
- */
-=======
 var base_dist     = new Array(D_CODES);
 zero(base_dist);
 /* First normalized distance for each code (0 = distance of 1) */
->>>>>>> master
 
 
 var StaticTreeDesc = function (static_tree, extra_bits, extra_base, elems, max_length) {
@@ -5560,22 +5070,6 @@ var TreeDesc = function(dyn_tree, stat_desc) {
   this.stat_desc = stat_desc;   /* the corresponding static tree */
 };
 
-<<<<<<< HEAD
-module.exports = emptyFunction;
-},{}],47:[function(require,module,exports){
-(function (process){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule invariant
- */
-=======
->>>>>>> master
 
 
 function d_code(dist) {
@@ -5617,25 +5111,10 @@ function send_code(s, c, tree) {
 }
 
 
-<<<<<<< HEAD
-},{"_process":30}],48:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule shallowEqual
- * @typechecks
- * 
-=======
 /* ===========================================================================
  * Reverse the first len bits of a code, using straightforward code (a faster
  * method would use a table)
  * IN assertion: 1 <= len <= 15
->>>>>>> master
  */
 function bi_reverse(code, len) {
   var res = 0;
@@ -5714,18 +5193,6 @@ function gen_bitlen(s, desc)
 
     if (n > max_code) { continue; } /* not a leaf node */
 
-<<<<<<< HEAD
-module.exports = shallowEqual;
-},{}],49:[function(require,module,exports){
-/**
- * Copyright (c) 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-=======
     s.bl_count[bits]++;
     xbits = 0;
     if (n >= base) {
@@ -5738,27 +5205,10 @@ module.exports = shallowEqual;
     }
   }
   if (overflow === 0) { return; }
->>>>>>> master
 
   // Trace((stderr,"\nbit length overflow\n"));
   /* This happens for example on obj2 and pic of the Calgary corpus */
 
-<<<<<<< HEAD
-},{"./lib/FluxContainer":34,"./lib/FluxMapStore":35,"./lib/FluxMixinLegacy":36,"./lib/FluxReduceStore":37,"./lib/FluxStore":38}],50:[function(require,module,exports){
-/**
- *  Copyright (c) 2014-2015, Facebook, Inc.
- *  All rights reserved.
- *
- *  This source code is licensed under the BSD-style license found in the
- *  LICENSE file in the root directory of this source tree. An additional grant
- *  of patent rights can be found in the PATENTS file in the same directory.
- */
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  global.Immutable = factory()
-}(this, function () { 'use strict';var SLICE$0 = Array.prototype.slice;
-=======
   /* Find the first bit length which could increase: */
   do {
     bits = max_length-1;
@@ -5771,7 +5221,6 @@ module.exports = shallowEqual;
      */
     overflow -= 2;
   } while (overflow > 0);
->>>>>>> master
 
   /* Now recompute all bit lengths, scanning in increasing frequency.
    * h is still equal to HEAP_SIZE. (It is simpler to reconstruct all
@@ -6925,7 +6374,7 @@ exports.Zlib = Zlib;
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-},{"_process":249,"buffer":53,"pako/lib/zlib/constants":42,"pako/lib/zlib/deflate.js":44,"pako/lib/zlib/inflate.js":46,"pako/lib/zlib/messages":48,"pako/lib/zlib/zstream":50}],52:[function(require,module,exports){
+},{"_process":255,"buffer":53,"pako/lib/zlib/constants":42,"pako/lib/zlib/deflate.js":44,"pako/lib/zlib/inflate.js":46,"pako/lib/zlib/messages":48,"pako/lib/zlib/zstream":50}],52:[function(require,module,exports){
 (function (process,Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -7540,7 +6989,7 @@ util.inherits(Unzip, Zlib);
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-},{"./binding":51,"_process":249,"_stream_transform":265,"assert":38,"buffer":53,"util":280}],53:[function(require,module,exports){
+},{"./binding":51,"_process":255,"_stream_transform":271,"assert":38,"buffer":53,"util":286}],53:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -9415,7 +8864,7 @@ var publicEncrypt = require('public-encrypt')
   }
 })
 
-},{"browserify-cipher":58,"browserify-sign":88,"browserify-sign/algos":87,"create-ecdh":152,"create-hash":175,"create-hmac":188,"diffie-hellman":189,"pbkdf2":196,"public-encrypt":197,"randombytes":242}],58:[function(require,module,exports){
+},{"browserify-cipher":58,"browserify-sign":88,"browserify-sign/algos":87,"create-ecdh":155,"create-hash":181,"create-hmac":194,"diffie-hellman":195,"pbkdf2":202,"public-encrypt":203,"randombytes":248}],58:[function(require,module,exports){
 var ebtk = require('evp_bytestokey')
 var aes = require('browserify-aes/browser')
 var DES = require('browserify-des')
@@ -9774,7 +9223,7 @@ function xorTest (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":59,"./ghash":64,"buffer":53,"buffer-xor":73,"cipher-base":74,"inherits":245}],61:[function(require,module,exports){
+},{"./aes":59,"./ghash":64,"buffer":53,"buffer-xor":73,"cipher-base":74,"inherits":251}],61:[function(require,module,exports){
 var ciphers = require('./encrypter')
 exports.createCipher = exports.Cipher = ciphers.createCipher
 exports.createCipheriv = exports.Cipheriv = ciphers.createCipheriv
@@ -9928,7 +9377,7 @@ exports.createDecipheriv = createDecipheriv
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":59,"./authCipher":60,"./modes":65,"./modes/cbc":66,"./modes/cfb":67,"./modes/cfb1":68,"./modes/cfb8":69,"./modes/ctr":70,"./modes/ecb":71,"./modes/ofb":72,"./streamCipher":75,"buffer":53,"cipher-base":74,"evp_bytestokey":86,"inherits":245}],63:[function(require,module,exports){
+},{"./aes":59,"./authCipher":60,"./modes":65,"./modes/cbc":66,"./modes/cfb":67,"./modes/cfb1":68,"./modes/cfb8":69,"./modes/ctr":70,"./modes/ecb":71,"./modes/ofb":72,"./streamCipher":75,"buffer":53,"cipher-base":74,"evp_bytestokey":86,"inherits":251}],63:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -10054,7 +9503,7 @@ exports.createCipher = createCipher
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":59,"./authCipher":60,"./modes":65,"./modes/cbc":66,"./modes/cfb":67,"./modes/cfb1":68,"./modes/cfb8":69,"./modes/ctr":70,"./modes/ecb":71,"./modes/ofb":72,"./streamCipher":75,"buffer":53,"cipher-base":74,"evp_bytestokey":86,"inherits":245}],64:[function(require,module,exports){
+},{"./aes":59,"./authCipher":60,"./modes":65,"./modes/cbc":66,"./modes/cfb":67,"./modes/cfb1":68,"./modes/cfb8":69,"./modes/ctr":70,"./modes/ecb":71,"./modes/ofb":72,"./streamCipher":75,"buffer":53,"cipher-base":74,"evp_bytestokey":86,"inherits":251}],64:[function(require,module,exports){
 (function (Buffer){
 var zeros = new Buffer(16)
 zeros.fill(0)
@@ -10619,7 +10068,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"inherits":245,"stream":267,"string_decoder":277}],75:[function(require,module,exports){
+},{"buffer":53,"inherits":251,"stream":273,"string_decoder":283}],75:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -10649,7 +10098,7 @@ StreamCipher.prototype._final = function () {
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":59,"buffer":53,"cipher-base":74,"inherits":245}],76:[function(require,module,exports){
+},{"./aes":59,"buffer":53,"cipher-base":74,"inherits":251}],76:[function(require,module,exports){
 (function (Buffer){
 var CipherBase = require('cipher-base')
 var des = require('des.js')
@@ -10697,7 +10146,7 @@ DES.prototype._final = function () {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"cipher-base":78,"des.js":79,"inherits":245}],77:[function(require,module,exports){
+},{"buffer":53,"cipher-base":78,"des.js":79,"inherits":251}],77:[function(require,module,exports){
 exports['des-ecb'] = {
   key: 8,
   iv: 0
@@ -10818,7 +10267,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"inherits":245,"stream":267,"string_decoder":277}],79:[function(require,module,exports){
+},{"buffer":53,"inherits":251,"stream":273,"string_decoder":283}],79:[function(require,module,exports){
 'use strict';
 
 exports.utils = require('./des/utils');
@@ -10894,7 +10343,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
   }
 };
 
-},{"inherits":245,"minimalistic-assert":85}],81:[function(require,module,exports){
+},{"inherits":251,"minimalistic-assert":85}],81:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -11182,7 +10631,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
   utils.rip(l, r, out, off);
 };
 
-},{"../des":79,"inherits":245,"minimalistic-assert":85}],83:[function(require,module,exports){
+},{"../des":79,"inherits":251,"minimalistic-assert":85}],83:[function(require,module,exports){
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -11239,7 +10688,7 @@ EDE.prototype._update = function _update(inp, inOff, out, outOff) {
 EDE.prototype._pad = DES.prototype._pad;
 EDE.prototype._unpad = DES.prototype._unpad;
 
-},{"../des":79,"inherits":245,"minimalistic-assert":85}],84:[function(require,module,exports){
+},{"../des":79,"inherits":251,"minimalistic-assert":85}],84:[function(require,module,exports){
 'use strict';
 
 exports.readUInt32BE = function readUInt32BE(bytes, off) {
@@ -11583,7 +11032,7 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"create-hash/md5":177}],87:[function(require,module,exports){
+},{"buffer":53,"create-hash/md5":183}],87:[function(require,module,exports){
 (function (Buffer){
 'use strict'
 exports['RSA-SHA224'] = exports.sha224WithRSAEncryption = {
@@ -11616,6 +11065,7 @@ exports['ecdsa-with-SHA1'] = {
   hash: 'sha1',
   id: new Buffer('', 'hex')
 }
+
 exports.DSA = exports['DSA-SHA1'] = exports['DSA-SHA'] = {
   sign: 'dsa',
   hash: 'sha1',
@@ -11767,7 +11217,7 @@ module.exports = {
 
 }).call(this,require("buffer").Buffer)
 
-},{"./algos":87,"./sign":150,"./verify":151,"buffer":53,"create-hash":175,"inherits":245,"stream":267}],89:[function(require,module,exports){
+},{"./algos":87,"./sign":153,"./verify":154,"buffer":53,"create-hash":181,"inherits":251,"stream":273}],89:[function(require,module,exports){
 'use strict'
 exports['1.3.132.0.10'] = 'secp256k1'
 
@@ -11776,6 +11226,10 @@ exports['1.3.132.0.33'] = 'p224'
 exports['1.2.840.10045.3.1.1'] = 'p192'
 
 exports['1.2.840.10045.3.1.7'] = 'p256'
+
+exports['1.3.132.0.34'] = 'p384'
+
+exports['1.3.132.0.35'] = 'p521'
 
 },{}],90:[function(require,module,exports){
 (function (module, exports) {
@@ -11809,7 +11263,7 @@ function BN(number, base, endian) {
     return number;
   }
 
-  this.sign = false;
+  this.negative = 0;
   this.words = null;
   this.length = 0;
 
@@ -11832,6 +11286,20 @@ else
 BN.BN = BN;
 BN.wordSize = 26;
 
+BN.max = function max(left, right) {
+  if (left.cmp(right) > 0)
+    return left;
+  else
+    return right;
+};
+
+BN.min = function min(left, right) {
+  if (left.cmp(right) < 0)
+    return left;
+  else
+    return right;
+};
+
 BN.prototype._init = function init(number, base, endian) {
   if (typeof number === 'number') {
     return this._initNumber(number, base, endian);
@@ -11853,7 +11321,7 @@ BN.prototype._init = function init(number, base, endian) {
     this._parseBase(number, base, start);
 
   if (number[0] === '-')
-    this.sign = true;
+    this.negative = 1;
 
   this.strip();
 
@@ -11865,7 +11333,7 @@ BN.prototype._init = function init(number, base, endian) {
 
 BN.prototype._initNumber = function _initNumber(number, base, endian) {
   if (number < 0) {
-    this.sign = true;
+    this.negative = 1;
     number = -number;
   }
   if (number < 0x4000000) {
@@ -12053,7 +11521,7 @@ BN.prototype.copy = function copy(dest) {
   for (var i = 0; i < this.length; i++)
     dest.words[i] = this.words[i];
   dest.length = this.length;
-  dest.sign = this.sign;
+  dest.negative = this.negative;
   dest.red = this.red;
 };
 
@@ -12073,7 +11541,7 @@ BN.prototype.strip = function strip() {
 BN.prototype._normSign = function _normSign() {
   // -0 = 0
   if (this.length === 1 && this.words[0] === 0)
-    this.sign = false;
+    this.negative = 0;
   return this;
 };
 
@@ -12160,10 +11628,10 @@ var groupBases = [
 
 BN.prototype.toString = function toString(base, padding) {
   base = base || 10;
+  var padding = padding | 0 || 1;
   if (base === 16 || base === 'hex') {
     var out = '';
     var off = 0;
-    var padding = padding | 0 || 1;
     var carry = 0;
     for (var i = 0; i < this.length; i++) {
       var w = this.words[i];
@@ -12183,7 +11651,7 @@ BN.prototype.toString = function toString(base, padding) {
       out = carry.toString(16) + out;
     while (out.length % padding !== 0)
       out = '0' + out;
-    if (this.sign)
+    if (this.negative !== 0)
       out = '-' + out;
     return out;
   } else if (base === (base | 0) && base >= 2 && base <= 36) {
@@ -12193,7 +11661,7 @@ BN.prototype.toString = function toString(base, padding) {
     var groupBase = groupBases[base];
     var out = '';
     var c = this.clone();
-    c.sign = false;
+    c.negative = 0;
     while (c.cmpn(0) !== 0) {
       var r = c.modn(groupBase).toString(base);
       c = c.idivn(groupBase);
@@ -12205,7 +11673,9 @@ BN.prototype.toString = function toString(base, padding) {
     }
     if (this.cmpn(0) === 0)
       out = '0' + out;
-    if (this.sign)
+    while (out.length % padding !== 0)
+      out = '0' + out;
+    if (this.negative !== 0)
       out = '-' + out;
     return out;
   } else {
@@ -12217,27 +11687,38 @@ BN.prototype.toJSON = function toJSON() {
   return this.toString(16);
 };
 
-BN.prototype.toArray = function toArray(endian) {
+BN.prototype.toArray = function toArray(endian, length) {
   this.strip();
+  var littleEndian = endian === 'le';
   var res = new Array(this.byteLength());
   res[0] = 0;
 
   var q = this.clone();
-  if (endian !== 'le') {
+  if (!littleEndian) {
     // Assume big-endian
     for (var i = 0; q.cmpn(0) !== 0; i++) {
       var b = q.andln(0xff);
-      q.ishrn(8);
+      q.iushrn(8);
 
       res[res.length - i - 1] = b;
     }
   } else {
-    // Assume little-endian
     for (var i = 0; q.cmpn(0) !== 0; i++) {
       var b = q.andln(0xff);
-      q.ishrn(8);
+      q.iushrn(8);
 
       res[i] = b;
+    }
+  }
+
+  if (length) {
+    assert(res.length <= length, 'byte array longer than desired length');
+
+    while (res.length < length) {
+      if (littleEndian)
+        res.push(0);
+      else
+        res.unshift(0);
     }
   }
 
@@ -12308,6 +11789,19 @@ BN.prototype.bitLength = function bitLength() {
   return (this.length - 1) * 26 + hi;
 };
 
+function toBitArray(num) {
+  var w = new Array(num.bitLength());
+
+  for (var bit = 0; bit < w.length; bit++) {
+    var off = (bit / 26) | 0;
+    var wbit = bit % 26;
+
+    w[bit] = (num.words[off] & (1 << wbit)) >>> wbit;
+  }
+
+  return w;
+}
+
 // Number of trailing zero bits
 BN.prototype.zeroBits = function zeroBits() {
   if (this.cmpn(0) === 0)
@@ -12333,15 +11827,17 @@ BN.prototype.neg = function neg() {
     return this.clone();
 
   var r = this.clone();
-  r.sign = !this.sign;
+  r.negative = this.negative ^ 1;
   return r;
 };
 
+BN.prototype.ineg = function ineg() {
+  this.negative ^= 1;
+  return this;
+};
 
 // Or `num` with `this` in-place
-BN.prototype.ior = function ior(num) {
-  this.sign = this.sign || num.sign;
-
+BN.prototype.iuor = function iuor(num) {
   while (this.length < num.length)
     this.words[this.length++] = 0;
 
@@ -12349,6 +11845,11 @@ BN.prototype.ior = function ior(num) {
     this.words[i] = this.words[i] | num.words[i];
 
   return this.strip();
+};
+
+BN.prototype.ior = function ior(num) {
+  assert((this.negative | num.negative) === 0);
+  return this.iuor(num);
 };
 
 
@@ -12360,11 +11861,16 @@ BN.prototype.or = function or(num) {
     return num.clone().ior(this);
 };
 
+BN.prototype.uor = function uor(num) {
+  if (this.length > num.length)
+    return this.clone().iuor(num);
+  else
+    return num.clone().iuor(this);
+};
+
 
 // And `num` with `this` in-place
-BN.prototype.iand = function iand(num) {
-  this.sign = this.sign && num.sign;
-
+BN.prototype.iuand = function iuand(num) {
   // b = min-length(num, this)
   var b;
   if (this.length > num.length)
@@ -12380,6 +11886,11 @@ BN.prototype.iand = function iand(num) {
   return this.strip();
 };
 
+BN.prototype.iand = function iand(num) {
+  assert((this.negative | num.negative) === 0);
+  return this.iuand(num);
+};
+
 
 // And `num` with `this`
 BN.prototype.and = function and(num) {
@@ -12389,11 +11900,16 @@ BN.prototype.and = function and(num) {
     return num.clone().iand(this);
 };
 
+BN.prototype.uand = function uand(num) {
+  if (this.length > num.length)
+    return this.clone().iuand(num);
+  else
+    return num.clone().iuand(this);
+};
+
 
 // Xor `num` with `this` in-place
-BN.prototype.ixor = function ixor(num) {
-  this.sign = this.sign || num.sign;
-
+BN.prototype.iuxor = function iuxor(num) {
   // a.length > b.length
   var a;
   var b;
@@ -12417,6 +11933,11 @@ BN.prototype.ixor = function ixor(num) {
   return this.strip();
 };
 
+BN.prototype.ixor = function ixor(num) {
+  assert((this.negative | num.negative) === 0);
+  return this.iuxor(num);
+};
+
 
 // Xor `num` with `this`
 BN.prototype.xor = function xor(num) {
@@ -12424,6 +11945,13 @@ BN.prototype.xor = function xor(num) {
     return this.clone().ixor(num);
   else
     return num.clone().ixor(this);
+};
+
+BN.prototype.uxor = function uxor(num) {
+  if (this.length > num.length)
+    return this.clone().iuxor(num);
+  else
+    return num.clone().iuxor(this);
 };
 
 
@@ -12449,17 +11977,17 @@ BN.prototype.setn = function setn(bit, val) {
 // Add `num` to `this` in-place
 BN.prototype.iadd = function iadd(num) {
   // negative + positive
-  if (this.sign && !num.sign) {
-    this.sign = false;
+  if (this.negative !== 0 && num.negative === 0) {
+    this.negative = 0;
     var r = this.isub(num);
-    this.sign = !this.sign;
+    this.negative ^= 1;
     return this._normSign();
 
   // positive + negative
-  } else if (!this.sign && num.sign) {
-    num.sign = false;
+  } else if (this.negative === 0 && num.negative !== 0) {
+    num.negative = 0;
     var r = this.isub(num);
-    num.sign = true;
+    num.negative = 1;
     return r._normSign();
   }
 
@@ -12476,12 +12004,12 @@ BN.prototype.iadd = function iadd(num) {
 
   var carry = 0;
   for (var i = 0; i < b.length; i++) {
-    var r = a.words[i] + b.words[i] + carry;
+    var r = (a.words[i] | 0) + (b.words[i] | 0) + carry;
     this.words[i] = r & 0x3ffffff;
     carry = r >>> 26;
   }
   for (; carry !== 0 && i < a.length; i++) {
-    var r = a.words[i] + carry;
+    var r = (a.words[i] | 0) + carry;
     this.words[i] = r & 0x3ffffff;
     carry = r >>> 26;
   }
@@ -12501,15 +12029,15 @@ BN.prototype.iadd = function iadd(num) {
 
 // Add `num` to `this`
 BN.prototype.add = function add(num) {
-  if (num.sign && !this.sign) {
-    num.sign = false;
+  if (num.negative !== 0 && this.negative === 0) {
+    num.negative = 0;
     var res = this.sub(num);
-    num.sign = true;
+    num.negative ^= 1;
     return res;
-  } else if (!num.sign && this.sign) {
-    this.sign = false;
+  } else if (num.negative === 0 && this.negative !== 0) {
+    this.negative = 0;
     var res = num.sub(this);
-    this.sign = true;
+    this.negative = 1;
     return res;
   }
 
@@ -12522,17 +12050,17 @@ BN.prototype.add = function add(num) {
 // Subtract `num` from `this` in-place
 BN.prototype.isub = function isub(num) {
   // this - (-num) = this + num
-  if (num.sign) {
-    num.sign = false;
+  if (num.negative !== 0) {
+    num.negative = 0;
     var r = this.iadd(num);
-    num.sign = true;
+    num.negative = 1;
     return r._normSign();
 
   // -this - num = -(this + num)
-  } else if (this.sign) {
-    this.sign = false;
+  } else if (this.negative !== 0) {
+    this.negative = 0;
     this.iadd(num);
-    this.sign = true;
+    this.negative = 1;
     return this._normSign();
   }
 
@@ -12541,7 +12069,7 @@ BN.prototype.isub = function isub(num) {
 
   // Optimization - zeroify
   if (cmp === 0) {
-    this.sign = false;
+    this.negative = 0;
     this.length = 1;
     this.words[0] = 0;
     return this;
@@ -12560,12 +12088,12 @@ BN.prototype.isub = function isub(num) {
 
   var carry = 0;
   for (var i = 0; i < b.length; i++) {
-    var r = a.words[i] - b.words[i] + carry;
+    var r = (a.words[i] | 0) - (b.words[i] | 0) + carry;
     carry = r >> 26;
     this.words[i] = r & 0x3ffffff;
   }
   for (; carry !== 0 && i < a.length; i++) {
-    var r = a.words[i] + carry;
+    var r = (a.words[i] | 0) + carry;
     carry = r >> 26;
     this.words[i] = r & 0x3ffffff;
   }
@@ -12577,7 +12105,7 @@ BN.prototype.isub = function isub(num) {
   this.length = Math.max(this.length, i);
 
   if (a !== this)
-    this.sign = true;
+    this.negative = 1;
 
   return this.strip();
 };
@@ -12625,20 +12153,30 @@ function _genCombMulTo(alen, blen) {
 }
 */
 
-BN.prototype._smallMulTo = function _smallMulTo(num, out) {
-  out.sign = num.sign !== this.sign;
-  out.length = this.length + num.length;
+function smallMulTo(self, num, out) {
+  out.negative = num.negative ^ self.negative;
+  var len = (self.length + num.length) | 0;
+  out.length = len;
+  len = (len - 1) | 0;
 
-  var carry = 0;
-  for (var k = 0; k < out.length - 1; k++) {
+  // Peel one iteration (compiler can't do it, because of code complexity)
+  var a = self.words[0] | 0;
+  var b = num.words[0] | 0;
+  var r = a * b;
+
+  var lo = r & 0x3ffffff;
+  var carry = (r / 0x4000000) | 0;
+  out.words[0] = lo;
+
+  for (var k = 1; k < len; k++) {
     // Sum all words with the same `i + j = k` and accumulate `ncarry`,
     // note that ncarry could be >= 0x3ffffff
     var ncarry = carry >>> 26;
     var rword = carry & 0x3ffffff;
     var maxJ = Math.min(k, num.length - 1);
-    for (var j = Math.max(0, k - this.length + 1); j <= maxJ; j++) {
-      var i = k - j;
-      var a = this.words[i] | 0;
+    for (var j = Math.max(0, k - self.length + 1); j <= maxJ; j++) {
+      var i = (k - j) | 0;
+      var a = self.words[i] | 0;
       var b = num.words[j] | 0;
       var r = a * b;
 
@@ -12648,21 +12186,21 @@ BN.prototype._smallMulTo = function _smallMulTo(num, out) {
       rword = lo & 0x3ffffff;
       ncarry = (ncarry + (lo >>> 26)) | 0;
     }
-    out.words[k] = rword;
-    carry = ncarry;
+    out.words[k] = rword | 0;
+    carry = ncarry | 0;
   }
   if (carry !== 0) {
-    out.words[k] = carry;
+    out.words[k] = carry | 0;
   } else {
     out.length--;
   }
 
   return out.strip();
-};
+}
 
-BN.prototype._bigMulTo = function _bigMulTo(num, out) {
-  out.sign = num.sign !== this.sign;
-  out.length = this.length + num.length;
+function bigMulTo(self, num, out) {
+  out.negative = num.negative ^ self.negative;
+  out.length = self.length + num.length;
 
   var carry = 0;
   var hncarry = 0;
@@ -12673,9 +12211,9 @@ BN.prototype._bigMulTo = function _bigMulTo(num, out) {
     hncarry = 0;
     var rword = carry & 0x3ffffff;
     var maxJ = Math.min(k, num.length - 1);
-    for (var j = Math.max(0, k - this.length + 1); j <= maxJ; j++) {
+    for (var j = Math.max(0, k - self.length + 1); j <= maxJ; j++) {
       var i = k - j;
-      var a = this.words[i] | 0;
+      var a = self.words[i] | 0;
       var b = num.words[j] | 0;
       var r = a * b;
 
@@ -12699,14 +12237,14 @@ BN.prototype._bigMulTo = function _bigMulTo(num, out) {
   }
 
   return out.strip();
-};
+}
 
 BN.prototype.mulTo = function mulTo(num, out) {
   var res;
   if (this.length + num.length < 63)
-    res = this._smallMulTo(num, out);
+    res = smallMulTo(this, num, out);
   else
-    res = this._bigMulTo(num, out);
+    res = bigMulTo(this, num, out);
   return res;
 };
 
@@ -12728,7 +12266,7 @@ BN.prototype.imul = function imul(num) {
   var tlen = this.length;
   var nlen = num.length;
 
-  this.sign = num.sign !== this.sign;
+  this.negative = num.negative ^ this.negative;
   this.length = this.length + num.length;
   this.words[this.length - 1] = 0;
 
@@ -12740,8 +12278,8 @@ BN.prototype.imul = function imul(num) {
     var maxJ = Math.min(k, nlen - 1);
     for (var j = Math.max(0, k - tlen + 1); j <= maxJ; j++) {
       var i = k - j;
-      var a = this.words[i];
-      var b = num.words[j];
+      var a = this.words[i] | 0;
+      var b = num.words[j] | 0;
       var r = a * b;
 
       var lo = r & 0x3ffffff;
@@ -12758,7 +12296,7 @@ BN.prototype.imul = function imul(num) {
   // Propagate overflows
   var carry = 0;
   for (var i = 1; i < this.length; i++) {
-    var w = this.words[i] + carry;
+    var w = (this.words[i] | 0) + carry;
     this.words[i] = w & 0x3ffffff;
     carry = w >>> 26;
   }
@@ -12772,7 +12310,7 @@ BN.prototype.imuln = function imuln(num) {
   // Carry
   var carry = 0;
   for (var i = 0; i < this.length; i++) {
-    var w = this.words[i] * num;
+    var w = (this.words[i] | 0) * num;
     var lo = (w & 0x3ffffff) + (carry & 0x3ffffff);
     carry >>= 26;
     carry += (w / 0x4000000) | 0;
@@ -12803,8 +12341,31 @@ BN.prototype.isqr = function isqr() {
   return this.mul(this);
 };
 
+// Math.pow(`this`, `num`)
+BN.prototype.pow = function pow(num) {
+  var w = toBitArray(num);
+  if (w.length === 0)
+    return new BN(1);
+
+  // Skip leading zeroes
+  var res = this;
+  for (var i = 0; i < w.length; i++, res = res.sqr())
+    if (w[i] !== 0)
+      break;
+
+  if (++i < w.length) {
+    for (var q = res.sqr(); i < w.length; i++, q = q.sqr()) {
+      if (w[i] === 0)
+        continue;
+      res = res.mul(q);
+    }
+  }
+
+  return res;
+};
+
 // Shift-left in-place
-BN.prototype.ishln = function ishln(bits) {
+BN.prototype.iushln = function iushln(bits) {
   assert(typeof bits === 'number' && bits >= 0);
   var r = bits % 26;
   var s = (bits - r) / 26;
@@ -12814,7 +12375,7 @@ BN.prototype.ishln = function ishln(bits) {
     var carry = 0;
     for (var i = 0; i < this.length; i++) {
       var newCarry = this.words[i] & carryMask;
-      var c = (this.words[i] - newCarry) << r;
+      var c = ((this.words[i] | 0) - newCarry) << r;
       this.words[i] = c | carry;
       carry = newCarry >>> (26 - r);
     }
@@ -12835,10 +12396,16 @@ BN.prototype.ishln = function ishln(bits) {
   return this.strip();
 };
 
+BN.prototype.ishln = function ishln(bits) {
+  // TODO(indutny): implement me
+  assert(this.negative === 0);
+  return this.iushln(bits);
+};
+
 // Shift-right in-place
 // NOTE: `hint` is a lowest bit before trailing zeroes
 // NOTE: if `extended` is present - it will be filled with destroyed bits
-BN.prototype.ishrn = function ishrn(bits, hint, extended) {
+BN.prototype.iushrn = function iushrn(bits, hint, extended) {
   assert(typeof bits === 'number' && bits >= 0);
   var h;
   if (hint)
@@ -12874,7 +12441,7 @@ BN.prototype.ishrn = function ishrn(bits, hint, extended) {
 
   var carry = 0;
   for (var i = this.length - 1; i >= 0 && (carry !== 0 || i >= h); i--) {
-    var word = this.words[i];
+    var word = this.words[i] | 0;
     this.words[i] = (carry << (26 - r)) | (word >>> r);
     carry = word & mask;
   }
@@ -12893,14 +12460,28 @@ BN.prototype.ishrn = function ishrn(bits, hint, extended) {
   return this;
 };
 
+BN.prototype.ishrn = function ishrn(bits, hint, extended) {
+  // TODO(indutny): implement me
+  assert(this.negative === 0);
+  return this.iushrn(bits, hint, extended);
+};
+
 // Shift-left
 BN.prototype.shln = function shln(bits) {
   return this.clone().ishln(bits);
 };
 
+BN.prototype.ushln = function ushln(bits) {
+  return this.clone().iushln(bits);
+};
+
 // Shift-right
 BN.prototype.shrn = function shrn(bits) {
   return this.clone().ishrn(bits);
+};
+
+BN.prototype.ushrn = function ushrn(bits) {
+  return this.clone().iushrn(bits);
 };
 
 // Test if n bit is set
@@ -12927,7 +12508,7 @@ BN.prototype.imaskn = function imaskn(bits) {
   var r = bits % 26;
   var s = (bits - r) / 26;
 
-  assert(!this.sign, 'imaskn works only with positive numbers');
+  assert(this.negative === 0, 'imaskn works only with positive numbers');
 
   if (r !== 0)
     s++;
@@ -12953,16 +12534,16 @@ BN.prototype.iaddn = function iaddn(num) {
     return this.isubn(-num);
 
   // Possible sign change
-  if (this.sign) {
-    if (this.length === 1 && this.words[0] < num) {
-      this.words[0] = num - this.words[0];
-      this.sign = false;
+  if (this.negative !== 0) {
+    if (this.length === 1 && (this.words[0] | 0) < num) {
+      this.words[0] = num - (this.words[0] | 0);
+      this.negative = 0;
       return this;
     }
 
-    this.sign = false;
+    this.negative = 0;
     this.isubn(num);
-    this.sign = true;
+    this.negative = 1;
     return this;
   }
 
@@ -12992,10 +12573,10 @@ BN.prototype.isubn = function isubn(num) {
   if (num < 0)
     return this.iaddn(-num);
 
-  if (this.sign) {
-    this.sign = false;
+  if (this.negative !== 0) {
+    this.negative = 0;
     this.iaddn(num);
-    this.sign = true;
+    this.negative = 1;
     return this;
   }
 
@@ -13019,7 +12600,7 @@ BN.prototype.subn = function subn(num) {
 };
 
 BN.prototype.iabs = function iabs() {
-  this.sign = false;
+  this.negative = 0;
 
   return this;
 };
@@ -13048,14 +12629,14 @@ BN.prototype._ishlnsubmul = function _ishlnsubmul(num, mul, shift) {
 
   var carry = 0;
   for (var i = 0; i < num.length; i++) {
-    var w = this.words[i + shift] + carry;
-    var right = num.words[i] * mul;
+    var w = (this.words[i + shift] | 0) + carry;
+    var right = (num.words[i] | 0) * mul;
     w -= right & 0x3ffffff;
     carry = (w >> 26) - ((right / 0x4000000) | 0);
     this.words[i + shift] = w & 0x3ffffff;
   }
   for (; i < this.length - shift; i++) {
-    var w = this.words[i + shift] + carry;
+    var w = (this.words[i + shift] | 0) + carry;
     carry = w >> 26;
     this.words[i + shift] = w & 0x3ffffff;
   }
@@ -13067,11 +12648,11 @@ BN.prototype._ishlnsubmul = function _ishlnsubmul(num, mul, shift) {
   assert(carry === -1);
   carry = 0;
   for (var i = 0; i < this.length; i++) {
-    var w = -this.words[i] + carry;
+    var w = -(this.words[i] | 0) + carry;
     carry = w >> 26;
     this.words[i] = w & 0x3ffffff;
   }
-  this.sign = true;
+  this.negative = 1;
 
   return this.strip();
 };
@@ -13083,13 +12664,13 @@ BN.prototype._wordDiv = function _wordDiv(num, mode) {
   var b = num;
 
   // Normalize
-  var bhi = b.words[b.length - 1];
+  var bhi = b.words[b.length - 1] | 0;
   var bhiBits = this._countBits(bhi);
   shift = 26 - bhiBits;
   if (shift !== 0) {
-    b = b.shln(shift);
-    a.ishln(shift);
-    bhi = b.words[b.length - 1];
+    b = b.ushln(shift);
+    a.iushln(shift);
+    bhi = b.words[b.length - 1] | 0;
   }
 
   // Initialize quotient
@@ -13105,26 +12686,27 @@ BN.prototype._wordDiv = function _wordDiv(num, mode) {
   }
 
   var diff = a.clone()._ishlnsubmul(b, 1, m);
-  if (!diff.sign) {
+  if (diff.negative === 0) {
     a = diff;
     if (q)
       q.words[m] = 1;
   }
 
   for (var j = m - 1; j >= 0; j--) {
-    var qj = a.words[b.length + j] * 0x4000000 + a.words[b.length + j - 1];
+    var qj = (a.words[b.length + j] | 0) * 0x4000000 +
+             (a.words[b.length + j - 1] | 0);
 
     // NOTE: (qj / bhi) is (0x3ffffff * 0x4000000 + 0x3ffffff) / 0x2000000 max
     // (0x7ffffff)
     qj = Math.min((qj / bhi) | 0, 0x3ffffff);
 
     a._ishlnsubmul(b, qj, j);
-    while (a.sign) {
+    while (a.negative !== 0) {
       qj--;
-      a.sign = false;
+      a.negative = 0;
       a._ishlnsubmul(b, 1, j);
       if (a.cmpn(0) !== 0)
-        a.sign = !a.sign;
+        a.negative ^= 1;
     }
     if (q)
       q.words[j] = qj;
@@ -13135,33 +12717,46 @@ BN.prototype._wordDiv = function _wordDiv(num, mode) {
 
   // Denormalize
   if (mode !== 'div' && shift !== 0)
-    a.ishrn(shift);
+    a.iushrn(shift);
   return { div: q ? q : null, mod: a };
 };
 
-BN.prototype.divmod = function divmod(num, mode) {
+BN.prototype.divmod = function divmod(num, mode, positive) {
   assert(num.cmpn(0) !== 0);
 
-  if (this.sign && !num.sign) {
+  if (this.negative !== 0 && num.negative === 0) {
     var res = this.neg().divmod(num, mode);
     var div;
     var mod;
     if (mode !== 'mod')
       div = res.div.neg();
-    if (mode !== 'div')
-      mod = res.mod.cmpn(0) === 0 ? res.mod : num.sub(res.mod);
+    if (mode !== 'div') {
+      mod = res.mod.neg();
+      if (positive && mod.neg)
+        mod = mod.add(num);
+    }
     return {
       div: div,
       mod: mod
     };
-  } else if (!this.sign && num.sign) {
+  } else if (this.negative === 0 && num.negative !== 0) {
     var res = this.divmod(num.neg(), mode);
     var div;
     if (mode !== 'mod')
       div = res.div.neg();
     return { div: div, mod: res.mod };
-  } else if (this.sign && num.sign) {
-    return this.neg().divmod(num.neg(), mode);
+  } else if ((this.negative & num.negative) !== 0) {
+    var res = this.neg().divmod(num.neg(), mode);
+    var mod;
+    if (mode !== 'div') {
+      mod = res.mod.neg();
+      if (positive && mod.neg)
+        mod = mod.isub(num);
+    }
+    return {
+      div: res.div,
+      mod: mod
+    };
   }
 
   // Both numbers are positive at this point
@@ -13187,12 +12782,16 @@ BN.prototype.divmod = function divmod(num, mode) {
 
 // Find `this` / `num`
 BN.prototype.div = function div(num) {
-  return this.divmod(num, 'div').div;
+  return this.divmod(num, 'div', false).div;
 };
 
 // Find `this` % `num`
 BN.prototype.mod = function mod(num) {
-  return this.divmod(num, 'mod').mod;
+  return this.divmod(num, 'mod', false).mod;
+};
+
+BN.prototype.umod = function umod(num) {
+  return this.divmod(num, 'mod', true).mod;
 };
 
 // Find Round(`this` / `num`)
@@ -13203,9 +12802,9 @@ BN.prototype.divRound = function divRound(num) {
   if (dm.mod.cmpn(0) === 0)
     return dm.div;
 
-  var mod = dm.div.sign ? dm.mod.isub(num) : dm.mod;
+  var mod = dm.div.negative !== 0 ? dm.mod.isub(num) : dm.mod;
 
-  var half = num.shrn(1);
+  var half = num.ushrn(1);
   var r2 = num.andln(1);
   var cmp = mod.cmp(half);
 
@@ -13214,7 +12813,7 @@ BN.prototype.divRound = function divRound(num) {
     return dm.div;
 
   // Round up
-  return dm.div.sign ? dm.div.isubn(1) : dm.div.iaddn(1);
+  return dm.div.negative !== 0 ? dm.div.isubn(1) : dm.div.iaddn(1);
 };
 
 BN.prototype.modn = function modn(num) {
@@ -13223,7 +12822,7 @@ BN.prototype.modn = function modn(num) {
 
   var acc = 0;
   for (var i = this.length - 1; i >= 0; i--)
-    acc = (p * acc + this.words[i]) % num;
+    acc = (p * acc + (this.words[i] | 0)) % num;
 
   return acc;
 };
@@ -13234,7 +12833,7 @@ BN.prototype.idivn = function idivn(num) {
 
   var carry = 0;
   for (var i = this.length - 1; i >= 0; i--) {
-    var w = this.words[i] + carry * 0x4000000;
+    var w = (this.words[i] | 0) + carry * 0x4000000;
     this.words[i] = (w / num) | 0;
     carry = w % num;
   }
@@ -13247,14 +12846,14 @@ BN.prototype.divn = function divn(num) {
 };
 
 BN.prototype.egcd = function egcd(p) {
-  assert(!p.sign);
+  assert(p.negative === 0);
   assert(p.cmpn(0) !== 0);
 
   var x = this;
   var y = p.clone();
 
-  if (x.sign)
-    x = x.mod(p);
+  if (x.negative !== 0)
+    x = x.umod(p);
   else
     x = x.clone();
 
@@ -13269,8 +12868,8 @@ BN.prototype.egcd = function egcd(p) {
   var g = 0;
 
   while (x.isEven() && y.isEven()) {
-    x.ishrn(1);
-    y.ishrn(1);
+    x.iushrn(1);
+    y.iushrn(1);
     ++g;
   }
 
@@ -13279,24 +12878,24 @@ BN.prototype.egcd = function egcd(p) {
 
   while (x.cmpn(0) !== 0) {
     while (x.isEven()) {
-      x.ishrn(1);
+      x.iushrn(1);
       if (A.isEven() && B.isEven()) {
-        A.ishrn(1);
-        B.ishrn(1);
+        A.iushrn(1);
+        B.iushrn(1);
       } else {
-        A.iadd(yp).ishrn(1);
-        B.isub(xp).ishrn(1);
+        A.iadd(yp).iushrn(1);
+        B.isub(xp).iushrn(1);
       }
     }
 
     while (y.isEven()) {
-      y.ishrn(1);
+      y.iushrn(1);
       if (C.isEven() && D.isEven()) {
-        C.ishrn(1);
-        D.ishrn(1);
+        C.iushrn(1);
+        D.iushrn(1);
       } else {
-        C.iadd(yp).ishrn(1);
-        D.isub(xp).ishrn(1);
+        C.iadd(yp).iushrn(1);
+        D.isub(xp).iushrn(1);
       }
     }
 
@@ -13314,7 +12913,7 @@ BN.prototype.egcd = function egcd(p) {
   return {
     a: C,
     b: D,
-    gcd: y.ishln(g)
+    gcd: y.iushln(g)
   };
 };
 
@@ -13322,14 +12921,14 @@ BN.prototype.egcd = function egcd(p) {
 // above, designated to invert members of the
 // _prime_ fields F(p) at a maximal speed
 BN.prototype._invmp = function _invmp(p) {
-  assert(!p.sign);
+  assert(p.negative === 0);
   assert(p.cmpn(0) !== 0);
 
   var a = this;
   var b = p.clone();
 
-  if (a.sign)
-    a = a.mod(p);
+  if (a.negative !== 0)
+    a = a.umod(p);
   else
     a = a.clone();
 
@@ -13340,18 +12939,18 @@ BN.prototype._invmp = function _invmp(p) {
 
   while (a.cmpn(1) > 0 && b.cmpn(1) > 0) {
     while (a.isEven()) {
-      a.ishrn(1);
+      a.iushrn(1);
       if (x1.isEven())
-        x1.ishrn(1);
+        x1.iushrn(1);
       else
-        x1.iadd(delta).ishrn(1);
+        x1.iadd(delta).iushrn(1);
     }
     while (b.isEven()) {
-      b.ishrn(1);
+      b.iushrn(1);
       if (x2.isEven())
-        x2.ishrn(1);
+        x2.iushrn(1);
       else
-        x2.iadd(delta).ishrn(1);
+        x2.iadd(delta).iushrn(1);
     }
     if (a.cmp(b) >= 0) {
       a.isub(b);
@@ -13361,10 +12960,17 @@ BN.prototype._invmp = function _invmp(p) {
       x2.isub(x1);
     }
   }
+
+  var res;
   if (a.cmpn(1) === 0)
-    return x1;
+    res = x1;
   else
-    return x2;
+    res = x2;
+
+  if (res.cmpn(0) < 0)
+    res.iadd(p);
+
+  return res;
 };
 
 BN.prototype.gcd = function gcd(num) {
@@ -13375,20 +12981,20 @@ BN.prototype.gcd = function gcd(num) {
 
   var a = this.clone();
   var b = num.clone();
-  a.sign = false;
-  b.sign = false;
+  a.negative = 0;
+  b.negative = 0;
 
   // Remove common factor of two
   for (var shift = 0; a.isEven() && b.isEven(); shift++) {
-    a.ishrn(1);
-    b.ishrn(1);
+    a.iushrn(1);
+    b.iushrn(1);
   }
 
   do {
     while (a.isEven())
-      a.ishrn(1);
+      a.iushrn(1);
     while (b.isEven())
-      b.ishrn(1);
+      b.iushrn(1);
 
     var r = a.cmp(b);
     if (r < 0) {
@@ -13403,12 +13009,12 @@ BN.prototype.gcd = function gcd(num) {
     a.isub(b);
   } while (true);
 
-  return b.ishln(shift);
+  return b.iushln(shift);
 };
 
 // Invert number in the field F(num)
 BN.prototype.invm = function invm(num) {
-  return this.egcd(num).a.mod(num);
+  return this.egcd(num).a.umod(num);
 };
 
 BN.prototype.isEven = function isEven() {
@@ -13443,7 +13049,7 @@ BN.prototype.bincn = function bincn(bit) {
   // Add bit and propagate, if needed
   var carry = q;
   for (var i = s; carry !== 0 && i < this.length; i++) {
-    var w = this.words[i];
+    var w = this.words[i] | 0;
     w += carry;
     carry = w >>> 26;
     w &= 0x3ffffff;
@@ -13457,13 +13063,13 @@ BN.prototype.bincn = function bincn(bit) {
 };
 
 BN.prototype.cmpn = function cmpn(num) {
-  var sign = num < 0;
-  if (sign)
+  var negative = num < 0;
+  if (negative)
     num = -num;
 
-  if (this.sign && !sign)
+  if (this.negative !== 0 && !negative)
     return -1;
-  else if (!this.sign && sign)
+  else if (this.negative === 0 && negative)
     return 1;
 
   num &= 0x3ffffff;
@@ -13473,10 +13079,10 @@ BN.prototype.cmpn = function cmpn(num) {
   if (this.length > 1) {
     res = 1;
   } else {
-    var w = this.words[0];
+    var w = this.words[0] | 0;
     res = w === num ? 0 : w < num ? -1 : 1;
   }
-  if (this.sign)
+  if (this.negative !== 0)
     res = -res;
   return res;
 };
@@ -13486,13 +13092,13 @@ BN.prototype.cmpn = function cmpn(num) {
 // 0 - if `this` == `num`
 // -1 - if `this` < `num`
 BN.prototype.cmp = function cmp(num) {
-  if (this.sign && !num.sign)
+  if (this.negative !== 0 && num.negative === 0)
     return -1;
-  else if (!this.sign && num.sign)
+  else if (this.negative === 0 && num.negative !== 0)
     return 1;
 
   var res = this.ucmp(num);
-  if (this.sign)
+  if (this.negative !== 0)
     return -res;
   else
     return res;
@@ -13508,8 +13114,8 @@ BN.prototype.ucmp = function ucmp(num) {
 
   var res = 0;
   for (var i = this.length - 1; i >= 0; i--) {
-    var a = this.words[i];
-    var b = num.words[i];
+    var a = this.words[i] | 0;
+    var b = num.words[i] | 0;
 
     if (a === b)
       continue;
@@ -13532,32 +13138,14 @@ BN.red = function red(num) {
 
 BN.prototype.toRed = function toRed(ctx) {
   assert(!this.red, 'Already a number in reduction context');
-  assert(!this.sign, 'red works only with positives');
+  assert(this.negative === 0, 'red works only with positives');
   return ctx.convertTo(this)._forceRed(ctx);
 };
 
-<<<<<<< HEAD
-}));
-},{}],51:[function(require,module,exports){
-/*!
- * jQuery JavaScript Library v2.1.4
- * http://jquery.com/
- *
- * Includes Sizzle.js
- * http://sizzlejs.com/
- *
- * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
- * Released under the MIT license
- * http://jquery.org/license
- *
- * Date: 2015-04-28T16:01Z
- */
-=======
 BN.prototype.fromRed = function fromRed() {
   assert(this.red, 'fromRed works only with numbers in reduction context');
   return this.red.convertFrom(this);
 };
->>>>>>> master
 
 BN.prototype._forceRed = function _forceRed(ctx) {
   this.red = ctx;
@@ -13591,7 +13179,7 @@ BN.prototype.redISub = function redISub(num) {
 
 BN.prototype.redShl = function redShl(num) {
   assert(this.red, 'redShl works only with red numbers');
-  return this.red.shl(this, num);
+  return this.red.ushl(this, num);
 };
 
 BN.prototype.redMul = function redMul(num) {
@@ -13658,7 +13246,7 @@ function MPrime(name, p) {
   this.name = name;
   this.p = new BN(p, 16);
   this.n = this.p.bitLength();
-  this.k = new BN(1).ishln(this.n).isub(this.p);
+  this.k = new BN(1).iushln(this.n).isub(this.p);
 
   this.tmp = this._tmp();
 }
@@ -13696,7 +13284,7 @@ MPrime.prototype.ireduce = function ireduce(num) {
 };
 
 MPrime.prototype.split = function split(input, out) {
-  input.ishrn(this.n, 0, out);
+  input.iushrn(this.n, 0, out);
 };
 
 MPrime.prototype.imulK = function imulK(num) {
@@ -13731,7 +13319,7 @@ K256.prototype.split = function split(input, output) {
   output.words[output.length++] = prev & mask;
 
   for (var i = 10; i < input.length; i++) {
-    var next = input.words[i];
+    var next = input.words[i] | 0;
     input.words[i - 10] = ((next & mask) << 4) | (prev >>> 22);
     prev = next;
   }
@@ -13749,7 +13337,7 @@ K256.prototype.imulK = function imulK(num) {
   var hi;
   var lo = 0;
   for (var i = 0; i < num.length; i++) {
-    var w = num.words[i];
+    var w = num.words[i] | 0;
     hi = w * 0x40;
     lo += w * 0x3d1;
     hi += (lo / 0x4000000) | 0;
@@ -13798,7 +13386,7 @@ P25519.prototype.imulK = function imulK(num) {
   // K = 0x13
   var carry = 0;
   for (var i = 0; i < num.length; i++) {
-    var hi = num.words[i] * 0x13 + carry;
+    var hi = (num.words[i] | 0) * 0x13 + carry;
     var lo = hi & 0x3ffffff;
     hi >>>= 26;
 
@@ -13847,12 +13435,12 @@ function Red(m) {
 }
 
 Red.prototype._verify1 = function _verify1(a) {
-  assert(!a.sign, 'red works only with positives');
+  assert(a.negative === 0, 'red works only with positives');
   assert(a.red, 'red works only with red numbers');
 };
 
 Red.prototype._verify2 = function _verify2(a, b) {
-  assert(!a.sign && !b.sign, 'red works only with positives');
+  assert((a.negative | b.negative) === 0, 'red works only with positives');
   assert(a.red && a.red === b.red,
          'red works only with red numbers');
 };
@@ -13860,12 +13448,12 @@ Red.prototype._verify2 = function _verify2(a, b) {
 Red.prototype.imod = function imod(a) {
   if (this.prime)
     return this.prime.ireduce(a)._forceRed(this);
-  return a.mod(this.m)._forceRed(this);
+  return a.umod(this.m)._forceRed(this);
 };
 
 Red.prototype.neg = function neg(a) {
   var r = a.clone();
-  r.sign = !r.sign;
+  r.negative ^= 1;
   return r.iadd(this.m)._forceRed(this);
 };
 
@@ -13907,7 +13495,7 @@ Red.prototype.isub = function isub(a, b) {
 
 Red.prototype.shl = function shl(a, num) {
   this._verify1(a);
-  return this.imod(a.shln(num));
+  return this.imod(a.ushln(num));
 };
 
 Red.prototype.imul = function imul(a, b) {
@@ -13937,7 +13525,7 @@ Red.prototype.sqrt = function sqrt(a) {
 
   // Fast case
   if (mod3 === 3) {
-    var pow = this.m.add(new BN(1)).ishrn(2);
+    var pow = this.m.add(new BN(1)).iushrn(2);
     var r = this.pow(a, pow);
     return r;
   }
@@ -13949,7 +13537,7 @@ Red.prototype.sqrt = function sqrt(a) {
   var s = 0;
   while (q.cmpn(0) !== 0 && q.andln(1) === 0) {
     s++;
-    q.ishrn(1);
+    q.iushrn(1);
   }
   assert(q.cmpn(0) !== 0);
 
@@ -13958,14 +13546,14 @@ Red.prototype.sqrt = function sqrt(a) {
 
   // Find quadratic non-residue
   // NOTE: Max is such because of generalized Riemann hypothesis.
-  var lpow = this.m.subn(1).ishrn(1);
+  var lpow = this.m.subn(1).iushrn(1);
   var z = this.m.bitLength();
   z = new BN(2 * z * z).toRed(this);
   while (this.pow(z, lpow).cmp(nOne) !== 0)
     z.redIAdd(nOne);
 
   var c = this.pow(z, q);
-  var r = this.pow(a, q.addn(1).ishrn(1));
+  var r = this.pow(a, q.addn(1).iushrn(1));
   var t = this.pow(a, q);
   var m = s;
   while (t.cmp(one) !== 0) {
@@ -13973,7 +13561,7 @@ Red.prototype.sqrt = function sqrt(a) {
     for (var i = 0; tmp.cmp(one) !== 0; i++)
       tmp = tmp.redSqr();
     assert(i < m);
-    var b = this.pow(c, new BN(1).ishln(m - i - 1));
+    var b = this.pow(c, new BN(1).iushln(m - i - 1));
 
     r = r.redMul(b);
     c = b.redSqr();
@@ -13986,8 +13574,8 @@ Red.prototype.sqrt = function sqrt(a) {
 
 Red.prototype.invm = function invm(a) {
   var inv = a._invmp(this.m);
-  if (inv.sign) {
-    inv.sign = false;
+  if (inv.negative !== 0) {
+    inv.negative = 0;
     return this.imod(inv).redNeg();
   } else {
     return this.imod(inv);
@@ -13995,37 +13583,53 @@ Red.prototype.invm = function invm(a) {
 };
 
 Red.prototype.pow = function pow(a, num) {
-  var w = [];
-
   if (num.cmpn(0) === 0)
     return new BN(1);
+  if (num.cmpn(1) === 0)
+    return a.clone();
 
-  var q = num.clone();
+  var windowSize = 4;
+  var wnd = new Array(1 << windowSize);
+  wnd[0] = new BN(1).toRed(this);
+  wnd[1] = a;
+  for (var i = 2; i < wnd.length; i++)
+    wnd[i] = this.mul(wnd[i - 1], a);
 
-  while (q.cmpn(0) !== 0) {
-    w.push(q.andln(1));
-    q.ishrn(1);
-  }
-
-  // Skip leading zeroes
-  var res = a;
-  for (var i = 0; i < w.length; i++, res = this.sqr(res))
-    if (w[i] !== 0)
-      break;
-
-  if (++i < w.length) {
-    for (var q = this.sqr(res); i < w.length; i++, q = this.sqr(q)) {
-      if (w[i] === 0)
+  var res = wnd[0];
+  var current = 0;
+  var currentLen = 0;
+  var start = num.bitLength() % 26;
+  if (start === 0)
+    start = 26;
+  for (var i = num.length - 1; i >= 0; i--) {
+    var word = num.words[i];
+    for (var j = start - 1; j >= 0; j--) {
+      var bit = (word >> j) & 1;
+      if (res !== wnd[0])
+        res = this.sqr(res);
+      if (bit === 0 && current === 0) {
+        currentLen = 0;
         continue;
-      res = this.mul(res, q);
+      }
+
+      current <<= 1;
+      current |= bit;
+      currentLen++;
+      if (currentLen !== windowSize && (i !== 0 || j !== 0))
+        continue;
+
+      res = this.mul(res, wnd[current]);
+      currentLen = 0;
+      current = 0;
     }
+    start = 26;
   }
 
   return res;
 };
 
 Red.prototype.convertTo = function convertTo(num) {
-  var r = num.mod(this.m);
+  var r = num.umod(this.m);
   if (r === num)
     return r.clone();
   else
@@ -14052,18 +13656,18 @@ function Mont(m) {
   this.shift = this.m.bitLength();
   if (this.shift % 26 !== 0)
     this.shift += 26 - (this.shift % 26);
-  this.r = new BN(1).ishln(this.shift);
+  this.r = new BN(1).iushln(this.shift);
   this.r2 = this.imod(this.r.sqr());
   this.rinv = this.r._invmp(this.m);
 
   this.minv = this.rinv.mul(this.r).isubn(1).div(this.m);
-  this.minv.sign = true;
-  this.minv = this.minv.mod(this.r);
+  this.minv = this.minv.umod(this.r);
+  this.minv = this.r.sub(this.minv);
 }
 inherits(Mont, Red);
 
 Mont.prototype.convertTo = function convertTo(num) {
-  return this.imod(num.shln(this.shift));
+  return this.imod(num.ushln(this.shift));
 };
 
 Mont.prototype.convertFrom = function convertFrom(num) {
@@ -14081,7 +13685,7 @@ Mont.prototype.imul = function imul(a, b) {
 
   var t = a.imul(b);
   var c = t.maskn(this.shift).mul(this.minv).imaskn(this.shift).mul(this.m);
-  var u = t.isub(c).ishrn(this.shift);
+  var u = t.isub(c).iushrn(this.shift);
   var res = u;
   if (u.cmp(this.m) >= 0)
     res = u.isub(this.m);
@@ -14097,7 +13701,7 @@ Mont.prototype.mul = function mul(a, b) {
 
   var t = a.mul(b);
   var c = t.maskn(this.shift).mul(this.minv).imaskn(this.shift).mul(this.m);
-  var u = t.isub(c).ishrn(this.shift);
+  var u = t.isub(c).iushrn(this.shift);
   var res = u;
   if (u.cmp(this.m) >= 0)
     res = u.isub(this.m);
@@ -14133,7 +13737,7 @@ function crt(msg, priv) {
   var blinds = blind(priv);
   var len = priv.modulus.byteLength();
   var mod = bn.mont(priv.modulus);
-  var blinded = new bn(msg).mul(blinds.blinder).mod(priv.modulus);
+  var blinded = new bn(msg).mul(blinds.blinder).umod(priv.modulus);
   var c1 = blinded.toRed(bn.mont(priv.prime1));
   var c2 = blinded.toRed(bn.mont(priv.prime2));
   var qinv = priv.coefficient;
@@ -14143,29 +13747,24 @@ function crt(msg, priv) {
   var m2 = c2.redPow(priv.exponent2);
   m1 = m1.fromRed();
   m2 = m2.fromRed();
-  var h = m1.isub(m2).imul(qinv).mod(p);
+  var h = m1.isub(m2).imul(qinv).umod(p);
   h.imul(q);
   m2.iadd(h);
-  var out = new Buffer(m2.imul(blinds.unblinder).mod(priv.modulus).toArray());
-  if (out.length < len) {
-    var prefix = new Buffer(len - out.length);
-    prefix.fill(0);
-    out = Buffer.concat([prefix, out], len);
-  }
-  return out;
+  return new Buffer(m2.imul(blinds.unblinder).umod(priv.modulus).toArray(false, len));
 }
 crt.getr = getr;
 function getr(priv) {
   var len = priv.modulus.byteLength();
   var r = new bn(randomBytes(len));
-  while (r.cmp(priv.modulus) >=  0 || !r.mod(priv.prime1) || !r.mod(priv.prime2)) {
+  while (r.cmp(priv.modulus) >=  0 || !r.umod(priv.prime1) || !r.umod(priv.prime2)) {
     r = new bn(randomBytes(len));
   }
   return r;
 }
+
 }).call(this,require("buffer").Buffer)
 
-},{"bn.js":90,"buffer":53,"randombytes":242}],92:[function(require,module,exports){
+},{"bn.js":90,"buffer":53,"randombytes":248}],92:[function(require,module,exports){
 'use strict';
 
 var elliptic = exports;
@@ -14179,16 +13778,17 @@ elliptic.curves = require('./elliptic/curves');
 
 // Protocols
 elliptic.ec = require('./elliptic/ec');
+elliptic.eddsa = require('./elliptic/eddsa');
 
-},{"../package.json":112,"./elliptic/curve":95,"./elliptic/curves":98,"./elliptic/ec":99,"./elliptic/hmac-drbg":102,"./elliptic/utils":104,"brorand":105}],93:[function(require,module,exports){
+},{"../package.json":115,"./elliptic/curve":95,"./elliptic/curves":98,"./elliptic/ec":99,"./elliptic/eddsa":102,"./elliptic/hmac-drbg":105,"./elliptic/utils":107,"brorand":108}],93:[function(require,module,exports){
 'use strict';
 
 var bn = require('bn.js');
 var elliptic = require('../../elliptic');
-
-var getNAF = elliptic.utils.getNAF;
-var getJSF = elliptic.utils.getJSF;
-var assert = elliptic.utils.assert;
+var utils = elliptic.utils;
+var getNAF = utils.getNAF;
+var getJSF = utils.getJSF;
+var assert = utils.assert;
 
 function BaseCurve(type, conf) {
   this.type = type;
@@ -14422,8 +14022,44 @@ function BasePoint(curve, type) {
 }
 BaseCurve.BasePoint = BasePoint;
 
+BasePoint.prototype.eq = function eq(/*other*/) {
+  throw new Error('Not implemented');
+};
+
 BasePoint.prototype.validate = function validate() {
   return this.curve.validate(this);
+};
+
+BaseCurve.prototype.decodePoint = function decodePoint(bytes, enc) {
+  bytes = utils.toArray(bytes, enc);
+
+  var len = this.p.byteLength();
+  if (bytes[0] === 0x04 && bytes.length - 1 === 2 * len) {
+    return this.point(bytes.slice(1, 1 + len),
+                      bytes.slice(1 + len, 1 + 2 * len));
+  } else if ((bytes[0] === 0x02 || bytes[0] === 0x03) &&
+              bytes.length - 1 === len) {
+    return this.pointFromX(bytes.slice(1, 1 + len), bytes[0] === 0x03);
+  }
+  throw new Error('Unknown point format');
+};
+
+BasePoint.prototype.encodeCompressed = function encodeCompressed(enc) {
+  return this.encode(enc, true);
+};
+
+BasePoint.prototype._encode = function _encode(compact) {
+  var len = this.curve.p.byteLength();
+  var x = this.getX().toArray('be', len);
+
+  if (compact)
+    return [ this.getY().isEven() ? 0x02 : 0x03 ].concat(x);
+
+  return [ 0x04 ].concat(x, this.getY().toArray('be', len)) ;
+};
+
+BasePoint.prototype.encode = function encode(enc, compact) {
+  return utils.encode(this._encode(compact), enc);
 };
 
 BasePoint.prototype.precompute = function precompute(power) {
@@ -14516,7 +14152,8 @@ function EdwardsCurve(conf) {
 
   Base.call(this, 'edwards', conf);
 
-  this.a = new bn(conf.a, 16).mod(this.red.m).toRed(this.red);
+  this.a = new bn(conf.a, 16).umod(this.red.m);
+  this.a = this.a.toRed(this.red);
   this.c = new bn(conf.c, 16).toRed(this.red);
   this.c2 = this.c.redSqr();
   this.d = new bn(conf.d, 16).toRed(this.red);
@@ -14547,7 +14184,7 @@ EdwardsCurve.prototype.jpoint = function jpoint(x, y, z, t) {
   return this.point(x, y, z, t);
 };
 
-EdwardsCurve.prototype.pointFromX = function pointFromX(odd, x) {
+EdwardsCurve.prototype.pointFromX = function pointFromX(x, odd) {
   x = new bn(x, 16);
   if (!x.red)
     x = x.toRed(this.red);
@@ -14561,7 +14198,35 @@ EdwardsCurve.prototype.pointFromX = function pointFromX(odd, x) {
   if (odd && !isOdd || !odd && isOdd)
     y = y.redNeg();
 
-  return this.point(x, y, curve.one);
+  return this.point(x, y);
+};
+
+EdwardsCurve.prototype.pointFromY = function pointFromY(y, odd) {
+  y = new bn(y, 16);
+  if (!y.red)
+    y = y.toRed(this.red);
+
+  // x^2 = (y^2 - 1) / (d y^2 + 1)
+  var y2 = y.redSqr();
+  var lhs = y2.redSub(this.one);
+  var rhs = y2.redMul(this.d).redAdd(this.one);
+  var x2 = lhs.redMul(rhs.redInvm());
+
+  if (x2.cmp(this.zero) === 0) {
+    if (odd)
+      throw new Error('invalid point');
+    else
+      return this.point(this.zero, y);
+  }
+
+  var x = x2.redSqrt();
+  if (x.redSqr().redSub(x2).cmp(this.zero) !== 0)
+    throw new Error('invalid point');
+
+  if (x.isOdd() !== odd)
+    x = x.redNeg();
+
+  return this.point(x, y);
 };
 
 EdwardsCurve.prototype.validate = function validate(point) {
@@ -14866,11 +14531,17 @@ Point.prototype.getY = function getY() {
   return this.y.fromRed();
 };
 
+Point.prototype.eq = function eq(other) {
+  return this === other ||
+         this.getX().cmp(other.getX()) === 0 &&
+         this.getY().cmp(other.getY()) === 0;
+};
+
 // Compatibility with BaseCurve
 Point.prototype.toP = Point.prototype.normalize;
 Point.prototype.mixedAdd = Point.prototype.add;
 
-},{"../../elliptic":92,"../curve":95,"bn.js":90,"inherits":245}],95:[function(require,module,exports){
+},{"../../elliptic":92,"../curve":95,"bn.js":90,"inherits":251}],95:[function(require,module,exports){
 'use strict';
 
 var curve = exports;
@@ -14887,6 +14558,9 @@ var curve = require('../curve');
 var bn = require('bn.js');
 var inherits = require('inherits');
 var Base = curve.base;
+
+var elliptic = require('../../elliptic');
+var utils = elliptic.utils;
 
 function MontCurve(conf) {
   Base.call(this, 'mont', conf);
@@ -14925,6 +14599,10 @@ function Point(curve, x, z) {
 }
 inherits(Point, Base.BasePoint);
 
+MontCurve.prototype.decodePoint = function decodePoint(bytes, enc) {
+  return this.point(utils.toArray(bytes, enc), 1);
+};
+
 MontCurve.prototype.point = function point(x, z) {
   return new Point(this, x, z);
 };
@@ -14935,6 +14613,10 @@ MontCurve.prototype.pointFromJSON = function pointFromJSON(obj) {
 
 Point.prototype.precompute = function precompute() {
   // No-op
+};
+
+Point.prototype._encode = function _encode() {
+  return this.getX().toArray('be', this.curve.p.byteLength());
 };
 
 Point.fromJSON = function fromJSON(curve, obj) {
@@ -15007,7 +14689,7 @@ Point.prototype.mul = function mul(k) {
   var b = this.curve.point(null, null); // (N / 2) * Q
   var c = this; // Q
 
-  for (var bits = []; t.cmpn(0) !== 0; t.ishrn(1))
+  for (var bits = []; t.cmpn(0) !== 0; t.iushrn(1))
     bits.push(t.andln(1));
 
   for (var i = bits.length - 1; i >= 0; i--) {
@@ -15030,6 +14712,10 @@ Point.prototype.mulAdd = function mulAdd() {
   throw new Error('Not supported on Montgomery curve');
 };
 
+Point.prototype.eq = function eq(other) {
+  return this.getX().cmp(other.getX()) === 0;
+};
+
 Point.prototype.normalize = function normalize() {
   this.x = this.x.redMul(this.z.redInvm());
   this.z = this.curve.one;
@@ -15043,7 +14729,7 @@ Point.prototype.getX = function getX() {
   return this.x.fromRed();
 };
 
-},{"../curve":95,"bn.js":90,"inherits":245}],97:[function(require,module,exports){
+},{"../../elliptic":92,"../curve":95,"bn.js":90,"inherits":251}],97:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -15138,7 +14824,7 @@ ShortCurve.prototype._getEndoRoots = function _getEndoRoots(num) {
 
 ShortCurve.prototype._getEndoBasis = function _getEndoBasis(lambda) {
   // aprxSqrt >= sqrt(this.n)
-  var aprxSqrt = this.n.shrn(Math.floor(this.n.bitLength() / 2));
+  var aprxSqrt = this.n.ushrn(Math.floor(this.n.bitLength() / 2));
 
   // 3.74
   // Run EGCD, until r(L + 1) < aprxSqrt
@@ -15197,11 +14883,11 @@ ShortCurve.prototype._getEndoBasis = function _getEndoBasis(lambda) {
   }
 
   // Normalize signs
-  if (a1.sign) {
+  if (a1.negative) {
     a1 = a1.neg();
     b1 = b1.neg();
   }
-  if (a2.sign) {
+  if (a2.negative) {
     a2 = a2.neg();
     b2 = b2.neg();
   }
@@ -15231,7 +14917,7 @@ ShortCurve.prototype._endoSplit = function _endoSplit(k) {
   return { k1: k1, k2: k2 };
 };
 
-ShortCurve.prototype.pointFromX = function pointFromX(odd, x) {
+ShortCurve.prototype.pointFromX = function pointFromX(x, odd) {
   x = new bn(x, 16);
   if (!x.red)
     x = x.toRed(this.red);
@@ -15269,12 +14955,12 @@ ShortCurve.prototype._endoWnafMulAdd =
     var p = points[i];
     var beta = p._getBeta();
 
-    if (split.k1.sign) {
-      split.k1.sign = !split.k1.sign;
+    if (split.k1.negative) {
+      split.k1.ineg();
       p = p.neg(true);
     }
-    if (split.k2.sign) {
-      split.k2.sign = !split.k2.sign;
+    if (split.k2.negative) {
+      split.k2.ineg();
       beta = beta.neg(true);
     }
 
@@ -15952,7 +15638,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
   return this.z.cmpn(0) === 0;
 };
 
-},{"../../elliptic":92,"../curve":95,"bn.js":90,"inherits":245}],98:[function(require,module,exports){
+},{"../../elliptic":92,"../curve":95,"bn.js":90,"inherits":251}],98:[function(require,module,exports){
 'use strict';
 
 var curves = exports;
@@ -16039,6 +15725,54 @@ defineCurve('p256', {
   ]
 });
 
+defineCurve('p384', {
+  type: 'short',
+  prime: null,
+  p: 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ' +
+     'fffffffe ffffffff 00000000 00000000 ffffffff',
+  a: 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ' +
+     'fffffffe ffffffff 00000000 00000000 fffffffc',
+  b: 'b3312fa7 e23ee7e4 988e056b e3f82d19 181d9c6e fe814112 0314088f ' +
+     '5013875a c656398d 8a2ed19d 2a85c8ed d3ec2aef',
+  n: 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff c7634d81 ' +
+     'f4372ddf 581a0db2 48b0a77a ecec196a ccc52973',
+  hash: hash.sha384,
+  gRed: false,
+  g: [
+    'aa87ca22 be8b0537 8eb1c71e f320ad74 6e1d3b62 8ba79b98 59f741e0 82542a38 ' +
+    '5502f25d bf55296c 3a545e38 72760ab7',
+    '3617de4a 96262c6f 5d9e98bf 9292dc29 f8f41dbd 289a147c e9da3113 b5f0b8c0 ' +
+    '0a60b1ce 1d7e819d 7a431d7c 90ea0e5f'
+  ]
+});
+
+defineCurve('p521', {
+  type: 'short',
+  prime: null,
+  p: '000001ff ffffffff ffffffff ffffffff ffffffff ffffffff ' +
+     'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ' +
+     'ffffffff ffffffff ffffffff ffffffff ffffffff',
+  a: '000001ff ffffffff ffffffff ffffffff ffffffff ffffffff ' +
+     'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ' +
+     'ffffffff ffffffff ffffffff ffffffff fffffffc',
+  b: '00000051 953eb961 8e1c9a1f 929a21a0 b68540ee a2da725b ' +
+     '99b315f3 b8b48991 8ef109e1 56193951 ec7e937b 1652c0bd ' +
+     '3bb1bf07 3573df88 3d2c34f1 ef451fd4 6b503f00',
+  n: '000001ff ffffffff ffffffff ffffffff ffffffff ffffffff ' +
+     'ffffffff ffffffff fffffffa 51868783 bf2f966b 7fcc0148 ' +
+     'f709a5d0 3bb5c9b8 899c47ae bb6fb71e 91386409',
+  hash: hash.sha512,
+  gRed: false,
+  g: [
+    '000000c6 858e06b7 0404e9cd 9e3ecb66 2395b442 9c648139 ' +
+    '053fb521 f828af60 6b4d3dba a14b5e77 efe75928 fe1dc127 ' +
+    'a2ffa8de 3348b3c1 856a429b f97e7e31 c2e5bd66',
+    '00000118 39296a78 9a3bc004 5c8a5fb4 2c7d1bd9 98f54449 ' +
+    '579b4468 17afbd17 273e662c 97ee7299 5ef42640 c550b901 ' +
+    '3fad0761 353c7086 a272c240 88be9476 9fd16650'
+  ]
+});
+
 defineCurve('curve25519', {
   type: 'mont',
   prime: 'p25519',
@@ -16111,7 +15845,7 @@ defineCurve('secp256k1', {
   ]
 });
 
-},{"../elliptic":92,"./precomputed/secp256k1":103,"hash.js":106}],99:[function(require,module,exports){
+},{"../elliptic":92,"./precomputed/secp256k1":106,"hash.js":109}],99:[function(require,module,exports){
 'use strict';
 
 var bn = require('bn.js');
@@ -16139,7 +15873,7 @@ function EC(options) {
 
   this.curve = options.curve.curve;
   this.n = this.curve.n;
-  this.nh = this.n.shrn(1);
+  this.nh = this.n.ushrn(1);
   this.g = this.curve.g;
 
   // Point on curve
@@ -16190,7 +15924,7 @@ EC.prototype.genKeyPair = function genKeyPair(options) {
 EC.prototype._truncateToN = function truncateToN(msg, truncOnly) {
   var delta = msg.byteLength() * 8 - this.n.bitLength();
   if (delta > 0)
-    msg = msg.shrn(delta);
+    msg = msg.ushrn(delta);
   if (!truncOnly && msg.cmp(this.n) >= 0)
     return msg.sub(this.n);
   else
@@ -16211,7 +15945,7 @@ EC.prototype.sign = function sign(msg, key, enc, options) {
   // Zero-extend key to provide enough entropy
   var bytes = this.n.byteLength();
   var bkey = key.getPrivate().toArray();
-  for (var i = bkey.length; i < 21; i++)
+  for (var i = bkey.length; i < bytes; i++)
     bkey.unshift(0);
 
   // Zero-extend nonce to have the same byte size as N
@@ -16239,20 +15973,23 @@ EC.prototype.sign = function sign(msg, key, enc, options) {
       continue;
 
     var kpX = kp.getX();
-    var r = kpX.mod(this.n);
+    var r = kpX.umod(this.n);
     if (r.cmpn(0) === 0)
       continue;
 
-    var s = k.invm(this.n).mul(r.mul(key.getPrivate()).iadd(msg)).mod(this.n);
+    var s = k.invm(this.n).mul(r.mul(key.getPrivate()).iadd(msg));
+    s = s.umod(this.n);
     if (s.cmpn(0) === 0)
       continue;
 
-    // Use complement of `s`, if it is > `n / 2`
-    if (options.canonical && s.cmp(this.nh) > 0)
-      s = this.n.sub(s);
-
     var recoveryParam = (kp.getY().isOdd() ? 1 : 0) |
                         (kpX.cmp(r) !== 0 ? 2 : 0);
+
+    // Use complement of `s`, if it is > `n / 2`
+    if (options.canonical && s.cmp(this.nh) > 0) {
+      s = this.n.sub(s);
+      recoveryParam ^= 1;
+    }
 
     return new Signature({ r: r, s: s, recoveryParam: recoveryParam });
   } while (true);
@@ -16273,14 +16010,14 @@ EC.prototype.verify = function verify(msg, signature, key, enc) {
 
   // Validate signature
   var sinv = s.invm(this.n);
-  var u1 = sinv.mul(msg).mod(this.n);
-  var u2 = sinv.mul(r).mod(this.n);
+  var u1 = sinv.mul(msg).umod(this.n);
+  var u2 = sinv.mul(r).umod(this.n);
 
   var p = this.g.mulAdd(u1, key.getPublic(), u2);
   if (p.isInfinity())
     return false;
 
-  return p.getX().mod(this.n).cmp(r) === 0;
+  return p.getX().umod(this.n).cmp(r) === 0;
 };
 
 EC.prototype.recoverPubKey = function(msg, signature, j, enc) {
@@ -16295,12 +16032,16 @@ EC.prototype.recoverPubKey = function(msg, signature, j, enc) {
   // A set LSB signifies that the y-coordinate is odd
   var isYOdd = j & 1;
   var isSecondKey = j >> 1;
-  if (r.cmp(this.curve.p.mod(this.curve.n)) >= 0 && isSecondKey)
+  if (r.cmp(this.curve.p.umod(this.curve.n)) >= 0 && isSecondKey)
     throw new Error('Unable to find sencond key candinate');
 
   // 1.1. Let x = r + jn.
-  r = this.curve.pointFromX(isYOdd, r);
-  var eNeg = e.neg().mod(n);
+  if (isSecondKey)
+    r = this.curve.pointFromX(r.add(this.curve.n), isYOdd);
+  else
+    r = this.curve.pointFromX(r, isYOdd);
+
+  var eNeg = n.sub(e);
 
   // 1.6.1 Compute Q = r^-1 (sR -  eG)
   //               Q = r^-1 (sR + -eG)
@@ -16326,9 +16067,6 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 'use strict';
 
 var bn = require('bn.js');
-
-var elliptic = require('../../elliptic');
-var utils = elliptic.utils;
 
 function KeyPair(ec, options) {
   this.ec = ec;
@@ -16377,39 +16115,19 @@ KeyPair.prototype.validate = function validate() {
 };
 
 KeyPair.prototype.getPublic = function getPublic(compact, enc) {
-  if (!this.pub)
-    this.pub = this.ec.g.mul(this.priv);
-
   // compact is optional argument
   if (typeof compact === 'string') {
     enc = compact;
     compact = null;
   }
 
+  if (!this.pub)
+    this.pub = this.ec.g.mul(this.priv);
+
   if (!enc)
     return this.pub;
 
-  var len = this.ec.curve.p.byteLength();
-  var x = this.pub.getX().toArray();
-
-  for (var i = x.length; i < len; i++)
-    x.unshift(0);
-
-  var res;
-  if (this.ec.curve.type !== 'mont') {
-    if (compact) {
-      res = [ this.pub.getY().isEven() ? 0x02 : 0x03 ].concat(x);
-    } else {
-      var y = this.pub.getY().toArray();
-      for (var i = y.length; i < len; i++)
-        y.unshift(0);
-      var res = [ 0x04 ].concat(x, y);
-    }
-  } else {
-    res = x;
-  }
-
-  return utils.encode(res, enc);
+  return this.pub.encode(enc, compact);
 };
 
 KeyPair.prototype.getPrivate = function getPrivate(enc) {
@@ -16424,7 +16142,7 @@ KeyPair.prototype._importPrivate = function _importPrivate(key, enc) {
 
   // Ensure that the priv won't be bigger than n, otherwise we may fail
   // in fixed multiplication method
-  this.priv = this.priv.mod(this.ec.curve.n);
+  this.priv = this.priv.umod(this.ec.curve.n);
 };
 
 KeyPair.prototype._importPublic = function _importPublic(key, enc) {
@@ -16432,27 +16150,7 @@ KeyPair.prototype._importPublic = function _importPublic(key, enc) {
     this.pub = this.ec.curve.point(key.x, key.y);
     return;
   }
-
-  key = utils.toArray(key, enc);
-  if (this.ec.curve.type !== 'mont')
-    return this._importPublicShort(key);
-  else
-    return this._importPublicMont(key);
-};
-
-KeyPair.prototype._importPublicShort = function _importPublicShort(key) {
-  var len = this.ec.curve.p.byteLength();
-  if (key[0] === 0x04 && key.length - 1 === 2 * len) {
-    this.pub = this.ec.curve.point(
-      key.slice(1, 1 + len),
-      key.slice(1 + len, 1 + 2 * len));
-  } else if ((key[0] === 0x02 || key[0] === 0x03) && key.length - 1 === len) {
-    this.pub = this.ec.curve.pointFromX(key[0] === 0x03, key.slice(1, 1 + len));
-  }
-};
-
-KeyPair.prototype._importPublicMont = function _importPublicMont(key) {
-  this.pub = this.ec.curve.point(key, 1);
+  this.pub = this.ec.curve.decodePoint(key, enc);
 };
 
 // ECDH
@@ -16461,8 +16159,8 @@ KeyPair.prototype.derive = function derive(pub) {
 };
 
 // ECDSA
-KeyPair.prototype.sign = function sign(msg) {
-  return this.ec.sign(msg, this);
+KeyPair.prototype.sign = function sign(msg, enc, options) {
+  return this.ec.sign(msg, this, enc, options);
 };
 
 KeyPair.prototype.verify = function verify(msg, signature) {
@@ -16474,7 +16172,7 @@ KeyPair.prototype.inspect = function inspect() {
          ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
 };
 
-},{"../../elliptic":92,"bn.js":90}],101:[function(require,module,exports){
+},{"bn.js":90}],101:[function(require,module,exports){
 'use strict';
 
 var bn = require('bn.js');
@@ -16500,34 +16198,87 @@ function Signature(options, enc) {
 }
 module.exports = Signature;
 
+function Position() {
+  this.place = 0;
+}
+
+function getLength(buf, p) {
+  var initial = buf[p.place++];
+  if (!(initial & 0x80)) {
+    return initial;
+  }
+  var octetLen = initial & 0xf;
+  var val = 0;
+  for (var i = 0, off = p.place; i < octetLen; i++, off++) {
+    val <<= 8;
+    val |= buf[off];
+  }
+  p.place = off;
+  return val;
+}
+
+function rmPadding(buf) {
+  var i = 0;
+  var len = buf.length - 1;
+  while (!buf[i] && !(buf[i + 1] & 0x80) && i < len) {
+    i++;
+  }
+  if (i === 0) {
+    return buf;
+  }
+  return buf.slice(i);
+}
+
 Signature.prototype._importDER = function _importDER(data, enc) {
   data = utils.toArray(data, enc);
-  if (data.length < 6 || data[0] !== 0x30 || data[2] !== 0x02)
+  var p = new Position();
+  if (data[p.place++] !== 0x30) {
     return false;
-  var total = data[1];
-  if (1 + total > data.length)
+  }
+  var len = getLength(data, p);
+  if ((len + p.place) !== data.length) {
     return false;
-  var rlen = data[3];
-  // Short length notation
-  if (rlen >= 0x80)
+  }
+  if (data[p.place++] !== 0x02) {
     return false;
-  if (4 + rlen + 2 >= data.length)
+  }
+  var rlen = getLength(data, p);
+  var r = data.slice(p.place, rlen + p.place);
+  p.place += rlen;
+  if (data[p.place++] !== 0x02) {
     return false;
-  if (data[4 + rlen] !== 0x02)
+  }
+  var slen = getLength(data, p);
+  if (data.length !== slen + p.place) {
     return false;
-  var slen = data[5 + rlen];
-  // Short length notation
-  if (slen >= 0x80)
-    return false;
-  if (4 + rlen + 2 + slen > data.length)
-    return false;
+  }
+  var s = data.slice(p.place, slen + p.place);
+  if (r[0] === 0 && (r[1] & 0x80)) {
+    r = r.slice(1);
+  }
+  if (s[0] === 0 && (s[1] & 0x80)) {
+    s = s.slice(1);
+  }
 
-  this.r = new bn(data.slice(4, 4 + rlen));
-  this.s = new bn(data.slice(4 + rlen + 2, 4 + rlen + 2 + slen));
+  this.r = new bn(r);
+  this.s = new bn(s);
   this.recoveryParam = null;
 
   return true;
 };
+
+function constructLength(arr, len) {
+  if (len < 0x80) {
+    arr.push(len);
+    return;
+  }
+  var octets = 1 + (Math.log(len) / Math.LN2 >>> 3);
+  arr.push(octets | 0x80);
+  while (--octets) {
+    arr.push((len >>> (octets << 3)) & 0xff);
+  }
+  arr.push(len);
+}
 
 Signature.prototype.toDER = function toDER(enc) {
   var r = this.r.toArray();
@@ -16540,13 +16291,311 @@ Signature.prototype.toDER = function toDER(enc) {
   if (s[0] & 0x80)
     s = [ 0 ].concat(s);
 
-  var total = r.length + s.length + 4;
-  var res = [ 0x30, total, 0x02, r.length ];
-  res = res.concat(r, [ 0x02, s.length ], s);
+  r = rmPadding(r);
+  s = rmPadding(s);
+
+  while (!s[0] && !(s[1] & 0x80)) {
+    s = s.slice(1);
+  }
+  var arr = [ 0x02 ];
+  constructLength(arr, r.length);
+  arr = arr.concat(r);
+  arr.push(0x02);
+  constructLength(arr, s.length);
+  var backHalf = arr.concat(s);
+  var res = [ 0x30 ];
+  constructLength(res, backHalf.length);
+  res = res.concat(backHalf);
   return utils.encode(res, enc);
 };
 
 },{"../../elliptic":92,"bn.js":90}],102:[function(require,module,exports){
+'use strict';
+
+var hash = require('hash.js');
+var elliptic = require('../../elliptic');
+var utils = elliptic.utils;
+var assert = utils.assert;
+var parseBytes = utils.parseBytes;
+var KeyPair = require('./key');
+var Signature = require('./signature');
+
+function EDDSA(curve) {
+  assert(curve === 'ed25519', 'only tested with ed25519 so far');
+
+  if (!(this instanceof EDDSA))
+    return new EDDSA(curve);
+
+  var curve = elliptic.curves[curve].curve;
+  this.curve = curve;
+  this.g = curve.g;
+  this.g.precompute(curve.n.bitLength() + 1);
+
+  this.pointClass = curve.point().constructor;
+  this.encodingLength = Math.ceil(curve.n.bitLength() / 8);
+  this.hash = hash.sha512;
+}
+
+module.exports = EDDSA;
+
+/**
+* @param {Array|String} message - message bytes
+* @param {Array|String|KeyPair} secret - secret bytes or a keypair
+* @returns {Signature} - signature
+*/
+EDDSA.prototype.sign = function sign(message, secret) {
+  message = parseBytes(message);
+  var key = this.keyFromSecret(secret);
+  var r = this.hashInt(key.messagePrefix(), message);
+  var R = this.g.mul(r);
+  var Rencoded = this.encodePoint(R);
+  var s_ = this.hashInt(Rencoded, key.pubBytes(), message)
+               .mul(key.priv());
+  var S = r.add(s_).umod(this.curve.n);
+  return this.makeSignature({ R: R, S: S, Rencoded: Rencoded });
+};
+
+/**
+* @param {Array} message - message bytes
+* @param {Array|String|Signature} sig - sig bytes
+* @param {Array|String|Point|KeyPair} pub - public key
+* @returns {Boolean} - true if public key matches sig of message
+*/
+EDDSA.prototype.verify = function verify(message, sig, pub) {
+  message = parseBytes(message);
+  sig = this.makeSignature(sig);
+  var key = this.keyFromPublic(pub);
+  var h = this.hashInt(sig.Rencoded(), key.pubBytes(), message);
+  var SG = this.g.mul(sig.S());
+  var RplusAh = sig.R().add(key.pub().mul(h));
+  return RplusAh.eq(SG);
+};
+
+EDDSA.prototype.hashInt = function hashInt() {
+  var hash = this.hash();
+  for (var i = 0; i < arguments.length; i++)
+    hash.update(arguments[i]);
+  return utils.intFromLE(hash.digest()).umod(this.curve.n);
+};
+
+EDDSA.prototype.keyFromPublic = function keyFromPublic(pub) {
+  return KeyPair.fromPublic(this, pub);
+};
+
+EDDSA.prototype.keyFromSecret = function keyFromSecret(secret) {
+  return KeyPair.fromSecret(this, secret);
+};
+
+EDDSA.prototype.makeSignature = function makeSignature(sig) {
+  if (sig instanceof Signature)
+    return sig;
+  return new Signature(this, sig);
+};
+
+/**
+* * https://tools.ietf.org/html/draft-josefsson-eddsa-ed25519-03#section-5.2
+*
+* EDDSA defines methods for encoding and decoding points and integers. These are
+* helper convenience methods, that pass along to utility functions implied
+* parameters.
+*
+*/
+EDDSA.prototype.encodePoint = function encodePoint(point) {
+  var enc = point.getY().toArray('le', this.encodingLength);
+  enc[this.encodingLength - 1] |= point.getX().isOdd() ? 0x80 : 0;
+  return enc;
+};
+
+EDDSA.prototype.decodePoint = function decodePoint(bytes) {
+  bytes = utils.parseBytes(bytes);
+
+  var lastIx = bytes.length - 1;
+  var normed = bytes.slice(0, lastIx).concat(bytes[lastIx] & ~0x80);
+  var xIsOdd = (bytes[lastIx] & 0x80) !== 0;
+
+  var y = utils.intFromLE(normed);
+  return this.curve.pointFromY(y, xIsOdd);
+};
+
+EDDSA.prototype.encodeInt = function encodeInt(num) {
+  return num.toArray('le', this.encodingLength);
+};
+
+EDDSA.prototype.decodeInt = function decodeInt(bytes) {
+  return utils.intFromLE(bytes);
+};
+
+EDDSA.prototype.isPoint = function isPoint(val) {
+  return val instanceof this.pointClass;
+};
+
+},{"../../elliptic":92,"./key":103,"./signature":104,"hash.js":109}],103:[function(require,module,exports){
+'use strict';
+
+var elliptic = require('../../elliptic');
+var utils = elliptic.utils;
+var assert = utils.assert;
+var parseBytes = utils.parseBytes;
+var cachedProperty = utils.cachedProperty;
+
+/**
+* @param {EDDSA} eddsa - instance
+* @param {Object} params - public/private key parameters
+*
+* @param {Array<Byte>} [params.secret] - secret seed bytes
+* @param {Point} [params.pub] - public key point (aka `A` in eddsa terms)
+* @param {Array<Byte>} [params.pub] - public key point encoded as bytes
+*
+*/
+function KeyPair(eddsa, params) {
+  this.eddsa = eddsa;
+  this._secret = parseBytes(params.secret);
+  if (eddsa.isPoint(params.pub))
+    this._pub = params.pub;
+  else
+    this._pubBytes = parseBytes(params.pub);
+}
+
+KeyPair.fromPublic = function fromPublic(eddsa, pub) {
+  if (pub instanceof KeyPair)
+    return pub;
+  return new KeyPair(eddsa, { pub: pub });
+};
+
+KeyPair.fromSecret = function fromSecret(eddsa, secret) {
+  if (secret instanceof KeyPair)
+    return secret;
+  return new KeyPair(eddsa, { secret: secret });
+};
+
+KeyPair.prototype.secret = function secret() {
+  return this._secret;
+};
+
+cachedProperty(KeyPair, function pubBytes() {
+  return this.eddsa.encodePoint(this.pub());
+});
+
+cachedProperty(KeyPair, function pub() {
+  if (this._pubBytes)
+    return this.eddsa.decodePoint(this._pubBytes);
+  return this.eddsa.g.mul(this.priv());
+});
+
+cachedProperty(KeyPair, function privBytes() {
+  var eddsa = this.eddsa;
+  var hash = this.hash();
+  var lastIx = eddsa.encodingLength - 1;
+
+  var a = hash.slice(0, eddsa.encodingLength);
+  a[0] &= 248;
+  a[lastIx] &= 127;
+  a[lastIx] |= 64;
+
+  return a;
+});
+
+cachedProperty(KeyPair, function priv() {
+  return this.eddsa.decodeInt(this.privBytes());
+});
+
+cachedProperty(KeyPair, function hash() {
+  return this.eddsa.hash().update(this.secret()).digest();
+});
+
+cachedProperty(KeyPair, function messagePrefix() {
+  return this.hash().slice(this.eddsa.encodingLength);
+});
+
+KeyPair.prototype.sign = function sign(message) {
+  assert(this._secret, 'KeyPair can only verify');
+  return this.eddsa.sign(message, this);
+};
+
+KeyPair.prototype.verify = function verify(message, sig) {
+  return this.eddsa.verify(message, sig, this);
+};
+
+KeyPair.prototype.getSecret = function getSecret(enc) {
+  assert(this._secret, 'KeyPair is public only');
+  return utils.encode(this.secret(), enc);
+};
+
+KeyPair.prototype.getPublic = function getPublic(enc) {
+  return utils.encode(this.pubBytes(), enc);
+};
+
+module.exports = KeyPair;
+
+},{"../../elliptic":92}],104:[function(require,module,exports){
+'use strict';
+
+var bn = require('bn.js');
+var elliptic = require('../../elliptic');
+var utils = elliptic.utils;
+var assert = utils.assert;
+var cachedProperty = utils.cachedProperty;
+var parseBytes = utils.parseBytes;
+
+/**
+* @param {EDDSA} eddsa - eddsa instance
+* @param {Array<Bytes>|Object} sig -
+* @param {Array<Bytes>|Point} [sig.R] - R point as Point or bytes
+* @param {Array<Bytes>|bn} [sig.S] - S scalar as bn or bytes
+* @param {Array<Bytes>} [sig.Rencoded] - R point encoded
+* @param {Array<Bytes>} [sig.Sencoded] - S scalar encoded
+*/
+function Signature(eddsa, sig) {
+  this.eddsa = eddsa;
+
+  if (typeof sig !== 'object')
+    sig = parseBytes(sig);
+
+  if (Array.isArray(sig)) {
+    sig = {
+      R: sig.slice(0, eddsa.encodingLength),
+      S: sig.slice(eddsa.encodingLength)
+    };
+  }
+
+  assert(sig.R && sig.S, 'Signature without R or S');
+
+  if (eddsa.isPoint(sig.R))
+    this._R = sig.R;
+  if (sig.S instanceof bn)
+    this._S = sig.S;
+
+  this._Rencoded = Array.isArray(sig.R) ? sig.R : sig.Rencoded;
+  this._Sencoded = Array.isArray(sig.S) ? sig.S : sig.Sencoded;
+}
+
+cachedProperty(Signature, function S() {
+  return this.eddsa.decodeInt(this.Sencoded());
+});
+
+cachedProperty(Signature, function R() {
+  return this.eddsa.decodePoint(this.Rencoded());
+});
+
+cachedProperty(Signature, function Rencoded() {
+  return this.eddsa.encodePoint(this.R());
+});
+
+cachedProperty(Signature, function Sencoded() {
+  return this.eddsa.encodeInt(this.S());
+});
+
+Signature.prototype.toBytes = function toBytes() {
+  return this.Rencoded().concat(this.Sencoded());
+};
+
+Signature.prototype.toHex = function toHex() {
+  return utils.encode(this.toBytes(), 'hex').toUpperCase();
+};
+
+module.exports = Signature;
+
+},{"../../elliptic":92,"bn.js":90}],105:[function(require,module,exports){
 'use strict';
 
 var hash = require('hash.js');
@@ -16662,7 +16711,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
   return utils.encode(res, enc);
 };
 
-},{"../elliptic":92,"hash.js":106}],103:[function(require,module,exports){
+},{"../elliptic":92,"hash.js":109}],106:[function(require,module,exports){
 module.exports = {
   doubles: {
     step: 4,
@@ -17444,10 +17493,11 @@ module.exports = {
   }
 };
 
-},{}],104:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 'use strict';
 
 var utils = exports;
+var bn = require('bn.js');
 
 utils.assert = function assert(val, msg) {
   if (!val)
@@ -17532,7 +17582,7 @@ function getNAF(num, w) {
     var shift = (k.cmpn(0) !== 0 && k.andln(ws - 1) === 0) ? (w + 1) : 1;
     for (var i = 1; i < shift; i++)
       naf.push(0);
-    k.ishrn(shift);
+    k.iushrn(shift);
   }
 
   return naf;
@@ -17588,15 +17638,37 @@ function getJSF(k1, k2) {
       d1 = 1 - d1;
     if (2 * d2 === u2 + 1)
       d2 = 1 - d2;
-    k1.ishrn(1);
-    k2.ishrn(1);
+    k1.iushrn(1);
+    k2.iushrn(1);
   }
 
   return jsf;
 }
 utils.getJSF = getJSF;
 
-},{}],105:[function(require,module,exports){
+function cachedProperty(obj, computer) {
+  var name = computer.name;
+  var key = '_' + name;
+  obj.prototype[name] = function cachedProperty() {
+    return this[key] !== undefined ? this[key] :
+           this[key] = computer.call(this);
+  };
+}
+utils.cachedProperty = cachedProperty;
+
+function parseBytes(bytes) {
+  return typeof bytes === 'string' ? utils.toArray(bytes, 'hex') :
+                                     bytes;
+}
+utils.parseBytes = parseBytes;
+
+function intFromLE(bytes) {
+  return new bn(bytes, 'hex', 'le');
+}
+utils.intFromLE = intFromLE;
+
+
+},{"bn.js":90}],108:[function(require,module,exports){
 var r;
 
 module.exports = function rand(len) {
@@ -17655,7 +17727,7 @@ if (typeof window === 'object') {
   }
 }
 
-},{}],106:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 var hash = exports;
 
 hash.utils = require('./hash/utils');
@@ -17672,7 +17744,7 @@ hash.sha384 = hash.sha.sha384;
 hash.sha512 = hash.sha.sha512;
 hash.ripemd160 = hash.ripemd.ripemd160;
 
-},{"./hash/common":107,"./hash/hmac":108,"./hash/ripemd":109,"./hash/sha":110,"./hash/utils":111}],107:[function(require,module,exports){
+},{"./hash/common":110,"./hash/hmac":111,"./hash/ripemd":112,"./hash/sha":113,"./hash/utils":114}],110:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -17765,7 +17837,7 @@ BlockHash.prototype._pad = function pad() {
   return res;
 };
 
-},{"../hash":106}],108:[function(require,module,exports){
+},{"../hash":109}],111:[function(require,module,exports){
 var hmac = exports;
 
 var hash = require('../hash');
@@ -17815,7 +17887,7 @@ Hmac.prototype.digest = function digest(enc) {
   return this.outer.digest(enc);
 };
 
-},{"../hash":106}],109:[function(require,module,exports){
+},{"../hash":109}],112:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 
@@ -17961,7 +18033,7 @@ var sh = [
   8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
 ];
 
-},{"../hash":106}],110:[function(require,module,exports){
+},{"../hash":109}],113:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -18527,7 +18599,7 @@ function g1_512_lo(xh, xl) {
   return r;
 }
 
-},{"../hash":106}],111:[function(require,module,exports){
+},{"../hash":109}],114:[function(require,module,exports){
 var utils = exports;
 var inherits = require('inherits');
 
@@ -18786,14 +18858,18 @@ function shr64_lo(ah, al, num) {
 };
 exports.shr64_lo = shr64_lo;
 
-},{"inherits":245}],112:[function(require,module,exports){
+},{"inherits":251}],115:[function(require,module,exports){
 module.exports={
   "name": "elliptic",
-  "version": "3.1.0",
+  "version": "6.0.2",
   "description": "EC cryptography",
   "main": "lib/elliptic.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
-    "test": "make lint && mocha --reporter=spec test/*-test.js"
+    "test": "make lint && istanbul test _mocha --reporter=spec test/*-test.js",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -18816,28 +18892,32 @@ module.exports={
   "homepage": "https://github.com/indutny/elliptic",
   "devDependencies": {
     "browserify": "^3.44.2",
+    "coveralls": "^2.11.3",
+    "istanbul": "^0.3.17",
     "jscs": "^1.11.3",
     "jshint": "^2.6.0",
     "mocha": "^2.1.0",
     "uglify-js": "^2.4.13"
   },
   "dependencies": {
-    "bn.js": "^2.0.3",
+    "bn.js": "^4.0.0",
     "brorand": "^1.0.1",
     "hash.js": "^1.0.0",
     "inherits": "^2.0.1"
   },
-  "readme": "# Elliptic [![Build Status](https://secure.travis-ci.org/indutny/elliptic.png)](http://travis-ci.org/indutny/elliptic)\n\nFast elliptic-curve cryptography in a plain javascript implementation.\n\nNOTE: Please take a look at http://safecurves.cr.yp.to/ before choosing a curve\nfor your cryptography operations.\n\n## Incentive\n\nECC is much slower than regular RSA cryptography, the JS implementations are\neven more slower.\n\n## Benchmarks\n\n```bash\n$ node benchmarks/index.js\nBenchmarking: sign\nelliptic#sign x 262 ops/sec ±0.51% (177 runs sampled)\neccjs#sign x 55.91 ops/sec ±0.90% (144 runs sampled)\n------------------------\nFastest is elliptic#sign\n========================\nBenchmarking: verify\nelliptic#verify x 113 ops/sec ±0.50% (166 runs sampled)\neccjs#verify x 48.56 ops/sec ±0.36% (125 runs sampled)\n------------------------\nFastest is elliptic#verify\n========================\nBenchmarking: gen\nelliptic#gen x 294 ops/sec ±0.43% (176 runs sampled)\neccjs#gen x 62.25 ops/sec ±0.63% (129 runs sampled)\n------------------------\nFastest is elliptic#gen\n========================\nBenchmarking: ecdh\nelliptic#ecdh x 136 ops/sec ±0.85% (156 runs sampled)\n------------------------\nFastest is elliptic#ecdh\n========================\n```\n\n## API\n\n### ECDSA\n\n```javascript\nvar EC = require('elliptic').ec;\n\n// Create and initialize EC context\n// (better do it once and reuse it)\nvar ec = new EC('secp256k1');\n\n// Generate keys\nvar key = ec.genKeyPair();\n\n// Sign message (must be an array, or it'll be treated as a hex sequence)\nvar msg = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];\nvar signature = key.sign(msg);\n\n// Export DER encoded signature in Array\nvar derSign = signature.toDER();\n\n// Verify signature\nconsole.log(key.verify(msg, derSign));\n```\n\n### ECDH\n\n```javascript\n// Generate keys\nvar key1 = ec.genKeyPair();\nvar key2 = ec.genKeyPair();\n\nvar shared1 = key1.derive(key2.getPublic());\nvar shared2 = key2.derive(key1.getPublic());\n\nconsole.log('Both shared secrets are BN instances');\nconsole.log(shared1.toString(16));\nconsole.log(shared2.toString(16));\n```\n\nNOTE: `.derive()` returns a [BN][1] instance.\n\n## Supported curves\n\nElliptic.js support following curve types:\n\n* Short Weierstrass\n* Montgomery\n* Edwards\n* Twisted Edwards\n\nFollowing curve 'presets' are embedded into the library:\n\n* `secp256k1`\n* `p192`\n* `p224`\n* `p256`\n* `curve25519`\n* `ed25519`\n\nNOTE: That `curve25519` could not be used for ECDSA, use `ed25519` instead.\n\n### Implementation details\n\nECDSA is using deterministic `k` value generation as per [RFC6979][0]. Most of\nthe curve operations are performed on non-affine coordinates (either projective\nor extended), various windowing techniques are used for different cases.\n\nAll operations are performed in reduction context using [bn.js][1], hashing is\nprovided by [hash.js][2]\n\n### Related projects\n\n* [eccrypto][3]: isomorphic implementation of ECDSA, ECDH and ECIES for both\n  browserify and node (uses `elliptic` for browser and [secp256k1-node][4] for\n  node)\n\n#### LICENSE\n\nThis software is licensed under the MIT License.\n\nCopyright Fedor Indutny, 2014.\n\nPermission is hereby granted, free of charge, to any person obtaining a\ncopy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to permit\npersons to whom the Software is furnished to do so, subject to the\nfollowing conditions:\n\nThe above copyright notice and this permission notice shall be included\nin all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\nOR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN\nNO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,\nDAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR\nOTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\nUSE OR OTHER DEALINGS IN THE SOFTWARE.\n\n[0]: http://tools.ietf.org/html/rfc6979\n[1]: https://github.com/indutny/bn.js\n[2]: https://github.com/indutny/hash.js\n[3]: https://github.com/bitchan/eccrypto\n[4]: https://github.com/wanderer/secp256k1-node\n",
-  "readmeFilename": "README.md",
-  "_id": "elliptic@3.1.0",
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-  "_shasum": "c21682ef762769b56a74201609105da11d5f60cc",
-  "_from": "elliptic@^3.0.0",
-  "_npmVersion": "2.11.0",
-  "_nodeVersion": "2.2.1",
+  "gitHead": "330106da186712d228d79bc71ae8e7e68565fa9d",
+  "_id": "elliptic@6.0.2",
+  "_shasum": "219b96cd92aa9885d91d31c1fd42eaa5eb4483a9",
+  "_from": "elliptic@>=6.0.0 <7.0.0",
+  "_npmVersion": "3.3.6",
+  "_nodeVersion": "5.0.0",
   "_npmUser": {
     "name": "indutny",
     "email": "fedor@indutny.com"
+  },
+  "dist": {
+    "shasum": "219b96cd92aa9885d91d31c1fd42eaa5eb4483a9",
+    "tarball": "http://registry.npmjs.org/elliptic/-/elliptic-6.0.2.tgz"
   },
   "maintainers": [
     {
@@ -18845,18 +18925,11 @@ module.exports={
       "email": "fedor@indutny.com"
     }
   ],
-  "dist": {
-    "shasum": "c21682ef762769b56a74201609105da11d5f60cc",
-    "tarball": "http://registry.npmjs.org/elliptic/-/elliptic-3.1.0.tgz"
-  },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-3.1.0.tgz"
-=======
-  "_from": "elliptic@>=3.0.0 <4.0.0"
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+  "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.0.2.tgz"
 }
 
-},{}],113:[function(require,module,exports){
+},{}],116:[function(require,module,exports){
 module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.2": "aes-128-cbc",
 "2.16.840.1.101.3.4.1.3": "aes-128-ofb",
@@ -18870,7 +18943,7 @@ module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.43": "aes-256-ofb",
 "2.16.840.1.101.3.4.1.44": "aes-256-cfb"
 }
-},{}],114:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 // Fedor, you are amazing.
 
@@ -18989,7 +19062,7 @@ exports.signature = asn1.define('signature', function () {
   )
 })
 
-},{"asn1.js":117}],115:[function(require,module,exports){
+},{"asn1.js":120}],118:[function(require,module,exports){
 (function (Buffer){
 // adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED\r?\nDEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)\r?\n\r?\n([0-9A-z\n\r\+\/\=]+)\r?\n/m
@@ -19024,7 +19097,7 @@ module.exports = function (okey, password) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"browserify-aes":134,"buffer":53,"evp_bytestokey":149}],116:[function(require,module,exports){
+},{"browserify-aes":137,"buffer":53,"evp_bytestokey":152}],119:[function(require,module,exports){
 (function (Buffer){
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
@@ -19130,7 +19203,7 @@ function decrypt (data, password) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aesid.json":113,"./asn1":114,"./fixProc":115,"browserify-aes":134,"buffer":53,"pbkdf2":196}],117:[function(require,module,exports){
+},{"./aesid.json":116,"./asn1":117,"./fixProc":118,"browserify-aes":137,"buffer":53,"pbkdf2":202}],120:[function(require,module,exports){
 var asn1 = exports;
 
 asn1.bignum = require('bn.js');
@@ -19141,7 +19214,7 @@ asn1.constants = require('./asn1/constants');
 asn1.decoders = require('./asn1/decoders');
 asn1.encoders = require('./asn1/encoders');
 
-},{"./asn1/api":118,"./asn1/base":120,"./asn1/constants":124,"./asn1/decoders":126,"./asn1/encoders":129,"bn.js":90}],118:[function(require,module,exports){
+},{"./asn1/api":121,"./asn1/base":123,"./asn1/constants":127,"./asn1/decoders":129,"./asn1/encoders":132,"bn.js":90}],121:[function(require,module,exports){
 var asn1 = require('../asn1');
 var inherits = require('inherits');
 
@@ -19202,7 +19275,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
   return this._getEncoder(enc).encode(data, reporter);
 };
 
-},{"../asn1":117,"inherits":245,"vm":281}],119:[function(require,module,exports){
+},{"../asn1":120,"inherits":251,"vm":287}],122:[function(require,module,exports){
 var inherits = require('inherits');
 var Reporter = require('../base').Reporter;
 var Buffer = require('buffer').Buffer;
@@ -19320,7 +19393,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
   return out;
 };
 
-},{"../base":120,"buffer":53,"inherits":245}],120:[function(require,module,exports){
+},{"../base":123,"buffer":53,"inherits":251}],123:[function(require,module,exports){
 var base = exports;
 
 base.Reporter = require('./reporter').Reporter;
@@ -19328,7 +19401,7 @@ base.DecoderBuffer = require('./buffer').DecoderBuffer;
 base.EncoderBuffer = require('./buffer').EncoderBuffer;
 base.Node = require('./node');
 
-},{"./buffer":119,"./node":121,"./reporter":122}],121:[function(require,module,exports){
+},{"./buffer":122,"./node":124,"./reporter":125}],124:[function(require,module,exports){
 var Reporter = require('../base').Reporter;
 var EncoderBuffer = require('../base').EncoderBuffer;
 var assert = require('minimalistic-assert');
@@ -19928,7 +20001,7 @@ Node.prototype._encodePrimitive = function encodePrimitive(tag, data) {
     throw new Error('Unsupported tag: ' + tag);
 };
 
-},{"../base":120,"minimalistic-assert":131}],122:[function(require,module,exports){
+},{"../base":123,"minimalistic-assert":134}],125:[function(require,module,exports){
 var inherits = require('inherits');
 
 function Reporter(options) {
@@ -20032,7 +20105,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
   return this;
 };
 
-},{"inherits":245}],123:[function(require,module,exports){
+},{"inherits":251}],126:[function(require,module,exports){
 var constants = require('../constants');
 
 exports.tagClass = {
@@ -20076,7 +20149,7 @@ exports.tag = {
 };
 exports.tagByName = constants._reverse(exports.tag);
 
-},{"../constants":124}],124:[function(require,module,exports){
+},{"../constants":127}],127:[function(require,module,exports){
 var constants = exports;
 
 // Helper
@@ -20097,7 +20170,7 @@ constants._reverse = function reverse(map) {
 
 constants.der = require('./der');
 
-},{"./der":123}],125:[function(require,module,exports){
+},{"./der":126}],128:[function(require,module,exports){
 var inherits = require('inherits');
 
 var asn1 = require('../../asn1');
@@ -20390,13 +20463,13 @@ function derDecodeLen(buf, primitive, fail) {
   return len;
 }
 
-},{"../../asn1":117,"inherits":245}],126:[function(require,module,exports){
+},{"../../asn1":120,"inherits":251}],129:[function(require,module,exports){
 var decoders = exports;
 
 decoders.der = require('./der');
 decoders.pem = require('./pem');
 
-},{"./der":125,"./pem":127}],127:[function(require,module,exports){
+},{"./der":128,"./pem":130}],130:[function(require,module,exports){
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -20448,7 +20521,7 @@ PEMDecoder.prototype.decode = function decode(data, options) {
   return DERDecoder.prototype.decode.call(this, input, options);
 };
 
-},{"../../asn1":117,"./der":125,"buffer":53,"inherits":245}],128:[function(require,module,exports){
+},{"../../asn1":120,"./der":128,"buffer":53,"inherits":251}],131:[function(require,module,exports){
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -20624,7 +20697,7 @@ DERNode.prototype._encodeInt = function encodeInt(num, values) {
   // Bignum, assume big endian
   if (typeof num !== 'number' && !Buffer.isBuffer(num)) {
     var numArray = num.toArray();
-    if (num.sign === false && numArray[0] & 0x80) {
+    if (!num.sign && numArray[0] & 0x80) {
       numArray.unshift(0);
     }
     num = new Buffer(numArray);
@@ -20722,13 +20795,13 @@ function encodeTag(tag, primitive, cls, reporter) {
   return res;
 }
 
-},{"../../asn1":117,"buffer":53,"inherits":245}],129:[function(require,module,exports){
+},{"../../asn1":120,"buffer":53,"inherits":251}],132:[function(require,module,exports){
 var encoders = exports;
 
 encoders.der = require('./der');
 encoders.pem = require('./pem');
 
-},{"./der":128,"./pem":130}],130:[function(require,module,exports){
+},{"./der":131,"./pem":133}],133:[function(require,module,exports){
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -20753,9 +20826,9 @@ PEMEncoder.prototype.encode = function encode(data, options) {
   return out.join('\n');
 };
 
-},{"../../asn1":117,"./der":128,"buffer":53,"inherits":245}],131:[function(require,module,exports){
+},{"../../asn1":120,"./der":131,"buffer":53,"inherits":251}],134:[function(require,module,exports){
 arguments[4][85][0].apply(exports,arguments)
-},{"dup":85}],132:[function(require,module,exports){
+},{"dup":85}],135:[function(require,module,exports){
 (function (Buffer){
 // based on the aes implimentation in triple sec
 // https://github.com/keybase/triplesec
@@ -20937,7 +21010,7 @@ exports.AES = AES
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],133:[function(require,module,exports){
+},{"buffer":53}],136:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -21039,9 +21112,9 @@ function xorTest (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":132,"./ghash":137,"buffer":53,"buffer-xor":146,"cipher-base":147,"inherits":245}],134:[function(require,module,exports){
+},{"./aes":135,"./ghash":140,"buffer":53,"buffer-xor":149,"cipher-base":150,"inherits":251}],137:[function(require,module,exports){
 arguments[4][61][0].apply(exports,arguments)
-},{"./decrypter":135,"./encrypter":136,"./modes":138,"dup":61}],135:[function(require,module,exports){
+},{"./decrypter":138,"./encrypter":139,"./modes":141,"dup":61}],138:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -21182,7 +21255,7 @@ exports.createDecipheriv = createDecipheriv
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":132,"./authCipher":133,"./modes":138,"./modes/cbc":139,"./modes/cfb":140,"./modes/cfb1":141,"./modes/cfb8":142,"./modes/ctr":143,"./modes/ecb":144,"./modes/ofb":145,"./streamCipher":148,"buffer":53,"cipher-base":147,"evp_bytestokey":149,"inherits":245}],136:[function(require,module,exports){
+},{"./aes":135,"./authCipher":136,"./modes":141,"./modes/cbc":142,"./modes/cfb":143,"./modes/cfb1":144,"./modes/cfb8":145,"./modes/ctr":146,"./modes/ecb":147,"./modes/ofb":148,"./streamCipher":151,"buffer":53,"cipher-base":150,"evp_bytestokey":152,"inherits":251}],139:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -21308,7 +21381,7 @@ exports.createCipher = createCipher
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":132,"./authCipher":133,"./modes":138,"./modes/cbc":139,"./modes/cfb":140,"./modes/cfb1":141,"./modes/cfb8":142,"./modes/ctr":143,"./modes/ecb":144,"./modes/ofb":145,"./streamCipher":148,"buffer":53,"cipher-base":147,"evp_bytestokey":149,"inherits":245}],137:[function(require,module,exports){
+},{"./aes":135,"./authCipher":136,"./modes":141,"./modes/cbc":142,"./modes/cfb":143,"./modes/cfb1":144,"./modes/cfb8":145,"./modes/ctr":146,"./modes/ecb":147,"./modes/ofb":148,"./streamCipher":151,"buffer":53,"cipher-base":150,"evp_bytestokey":152,"inherits":251}],140:[function(require,module,exports){
 (function (Buffer){
 var zeros = new Buffer(16)
 zeros.fill(0)
@@ -21411,11 +21484,11 @@ function xor (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],138:[function(require,module,exports){
+},{"buffer":53}],141:[function(require,module,exports){
 arguments[4][65][0].apply(exports,arguments)
-},{"dup":65}],139:[function(require,module,exports){
+},{"dup":65}],142:[function(require,module,exports){
 arguments[4][66][0].apply(exports,arguments)
-},{"buffer-xor":146,"dup":66}],140:[function(require,module,exports){
+},{"buffer-xor":149,"dup":66}],143:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -21451,7 +21524,7 @@ function encryptStart (self, data, decrypt) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"buffer-xor":146}],141:[function(require,module,exports){
+},{"buffer":53,"buffer-xor":149}],144:[function(require,module,exports){
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad
@@ -21490,7 +21563,7 @@ function shiftIn (buffer, value) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],142:[function(require,module,exports){
+},{"buffer":53}],145:[function(require,module,exports){
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad = self._cipher.encryptBlock(self._prev)
@@ -21510,7 +21583,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],143:[function(require,module,exports){
+},{"buffer":53}],146:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -21546,9 +21619,9 @@ exports.encrypt = function (self, chunk) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"buffer-xor":146}],144:[function(require,module,exports){
+},{"buffer":53,"buffer-xor":149}],147:[function(require,module,exports){
 arguments[4][71][0].apply(exports,arguments)
-},{"dup":71}],145:[function(require,module,exports){
+},{"dup":71}],148:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -21569,7 +21642,7 @@ exports.encrypt = function (self, chunk) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"buffer-xor":146}],146:[function(require,module,exports){
+},{"buffer":53,"buffer-xor":149}],149:[function(require,module,exports){
 (function (Buffer){
 module.exports = function xor (a, b) {
   var length = Math.min(a.length, b.length)
@@ -21584,7 +21657,7 @@ module.exports = function xor (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],147:[function(require,module,exports){
+},{"buffer":53}],150:[function(require,module,exports){
 (function (Buffer){
 var Transform = require('stream').Transform
 var inherits = require('inherits')
@@ -21679,7 +21752,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"inherits":245,"stream":267,"string_decoder":277}],148:[function(require,module,exports){
+},{"buffer":53,"inherits":251,"stream":273,"string_decoder":283}],151:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -21709,7 +21782,7 @@ StreamCipher.prototype._final = function () {
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":132,"buffer":53,"cipher-base":147,"inherits":245}],149:[function(require,module,exports){
+},{"./aes":135,"buffer":53,"cipher-base":150,"inherits":251}],152:[function(require,module,exports){
 (function (Buffer){
 var md5 = require('create-hash/md5')
 module.exports = EVP_BytesToKey
@@ -21782,7 +21855,7 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"create-hash/md5":177}],150:[function(require,module,exports){
+},{"buffer":53,"create-hash/md5":183}],153:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var createHmac = require('create-hmac')
@@ -21972,7 +22045,7 @@ module.exports.makeKey = makeKey
 
 }).call(this,require("buffer").Buffer)
 
-},{"./curves":89,"bn.js":90,"browserify-rsa":91,"buffer":53,"create-hmac":188,"elliptic":92,"parse-asn1":116}],151:[function(require,module,exports){
+},{"./curves":89,"bn.js":90,"browserify-rsa":91,"buffer":53,"create-hmac":194,"elliptic":92,"parse-asn1":119}],154:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var curves = require('./curves')
@@ -22080,7 +22153,7 @@ module.exports = verify
 
 }).call(this,require("buffer").Buffer)
 
-},{"./curves":89,"bn.js":90,"buffer":53,"elliptic":92,"parse-asn1":116}],152:[function(require,module,exports){
+},{"./curves":89,"bn.js":90,"buffer":53,"elliptic":92,"parse-asn1":119}],155:[function(require,module,exports){
 (function (Buffer){
 var elliptic = require('elliptic');
 var BN = require('bn.js');
@@ -22109,12 +22182,22 @@ var aliases = {
 	ed25519: {
 		name: 'ed25519',
 		byteLength: 32
+	},
+	secp384r1: {
+		name: 'p384',
+		byteLength: 48
+	},
+	secp521r1: {
+		name: 'p521',
+		byteLength: 66
 	}
 };
 
 aliases.p224 = aliases.secp224r1;
 aliases.p256 = aliases.secp256r1 = aliases.prime256v1;
 aliases.p192 = aliases.secp192r1 = aliases.prime192v1;
+aliases.p384 = aliases.secp384r1;
+aliases.p521 = aliases.secp521r1;
 
 function ECDH(curve) {
 	this.curveType = aliases[curve];
@@ -22197,51 +22280,57 @@ function formatReturnValue(bn, enc, len) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"bn.js":153,"buffer":53,"elliptic":154}],153:[function(require,module,exports){
+},{"bn.js":156,"buffer":53,"elliptic":157}],156:[function(require,module,exports){
 arguments[4][90][0].apply(exports,arguments)
-},{"dup":90}],154:[function(require,module,exports){
+},{"dup":90}],157:[function(require,module,exports){
 arguments[4][92][0].apply(exports,arguments)
-},{"../package.json":174,"./elliptic/curve":157,"./elliptic/curves":160,"./elliptic/ec":161,"./elliptic/hmac-drbg":164,"./elliptic/utils":166,"brorand":167,"dup":92}],155:[function(require,module,exports){
+},{"../package.json":180,"./elliptic/curve":160,"./elliptic/curves":163,"./elliptic/ec":164,"./elliptic/eddsa":167,"./elliptic/hmac-drbg":170,"./elliptic/utils":172,"brorand":173,"dup":92}],158:[function(require,module,exports){
 arguments[4][93][0].apply(exports,arguments)
-},{"../../elliptic":154,"bn.js":153,"dup":93}],156:[function(require,module,exports){
+},{"../../elliptic":157,"bn.js":156,"dup":93}],159:[function(require,module,exports){
 arguments[4][94][0].apply(exports,arguments)
-},{"../../elliptic":154,"../curve":157,"bn.js":153,"dup":94,"inherits":245}],157:[function(require,module,exports){
+},{"../../elliptic":157,"../curve":160,"bn.js":156,"dup":94,"inherits":251}],160:[function(require,module,exports){
 arguments[4][95][0].apply(exports,arguments)
-},{"./base":155,"./edwards":156,"./mont":158,"./short":159,"dup":95}],158:[function(require,module,exports){
+},{"./base":158,"./edwards":159,"./mont":161,"./short":162,"dup":95}],161:[function(require,module,exports){
 arguments[4][96][0].apply(exports,arguments)
-},{"../curve":157,"bn.js":153,"dup":96,"inherits":245}],159:[function(require,module,exports){
+},{"../../elliptic":157,"../curve":160,"bn.js":156,"dup":96,"inherits":251}],162:[function(require,module,exports){
 arguments[4][97][0].apply(exports,arguments)
-},{"../../elliptic":154,"../curve":157,"bn.js":153,"dup":97,"inherits":245}],160:[function(require,module,exports){
+},{"../../elliptic":157,"../curve":160,"bn.js":156,"dup":97,"inherits":251}],163:[function(require,module,exports){
 arguments[4][98][0].apply(exports,arguments)
-},{"../elliptic":154,"./precomputed/secp256k1":165,"dup":98,"hash.js":168}],161:[function(require,module,exports){
+},{"../elliptic":157,"./precomputed/secp256k1":171,"dup":98,"hash.js":174}],164:[function(require,module,exports){
 arguments[4][99][0].apply(exports,arguments)
-},{"../../elliptic":154,"./key":162,"./signature":163,"bn.js":153,"dup":99}],162:[function(require,module,exports){
+},{"../../elliptic":157,"./key":165,"./signature":166,"bn.js":156,"dup":99}],165:[function(require,module,exports){
 arguments[4][100][0].apply(exports,arguments)
-},{"../../elliptic":154,"bn.js":153,"dup":100}],163:[function(require,module,exports){
+},{"bn.js":156,"dup":100}],166:[function(require,module,exports){
 arguments[4][101][0].apply(exports,arguments)
-},{"../../elliptic":154,"bn.js":153,"dup":101}],164:[function(require,module,exports){
+},{"../../elliptic":157,"bn.js":156,"dup":101}],167:[function(require,module,exports){
 arguments[4][102][0].apply(exports,arguments)
-},{"../elliptic":154,"dup":102,"hash.js":168}],165:[function(require,module,exports){
+},{"../../elliptic":157,"./key":168,"./signature":169,"dup":102,"hash.js":174}],168:[function(require,module,exports){
 arguments[4][103][0].apply(exports,arguments)
-},{"dup":103}],166:[function(require,module,exports){
+},{"../../elliptic":157,"dup":103}],169:[function(require,module,exports){
 arguments[4][104][0].apply(exports,arguments)
-},{"dup":104}],167:[function(require,module,exports){
+},{"../../elliptic":157,"bn.js":156,"dup":104}],170:[function(require,module,exports){
 arguments[4][105][0].apply(exports,arguments)
-},{"dup":105}],168:[function(require,module,exports){
+},{"../elliptic":157,"dup":105,"hash.js":174}],171:[function(require,module,exports){
 arguments[4][106][0].apply(exports,arguments)
-},{"./hash/common":169,"./hash/hmac":170,"./hash/ripemd":171,"./hash/sha":172,"./hash/utils":173,"dup":106}],169:[function(require,module,exports){
+},{"dup":106}],172:[function(require,module,exports){
 arguments[4][107][0].apply(exports,arguments)
-},{"../hash":168,"dup":107}],170:[function(require,module,exports){
+},{"bn.js":156,"dup":107}],173:[function(require,module,exports){
 arguments[4][108][0].apply(exports,arguments)
-},{"../hash":168,"dup":108}],171:[function(require,module,exports){
+},{"dup":108}],174:[function(require,module,exports){
 arguments[4][109][0].apply(exports,arguments)
-},{"../hash":168,"dup":109}],172:[function(require,module,exports){
+},{"./hash/common":175,"./hash/hmac":176,"./hash/ripemd":177,"./hash/sha":178,"./hash/utils":179,"dup":109}],175:[function(require,module,exports){
 arguments[4][110][0].apply(exports,arguments)
-},{"../hash":168,"dup":110}],173:[function(require,module,exports){
+},{"../hash":174,"dup":110}],176:[function(require,module,exports){
 arguments[4][111][0].apply(exports,arguments)
-},{"dup":111,"inherits":245}],174:[function(require,module,exports){
+},{"../hash":174,"dup":111}],177:[function(require,module,exports){
 arguments[4][112][0].apply(exports,arguments)
-},{"dup":112}],175:[function(require,module,exports){
+},{"../hash":174,"dup":112}],178:[function(require,module,exports){
+arguments[4][113][0].apply(exports,arguments)
+},{"../hash":174,"dup":113}],179:[function(require,module,exports){
+arguments[4][114][0].apply(exports,arguments)
+},{"dup":114,"inherits":251}],180:[function(require,module,exports){
+arguments[4][115][0].apply(exports,arguments)
+},{"dup":115}],181:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var inherits = require('inherits')
@@ -22298,7 +22387,7 @@ module.exports = function createHash (alg) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"./md5":177,"buffer":53,"cipher-base":178,"inherits":245,"ripemd160":179,"sha.js":181}],176:[function(require,module,exports){
+},{"./md5":183,"buffer":53,"cipher-base":184,"inherits":251,"ripemd160":185,"sha.js":187}],182:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var intSize = 4;
@@ -22336,7 +22425,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 exports.hash = hash;
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],177:[function(require,module,exports){
+},{"buffer":53}],183:[function(require,module,exports){
 'use strict';
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
@@ -22493,7 +22582,7 @@ function bit_rol(num, cnt)
 module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
-},{"./helpers":176}],178:[function(require,module,exports){
+},{"./helpers":182}],184:[function(require,module,exports){
 (function (Buffer){
 var Transform = require('stream').Transform
 var inherits = require('inherits')
@@ -22588,7 +22677,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"inherits":245,"stream":267,"string_decoder":277}],179:[function(require,module,exports){
+},{"buffer":53,"inherits":251,"stream":273,"string_decoder":283}],185:[function(require,module,exports){
 (function (Buffer){
 /*
 CryptoJS v3.1.2
@@ -22803,7 +22892,7 @@ module.exports = ripemd160
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],180:[function(require,module,exports){
+},{"buffer":53}],186:[function(require,module,exports){
 (function (Buffer){
 // prototype class for hash functions
 function Hash (blockSize, finalSize) {
@@ -22877,7 +22966,7 @@ module.exports = Hash
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],181:[function(require,module,exports){
+},{"buffer":53}],187:[function(require,module,exports){
 var exports = module.exports = function SHA (algorithm) {
   algorithm = algorithm.toLowerCase()
 
@@ -22894,7 +22983,7 @@ exports.sha256 = require('./sha256')
 exports.sha384 = require('./sha384')
 exports.sha512 = require('./sha512')
 
-},{"./sha":182,"./sha1":183,"./sha224":184,"./sha256":185,"./sha384":186,"./sha512":187}],182:[function(require,module,exports){
+},{"./sha":188,"./sha1":189,"./sha224":190,"./sha256":191,"./sha384":192,"./sha512":193}],188:[function(require,module,exports){
 (function (Buffer){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-0, as defined
@@ -22999,7 +23088,7 @@ module.exports = Sha
 
 }).call(this,require("buffer").Buffer)
 
-},{"./hash":180,"buffer":53,"inherits":245}],183:[function(require,module,exports){
+},{"./hash":186,"buffer":53,"inherits":251}],189:[function(require,module,exports){
 (function (Buffer){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
@@ -23100,7 +23189,7 @@ module.exports = Sha1
 
 }).call(this,require("buffer").Buffer)
 
-},{"./hash":180,"buffer":53,"inherits":245}],184:[function(require,module,exports){
+},{"./hash":186,"buffer":53,"inherits":251}],190:[function(require,module,exports){
 (function (Buffer){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -23157,7 +23246,7 @@ module.exports = Sha224
 
 }).call(this,require("buffer").Buffer)
 
-},{"./hash":180,"./sha256":185,"buffer":53,"inherits":245}],185:[function(require,module,exports){
+},{"./hash":186,"./sha256":191,"buffer":53,"inherits":251}],191:[function(require,module,exports){
 (function (Buffer){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -23303,7 +23392,7 @@ module.exports = Sha256
 
 }).call(this,require("buffer").Buffer)
 
-},{"./hash":180,"buffer":53,"inherits":245}],186:[function(require,module,exports){
+},{"./hash":186,"buffer":53,"inherits":251}],192:[function(require,module,exports){
 (function (Buffer){
 var inherits = require('inherits')
 var SHA512 = require('./sha512')
@@ -23364,7 +23453,7 @@ module.exports = Sha384
 
 }).call(this,require("buffer").Buffer)
 
-},{"./hash":180,"./sha512":187,"buffer":53,"inherits":245}],187:[function(require,module,exports){
+},{"./hash":186,"./sha512":193,"buffer":53,"inherits":251}],193:[function(require,module,exports){
 (function (Buffer){
 var inherits = require('inherits')
 var Hash = require('./hash')
@@ -23635,7 +23724,7 @@ module.exports = Sha512
 
 }).call(this,require("buffer").Buffer)
 
-},{"./hash":180,"buffer":53,"inherits":245}],188:[function(require,module,exports){
+},{"./hash":186,"buffer":53,"inherits":251}],194:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var createHash = require('create-hash/browser');
@@ -23708,7 +23797,7 @@ module.exports = function createHmac(alg, key) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"create-hash/browser":175,"inherits":245,"stream":267}],189:[function(require,module,exports){
+},{"buffer":53,"create-hash/browser":181,"inherits":251,"stream":273}],195:[function(require,module,exports){
 (function (Buffer){
 var generatePrime = require('./lib/generatePrime');
 var primes = require('./lib/primes');
@@ -23753,7 +23842,7 @@ exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman;
 
 }).call(this,require("buffer").Buffer)
 
-},{"./lib/dh":190,"./lib/generatePrime":191,"./lib/primes":192,"buffer":53}],190:[function(require,module,exports){
+},{"./lib/dh":196,"./lib/generatePrime":197,"./lib/primes":198,"buffer":53}],196:[function(require,module,exports){
 (function (Buffer){
 var BN = require('bn.js');
 var MillerRabin = require('miller-rabin');
@@ -23793,14 +23882,14 @@ function checkPrime(prime, generator) {
     return primeCache[hex];
   }
   var error = 0;
-  
+
   if (prime.isEven() ||
     !primes.simpleSieve ||
     !primes.fermatTest(prime) ||
     !millerRabin.test(prime)) {
     //not a prime so +1
     error += 1;
-    
+
     if (gen === '02' || gen === '05') {
       // we'd be able to check the generator
       // it would fail so +8
@@ -23830,43 +23919,39 @@ function checkPrime(prime, generator) {
       if (rem.cmp(THREE) && rem.cmp(SEVEN)) {
         // prime mod 10 needs to equal 3 or 7
         error += 8;
-      } 
+      }
       break;
-    default: 
+    default:
       error += 4;
   }
   primeCache[hex] = error;
   return error;
 }
 
-function defineError (self, error) {
-  try {
-    Object.defineProperty(self, 'verifyError', {
-      enumerable: true,
-      value: error,
-      writable: false
-    });
-  } catch(e) {
-    self.verifyError = error;
-  }
-}
 function DH(prime, generator, malleable) {
   this.setGenerator(generator);
   this.__prime = new BN(prime);
   this._prime = BN.mont(this.__prime);
   this._primeLen = prime.length;
-  this._pub = void 0;
-  this._priv = void 0;
-  
+  this._pub = undefined;
+  this._priv = undefined;
+  this._primeCode = undefined;
   if (malleable) {
     this.setPublicKey = setPublicKey;
     this.setPrivateKey = setPrivateKey;
-    defineError(this, checkPrime(this.__prime, generator));
   } else {
-    defineError(this, 8);
+    this._primeCode = 8;
   }
 }
-
+Object.defineProperty(DH.prototype, 'verifyError', {
+  enumerable: true,
+  get: function () {
+    if (typeof this._primeCode !== 'number') {
+      this._primeCode = checkPrime(this.__prime, this.__gen);
+    }
+    return this._primeCode;
+  }
+});
 DH.prototype.generateKeys = function () {
   if (!this._priv) {
     this._priv = new BN(randomBytes(this._primeLen));
@@ -23910,6 +23995,7 @@ DH.prototype.setGenerator = function (gen, enc) {
   if (!Buffer.isBuffer(gen)) {
     gen = new Buffer(gen, enc);
   }
+  this.__gen = gen;
   this._gen = new BN(gen);
   return this;
 };
@@ -23922,9 +24008,10 @@ function formatReturnValue(bn, enc) {
     return buf.toString(enc);
   }
 }
+
 }).call(this,require("buffer").Buffer)
 
-},{"./generatePrime":191,"bn.js":193,"buffer":53,"miller-rabin":194,"randombytes":242}],191:[function(require,module,exports){
+},{"./generatePrime":197,"bn.js":199,"buffer":53,"miller-rabin":200,"randombytes":248}],197:[function(require,module,exports){
 var randomBytes = require('randombytes');
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
@@ -23998,66 +24085,40 @@ function findPrime(bits, gen) {
     }
   }
   gen = new BN(gen);
-  var runs, comp;
-  function generateRandom(bits) {
-    runs = -1;
-    var out = new BN(randomBytes(Math.ceil(bits / 8)));
-    while (out.bitLength() > bits) {
-      out.ishrn(1);
-    }
-    if (out.isEven()) {
-      out.iadd(ONE);
-    }
-    if (!out.testn(1)) {
-      out.iadd(TWO);
-    }
-    if (!gen.cmp(TWO)) {
-      while (out.mod(TWENTYFOUR).cmp(ELEVEN)) {
-        out.iadd(FOUR);
-      }
-      comp = {
-        major: [TWENTYFOUR],
-        minor: [TWELVE]
-      };
-    } else if (!gen.cmp(FIVE)) {
-      rem = out.mod(TEN);
-      while (rem.cmp(THREE)) {
-        out.iadd(FOUR);
-        rem = out.mod(TEN);
-      }
-      comp = {
-        major: [FOUR, SIXTEEN],
-        minor: [TWO, EIGHT]
-      };
-    } else {
-      comp = {
-        major: [FOUR],
-        minor: [TWO]
-      };
-    }
-    return out;
-  }
-  var num = generateRandom(bits);
 
-  var n2 = num.shrn(1);
+  var num, n2;
 
   while (true) {
+    num = new BN(randomBytes(Math.ceil(bits / 8)));
     while (num.bitLength() > bits) {
-      num = generateRandom(bits);
-      n2 = num.shrn(1);
+      num.ishrn(1);
     }
-    runs++;
-    if (simpleSieve(n2) &&  simpleSieve(num) &&
-      fermatTest(n2) &&  fermatTest(num) &&
+    if (num.isEven()) {
+      num.iadd(ONE);
+    }
+    if (!num.testn(1)) {
+      num.iadd(TWO);
+    }
+    if (!gen.cmp(TWO)) {
+      while (num.mod(TWENTYFOUR).cmp(ELEVEN)) {
+        num.iadd(FOUR);
+      }
+    } else if (!gen.cmp(FIVE)) {
+      while (num.mod(TEN).cmp(THREE)) {
+        num.iadd(FOUR);
+      }
+    }
+    n2 = num.shrn(1);
+    if (simpleSieve(n2) && simpleSieve(num) &&
+      fermatTest(n2) && fermatTest(num) &&
       millerRabin.test(n2) && millerRabin.test(num)) {
       return num;
     }
-    num.iadd(comp.major[runs%comp.major.length]);
-    n2.iadd(comp.minor[runs%comp.minor.length]);
   }
 
 }
-},{"bn.js":193,"miller-rabin":194,"randombytes":242}],192:[function(require,module,exports){
+
+},{"bn.js":199,"miller-rabin":200,"randombytes":248}],198:[function(require,module,exports){
 module.exports={
     "modp1": {
         "gen": "02",
@@ -24092,9 +24153,9 @@ module.exports={
         "prime": "ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"
     }
 }
-},{}],193:[function(require,module,exports){
+},{}],199:[function(require,module,exports){
 arguments[4][90][0].apply(exports,arguments)
-},{"dup":90}],194:[function(require,module,exports){
+},{"dup":90}],200:[function(require,module,exports){
 var bn = require('bn.js');
 var brorand = require('brorand');
 
@@ -24209,9 +24270,9 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
   return false;
 };
 
-},{"bn.js":193,"brorand":195}],195:[function(require,module,exports){
-arguments[4][105][0].apply(exports,arguments)
-},{"dup":105}],196:[function(require,module,exports){
+},{"bn.js":199,"brorand":201}],201:[function(require,module,exports){
+arguments[4][108][0].apply(exports,arguments)
+},{"dup":108}],202:[function(require,module,exports){
 (function (Buffer){
 var createHmac = require('create-hmac')
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
@@ -24296,7 +24357,7 @@ function pbkdf2Sync (password, salt, iterations, keylen, digest) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"create-hmac":188}],197:[function(require,module,exports){
+},{"buffer":53,"create-hmac":194}],203:[function(require,module,exports){
 exports.publicEncrypt = require('./publicEncrypt');
 exports.privateDecrypt = require('./privateDecrypt');
 
@@ -24307,7 +24368,7 @@ exports.privateEncrypt = function privateEncrypt(key, buf) {
 exports.publicDecrypt = function publicDecrypt(key, buf) {
   return exports.privateDecrypt(key, buf, true);
 };
-},{"./privateDecrypt":238,"./publicEncrypt":239}],198:[function(require,module,exports){
+},{"./privateDecrypt":244,"./publicEncrypt":245}],204:[function(require,module,exports){
 (function (Buffer){
 var createHash = require('create-hash');
 module.exports = function (seed, len) {
@@ -24327,9 +24388,9 @@ function i2ops(c) {
 }
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"create-hash":175}],199:[function(require,module,exports){
+},{"buffer":53,"create-hash":181}],205:[function(require,module,exports){
 arguments[4][90][0].apply(exports,arguments)
-},{"dup":90}],200:[function(require,module,exports){
+},{"dup":90}],206:[function(require,module,exports){
 (function (Buffer){
 var bn = require('bn.js');
 var randomBytes = require('randombytes');
@@ -24347,7 +24408,7 @@ function crt(msg, priv) {
   var blinds = blind(priv);
   var len = priv.modulus.byteLength();
   var mod = bn.mont(priv.modulus);
-  var blinded = new bn(msg).mul(blinds.blinder).mod(priv.modulus);
+  var blinded = new bn(msg).mul(blinds.blinder).umod(priv.modulus);
   var c1 = blinded.toRed(bn.mont(priv.prime1));
   var c2 = blinded.toRed(bn.mont(priv.prime2));
   var qinv = priv.coefficient;
@@ -24357,33 +24418,28 @@ function crt(msg, priv) {
   var m2 = c2.redPow(priv.exponent2);
   m1 = m1.fromRed();
   m2 = m2.fromRed();
-  var h = m1.isub(m2).imul(qinv).mod(p);
+  var h = m1.isub(m2).imul(qinv).umod(p);
   h.imul(q);
   m2.iadd(h);
-  var out = new Buffer(m2.imul(blinds.unblinder).mod(priv.modulus).toArray());
-  if (out.length < len) {
-    var prefix = new Buffer(len - out.length);
-    prefix.fill(0);
-    out = Buffer.concat([prefix, out], len);
-  }
-  return out;
+  return new Buffer(m2.imul(blinds.unblinder).umod(priv.modulus).toArray(false, len));
 }
 crt.getr = getr;
 function getr(priv) {
   var len = priv.modulus.byteLength();
   var r = new bn(randomBytes(len));
-  while (r.cmp(priv.modulus) >=  0 || !r.mod(priv.prime1) || !r.mod(priv.prime2)) {
+  while (r.cmp(priv.modulus) >=  0 || !r.umod(priv.prime1) || !r.umod(priv.prime2)) {
     r = new bn(randomBytes(len));
   }
   return r;
 }
+
 }).call(this,require("buffer").Buffer)
 
-},{"bn.js":199,"buffer":53,"randombytes":242}],201:[function(require,module,exports){
-arguments[4][113][0].apply(exports,arguments)
-},{"dup":113}],202:[function(require,module,exports){
-arguments[4][114][0].apply(exports,arguments)
-},{"asn1.js":205,"dup":114}],203:[function(require,module,exports){
+},{"bn.js":205,"buffer":53,"randombytes":248}],207:[function(require,module,exports){
+arguments[4][116][0].apply(exports,arguments)
+},{"dup":116}],208:[function(require,module,exports){
+arguments[4][117][0].apply(exports,arguments)
+},{"asn1.js":211,"dup":117}],209:[function(require,module,exports){
 (function (Buffer){
 // adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED\r?\nDEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)\r?\n\r?\n([0-9A-z\n\r\+\/\=]+)\r?\n/m
@@ -24418,7 +24474,7 @@ module.exports = function (okey, password) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"browserify-aes":222,"buffer":53,"evp_bytestokey":237}],204:[function(require,module,exports){
+},{"browserify-aes":228,"buffer":53,"evp_bytestokey":243}],210:[function(require,module,exports){
 (function (Buffer){
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
@@ -24524,37 +24580,37 @@ function decrypt (data, password) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aesid.json":201,"./asn1":202,"./fixProc":203,"browserify-aes":222,"buffer":53,"pbkdf2":196}],205:[function(require,module,exports){
-arguments[4][117][0].apply(exports,arguments)
-},{"./asn1/api":206,"./asn1/base":208,"./asn1/constants":212,"./asn1/decoders":214,"./asn1/encoders":217,"bn.js":199,"dup":117}],206:[function(require,module,exports){
-arguments[4][118][0].apply(exports,arguments)
-},{"../asn1":205,"dup":118,"inherits":245,"vm":281}],207:[function(require,module,exports){
-arguments[4][119][0].apply(exports,arguments)
-},{"../base":208,"buffer":53,"dup":119,"inherits":245}],208:[function(require,module,exports){
+},{"./aesid.json":207,"./asn1":208,"./fixProc":209,"browserify-aes":228,"buffer":53,"pbkdf2":202}],211:[function(require,module,exports){
 arguments[4][120][0].apply(exports,arguments)
-},{"./buffer":207,"./node":209,"./reporter":210,"dup":120}],209:[function(require,module,exports){
+},{"./asn1/api":212,"./asn1/base":214,"./asn1/constants":218,"./asn1/decoders":220,"./asn1/encoders":223,"bn.js":205,"dup":120}],212:[function(require,module,exports){
 arguments[4][121][0].apply(exports,arguments)
-},{"../base":208,"dup":121,"minimalistic-assert":219}],210:[function(require,module,exports){
+},{"../asn1":211,"dup":121,"inherits":251,"vm":287}],213:[function(require,module,exports){
 arguments[4][122][0].apply(exports,arguments)
-},{"dup":122,"inherits":245}],211:[function(require,module,exports){
+},{"../base":214,"buffer":53,"dup":122,"inherits":251}],214:[function(require,module,exports){
 arguments[4][123][0].apply(exports,arguments)
-},{"../constants":212,"dup":123}],212:[function(require,module,exports){
+},{"./buffer":213,"./node":215,"./reporter":216,"dup":123}],215:[function(require,module,exports){
 arguments[4][124][0].apply(exports,arguments)
-},{"./der":211,"dup":124}],213:[function(require,module,exports){
+},{"../base":214,"dup":124,"minimalistic-assert":225}],216:[function(require,module,exports){
 arguments[4][125][0].apply(exports,arguments)
-},{"../../asn1":205,"dup":125,"inherits":245}],214:[function(require,module,exports){
+},{"dup":125,"inherits":251}],217:[function(require,module,exports){
 arguments[4][126][0].apply(exports,arguments)
-},{"./der":213,"./pem":215,"dup":126}],215:[function(require,module,exports){
+},{"../constants":218,"dup":126}],218:[function(require,module,exports){
 arguments[4][127][0].apply(exports,arguments)
-},{"../../asn1":205,"./der":213,"buffer":53,"dup":127,"inherits":245}],216:[function(require,module,exports){
+},{"./der":217,"dup":127}],219:[function(require,module,exports){
 arguments[4][128][0].apply(exports,arguments)
-},{"../../asn1":205,"buffer":53,"dup":128,"inherits":245}],217:[function(require,module,exports){
+},{"../../asn1":211,"dup":128,"inherits":251}],220:[function(require,module,exports){
 arguments[4][129][0].apply(exports,arguments)
-},{"./der":216,"./pem":218,"dup":129}],218:[function(require,module,exports){
+},{"./der":219,"./pem":221,"dup":129}],221:[function(require,module,exports){
 arguments[4][130][0].apply(exports,arguments)
-},{"../../asn1":205,"./der":216,"buffer":53,"dup":130,"inherits":245}],219:[function(require,module,exports){
+},{"../../asn1":211,"./der":219,"buffer":53,"dup":130,"inherits":251}],222:[function(require,module,exports){
+arguments[4][131][0].apply(exports,arguments)
+},{"../../asn1":211,"buffer":53,"dup":131,"inherits":251}],223:[function(require,module,exports){
+arguments[4][132][0].apply(exports,arguments)
+},{"./der":222,"./pem":224,"dup":132}],224:[function(require,module,exports){
+arguments[4][133][0].apply(exports,arguments)
+},{"../../asn1":211,"./der":222,"buffer":53,"dup":133,"inherits":251}],225:[function(require,module,exports){
 arguments[4][85][0].apply(exports,arguments)
-},{"dup":85}],220:[function(require,module,exports){
+},{"dup":85}],226:[function(require,module,exports){
 (function (Buffer){
 // based on the aes implimentation in triple sec
 // https://github.com/keybase/triplesec
@@ -24736,7 +24792,7 @@ exports.AES = AES
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],221:[function(require,module,exports){
+},{"buffer":53}],227:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -24838,9 +24894,9 @@ function xorTest (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":220,"./ghash":225,"buffer":53,"buffer-xor":234,"cipher-base":235,"inherits":245}],222:[function(require,module,exports){
+},{"./aes":226,"./ghash":231,"buffer":53,"buffer-xor":240,"cipher-base":241,"inherits":251}],228:[function(require,module,exports){
 arguments[4][61][0].apply(exports,arguments)
-},{"./decrypter":223,"./encrypter":224,"./modes":226,"dup":61}],223:[function(require,module,exports){
+},{"./decrypter":229,"./encrypter":230,"./modes":232,"dup":61}],229:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -24981,7 +25037,7 @@ exports.createDecipheriv = createDecipheriv
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":220,"./authCipher":221,"./modes":226,"./modes/cbc":227,"./modes/cfb":228,"./modes/cfb1":229,"./modes/cfb8":230,"./modes/ctr":231,"./modes/ecb":232,"./modes/ofb":233,"./streamCipher":236,"buffer":53,"cipher-base":235,"evp_bytestokey":237,"inherits":245}],224:[function(require,module,exports){
+},{"./aes":226,"./authCipher":227,"./modes":232,"./modes/cbc":233,"./modes/cfb":234,"./modes/cfb1":235,"./modes/cfb8":236,"./modes/ctr":237,"./modes/ecb":238,"./modes/ofb":239,"./streamCipher":242,"buffer":53,"cipher-base":241,"evp_bytestokey":243,"inherits":251}],230:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -25107,7 +25163,7 @@ exports.createCipher = createCipher
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":220,"./authCipher":221,"./modes":226,"./modes/cbc":227,"./modes/cfb":228,"./modes/cfb1":229,"./modes/cfb8":230,"./modes/ctr":231,"./modes/ecb":232,"./modes/ofb":233,"./streamCipher":236,"buffer":53,"cipher-base":235,"evp_bytestokey":237,"inherits":245}],225:[function(require,module,exports){
+},{"./aes":226,"./authCipher":227,"./modes":232,"./modes/cbc":233,"./modes/cfb":234,"./modes/cfb1":235,"./modes/cfb8":236,"./modes/ctr":237,"./modes/ecb":238,"./modes/ofb":239,"./streamCipher":242,"buffer":53,"cipher-base":241,"evp_bytestokey":243,"inherits":251}],231:[function(require,module,exports){
 (function (Buffer){
 var zeros = new Buffer(16)
 zeros.fill(0)
@@ -25210,11 +25266,11 @@ function xor (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],226:[function(require,module,exports){
+},{"buffer":53}],232:[function(require,module,exports){
 arguments[4][65][0].apply(exports,arguments)
-},{"dup":65}],227:[function(require,module,exports){
+},{"dup":65}],233:[function(require,module,exports){
 arguments[4][66][0].apply(exports,arguments)
-},{"buffer-xor":234,"dup":66}],228:[function(require,module,exports){
+},{"buffer-xor":240,"dup":66}],234:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -25250,7 +25306,7 @@ function encryptStart (self, data, decrypt) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"buffer-xor":234}],229:[function(require,module,exports){
+},{"buffer":53,"buffer-xor":240}],235:[function(require,module,exports){
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad
@@ -25289,7 +25345,7 @@ function shiftIn (buffer, value) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],230:[function(require,module,exports){
+},{"buffer":53}],236:[function(require,module,exports){
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad = self._cipher.encryptBlock(self._prev)
@@ -25309,7 +25365,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],231:[function(require,module,exports){
+},{"buffer":53}],237:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -25345,9 +25401,9 @@ exports.encrypt = function (self, chunk) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"buffer-xor":234}],232:[function(require,module,exports){
+},{"buffer":53,"buffer-xor":240}],238:[function(require,module,exports){
 arguments[4][71][0].apply(exports,arguments)
-},{"dup":71}],233:[function(require,module,exports){
+},{"dup":71}],239:[function(require,module,exports){
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -25368,7 +25424,7 @@ exports.encrypt = function (self, chunk) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"buffer-xor":234}],234:[function(require,module,exports){
+},{"buffer":53,"buffer-xor":240}],240:[function(require,module,exports){
 (function (Buffer){
 module.exports = function xor (a, b) {
   var length = Math.min(a.length, b.length)
@@ -25383,7 +25439,7 @@ module.exports = function xor (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53}],235:[function(require,module,exports){
+},{"buffer":53}],241:[function(require,module,exports){
 (function (Buffer){
 var Transform = require('stream').Transform
 var inherits = require('inherits')
@@ -25478,7 +25534,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"inherits":245,"stream":267,"string_decoder":277}],236:[function(require,module,exports){
+},{"buffer":53,"inherits":251,"stream":273,"string_decoder":283}],242:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -25508,7 +25564,7 @@ StreamCipher.prototype._final = function () {
 
 }).call(this,require("buffer").Buffer)
 
-},{"./aes":220,"buffer":53,"cipher-base":235,"inherits":245}],237:[function(require,module,exports){
+},{"./aes":226,"buffer":53,"cipher-base":241,"inherits":251}],243:[function(require,module,exports){
 (function (Buffer){
 var md5 = require('create-hash/md5')
 module.exports = EVP_BytesToKey
@@ -25581,7 +25637,7 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":53,"create-hash/md5":177}],238:[function(require,module,exports){
+},{"buffer":53,"create-hash/md5":183}],244:[function(require,module,exports){
 (function (Buffer){
 var parseKeys = require('parse-asn1');
 var mgf = require('./mgf');
@@ -25693,7 +25749,7 @@ function compare(a, b){
 }
 }).call(this,require("buffer").Buffer)
 
-},{"./mgf":198,"./withPublic":240,"./xor":241,"bn.js":199,"browserify-rsa":200,"buffer":53,"create-hash":175,"parse-asn1":204}],239:[function(require,module,exports){
+},{"./mgf":204,"./withPublic":246,"./xor":247,"bn.js":205,"browserify-rsa":206,"buffer":53,"create-hash":181,"parse-asn1":210}],245:[function(require,module,exports){
 (function (Buffer){
 var parseKeys = require('parse-asn1');
 var randomBytes = require('randombytes');
@@ -25792,7 +25848,7 @@ function nonZero(len, crypto) {
 }
 }).call(this,require("buffer").Buffer)
 
-},{"./mgf":198,"./withPublic":240,"./xor":241,"bn.js":199,"browserify-rsa":200,"buffer":53,"create-hash":175,"parse-asn1":204,"randombytes":242}],240:[function(require,module,exports){
+},{"./mgf":204,"./withPublic":246,"./xor":247,"bn.js":205,"browserify-rsa":206,"buffer":53,"create-hash":181,"parse-asn1":210,"randombytes":248}],246:[function(require,module,exports){
 (function (Buffer){
 var bn = require('bn.js');
 function withPublic(paddedMsg, key) {
@@ -25806,7 +25862,7 @@ function withPublic(paddedMsg, key) {
 module.exports = withPublic;
 }).call(this,require("buffer").Buffer)
 
-},{"bn.js":199,"buffer":53}],241:[function(require,module,exports){
+},{"bn.js":205,"buffer":53}],247:[function(require,module,exports){
 module.exports = function xor(a, b) {
   var len = a.length;
   var i = -1;
@@ -25815,7 +25871,7 @@ module.exports = function xor(a, b) {
   }
   return a
 };
-},{}],242:[function(require,module,exports){
+},{}],248:[function(require,module,exports){
 (function (process,global,Buffer){
 'use strict';
 
@@ -25848,7 +25904,7 @@ function oldBrowser() {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 
-},{"_process":249,"buffer":53}],243:[function(require,module,exports){
+},{"_process":255,"buffer":53}],249:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -26151,7 +26207,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],244:[function(require,module,exports){
+},{}],250:[function(require,module,exports){
 var http = require('http');
 
 var https = module.exports;
@@ -26167,7 +26223,7 @@ https.request = function (params, cb) {
     return http.request.call(this, params, cb);
 }
 
-},{"http":268}],245:[function(require,module,exports){
+},{"http":274}],251:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -26192,7 +26248,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],246:[function(require,module,exports){
+},{}],252:[function(require,module,exports){
 /**
  * Determine if an object is Buffer
  *
@@ -26211,12 +26267,12 @@ module.exports = function (obj) {
     ))
 }
 
-},{}],247:[function(require,module,exports){
+},{}],253:[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],248:[function(require,module,exports){
+},{}],254:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -26445,7 +26501,7 @@ var substr = 'ab'.substr(-1) === 'b'
 
 }).call(this,require('_process'))
 
-},{"_process":249}],249:[function(require,module,exports){
+},{"_process":255}],255:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -26538,7 +26594,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],250:[function(require,module,exports){
+},{}],256:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/punycode v1.3.2 by @mathias */
 ;(function(root) {
@@ -27073,7 +27129,7 @@ process.umask = function() { return 0; };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],251:[function(require,module,exports){
+},{}],257:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -27159,7 +27215,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],252:[function(require,module,exports){
+},{}],258:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -27246,16 +27302,16 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],253:[function(require,module,exports){
+},{}],259:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":251,"./encode":252}],254:[function(require,module,exports){
+},{"./decode":257,"./encode":258}],260:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":255}],255:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":261}],261:[function(require,module,exports){
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -27339,7 +27395,7 @@ function forEach (xs, f) {
   }
 }
 
-},{"./_stream_readable":257,"./_stream_writable":259,"core-util-is":260,"inherits":245,"process-nextick-args":261}],256:[function(require,module,exports){
+},{"./_stream_readable":263,"./_stream_writable":265,"core-util-is":266,"inherits":251,"process-nextick-args":267}],262:[function(require,module,exports){
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -27368,7 +27424,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"./_stream_transform":258,"core-util-is":260,"inherits":245}],257:[function(require,module,exports){
+},{"./_stream_transform":264,"core-util-is":266,"inherits":251}],263:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -27922,6 +27978,7 @@ Readable.prototype.pipe = function(dest, pipeOpts) {
   var ondrain = pipeOnDrain(src);
   dest.on('drain', ondrain);
 
+  var cleanedUp = false;
   function cleanup() {
     debug('cleanup');
     // cleanup event handlers once the pipe is broken
@@ -27933,6 +27990,8 @@ Readable.prototype.pipe = function(dest, pipeOpts) {
     src.removeListener('end', onend);
     src.removeListener('end', cleanup);
     src.removeListener('data', ondata);
+
+    cleanedUp = true;
 
     // if the reader is waiting for a drain event from this
     // specific writer, then it would cause it to never start
@@ -27949,9 +28008,16 @@ Readable.prototype.pipe = function(dest, pipeOpts) {
     debug('ondata');
     var ret = dest.write(chunk);
     if (false === ret) {
-      debug('false write response, pause',
-            src._readableState.awaitDrain);
-      src._readableState.awaitDrain++;
+      // If the user unpiped during `dest.write()`, it is possible
+      // to get stuck in a permanently paused state if that write
+      // also returned false.
+      if (state.pipesCount === 1 &&
+          state.pipes[0] === dest &&
+          src.listenerCount('data') === 1 &&
+          !cleanedUp) {
+        debug('false write response, pause', src._readableState.awaitDrain);
+        src._readableState.awaitDrain++;
+      }
       src.pause();
     }
   }
@@ -28251,6 +28317,8 @@ function fromList(n, state) {
     // read it all, truncate the array.
     if (stringMode)
       ret = list.join('');
+    else if (list.length === 1)
+      ret = list[0];
     else
       ret = Buffer.concat(list, length);
     list.length = 0;
@@ -28334,7 +28402,7 @@ function indexOf (xs, x) {
 
 }).call(this,require('_process'))
 
-},{"./_stream_duplex":255,"_process":249,"buffer":53,"core-util-is":260,"events":243,"inherits":245,"isarray":247,"process-nextick-args":261,"string_decoder/":277,"util":39}],258:[function(require,module,exports){
+},{"./_stream_duplex":261,"_process":255,"buffer":53,"core-util-is":266,"events":249,"inherits":251,"isarray":253,"process-nextick-args":267,"string_decoder/":283,"util":39}],264:[function(require,module,exports){
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -28533,9 +28601,9 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"./_stream_duplex":255,"core-util-is":260,"inherits":245}],259:[function(require,module,exports){
+},{"./_stream_duplex":261,"core-util-is":266,"inherits":251}],265:[function(require,module,exports){
 // A bit simpler than readable streams.
-// Implement an async ._write(chunk, cb), and it'll handle all
+// Implement an async ._write(chunk, encoding, cb), and it'll handle all
 // the drain event emission and buffering.
 
 'use strict';
@@ -29062,7 +29130,7 @@ function endWritable(stream, state, cb) {
   state.ended = true;
 }
 
-},{"./_stream_duplex":255,"buffer":53,"core-util-is":260,"events":243,"inherits":245,"process-nextick-args":261,"util-deprecate":262}],260:[function(require,module,exports){
+},{"./_stream_duplex":261,"buffer":53,"core-util-is":266,"events":249,"inherits":251,"process-nextick-args":267,"util-deprecate":268}],266:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -29173,7 +29241,7 @@ function objectToString(o) {
 }
 }).call(this,{"isBuffer":require("../../../../insert-module-globals/node_modules/is-buffer/index.js")})
 
-},{"../../../../insert-module-globals/node_modules/is-buffer/index.js":246}],261:[function(require,module,exports){
+},{"../../../../insert-module-globals/node_modules/is-buffer/index.js":252}],267:[function(require,module,exports){
 (function (process){
 'use strict';
 module.exports = nextTick;
@@ -29191,7 +29259,7 @@ function nextTick(fn) {
 
 }).call(this,require('_process'))
 
-},{"_process":249}],262:[function(require,module,exports){
+},{"_process":255}],268:[function(require,module,exports){
 (function (global){
 
 /**
@@ -29263,10 +29331,10 @@ function config (name) {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],263:[function(require,module,exports){
+},{}],269:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":256}],264:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":262}],270:[function(require,module,exports){
 var Stream = (function (){
   try {
     return require('st' + 'ream'); // hack to fix a circular dependency issue when used with browserify
@@ -29280,13 +29348,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":255,"./lib/_stream_passthrough.js":256,"./lib/_stream_readable.js":257,"./lib/_stream_transform.js":258,"./lib/_stream_writable.js":259}],265:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":261,"./lib/_stream_passthrough.js":262,"./lib/_stream_readable.js":263,"./lib/_stream_transform.js":264,"./lib/_stream_writable.js":265}],271:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":258}],266:[function(require,module,exports){
+},{"./lib/_stream_transform.js":264}],272:[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":259}],267:[function(require,module,exports){
+},{"./lib/_stream_writable.js":265}],273:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -29415,7 +29483,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":243,"inherits":245,"readable-stream/duplex.js":254,"readable-stream/passthrough.js":263,"readable-stream/readable.js":264,"readable-stream/transform.js":265,"readable-stream/writable.js":266}],268:[function(require,module,exports){
+},{"events":249,"inherits":251,"readable-stream/duplex.js":260,"readable-stream/passthrough.js":269,"readable-stream/readable.js":270,"readable-stream/transform.js":271,"readable-stream/writable.js":272}],274:[function(require,module,exports){
 var ClientRequest = require('./lib/request')
 var extend = require('xtend')
 var statusCodes = require('builtin-status-codes')
@@ -29490,7 +29558,7 @@ http.METHODS = [
 	'UNLOCK',
 	'UNSUBSCRIBE'
 ]
-},{"./lib/request":270,"builtin-status-codes":272,"url":278,"xtend":283}],269:[function(require,module,exports){
+},{"./lib/request":276,"builtin-status-codes":278,"url":284,"xtend":289}],275:[function(require,module,exports){
 (function (global){
 exports.fetch = isFunction(global.fetch) && isFunction(global.ReadableByteStream)
 
@@ -29535,7 +29603,7 @@ xhr = null // Help gc
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],270:[function(require,module,exports){
+},{}],276:[function(require,module,exports){
 (function (process,global,Buffer){
 // var Base64 = require('Base64')
 var capability = require('./capability')
@@ -29818,7 +29886,7 @@ var unsafeHeaders = [
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 
-},{"./capability":269,"./response":271,"_process":249,"buffer":53,"foreach":273,"indexof":274,"inherits":245,"object-keys":275,"stream":267}],271:[function(require,module,exports){
+},{"./capability":275,"./response":277,"_process":255,"buffer":53,"foreach":279,"indexof":280,"inherits":251,"object-keys":281,"stream":273}],277:[function(require,module,exports){
 (function (process,global,Buffer){
 var capability = require('./capability')
 var foreach = require('foreach')
@@ -29996,7 +30064,7 @@ IncomingMessage.prototype._onXHRProgress = function () {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 
-},{"./capability":269,"_process":249,"buffer":53,"foreach":273,"inherits":245,"stream":267}],272:[function(require,module,exports){
+},{"./capability":275,"_process":255,"buffer":53,"foreach":279,"inherits":251,"stream":273}],278:[function(require,module,exports){
 module.exports = {
   "100": "Continue",
   "101": "Switching Protocols",
@@ -30057,7 +30125,7 @@ module.exports = {
   "511": "Network Authentication Required"
 }
 
-},{}],273:[function(require,module,exports){
+},{}],279:[function(require,module,exports){
 
 var hasOwn = Object.prototype.hasOwnProperty;
 var toString = Object.prototype.toString;
@@ -30081,7 +30149,7 @@ module.exports = function forEach (obj, fn, ctx) {
 };
 
 
-},{}],274:[function(require,module,exports){
+},{}],280:[function(require,module,exports){
 
 var indexOf = [].indexOf;
 
@@ -30092,7 +30160,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],275:[function(require,module,exports){
+},{}],281:[function(require,module,exports){
 'use strict';
 
 // modified from https://github.com/es-shims/es5-shim
@@ -30222,7 +30290,7 @@ keysShim.shim = function shimObjectKeys() {
 
 module.exports = keysShim;
 
-},{"./isArguments":276}],276:[function(require,module,exports){
+},{"./isArguments":282}],282:[function(require,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -30241,7 +30309,7 @@ module.exports = function isArguments(value) {
 	return isArgs;
 };
 
-},{}],277:[function(require,module,exports){
+},{}],283:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -30464,7 +30532,7 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":53}],278:[function(require,module,exports){
+},{"buffer":53}],284:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -31173,14 +31241,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":250,"querystring":253}],279:[function(require,module,exports){
+},{"punycode":256,"querystring":259}],285:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],280:[function(require,module,exports){
+},{}],286:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -31771,7 +31839,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./support/isBuffer":279,"_process":249,"inherits":245}],281:[function(require,module,exports){
+},{"./support/isBuffer":285,"_process":255,"inherits":251}],287:[function(require,module,exports){
 var indexOf = require('indexof');
 
 var Object_keys = function (obj) {
@@ -31911,10 +31979,12 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{"indexof":282}],282:[function(require,module,exports){
-arguments[4][274][0].apply(exports,arguments)
-},{"dup":274}],283:[function(require,module,exports){
+},{"indexof":288}],288:[function(require,module,exports){
+arguments[4][280][0].apply(exports,arguments)
+},{"dup":280}],289:[function(require,module,exports){
 module.exports = extend
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 function extend() {
     var target = {}
@@ -31923,7 +31993,7 @@ function extend() {
         var source = arguments[i]
 
         for (var key in source) {
-            if (source.hasOwnProperty(key)) {
+            if (hasOwnProperty.call(source, key)) {
                 target[key] = source[key]
             }
         }
@@ -31932,7 +32002,7 @@ function extend() {
     return target
 }
 
-},{}],284:[function(require,module,exports){
+},{}],290:[function(require,module,exports){
 /*!
   Copyright (c) 2015 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -31982,7 +32052,7 @@ function extend() {
 	}
 }());
 
-},{}],285:[function(require,module,exports){
+},{}],291:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -32007,7 +32077,7 @@ function activeElement() {
 }
 
 module.exports = exports['default'];
-},{"./ownerDocument":287,"./util/babelHelpers.js":291}],286:[function(require,module,exports){
+},{"./ownerDocument":293,"./util/babelHelpers.js":297}],292:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 var on = function on() {};
@@ -32024,7 +32094,7 @@ if (canUseDOM) {
 }
 
 module.exports = on;
-},{"../util/inDOM":292}],287:[function(require,module,exports){
+},{"../util/inDOM":298}],293:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -32035,7 +32105,7 @@ function ownerDocument(node) {
 }
 
 module.exports = exports["default"];
-},{}],288:[function(require,module,exports){
+},{}],294:[function(require,module,exports){
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -32053,7 +32123,7 @@ function ownerWindow(node) {
 }
 
 module.exports = exports['default'];
-},{"./ownerDocument":287,"./util/babelHelpers.js":291}],289:[function(require,module,exports){
+},{"./ownerDocument":293,"./util/babelHelpers.js":297}],295:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 
@@ -32074,7 +32144,7 @@ var contains = (function () {
 })();
 
 module.exports = contains;
-},{"../util/inDOM":292}],290:[function(require,module,exports){
+},{"../util/inDOM":298}],296:[function(require,module,exports){
 'use strict';
 var canUseDOM = require('../util/inDOM');
 
@@ -32130,7 +32200,7 @@ function getTransitionProperties() {
 
   return { end: endEvent, prefix: prefix };
 }
-},{"../util/inDOM":292}],291:[function(require,module,exports){
+},{"../util/inDOM":298}],297:[function(require,module,exports){
 (function (root, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports"], factory);
@@ -32162,10 +32232,10 @@ function getTransitionProperties() {
     return target;
   };
 })
-},{}],292:[function(require,module,exports){
+},{}],298:[function(require,module,exports){
 'use strict';
 module.exports = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-},{}],293:[function(require,module,exports){
+},{}],299:[function(require,module,exports){
 'use strict';
 
 var canUseDOM = require('./inDOM');
@@ -32191,7 +32261,7 @@ module.exports = function (recalc) {
 
   return size;
 };
-},{"./inDOM":292}],294:[function(require,module,exports){
+},{"./inDOM":298}],300:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -32203,7 +32273,7 @@ module.exports = function (recalc) {
 
 module.exports.Dispatcher = require('./lib/Dispatcher');
 
-},{"./lib/Dispatcher":295}],295:[function(require,module,exports){
+},{"./lib/Dispatcher":301}],301:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -32438,7 +32508,7 @@ var Dispatcher = (function () {
 module.exports = Dispatcher;
 }).call(this,require('_process'))
 
-},{"_process":249,"fbjs/lib/invariant":309}],296:[function(require,module,exports){
+},{"_process":255,"fbjs/lib/invariant":315}],302:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -32619,7 +32689,7 @@ function enforceInterface(o) {
 module.exports = { create: create };
 }).call(this,require('_process'))
 
-},{"./FluxStoreGroup":301,"_process":249,"fbjs/lib/invariant":309,"fbjs/lib/shallowEqual":310}],297:[function(require,module,exports){
+},{"./FluxStoreGroup":307,"_process":255,"fbjs/lib/invariant":315,"fbjs/lib/shallowEqual":316}],303:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -32767,7 +32837,7 @@ var FluxMapStore = (function (_FluxReduceStore) {
 module.exports = FluxMapStore;
 }).call(this,require('_process'))
 
-},{"./FluxReduceStore":299,"_process":249,"fbjs/lib/invariant":309,"immutable":312}],298:[function(require,module,exports){
+},{"./FluxReduceStore":305,"_process":255,"fbjs/lib/invariant":315,"immutable":318}],304:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -32888,7 +32958,7 @@ function enforceInterface(o) {
 module.exports = FluxMixinLegacy;
 }).call(this,require('_process'))
 
-},{"./FluxStoreGroup":301,"_process":249,"fbjs/lib/invariant":309}],299:[function(require,module,exports){
+},{"./FluxStoreGroup":307,"_process":255,"fbjs/lib/invariant":315}],305:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -32993,7 +33063,7 @@ var FluxReduceStore = (function (_FluxStore) {
 module.exports = FluxReduceStore;
 }).call(this,require('_process'))
 
-},{"./FluxStore":300,"./abstractMethod":302,"_process":249,"fbjs/lib/invariant":309}],300:[function(require,module,exports){
+},{"./FluxStore":306,"./abstractMethod":308,"_process":255,"fbjs/lib/invariant":315}],306:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -33174,7 +33244,7 @@ module.exports = FluxStore;
 // protected, available to subclasses
 }).call(this,require('_process'))
 
-},{"_process":249,"fbemitter":303,"fbjs/lib/invariant":309}],301:[function(require,module,exports){
+},{"_process":255,"fbemitter":309,"fbjs/lib/invariant":315}],307:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -33253,7 +33323,7 @@ function _getUniformDispatcher(stores) {
 module.exports = FluxStoreGroup;
 }).call(this,require('_process'))
 
-},{"_process":249,"fbjs/lib/invariant":309}],302:[function(require,module,exports){
+},{"_process":255,"fbjs/lib/invariant":315}],308:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -33278,7 +33348,7 @@ function abstractMethod(className, methodName) {
 module.exports = abstractMethod;
 }).call(this,require('_process'))
 
-},{"_process":249,"fbjs/lib/invariant":309}],303:[function(require,module,exports){
+},{"_process":255,"fbjs/lib/invariant":315}],309:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -33294,7 +33364,7 @@ var fbemitter = {
 
 module.exports = fbemitter;
 
-},{"./lib/BaseEventEmitter":304}],304:[function(require,module,exports){
+},{"./lib/BaseEventEmitter":310}],310:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -33489,7 +33559,7 @@ var BaseEventEmitter = (function () {
 module.exports = BaseEventEmitter;
 }).call(this,require('_process'))
 
-},{"./EmitterSubscription":305,"./EventSubscriptionVendor":307,"_process":249,"fbjs/lib/emptyFunction":308,"fbjs/lib/invariant":309}],305:[function(require,module,exports){
+},{"./EmitterSubscription":311,"./EventSubscriptionVendor":313,"_process":255,"fbjs/lib/emptyFunction":314,"fbjs/lib/invariant":315}],311:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -33538,7 +33608,7 @@ var EmitterSubscription = (function (_EventSubscription) {
 })(EventSubscription);
 
 module.exports = EmitterSubscription;
-},{"./EventSubscription":306}],306:[function(require,module,exports){
+},{"./EventSubscription":312}],312:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -33585,7 +33655,7 @@ var EventSubscription = (function () {
 })();
 
 module.exports = EventSubscription;
-},{}],307:[function(require,module,exports){
+},{}],313:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -33692,7 +33762,7 @@ var EventSubscriptionVendor = (function () {
 module.exports = EventSubscriptionVendor;
 }).call(this,require('_process'))
 
-},{"_process":249,"fbjs/lib/invariant":309}],308:[function(require,module,exports){
+},{"_process":255,"fbjs/lib/invariant":315}],314:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -33731,7 +33801,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-},{}],309:[function(require,module,exports){
+},{}],315:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -33784,7 +33854,7 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 }).call(this,require('_process'))
 
-},{"_process":249}],310:[function(require,module,exports){
+},{"_process":255}],316:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -33835,7 +33905,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-},{}],311:[function(require,module,exports){
+},{}],317:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -33851,7 +33921,7 @@ module.exports.Mixin = require('./lib/FluxMixinLegacy');
 module.exports.ReduceStore = require('./lib/FluxReduceStore');
 module.exports.Store = require('./lib/FluxStore');
 
-},{"./lib/FluxContainer":296,"./lib/FluxMapStore":297,"./lib/FluxMixinLegacy":298,"./lib/FluxReduceStore":299,"./lib/FluxStore":300}],312:[function(require,module,exports){
+},{"./lib/FluxContainer":302,"./lib/FluxMapStore":303,"./lib/FluxMixinLegacy":304,"./lib/FluxReduceStore":305,"./lib/FluxStore":306}],318:[function(require,module,exports){
 /**
  *  Copyright (c) 2014-2015, Facebook, Inc.
  *  All rights reserved.
@@ -38812,7 +38882,7 @@ module.exports.Store = require('./lib/FluxStore');
   return Immutable;
 
 }));
-},{}],313:[function(require,module,exports){
+},{}],319:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -48024,7 +48094,7 @@ return jQuery;
 
 }));
 
-},{}],314:[function(require,module,exports){
+},{}],320:[function(require,module,exports){
 (function (global){
 /**
  * marked - a markdown parser
@@ -49314,8 +49384,7 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],315:[function(require,module,exports){
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
+},{}],321:[function(require,module,exports){
 var exports = module.exports = function() {
 	var fn = arguments[0];	
 	var args = [].concat.apply([],arguments).slice(1);
@@ -49341,9 +49410,7 @@ exports.rapply = function() {
 	};
 };
 
-},{}],316:[function(require,module,exports){
-=======
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],322:[function(require,module,exports){
 var _ = require("lodash");
 
 var School = require("./School");
@@ -49455,11 +49522,7 @@ Class.prototype.search = function(query) {
 }
 
 module.exports = Class;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"../petty":416,"./Content":317,"./FeedItem":318,"./School":319,"lodash":321}],317:[function(require,module,exports){
-=======
-},{"../petty":415,"./Content":316,"./FeedItem":317,"./School":318,"lodash":320}],316:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../petty":422,"./Content":323,"./FeedItem":324,"./School":325,"lodash":327}],323:[function(require,module,exports){
 var _ = require("lodash");
 
 var callPetty = require("../petty");
@@ -49550,11 +49613,7 @@ Content.prototype.getFollowups = function() {
 }
 
 module.exports = Content;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"../petty":416,"lodash":321}],318:[function(require,module,exports){
-=======
-},{"../petty":415,"lodash":320}],317:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../petty":422,"lodash":327}],324:[function(require,module,exports){
 var Content = require("./Content");
 var callPetty = require("../petty")
 
@@ -49583,22 +49642,14 @@ FeedItem.prototype.toContent = function() {
 }
 
 module.exports = FeedItem;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"../petty":416,"./Content":317}],319:[function(require,module,exports){
-=======
-},{"../petty":415,"./Content":316}],318:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../petty":422,"./Content":323}],325:[function(require,module,exports){
 var School = function(name, id) {
 	this.id = id;
 	this.name = name;
 }
 
 module.exports = School;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],320:[function(require,module,exports){
-=======
-},{}],319:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],326:[function(require,module,exports){
 var _ = require("lodash");
 
 var Class = require("./Class");
@@ -49644,11 +49695,7 @@ User.prototype.isTakingClass = function(class_id) {
 }
 
 module.exports = User;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"../petty":416,"./Class":316,"lodash":321}],321:[function(require,module,exports){
-=======
-},{"../petty":415,"./Class":315,"lodash":320}],320:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../petty":422,"./Class":322,"lodash":327}],327:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -62004,11 +62051,7 @@ module.exports = User;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],322:[function(require,module,exports){
-=======
-},{}],321:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],328:[function(require,module,exports){
 // Copyright 2010-2012 Mikeal Rogers
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
@@ -62166,11 +62209,7 @@ Object.defineProperty(request, 'debug', {
   }
 })
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./lib/cookies":324,"./lib/helpers":327,"./request":415,"extend":348}],323:[function(require,module,exports){
-=======
-},{"./lib/cookies":323,"./lib/helpers":326,"./request":414,"extend":347}],322:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./lib/cookies":330,"./lib/helpers":333,"./request":421,"extend":354}],329:[function(require,module,exports){
 'use strict'
 
 var caseless = require('caseless')
@@ -62340,11 +62379,7 @@ Auth.prototype.onResponse = function (response) {
 
 exports.Auth = Auth
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./helpers":327,"caseless":345,"node-uuid":400}],324:[function(require,module,exports){
-=======
-},{"./helpers":326,"caseless":344,"node-uuid":399}],323:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./helpers":333,"caseless":351,"node-uuid":406}],330:[function(require,module,exports){
 'use strict'
 
 var tough = require('tough-cookie')
@@ -62385,11 +62420,7 @@ exports.jar = function(store) {
   return new RequestJar(store)
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"tough-cookie":407}],325:[function(require,module,exports){
-=======
-},{"tough-cookie":406}],324:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"tough-cookie":413}],331:[function(require,module,exports){
 (function (process){
 'use strict'
 
@@ -62473,11 +62504,7 @@ module.exports = getProxyFromURI
 
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"_process":249}],326:[function(require,module,exports){
-=======
-},{"_process":249}],325:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255}],332:[function(require,module,exports){
 'use strict'
 
 var fs = require('fs')
@@ -62684,11 +62711,7 @@ Har.prototype.options = function (options) {
 
 exports.Har = Har
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"fs":37,"har-validator":352,"querystring":253,"util":280}],327:[function(require,module,exports){
-=======
-},{"fs":37,"har-validator":351,"querystring":253,"util":280}],326:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"fs":37,"har-validator":358,"querystring":259,"util":286}],333:[function(require,module,exports){
 (function (process,Buffer){
 'use strict'
 
@@ -62767,11 +62790,7 @@ exports.defer                 = deferMethod()
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"_process":249,"buffer":53,"crypto":57,"json-stringify-safe":396}],328:[function(require,module,exports){
-=======
-},{"_process":249,"buffer":53,"crypto":57,"json-stringify-safe":395}],327:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255,"buffer":53,"crypto":57,"json-stringify-safe":402}],334:[function(require,module,exports){
 (function (Buffer){
 'use strict'
 
@@ -62885,11 +62904,7 @@ exports.Multipart = Multipart
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"buffer":53,"combined-stream":346,"isstream":395,"node-uuid":400}],329:[function(require,module,exports){
-=======
-},{"buffer":53,"combined-stream":345,"isstream":394,"node-uuid":399}],328:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"buffer":53,"combined-stream":352,"isstream":401,"node-uuid":406}],335:[function(require,module,exports){
 (function (Buffer){
 'use strict'
 
@@ -63041,11 +63056,7 @@ exports.OAuth = OAuth
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"buffer":53,"caseless":345,"crypto":57,"node-uuid":400,"oauth-sign":401,"qs":402,"url":278}],330:[function(require,module,exports){
-=======
-},{"buffer":53,"caseless":344,"crypto":57,"node-uuid":399,"oauth-sign":400,"qs":401,"url":278}],329:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"buffer":53,"caseless":351,"crypto":57,"node-uuid":406,"oauth-sign":407,"qs":408,"url":284}],336:[function(require,module,exports){
 'use strict'
 
 var qs = require('qs')
@@ -63098,11 +63109,7 @@ Querystring.prototype.unescape = querystring.unescape
 
 exports.Querystring = Querystring
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"qs":402,"querystring":253}],331:[function(require,module,exports){
-=======
-},{"qs":401,"querystring":253}],330:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"qs":408,"querystring":259}],337:[function(require,module,exports){
 'use strict'
 
 var url = require('url')
@@ -63258,11 +63265,7 @@ Redirect.prototype.onResponse = function (response) {
 
 exports.Redirect = Redirect
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"url":278}],332:[function(require,module,exports){
-=======
-},{"url":278}],331:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"url":284}],338:[function(require,module,exports){
 'use strict'
 
 var url = require('url')
@@ -63447,11 +63450,7 @@ Tunnel.defaultProxyHeaderWhiteList = defaultProxyHeaderWhiteList
 Tunnel.defaultProxyHeaderExclusiveList = defaultProxyHeaderExclusiveList
 exports.Tunnel = Tunnel
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"tunnel-agent":414,"url":278}],333:[function(require,module,exports){
-=======
-},{"tunnel-agent":413,"url":278}],332:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"tunnel-agent":420,"url":284}],339:[function(require,module,exports){
 
 /*!
  *  Copyright 2010 LearnBoost <dev@learnboost.com>
@@ -63665,11 +63664,7 @@ function canonicalizeResource (resource) {
 }
 module.exports.canonicalizeResource = canonicalizeResource
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"crypto":57,"url":278}],334:[function(require,module,exports){
-=======
-},{"crypto":57,"url":278}],333:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"crypto":57,"url":284}],340:[function(require,module,exports){
 (function (Buffer){
 var DuplexStream = require('readable-stream/duplex')
   , util         = require('util')
@@ -63890,19 +63885,11 @@ module.exports = BufferList
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"buffer":53,"readable-stream/duplex":335,"util":280}],335:[function(require,module,exports){
-arguments[4][254][0].apply(exports,arguments)
-},{"./lib/_stream_duplex.js":336,"dup":254}],336:[function(require,module,exports){
-arguments[4][255][0].apply(exports,arguments)
-},{"./_stream_readable":337,"./_stream_writable":338,"core-util-is":339,"dup":255,"inherits":340,"process-nextick-args":342}],337:[function(require,module,exports){
-=======
-},{"buffer":53,"readable-stream/duplex":334,"util":280}],334:[function(require,module,exports){
-arguments[4][254][0].apply(exports,arguments)
-},{"./lib/_stream_duplex.js":335,"dup":254}],335:[function(require,module,exports){
-arguments[4][255][0].apply(exports,arguments)
-},{"./_stream_readable":336,"./_stream_writable":337,"core-util-is":338,"dup":255,"inherits":339,"process-nextick-args":341}],336:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"buffer":53,"readable-stream/duplex":341,"util":286}],341:[function(require,module,exports){
+arguments[4][260][0].apply(exports,arguments)
+},{"./lib/_stream_duplex.js":342,"dup":260}],342:[function(require,module,exports){
+arguments[4][261][0].apply(exports,arguments)
+},{"./_stream_readable":343,"./_stream_writable":344,"core-util-is":345,"dup":261,"inherits":346,"process-nextick-args":348}],343:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -64880,544 +64867,9 @@ function indexOf (xs, x) {
 
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./_stream_duplex":336,"_process":249,"buffer":53,"core-util-is":339,"events":243,"inherits":340,"isarray":341,"process-nextick-args":342,"string_decoder/":343,"util":39}],338:[function(require,module,exports){
-=======
-},{"./_stream_duplex":335,"_process":249,"buffer":53,"core-util-is":338,"events":243,"inherits":339,"isarray":340,"process-nextick-args":341,"string_decoder/":342,"util":39}],337:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
-// A bit simpler than readable streams.
-// Implement an async ._write(chunk, encoding, cb), and it'll handle all
-// the drain event emission and buffering.
-
-'use strict';
-
-module.exports = Writable;
-
-/*<replacement>*/
-var processNextTick = require('process-nextick-args');
-/*</replacement>*/
-
-
-/*<replacement>*/
-var Buffer = require('buffer').Buffer;
-/*</replacement>*/
-
-Writable.WritableState = WritableState;
-
-
-/*<replacement>*/
-var util = require('core-util-is');
-util.inherits = require('inherits');
-/*</replacement>*/
-
-
-/*<replacement>*/
-var internalUtil = {
-  deprecate: require('util-deprecate')
-};
-/*</replacement>*/
-
-
-
-/*<replacement>*/
-var Stream;
-(function (){try{
-  Stream = require('st' + 'ream');
-}catch(_){}finally{
-  if (!Stream)
-    Stream = require('events').EventEmitter;
-}}())
-/*</replacement>*/
-
-var Buffer = require('buffer').Buffer;
-
-util.inherits(Writable, Stream);
-
-function nop() {}
-
-function WriteReq(chunk, encoding, cb) {
-  this.chunk = chunk;
-  this.encoding = encoding;
-  this.callback = cb;
-  this.next = null;
-}
-
-function WritableState(options, stream) {
-  var Duplex = require('./_stream_duplex');
-
-  options = options || {};
-
-  // object stream flag to indicate whether or not this stream
-  // contains buffers or objects.
-  this.objectMode = !!options.objectMode;
-
-  if (stream instanceof Duplex)
-    this.objectMode = this.objectMode || !!options.writableObjectMode;
-
-  // the point at which write() starts returning false
-  // Note: 0 is a valid value, means that we always return false if
-  // the entire buffer is not flushed immediately on write()
-  var hwm = options.highWaterMark;
-  var defaultHwm = this.objectMode ? 16 : 16 * 1024;
-  this.highWaterMark = (hwm || hwm === 0) ? hwm : defaultHwm;
-
-  // cast to ints.
-  this.highWaterMark = ~~this.highWaterMark;
-
-  this.needDrain = false;
-  // at the start of calling end()
-  this.ending = false;
-  // when end() has been called, and returned
-  this.ended = false;
-  // when 'finish' is emitted
-  this.finished = false;
-
-  // should we decode strings into buffers before passing to _write?
-  // this is here so that some node-core streams can optimize string
-  // handling at a lower level.
-  var noDecode = options.decodeStrings === false;
-  this.decodeStrings = !noDecode;
-
-  // Crypto is kind of old and crusty.  Historically, its default string
-  // encoding is 'binary' so we have to make this configurable.
-  // Everything else in the universe uses 'utf8', though.
-  this.defaultEncoding = options.defaultEncoding || 'utf8';
-
-  // not an actual buffer we keep track of, but a measurement
-  // of how much we're waiting to get pushed to some underlying
-  // socket or file.
-  this.length = 0;
-
-  // a flag to see when we're in the middle of a write.
-  this.writing = false;
-
-  // when true all writes will be buffered until .uncork() call
-  this.corked = 0;
-
-  // a flag to be able to tell if the onwrite cb is called immediately,
-  // or on a later tick.  We set this to true at first, because any
-  // actions that shouldn't happen until "later" should generally also
-  // not happen before the first write call.
-  this.sync = true;
-
-  // a flag to know if we're processing previously buffered items, which
-  // may call the _write() callback in the same tick, so that we don't
-  // end up in an overlapped onwrite situation.
-  this.bufferProcessing = false;
-
-  // the callback that's passed to _write(chunk,cb)
-  this.onwrite = function(er) {
-    onwrite(stream, er);
-  };
-
-  // the callback that the user supplies to write(chunk,encoding,cb)
-  this.writecb = null;
-
-  // the amount that is being written when _write is called.
-  this.writelen = 0;
-
-  this.bufferedRequest = null;
-  this.lastBufferedRequest = null;
-
-  // number of pending user-supplied write callbacks
-  // this must be 0 before 'finish' can be emitted
-  this.pendingcb = 0;
-
-  // emit prefinish if the only thing we're waiting for is _write cbs
-  // This is relevant for synchronous Transform streams
-  this.prefinished = false;
-
-  // True if the error was already emitted and should not be thrown again
-  this.errorEmitted = false;
-}
-
-WritableState.prototype.getBuffer = function writableStateGetBuffer() {
-  var current = this.bufferedRequest;
-  var out = [];
-  while (current) {
-    out.push(current);
-    current = current.next;
-  }
-  return out;
-};
-
-(function (){try {
-Object.defineProperty(WritableState.prototype, 'buffer', {
-  get: internalUtil.deprecate(function() {
-    return this.getBuffer();
-  }, '_writableState.buffer is deprecated. Use _writableState.getBuffer ' +
-     'instead.')
-});
-}catch(_){}}());
-
-
-function Writable(options) {
-  var Duplex = require('./_stream_duplex');
-
-  // Writable ctor is applied to Duplexes, though they're not
-  // instanceof Writable, they're instanceof Readable.
-  if (!(this instanceof Writable) && !(this instanceof Duplex))
-    return new Writable(options);
-
-  this._writableState = new WritableState(options, this);
-
-  // legacy.
-  this.writable = true;
-
-  if (options) {
-    if (typeof options.write === 'function')
-      this._write = options.write;
-
-    if (typeof options.writev === 'function')
-      this._writev = options.writev;
-  }
-
-  Stream.call(this);
-}
-
-// Otherwise people can pipe Writable streams, which is just wrong.
-Writable.prototype.pipe = function() {
-  this.emit('error', new Error('Cannot pipe. Not readable.'));
-};
-
-
-function writeAfterEnd(stream, cb) {
-  var er = new Error('write after end');
-  // TODO: defer error events consistently everywhere, not just the cb
-  stream.emit('error', er);
-  processNextTick(cb, er);
-}
-
-// If we get something that is not a buffer, string, null, or undefined,
-// and we're not in objectMode, then that's an error.
-// Otherwise stream chunks are all considered to be of length=1, and the
-// watermarks determine how many objects to keep in the buffer, rather than
-// how many bytes or characters.
-function validChunk(stream, state, chunk, cb) {
-  var valid = true;
-
-  if (!(Buffer.isBuffer(chunk)) &&
-      typeof chunk !== 'string' &&
-      chunk !== null &&
-      chunk !== undefined &&
-      !state.objectMode) {
-    var er = new TypeError('Invalid non-string/buffer chunk');
-    stream.emit('error', er);
-    processNextTick(cb, er);
-    valid = false;
-  }
-  return valid;
-}
-
-Writable.prototype.write = function(chunk, encoding, cb) {
-  var state = this._writableState;
-  var ret = false;
-
-  if (typeof encoding === 'function') {
-    cb = encoding;
-    encoding = null;
-  }
-
-  if (Buffer.isBuffer(chunk))
-    encoding = 'buffer';
-  else if (!encoding)
-    encoding = state.defaultEncoding;
-
-  if (typeof cb !== 'function')
-    cb = nop;
-
-  if (state.ended)
-    writeAfterEnd(this, cb);
-  else if (validChunk(this, state, chunk, cb)) {
-    state.pendingcb++;
-    ret = writeOrBuffer(this, state, chunk, encoding, cb);
-  }
-
-  return ret;
-};
-
-Writable.prototype.cork = function() {
-  var state = this._writableState;
-
-  state.corked++;
-};
-
-Writable.prototype.uncork = function() {
-  var state = this._writableState;
-
-  if (state.corked) {
-    state.corked--;
-
-    if (!state.writing &&
-        !state.corked &&
-        !state.finished &&
-        !state.bufferProcessing &&
-        state.bufferedRequest)
-      clearBuffer(this, state);
-  }
-};
-
-Writable.prototype.setDefaultEncoding = function setDefaultEncoding(encoding) {
-  // node::ParseEncoding() requires lower case.
-  if (typeof encoding === 'string')
-    encoding = encoding.toLowerCase();
-  if (!(['hex', 'utf8', 'utf-8', 'ascii', 'binary', 'base64',
-'ucs2', 'ucs-2','utf16le', 'utf-16le', 'raw']
-.indexOf((encoding + '').toLowerCase()) > -1))
-    throw new TypeError('Unknown encoding: ' + encoding);
-  this._writableState.defaultEncoding = encoding;
-};
-
-function decodeChunk(state, chunk, encoding) {
-  if (!state.objectMode &&
-      state.decodeStrings !== false &&
-      typeof chunk === 'string') {
-    chunk = new Buffer(chunk, encoding);
-  }
-  return chunk;
-}
-
-// if we're already writing something, then just put this
-// in the queue, and wait our turn.  Otherwise, call _write
-// If we return false, then we need a drain event, so set that flag.
-function writeOrBuffer(stream, state, chunk, encoding, cb) {
-  chunk = decodeChunk(state, chunk, encoding);
-
-  if (Buffer.isBuffer(chunk))
-    encoding = 'buffer';
-  var len = state.objectMode ? 1 : chunk.length;
-
-  state.length += len;
-
-  var ret = state.length < state.highWaterMark;
-  // we must ensure that previous needDrain will not be reset to false.
-  if (!ret)
-    state.needDrain = true;
-
-  if (state.writing || state.corked) {
-    var last = state.lastBufferedRequest;
-    state.lastBufferedRequest = new WriteReq(chunk, encoding, cb);
-    if (last) {
-      last.next = state.lastBufferedRequest;
-    } else {
-      state.bufferedRequest = state.lastBufferedRequest;
-    }
-  } else {
-    doWrite(stream, state, false, len, chunk, encoding, cb);
-  }
-
-  return ret;
-}
-
-function doWrite(stream, state, writev, len, chunk, encoding, cb) {
-  state.writelen = len;
-  state.writecb = cb;
-  state.writing = true;
-  state.sync = true;
-  if (writev)
-    stream._writev(chunk, state.onwrite);
-  else
-    stream._write(chunk, encoding, state.onwrite);
-  state.sync = false;
-}
-
-function onwriteError(stream, state, sync, er, cb) {
-  --state.pendingcb;
-  if (sync)
-    processNextTick(cb, er);
-  else
-    cb(er);
-
-  stream._writableState.errorEmitted = true;
-  stream.emit('error', er);
-}
-
-function onwriteStateUpdate(state) {
-  state.writing = false;
-  state.writecb = null;
-  state.length -= state.writelen;
-  state.writelen = 0;
-}
-
-function onwrite(stream, er) {
-  var state = stream._writableState;
-  var sync = state.sync;
-  var cb = state.writecb;
-
-  onwriteStateUpdate(state);
-
-  if (er)
-    onwriteError(stream, state, sync, er, cb);
-  else {
-    // Check if we're actually ready to finish, but don't emit yet
-    var finished = needFinish(state);
-
-    if (!finished &&
-        !state.corked &&
-        !state.bufferProcessing &&
-        state.bufferedRequest) {
-      clearBuffer(stream, state);
-    }
-
-    if (sync) {
-      processNextTick(afterWrite, stream, state, finished, cb);
-    } else {
-      afterWrite(stream, state, finished, cb);
-    }
-  }
-}
-
-function afterWrite(stream, state, finished, cb) {
-  if (!finished)
-    onwriteDrain(stream, state);
-  state.pendingcb--;
-  cb();
-  finishMaybe(stream, state);
-}
-
-// Must force callback to be called on nextTick, so that we don't
-// emit 'drain' before the write() consumer gets the 'false' return
-// value, and has a chance to attach a 'drain' listener.
-function onwriteDrain(stream, state) {
-  if (state.length === 0 && state.needDrain) {
-    state.needDrain = false;
-    stream.emit('drain');
-  }
-}
-
-
-// if there's something in the buffer waiting, then process it
-function clearBuffer(stream, state) {
-  state.bufferProcessing = true;
-  var entry = state.bufferedRequest;
-
-  if (stream._writev && entry && entry.next) {
-    // Fast case, write everything using _writev()
-    var buffer = [];
-    var cbs = [];
-    while (entry) {
-      cbs.push(entry.callback);
-      buffer.push(entry);
-      entry = entry.next;
-    }
-
-    // count the one we are adding, as well.
-    // TODO(isaacs) clean this up
-    state.pendingcb++;
-    state.lastBufferedRequest = null;
-    doWrite(stream, state, true, state.length, buffer, '', function(err) {
-      for (var i = 0; i < cbs.length; i++) {
-        state.pendingcb--;
-        cbs[i](err);
-      }
-    });
-
-    // Clear buffer
-  } else {
-    // Slow case, write chunks one-by-one
-    while (entry) {
-      var chunk = entry.chunk;
-      var encoding = entry.encoding;
-      var cb = entry.callback;
-      var len = state.objectMode ? 1 : chunk.length;
-
-      doWrite(stream, state, false, len, chunk, encoding, cb);
-      entry = entry.next;
-      // if we didn't call the onwrite immediately, then
-      // it means that we need to wait until it does.
-      // also, that means that the chunk and cb are currently
-      // being processed, so move the buffer counter past them.
-      if (state.writing) {
-        break;
-      }
-    }
-
-    if (entry === null)
-      state.lastBufferedRequest = null;
-  }
-  state.bufferedRequest = entry;
-  state.bufferProcessing = false;
-}
-
-Writable.prototype._write = function(chunk, encoding, cb) {
-  cb(new Error('not implemented'));
-};
-
-Writable.prototype._writev = null;
-
-Writable.prototype.end = function(chunk, encoding, cb) {
-  var state = this._writableState;
-
-  if (typeof chunk === 'function') {
-    cb = chunk;
-    chunk = null;
-    encoding = null;
-  } else if (typeof encoding === 'function') {
-    cb = encoding;
-    encoding = null;
-  }
-
-  if (chunk !== null && chunk !== undefined)
-    this.write(chunk, encoding);
-
-  // .end() fully uncorks
-  if (state.corked) {
-    state.corked = 1;
-    this.uncork();
-  }
-
-  // ignore unnecessary end() calls.
-  if (!state.ending && !state.finished)
-    endWritable(this, state, cb);
-};
-
-
-function needFinish(state) {
-  return (state.ending &&
-          state.length === 0 &&
-          state.bufferedRequest === null &&
-          !state.finished &&
-          !state.writing);
-}
-
-function prefinish(stream, state) {
-  if (!state.prefinished) {
-    state.prefinished = true;
-    stream.emit('prefinish');
-  }
-}
-
-function finishMaybe(stream, state) {
-  var need = needFinish(state);
-  if (need) {
-    if (state.pendingcb === 0) {
-      prefinish(stream, state);
-      state.finished = true;
-      stream.emit('finish');
-    } else {
-      prefinish(stream, state);
-    }
-  }
-  return need;
-}
-
-function endWritable(stream, state, cb) {
-  state.ending = true;
-  finishMaybe(stream, state);
-  if (cb) {
-    if (state.finished)
-      processNextTick(cb);
-    else
-      stream.once('finish', cb);
-  }
-  state.ended = true;
-}
-
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./_stream_duplex":336,"buffer":53,"core-util-is":339,"events":243,"inherits":340,"process-nextick-args":342,"util-deprecate":344}],339:[function(require,module,exports){
-=======
-},{"./_stream_duplex":335,"buffer":53,"core-util-is":338,"events":243,"inherits":339,"process-nextick-args":341,"util-deprecate":343}],338:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./_stream_duplex":342,"_process":255,"buffer":53,"core-util-is":345,"events":249,"inherits":346,"isarray":347,"process-nextick-args":348,"string_decoder/":349,"util":39}],344:[function(require,module,exports){
+arguments[4][265][0].apply(exports,arguments)
+},{"./_stream_duplex":342,"buffer":53,"core-util-is":345,"dup":265,"events":249,"inherits":346,"process-nextick-args":348,"util-deprecate":350}],345:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -65528,19 +64980,11 @@ function objectToString(o) {
 }
 }).call(this,{"isBuffer":require("../../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")})
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"../../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246}],340:[function(require,module,exports){
-arguments[4][245][0].apply(exports,arguments)
-},{"dup":245}],341:[function(require,module,exports){
-arguments[4][247][0].apply(exports,arguments)
-},{"dup":247}],342:[function(require,module,exports){
-=======
-},{"../../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246}],339:[function(require,module,exports){
-arguments[4][245][0].apply(exports,arguments)
-},{"dup":245}],340:[function(require,module,exports){
-arguments[4][247][0].apply(exports,arguments)
-},{"dup":247}],341:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":252}],346:[function(require,module,exports){
+arguments[4][251][0].apply(exports,arguments)
+},{"dup":251}],347:[function(require,module,exports){
+arguments[4][253][0].apply(exports,arguments)
+},{"dup":253}],348:[function(require,module,exports){
 (function (process){
 'use strict';
 module.exports = nextTick;
@@ -65558,15 +65002,9 @@ function nextTick(fn) {
 
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"_process":249}],343:[function(require,module,exports){
-arguments[4][277][0].apply(exports,arguments)
-},{"buffer":53,"dup":277}],344:[function(require,module,exports){
-=======
-},{"_process":249}],342:[function(require,module,exports){
-arguments[4][277][0].apply(exports,arguments)
-},{"buffer":53,"dup":277}],343:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255}],349:[function(require,module,exports){
+arguments[4][283][0].apply(exports,arguments)
+},{"buffer":53,"dup":283}],350:[function(require,module,exports){
 (function (global){
 
 /**
@@ -65638,11 +65076,7 @@ function config (name) {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],345:[function(require,module,exports){
-=======
-},{}],344:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],351:[function(require,module,exports){
 function Caseless (dict) {
   this.dict = dict || {}
 }
@@ -65710,11 +65144,7 @@ module.exports.httpify = function (resp, headers) {
   return c
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],346:[function(require,module,exports){
-=======
-},{}],345:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],352:[function(require,module,exports){
 (function (Buffer){
 var util = require('util');
 var Stream = require('stream').Stream;
@@ -65907,11 +65337,7 @@ CombinedStream.prototype._emitError = function(err) {
 
 }).call(this,{"isBuffer":require("../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")})
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"delayed-stream":347,"stream":267,"util":280}],347:[function(require,module,exports){
-=======
-},{"../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"delayed-stream":346,"stream":267,"util":280}],346:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":252,"delayed-stream":353,"stream":273,"util":286}],353:[function(require,module,exports){
 var Stream = require('stream').Stream;
 var util = require('util');
 
@@ -66020,11 +65446,7 @@ DelayedStream.prototype._checkIfMaxDataSizeExceeded = function() {
   this.emit('error', new Error(message));
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"stream":267,"util":280}],348:[function(require,module,exports){
-=======
-},{"stream":267,"util":280}],347:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"stream":273,"util":286}],354:[function(require,module,exports){
 'use strict';
 
 var hasOwn = Object.prototype.hasOwnProperty;
@@ -66112,11 +65534,7 @@ module.exports = function extend() {
 };
 
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],349:[function(require,module,exports){
-=======
-},{}],348:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],355:[function(require,module,exports){
 module.exports = ForeverAgent
 ForeverAgent.SSL = ForeverAgentSSL
 
@@ -66256,15 +65674,9 @@ function createConnectionSSL (port, host, options) {
   return tls.connect(options);
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"http":268,"https":244,"net":37,"tls":37,"util":280}],350:[function(require,module,exports){
+},{"http":274,"https":250,"net":37,"tls":37,"util":286}],356:[function(require,module,exports){
 module.exports = FormData;
-},{}],351:[function(require,module,exports){
-=======
-},{"http":268,"https":244,"net":37,"tls":37,"util":280}],349:[function(require,module,exports){
-module.exports = FormData;
-},{}],350:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],357:[function(require,module,exports){
 'use strict'
 
 function ValidationError (errors) {
@@ -66276,11 +65688,7 @@ ValidationError.prototype = Error.prototype
 
 module.exports = ValidationError
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],352:[function(require,module,exports){
-=======
-},{}],351:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],358:[function(require,module,exports){
 'use strict'
 
 var Promise = require('pinkie-promise')
@@ -66304,11 +65712,7 @@ Object.keys(schemas).map(function (name) {
   module.exports[name] = promisify(schemas[name])
 })
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./runner":353,"./schemas":361,"pinkie-promise":377}],353:[function(require,module,exports){
-=======
-},{"./runner":352,"./schemas":360,"pinkie-promise":376}],352:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./runner":359,"./schemas":367,"pinkie-promise":383}],359:[function(require,module,exports){
 'use strict'
 
 var schemas = require('./schemas')
@@ -66339,11 +65743,7 @@ module.exports = function (schema, data, cb) {
   return valid
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./error":351,"./schemas":361,"is-my-json-valid":371}],354:[function(require,module,exports){
-=======
-},{"./error":350,"./schemas":360,"is-my-json-valid":370}],353:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./error":357,"./schemas":367,"is-my-json-valid":377}],360:[function(require,module,exports){
 module.exports={
   "properties": {
     "beforeRequest": {
@@ -66358,11 +65758,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],355:[function(require,module,exports){
-=======
-},{}],354:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],361:[function(require,module,exports){
 module.exports={
   "oneOf": [{
     "type": "object",
@@ -66395,11 +65791,7 @@ module.exports={
   }]
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],356:[function(require,module,exports){
-=======
-},{}],355:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],362:[function(require,module,exports){
 module.exports={
   "type": "object",
   "required": [
@@ -66428,11 +65820,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],357:[function(require,module,exports){
-=======
-},{}],356:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],363:[function(require,module,exports){
 module.exports={
   "type": "object",
   "required": [
@@ -66468,11 +65856,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],358:[function(require,module,exports){
-=======
-},{}],357:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],364:[function(require,module,exports){
 module.exports={
   "type": "object",
   "required": [
@@ -66492,11 +65876,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],359:[function(require,module,exports){
-=======
-},{}],358:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],365:[function(require,module,exports){
 module.exports={
   "type": "object",
   "optional": true,
@@ -66549,11 +65929,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],360:[function(require,module,exports){
-=======
-},{}],359:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],366:[function(require,module,exports){
 module.exports={
   "type": "object",
   "required": [
@@ -66566,11 +65942,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],361:[function(require,module,exports){
-=======
-},{}],360:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],367:[function(require,module,exports){
 'use strict'
 
 var schemas = {
@@ -66621,11 +65993,7 @@ schemas.har.properties.log = schemas.log
 
 module.exports = schemas
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./cache.json":354,"./cacheEntry.json":355,"./content.json":356,"./cookie.json":357,"./creator.json":358,"./entry.json":359,"./har.json":360,"./log.json":362,"./page.json":363,"./pageTimings.json":364,"./postData.json":365,"./record.json":366,"./request.json":367,"./response.json":368,"./timings.json":369}],362:[function(require,module,exports){
-=======
-},{"./cache.json":353,"./cacheEntry.json":354,"./content.json":355,"./cookie.json":356,"./creator.json":357,"./entry.json":358,"./har.json":359,"./log.json":361,"./page.json":362,"./pageTimings.json":363,"./postData.json":364,"./record.json":365,"./request.json":366,"./response.json":367,"./timings.json":368}],361:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./cache.json":360,"./cacheEntry.json":361,"./content.json":362,"./cookie.json":363,"./creator.json":364,"./entry.json":365,"./har.json":366,"./log.json":368,"./page.json":369,"./pageTimings.json":370,"./postData.json":371,"./record.json":372,"./request.json":373,"./response.json":374,"./timings.json":375}],368:[function(require,module,exports){
 module.exports={
   "type": "object",
   "required": [
@@ -66661,11 +66029,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],363:[function(require,module,exports){
-=======
-},{}],362:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],369:[function(require,module,exports){
 module.exports={
   "type": "object",
   "optional": true,
@@ -66697,11 +66061,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],364:[function(require,module,exports){
-=======
-},{}],363:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],370:[function(require,module,exports){
 module.exports={
   "type": "object",
   "properties": {
@@ -66719,11 +66079,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],365:[function(require,module,exports){
-=======
-},{}],364:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],371:[function(require,module,exports){
 module.exports={
   "type": "object",
   "optional": true,
@@ -66766,11 +66122,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],366:[function(require,module,exports){
-=======
-},{}],365:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],372:[function(require,module,exports){
 module.exports={
   "type": "object",
   "required": [
@@ -66790,11 +66142,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],367:[function(require,module,exports){
-=======
-},{}],366:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],373:[function(require,module,exports){
 module.exports={
   "type": "object",
   "required": [
@@ -66851,11 +66199,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],368:[function(require,module,exports){
-=======
-},{}],367:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],374:[function(require,module,exports){
 module.exports={
   "type": "object",
   "required": [
@@ -66909,11 +66253,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],369:[function(require,module,exports){
-=======
-},{}],368:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],375:[function(require,module,exports){
 module.exports={
   "required": [
     "send",
@@ -66955,11 +66295,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],370:[function(require,module,exports){
-=======
-},{}],369:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],376:[function(require,module,exports){
 exports['date-time'] = /^\d{4}-(?:0[0-9]{1}|1[0-2]{1})-[0-9]{2}[tT ]\d{2}:\d{2}:\d{2}(\.\d+)?([zZ]|[+-]\d{2}:\d{2})$/
 exports['date'] = /^\d{4}-(?:0[0-9]{1}|1[0-2]{1})-[0-9]{2}$/
 exports['time'] = /^\d{2}:\d{2}:\d{2}$/
@@ -66975,11 +66311,7 @@ exports['style'] = /\s*(.+?):\s*([^;]+);?/g
 exports['phone'] = /^\+(?:[0-9] ?){6,14}[0-9]$/
 exports['utc-millisec'] = /^[0-9]+(\.?[0-9]+)?$/
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],371:[function(require,module,exports){
-=======
-},{}],370:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],377:[function(require,module,exports){
 var genobj = require('generate-object-property')
 var genfun = require('generate-function')
 var jsonpointer = require('jsonpointer')
@@ -67556,11 +66888,7 @@ module.exports.filter = function(schema, opts) {
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./formats":370,"generate-function":372,"generate-object-property":373,"jsonpointer":375,"xtend":376}],372:[function(require,module,exports){
-=======
-},{"./formats":369,"generate-function":371,"generate-object-property":372,"jsonpointer":374,"xtend":375}],371:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./formats":376,"generate-function":378,"generate-object-property":379,"jsonpointer":381,"xtend":382}],378:[function(require,module,exports){
 var util = require('util')
 
 var INDENT_START = /[\{\[]/
@@ -67623,11 +66951,7 @@ module.exports = function() {
   return line
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"util":280}],373:[function(require,module,exports){
-=======
-},{"util":280}],372:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"util":286}],379:[function(require,module,exports){
 var isProperty = require('is-property')
 
 var gen = function(obj, prop) {
@@ -67641,21 +66965,13 @@ gen.property = function (prop) {
 
 module.exports = gen
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"is-property":374}],374:[function(require,module,exports){
-=======
-},{"is-property":373}],373:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"is-property":380}],380:[function(require,module,exports){
 "use strict"
 function isProperty(str) {
   return /^[$A-Z\_a-z\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05d0-\u05ea\u05f0-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u08a0\u08a2-\u08ac\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0977\u0979-\u097f\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c33\u0c35-\u0c39\u0c3d\u0c58\u0c59\u0c60\u0c61\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d05-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d60\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e87\u0e88\u0e8a\u0e8d\u0e94-\u0e97\u0e99-\u0e9f\u0ea1-\u0ea3\u0ea5\u0ea7\u0eaa\u0eab\u0ead-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f4\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f0\u1700-\u170c\u170e-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1877\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191c\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19c1-\u19c7\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4b\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1ce9-\u1cec\u1cee-\u1cf1\u1cf5\u1cf6\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126\u2128\u212a-\u212d\u212f-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2c2e\u2c30-\u2c5e\u2c60-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u2e2f\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309d-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312d\u3131-\u318e\u31a0-\u31ba\u31f0-\u31ff\u3400-\u4db5\u4e00-\u9fcc\ua000-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua697\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua78e\ua790-\ua793\ua7a0-\ua7aa\ua7f8-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa80-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uabc0-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc][$A-Z\_a-z\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05d0-\u05ea\u05f0-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u08a0\u08a2-\u08ac\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0977\u0979-\u097f\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c33\u0c35-\u0c39\u0c3d\u0c58\u0c59\u0c60\u0c61\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d05-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d60\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e87\u0e88\u0e8a\u0e8d\u0e94-\u0e97\u0e99-\u0e9f\u0ea1-\u0ea3\u0ea5\u0ea7\u0eaa\u0eab\u0ead-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f4\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f0\u1700-\u170c\u170e-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1877\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191c\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19c1-\u19c7\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4b\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1ce9-\u1cec\u1cee-\u1cf1\u1cf5\u1cf6\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126\u2128\u212a-\u212d\u212f-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2c2e\u2c30-\u2c5e\u2c60-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u2e2f\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309d-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312d\u3131-\u318e\u31a0-\u31ba\u31f0-\u31ff\u3400-\u4db5\u4e00-\u9fcc\ua000-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua697\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua78e\ua790-\ua793\ua7a0-\ua7aa\ua7f8-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa80-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uabc0-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc0-9\u0300-\u036f\u0483-\u0487\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7\u0610-\u061a\u064b-\u0669\u0670\u06d6-\u06dc\u06df-\u06e4\u06e7\u06e8\u06ea-\u06ed\u06f0-\u06f9\u0711\u0730-\u074a\u07a6-\u07b0\u07c0-\u07c9\u07eb-\u07f3\u0816-\u0819\u081b-\u0823\u0825-\u0827\u0829-\u082d\u0859-\u085b\u08e4-\u08fe\u0900-\u0903\u093a-\u093c\u093e-\u094f\u0951-\u0957\u0962\u0963\u0966-\u096f\u0981-\u0983\u09bc\u09be-\u09c4\u09c7\u09c8\u09cb-\u09cd\u09d7\u09e2\u09e3\u09e6-\u09ef\u0a01-\u0a03\u0a3c\u0a3e-\u0a42\u0a47\u0a48\u0a4b-\u0a4d\u0a51\u0a66-\u0a71\u0a75\u0a81-\u0a83\u0abc\u0abe-\u0ac5\u0ac7-\u0ac9\u0acb-\u0acd\u0ae2\u0ae3\u0ae6-\u0aef\u0b01-\u0b03\u0b3c\u0b3e-\u0b44\u0b47\u0b48\u0b4b-\u0b4d\u0b56\u0b57\u0b62\u0b63\u0b66-\u0b6f\u0b82\u0bbe-\u0bc2\u0bc6-\u0bc8\u0bca-\u0bcd\u0bd7\u0be6-\u0bef\u0c01-\u0c03\u0c3e-\u0c44\u0c46-\u0c48\u0c4a-\u0c4d\u0c55\u0c56\u0c62\u0c63\u0c66-\u0c6f\u0c82\u0c83\u0cbc\u0cbe-\u0cc4\u0cc6-\u0cc8\u0cca-\u0ccd\u0cd5\u0cd6\u0ce2\u0ce3\u0ce6-\u0cef\u0d02\u0d03\u0d3e-\u0d44\u0d46-\u0d48\u0d4a-\u0d4d\u0d57\u0d62\u0d63\u0d66-\u0d6f\u0d82\u0d83\u0dca\u0dcf-\u0dd4\u0dd6\u0dd8-\u0ddf\u0df2\u0df3\u0e31\u0e34-\u0e3a\u0e47-\u0e4e\u0e50-\u0e59\u0eb1\u0eb4-\u0eb9\u0ebb\u0ebc\u0ec8-\u0ecd\u0ed0-\u0ed9\u0f18\u0f19\u0f20-\u0f29\u0f35\u0f37\u0f39\u0f3e\u0f3f\u0f71-\u0f84\u0f86\u0f87\u0f8d-\u0f97\u0f99-\u0fbc\u0fc6\u102b-\u103e\u1040-\u1049\u1056-\u1059\u105e-\u1060\u1062-\u1064\u1067-\u106d\u1071-\u1074\u1082-\u108d\u108f-\u109d\u135d-\u135f\u1712-\u1714\u1732-\u1734\u1752\u1753\u1772\u1773\u17b4-\u17d3\u17dd\u17e0-\u17e9\u180b-\u180d\u1810-\u1819\u18a9\u1920-\u192b\u1930-\u193b\u1946-\u194f\u19b0-\u19c0\u19c8\u19c9\u19d0-\u19d9\u1a17-\u1a1b\u1a55-\u1a5e\u1a60-\u1a7c\u1a7f-\u1a89\u1a90-\u1a99\u1b00-\u1b04\u1b34-\u1b44\u1b50-\u1b59\u1b6b-\u1b73\u1b80-\u1b82\u1ba1-\u1bad\u1bb0-\u1bb9\u1be6-\u1bf3\u1c24-\u1c37\u1c40-\u1c49\u1c50-\u1c59\u1cd0-\u1cd2\u1cd4-\u1ce8\u1ced\u1cf2-\u1cf4\u1dc0-\u1de6\u1dfc-\u1dff\u200c\u200d\u203f\u2040\u2054\u20d0-\u20dc\u20e1\u20e5-\u20f0\u2cef-\u2cf1\u2d7f\u2de0-\u2dff\u302a-\u302f\u3099\u309a\ua620-\ua629\ua66f\ua674-\ua67d\ua69f\ua6f0\ua6f1\ua802\ua806\ua80b\ua823-\ua827\ua880\ua881\ua8b4-\ua8c4\ua8d0-\ua8d9\ua8e0-\ua8f1\ua900-\ua909\ua926-\ua92d\ua947-\ua953\ua980-\ua983\ua9b3-\ua9c0\ua9d0-\ua9d9\uaa29-\uaa36\uaa43\uaa4c\uaa4d\uaa50-\uaa59\uaa7b\uaab0\uaab2-\uaab4\uaab7\uaab8\uaabe\uaabf\uaac1\uaaeb-\uaaef\uaaf5\uaaf6\uabe3-\uabea\uabec\uabed\uabf0-\uabf9\ufb1e\ufe00-\ufe0f\ufe20-\ufe26\ufe33\ufe34\ufe4d-\ufe4f\uff10-\uff19\uff3f]*$/.test(str)
 }
 module.exports = isProperty
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],375:[function(require,module,exports){
-=======
-},{}],374:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],381:[function(require,module,exports){
 var untilde = function(str) {
   return str.replace(/~./g, function(m) {
     switch (m) {
@@ -67733,36 +67049,9 @@ var set = function(obj, pointer, value) {
 exports.get = get
 exports.set = set
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],376:[function(require,module,exports){
-=======
-},{}],375:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
-module.exports = extend
-
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-function extend() {
-    var target = {}
-
-    for (var i = 0; i < arguments.length; i++) {
-        var source = arguments[i]
-
-        for (var key in source) {
-            if (hasOwnProperty.call(source, key)) {
-                target[key] = source[key]
-            }
-        }
-    }
-
-    return target
-}
-
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],377:[function(require,module,exports){
-=======
-},{}],376:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],382:[function(require,module,exports){
+arguments[4][289][0].apply(exports,arguments)
+},{"dup":289}],383:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -67770,11 +67059,7 @@ module.exports = global.Promise || require('pinkie');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"pinkie":378}],378:[function(require,module,exports){
-=======
-},{"pinkie":377}],377:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"pinkie":384}],384:[function(require,module,exports){
 'use strict';
 
 var PENDING = 'pending';
@@ -68052,11 +67337,7 @@ Promise.reject = function (reason) {
 
 module.exports = Promise;
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],379:[function(require,module,exports){
-=======
-},{}],378:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],385:[function(require,module,exports){
 /*
     HTTP Hawk Authentication Scheme
     Copyright (c) 2012-2014, Eran Hammer <eran@hammer.io>
@@ -68695,11 +67976,7 @@ if (typeof module !== 'undefined' && module.exports) {
 /* eslint-enable */
 // $lab:coverage:on$
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],380:[function(require,module,exports){
-=======
-},{}],379:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],386:[function(require,module,exports){
 // Copyright 2015 Joyent, Inc.
 
 var parser = require('./parser');
@@ -68728,11 +68005,7 @@ module.exports = {
   verifyHMAC: verify.verifyHMAC
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./parser":381,"./signer":382,"./util":383,"./verify":384}],381:[function(require,module,exports){
-=======
-},{"./parser":380,"./signer":381,"./util":382,"./verify":383}],380:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./parser":387,"./signer":388,"./util":389,"./verify":390}],387:[function(require,module,exports){
 // Copyright 2012 Joyent, Inc.  All rights reserved.
 
 var assert = require('assert-plus');
@@ -69038,11 +68311,7 @@ module.exports = {
 
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"assert-plus":391,"util":280}],382:[function(require,module,exports){
-=======
-},{"assert-plus":390,"util":280}],381:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"assert-plus":397,"util":286}],388:[function(require,module,exports){
 // Copyright 2012 Joyent, Inc.  All rights reserved.
 
 var assert = require('assert-plus');
@@ -69222,11 +68491,7 @@ module.exports = {
 
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"assert-plus":391,"crypto":57,"http":268,"util":280}],383:[function(require,module,exports){
-=======
-},{"assert-plus":390,"crypto":57,"http":268,"util":280}],382:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"assert-plus":397,"crypto":57,"http":274,"util":286}],389:[function(require,module,exports){
 (function (Buffer){
 // Copyright 2012 Joyent, Inc.  All rights reserved.
 
@@ -69537,11 +68802,7 @@ module.exports = {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"asn1":390,"assert-plus":391,"buffer":53,"crypto":57,"ctype":394}],384:[function(require,module,exports){
-=======
-},{"asn1":389,"assert-plus":390,"buffer":53,"crypto":57,"ctype":393}],383:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"asn1":396,"assert-plus":397,"buffer":53,"crypto":57,"ctype":400}],390:[function(require,module,exports){
 // Copyright 2015 Joyent, Inc.
 
 var assert = require('assert-plus');
@@ -69599,11 +68860,7 @@ module.exports = {
   }
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"assert-plus":391,"crypto":57}],385:[function(require,module,exports){
-=======
-},{"assert-plus":390,"crypto":57}],384:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"assert-plus":397,"crypto":57}],391:[function(require,module,exports){
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 
@@ -69618,11 +68875,7 @@ module.exports = {
 
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],386:[function(require,module,exports){
-=======
-},{}],385:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],392:[function(require,module,exports){
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 var errors = require('./errors');
@@ -69651,11 +68904,7 @@ for (var e in errors) {
     module.exports[e] = errors[e];
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./errors":385,"./reader":387,"./types":388,"./writer":389}],387:[function(require,module,exports){
-=======
-},{"./errors":384,"./reader":386,"./types":387,"./writer":388}],386:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./errors":391,"./reader":393,"./types":394,"./writer":395}],393:[function(require,module,exports){
 (function (Buffer){
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
@@ -69927,11 +69176,7 @@ module.exports = Reader;
 
 }).call(this,{"isBuffer":require("../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")})
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"./errors":385,"./types":388,"assert":38}],388:[function(require,module,exports){
-=======
-},{"../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"./errors":384,"./types":387,"assert":38}],387:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":252,"./errors":391,"./types":394,"assert":38}],394:[function(require,module,exports){
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 
@@ -69969,11 +69214,7 @@ module.exports = {
   Context: 128
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],389:[function(require,module,exports){
-=======
-},{}],388:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],395:[function(require,module,exports){
 (function (Buffer){
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
@@ -70295,11 +69536,7 @@ module.exports = Writer;
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./errors":385,"./types":388,"assert":38,"buffer":53}],390:[function(require,module,exports){
-=======
-},{"./errors":384,"./types":387,"assert":38,"buffer":53}],389:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./errors":391,"./types":394,"assert":38,"buffer":53}],396:[function(require,module,exports){
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 // If you have no idea what ASN.1 or BER is, see this:
@@ -70321,11 +69558,7 @@ module.exports = {
 
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./ber/index":386}],391:[function(require,module,exports){
-=======
-},{"./ber/index":385}],390:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ber/index":392}],397:[function(require,module,exports){
 (function (Buffer,process){
 // Copyright (c) 2012, Mark Cavage. All rights reserved.
 
@@ -70575,11 +69808,7 @@ Object.keys(assert).forEach(function (k) {
 
 }).call(this,{"isBuffer":require("../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")},require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"_process":249,"assert":38,"stream":267,"util":280}],392:[function(require,module,exports){
-=======
-},{"../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"_process":249,"assert":38,"stream":267,"util":280}],391:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":252,"_process":255,"assert":38,"stream":273,"util":286}],398:[function(require,module,exports){
 /*
  * ctf.js
  *
@@ -70826,11 +70055,7 @@ function ctfParseJson(json, ctype)
 
 exports.ctfParseJson = ctfParseJson;
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"assert":38}],393:[function(require,module,exports){
-=======
-},{"assert":38}],392:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"assert":38}],399:[function(require,module,exports){
 /*
  * rm - Feb 2011
  * ctio.js:
@@ -72317,11 +71542,7 @@ exports.rdouble = rdouble;
 exports.wfloat = wfloat;
 exports.wdouble = wdouble;
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"assert":38}],394:[function(require,module,exports){
-=======
-},{"assert":38}],393:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"assert":38}],400:[function(require,module,exports){
 (function (Buffer){
 /*
  * rm - Feb 2011
@@ -73270,11 +72491,7 @@ exports.wdouble = mod_ctio.wdouble;
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./ctf.js":392,"./ctio.js":393,"assert":38,"buffer":53}],395:[function(require,module,exports){
-=======
-},{"./ctf.js":391,"./ctio.js":392,"assert":38,"buffer":53}],394:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ctf.js":398,"./ctio.js":399,"assert":38,"buffer":53}],401:[function(require,module,exports){
 var stream = require('stream')
 
 
@@ -73303,11 +72520,7 @@ module.exports.isReadable = isReadable
 module.exports.isWritable = isWritable
 module.exports.isDuplex   = isDuplex
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"stream":267}],396:[function(require,module,exports){
-=======
-},{"stream":267}],395:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"stream":273}],402:[function(require,module,exports){
 exports = module.exports = stringify
 exports.getSerialize = serializer
 
@@ -73336,11 +72549,7 @@ function serializer(replacer, cycleReplacer) {
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],397:[function(require,module,exports){
-=======
-},{}],396:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],403:[function(require,module,exports){
 /*!
  * mime-types
  * Copyright(c) 2014 Jonathan Ong
@@ -73530,11 +72739,7 @@ function populateMaps(extensions, types) {
   })
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"mime-db":399,"path":248}],398:[function(require,module,exports){
-=======
-},{"mime-db":398,"path":248}],397:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"mime-db":405,"path":254}],404:[function(require,module,exports){
 module.exports={
   "application/1d-interleaved-parityfec": {
     "source": "iana"
@@ -80010,11 +79215,7 @@ module.exports={
   }
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],399:[function(require,module,exports){
-=======
-},{}],398:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],405:[function(require,module,exports){
 /*!
  * mime-db
  * Copyright(c) 2014 Jonathan Ong
@@ -80027,11 +79228,7 @@ module.exports={
 
 module.exports = require('./db.json')
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./db.json":398}],400:[function(require,module,exports){
-=======
-},{"./db.json":397}],399:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./db.json":404}],406:[function(require,module,exports){
 //     uuid.js
 //
 //     Copyright (c) 2010-2012 Robert Kieffer
@@ -80045,23 +79242,26 @@ module.exports = require('./db.json')
   // returns 128-bits of randomness, since that's what's usually required
   var _rng;
 
+  // Allow for MSIE11 msCrypto
+  var _crypto = _global.crypto || _global.msCrypto;
+
   // Node.js crypto-based RNG - http://nodejs.org/docs/v0.6.2/api/crypto.html
   //
   // Moderately fast, high quality
-  if (typeof(_global.require) == 'function') {
+  if ('function' === typeof require) {
     try {
-      var _rb = _global.require('crypto').randomBytes;
+      var _rb = require('crypto').randomBytes;
       _rng = _rb && function() {return _rb(16);};
     } catch(e) {}
   }
 
-  if (!_rng && _global.crypto && crypto.getRandomValues) {
+  if (!_rng && _crypto && _crypto.getRandomValues) {
     // WHATWG crypto-based RNG - http://wiki.whatwg.org/wiki/Crypto
     //
     // Moderately fast, high quality
     var _rnds8 = new Uint8Array(16);
     _rng = function whatwgRNG() {
-      crypto.getRandomValues(_rnds8);
+      _crypto.getRandomValues(_rnds8);
       return _rnds8;
     };
   }
@@ -80257,6 +79457,7 @@ module.exports = require('./db.json')
   uuid.parse = parse;
   uuid.unparse = unparse;
   uuid.BufferClass = BufferClass;
+  uuid._rng = _rng;
 
   if (typeof(module) != 'undefined' && module.exports) {
     // Publish as node.js module
@@ -80264,7 +79465,7 @@ module.exports = require('./db.json')
   } else  if (typeof define === 'function' && define.amd) {
     // Publish as AMD module
     define(function() {return uuid;});
- 
+
 
   } else {
     // Publish as global (in browsers)
@@ -80280,11 +79481,7 @@ module.exports = require('./db.json')
   }
 }).call(this);
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],401:[function(require,module,exports){
-=======
-},{}],400:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"crypto":57}],407:[function(require,module,exports){
 var crypto = require('crypto')
   , qs = require('querystring')
   ;
@@ -80420,11 +79617,7 @@ exports.plaintext = plaintext
 exports.sign = sign
 exports.rfc3986 = rfc3986
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"crypto":57,"querystring":253}],402:[function(require,module,exports){
-=======
-},{"crypto":57,"querystring":253}],401:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"crypto":57,"querystring":259}],408:[function(require,module,exports){
 // Load modules
 
 var Stringify = require('./stringify');
@@ -80441,11 +79634,7 @@ module.exports = {
     parse: Parse
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./parse":403,"./stringify":404}],403:[function(require,module,exports){
-=======
-},{"./parse":402,"./stringify":403}],402:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./parse":409,"./stringify":410}],409:[function(require,module,exports){
 // Load modules
 
 var Utils = require('./utils');
@@ -80634,11 +79823,7 @@ module.exports = function (str, options) {
     return Utils.compact(obj);
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./utils":405}],404:[function(require,module,exports){
-=======
-},{"./utils":404}],403:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./utils":411}],410:[function(require,module,exports){
 // Load modules
 
 var Utils = require('./utils');
@@ -80794,11 +79979,7 @@ module.exports = function (obj, options) {
     return keys.join(delimiter);
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./utils":405}],405:[function(require,module,exports){
-=======
-},{"./utils":404}],404:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./utils":411}],411:[function(require,module,exports){
 // Load modules
 
 
@@ -80990,11 +80171,7 @@ exports.isBuffer = function (obj) {
               obj.constructor.isBuffer(obj));
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],406:[function(require,module,exports){
-=======
-},{}],405:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],412:[function(require,module,exports){
 (function (Buffer){
 var util = require('util')
 var Stream = require('stream')
@@ -81101,11 +80278,7 @@ function alignedWrite(buffer) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"buffer":53,"stream":267,"string_decoder":277,"util":280}],407:[function(require,module,exports){
-=======
-},{"buffer":53,"stream":267,"string_decoder":277,"util":280}],406:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"buffer":53,"stream":273,"string_decoder":283,"util":286}],413:[function(require,module,exports){
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -82449,11 +81622,7 @@ module.exports = {
   canonicalDomain: canonicalDomain
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"../package.json":413,"./memstore":408,"./pathMatch":409,"./permuteDomain":410,"./pubsuffix":411,"./store":412,"net":37,"punycode":250,"url":278}],408:[function(require,module,exports){
-=======
-},{"../package.json":412,"./memstore":407,"./pathMatch":408,"./permuteDomain":409,"./pubsuffix":410,"./store":411,"net":37,"punycode":250,"url":278}],407:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../package.json":419,"./memstore":414,"./pathMatch":415,"./permuteDomain":416,"./pubsuffix":417,"./store":418,"net":37,"punycode":256,"url":284}],414:[function(require,module,exports){
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -82625,11 +81794,7 @@ MemoryCookieStore.prototype.getAllCookies = function(cb) {
   cb(null, cookies);
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./pathMatch":409,"./permuteDomain":410,"./store":412,"util":280}],409:[function(require,module,exports){
-=======
-},{"./pathMatch":408,"./permuteDomain":409,"./store":411,"util":280}],408:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./pathMatch":415,"./permuteDomain":416,"./store":418,"util":286}],415:[function(require,module,exports){
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -82687,26 +81852,12 @@ function pathMatch (reqPath, cookiePath) {
     }
   }
 
-<<<<<<< HEAD
-},{}],52:[function(require,module,exports){
-(function (global){
-/**
- * marked - a markdown parser
- * Copyright (c) 2011-2014, Christopher Jeffrey. (MIT Licensed)
- * https://github.com/chjj/marked
- */
-=======
   return false;
 }
->>>>>>> master
 
 exports.pathMatch = pathMatch;
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],410:[function(require,module,exports){
-=======
-},{}],409:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],416:[function(require,module,exports){
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -82764,11 +81915,7 @@ function permuteDomain (domain) {
 
 exports.permuteDomain = permuteDomain;
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./pubsuffix":411}],411:[function(require,module,exports){
-=======
-},{"./pubsuffix":410}],410:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./pubsuffix":417}],417:[function(require,module,exports){
 /****************************************************
  * AUTOMATICALLY GENERATED by generate-pubsuffix.js *
  *                  DO NOT EDIT!                    *
@@ -82868,11 +82015,7 @@ var index = module.exports.index = Object.freeze(
 
 // END of automatically generated file
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"punycode":250}],412:[function(require,module,exports){
-=======
-},{"punycode":250}],411:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"punycode":256}],418:[function(require,module,exports){
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -82945,11 +82088,7 @@ Store.prototype.getAllCookies = function(cb) {
   throw new Error('getAllCookies is not implemented (therefore jar cannot be serialized)');
 };
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],413:[function(require,module,exports){
-=======
-},{}],412:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],419:[function(require,module,exports){
 module.exports={
   "author": {
     "name": "Jeremy Stashewsky",
@@ -83037,14 +82176,11 @@ module.exports={
     }
   ],
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.2.0.tgz"
+  "_resolved": "https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.2.0.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],414:[function(require,module,exports){
-=======
-},{}],413:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],420:[function(require,module,exports){
 (function (process,Buffer){
 'use strict'
 
@@ -83290,11 +82426,7 @@ exports.debug = debug // for test
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"_process":249,"assert":38,"buffer":53,"events":243,"http":268,"https":244,"net":37,"tls":37,"util":280}],415:[function(require,module,exports){
-=======
-},{"_process":249,"assert":38,"buffer":53,"events":243,"http":268,"https":244,"net":37,"tls":37,"util":280}],414:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255,"assert":38,"buffer":53,"events":249,"http":274,"https":250,"net":37,"tls":37,"util":286}],421:[function(require,module,exports){
 (function (process,Buffer){
 'use strict'
 
@@ -84737,11 +83869,7 @@ module.exports = Request
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./lib/auth":323,"./lib/cookies":324,"./lib/getProxyFromURI":325,"./lib/har":326,"./lib/helpers":327,"./lib/multipart":328,"./lib/oauth":329,"./lib/querystring":330,"./lib/redirect":331,"./lib/tunnel":332,"_process":249,"aws-sign2":333,"bl":334,"buffer":53,"caseless":345,"forever-agent":349,"form-data":350,"hawk":379,"http":268,"http-signature":380,"https":244,"mime-types":397,"stream":267,"stringstream":406,"url":278,"util":280,"zlib":52}],416:[function(require,module,exports){
-=======
-},{"./lib/auth":322,"./lib/cookies":323,"./lib/getProxyFromURI":324,"./lib/har":325,"./lib/helpers":326,"./lib/multipart":327,"./lib/oauth":328,"./lib/querystring":329,"./lib/redirect":330,"./lib/tunnel":331,"_process":249,"aws-sign2":332,"bl":333,"buffer":53,"caseless":344,"forever-agent":348,"form-data":349,"hawk":378,"http":268,"http-signature":379,"https":244,"mime-types":396,"stream":267,"stringstream":405,"url":278,"util":280,"zlib":52}],415:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./lib/auth":329,"./lib/cookies":330,"./lib/getProxyFromURI":331,"./lib/har":332,"./lib/helpers":333,"./lib/multipart":334,"./lib/oauth":335,"./lib/querystring":336,"./lib/redirect":337,"./lib/tunnel":338,"_process":255,"aws-sign2":339,"bl":340,"buffer":53,"caseless":351,"forever-agent":355,"form-data":356,"hawk":385,"http":274,"http-signature":386,"https":250,"mime-types":403,"stream":273,"stringstream":412,"url":284,"util":286,"zlib":52}],422:[function(require,module,exports){
 var request = require("request");
 
 var apiUrl = "https://piazza.com/logic/api";
@@ -84772,17 +83900,10 @@ var callPetty = function(method, params) {
 }
 
 module.exports = callPetty;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"request":322}],417:[function(require,module,exports){
-=======
-},{"request":321}],416:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"request":328}],423:[function(require,module,exports){
 var User = require("./models/User");
 var callPetty = require("./petty");
 
-<<<<<<< HEAD
-},{}],53:[function(require,module,exports){
-=======
 module.exports = {
   // must login before accessing other api methods
   login: function(email, password) {
@@ -84798,12 +83919,7 @@ module.exports = {
     return loginPromise;
   }
 };
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./models/User":320,"./petty":416}],418:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./models/User":319,"./petty":415}],417:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./models/User":326,"./petty":422}],424:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -84898,15 +84014,7 @@ var Alert = _react2['default'].createClass({
 
 exports['default'] = Alert;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./BootstrapMixin":54,"babel-runtime/helpers/extends":5,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227}],54:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":419,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],419:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./BootstrapMixin":418,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],418:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./BootstrapMixin":425,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],425:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -84977,15 +84085,7 @@ var BootstrapMixin = {
 
 exports['default'] = BootstrapMixin;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./styleMaps":63,"babel-runtime/helpers/interop-require-default":7,"react":227,"react-prop-types/lib/keyOf":68}],55:[function(require,module,exports){
-=======
-},{"./styleMaps":435,"babel-runtime/helpers/interop-require-default":9,"react":609,"react-prop-types/lib/keyOf":450}],420:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./styleMaps":434,"babel-runtime/helpers/interop-require-default":9,"react":607,"react-prop-types/lib/keyOf":449}],419:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./styleMaps":441,"babel-runtime/helpers/interop-require-default":9,"react":615,"react-prop-types/lib/keyOf":456}],426:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -85111,15 +84211,7 @@ Button.types = types;
 
 exports['default'] = Button;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./BootstrapMixin":54,"babel-runtime/helpers/extends":5,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227,"react-prop-types/lib/elementType":67}],56:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":419,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609,"react-prop-types/lib/elementType":449}],421:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./BootstrapMixin":418,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607,"react-prop-types/lib/elementType":448}],420:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./BootstrapMixin":425,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615,"react-prop-types/lib/elementType":455}],427:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -85209,14 +84301,7 @@ ButtonInput.propTypes = {
 
 exports['default'] = ButtonInput;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Button":55,"./FormGroup":59,"./InputBase":62,"./utils/childrenValueInputValidation":64,"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/extends":5,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"babel-runtime/helpers/object-without-properties":9,"react":227}],57:[function(require,module,exports){
-=======
-},{"./Button":420,"./FormGroup":425,"./InputBase":428,"./utils/childrenValueInputValidation":437,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"react":609}],422:[function(require,module,exports){
-=======
-},{"./Button":419,"./FormGroup":424,"./InputBase":427,"./utils/childrenValueInputValidation":436,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"react":607}],421:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Button":426,"./FormGroup":431,"./InputBase":434,"./utils/childrenValueInputValidation":443,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"react":615}],428:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -85336,12 +84421,7 @@ Fade.defaultProps = {
 
 exports['default'] = Fade;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":609,"react-overlays/lib/Transition":442,"react-prop-types/lib/deprecated":448}],423:[function(require,module,exports){
->>>>>>> master
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":607,"react-overlays/lib/Transition":441,"react-prop-types/lib/deprecated":447}],422:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":615,"react-overlays/lib/Transition":448,"react-prop-types/lib/deprecated":454}],429:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -85405,15 +84485,7 @@ Static.propTypes = {
 
 exports['default'] = Static;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"../InputBase":62,"../utils/childrenValueInputValidation":64,"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/extends":5,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227}],58:[function(require,module,exports){
-=======
-},{"../InputBase":428,"../utils/childrenValueInputValidation":437,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],424:[function(require,module,exports){
->>>>>>> master
-=======
-},{"../InputBase":427,"../utils/childrenValueInputValidation":436,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],423:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../InputBase":434,"../utils/childrenValueInputValidation":443,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],430:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -85425,15 +84497,7 @@ var _Static2 = require('./Static');
 var _Static3 = _interopRequireDefault(_Static2);
 
 exports.Static = _Static3['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Static":57,"babel-runtime/helpers/interop-require-default":7}],59:[function(require,module,exports){
-=======
-},{"./Static":423,"babel-runtime/helpers/interop-require-default":9}],425:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Static":422,"babel-runtime/helpers/interop-require-default":9}],424:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Static":429,"babel-runtime/helpers/interop-require-default":9}],431:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -85503,15 +84567,7 @@ FormGroup.propTypes = {
 
 exports['default'] = FormGroup;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227}],60:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],426:[function(require,module,exports){
->>>>>>> master
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],425:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],432:[function(require,module,exports){
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -85570,15 +84626,7 @@ var Glyphicon = _react2['default'].createClass({
 
 exports['default'] = Glyphicon;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"babel-runtime/helpers/extends":5,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227}],61:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],427:[function(require,module,exports){
->>>>>>> master
-=======
-},{"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],426:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],433:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -85634,15 +84682,7 @@ Input.propTypes = {
 
 exports['default'] = Input;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./FormControls":58,"./InputBase":62,"./utils/deprecationWarning":65,"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"babel-runtime/helpers/interop-require-wildcard":8,"react":227}],62:[function(require,module,exports){
-=======
-},{"./FormControls":424,"./InputBase":428,"./utils/deprecationWarning":439,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/interop-require-wildcard":10,"react":609}],428:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./FormControls":423,"./InputBase":427,"./utils/deprecationWarning":438,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/interop-require-wildcard":10,"react":607}],427:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./FormControls":430,"./InputBase":434,"./utils/deprecationWarning":445,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/interop-require-wildcard":10,"react":615}],434:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -85905,157 +84945,452 @@ InputBase.defaultProps = {
 
 exports['default'] = InputBase;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./FormGroup":59,"./Glyphicon":60,"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/extends":5,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"classnames":31,"react":227}],63:[function(require,module,exports){
-=======
-},{"./FormGroup":425,"./Glyphicon":426,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],429:[function(require,module,exports){
-=======
-},{"./FormGroup":424,"./Glyphicon":425,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],428:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./FormGroup":431,"./Glyphicon":432,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],435:[function(require,module,exports){
 /* eslint-disable react/prop-types */
 
->>>>>>> master
 'use strict';
 
-exports.__esModule = true;
-var styleMaps = {
-  CLASSES: {
-    'alert': 'alert',
-    'button': 'btn',
-    'button-group': 'btn-group',
-    'button-toolbar': 'btn-toolbar',
-    'column': 'col',
-    'input-group': 'input-group',
-    'form': 'form',
-    'glyphicon': 'glyphicon',
-    'label': 'label',
-    'thumbnail': 'thumbnail',
-    'list-group-item': 'list-group-item',
-    'panel': 'panel',
-    'panel-group': 'panel-group',
-    'pagination': 'pagination',
-    'progress-bar': 'progress-bar',
-    'nav': 'nav',
-    'navbar': 'navbar',
-    'modal': 'modal',
-    'row': 'row',
-    'well': 'well'
-  },
-  STYLES: ['default', 'primary', 'success', 'info', 'warning', 'danger', 'link', 'inline', 'tabs', 'pills'],
-  addStyle: function addStyle(name) {
-    styleMaps.STYLES.push(name);
-  },
-  SIZES: {
-    'large': 'lg',
-    'medium': 'md',
-    'small': 'sm',
-    'xsmall': 'xs',
-    'lg': 'lg',
-    'md': 'md',
-    'sm': 'sm',
-    'xs': 'xs'
-  },
-  GRID_COLUMNS: 12
-};
+var _extends = require('babel-runtime/helpers/extends')['default'];
 
-exports['default'] = styleMaps;
-module.exports = exports['default'];
-},{}],64:[function(require,module,exports){
-'use strict';
+var _objectWithoutProperties = require('babel-runtime/helpers/object-without-properties')['default'];
+
+var _Object$isFrozen = require('babel-runtime/core-js/object/is-frozen')['default'];
+
+var _Object$keys = require('babel-runtime/core-js/object/keys')['default'];
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
 
 exports.__esModule = true;
-exports['default'] = valueValidation;
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactPropTypesLibSinglePropFrom = require('react-prop-types/lib/singlePropFrom');
+var _reactDom = require('react-dom');
 
-var _reactPropTypesLibSinglePropFrom2 = _interopRequireDefault(_reactPropTypesLibSinglePropFrom);
+var _reactDom2 = _interopRequireDefault(_reactDom);
 
-function valueValidation(props, propName, componentName) {
-  var error = _reactPropTypesLibSinglePropFrom2['default']('children', 'value')(props, propName, componentName);
+var _utilsDomUtils = require('./utils/domUtils');
 
-  if (!error) {
-    error = _react2['default'].PropTypes.node(props, propName, componentName);
-  }
+var _utilsDomUtils2 = _interopRequireDefault(_utilsDomUtils);
 
-  return error;
+var _domHelpersUtilScrollbarSize = require('dom-helpers/util/scrollbarSize');
+
+var _domHelpersUtilScrollbarSize2 = _interopRequireDefault(_domHelpersUtilScrollbarSize);
+
+var _utilsEventListener = require('./utils/EventListener');
+
+var _utilsEventListener2 = _interopRequireDefault(_utilsEventListener);
+
+var _utilsCreateChainedFunction = require('./utils/createChainedFunction');
+
+var _utilsCreateChainedFunction2 = _interopRequireDefault(_utilsCreateChainedFunction);
+
+var _reactPropTypesLibElementType = require('react-prop-types/lib/elementType');
+
+var _reactPropTypesLibElementType2 = _interopRequireDefault(_reactPropTypesLibElementType);
+
+var _domHelpersUtilInDOM = require('dom-helpers/util/inDOM');
+
+var _domHelpersUtilInDOM2 = _interopRequireDefault(_domHelpersUtilInDOM);
+
+var _domHelpersQueryContains = require('dom-helpers/query/contains');
+
+var _domHelpersQueryContains2 = _interopRequireDefault(_domHelpersQueryContains);
+
+var _domHelpersActiveElement = require('dom-helpers/activeElement');
+
+var _domHelpersActiveElement2 = _interopRequireDefault(_domHelpersActiveElement);
+
+var _reactOverlaysLibPortal = require('react-overlays/lib/Portal');
+
+var _reactOverlaysLibPortal2 = _interopRequireDefault(_reactOverlaysLibPortal);
+
+var _Fade = require('./Fade');
+
+var _Fade2 = _interopRequireDefault(_Fade);
+
+var _ModalDialog = require('./ModalDialog');
+
+var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
+
+var _ModalBody = require('./ModalBody');
+
+var _ModalBody2 = _interopRequireDefault(_ModalBody);
+
+var _ModalHeader = require('./ModalHeader');
+
+var _ModalHeader2 = _interopRequireDefault(_ModalHeader);
+
+var _ModalTitle = require('./ModalTitle');
+
+var _ModalTitle2 = _interopRequireDefault(_ModalTitle);
+
+var _ModalFooter = require('./ModalFooter');
+
+var _ModalFooter2 = _interopRequireDefault(_ModalFooter);
+
+/**
+ * Gets the correct clientHeight of the modal container
+ * when the body/window/document you need to use the docElement clientHeight
+ * @param  {HTMLElement} container
+ * @param  {ReactElement|HTMLElement} context
+ * @return {Number}
+ */
+function containerClientHeight(container, context) {
+  var doc = _utilsDomUtils2['default'].ownerDocument(context);
+
+  return container === doc.body || container === doc.documentElement ? doc.documentElement.clientHeight : container.clientHeight;
 }
 
-module.exports = exports['default'];
-},{"babel-runtime/helpers/interop-require-default":7,"react":227,"react-prop-types/lib/singlePropFrom":69}],65:[function(require,module,exports){
-'use strict';
-
-var _inherits = require('babel-runtime/helpers/inherits')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
-exports.__esModule = true;
-
-var _warning = require('warning');
-
-var _warning2 = _interopRequireDefault(_warning);
-
-var warned = {};
-
-function deprecationWarning(oldname, newname, link) {
-  var message = undefined;
-
-  if (typeof oldname === 'object') {
-    message = oldname.message;
-  } else {
-    message = oldname + ' is deprecated. Use ' + newname + ' instead.';
-
-    if (link) {
-      message += '\nYou can read more about it at ' + link;
-    }
-  }
-
-  if (warned[message]) {
-    return;
-  }
-
-  _warning2['default'](false, message);
-  warned[message] = true;
+function getContainer(context) {
+  return context.props.container && _reactDom2['default'].findDOMNode(context.props.container) || _utilsDomUtils2['default'].ownerDocument(context).body;
 }
 
-deprecationWarning.wrapper = function (Component) {
-  for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
+var currentFocusListener = undefined;
+
+/**
+ * Firefox doesn't have a focusin event so using capture is easiest way to get bubbling
+ * IE8 can't do addEventListener, but does have onfocusin, so we use that in ie8
+ *
+ * We only allow one Listener at a time to avoid stack overflows
+ *
+ * @param  {ReactElement|HTMLElement} context
+ * @param  {Function} handler
+ */
+function onFocus(context, handler) {
+  var doc = _utilsDomUtils2['default'].ownerDocument(context);
+  var useFocusin = !doc.addEventListener;
+  var remove = undefined;
+
+  if (currentFocusListener) {
+    currentFocusListener.remove();
   }
 
-  return (function (_Component) {
-    _inherits(DeprecatedComponent, _Component);
-
-    function DeprecatedComponent() {
-      _classCallCheck(this, DeprecatedComponent);
-
-      _Component.apply(this, arguments);
-    }
-
-    DeprecatedComponent.prototype.componentWillMount = function componentWillMount() {
-      deprecationWarning.apply(undefined, args);
-
-      if (_Component.prototype.componentWillMount) {
-        var _Component$prototype$componentWillMount;
-
-        for (var _len2 = arguments.length, methodArgs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-          methodArgs[_key2] = arguments[_key2];
-        }
-
-        (_Component$prototype$componentWillMount = _Component.prototype.componentWillMount).call.apply(_Component$prototype$componentWillMount, [this].concat(methodArgs));
-      }
+  if (useFocusin) {
+    document.attachEvent('onfocusin', handler);
+    remove = function () {
+      return document.detachEvent('onfocusin', handler);
     };
+  } else {
+    document.addEventListener('focus', handler, true);
+    remove = function () {
+      return document.removeEventListener('focus', handler, true);
+    };
+  }
 
-<<<<<<< HEAD
-=======
+  currentFocusListener = { remove: remove };
+
+  return currentFocusListener;
+}
+
+var Modal = _react2['default'].createClass({
+  displayName: 'Modal',
+
+  propTypes: _extends({}, _reactOverlaysLibPortal2['default'].propTypes, _ModalDialog2['default'].propTypes, {
+
+    /**
+     * Include a backdrop component. Specify 'static' for a backdrop that doesn't trigger an "onHide" when clicked.
+     */
+    backdrop: _react2['default'].PropTypes.oneOf(['static', true, false]),
+
+    /**
+     * Close the modal when escape key is pressed
+     */
+    keyboard: _react2['default'].PropTypes.bool,
+
+    /**
+     * Open and close the Modal with a slide and fade animation.
+     */
+    animation: _react2['default'].PropTypes.bool,
+
+    /**
+     * A Component type that provides the modal content Markup. This is a useful prop when you want to use your own
+     * styles and markup to create a custom modal component.
+     */
+    dialogComponent: _reactPropTypesLibElementType2['default'],
+
+    /**
+     * When `true` The modal will automatically shift focus to itself when it opens, and replace it to the last focused element when it closes.
+     * Generally this should never be set to false as it makes the Modal less accessible to assistive technologies, like screen-readers.
+     */
+    autoFocus: _react2['default'].PropTypes.bool,
+
+    /**
+     * When `true` The modal will prevent focus from leaving the Modal while open.
+     * Consider leaving the default value here, as it is necessary to make the Modal work well with assistive technologies,
+     * such as screen readers.
+     */
+    enforceFocus: _react2['default'].PropTypes.bool,
+
+    /**
+     * Hide this from automatic props documentation generation.
+     * @private
+     */
+    bsStyle: _react2['default'].PropTypes.string,
+
+    /**
+     * When `true` The modal will show itself.
+     */
+    show: _react2['default'].PropTypes.bool
+  }),
+
+  getDefaultProps: function getDefaultProps() {
+    return {
+      bsClass: 'modal',
+      dialogComponent: _ModalDialog2['default'],
+      show: false,
+      animation: true,
+      backdrop: true,
+      keyboard: true,
+      autoFocus: true,
+      enforceFocus: true
+    };
+  },
+
+  getInitialState: function getInitialState() {
+    return {
+      exited: !this.props.show
+    };
+  },
+
+  render: function render() {
+    var _props = this.props;
+    var children = _props.children;
+    var animation = _props.animation;
+    var backdrop = _props.backdrop;
+
+    var props = _objectWithoutProperties(_props, ['children', 'animation', 'backdrop']);
+
+    var onExit = props.onExit;
+    var onExiting = props.onExiting;
+    var onEnter = props.onEnter;
+    var onEntering = props.onEntering;
+    var onEntered = props.onEntered;
+
+    var show = !!props.show;
+    var Dialog = props.dialogComponent;
+
+    var mountModal = show || animation && !this.state.exited;
+    if (!mountModal) {
+      return null;
+    }
+
+    var modal = _react2['default'].createElement(
+      Dialog,
+      _extends({}, props, {
+        ref: this._setDialogRef,
+        className: _classnames2['default'](this.props.className, { 'in': show && !animation }),
+        onClick: backdrop === true ? this.handleBackdropClick : null }),
+      this.renderContent()
+    );
+
+    if (animation) {
+      modal = _react2['default'].createElement(
+        _Fade2['default'],
+        {
+          transitionAppear: true,
+          unmountOnExit: true,
+          'in': show,
+          timeout: Modal.TRANSITION_DURATION,
+          onExit: onExit,
+          onExiting: onExiting,
+          onExited: this.handleHidden,
+          onEnter: onEnter,
+          onEntering: onEntering,
+          onEntered: onEntered },
+        modal
+      );
+    }
+
+    if (backdrop) {
+      modal = this.renderBackdrop(modal);
+    }
+
+    return _react2['default'].createElement(
+      _reactOverlaysLibPortal2['default'],
+      { container: props.container },
+      modal
+    );
+  },
+
+  renderContent: function renderContent() {
+    var _this = this;
+
+    return _react2['default'].Children.map(this.props.children, function (child) {
+      // TODO: use context in 0.14
+      if (child && child.type && child.type.__isModalHeader) {
+        return _react.cloneElement(child, {
+          onHide: _utilsCreateChainedFunction2['default'](_this.props.onHide, child.props.onHide)
+        });
+      }
+      return child;
+    });
+  },
+
+  renderBackdrop: function renderBackdrop(modal) {
+    var _props2 = this.props;
+    var animation = _props2.animation;
+    var bsClass = _props2.bsClass;
+
+    var duration = Modal.BACKDROP_TRANSITION_DURATION;
+
+    // Don't handle clicks for "static" backdrops
+    var onClick = this.props.backdrop === true ? this.handleBackdropClick : null;
+
+    var backdrop = _react2['default'].createElement('div', {
+      ref: 'backdrop',
+      className: _classnames2['default'](bsClass + '-backdrop', { 'in': this.props.show && !animation }),
+      onClick: onClick });
+
+    return _react2['default'].createElement(
+      'div',
+      {
+        ref: 'modal' },
+      animation ? _react2['default'].createElement(
+        _Fade2['default'],
+        { transitionAppear: true, 'in': this.props.show, timeout: duration },
+        backdrop
+      ) : backdrop,
+      modal
+    );
+  },
+
+  _setDialogRef: function _setDialogRef(ref) {
+    // issue #1074
+    // due to: https://github.com/facebook/react/blob/v0.13.3/src/core/ReactCompositeComponent.js#L842
+    //
+    // when backdrop is `false` react hasn't had a chance to reassign the refs to a usable object, b/c there are no other
+    // "classic" refs on the component (or they haven't been processed yet)
+    // TODO: Remove the need for this in next breaking release
+    if (_Object$isFrozen(this.refs) && !_Object$keys(this.refs).length) {
+      this.refs = {};
+    }
+
+    this.refs.dialog = ref;
+
+    // maintains backwards compat with older component breakdown
+    if (!this.props.backdrop) {
+      this.refs.modal = ref;
+    }
+  },
+
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    if (nextProps.show) {
+      this.setState({ exited: false });
+    } else if (!nextProps.animation) {
+      // Otherwise let handleHidden take care of marking exited.
+      this.setState({ exited: true });
+    }
+  },
+
+  componentWillUpdate: function componentWillUpdate(nextProps) {
+    if (nextProps.show) {
+      this.checkForFocus();
+    }
+  },
+
+  componentDidMount: function componentDidMount() {
+    if (this.props.show) {
+      this.onShow();
+    }
+  },
+
+  componentDidUpdate: function componentDidUpdate(prevProps) {
+    var animation = this.props.animation;
+
+    if (prevProps.show && !this.props.show && !animation) {
+      // otherwise handleHidden will call this.
+      this.onHide();
+    } else if (!prevProps.show && this.props.show) {
+      this.onShow();
+    }
+  },
+
+  componentWillUnmount: function componentWillUnmount() {
+    if (this.props.show) {
+      this.onHide();
+    }
+  },
+
+  onShow: function onShow() {
+    var _this2 = this;
+
+    var doc = _utilsDomUtils2['default'].ownerDocument(this);
+    var win = _utilsDomUtils2['default'].ownerWindow(this);
+
+    this._onDocumentKeyupListener = _utilsEventListener2['default'].listen(doc, 'keyup', this.handleDocumentKeyUp);
+
+    this._onWindowResizeListener = _utilsEventListener2['default'].listen(win, 'resize', this.handleWindowResize);
+
+    if (this.props.enforceFocus) {
+      this._onFocusinListener = onFocus(this, this.enforceFocus);
+    }
+
+    var container = getContainer(this);
+
+    container.className += container.className.length ? ' modal-open' : 'modal-open';
+
+    this._containerIsOverflowing = container.scrollHeight > containerClientHeight(container, this);
+
+    this._originalPadding = container.style.paddingRight;
+
+    if (this._containerIsOverflowing) {
+      container.style.paddingRight = parseInt(this._originalPadding || 0, 10) + _domHelpersUtilScrollbarSize2['default']() + 'px';
+    }
+
+    this.setState(this._getStyles(), function () {
+      return _this2.focusModalContent();
+    });
+  },
+
+  onHide: function onHide() {
+    this._onDocumentKeyupListener.remove();
+    this._onWindowResizeListener.remove();
+
+    if (this._onFocusinListener) {
+      this._onFocusinListener.remove();
+    }
+
+    var container = getContainer(this);
+
+    container.style.paddingRight = this._originalPadding;
+
+    container.className = container.className.replace(/ ?modal-open/, '');
+
+    this.restoreLastFocus();
+  },
+
+  handleHidden: function handleHidden() {
+    this.setState({ exited: true });
+
+    this.onHide();
+
+    if (this.props.onExited) {
+      var _props3;
+
+      (_props3 = this.props).onExited.apply(_props3, arguments);
+    }
+  },
+
+  handleBackdropClick: function handleBackdropClick(e) {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+
+    this.props.onHide();
+  },
+
+  handleDocumentKeyUp: function handleDocumentKeyUp(e) {
+    if (this.props.keyboard && e.keyCode === 27) {
+      this.props.onHide();
+    }
+  },
+
   handleWindowResize: function handleWindowResize() {
     this.setState(this._getStyles());
   },
@@ -86130,11 +85465,7 @@ Modal.BACKDROP_TRANSITION_DURATION = 150;
 
 exports['default'] = Modal;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./Fade":422,"./ModalBody":430,"./ModalDialog":431,"./ModalFooter":432,"./ModalHeader":433,"./ModalTitle":434,"./utils/EventListener":436,"./utils/createChainedFunction":438,"./utils/domUtils":440,"babel-runtime/core-js/object/is-frozen":3,"babel-runtime/core-js/object/keys":4,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"classnames":284,"dom-helpers/activeElement":285,"dom-helpers/query/contains":289,"dom-helpers/util/inDOM":292,"dom-helpers/util/scrollbarSize":293,"react":609,"react-dom":453,"react-overlays/lib/Portal":441,"react-prop-types/lib/elementType":449}],430:[function(require,module,exports){
-=======
-},{"./Fade":421,"./ModalBody":429,"./ModalDialog":430,"./ModalFooter":431,"./ModalHeader":432,"./ModalTitle":433,"./utils/EventListener":435,"./utils/createChainedFunction":437,"./utils/domUtils":439,"babel-runtime/core-js/object/is-frozen":3,"babel-runtime/core-js/object/keys":4,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"classnames":284,"dom-helpers/activeElement":285,"dom-helpers/query/contains":289,"dom-helpers/util/inDOM":292,"dom-helpers/util/scrollbarSize":293,"react":607,"react-dom":452,"react-overlays/lib/Portal":440,"react-prop-types/lib/elementType":448}],429:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Fade":428,"./ModalBody":436,"./ModalDialog":437,"./ModalFooter":438,"./ModalHeader":439,"./ModalTitle":440,"./utils/EventListener":442,"./utils/createChainedFunction":444,"./utils/domUtils":446,"babel-runtime/core-js/object/is-frozen":3,"babel-runtime/core-js/object/keys":4,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"classnames":290,"dom-helpers/activeElement":291,"dom-helpers/query/contains":295,"dom-helpers/util/inDOM":298,"dom-helpers/util/scrollbarSize":299,"react":615,"react-dom":459,"react-overlays/lib/Portal":447,"react-prop-types/lib/elementType":455}],436:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86189,11 +85520,7 @@ ModalBody.defaultProps = {
 
 exports['default'] = ModalBody;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],431:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],430:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],437:[function(require,module,exports){
 /* eslint-disable react/prop-types */
 'use strict';
 
@@ -86275,11 +85602,7 @@ var ModalDialog = _react2['default'].createClass({
 
 exports['default'] = ModalDialog;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./BootstrapMixin":419,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],432:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":418,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],431:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./BootstrapMixin":425,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],438:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86334,11 +85657,7 @@ ModalFooter.defaultProps = {
 
 exports['default'] = ModalFooter;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],433:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],432:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],439:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86428,11 +85747,7 @@ ModalHeader.defaultProps = {
 
 exports['default'] = ModalHeader;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],434:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],433:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],440:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86487,11 +85802,7 @@ ModalTitle.defaultProps = {
 
 exports['default'] = ModalTitle;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],435:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":607}],434:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],441:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -86537,11 +85848,7 @@ var styleMaps = {
 
 exports['default'] = styleMaps;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],436:[function(require,module,exports){
-=======
-},{}],435:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],442:[function(require,module,exports){
 /**
  * Copyright 2013-2014 Facebook, Inc.
  *
@@ -86600,11 +85907,7 @@ var EventListener = {
 
 exports['default'] = EventListener;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],437:[function(require,module,exports){
-=======
-},{}],436:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],443:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -86631,11 +85934,7 @@ function valueValidation(props, propName, componentName) {
 }
 
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"babel-runtime/helpers/interop-require-default":9,"react":609,"react-prop-types/lib/singlePropFrom":451}],438:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/interop-require-default":9,"react":607,"react-prop-types/lib/singlePropFrom":450}],437:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"babel-runtime/helpers/interop-require-default":9,"react":615,"react-prop-types/lib/singlePropFrom":457}],444:[function(require,module,exports){
 /**
  * Safe chained function
  *
@@ -86677,11 +85976,7 @@ function createChainedFunction() {
 
 exports['default'] = createChainedFunction;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{}],439:[function(require,module,exports){
-=======
-},{}],438:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],445:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86747,21 +86042,13 @@ deprecationWarning.wrapper = function (Component) {
       }
     };
 
->>>>>>> master
     return DeprecatedComponent;
   })(Component);
 };
 
 exports['default'] = deprecationWarning;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7,"warning":70}],66:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"warning":452}],440:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"warning":451}],439:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"warning":458}],446:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -86829,11 +86116,7 @@ exports['default'] = {
   getSize: getSize
 };
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"babel-runtime/helpers/interop-require-default":9,"dom-helpers/ownerDocument":287,"dom-helpers/ownerWindow":288,"react-dom":453}],441:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/interop-require-default":9,"dom-helpers/ownerDocument":287,"dom-helpers/ownerWindow":288,"react-dom":452}],440:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"babel-runtime/helpers/interop-require-default":9,"dom-helpers/ownerDocument":293,"dom-helpers/ownerWindow":294,"react-dom":459}],447:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -86957,11 +86240,7 @@ var Portal = _react2['default'].createClass({
 
 exports['default'] = Portal;
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"./utils/getContainer":443,"./utils/ownerDocument":444,"react":609,"react-dom":453,"react-prop-types/lib/mountable":446}],442:[function(require,module,exports){
-=======
-},{"./utils/getContainer":442,"./utils/ownerDocument":443,"react":607,"react-dom":452,"react-prop-types/lib/mountable":445}],441:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./utils/getContainer":449,"./utils/ownerDocument":450,"react":615,"react-dom":459,"react-prop-types/lib/mountable":452}],448:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -87299,11 +86578,7 @@ Transition.defaultProps = {
 };
 
 exports['default'] = Transition;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"classnames":284,"dom-helpers/events/on":286,"dom-helpers/transition/properties":290,"react":609,"react-dom":453}],443:[function(require,module,exports){
-=======
-},{"classnames":284,"dom-helpers/events/on":286,"dom-helpers/transition/properties":290,"react":607,"react-dom":452}],442:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"classnames":290,"dom-helpers/events/on":292,"dom-helpers/transition/properties":296,"react":615,"react-dom":459}],449:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -87321,11 +86596,7 @@ function getContainer(container, defaultContainer) {
 }
 
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"react-dom":453}],444:[function(require,module,exports){
-=======
-},{"react-dom":452}],443:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"react-dom":459}],450:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -87345,12 +86616,7 @@ exports['default'] = function (componentOrElement) {
 };
 
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"dom-helpers/ownerDocument":287,"react-dom":453}],445:[function(require,module,exports){
->>>>>>> master
-=======
-},{"dom-helpers/ownerDocument":287,"react-dom":452}],444:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"dom-helpers/ownerDocument":293,"react-dom":459}],451:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -87385,14 +86651,7 @@ function createChainableTypeChecker(validate) {
 
   return chainedCheckType;
 }
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],67:[function(require,module,exports){
-=======
-},{}],446:[function(require,module,exports){
-=======
-},{}],445:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],452:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -87420,9 +86679,9 @@ function validate(props, propName, componentName) {
 
 exports['default'] = _common.createChainableTypeChecker(validate);
 module.exports = exports['default'];
-},{"./common":444}],446:[function(require,module,exports){
-arguments[4][444][0].apply(exports,arguments)
-},{"dup":444}],447:[function(require,module,exports){
+},{"./common":451}],453:[function(require,module,exports){
+arguments[4][451][0].apply(exports,arguments)
+},{"dup":451}],454:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -87445,12 +86704,7 @@ function deprecated(propType, explanation) {
 }
 
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-},{"warning":452}],449:[function(require,module,exports){
->>>>>>> master
-=======
-},{"warning":451}],448:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"warning":458}],455:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -87492,15 +86746,7 @@ function validate(props, propName, componentName) {
 
 exports['default'] = _common.createChainableTypeChecker(validate);
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./common":66,"react":227}],68:[function(require,module,exports){
-=======
-},{"./common":447,"react":609}],450:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./common":446,"react":607}],449:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./common":453,"react":615}],456:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -87529,15 +86775,7 @@ function keyOf(obj) {
 }
 
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./common":66}],69:[function(require,module,exports){
-=======
-},{"./common":447}],451:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./common":446}],450:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./common":453}],457:[function(require,module,exports){
 /**
  * Checks if only one of the listed properties is in use. An error is given
  * if multiple have a value
@@ -87576,15 +86814,7 @@ function createSinglePropFromChecker() {
 }
 
 module.exports = exports['default'];
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],70:[function(require,module,exports){
-=======
-},{}],452:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],451:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],458:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -87649,28 +86879,12 @@ module.exports = warning;
 
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30}],71:[function(require,module,exports){
-=======
-},{"_process":249}],453:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249}],452:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255}],459:[function(require,module,exports){
 'use strict';
 
 module.exports = require('react/lib/ReactDOM');
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"react/lib/ReactDOM":106}],72:[function(require,module,exports){
-=======
-},{"react/lib/ReactDOM":488}],454:[function(require,module,exports){
->>>>>>> master
-=======
-},{"react/lib/ReactDOM":487}],453:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"react/lib/ReactDOM":494}],460:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -87707,15 +86921,7 @@ var AutoFocusUtils = {
 };
 
 module.exports = AutoFocusUtils;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactMount":136,"./findDOMNode":179,"fbjs/lib/focusNode":209}],73:[function(require,module,exports){
-=======
-},{"./ReactMount":518,"./findDOMNode":561,"fbjs/lib/focusNode":591}],455:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactMount":517,"./findDOMNode":559,"fbjs/lib/focusNode":589}],454:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactMount":524,"./findDOMNode":567,"fbjs/lib/focusNode":597}],461:[function(require,module,exports){
 /**
  * Copyright 2013-2015 Facebook, Inc.
  * All rights reserved.
@@ -88121,15 +87327,7 @@ var BeforeInputEventPlugin = {
 };
 
 module.exports = BeforeInputEventPlugin;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./EventConstants":85,"./EventPropagators":89,"./FallbackCompositionState":90,"./SyntheticCompositionEvent":161,"./SyntheticInputEvent":165,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/keyOf":219}],74:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./EventPropagators":471,"./FallbackCompositionState":472,"./SyntheticCompositionEvent":543,"./SyntheticInputEvent":547,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/keyOf":601}],456:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./EventConstants":466,"./EventPropagators":470,"./FallbackCompositionState":471,"./SyntheticCompositionEvent":542,"./SyntheticInputEvent":546,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/keyOf":599}],455:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./EventConstants":473,"./EventPropagators":477,"./FallbackCompositionState":478,"./SyntheticCompositionEvent":549,"./SyntheticInputEvent":553,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/keyOf":607}],462:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -88269,15 +87467,7 @@ var CSSProperty = {
 };
 
 module.exports = CSSProperty;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],75:[function(require,module,exports){
-=======
-},{}],457:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],456:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],463:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -88456,15 +87646,7 @@ ReactPerf.measureMethods(CSSPropertyOperations, 'CSSPropertyOperations', {
 module.exports = CSSPropertyOperations;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./CSSProperty":74,"./ReactPerf":142,"./dangerousStyleValue":176,"_process":30,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/camelizeStyleName":203,"fbjs/lib/hyphenateStyleName":214,"fbjs/lib/memoizeStringOnly":221,"fbjs/lib/warning":226}],76:[function(require,module,exports){
-=======
-},{"./CSSProperty":456,"./ReactPerf":524,"./dangerousStyleValue":558,"_process":249,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/camelizeStyleName":585,"fbjs/lib/hyphenateStyleName":596,"fbjs/lib/memoizeStringOnly":603,"fbjs/lib/warning":608}],458:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./CSSProperty":455,"./ReactPerf":523,"./dangerousStyleValue":556,"_process":249,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/camelizeStyleName":583,"fbjs/lib/hyphenateStyleName":594,"fbjs/lib/memoizeStringOnly":601,"fbjs/lib/warning":606}],457:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./CSSProperty":462,"./ReactPerf":530,"./dangerousStyleValue":564,"_process":255,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/camelizeStyleName":591,"fbjs/lib/hyphenateStyleName":602,"fbjs/lib/memoizeStringOnly":609,"fbjs/lib/warning":614}],464:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -88561,15 +87743,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 module.exports = CallbackQueue;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./PooledClass":94,"_process":30,"fbjs/lib/invariant":215}],77:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./PooledClass":476,"_process":249,"fbjs/lib/invariant":597}],459:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./PooledClass":475,"_process":249,"fbjs/lib/invariant":595}],458:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./PooledClass":482,"_process":255,"fbjs/lib/invariant":603}],465:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -88891,15 +88065,7 @@ var ChangeEventPlugin = {
 };
 
 module.exports = ChangeEventPlugin;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./EventConstants":85,"./EventPluginHub":86,"./EventPropagators":89,"./ReactUpdates":154,"./SyntheticEvent":163,"./getEventTarget":185,"./isEventSupported":190,"./isTextInputElement":191,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/keyOf":219}],78:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./EventPluginHub":468,"./EventPropagators":471,"./ReactUpdates":536,"./SyntheticEvent":545,"./getEventTarget":567,"./isEventSupported":572,"./isTextInputElement":573,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/keyOf":601}],460:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./EventConstants":466,"./EventPluginHub":467,"./EventPropagators":470,"./ReactUpdates":535,"./SyntheticEvent":544,"./getEventTarget":565,"./isEventSupported":570,"./isTextInputElement":571,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/keyOf":599}],459:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./EventConstants":473,"./EventPluginHub":474,"./EventPropagators":477,"./ReactUpdates":542,"./SyntheticEvent":551,"./getEventTarget":573,"./isEventSupported":578,"./isTextInputElement":579,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/keyOf":607}],466:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -88923,15 +88089,7 @@ var ClientReactRootIndex = {
 };
 
 module.exports = ClientReactRootIndex;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],79:[function(require,module,exports){
-=======
-},{}],461:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],460:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],467:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -89064,15 +88222,7 @@ ReactPerf.measureMethods(DOMChildrenOperations, 'DOMChildrenOperations', {
 module.exports = DOMChildrenOperations;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Danger":82,"./ReactMultiChildUpdateTypes":138,"./ReactPerf":142,"./setInnerHTML":195,"./setTextContent":196,"_process":30,"fbjs/lib/invariant":215}],80:[function(require,module,exports){
-=======
-},{"./Danger":464,"./ReactMultiChildUpdateTypes":520,"./ReactPerf":524,"./setInnerHTML":577,"./setTextContent":578,"_process":249,"fbjs/lib/invariant":597}],462:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Danger":463,"./ReactMultiChildUpdateTypes":519,"./ReactPerf":523,"./setInnerHTML":575,"./setTextContent":576,"_process":249,"fbjs/lib/invariant":595}],461:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Danger":470,"./ReactMultiChildUpdateTypes":526,"./ReactPerf":530,"./setInnerHTML":583,"./setTextContent":584,"_process":255,"fbjs/lib/invariant":603}],468:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -89310,15 +88460,7 @@ var DOMProperty = {
 module.exports = DOMProperty;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/invariant":215}],81:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/invariant":597}],463:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249,"fbjs/lib/invariant":595}],462:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255,"fbjs/lib/invariant":603}],469:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -89547,15 +88689,7 @@ ReactPerf.measureMethods(DOMPropertyOperations, 'DOMPropertyOperations', {
 module.exports = DOMPropertyOperations;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./DOMProperty":80,"./ReactPerf":142,"./quoteAttributeValueForBrowser":193,"_process":30,"fbjs/lib/warning":226}],82:[function(require,module,exports){
-=======
-},{"./DOMProperty":462,"./ReactPerf":524,"./quoteAttributeValueForBrowser":575,"_process":249,"fbjs/lib/warning":608}],464:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./DOMProperty":461,"./ReactPerf":523,"./quoteAttributeValueForBrowser":573,"_process":249,"fbjs/lib/warning":606}],463:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./DOMProperty":468,"./ReactPerf":530,"./quoteAttributeValueForBrowser":581,"_process":255,"fbjs/lib/warning":614}],470:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -89704,15 +88838,7 @@ var Danger = {
 module.exports = Danger;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/createNodesFromMarkup":206,"fbjs/lib/emptyFunction":207,"fbjs/lib/getMarkupWrap":211,"fbjs/lib/invariant":215}],83:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/createNodesFromMarkup":588,"fbjs/lib/emptyFunction":589,"fbjs/lib/getMarkupWrap":593,"fbjs/lib/invariant":597}],465:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/createNodesFromMarkup":586,"fbjs/lib/emptyFunction":587,"fbjs/lib/getMarkupWrap":591,"fbjs/lib/invariant":595}],464:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/createNodesFromMarkup":594,"fbjs/lib/emptyFunction":595,"fbjs/lib/getMarkupWrap":599,"fbjs/lib/invariant":603}],471:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -89740,15 +88866,7 @@ var keyOf = require('fbjs/lib/keyOf');
 var DefaultEventPluginOrder = [keyOf({ ResponderEventPlugin: null }), keyOf({ SimpleEventPlugin: null }), keyOf({ TapEventPlugin: null }), keyOf({ EnterLeaveEventPlugin: null }), keyOf({ ChangeEventPlugin: null }), keyOf({ SelectEventPlugin: null }), keyOf({ BeforeInputEventPlugin: null })];
 
 module.exports = DefaultEventPluginOrder;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"fbjs/lib/keyOf":219}],84:[function(require,module,exports){
-=======
-},{"fbjs/lib/keyOf":601}],466:[function(require,module,exports){
->>>>>>> master
-=======
-},{"fbjs/lib/keyOf":599}],465:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"fbjs/lib/keyOf":607}],472:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -89873,15 +88991,7 @@ var EnterLeaveEventPlugin = {
 };
 
 module.exports = EnterLeaveEventPlugin;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./EventConstants":85,"./EventPropagators":89,"./ReactMount":136,"./SyntheticMouseEvent":167,"fbjs/lib/keyOf":219}],85:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./EventPropagators":471,"./ReactMount":518,"./SyntheticMouseEvent":549,"fbjs/lib/keyOf":601}],467:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./EventConstants":466,"./EventPropagators":470,"./ReactMount":517,"./SyntheticMouseEvent":548,"fbjs/lib/keyOf":599}],466:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./EventConstants":473,"./EventPropagators":477,"./ReactMount":524,"./SyntheticMouseEvent":555,"fbjs/lib/keyOf":607}],473:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -89974,15 +89084,7 @@ var EventConstants = {
 };
 
 module.exports = EventConstants;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"fbjs/lib/keyMirror":218}],86:[function(require,module,exports){
-=======
-},{"fbjs/lib/keyMirror":600}],468:[function(require,module,exports){
->>>>>>> master
-=======
-},{"fbjs/lib/keyMirror":598}],467:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"fbjs/lib/keyMirror":606}],474:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -90265,15 +89367,7 @@ var EventPluginHub = {
 module.exports = EventPluginHub;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./EventPluginRegistry":87,"./EventPluginUtils":88,"./ReactErrorUtils":127,"./accumulateInto":173,"./forEachAccumulated":181,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],87:[function(require,module,exports){
-=======
-},{"./EventPluginRegistry":469,"./EventPluginUtils":470,"./ReactErrorUtils":509,"./accumulateInto":555,"./forEachAccumulated":563,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],469:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./EventPluginRegistry":468,"./EventPluginUtils":469,"./ReactErrorUtils":508,"./accumulateInto":554,"./forEachAccumulated":561,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],468:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./EventPluginRegistry":475,"./EventPluginUtils":476,"./ReactErrorUtils":515,"./accumulateInto":561,"./forEachAccumulated":569,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],475:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -90497,15 +89591,7 @@ var EventPluginRegistry = {
 module.exports = EventPluginRegistry;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/invariant":215}],88:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/invariant":597}],470:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249,"fbjs/lib/invariant":595}],469:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255,"fbjs/lib/invariant":603}],476:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -90711,15 +89797,7 @@ var EventPluginUtils = {
 module.exports = EventPluginUtils;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./EventConstants":85,"./ReactErrorUtils":127,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],89:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./ReactErrorUtils":509,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],471:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./EventConstants":466,"./ReactErrorUtils":508,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],470:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./EventConstants":473,"./ReactErrorUtils":515,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],477:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -90858,15 +89936,7 @@ var EventPropagators = {
 module.exports = EventPropagators;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./EventConstants":85,"./EventPluginHub":86,"./accumulateInto":173,"./forEachAccumulated":181,"_process":30,"fbjs/lib/warning":226}],90:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./EventPluginHub":468,"./accumulateInto":555,"./forEachAccumulated":563,"_process":249,"fbjs/lib/warning":608}],472:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./EventConstants":466,"./EventPluginHub":467,"./accumulateInto":554,"./forEachAccumulated":561,"_process":249,"fbjs/lib/warning":606}],471:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./EventConstants":473,"./EventPluginHub":474,"./accumulateInto":561,"./forEachAccumulated":569,"_process":255,"fbjs/lib/warning":614}],478:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -90962,15 +90032,7 @@ assign(FallbackCompositionState.prototype, {
 PooledClass.addPoolingTo(FallbackCompositionState);
 
 module.exports = FallbackCompositionState;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./PooledClass":94,"./getTextContentAccessor":188}],91:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./PooledClass":476,"./getTextContentAccessor":570}],473:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./PooledClass":475,"./getTextContentAccessor":568}],472:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./PooledClass":482,"./getTextContentAccessor":576}],479:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -91201,15 +90263,7 @@ var HTMLDOMPropertyConfig = {
 };
 
 module.exports = HTMLDOMPropertyConfig;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./DOMProperty":80,"fbjs/lib/ExecutionEnvironment":201}],92:[function(require,module,exports){
-=======
-},{"./DOMProperty":462,"fbjs/lib/ExecutionEnvironment":583}],474:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./DOMProperty":461,"fbjs/lib/ExecutionEnvironment":581}],473:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./DOMProperty":468,"fbjs/lib/ExecutionEnvironment":589}],480:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -91347,15 +90401,7 @@ var LinkedValueUtils = {
 module.exports = LinkedValueUtils;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactPropTypeLocations":144,"./ReactPropTypes":145,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],93:[function(require,module,exports){
-=======
-},{"./ReactPropTypeLocations":526,"./ReactPropTypes":527,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],475:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactPropTypeLocations":525,"./ReactPropTypes":526,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],474:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactPropTypeLocations":532,"./ReactPropTypes":533,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],481:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -91403,15 +90449,7 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],94:[function(require,module,exports){
-=======
-},{}],476:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],475:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],482:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -91534,15 +90572,7 @@ var PooledClass = {
 module.exports = PooledClass;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/invariant":215}],95:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/invariant":597}],477:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249,"fbjs/lib/invariant":595}],476:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255,"fbjs/lib/invariant":603}],483:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -91582,15 +90612,7 @@ assign(React, {
 React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
 
 module.exports = React;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./ReactDOM":106,"./ReactDOMServer":116,"./ReactIsomorphic":134,"./deprecated":177}],96:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./ReactDOM":488,"./ReactDOMServer":498,"./ReactIsomorphic":516,"./deprecated":559}],478:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./ReactDOM":487,"./ReactDOMServer":497,"./ReactIsomorphic":515,"./deprecated":557}],477:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./ReactDOM":494,"./ReactDOMServer":504,"./ReactIsomorphic":522,"./deprecated":565}],484:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -91630,15 +90652,7 @@ var ReactBrowserComponentMixin = {
 module.exports = ReactBrowserComponentMixin;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactInstanceMap":133,"./findDOMNode":179,"_process":30,"fbjs/lib/warning":226}],97:[function(require,module,exports){
-=======
-},{"./ReactInstanceMap":515,"./findDOMNode":561,"_process":249,"fbjs/lib/warning":608}],479:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactInstanceMap":514,"./findDOMNode":559,"_process":249,"fbjs/lib/warning":606}],478:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactInstanceMap":521,"./findDOMNode":567,"_process":255,"fbjs/lib/warning":614}],485:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -91963,15 +90977,7 @@ ReactPerf.measureMethods(ReactBrowserEventEmitter, 'ReactBrowserEventEmitter', {
 });
 
 module.exports = ReactBrowserEventEmitter;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./EventConstants":85,"./EventPluginHub":86,"./EventPluginRegistry":87,"./Object.assign":93,"./ReactEventEmitterMixin":128,"./ReactPerf":142,"./ViewportMetrics":172,"./isEventSupported":190}],98:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./EventPluginHub":468,"./EventPluginRegistry":469,"./Object.assign":475,"./ReactEventEmitterMixin":510,"./ReactPerf":524,"./ViewportMetrics":554,"./isEventSupported":572}],480:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./EventConstants":466,"./EventPluginHub":467,"./EventPluginRegistry":468,"./Object.assign":474,"./ReactEventEmitterMixin":509,"./ReactPerf":523,"./ViewportMetrics":553,"./isEventSupported":570}],479:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./EventConstants":473,"./EventPluginHub":474,"./EventPluginRegistry":475,"./Object.assign":481,"./ReactEventEmitterMixin":516,"./ReactPerf":530,"./ViewportMetrics":560,"./isEventSupported":578}],486:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -92097,15 +91103,7 @@ var ReactChildReconciler = {
 module.exports = ReactChildReconciler;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactReconciler":147,"./instantiateReactComponent":189,"./shouldUpdateReactComponent":197,"./traverseAllChildren":198,"_process":30,"fbjs/lib/warning":226}],99:[function(require,module,exports){
-=======
-},{"./ReactReconciler":529,"./instantiateReactComponent":571,"./shouldUpdateReactComponent":579,"./traverseAllChildren":580,"_process":249,"fbjs/lib/warning":608}],481:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactReconciler":528,"./instantiateReactComponent":569,"./shouldUpdateReactComponent":577,"./traverseAllChildren":578,"_process":249,"fbjs/lib/warning":606}],480:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactReconciler":535,"./instantiateReactComponent":577,"./shouldUpdateReactComponent":585,"./traverseAllChildren":586,"_process":255,"fbjs/lib/warning":614}],487:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -92288,15 +91286,7 @@ var ReactChildren = {
 };
 
 module.exports = ReactChildren;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./PooledClass":94,"./ReactElement":123,"./traverseAllChildren":198,"fbjs/lib/emptyFunction":207}],100:[function(require,module,exports){
-=======
-},{"./PooledClass":476,"./ReactElement":505,"./traverseAllChildren":580,"fbjs/lib/emptyFunction":589}],482:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./PooledClass":475,"./ReactElement":504,"./traverseAllChildren":578,"fbjs/lib/emptyFunction":587}],481:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./PooledClass":482,"./ReactElement":511,"./traverseAllChildren":586,"fbjs/lib/emptyFunction":595}],488:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -93071,15 +92061,7 @@ var ReactClass = {
 module.exports = ReactClass;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./ReactComponent":101,"./ReactElement":123,"./ReactNoopUpdateQueue":140,"./ReactPropTypeLocationNames":143,"./ReactPropTypeLocations":144,"_process":30,"fbjs/lib/emptyObject":208,"fbjs/lib/invariant":215,"fbjs/lib/keyMirror":218,"fbjs/lib/keyOf":219,"fbjs/lib/warning":226}],101:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./ReactComponent":483,"./ReactElement":505,"./ReactNoopUpdateQueue":522,"./ReactPropTypeLocationNames":525,"./ReactPropTypeLocations":526,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/keyMirror":600,"fbjs/lib/keyOf":601,"fbjs/lib/warning":608}],483:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./ReactComponent":482,"./ReactElement":504,"./ReactNoopUpdateQueue":521,"./ReactPropTypeLocationNames":524,"./ReactPropTypeLocations":525,"_process":249,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/keyMirror":598,"fbjs/lib/keyOf":599,"fbjs/lib/warning":606}],482:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./ReactComponent":489,"./ReactElement":511,"./ReactNoopUpdateQueue":528,"./ReactPropTypeLocationNames":531,"./ReactPropTypeLocations":532,"_process":255,"fbjs/lib/emptyObject":596,"fbjs/lib/invariant":603,"fbjs/lib/keyMirror":606,"fbjs/lib/keyOf":607,"fbjs/lib/warning":614}],489:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -93205,15 +92187,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = ReactComponent;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactNoopUpdateQueue":140,"./canDefineProperty":175,"_process":30,"fbjs/lib/emptyObject":208,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],102:[function(require,module,exports){
-=======
-},{"./ReactNoopUpdateQueue":522,"./canDefineProperty":557,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],484:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactNoopUpdateQueue":521,"_process":249,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],483:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactNoopUpdateQueue":528,"./canDefineProperty":563,"_process":255,"fbjs/lib/emptyObject":596,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],490:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -93255,15 +92229,7 @@ var ReactComponentBrowserEnvironment = {
 };
 
 module.exports = ReactComponentBrowserEnvironment;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactDOMIDOperations":111,"./ReactMount":136}],103:[function(require,module,exports){
-=======
-},{"./ReactDOMIDOperations":493,"./ReactMount":518}],485:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactDOMIDOperations":492,"./ReactMount":517}],484:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactDOMIDOperations":499,"./ReactMount":524}],491:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -93318,15 +92284,7 @@ var ReactComponentEnvironment = {
 module.exports = ReactComponentEnvironment;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/invariant":215}],104:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/invariant":597}],486:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249,"fbjs/lib/invariant":595}],485:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255,"fbjs/lib/invariant":603}],492:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -94024,15 +92982,7 @@ var ReactCompositeComponent = {
 module.exports = ReactCompositeComponent;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./ReactComponentEnvironment":103,"./ReactCurrentOwner":105,"./ReactElement":123,"./ReactInstanceMap":133,"./ReactPerf":142,"./ReactPropTypeLocationNames":143,"./ReactPropTypeLocations":144,"./ReactReconciler":147,"./ReactUpdateQueue":153,"./shouldUpdateReactComponent":197,"_process":30,"fbjs/lib/emptyObject":208,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],105:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./ReactComponentEnvironment":485,"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactInstanceMap":515,"./ReactPerf":524,"./ReactPropTypeLocationNames":525,"./ReactPropTypeLocations":526,"./ReactReconciler":529,"./ReactUpdateQueue":535,"./shouldUpdateReactComponent":579,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],487:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./ReactComponentEnvironment":484,"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactInstanceMap":514,"./ReactPerf":523,"./ReactPropTypeLocationNames":524,"./ReactPropTypeLocations":525,"./ReactReconciler":528,"./ReactUpdateQueue":534,"./shouldUpdateReactComponent":577,"_process":249,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],486:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./ReactComponentEnvironment":491,"./ReactCurrentOwner":493,"./ReactElement":511,"./ReactInstanceMap":521,"./ReactPerf":530,"./ReactPropTypeLocationNames":531,"./ReactPropTypeLocations":532,"./ReactReconciler":535,"./ReactUpdateQueue":541,"./shouldUpdateReactComponent":585,"_process":255,"fbjs/lib/emptyObject":596,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],493:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -94063,15 +93013,7 @@ var ReactCurrentOwner = {
 };
 
 module.exports = ReactCurrentOwner;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],106:[function(require,module,exports){
-=======
-},{}],488:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],487:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],494:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -94167,15 +93109,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = React;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactCurrentOwner":105,"./ReactDOMTextComponent":117,"./ReactDefaultInjection":120,"./ReactInstanceHandles":132,"./ReactMount":136,"./ReactPerf":142,"./ReactReconciler":147,"./ReactUpdates":154,"./ReactVersion":155,"./findDOMNode":179,"./renderSubtreeIntoContainer":194,"_process":30,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/warning":226}],107:[function(require,module,exports){
-=======
-},{"./ReactCurrentOwner":487,"./ReactDOMTextComponent":499,"./ReactDefaultInjection":502,"./ReactInstanceHandles":514,"./ReactMount":518,"./ReactPerf":524,"./ReactReconciler":529,"./ReactUpdates":536,"./ReactVersion":537,"./findDOMNode":561,"./renderSubtreeIntoContainer":576,"_process":249,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/warning":608}],489:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactCurrentOwner":486,"./ReactDOMTextComponent":498,"./ReactDefaultInjection":501,"./ReactInstanceHandles":513,"./ReactMount":517,"./ReactPerf":523,"./ReactReconciler":528,"./ReactUpdates":535,"./ReactVersion":536,"./findDOMNode":559,"./renderSubtreeIntoContainer":574,"_process":249,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/warning":606}],488:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactCurrentOwner":493,"./ReactDOMTextComponent":505,"./ReactDefaultInjection":508,"./ReactInstanceHandles":520,"./ReactMount":524,"./ReactPerf":530,"./ReactReconciler":535,"./ReactUpdates":542,"./ReactVersion":543,"./findDOMNode":567,"./renderSubtreeIntoContainer":582,"_process":255,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/warning":614}],495:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -94226,15 +93160,7 @@ var ReactDOMButton = {
 };
 
 module.exports = ReactDOMButton;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],108:[function(require,module,exports){
-=======
-},{}],490:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],489:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],496:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -95200,15 +94126,7 @@ assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mix
 module.exports = ReactDOMComponent;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./AutoFocusUtils":72,"./CSSPropertyOperations":75,"./DOMProperty":80,"./DOMPropertyOperations":81,"./EventConstants":85,"./Object.assign":93,"./ReactBrowserEventEmitter":97,"./ReactComponentBrowserEnvironment":102,"./ReactDOMButton":107,"./ReactDOMInput":112,"./ReactDOMOption":113,"./ReactDOMSelect":114,"./ReactDOMTextarea":118,"./ReactMount":136,"./ReactMultiChild":137,"./ReactPerf":142,"./ReactUpdateQueue":153,"./canDefineProperty":175,"./escapeTextContentForBrowser":178,"./isEventSupported":190,"./setInnerHTML":195,"./setTextContent":196,"./validateDOMNesting":199,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/keyOf":219,"fbjs/lib/shallowEqual":224,"fbjs/lib/warning":226}],109:[function(require,module,exports){
-=======
-},{"./AutoFocusUtils":454,"./CSSPropertyOperations":457,"./DOMProperty":462,"./DOMPropertyOperations":463,"./EventConstants":467,"./Object.assign":475,"./ReactBrowserEventEmitter":479,"./ReactComponentBrowserEnvironment":484,"./ReactDOMButton":489,"./ReactDOMInput":494,"./ReactDOMOption":495,"./ReactDOMSelect":496,"./ReactDOMTextarea":500,"./ReactMount":518,"./ReactMultiChild":519,"./ReactPerf":524,"./ReactUpdateQueue":535,"./canDefineProperty":557,"./escapeTextContentForBrowser":560,"./isEventSupported":572,"./setInnerHTML":577,"./setTextContent":578,"./validateDOMNesting":581,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/keyOf":601,"fbjs/lib/shallowEqual":606,"fbjs/lib/warning":608}],491:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./AutoFocusUtils":453,"./CSSPropertyOperations":456,"./DOMProperty":461,"./DOMPropertyOperations":462,"./EventConstants":466,"./Object.assign":474,"./ReactBrowserEventEmitter":478,"./ReactComponentBrowserEnvironment":483,"./ReactDOMButton":488,"./ReactDOMInput":493,"./ReactDOMOption":494,"./ReactDOMSelect":495,"./ReactDOMTextarea":499,"./ReactMount":517,"./ReactMultiChild":518,"./ReactPerf":523,"./ReactUpdateQueue":534,"./escapeTextContentForBrowser":558,"./isEventSupported":570,"./setInnerHTML":575,"./setTextContent":576,"./validateDOMNesting":579,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/keyOf":599,"fbjs/lib/shallowEqual":604,"fbjs/lib/warning":606}],490:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./AutoFocusUtils":460,"./CSSPropertyOperations":463,"./DOMProperty":468,"./DOMPropertyOperations":469,"./EventConstants":473,"./Object.assign":481,"./ReactBrowserEventEmitter":485,"./ReactComponentBrowserEnvironment":490,"./ReactDOMButton":495,"./ReactDOMInput":500,"./ReactDOMOption":501,"./ReactDOMSelect":502,"./ReactDOMTextarea":506,"./ReactMount":524,"./ReactMultiChild":525,"./ReactPerf":530,"./ReactUpdateQueue":541,"./canDefineProperty":563,"./escapeTextContentForBrowser":566,"./isEventSupported":578,"./setInnerHTML":583,"./setTextContent":584,"./validateDOMNesting":587,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/keyOf":607,"fbjs/lib/shallowEqual":612,"fbjs/lib/warning":614}],497:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -95389,15 +94307,7 @@ var ReactDOMFactories = mapObject({
 module.exports = ReactDOMFactories;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactElement":123,"./ReactElementValidator":124,"_process":30,"fbjs/lib/mapObject":220}],110:[function(require,module,exports){
-=======
-},{"./ReactElement":505,"./ReactElementValidator":506,"_process":249,"fbjs/lib/mapObject":602}],492:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactElement":504,"./ReactElementValidator":505,"_process":249,"fbjs/lib/mapObject":600}],491:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactElement":511,"./ReactElementValidator":512,"_process":255,"fbjs/lib/mapObject":608}],498:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -95416,15 +94326,7 @@ var ReactDOMFeatureFlags = {
 };
 
 module.exports = ReactDOMFeatureFlags;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],111:[function(require,module,exports){
-=======
-},{}],493:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],492:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],499:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -95522,15 +94424,7 @@ ReactPerf.measureMethods(ReactDOMIDOperations, 'ReactDOMIDOperations', {
 module.exports = ReactDOMIDOperations;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./DOMChildrenOperations":79,"./DOMPropertyOperations":81,"./ReactMount":136,"./ReactPerf":142,"_process":30,"fbjs/lib/invariant":215}],112:[function(require,module,exports){
-=======
-},{"./DOMChildrenOperations":461,"./DOMPropertyOperations":463,"./ReactMount":518,"./ReactPerf":524,"_process":249,"fbjs/lib/invariant":597}],494:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./DOMChildrenOperations":460,"./DOMPropertyOperations":462,"./ReactMount":517,"./ReactPerf":523,"_process":249,"fbjs/lib/invariant":595}],493:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./DOMChildrenOperations":467,"./DOMPropertyOperations":469,"./ReactMount":524,"./ReactPerf":530,"_process":255,"fbjs/lib/invariant":603}],500:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -95687,15 +94581,7 @@ function _handleChange(event) {
 module.exports = ReactDOMInput;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./LinkedValueUtils":92,"./Object.assign":93,"./ReactDOMIDOperations":111,"./ReactMount":136,"./ReactUpdates":154,"_process":30,"fbjs/lib/invariant":215}],113:[function(require,module,exports){
-=======
-},{"./LinkedValueUtils":474,"./Object.assign":475,"./ReactDOMIDOperations":493,"./ReactMount":518,"./ReactUpdates":536,"_process":249,"fbjs/lib/invariant":597}],495:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./LinkedValueUtils":473,"./Object.assign":474,"./ReactDOMIDOperations":492,"./ReactMount":517,"./ReactUpdates":535,"_process":249,"fbjs/lib/invariant":595}],494:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./LinkedValueUtils":480,"./Object.assign":481,"./ReactDOMIDOperations":499,"./ReactMount":524,"./ReactUpdates":542,"_process":255,"fbjs/lib/invariant":603}],501:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -95785,15 +94671,7 @@ var ReactDOMOption = {
 module.exports = ReactDOMOption;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./ReactChildren":99,"./ReactDOMSelect":114,"_process":30,"fbjs/lib/warning":226}],114:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./ReactChildren":481,"./ReactDOMSelect":496,"_process":249,"fbjs/lib/warning":608}],496:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./ReactChildren":480,"./ReactDOMSelect":495,"_process":249,"fbjs/lib/warning":606}],495:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./ReactChildren":487,"./ReactDOMSelect":502,"_process":255,"fbjs/lib/warning":614}],502:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -95985,15 +94863,7 @@ function _handleChange(event) {
 module.exports = ReactDOMSelect;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./LinkedValueUtils":92,"./Object.assign":93,"./ReactMount":136,"./ReactUpdates":154,"_process":30,"fbjs/lib/warning":226}],115:[function(require,module,exports){
-=======
-},{"./LinkedValueUtils":474,"./Object.assign":475,"./ReactMount":518,"./ReactUpdates":536,"_process":249,"fbjs/lib/warning":608}],497:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./LinkedValueUtils":473,"./Object.assign":474,"./ReactMount":517,"./ReactUpdates":535,"_process":249,"fbjs/lib/warning":606}],496:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./LinkedValueUtils":480,"./Object.assign":481,"./ReactMount":524,"./ReactUpdates":542,"_process":255,"fbjs/lib/warning":614}],503:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -96206,15 +95076,7 @@ var ReactDOMSelection = {
 };
 
 module.exports = ReactDOMSelection;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./getNodeForCharacterOffset":187,"./getTextContentAccessor":188,"fbjs/lib/ExecutionEnvironment":201}],116:[function(require,module,exports){
-=======
-},{"./getNodeForCharacterOffset":569,"./getTextContentAccessor":570,"fbjs/lib/ExecutionEnvironment":583}],498:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./getNodeForCharacterOffset":567,"./getTextContentAccessor":568,"fbjs/lib/ExecutionEnvironment":581}],497:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./getNodeForCharacterOffset":575,"./getTextContentAccessor":576,"fbjs/lib/ExecutionEnvironment":589}],504:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -96241,15 +95103,7 @@ var ReactDOMServer = {
 };
 
 module.exports = ReactDOMServer;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactDefaultInjection":120,"./ReactServerRendering":151,"./ReactVersion":155}],117:[function(require,module,exports){
-=======
-},{"./ReactDefaultInjection":502,"./ReactServerRendering":533,"./ReactVersion":537}],499:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactDefaultInjection":501,"./ReactServerRendering":532,"./ReactVersion":536}],498:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactDefaultInjection":508,"./ReactServerRendering":539,"./ReactVersion":543}],505:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -96380,15 +95234,7 @@ assign(ReactDOMTextComponent.prototype, {
 module.exports = ReactDOMTextComponent;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./DOMChildrenOperations":79,"./DOMPropertyOperations":81,"./Object.assign":93,"./ReactComponentBrowserEnvironment":102,"./ReactMount":136,"./escapeTextContentForBrowser":178,"./setTextContent":196,"./validateDOMNesting":199,"_process":30}],118:[function(require,module,exports){
-=======
-},{"./DOMChildrenOperations":461,"./DOMPropertyOperations":463,"./Object.assign":475,"./ReactComponentBrowserEnvironment":484,"./ReactMount":518,"./escapeTextContentForBrowser":560,"./setTextContent":578,"./validateDOMNesting":581,"_process":249}],500:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./DOMChildrenOperations":460,"./DOMPropertyOperations":462,"./Object.assign":474,"./ReactComponentBrowserEnvironment":483,"./ReactMount":517,"./escapeTextContentForBrowser":558,"./setTextContent":576,"./validateDOMNesting":579,"_process":249}],499:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./DOMChildrenOperations":467,"./DOMPropertyOperations":469,"./Object.assign":481,"./ReactComponentBrowserEnvironment":490,"./ReactMount":524,"./escapeTextContentForBrowser":566,"./setTextContent":584,"./validateDOMNesting":587,"_process":255}],506:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -96505,15 +95351,7 @@ function _handleChange(event) {
 module.exports = ReactDOMTextarea;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./LinkedValueUtils":92,"./Object.assign":93,"./ReactDOMIDOperations":111,"./ReactUpdates":154,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],119:[function(require,module,exports){
-=======
-},{"./LinkedValueUtils":474,"./Object.assign":475,"./ReactDOMIDOperations":493,"./ReactUpdates":536,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],501:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./LinkedValueUtils":473,"./Object.assign":474,"./ReactDOMIDOperations":492,"./ReactUpdates":535,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],500:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./LinkedValueUtils":480,"./Object.assign":481,"./ReactDOMIDOperations":499,"./ReactUpdates":542,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],507:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -96581,15 +95419,7 @@ var ReactDefaultBatchingStrategy = {
 };
 
 module.exports = ReactDefaultBatchingStrategy;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./ReactUpdates":154,"./Transaction":171,"fbjs/lib/emptyFunction":207}],120:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./ReactUpdates":536,"./Transaction":553,"fbjs/lib/emptyFunction":589}],502:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./ReactUpdates":535,"./Transaction":552,"fbjs/lib/emptyFunction":587}],501:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./ReactUpdates":542,"./Transaction":559,"fbjs/lib/emptyFunction":595}],508:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -96690,15 +95520,7 @@ module.exports = {
 };
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./BeforeInputEventPlugin":73,"./ChangeEventPlugin":77,"./ClientReactRootIndex":78,"./DefaultEventPluginOrder":83,"./EnterLeaveEventPlugin":84,"./HTMLDOMPropertyConfig":91,"./ReactBrowserComponentMixin":96,"./ReactComponentBrowserEnvironment":102,"./ReactDOMComponent":108,"./ReactDOMTextComponent":117,"./ReactDefaultBatchingStrategy":119,"./ReactDefaultPerf":121,"./ReactEventListener":129,"./ReactInjection":130,"./ReactInstanceHandles":132,"./ReactMount":136,"./ReactReconcileTransaction":146,"./SVGDOMPropertyConfig":156,"./SelectEventPlugin":157,"./ServerReactRootIndex":158,"./SimpleEventPlugin":159,"_process":30,"fbjs/lib/ExecutionEnvironment":201}],121:[function(require,module,exports){
-=======
-},{"./BeforeInputEventPlugin":455,"./ChangeEventPlugin":459,"./ClientReactRootIndex":460,"./DefaultEventPluginOrder":465,"./EnterLeaveEventPlugin":466,"./HTMLDOMPropertyConfig":473,"./ReactBrowserComponentMixin":478,"./ReactComponentBrowserEnvironment":484,"./ReactDOMComponent":490,"./ReactDOMTextComponent":499,"./ReactDefaultBatchingStrategy":501,"./ReactDefaultPerf":503,"./ReactEventListener":511,"./ReactInjection":512,"./ReactInstanceHandles":514,"./ReactMount":518,"./ReactReconcileTransaction":528,"./SVGDOMPropertyConfig":538,"./SelectEventPlugin":539,"./ServerReactRootIndex":540,"./SimpleEventPlugin":541,"_process":249,"fbjs/lib/ExecutionEnvironment":583}],503:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./BeforeInputEventPlugin":454,"./ChangeEventPlugin":458,"./ClientReactRootIndex":459,"./DefaultEventPluginOrder":464,"./EnterLeaveEventPlugin":465,"./HTMLDOMPropertyConfig":472,"./ReactBrowserComponentMixin":477,"./ReactComponentBrowserEnvironment":483,"./ReactDOMComponent":489,"./ReactDOMTextComponent":498,"./ReactDefaultBatchingStrategy":500,"./ReactDefaultPerf":502,"./ReactEventListener":510,"./ReactInjection":511,"./ReactInstanceHandles":513,"./ReactMount":517,"./ReactReconcileTransaction":527,"./SVGDOMPropertyConfig":537,"./SelectEventPlugin":538,"./ServerReactRootIndex":539,"./SimpleEventPlugin":540,"_process":249,"fbjs/lib/ExecutionEnvironment":581}],502:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./BeforeInputEventPlugin":461,"./ChangeEventPlugin":465,"./ClientReactRootIndex":466,"./DefaultEventPluginOrder":471,"./EnterLeaveEventPlugin":472,"./HTMLDOMPropertyConfig":479,"./ReactBrowserComponentMixin":484,"./ReactComponentBrowserEnvironment":490,"./ReactDOMComponent":496,"./ReactDOMTextComponent":505,"./ReactDefaultBatchingStrategy":507,"./ReactDefaultPerf":509,"./ReactEventListener":517,"./ReactInjection":518,"./ReactInstanceHandles":520,"./ReactMount":524,"./ReactReconcileTransaction":534,"./SVGDOMPropertyConfig":544,"./SelectEventPlugin":545,"./ServerReactRootIndex":546,"./SimpleEventPlugin":547,"_process":255,"fbjs/lib/ExecutionEnvironment":589}],509:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -96936,15 +95758,7 @@ var ReactDefaultPerf = {
 };
 
 module.exports = ReactDefaultPerf;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./DOMProperty":80,"./ReactDefaultPerfAnalysis":122,"./ReactMount":136,"./ReactPerf":142,"fbjs/lib/performanceNow":223}],122:[function(require,module,exports){
-=======
-},{"./DOMProperty":462,"./ReactDefaultPerfAnalysis":504,"./ReactMount":518,"./ReactPerf":524,"fbjs/lib/performanceNow":605}],504:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./DOMProperty":461,"./ReactDefaultPerfAnalysis":503,"./ReactMount":517,"./ReactPerf":523,"fbjs/lib/performanceNow":603}],503:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./DOMProperty":468,"./ReactDefaultPerfAnalysis":510,"./ReactMount":524,"./ReactPerf":530,"fbjs/lib/performanceNow":611}],510:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97144,15 +95958,7 @@ var ReactDefaultPerfAnalysis = {
 };
 
 module.exports = ReactDefaultPerfAnalysis;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93}],123:[function(require,module,exports){
-=======
-},{"./Object.assign":475}],505:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474}],504:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481}],511:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -97403,15 +96209,7 @@ ReactElement.isValidElement = function (object) {
 module.exports = ReactElement;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./ReactCurrentOwner":105,"./canDefineProperty":175,"_process":30}],124:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./ReactCurrentOwner":487,"./canDefineProperty":557,"_process":249}],506:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./ReactCurrentOwner":486,"_process":249}],505:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./ReactCurrentOwner":493,"./canDefineProperty":563,"_process":255}],512:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -97696,15 +96494,7 @@ var ReactElementValidator = {
 module.exports = ReactElementValidator;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactCurrentOwner":105,"./ReactElement":123,"./ReactPropTypeLocationNames":143,"./ReactPropTypeLocations":144,"./canDefineProperty":175,"./getIteratorFn":186,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],125:[function(require,module,exports){
-=======
-},{"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactPropTypeLocationNames":525,"./ReactPropTypeLocations":526,"./canDefineProperty":557,"./getIteratorFn":568,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],507:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactPropTypeLocationNames":524,"./ReactPropTypeLocations":525,"./getIteratorFn":566,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],506:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactCurrentOwner":493,"./ReactElement":511,"./ReactPropTypeLocationNames":531,"./ReactPropTypeLocations":532,"./canDefineProperty":563,"./getIteratorFn":574,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],513:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -97756,15 +96546,7 @@ assign(ReactEmptyComponent.prototype, {
 ReactEmptyComponent.injection = ReactEmptyComponentInjection;
 
 module.exports = ReactEmptyComponent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./ReactElement":123,"./ReactEmptyComponentRegistry":126,"./ReactReconciler":147}],126:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./ReactElement":505,"./ReactEmptyComponentRegistry":508,"./ReactReconciler":529}],508:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./ReactElement":504,"./ReactEmptyComponentRegistry":507,"./ReactReconciler":528}],507:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./ReactElement":511,"./ReactEmptyComponentRegistry":514,"./ReactReconciler":535}],514:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -97813,15 +96595,7 @@ var ReactEmptyComponentRegistry = {
 };
 
 module.exports = ReactEmptyComponentRegistry;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],127:[function(require,module,exports){
-=======
-},{}],509:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],508:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],515:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -97889,20 +96663,12 @@ if (process.env.NODE_ENV !== 'production') {
     var fakeNode = document.createElement('react');
     ReactErrorUtils.invokeGuardedCallback = function (name, func, a, b) {
       var boundFunc = func.bind(null, a, b);
-<<<<<<< HEAD
       var evtType = 'react-' + name;
       fakeNode.addEventListener(evtType, boundFunc, false);
       var evt = document.createEvent('Event');
       evt.initEvent(evtType, false, false);
       fakeNode.dispatchEvent(evt);
       fakeNode.removeEventListener(evtType, boundFunc, false);
-=======
-      fakeNode.addEventListener(name, boundFunc, false);
-      var evt = document.createEvent('Event');
-      evt.initEvent(name, false, false);
-      fakeNode.dispatchEvent(evt);
-      fakeNode.removeEventListener(name, boundFunc, false);
->>>>>>> master
     };
   }
 }
@@ -97910,15 +96676,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = ReactErrorUtils;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30}],128:[function(require,module,exports){
-=======
-},{"_process":249}],510:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249}],509:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255}],516:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97957,15 +96715,7 @@ var ReactEventEmitterMixin = {
 };
 
 module.exports = ReactEventEmitterMixin;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./EventPluginHub":86}],129:[function(require,module,exports){
-=======
-},{"./EventPluginHub":468}],511:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./EventPluginHub":467}],510:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./EventPluginHub":474}],517:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -98177,15 +96927,7 @@ var ReactEventListener = {
 };
 
 module.exports = ReactEventListener;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./PooledClass":94,"./ReactInstanceHandles":132,"./ReactMount":136,"./ReactUpdates":154,"./getEventTarget":185,"fbjs/lib/EventListener":200,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/getUnboundedScrollPosition":212}],130:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./PooledClass":476,"./ReactInstanceHandles":514,"./ReactMount":518,"./ReactUpdates":536,"./getEventTarget":567,"fbjs/lib/EventListener":582,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/getUnboundedScrollPosition":594}],512:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./PooledClass":475,"./ReactInstanceHandles":513,"./ReactMount":517,"./ReactUpdates":535,"./getEventTarget":565,"fbjs/lib/EventListener":580,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/getUnboundedScrollPosition":592}],511:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./PooledClass":482,"./ReactInstanceHandles":520,"./ReactMount":524,"./ReactUpdates":542,"./getEventTarget":573,"fbjs/lib/EventListener":588,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/getUnboundedScrollPosition":600}],518:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -98224,15 +96966,7 @@ var ReactInjection = {
 };
 
 module.exports = ReactInjection;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./DOMProperty":80,"./EventPluginHub":86,"./ReactBrowserEventEmitter":97,"./ReactClass":100,"./ReactComponentEnvironment":103,"./ReactEmptyComponent":125,"./ReactNativeComponent":139,"./ReactPerf":142,"./ReactRootIndex":149,"./ReactUpdates":154}],131:[function(require,module,exports){
-=======
-},{"./DOMProperty":462,"./EventPluginHub":468,"./ReactBrowserEventEmitter":479,"./ReactClass":482,"./ReactComponentEnvironment":485,"./ReactEmptyComponent":507,"./ReactNativeComponent":521,"./ReactPerf":524,"./ReactRootIndex":531,"./ReactUpdates":536}],513:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./DOMProperty":461,"./EventPluginHub":467,"./ReactBrowserEventEmitter":478,"./ReactClass":481,"./ReactComponentEnvironment":484,"./ReactEmptyComponent":506,"./ReactNativeComponent":520,"./ReactPerf":523,"./ReactRootIndex":530,"./ReactUpdates":535}],512:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./DOMProperty":468,"./EventPluginHub":474,"./ReactBrowserEventEmitter":485,"./ReactClass":488,"./ReactComponentEnvironment":491,"./ReactEmptyComponent":513,"./ReactNativeComponent":527,"./ReactPerf":530,"./ReactRootIndex":537,"./ReactUpdates":542}],519:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -98357,15 +97091,7 @@ var ReactInputSelection = {
 };
 
 module.exports = ReactInputSelection;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactDOMSelection":115,"fbjs/lib/containsNode":204,"fbjs/lib/focusNode":209,"fbjs/lib/getActiveElement":210}],132:[function(require,module,exports){
-=======
-},{"./ReactDOMSelection":497,"fbjs/lib/containsNode":586,"fbjs/lib/focusNode":591,"fbjs/lib/getActiveElement":592}],514:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactDOMSelection":496,"fbjs/lib/containsNode":584,"fbjs/lib/focusNode":589,"fbjs/lib/getActiveElement":590}],513:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactDOMSelection":503,"fbjs/lib/containsNode":592,"fbjs/lib/focusNode":597,"fbjs/lib/getActiveElement":598}],520:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -98671,15 +97397,7 @@ var ReactInstanceHandles = {
 module.exports = ReactInstanceHandles;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactRootIndex":149,"_process":30,"fbjs/lib/invariant":215}],133:[function(require,module,exports){
-=======
-},{"./ReactRootIndex":531,"_process":249,"fbjs/lib/invariant":597}],515:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactRootIndex":530,"_process":249,"fbjs/lib/invariant":595}],514:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactRootIndex":537,"_process":255,"fbjs/lib/invariant":603}],521:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -98727,15 +97445,7 @@ var ReactInstanceMap = {
 };
 
 module.exports = ReactInstanceMap;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],134:[function(require,module,exports){
-=======
-},{}],516:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],515:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],522:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -98813,15 +97523,7 @@ var React = {
 module.exports = React;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./ReactChildren":99,"./ReactClass":100,"./ReactComponent":101,"./ReactDOMFactories":109,"./ReactElement":123,"./ReactElementValidator":124,"./ReactPropTypes":145,"./ReactVersion":155,"./onlyChild":192,"_process":30}],135:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./ReactChildren":481,"./ReactClass":482,"./ReactComponent":483,"./ReactDOMFactories":491,"./ReactElement":505,"./ReactElementValidator":506,"./ReactPropTypes":527,"./ReactVersion":537,"./onlyChild":574,"_process":249}],517:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./ReactChildren":480,"./ReactClass":481,"./ReactComponent":482,"./ReactDOMFactories":490,"./ReactElement":504,"./ReactElementValidator":505,"./ReactPropTypes":526,"./ReactVersion":536,"./onlyChild":572,"_process":249}],516:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./ReactChildren":487,"./ReactClass":488,"./ReactComponent":489,"./ReactDOMFactories":497,"./ReactElement":511,"./ReactElementValidator":512,"./ReactPropTypes":533,"./ReactVersion":543,"./onlyChild":580,"_process":255}],523:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -98867,15 +97569,7 @@ var ReactMarkupChecksum = {
 };
 
 module.exports = ReactMarkupChecksum;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./adler32":174}],136:[function(require,module,exports){
-=======
-},{"./adler32":556}],518:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./adler32":555}],517:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./adler32":562}],524:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -99729,15 +98423,7 @@ ReactPerf.measureMethods(ReactMount, 'ReactMount', {
 module.exports = ReactMount;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./DOMProperty":80,"./Object.assign":93,"./ReactBrowserEventEmitter":97,"./ReactCurrentOwner":105,"./ReactDOMFeatureFlags":110,"./ReactElement":123,"./ReactEmptyComponentRegistry":126,"./ReactInstanceHandles":132,"./ReactInstanceMap":133,"./ReactMarkupChecksum":135,"./ReactPerf":142,"./ReactReconciler":147,"./ReactUpdateQueue":153,"./ReactUpdates":154,"./instantiateReactComponent":189,"./setInnerHTML":195,"./shouldUpdateReactComponent":197,"./validateDOMNesting":199,"_process":30,"fbjs/lib/containsNode":204,"fbjs/lib/emptyObject":208,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],137:[function(require,module,exports){
-=======
-},{"./DOMProperty":462,"./Object.assign":475,"./ReactBrowserEventEmitter":479,"./ReactCurrentOwner":487,"./ReactDOMFeatureFlags":492,"./ReactElement":505,"./ReactEmptyComponentRegistry":508,"./ReactInstanceHandles":514,"./ReactInstanceMap":515,"./ReactMarkupChecksum":517,"./ReactPerf":524,"./ReactReconciler":529,"./ReactUpdateQueue":535,"./ReactUpdates":536,"./instantiateReactComponent":571,"./setInnerHTML":577,"./shouldUpdateReactComponent":579,"./validateDOMNesting":581,"_process":249,"fbjs/lib/containsNode":586,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],519:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./DOMProperty":461,"./Object.assign":474,"./ReactBrowserEventEmitter":478,"./ReactCurrentOwner":486,"./ReactDOMFeatureFlags":491,"./ReactElement":504,"./ReactEmptyComponentRegistry":507,"./ReactInstanceHandles":513,"./ReactInstanceMap":514,"./ReactMarkupChecksum":516,"./ReactPerf":523,"./ReactReconciler":528,"./ReactUpdateQueue":534,"./ReactUpdates":535,"./instantiateReactComponent":569,"./setInnerHTML":575,"./shouldUpdateReactComponent":577,"./validateDOMNesting":579,"_process":249,"fbjs/lib/containsNode":584,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],518:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./DOMProperty":468,"./Object.assign":481,"./ReactBrowserEventEmitter":485,"./ReactCurrentOwner":493,"./ReactDOMFeatureFlags":498,"./ReactElement":511,"./ReactEmptyComponentRegistry":514,"./ReactInstanceHandles":520,"./ReactInstanceMap":521,"./ReactMarkupChecksum":523,"./ReactPerf":530,"./ReactReconciler":535,"./ReactUpdateQueue":541,"./ReactUpdates":542,"./instantiateReactComponent":577,"./setInnerHTML":583,"./shouldUpdateReactComponent":585,"./validateDOMNesting":587,"_process":255,"fbjs/lib/containsNode":592,"fbjs/lib/emptyObject":596,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],525:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -100237,15 +98923,7 @@ var ReactMultiChild = {
 module.exports = ReactMultiChild;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactChildReconciler":98,"./ReactComponentEnvironment":103,"./ReactCurrentOwner":105,"./ReactMultiChildUpdateTypes":138,"./ReactReconciler":147,"./flattenChildren":180,"_process":30}],138:[function(require,module,exports){
-=======
-},{"./ReactChildReconciler":480,"./ReactComponentEnvironment":485,"./ReactCurrentOwner":487,"./ReactMultiChildUpdateTypes":520,"./ReactReconciler":529,"./flattenChildren":562,"_process":249}],520:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactChildReconciler":479,"./ReactComponentEnvironment":484,"./ReactCurrentOwner":486,"./ReactMultiChildUpdateTypes":519,"./ReactReconciler":528,"./flattenChildren":560,"_process":249}],519:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactChildReconciler":486,"./ReactComponentEnvironment":491,"./ReactCurrentOwner":493,"./ReactMultiChildUpdateTypes":526,"./ReactReconciler":535,"./flattenChildren":568,"_process":255}],526:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -100278,15 +98956,7 @@ var ReactMultiChildUpdateTypes = keyMirror({
 });
 
 module.exports = ReactMultiChildUpdateTypes;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"fbjs/lib/keyMirror":218}],139:[function(require,module,exports){
-=======
-},{"fbjs/lib/keyMirror":600}],521:[function(require,module,exports){
->>>>>>> master
-=======
-},{"fbjs/lib/keyMirror":598}],520:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"fbjs/lib/keyMirror":606}],527:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -100384,15 +99054,7 @@ var ReactNativeComponent = {
 module.exports = ReactNativeComponent;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"_process":30,"fbjs/lib/invariant":215}],140:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"_process":249,"fbjs/lib/invariant":597}],522:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"_process":249,"fbjs/lib/invariant":595}],521:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"_process":255,"fbjs/lib/invariant":603}],528:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -100514,15 +99176,7 @@ var ReactNoopUpdateQueue = {
 module.exports = ReactNoopUpdateQueue;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/warning":226}],141:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/warning":608}],523:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249,"fbjs/lib/warning":606}],522:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255,"fbjs/lib/warning":614}],529:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -100617,15 +99271,7 @@ var ReactOwner = {
 module.exports = ReactOwner;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/invariant":215}],142:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/invariant":597}],524:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249,"fbjs/lib/invariant":595}],523:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255,"fbjs/lib/invariant":603}],530:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -100725,15 +99371,7 @@ function _noMeasure(objName, fnName, func) {
 module.exports = ReactPerf;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30}],143:[function(require,module,exports){
-=======
-},{"_process":249}],525:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249}],524:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255}],531:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -100761,15 +99399,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = ReactPropTypeLocationNames;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30}],144:[function(require,module,exports){
-=======
-},{"_process":249}],526:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249}],525:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255}],532:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -100792,15 +99422,7 @@ var ReactPropTypeLocations = keyMirror({
 });
 
 module.exports = ReactPropTypeLocations;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"fbjs/lib/keyMirror":218}],145:[function(require,module,exports){
-=======
-},{"fbjs/lib/keyMirror":600}],527:[function(require,module,exports){
->>>>>>> master
-=======
-},{"fbjs/lib/keyMirror":598}],526:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"fbjs/lib/keyMirror":606}],533:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101157,15 +99779,7 @@ function getClassName(propValue) {
 }
 
 module.exports = ReactPropTypes;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactElement":123,"./ReactPropTypeLocationNames":143,"./getIteratorFn":186,"fbjs/lib/emptyFunction":207}],146:[function(require,module,exports){
-=======
-},{"./ReactElement":505,"./ReactPropTypeLocationNames":525,"./getIteratorFn":568,"fbjs/lib/emptyFunction":589}],528:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactElement":504,"./ReactPropTypeLocationNames":524,"./getIteratorFn":566,"fbjs/lib/emptyFunction":587}],527:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactElement":511,"./ReactPropTypeLocationNames":531,"./getIteratorFn":574,"fbjs/lib/emptyFunction":595}],534:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101317,15 +99931,7 @@ assign(ReactReconcileTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./CallbackQueue":76,"./Object.assign":93,"./PooledClass":94,"./ReactBrowserEventEmitter":97,"./ReactDOMFeatureFlags":110,"./ReactInputSelection":131,"./Transaction":171}],147:[function(require,module,exports){
-=======
-},{"./CallbackQueue":458,"./Object.assign":475,"./PooledClass":476,"./ReactBrowserEventEmitter":479,"./ReactDOMFeatureFlags":492,"./ReactInputSelection":513,"./Transaction":553}],529:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./CallbackQueue":457,"./Object.assign":474,"./PooledClass":475,"./ReactBrowserEventEmitter":478,"./ReactDOMFeatureFlags":491,"./ReactInputSelection":512,"./Transaction":552}],528:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./CallbackQueue":464,"./Object.assign":481,"./PooledClass":482,"./ReactBrowserEventEmitter":485,"./ReactDOMFeatureFlags":498,"./ReactInputSelection":519,"./Transaction":559}],535:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101433,15 +100039,7 @@ var ReactReconciler = {
 };
 
 module.exports = ReactReconciler;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactRef":148}],148:[function(require,module,exports){
-=======
-},{"./ReactRef":530}],530:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactRef":529}],529:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactRef":536}],536:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101520,15 +100118,7 @@ ReactRef.detachRefs = function (instance, element) {
 };
 
 module.exports = ReactRef;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactOwner":141}],149:[function(require,module,exports){
-=======
-},{"./ReactOwner":523}],531:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactOwner":522}],530:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactOwner":529}],537:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101558,15 +100148,7 @@ var ReactRootIndex = {
 };
 
 module.exports = ReactRootIndex;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],150:[function(require,module,exports){
-=======
-},{}],532:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],531:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],538:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -101590,15 +100172,7 @@ var ReactServerBatchingStrategy = {
 };
 
 module.exports = ReactServerBatchingStrategy;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],151:[function(require,module,exports){
-=======
-},{}],533:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],532:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],539:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -101685,15 +100259,7 @@ module.exports = {
 };
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactDefaultBatchingStrategy":119,"./ReactElement":123,"./ReactInstanceHandles":132,"./ReactMarkupChecksum":135,"./ReactServerBatchingStrategy":150,"./ReactServerRenderingTransaction":152,"./ReactUpdates":154,"./instantiateReactComponent":189,"_process":30,"fbjs/lib/emptyObject":208,"fbjs/lib/invariant":215}],152:[function(require,module,exports){
-=======
-},{"./ReactDefaultBatchingStrategy":501,"./ReactElement":505,"./ReactInstanceHandles":514,"./ReactMarkupChecksum":517,"./ReactServerBatchingStrategy":532,"./ReactServerRenderingTransaction":534,"./ReactUpdates":536,"./instantiateReactComponent":571,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597}],534:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactDefaultBatchingStrategy":500,"./ReactElement":504,"./ReactInstanceHandles":513,"./ReactMarkupChecksum":516,"./ReactServerBatchingStrategy":531,"./ReactServerRenderingTransaction":533,"./ReactUpdates":535,"./instantiateReactComponent":569,"_process":249,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595}],533:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactDefaultBatchingStrategy":507,"./ReactElement":511,"./ReactInstanceHandles":520,"./ReactMarkupChecksum":523,"./ReactServerBatchingStrategy":538,"./ReactServerRenderingTransaction":540,"./ReactUpdates":542,"./instantiateReactComponent":577,"_process":255,"fbjs/lib/emptyObject":596,"fbjs/lib/invariant":603}],540:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -101781,15 +100347,7 @@ assign(ReactServerRenderingTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./CallbackQueue":76,"./Object.assign":93,"./PooledClass":94,"./Transaction":171,"fbjs/lib/emptyFunction":207}],153:[function(require,module,exports){
-=======
-},{"./CallbackQueue":458,"./Object.assign":475,"./PooledClass":476,"./Transaction":553,"fbjs/lib/emptyFunction":589}],535:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./CallbackQueue":457,"./Object.assign":474,"./PooledClass":475,"./Transaction":552,"fbjs/lib/emptyFunction":587}],534:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./CallbackQueue":464,"./Object.assign":481,"./PooledClass":482,"./Transaction":559,"fbjs/lib/emptyFunction":595}],541:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -102050,15 +100608,7 @@ var ReactUpdateQueue = {
 module.exports = ReactUpdateQueue;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./ReactCurrentOwner":105,"./ReactElement":123,"./ReactInstanceMap":133,"./ReactUpdates":154,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],154:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactInstanceMap":515,"./ReactUpdates":536,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],536:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactInstanceMap":514,"./ReactUpdates":535,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],535:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./ReactCurrentOwner":493,"./ReactElement":511,"./ReactInstanceMap":521,"./ReactUpdates":542,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],542:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -102285,15 +100835,7 @@ var ReactUpdates = {
 module.exports = ReactUpdates;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./CallbackQueue":76,"./Object.assign":93,"./PooledClass":94,"./ReactPerf":142,"./ReactReconciler":147,"./Transaction":171,"_process":30,"fbjs/lib/invariant":215}],155:[function(require,module,exports){
-=======
-},{"./CallbackQueue":458,"./Object.assign":475,"./PooledClass":476,"./ReactPerf":524,"./ReactReconciler":529,"./Transaction":553,"_process":249,"fbjs/lib/invariant":597}],537:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./CallbackQueue":457,"./Object.assign":474,"./PooledClass":475,"./ReactPerf":523,"./ReactReconciler":528,"./Transaction":552,"_process":249,"fbjs/lib/invariant":595}],536:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./CallbackQueue":464,"./Object.assign":481,"./PooledClass":482,"./ReactPerf":530,"./ReactReconciler":535,"./Transaction":559,"_process":255,"fbjs/lib/invariant":603}],543:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102307,18 +100849,8 @@ module.exports = ReactUpdates;
 
 'use strict';
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
 module.exports = '0.14.2';
-},{}],156:[function(require,module,exports){
-=======
-module.exports = '0.14.1';
-},{}],538:[function(require,module,exports){
->>>>>>> master
-=======
-module.exports = '0.14.0';
-},{}],537:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],544:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102446,15 +100978,7 @@ var SVGDOMPropertyConfig = {
 };
 
 module.exports = SVGDOMPropertyConfig;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./DOMProperty":80}],157:[function(require,module,exports){
-=======
-},{"./DOMProperty":462}],539:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./DOMProperty":461}],538:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./DOMProperty":468}],545:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102656,15 +101180,7 @@ var SelectEventPlugin = {
 };
 
 module.exports = SelectEventPlugin;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./EventConstants":85,"./EventPropagators":89,"./ReactInputSelection":131,"./SyntheticEvent":163,"./isTextInputElement":191,"fbjs/lib/ExecutionEnvironment":201,"fbjs/lib/getActiveElement":210,"fbjs/lib/keyOf":219,"fbjs/lib/shallowEqual":224}],158:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./EventPropagators":471,"./ReactInputSelection":513,"./SyntheticEvent":545,"./isTextInputElement":573,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/getActiveElement":592,"fbjs/lib/keyOf":601,"fbjs/lib/shallowEqual":606}],540:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./EventConstants":466,"./EventPropagators":470,"./ReactInputSelection":512,"./SyntheticEvent":544,"./isTextInputElement":571,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/getActiveElement":590,"fbjs/lib/keyOf":599,"fbjs/lib/shallowEqual":604}],539:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./EventConstants":473,"./EventPropagators":477,"./ReactInputSelection":519,"./SyntheticEvent":551,"./isTextInputElement":579,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/getActiveElement":598,"fbjs/lib/keyOf":607,"fbjs/lib/shallowEqual":612}],546:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102694,15 +101210,7 @@ var ServerReactRootIndex = {
 };
 
 module.exports = ServerReactRootIndex;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],159:[function(require,module,exports){
-=======
-},{}],541:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],540:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],547:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -103293,15 +101801,7 @@ var SimpleEventPlugin = {
 module.exports = SimpleEventPlugin;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./EventConstants":85,"./EventPropagators":89,"./ReactMount":136,"./SyntheticClipboardEvent":160,"./SyntheticDragEvent":162,"./SyntheticEvent":163,"./SyntheticFocusEvent":164,"./SyntheticKeyboardEvent":166,"./SyntheticMouseEvent":167,"./SyntheticTouchEvent":168,"./SyntheticUIEvent":169,"./SyntheticWheelEvent":170,"./getEventCharCode":182,"_process":30,"fbjs/lib/EventListener":200,"fbjs/lib/emptyFunction":207,"fbjs/lib/invariant":215,"fbjs/lib/keyOf":219}],160:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./EventPropagators":471,"./ReactMount":518,"./SyntheticClipboardEvent":542,"./SyntheticDragEvent":544,"./SyntheticEvent":545,"./SyntheticFocusEvent":546,"./SyntheticKeyboardEvent":548,"./SyntheticMouseEvent":549,"./SyntheticTouchEvent":550,"./SyntheticUIEvent":551,"./SyntheticWheelEvent":552,"./getEventCharCode":564,"_process":249,"fbjs/lib/EventListener":582,"fbjs/lib/emptyFunction":589,"fbjs/lib/invariant":597,"fbjs/lib/keyOf":601}],542:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./EventConstants":466,"./EventPropagators":470,"./ReactMount":517,"./SyntheticClipboardEvent":541,"./SyntheticDragEvent":543,"./SyntheticEvent":544,"./SyntheticFocusEvent":545,"./SyntheticKeyboardEvent":547,"./SyntheticMouseEvent":548,"./SyntheticTouchEvent":549,"./SyntheticUIEvent":550,"./SyntheticWheelEvent":551,"./getEventCharCode":562,"_process":249,"fbjs/lib/EventListener":580,"fbjs/lib/emptyFunction":587,"fbjs/lib/invariant":595,"fbjs/lib/keyOf":599}],541:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./EventConstants":473,"./EventPropagators":477,"./ReactMount":524,"./SyntheticClipboardEvent":548,"./SyntheticDragEvent":550,"./SyntheticEvent":551,"./SyntheticFocusEvent":552,"./SyntheticKeyboardEvent":554,"./SyntheticMouseEvent":555,"./SyntheticTouchEvent":556,"./SyntheticUIEvent":557,"./SyntheticWheelEvent":558,"./getEventCharCode":570,"_process":255,"fbjs/lib/EventListener":588,"fbjs/lib/emptyFunction":595,"fbjs/lib/invariant":603,"fbjs/lib/keyOf":607}],548:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103341,15 +101841,7 @@ function SyntheticClipboardEvent(dispatchConfig, dispatchMarker, nativeEvent, na
 SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 module.exports = SyntheticClipboardEvent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./SyntheticEvent":163}],161:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":545}],543:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./SyntheticEvent":544}],542:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./SyntheticEvent":551}],549:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103387,15 +101879,7 @@ function SyntheticCompositionEvent(dispatchConfig, dispatchMarker, nativeEvent, 
 SyntheticEvent.augmentClass(SyntheticCompositionEvent, CompositionEventInterface);
 
 module.exports = SyntheticCompositionEvent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./SyntheticEvent":163}],162:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":545}],544:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./SyntheticEvent":544}],543:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./SyntheticEvent":551}],550:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103433,15 +101917,7 @@ function SyntheticDragEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeE
 SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./SyntheticMouseEvent":167}],163:[function(require,module,exports){
-=======
-},{"./SyntheticMouseEvent":549}],545:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./SyntheticMouseEvent":548}],544:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./SyntheticMouseEvent":555}],551:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -103622,15 +102098,7 @@ PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
 module.exports = SyntheticEvent;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./PooledClass":94,"_process":30,"fbjs/lib/emptyFunction":207,"fbjs/lib/warning":226}],164:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./PooledClass":476,"_process":249,"fbjs/lib/emptyFunction":589,"fbjs/lib/warning":608}],546:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./PooledClass":475,"_process":249,"fbjs/lib/emptyFunction":587,"fbjs/lib/warning":606}],545:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./PooledClass":482,"_process":255,"fbjs/lib/emptyFunction":595,"fbjs/lib/warning":614}],552:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103668,15 +102136,7 @@ function SyntheticFocusEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./SyntheticUIEvent":169}],165:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":551}],547:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./SyntheticUIEvent":550}],546:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./SyntheticUIEvent":557}],553:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103715,15 +102175,7 @@ function SyntheticInputEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticEvent.augmentClass(SyntheticInputEvent, InputEventInterface);
 
 module.exports = SyntheticInputEvent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./SyntheticEvent":163}],166:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":545}],548:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./SyntheticEvent":544}],547:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./SyntheticEvent":551}],554:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103809,15 +102261,7 @@ function SyntheticKeyboardEvent(dispatchConfig, dispatchMarker, nativeEvent, nat
 SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./SyntheticUIEvent":169,"./getEventCharCode":182,"./getEventKey":183,"./getEventModifierState":184}],167:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":551,"./getEventCharCode":564,"./getEventKey":565,"./getEventModifierState":566}],549:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./SyntheticUIEvent":550,"./getEventCharCode":562,"./getEventKey":563,"./getEventModifierState":564}],548:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./SyntheticUIEvent":557,"./getEventCharCode":570,"./getEventKey":571,"./getEventModifierState":572}],555:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103891,15 +102335,7 @@ function SyntheticMouseEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./SyntheticUIEvent":169,"./ViewportMetrics":172,"./getEventModifierState":184}],168:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":551,"./ViewportMetrics":554,"./getEventModifierState":566}],550:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./SyntheticUIEvent":550,"./ViewportMetrics":553,"./getEventModifierState":564}],549:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./SyntheticUIEvent":557,"./ViewportMetrics":560,"./getEventModifierState":572}],556:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103946,15 +102382,7 @@ function SyntheticTouchEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./SyntheticUIEvent":169,"./getEventModifierState":184}],169:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":551,"./getEventModifierState":566}],551:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./SyntheticUIEvent":550,"./getEventModifierState":564}],550:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./SyntheticUIEvent":557,"./getEventModifierState":572}],557:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104015,15 +102443,7 @@ function SyntheticUIEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEve
 SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./SyntheticEvent":163,"./getEventTarget":185}],170:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":545,"./getEventTarget":567}],552:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./SyntheticEvent":544,"./getEventTarget":565}],551:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./SyntheticEvent":551,"./getEventTarget":573}],558:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104079,15 +102499,7 @@ function SyntheticWheelEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./SyntheticMouseEvent":167}],171:[function(require,module,exports){
-=======
-},{"./SyntheticMouseEvent":549}],553:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./SyntheticMouseEvent":548}],552:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./SyntheticMouseEvent":555}],559:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -104322,15 +102734,7 @@ var Transaction = {
 module.exports = Transaction;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/invariant":215}],172:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/invariant":597}],554:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249,"fbjs/lib/invariant":595}],553:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255,"fbjs/lib/invariant":603}],560:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104358,15 +102762,7 @@ var ViewportMetrics = {
 };
 
 module.exports = ViewportMetrics;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],173:[function(require,module,exports){
-=======
-},{}],555:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],554:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],561:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -104429,15 +102825,7 @@ function accumulateInto(current, next) {
 module.exports = accumulateInto;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30,"fbjs/lib/invariant":215}],174:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/invariant":597}],556:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249,"fbjs/lib/invariant":595}],555:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255,"fbjs/lib/invariant":603}],562:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104480,12 +102868,7 @@ function adler32(data) {
 }
 
 module.exports = adler32;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],175:[function(require,module,exports){
-=======
-},{}],557:[function(require,module,exports){
->>>>>>> master
+},{}],563:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -104503,11 +102886,7 @@ module.exports = adler32;
 var canDefineProperty = false;
 if (process.env.NODE_ENV !== 'production') {
   try {
-<<<<<<< HEAD
     Object.defineProperty({}, 'x', { get: function () {} });
-=======
-    Object.defineProperty({}, 'x', {});
->>>>>>> master
     canDefineProperty = true;
   } catch (x) {
     // IE will fail on defineProperty
@@ -104517,14 +102896,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = canDefineProperty;
 }).call(this,require('_process'))
 
-<<<<<<< HEAD
-},{"_process":30}],176:[function(require,module,exports){
-=======
-},{"_process":249}],558:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],556:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255}],564:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104580,15 +102952,7 @@ function dangerousStyleValue(name, value) {
 }
 
 module.exports = dangerousStyleValue;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./CSSProperty":74}],177:[function(require,module,exports){
-=======
-},{"./CSSProperty":456}],559:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./CSSProperty":455}],557:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./CSSProperty":462}],565:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -104640,15 +103004,7 @@ function deprecated(fnName, newModule, newPackage, ctx, fn) {
 module.exports = deprecated;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"_process":30,"fbjs/lib/warning":226}],178:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"_process":249,"fbjs/lib/warning":608}],560:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"_process":249,"fbjs/lib/warning":606}],558:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"_process":255,"fbjs/lib/warning":614}],566:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104687,15 +103043,7 @@ function escapeTextContentForBrowser(text) {
 }
 
 module.exports = escapeTextContentForBrowser;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],179:[function(require,module,exports){
-=======
-},{}],561:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],559:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],567:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -104748,15 +103096,7 @@ function findDOMNode(componentOrElement) {
 module.exports = findDOMNode;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactCurrentOwner":105,"./ReactInstanceMap":133,"./ReactMount":136,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],180:[function(require,module,exports){
-=======
-},{"./ReactCurrentOwner":487,"./ReactInstanceMap":515,"./ReactMount":518,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],562:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactCurrentOwner":486,"./ReactInstanceMap":514,"./ReactMount":517,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],560:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactCurrentOwner":493,"./ReactInstanceMap":521,"./ReactMount":524,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],568:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -104808,15 +103148,7 @@ function flattenChildren(children) {
 module.exports = flattenChildren;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./traverseAllChildren":198,"_process":30,"fbjs/lib/warning":226}],181:[function(require,module,exports){
-=======
-},{"./traverseAllChildren":580,"_process":249,"fbjs/lib/warning":608}],563:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./traverseAllChildren":578,"_process":249,"fbjs/lib/warning":606}],561:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./traverseAllChildren":586,"_process":255,"fbjs/lib/warning":614}],569:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104846,15 +103178,7 @@ var forEachAccumulated = function (arr, cb, scope) {
 };
 
 module.exports = forEachAccumulated;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],182:[function(require,module,exports){
-=======
-},{}],564:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],562:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],570:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104905,15 +103229,7 @@ function getEventCharCode(nativeEvent) {
 }
 
 module.exports = getEventCharCode;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],183:[function(require,module,exports){
-=======
-},{}],565:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],563:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],571:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105017,15 +103333,7 @@ function getEventKey(nativeEvent) {
 }
 
 module.exports = getEventKey;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./getEventCharCode":182}],184:[function(require,module,exports){
-=======
-},{"./getEventCharCode":564}],566:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./getEventCharCode":562}],564:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./getEventCharCode":570}],572:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105070,15 +103378,7 @@ function getEventModifierState(nativeEvent) {
 }
 
 module.exports = getEventModifierState;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],185:[function(require,module,exports){
-=======
-},{}],567:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],565:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],573:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105108,15 +103408,7 @@ function getEventTarget(nativeEvent) {
 }
 
 module.exports = getEventTarget;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],186:[function(require,module,exports){
-=======
-},{}],568:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],566:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],574:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105157,15 +103449,7 @@ function getIteratorFn(maybeIterable) {
 }
 
 module.exports = getIteratorFn;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],187:[function(require,module,exports){
-=======
-},{}],569:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],567:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],575:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105239,15 +103523,7 @@ function getNodeForCharacterOffset(root, offset) {
 }
 
 module.exports = getNodeForCharacterOffset;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],188:[function(require,module,exports){
-=======
-},{}],570:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],568:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],576:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105281,15 +103557,7 @@ function getTextContentAccessor() {
 }
 
 module.exports = getTextContentAccessor;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"fbjs/lib/ExecutionEnvironment":201}],189:[function(require,module,exports){
-=======
-},{"fbjs/lib/ExecutionEnvironment":583}],571:[function(require,module,exports){
->>>>>>> master
-=======
-},{"fbjs/lib/ExecutionEnvironment":581}],569:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"fbjs/lib/ExecutionEnvironment":589}],577:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -105405,15 +103673,7 @@ function instantiateReactComponent(node) {
 module.exports = instantiateReactComponent;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"./ReactCompositeComponent":104,"./ReactEmptyComponent":125,"./ReactNativeComponent":139,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],190:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./ReactCompositeComponent":486,"./ReactEmptyComponent":507,"./ReactNativeComponent":521,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],572:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"./ReactCompositeComponent":485,"./ReactEmptyComponent":506,"./ReactNativeComponent":520,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],570:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"./ReactCompositeComponent":492,"./ReactEmptyComponent":513,"./ReactNativeComponent":527,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],578:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105474,15 +103734,7 @@ function isEventSupported(eventNameSuffix, capture) {
 }
 
 module.exports = isEventSupported;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"fbjs/lib/ExecutionEnvironment":201}],191:[function(require,module,exports){
-=======
-},{"fbjs/lib/ExecutionEnvironment":583}],573:[function(require,module,exports){
->>>>>>> master
-=======
-},{"fbjs/lib/ExecutionEnvironment":581}],571:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"fbjs/lib/ExecutionEnvironment":589}],579:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105523,15 +103775,7 @@ function isTextInputElement(elem) {
 }
 
 module.exports = isTextInputElement;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],192:[function(require,module,exports){
-=======
-},{}],574:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],572:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],580:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -105568,15 +103812,7 @@ function onlyChild(children) {
 module.exports = onlyChild;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactElement":123,"_process":30,"fbjs/lib/invariant":215}],193:[function(require,module,exports){
-=======
-},{"./ReactElement":505,"_process":249,"fbjs/lib/invariant":597}],575:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactElement":504,"_process":249,"fbjs/lib/invariant":595}],573:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactElement":511,"_process":255,"fbjs/lib/invariant":603}],581:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105603,15 +103839,7 @@ function quoteAttributeValueForBrowser(value) {
 }
 
 module.exports = quoteAttributeValueForBrowser;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./escapeTextContentForBrowser":178}],194:[function(require,module,exports){
-=======
-},{"./escapeTextContentForBrowser":560}],576:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./escapeTextContentForBrowser":558}],574:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./escapeTextContentForBrowser":566}],582:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105628,15 +103856,7 @@ module.exports = quoteAttributeValueForBrowser;
 var ReactMount = require('./ReactMount');
 
 module.exports = ReactMount.renderSubtreeIntoContainer;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactMount":136}],195:[function(require,module,exports){
-=======
-},{"./ReactMount":518}],577:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactMount":517}],575:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactMount":524}],583:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105727,15 +103947,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setInnerHTML;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"fbjs/lib/ExecutionEnvironment":201}],196:[function(require,module,exports){
-=======
-},{"fbjs/lib/ExecutionEnvironment":583}],578:[function(require,module,exports){
->>>>>>> master
-=======
-},{"fbjs/lib/ExecutionEnvironment":581}],576:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"fbjs/lib/ExecutionEnvironment":589}],584:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105776,15 +103988,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setTextContent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./escapeTextContentForBrowser":178,"./setInnerHTML":195,"fbjs/lib/ExecutionEnvironment":201}],197:[function(require,module,exports){
-=======
-},{"./escapeTextContentForBrowser":560,"./setInnerHTML":577,"fbjs/lib/ExecutionEnvironment":583}],579:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./escapeTextContentForBrowser":558,"./setInnerHTML":575,"fbjs/lib/ExecutionEnvironment":581}],577:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./escapeTextContentForBrowser":566,"./setInnerHTML":583,"fbjs/lib/ExecutionEnvironment":589}],585:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105828,15 +104032,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 }
 
 module.exports = shouldUpdateReactComponent;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],198:[function(require,module,exports){
-=======
-},{}],580:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],578:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],586:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -106029,15 +104225,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 module.exports = traverseAllChildren;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ReactCurrentOwner":105,"./ReactElement":123,"./ReactInstanceHandles":132,"./getIteratorFn":186,"_process":30,"fbjs/lib/invariant":215,"fbjs/lib/warning":226}],199:[function(require,module,exports){
-=======
-},{"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactInstanceHandles":514,"./getIteratorFn":568,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],581:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactInstanceHandles":513,"./getIteratorFn":566,"_process":249,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],579:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ReactCurrentOwner":493,"./ReactElement":511,"./ReactInstanceHandles":520,"./getIteratorFn":574,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],587:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -106404,15 +104592,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = validateDOMNesting;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Object.assign":93,"_process":30,"fbjs/lib/emptyFunction":207,"fbjs/lib/warning":226}],200:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"_process":249,"fbjs/lib/emptyFunction":589,"fbjs/lib/warning":608}],582:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Object.assign":474,"_process":249,"fbjs/lib/emptyFunction":587,"fbjs/lib/warning":606}],580:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Object.assign":481,"_process":255,"fbjs/lib/emptyFunction":595,"fbjs/lib/warning":614}],588:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -106500,15 +104680,7 @@ var EventListener = {
 module.exports = EventListener;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./emptyFunction":207,"_process":30}],201:[function(require,module,exports){
-=======
-},{"./emptyFunction":589,"_process":249}],583:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./emptyFunction":587,"_process":249}],581:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./emptyFunction":595,"_process":255}],589:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106545,15 +104717,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],202:[function(require,module,exports){
-=======
-},{}],584:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],582:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],590:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106586,15 +104750,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],203:[function(require,module,exports){
-=======
-},{}],585:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],583:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],591:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106635,15 +104791,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./camelize":202}],204:[function(require,module,exports){
-=======
-},{"./camelize":584}],586:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./camelize":582}],584:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./camelize":590}],592:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106699,15 +104847,7 @@ function containsNode(_x, _x2) {
 }
 
 module.exports = containsNode;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./isTextNode":217}],205:[function(require,module,exports){
-=======
-},{"./isTextNode":599}],587:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./isTextNode":597}],585:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./isTextNode":605}],593:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106793,15 +104933,7 @@ function createArrayFromMixed(obj) {
 }
 
 module.exports = createArrayFromMixed;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./toArray":225}],206:[function(require,module,exports){
-=======
-},{"./toArray":607}],588:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./toArray":605}],586:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./toArray":613}],594:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -106889,21 +105021,9 @@ function createNodesFromMarkup(markup, handleScript) {
 module.exports = createNodesFromMarkup;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":201,"./createArrayFromMixed":205,"./getMarkupWrap":211,"./invariant":215,"_process":30}],207:[function(require,module,exports){
-arguments[4][46][0].apply(exports,arguments)
-},{"dup":46}],208:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":583,"./createArrayFromMixed":587,"./getMarkupWrap":593,"./invariant":597,"_process":249}],589:[function(require,module,exports){
-arguments[4][308][0].apply(exports,arguments)
-},{"dup":308}],590:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ExecutionEnvironment":581,"./createArrayFromMixed":585,"./getMarkupWrap":591,"./invariant":595,"_process":249}],587:[function(require,module,exports){
-arguments[4][308][0].apply(exports,arguments)
-},{"dup":308}],588:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ExecutionEnvironment":589,"./createArrayFromMixed":593,"./getMarkupWrap":599,"./invariant":603,"_process":255}],595:[function(require,module,exports){
+arguments[4][314][0].apply(exports,arguments)
+},{"dup":314}],596:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -106927,15 +105047,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = emptyObject;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30}],209:[function(require,module,exports){
-=======
-},{"_process":249}],591:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249}],589:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255}],597:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106962,15 +105074,7 @@ function focusNode(node) {
 }
 
 module.exports = focusNode;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],210:[function(require,module,exports){
-=======
-},{}],592:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],590:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],598:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107004,15 +105108,7 @@ function getActiveElement() /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],211:[function(require,module,exports){
-=======
-},{}],593:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],591:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],599:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -107111,15 +105207,7 @@ function getMarkupWrap(nodeName) {
 module.exports = getMarkupWrap;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":201,"./invariant":215,"_process":30}],212:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":583,"./invariant":597,"_process":249}],594:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ExecutionEnvironment":581,"./invariant":595,"_process":249}],592:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ExecutionEnvironment":589,"./invariant":603,"_process":255}],600:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107158,15 +105246,7 @@ function getUnboundedScrollPosition(scrollable) {
 }
 
 module.exports = getUnboundedScrollPosition;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],213:[function(require,module,exports){
-=======
-},{}],595:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],593:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],601:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107200,15 +105280,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],214:[function(require,module,exports){
-=======
-},{}],596:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],594:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],602:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107248,15 +105320,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./hyphenate":213}],215:[function(require,module,exports){
-=======
-},{"./hyphenate":595}],597:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./hyphenate":593}],595:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./hyphenate":601}],603:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -107309,15 +105373,7 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"_process":30}],216:[function(require,module,exports){
-=======
-},{"_process":249}],598:[function(require,module,exports){
->>>>>>> master
-=======
-},{"_process":249}],596:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"_process":255}],604:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107341,15 +105397,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],217:[function(require,module,exports){
-=======
-},{}],599:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],597:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],605:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107375,15 +105423,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./isNode":216}],218:[function(require,module,exports){
-=======
-},{"./isNode":598}],600:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./isNode":596}],598:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./isNode":604}],606:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -107435,15 +105475,7 @@ var keyMirror = function (obj) {
 module.exports = keyMirror;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./invariant":215,"_process":30}],219:[function(require,module,exports){
-=======
-},{"./invariant":597,"_process":249}],601:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./invariant":595,"_process":249}],599:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./invariant":603,"_process":255}],607:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107479,15 +105511,7 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],220:[function(require,module,exports){
-=======
-},{}],602:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],600:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],608:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107539,15 +105563,7 @@ function mapObject(object, callback, context) {
 }
 
 module.exports = mapObject;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],221:[function(require,module,exports){
-=======
-},{}],603:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],601:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],609:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107579,15 +105595,7 @@ function memoizeStringOnly(callback) {
 }
 
 module.exports = memoizeStringOnly;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],222:[function(require,module,exports){
-=======
-},{}],604:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],602:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],610:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107611,15 +105619,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = performance || {};
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./ExecutionEnvironment":201}],223:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":583}],605:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./ExecutionEnvironment":581}],603:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./ExecutionEnvironment":589}],611:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107649,21 +105649,9 @@ if (!curPerformance || !curPerformance.now) {
 var performanceNow = curPerformance.now.bind(curPerformance);
 
 module.exports = performanceNow;
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./performance":222}],224:[function(require,module,exports){
-arguments[4][48][0].apply(exports,arguments)
-},{"dup":48}],225:[function(require,module,exports){
-=======
-},{"./performance":604}],606:[function(require,module,exports){
-arguments[4][310][0].apply(exports,arguments)
-},{"dup":310}],607:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./performance":602}],604:[function(require,module,exports){
-arguments[4][310][0].apply(exports,arguments)
-},{"dup":310}],605:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./performance":610}],612:[function(require,module,exports){
+arguments[4][316][0].apply(exports,arguments)
+},{"dup":316}],613:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -107724,15 +105712,7 @@ function toArray(obj) {
 module.exports = toArray;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./invariant":215,"_process":30}],226:[function(require,module,exports){
-=======
-},{"./invariant":597,"_process":249}],608:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./invariant":595,"_process":249}],606:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./invariant":603,"_process":255}],614:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -107793,26 +105773,14 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = warning;
 }).call(this,require('_process'))
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./emptyFunction":207,"_process":30}],227:[function(require,module,exports){
-=======
-},{"./emptyFunction":589,"_process":249}],609:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./emptyFunction":587,"_process":249}],607:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./emptyFunction":595,"_process":255}],615:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/React');
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./lib/React":95}],228:[function(require,module,exports){
-=======
-},{"./lib/React":477}],610:[function(require,module,exports){
-arguments[4][268][0].apply(exports,arguments)
-},{"./lib/request":612,"builtin-status-codes":614,"dup":268,"url":278,"xtend":616}],611:[function(require,module,exports){
+},{"./lib/React":483}],616:[function(require,module,exports){
+arguments[4][274][0].apply(exports,arguments)
+},{"./lib/request":618,"builtin-status-codes":620,"dup":274,"url":284,"xtend":622}],617:[function(require,module,exports){
 (function (global){
 exports.fetch = isFunction(global.fetch) && isFunction(global.ReadableByteStream)
 
@@ -107857,7 +105825,7 @@ xhr = null // Help gc
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],612:[function(require,module,exports){
+},{}],618:[function(require,module,exports){
 (function (process,global,Buffer){
 // var Base64 = require('Base64')
 var capability = require('./capability')
@@ -108137,7 +106105,7 @@ var unsafeHeaders = [
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 
-},{"./capability":611,"./response":613,"_process":249,"buffer":53,"inherits":615,"stream":267}],613:[function(require,module,exports){
+},{"./capability":617,"./response":619,"_process":255,"buffer":53,"inherits":621,"stream":273}],619:[function(require,module,exports){
 (function (process,global,Buffer){
 var capability = require('./capability')
 var inherits = require('inherits')
@@ -108314,14 +106282,13 @@ IncomingMessage.prototype._onXHRProgress = function () {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 
-},{"./capability":611,"_process":249,"buffer":53,"inherits":615,"stream":267}],614:[function(require,module,exports){
-arguments[4][272][0].apply(exports,arguments)
-},{"dup":272}],615:[function(require,module,exports){
-arguments[4][245][0].apply(exports,arguments)
-},{"dup":245}],616:[function(require,module,exports){
-arguments[4][376][0].apply(exports,arguments)
-},{"dup":376}],617:[function(require,module,exports){
->>>>>>> master
+},{"./capability":617,"_process":255,"buffer":53,"inherits":621,"stream":273}],620:[function(require,module,exports){
+arguments[4][278][0].apply(exports,arguments)
+},{"dup":278}],621:[function(require,module,exports){
+arguments[4][251][0].apply(exports,arguments)
+},{"dup":251}],622:[function(require,module,exports){
+arguments[4][289][0].apply(exports,arguments)
+},{"dup":289}],623:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -108344,11 +106311,7 @@ var Action = function Action(name, data) {
 exports["default"] = Action;
 module.exports = exports["default"];
 
-<<<<<<< HEAD
-},{}],229:[function(require,module,exports){
-=======
-},{}],618:[function(require,module,exports){
->>>>>>> master
+},{}],624:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108386,69 +106349,6 @@ var WebAPI = _interopRequireWildcard(_utilsWebapiJs);
 var AddNode = (function (_Action) {
   _inherits(AddNode, _Action);
 
-=======
-},{"./lib/React":476}],608:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Action = function Action(name, data) {
-  _classCallCheck(this, Action);
-
-  if (this.constructor === Action) {
-    //TODO: make abstract class helper
-    throw new Error("cannot instantiate abstract class Action");
-  }
-  this.name = name;
-  this.data = data;
-};
-
-exports["default"] = Action;
-module.exports = exports["default"];
-
-},{}],609:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-exports['default'] = addNode;
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _actionJs = require('./action.js');
-
-var _actionJs2 = _interopRequireDefault(_actionJs);
-
-var _dispatcherJs = require('../dispatcher.js');
-
-var _dispatcherJs2 = _interopRequireDefault(_dispatcherJs);
-
-var _ModelsNodeJs = require('../Models/node.js');
-
-var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
-
-var _utilsWebapiJs = require('../utils/webapi.js');
-
-var WebAPI = _interopRequireWildcard(_utilsWebapiJs);
-
-var AddNode = (function (_Action) {
-  _inherits(AddNode, _Action);
-
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
   function AddNode(node) {
     _classCallCheck(this, AddNode);
 
@@ -108459,11 +106359,7 @@ var AddNode = (function (_Action) {
 })(_actionJs2['default']);
 
 function addNode(node, title, markdown, renderer) {
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
   WebAPI.addNewChild(node, title, markdown, renderer, function (node) {
-=======
-  WebAPI.addNewChild(node, title, markdown, "Resource", function (node) {
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
     var action = new AddNode(node);
     _dispatcherJs2['default'].dispatch(action);
   });
@@ -108471,9 +106367,7 @@ function addNode(node, title, markdown, renderer) {
 
 module.exports = exports['default'];
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"../Models/node.js":236,"../dispatcher.js":240,"../utils/webapi.js":243,"./action.js":228}],230:[function(require,module,exports){
+},{"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"./action.js":623}],625:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108529,13 +106423,7 @@ function editNode(node, markdown, renderer, children) {
 
 module.exports = exports['default'];
 
-},{"../Models/node.js":236,"../dispatcher.js":240,"../utils/webapi.js":243,"./action.js":228}],231:[function(require,module,exports){
-=======
-},{"../Models/node.js":624,"../dispatcher.js":628,"../utils/webapi.js":631,"./action.js":617}],619:[function(require,module,exports){
->>>>>>> master
-=======
-},{"../Models/node.js":614,"../dispatcher.js":618,"../utils/webapi.js":621,"./action.js":608}],610:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"./action.js":623}],626:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108583,15 +106471,7 @@ function expandWeek(tag) {
 
 module.exports = exports['default'];
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"../Models/node.js":236,"../dispatcher.js":240,"./action.js":228}],232:[function(require,module,exports){
-=======
-},{"../Models/node.js":624,"../dispatcher.js":628,"./action.js":617}],620:[function(require,module,exports){
->>>>>>> master
-=======
-},{"../Models/node.js":614,"../dispatcher.js":618,"./action.js":608}],611:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../Models/node.js":632,"../dispatcher.js":636,"./action.js":623}],627:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108641,11 +106521,7 @@ function open(rootId, nodes) {
 
 module.exports = exports['default'];
 
-<<<<<<< HEAD
-},{"../Models/node.js":236,"../dispatcher.js":240,"./action.js":228,"immutable":50}],233:[function(require,module,exports){
-=======
-},{"../Models/node.js":624,"../dispatcher.js":628,"./action.js":617,"immutable":312}],621:[function(require,module,exports){
->>>>>>> master
+},{"../Models/node.js":632,"../dispatcher.js":636,"./action.js":623,"immutable":318}],628:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108654,13 +106530,7 @@ Object.defineProperty(exports, '__esModule', {
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-<<<<<<< HEAD
-exports['default'] = removeNode;
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-=======
 exports['default'] = piazzaPostsFetched;
->>>>>>> master
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -108668,11 +106538,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-<<<<<<< HEAD
-=======
 var _immutable = require('immutable');
 
->>>>>>> master
 var _actionJs = require('./action.js');
 
 var _actionJs2 = _interopRequireDefault(_actionJs);
@@ -108681,7 +106548,52 @@ var _dispatcherJs = require('../dispatcher.js');
 
 var _dispatcherJs2 = _interopRequireDefault(_dispatcherJs);
 
-<<<<<<< HEAD
+var PiazzaPostsFetched = (function (_Action) {
+  _inherits(PiazzaPostsFetched, _Action);
+
+  function PiazzaPostsFetched(posts) {
+    _classCallCheck(this, PiazzaPostsFetched);
+
+    _get(Object.getPrototypeOf(PiazzaPostsFetched.prototype), 'constructor', this).call(this, "piazzaPostsFetched", { posts: posts });
+  }
+
+  return PiazzaPostsFetched;
+})(_actionJs2['default']);
+
+function piazzaPostsFetched(posts) {
+  var action = new PiazzaPostsFetched(posts);
+  _dispatcherJs2['default'].dispatch(action);
+}
+
+module.exports = exports['default'];
+
+},{"../dispatcher.js":636,"./action.js":623,"immutable":318}],629:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+exports['default'] = removeNode;
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _actionJs = require('./action.js');
+
+var _actionJs2 = _interopRequireDefault(_actionJs);
+
+var _dispatcherJs = require('../dispatcher.js');
+
+var _dispatcherJs2 = _interopRequireDefault(_dispatcherJs);
+
 var _ModelsNodeJs = require('../Models/node.js');
 
 var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
@@ -108707,36 +106619,11 @@ function removeNode(node) {
     var action = new RemoveNode(node);
     _dispatcherJs2['default'].dispatch(action);
   });
-=======
-var PiazzaPostsFetched = (function (_Action) {
-  _inherits(PiazzaPostsFetched, _Action);
-
-  function PiazzaPostsFetched(posts) {
-    _classCallCheck(this, PiazzaPostsFetched);
-
-    _get(Object.getPrototypeOf(PiazzaPostsFetched.prototype), 'constructor', this).call(this, "piazzaPostsFetched", { posts: posts });
-  }
-
-  return PiazzaPostsFetched;
-})(_actionJs2['default']);
-
-function piazzaPostsFetched(posts) {
-  var action = new PiazzaPostsFetched(posts);
-  _dispatcherJs2['default'].dispatch(action);
->>>>>>> master
 }
 
 module.exports = exports['default'];
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"../Models/node.js":236,"../dispatcher.js":240,"../utils/webapi.js":243,"./action.js":228}],234:[function(require,module,exports){
-=======
-},{"../dispatcher.js":628,"./action.js":617,"immutable":312}],622:[function(require,module,exports){
->>>>>>> master
-=======
-},{"../Models/node.js":614,"../dispatcher.js":618,"./action.js":608,"immutable":312}],612:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"./action.js":623}],630:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108772,15 +106659,7 @@ function getRenderedElement(tag, node, ui) {
 
 module.exports = exports['default'];
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./renderer.js":235,"react":227}],235:[function(require,module,exports){
-=======
-},{"./renderer.js":623,"react":609}],623:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./renderer.js":613,"react":607}],613:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./renderer.js":631,"react":615}],631:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -108807,6 +106686,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _partial = require('partial');
+
+var _partial2 = _interopRequireDefault(_partial);
+
 var _reactBootstrapLibInput = require('react-bootstrap/lib/Input');
 
 var _reactBootstrapLibInput2 = _interopRequireDefault(_reactBootstrapLibInput);
@@ -108823,9 +106706,13 @@ var _marked = require('marked');
 
 var _marked2 = _interopRequireDefault(_marked);
 
-var _partial = require('partial');
+var _reactBootstrapLibModal = require('react-bootstrap/lib/Modal');
 
-var _partial2 = _interopRequireDefault(_partial);
+var _reactBootstrapLibModal2 = _interopRequireDefault(_reactBootstrapLibModal);
+
+var _reactBootstrapLibModalBody = require('react-bootstrap/lib/ModalBody');
+
+var _reactBootstrapLibModalBody2 = _interopRequireDefault(_reactBootstrapLibModalBody);
 
 var _ModelsNodeJs = require('../Models/node.js');
 
@@ -109124,8 +107011,128 @@ var List = (function (_React$Component5) {
 
 exports.List = List;
 
-var ListElement = (function (_React$Component6) {
-  _inherits(ListElement, _React$Component6);
+var ModalListElement = (function (_React$Component6) {
+  _inherits(ModalListElement, _React$Component6);
+
+  function ModalListElement() {
+    _classCallCheck(this, ModalListElement);
+
+    _get(Object.getPrototypeOf(ModalListElement.prototype), 'constructor', this).call(this);
+    this.state = {
+      show: false
+    };
+  }
+
+  _createClass(ModalListElement, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(this.props.node.renderer, { onClick: this.handleClick.bind(this),
+        className: "listelement" }, _react2['default'].createElement(
+        'h2',
+        null,
+        (0, _utilsTitlecapsJs2['default'])(this.props.tag)
+      ), _react2['default'].createElement(
+        _reactBootstrapLibModal2['default'],
+        { show: this.state.show, onHide: this.close.bind(this) },
+        _react2['default'].createElement(
+          _reactBootstrapLibModalBody2['default'],
+          null,
+          (0, _createelementJs2['default'])(this.props.tag, this.props.node, this.props.ui)
+        )
+      ));
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick(event) {
+      this.setState({ show: true });
+    }
+  }, {
+    key: 'close',
+    value: function close() {
+      this.setState({ show: false });
+    }
+  }]);
+
+  return ModalListElement;
+})(_react2['default'].Component);
+
+exports.ModalListElement = ModalListElement;
+
+var EditableModalList = (function (_React$Component7) {
+  _inherits(EditableModalList, _React$Component7);
+
+  function EditableModalList() {
+    _classCallCheck(this, EditableModalList);
+
+    _get(Object.getPrototypeOf(EditableModalList.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(EditableModalList, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'list',
+        null,
+        _react2['default'].createElement(
+          'h1',
+          null,
+          (0, _utilsTitlecapsJs2['default'])(this.props.tag)
+        ),
+        _react2['default'].createElement(ListElementInput, { onClick: this.addNewChild.bind(this) }),
+        mapObject(this.props.node.children, function (id, tag) {
+          return _react2['default'].createElement(ListElement, { key: id, tag: tag, node: _StoresNodestoreJs2['default'].getState().nodes.get(id) });
+        })
+      );
+    }
+  }, {
+    key: 'addNewChild',
+    value: function addNewChild(title, markdown) {
+      (0, _ActionsAddnodeJs2['default'])(this.props.node, title, markdown, "Resource");
+    }
+  }]);
+
+  return EditableModalList;
+})(_react2['default'].Component);
+
+exports.EditableModalList = EditableModalList;
+
+var ListElementInput = (function (_React$Component8) {
+  _inherits(ListElementInput, _React$Component8);
+
+  function ListElementInput() {
+    _classCallCheck(this, ListElementInput);
+
+    _get(Object.getPrototypeOf(ListElementInput.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(ListElementInput, [{
+    key: 'render',
+    value: function render() {
+      //add type that is element or component
+      return _react2['default'].createElement(
+        'form',
+        null,
+        _react2['default'].createElement(_reactBootstrapLibInput2['default'], { type: 'text', ref: 'title', placeholder: 'title' }),
+        _react2['default'].createElement(_reactBootstrapLibInput2['default'], { type: 'textarea', ref: 'contents', placeholder: 'type markdown here' }),
+        _react2['default'].createElement(_reactBootstrapLibButtonInput2['default'], { type: 'reset', value: 'Create', onClick: this.clickWrapper.bind(this) })
+      );
+    }
+  }, {
+    key: 'clickWrapper',
+    value: function clickWrapper() {
+      var title = this.refs["title"].getValue(),
+          value = this.refs["contents"].getValue();
+      this.props.onClick(title, value);
+    }
+  }]);
+
+  return ListElementInput;
+})(_react2['default'].Component);
+
+exports.ListElementInput = ListElementInput;
+
+var ListElement = (function (_React$Component9) {
+  _inherits(ListElement, _React$Component9);
 
   function ListElement() {
     _classCallCheck(this, ListElement);
@@ -109180,8 +107187,8 @@ var ListElement = (function (_React$Component6) {
 
 exports.ListElement = ListElement;
 
-var EditableList = (function (_React$Component7) {
-  _inherits(EditableList, _React$Component7);
+var EditableList = (function (_React$Component10) {
+  _inherits(EditableList, _React$Component10);
 
   function EditableList() {
     _classCallCheck(this, EditableList);
@@ -109218,13 +107225,8 @@ var EditableList = (function (_React$Component7) {
 
 exports.EditableList = EditableList;
 
-<<<<<<< HEAD
-var ListElementCreator = (function (_React$Component7) {
-  _inherits(ListElementCreator, _React$Component7);
-=======
-var ListElementInput = (function (_React$Component8) {
-  _inherits(ListElementInput, _React$Component8);
->>>>>>> master
+var ListElementCreator = (function (_React$Component11) {
+  _inherits(ListElementCreator, _React$Component11);
 
   function ListElementCreator() {
     _classCallCheck(this, ListElementCreator);
@@ -109275,9 +107277,8 @@ var ListElementInput = (function (_React$Component8) {
   return ListElementCreator;
 })(_react2['default'].Component);
 
-<<<<<<< HEAD
-var ListElementEditor = (function (_React$Component8) {
-  _inherits(ListElementEditor, _React$Component8);
+var ListElementEditor = (function (_React$Component12) {
+  _inherits(ListElementEditor, _React$Component12);
 
   function ListElementEditor() {
     _classCallCheck(this, ListElementEditor);
@@ -109312,10 +107313,8 @@ var ListElementEditor = (function (_React$Component8) {
   return ListElementEditor;
 })(_react2['default'].Component);
 
-=======
->>>>>>> master
-var AlertDismissable = (function (_React$Component9) {
-  _inherits(AlertDismissable, _React$Component9);
+var AlertDismissable = (function (_React$Component13) {
+  _inherits(AlertDismissable, _React$Component13);
 
   function AlertDismissable() {
     _classCallCheck(this, AlertDismissable);
@@ -109354,15 +107353,7 @@ var AlertDismissable = (function (_React$Component9) {
   return AlertDismissable;
 })(_react2['default'].Component);
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"../Actions/addnode.js":229,"../Actions/editnode.js":230,"../Actions/expandweek.js":231,"../Actions/removenode.js":233,"../Stores/nodestore.js":237,"../utils/titlecaps.js":242,"./createelement.js":234,"marked":52,"react":227,"react-bootstrap/lib/Alert":53,"react-bootstrap/lib/ButtonInput":56,"react-bootstrap/lib/Input":61,"react-dom":71}],236:[function(require,module,exports){
-=======
-},{"../Actions/addnode.js":618,"../Actions/expandweek.js":619,"../Models/node.js":624,"../Stores/nodestore.js":625,"../utils/titlecaps.js":630,"../utils/webapi.js":631,"./createelement.js":622,"marked":314,"partial":315,"react":609,"react-bootstrap/lib/Alert":418,"react-bootstrap/lib/ButtonInput":421,"react-bootstrap/lib/Input":427,"react-bootstrap/lib/Modal":429,"react-bootstrap/lib/ModalBody":430,"react-dom":453}],624:[function(require,module,exports){
->>>>>>> master
-=======
-},{"../Actions/addnode.js":609,"../Actions/expandweek.js":610,"../Stores/nodestore.js":615,"../utils/titlecaps.js":620,"../utils/webapi.js":621,"./createelement.js":612,"marked":314,"react":607,"react-bootstrap/lib/Alert":417,"react-bootstrap/lib/ButtonInput":420,"react-bootstrap/lib/Input":426,"react-bootstrap/lib/Modal":428,"react-bootstrap/lib/ModalBody":429,"react-dom":452}],614:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../Actions/addnode.js":624,"../Actions/editnode.js":625,"../Actions/expandweek.js":626,"../Actions/removenode.js":629,"../Models/node.js":632,"../Stores/nodestore.js":633,"../utils/titlecaps.js":638,"../utils/webapi.js":639,"./createelement.js":630,"marked":320,"partial":321,"react":615,"react-bootstrap/lib/Alert":424,"react-bootstrap/lib/ButtonInput":427,"react-bootstrap/lib/Input":433,"react-bootstrap/lib/Modal":435,"react-bootstrap/lib/ModalBody":436,"react-dom":459}],632:[function(require,module,exports){
 
 
 //internal model for a Node. used across the frontend
@@ -109394,15 +107385,7 @@ var Node = function Node(node) {
 exports["default"] = Node;
 module.exports = exports["default"];
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],237:[function(require,module,exports){
-=======
-},{}],625:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],615:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],633:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -109480,6 +107463,7 @@ var NodeStore = (function (_ReduceStore) {
     value: function reduce(state, action) {
       //TODO: make the state enforcably immutable
       var newState = undefined;
+
       switch (action.name) {
         case "open":
           //handle creation of tree given data format from server
@@ -109540,15 +107524,7 @@ var nodeStore = new NodeStore(_dispatcherJs2['default']);
 exports['default'] = nodeStore;
 module.exports = exports['default'];
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"../Actions/action.js":228,"../Models/node.js":236,"../dispatcher.js":240,"../utils/webapi.js":243,"flux":32,"flux/utils":49,"immutable":50}],238:[function(require,module,exports){
-=======
-},{"../Actions/action.js":617,"../Models/node.js":624,"../dispatcher.js":628,"flux":294,"flux/utils":311,"immutable":312}],626:[function(require,module,exports){
->>>>>>> master
-=======
-},{"../Actions/action.js":608,"../Models/node.js":614,"../dispatcher.js":618,"flux":294,"flux/utils":311,"immutable":312}],616:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../Actions/action.js":623,"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"flux":300,"flux/utils":317,"immutable":318}],634:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -109617,15 +107593,15 @@ var UIStateStore = (function (_ReduceStore) {
         case "piazzaPostsFetched":
           newState = new UIState(state.currentWeek);
           newState.piazzaPosts = action.data.posts;
-          return newState;
+          break;
         case "expandWeek":
           //TODO: this is really ugly. may want to use Object.assign
           newState = new UIState(action.data);
           newState.piazzaPosts = state.piazzaPosts;
-          return newState;
+          break;
       }
 
-      return state;
+      return newState;
     }
   }]);
 
@@ -109636,15 +107612,7 @@ var uiStateStore = new UIStateStore(_dispatcherJs2['default']);
 exports['default'] = uiStateStore;
 module.exports = exports['default'];
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"../Actions/action.js":228,"../Models/node.js":236,"../dispatcher.js":240,"flux":32,"flux/utils":49,"immutable":50}],239:[function(require,module,exports){
-=======
-},{"../Actions/action.js":617,"../Models/node.js":624,"../dispatcher.js":628,"flux":294,"flux/utils":311,"immutable":312}],627:[function(require,module,exports){
->>>>>>> master
-=======
-},{"../Actions/action.js":608,"../Models/node.js":614,"../dispatcher.js":618,"flux":294,"flux/utils":311,"immutable":312}],617:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../Actions/action.js":623,"../Models/node.js":632,"../dispatcher.js":636,"flux":300,"flux/utils":317,"immutable":318}],635:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -109746,15 +107714,7 @@ var ApplicationContainer = _fluxUtils.Container.create(ApplicationComponent);
 exports['default'] = ApplicationContainer;
 module.exports = exports['default'];
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./Actions/open.js":232,"./Components/createelement.js":234,"./Models/node.js":236,"./Stores/nodestore.js":237,"./Stores/uistatestore.js":238,"./utils/webapi.js":243,"flux/utils":49,"jquery":51,"react":227}],240:[function(require,module,exports){
-=======
-},{"./Actions/open.js":620,"./Components/createelement.js":622,"./Models/node.js":624,"./Stores/nodestore.js":625,"./Stores/uistatestore.js":626,"./utils/webapi.js":631,"flux/utils":311,"jquery":313,"react":609}],628:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./Actions/open.js":611,"./Components/createelement.js":612,"./Models/node.js":614,"./Stores/nodestore.js":615,"./Stores/uistatestore.js":616,"./utils/webapi.js":621,"flux/utils":311,"jquery":313,"react":607}],618:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./Actions/open.js":627,"./Components/createelement.js":630,"./Models/node.js":632,"./Stores/nodestore.js":633,"./Stores/uistatestore.js":634,"./utils/webapi.js":639,"flux/utils":317,"jquery":319,"react":615}],636:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -109767,15 +107727,7 @@ var dispatcher = new _flux.Dispatcher();
 exports['default'] = dispatcher;
 module.exports = exports['default'];
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"flux":32}],241:[function(require,module,exports){
-=======
-},{"flux":294}],629:[function(require,module,exports){
->>>>>>> master
-=======
-},{"flux":294}],619:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"flux":300}],637:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -109815,15 +107767,7 @@ global.HTTP = http;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"./application.js":239,"./utils/webapi.js":243,"jquery":51,"react":227,"react-dom":71}],242:[function(require,module,exports){
-=======
-},{"./application.js":627,"./utils/webapi.js":631,"jquery":313,"react":609,"react-dom":453,"stream-http":610}],630:[function(require,module,exports){
->>>>>>> master
-=======
-},{"./application.js":617,"./utils/webapi.js":621,"jquery":313,"react":607,"react-dom":452}],620:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"./application.js":635,"./utils/webapi.js":639,"jquery":319,"react":615,"react-dom":459,"stream-http":616}],638:[function(require,module,exports){
 /*
  * Title Caps
  *
@@ -109875,30 +107819,18 @@ function upper(word) {
 }
 module.exports = exports["default"];
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{}],243:[function(require,module,exports){
-=======
-},{}],631:[function(require,module,exports){
->>>>>>> master
-=======
-},{}],621:[function(require,module,exports){
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{}],639:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 exports.addNewChild = addNewChild;
-<<<<<<< HEAD
 exports.editNode = editNode;
 exports.removeNode = removeNode;
-exports.getInitialTree = getInitialTree;
-=======
 exports.init = init;
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
->>>>>>> master
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -110095,7 +108027,6 @@ function addNewChild(node, tag, markdown, renderer, callback) {
   });
 }
 
-<<<<<<< HEAD
 function editNode(node, markdown, renderer, children, callback) {
   var newNode = new _ModelsNodeJs2['default']({ id: node.id, contents: markdown, renderer: renderer, children: children });
 
@@ -110116,12 +108047,9 @@ function removeNode(node, callback) {
   });
 }
 
-function getInitialTree(callback) {
-=======
 function init(callback) {
   var nodes = undefined,
       rootId = undefined;
->>>>>>> master
   getTree().then(function (data) {
     nodes = data.nodes;
     return getRoot();
@@ -110147,15 +108075,7 @@ function init(callback) {
   });
 }
 
-<<<<<<< f9de658bef036bce07f751f02eed11f31c9f0f05:backend/frontend/js/index.js
-<<<<<<< HEAD
-},{"../Models/node.js":236,"jquery":51}]},{},[241])
-=======
-},{"../Actions/piazzapostsfetched.js":621,"../Models/node.js":624,"immutable":312,"jquery":313,"piazza-api":417,"stream-http":610}]},{},[629])
->>>>>>> master
-=======
-},{"../Models/node.js":614,"jquery":313,"piazza-api":416}]},{},[619])
->>>>>>> began framework adds for piazza integration:frontend/js/index.js
+},{"../Actions/piazzapostsfetched.js":628,"../Models/node.js":632,"immutable":318,"jquery":319,"piazza-api":423,"stream-http":616}]},{},[637])
 
 
 //# sourceMappingURL=index.js.map
