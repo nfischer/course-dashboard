@@ -31,7 +31,7 @@ $ ./setup.sh
   ```
     > git clone https://github.com/nfischer/course-dashboard.git
   ```
-  
+
 2. Install sqlite3
   - Follow the steps laid out in: http://www.tutorialspoint.com/sqlite/sqlite_installation.htm
 3. Install Python and Pip
@@ -44,7 +44,7 @@ $ ./setup.sh
   > pip install Flask
   > pip install flask-restful
   > pip install piazza_api
-  
+
   > cd course-dashboard/backend
   > setup.bat
   ```
