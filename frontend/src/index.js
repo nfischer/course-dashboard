@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import * as http from 'stream-http';
 
 import * as WEBAPI from './utils/webapi.js';
 
@@ -14,3 +15,4 @@ ReactDOM.render(
 
 global.$ = $;
 global.WEBAPI = WEBAPI;
+global.HTTP = http;

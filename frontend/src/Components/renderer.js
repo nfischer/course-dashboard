@@ -7,6 +7,9 @@ import Input from 'react-bootstrap/lib/Input';
 import ButtonInput from 'react-bootstrap/lib/ButtonInput';
 import Alert from 'react-bootstrap/lib/Alert';
 import marked from 'marked';
+import partial from 'partial';
+
+import Node from '../Models/node.js';
 
 import nodeStore from '../Stores/nodestore.js';
 import getRenderedElement from './createelement.js';
@@ -105,20 +108,50 @@ export class WeekCollapsed extends React.Component{
   }
 }
 
+function itemInFilter(filter, item){
+  let start = Date.parse(filter.start), end = Date.parse(filter.end);
+  let cur = Date.parse(item.history[0].created);
+  return (start <= cur && cur <= end);
+}
+
+function dateCompare(a, b){
+  let dateA = Date.parse(a.history[0].created),
+      dateB = Date.parse(b.history[0].created);
+
+  if(dateA < dateB){
+    return -1;
+  } else if(dateA > dateB){
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
 export class Announcements extends React.Component{ //this should pretty much behave like a list
   constructor(){
     super();
     this.state = {
+      filter: null,
       filteredItems: []
     };
   }
 
   componentWillMount(){
-    //not sure if we need to parse the JSON
-    let filter = JSON.parse(this.node.contents);
-    WebAPI.applyTimeFilter(filter, (filteredItems) => {
-      this.setState({filteredItems});
+    let filter = JSON.parse(this.props.node.contents);
+    this.setState({
+      filter,
+      filteredItems: this.props.ui.piazzaPosts
+        .filter(partial(itemInFilter, filter))
+        .sort(dateCompare)
     });
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      filteredItems: this.props.ui.piazzaPosts
+        .filter(partial(itemInFilter, this.state.filter))
+        .sort(dateCompare)
+    })
   }
 
   render(){
@@ -127,15 +160,16 @@ export class Announcements extends React.Component{ //this should pretty much be
         <h1>{titleCaps(this.props.tag)}</h1>
         {
           this.state.filteredItems.map((item) =>{
+            let latest = item.history[0];
             //create artificial node for this item
             let artificialNode = new Node({
               id: "-1",
-              contents: `[${item.content_snippet}](http://piazza.com/class/${WebAPI.classId}?cid=${item.id})`,
+              contents: `[${latest.subject}](http://piazza.com/class/${WebAPI.classId}?cid=${item.id})`,
               renderer: "Piazza-Item",
               children: {}
             });
 
-            return <ListElement tag={item.title}
+            return <ListElement tag={latest.subject}
                                 key={item.id}
                                 node={artificialNode}
                                 ui={this.props.ui} />
@@ -150,7 +184,7 @@ export class Announcements extends React.Component{ //this should pretty much be
 export class List extends React.Component {
   render() : React.Element {
     return (
-      <list>
+      <list className={this.props.tag}>
         <h1>{titleCaps(this.props.tag)}</h1>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>

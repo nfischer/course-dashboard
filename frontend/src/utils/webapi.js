@@ -1,7 +1,10 @@
 import $ from 'jquery';
 import * as piazza from 'piazza-api';
+import * as http from 'stream-http';
+import { Map, List } from 'immutable';
 
 import Node from '../Models/node.js';
+import piazzaPostsFetched from '../Actions/piazzapostsfetched.js'
 
 //TODO: clean up CALLBACK HELL
 
@@ -79,6 +82,42 @@ function getUserInfo(userId: number){
   });
 }
 
+var posts = new Map();
+var cached = null;
+function getPiazzaPosts(courseId: number){
+  let endpoint = mainUrl + `/${courseId}/course/getpiazzaposts/`;
+  http.get(endpoint, function(res){
+    res.on('data', function(buf){
+      console.log(buf.toString());
+      if(!posts.has(courseId)){
+        posts = posts.set(courseId, List());
+      }
+
+      let toparse;
+      try{
+        if(cached){
+          toparse = cached + buf.toString();
+          cached = null;
+        } else {
+          toparse = buf.toString();
+        }
+
+        posts = posts.set(courseId,
+          posts.get(courseId).push(JSON.parse(buf.toString()))
+        );
+
+        piazzaPostsFetched(posts.get(courseId));
+      } catch(e) {
+        cached = toparse;
+      }
+    });
+
+    res.on('end', function(){
+      piazzaPostsFetched(posts.get(courseId));
+    });
+  })
+}
+
 
 //More complex actions defined in terms of primitives
 // promises are used to make the order of asynchronous steps more transparent
@@ -111,74 +150,15 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
     });
 }
 
-var piazza_class;
-
 export function init(callback: any){
   let tree;
-  Promise.resolve(
-    getTree().then((data) => {
-      tree = data;
-      return getUserInfo(userId);
-    }, (jqXHR, textStatus, errorThrown) => {
-      console.error("Error requesting tree:",textStatus);
-      throw errorThrown;
-    }).then((userInfo) => {
-      //this promise type is different than jquery promise type. need to address
-        console.log(userInfo.piazza_username, userInfo.piazza_password);
-        return piazza.login(userInfo.piazza_username, userInfo.piazza_password);
-      }, (jqXHR, textStatus, errorThrown) => {
-        console.error("Error requesting user info:", textStatus);
-        throw errorThrown;
-    })
-  ).then((user) => {
-      console.log(user);
-      user.getClassById(classId).then(function(cls){
-        piazza_class = cls;
-      }, function(error){
-        console.error("Error getting class:",error);
-        throw error;
-      });
-      callback(tree, user);
-    }, function(error){
-      console.error("Error getting user:",error);
-      throw error;
-  });
-}
-
-var folderData = {};
-
-export function applyTimeFilter({start, end}, callback){ //may want to make this asynchronous
-  let folderData = Object.keys(folderData).length > 0 ?
-    new Promise(function(resolve, reject){
-      resolve( folderData );
-    }) :
-    Promise.all(piazza_class.folders.map(piazza_class.filterByFolder.bind(piazza_class)))
-      .then(function(foldersFeedItems){
-          foldersFeedItems.forEach((feedItems, i) => {
-            folderData[piazza_class.folders[i]] = feedItems;
-          });
-
-          return folderData
-        }, function(error){
-          console.error("Error getting folders:", error);
-          throw error;
-      });
-
-  folderData.then((folderData) => {
-      let filtered = [];
-      let startDate = Date.parse(start);
-      let endDate = Date.parse(end);
-
-      for( folder in folderData ){
-        filtered = filtered.concat(folderData[folder].filter(item => {
-          let date = Date.parse(item.lastModified);
-          return start <= date && date <= end;
-        }));
-      }
-
-      callback(filtered);
-    }, (error) => {
-      console.error("Error filtering folders:", error);
-      throw error;
+  getTree().then((data) => {
+    setTimeout(function(){
+      getPiazzaPosts(courseId);
+    }, 2000);
+    callback(data);
+  }, (jqXHR, textStatus, errorThrown) => {
+    console.error("Error requesting tree:",textStatus);
+    throw errorThrown;
   });
 }
