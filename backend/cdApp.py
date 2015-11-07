@@ -193,7 +193,6 @@ class Course(Resource):
     def post(self, course_id, operation):
         if operation == 'setpiazza':
             try:
-                print request.form['piazza_cid']
                 g.db.execute('''INSERT INTO courses
                                 (course_id, piazza_cid) VALUES (?, ?)''',
                              [int(course_id), request.form['piazza_cid']])
@@ -236,16 +235,15 @@ class Course(Resource):
             if piazza_id_str is None:
                 raise InvalidUsage('Given course does not have a Piazza ID')
             else: #TODO: handle errors
-                print piazza_id_str
                 p = Piazza()
                 p.user_login(email="sakekasi@ucla.edu", password="password")
-                cls = p.network(piazza_id_str)
+                piazzaClass = p.network(piazza_id_str)
 
-                def getPosts():
-                    for post in cls.iter_all_posts():
+                def get_posts():
+                    for post in piazzaClass.iter_all_posts():
                         yield json.dumps(post)
 
-                return Response(getPosts(), mimetype="application/json")
+                return Response(get_posts(), mimetype="application/json")
         else:
             raise InvalidUsage('Unknown operation type')
 

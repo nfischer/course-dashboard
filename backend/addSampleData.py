@@ -62,11 +62,11 @@ def add_root(root_id):
         raise ValueError('Unable to add root %s' % root_id)
     return ret
 
-def add_course(piazzaid):
+def add_course(piazza_id):
     """Uses te backend API to add a course to the course list"""
-    ret = post(os.path.join(URL, 'course/setpiazza/'), data={"piazza_cid": piazzaid})
+    ret = post(os.path.join(URL, 'course/setpiazza/'), data={"piazza_cid": piazza_id})
     if ret.status_code != 200:
-        raise ValueError('Unable to add piazza id %s' % piazzaid)
+        raise ValueError('Unable to add piazza id %s' % piazza_id)
     return ret
 
 ## @private
