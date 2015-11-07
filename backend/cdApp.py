@@ -220,10 +220,11 @@ class Course(Resource):
                                      FROM courses
                                      WHERE course_id=(?)''',
                                   [int(course_id)])
-            piazza_id_str = cursor.fetchone()
-            if piazza_id_str is None:
+            piazza_id_row = cursor.fetchone()
+            if piazza_id_row is None:
                 raise InvalidUsage('Given course does not have a Piazza ID')
             else:
+                piazza_id_str = piazza_id_row['piazza_cid']
                 return jsonify(message='Returning piazza ID for course', course_id=course_id, piazza_cid=piazza_id_str)
 
         elif operation == 'getpiazzaposts':
@@ -231,16 +232,17 @@ class Course(Resource):
                                      FROM courses
                                      WHERE course_id=(?)''',
                                   [int(course_id)])
-            piazza_id_str = cursor.fetchone()['piazza_cid']
-            if piazza_id_str is None:
+            piazza_id_row = cursor.fetchone()
+            if piazza_id_row is None:
                 raise InvalidUsage('Given course does not have a Piazza ID')
             else: #TODO: handle errors
+                piazza_id_str = piazza_id_row['piazza_cid']
                 p = Piazza()
                 p.user_login(email="sakekasi@ucla.edu", password="password")
-                piazzaClass = p.network(piazza_id_str)
+                piazza_class = p.network(piazza_id_str)
 
                 def get_posts():
-                    for post in piazzaClass.iter_all_posts():
+                    for post in piazza_class.iter_all_posts():
                         yield json.dumps(post)
 
                 return Response(get_posts(), mimetype="application/json")
