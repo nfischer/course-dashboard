@@ -1,10 +1,15 @@
 /* @flow */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Modal from 'react-bootstrap/lib/Modal';
 import ModalBody from 'react-bootstrap/lib/ModalBody';
 import Input from 'react-bootstrap/lib/Input';
 import ButtonInput from 'react-bootstrap/lib/ButtonInput';
+import Alert from 'react-bootstrap/lib/Alert';
 import marked from 'marked';
+import partial from 'partial';
+
+import Node from '../Models/node.js';
 
 import nodeStore from '../Stores/nodestore.js';
 import getRenderedElement from './createelement.js';
@@ -12,6 +17,7 @@ import expandWeek from '../Actions/expandweek.js';
 import addNode from '../Actions/addnode.js';
 
 import titleCaps from '../utils/titlecaps.js';
+import * as WebAPI from '../utils/webapi.js';
 
 var mdRenderer = new marked.Renderer();
 mdRenderer.link = function(href: string, title: string, text: string){
@@ -20,7 +26,6 @@ mdRenderer.link = function(href: string, title: string, text: string){
 marked.setOptions({
   renderer: mdRenderer
 });
-
 
 function mapObject(obj: Object, callback: any) : Array<any> { // replace any
     return Object.keys(obj).sort().map(function(value, index, array) {
@@ -103,11 +108,83 @@ export class WeekCollapsed extends React.Component{
   }
 }
 
+function itemInFilter(filter, item){
+  let start = Date.parse(filter.start), end = Date.parse(filter.end);
+  let cur = Date.parse(item.history[0].created);
+  return (start <= cur && cur <= end);
+}
+
+function dateCompare(a, b){
+  let dateA = Date.parse(a.history[0].created),
+      dateB = Date.parse(b.history[0].created);
+
+  if(dateA < dateB){
+    return -1;
+  } else if(dateA > dateB){
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+export class Announcements extends React.Component{ //this should pretty much behave like a list
+  constructor(){
+    super();
+    this.state = {
+      filter: null,
+      filteredItems: []
+    };
+  }
+
+  componentWillMount(){
+    let filter = JSON.parse(this.props.node.contents);
+    this.setState({
+      filter,
+      filteredItems: this.props.ui.piazzaPosts
+        .filter(partial(itemInFilter, filter))
+        .sort(dateCompare)
+    });
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      filteredItems: this.props.ui.piazzaPosts
+        .filter(partial(itemInFilter, this.state.filter))
+        .sort(dateCompare)
+    })
+  }
+
+  render(){
+    return (
+      <announcements>
+        <h1>{titleCaps(this.props.tag)}</h1>
+        {
+          this.state.filteredItems.map((item) =>{
+            let latest = item.history[0];
+            //create artificial node for this item
+            let artificialNode = new Node({
+              id: "-1",
+              contents: `[${latest.subject}](http://piazza.com/class/${WebAPI.classId}?cid=${item.id})`,
+              renderer: "Piazza-Item",
+              children: {}
+            });
+
+            return <ListElement tag={latest.subject}
+                                key={item.id}
+                                node={artificialNode}
+                                ui={this.props.ui} />
+          })
+        }
+      </announcements>
+    );
+  }
+}
+
 //List renderer. List items are shown in a modal dialog
 export class List extends React.Component {
   render() : React.Element {
     return (
-      <list>
+      <list className={this.props.tag}>
         <h1>{titleCaps(this.props.tag)}</h1>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>
@@ -154,6 +231,7 @@ export class ListElement extends React.Component {
 //Editable list renderer: same as a list, except that elements can be added.
 //currently only adds "Resource" nodes, but will allow for more in the future
 export class EditableList extends React.Component {
+
   render() : React.Element {
     return (
       <list>
@@ -169,27 +247,69 @@ export class EditableList extends React.Component {
   }
 
   addNewChild(title: string, markdown: string){
-    console.log("addNewChild", title, markdown);
     addNode(this.props.node, title, markdown, "Resource");
   }
 }
 
-export class ListElementInput extends React.Component {
+class ListElementInput extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      alert: null
+    };
+  }
+
   render() : React.Component { //add type that is element or component
     return (
-      <form>
-        <Input type="text" ref="title" placeholder="title"/>
-        <Input type="textarea" ref="contents" placeholder="type markdown here"/>
-        <ButtonInput type="reset" value="Create" onClick={this.clickWrapper.bind(this)}/>
-      </form>
+      <listelementinput>
+        {this.state.alert ? this.state.alert : <placeholder/>}
+        <form ref="formelement">
+          <Input type="text" ref="title" placeholder="title"/>
+          <Input type="textarea" ref="contents" placeholder="type markdown here"/>
+          <ButtonInput value="Create" onClick={this.clickWrapper.bind(this)}/>
+        </form>
+      </listelementinput>
     );
   }
 
   clickWrapper(){
-    let title=this.refs["title"].getValue(), value=this.refs["contents"].getValue();
+    let title=this.refs["title"].getValue().trim(), value=this.refs["contents"].getValue();
+    if(title === ""){
+      this.setState({alert: <AlertDismissable text="ERROR: must have a title"
+                                              onDismiss={this.onDismiss.bind(this)}/>});
+    } else {
+      ReactDOM.findDOMNode(this.refs["formelement"]).reset();
+      this.props.onClick(title, value);
+    }
+  }
 
-    console.log("clickwrapper");
-    console.log(title, value);
-    this.props.onClick(title, value);
+  onDismiss(){
+    this.setState({alert: []});
+  }
+}
+
+class AlertDismissable extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      alertVisible: true
+    };
+  }
+
+  render(){
+    if(this.state.alertVisible){
+      return (
+        <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss.bind(this)} dismissAfter={2000}>
+          <p>{this.props.text}</p>
+        </Alert>
+      );
+    } else {
+      return <placeholder/>;
+    }
+  }
+
+  handleAlertDismiss(){
+    this.setState({alertVisible: false});
+    this.props.onDismiss();
   }
 }

@@ -1,6 +1,12 @@
 import $ from 'jquery';
+import * as piazza from 'piazza-api';
+import * as http from 'stream-http';
+import { Map, List } from 'immutable';
 
 import Node from '../Models/node.js';
+import piazzaPostsFetched from '../Actions/piazzapostsfetched.js'
+
+//TODO: clean up CALLBACK HELL
 
 //this is a module exclusively for sending specific actions to the web api.
 //complex actions can be defined here in terms of the basic RESTful API
@@ -8,10 +14,20 @@ import Node from '../Models/node.js';
 //Primitive actions supported by webapi.
 //----------------------------------------
 
+// TODO(nate): This is a hardcoded <courseId>. Change this dynamically during
+// runtime based on which course we're actually viewing
+var courseId = "42";
 var mainUrl = "";
 
+// TODO(nate): This is a hardcoded user id. change this dynamically during
+// runtime based on which user is actually viewing
+var userId = 1;
+
+//TODO: this is hardcoded. fix plz
+export var classId = "if44ov1fn5a505";
+
 function getNode(nodeId: string){
-  let endpoint = mainUrl + `/node/${nodeId}/`;
+  let endpoint = mainUrl + `/${courseId}/node/${nodeId}/`;
   return $.ajax(endpoint,{
     method: "GET",
     dataType: "json"
@@ -19,7 +35,28 @@ function getNode(nodeId: string){
 }
 
 function overwriteNode(node: Node){
-  let endpoint = mainUrl + `/node/${node.id}/`;
+  let endpoint = mainUrl + `/${courseId}/node/update/${node.id}/`;
+  let data = {contents: node.contents, renderer: node.renderer, children: JSON.stringify(node.children)};
+  return $.ajax(endpoint, {
+    method: "POST",
+    data: data,
+    dataType: "json"
+  });
+}
+
+// @deprecated
+function overwriteChildren(node: Node){
+  let endpoint = mainUrl + `/${courseId}/node/update/${node.id}/`;
+  let data = {children: JSON.stringify(node.children)};
+  return $.ajax(endpoint, {
+    method: "POST",
+    data: data,
+    dataType: "json"
+  })
+}
+
+function createNode(node: Node){ //mock for creation process
+  let endpoint = mainUrl + `/${courseId}/node/add/`;
   return $.ajax(endpoint, {
     method: "POST",
     data: node,
@@ -27,32 +64,58 @@ function overwriteNode(node: Node){
   });
 }
 
-function overwriteChildren(node: Node, create: boolean){
-  let endpoint = mainUrl + `/children/${node.id}/`;
-  let data = {children: JSON.stringify(node.children)};
-  return $.ajax(endpoint, {
-    method: create ? "PUT" : "POST",
-    data: data,
-    dataType: "json"
-  })
-}
-
-function createNode(node: Node){ //mock for creation process
-  let endpoint = mainUrl + "/node/";
-  return $.ajax(endpoint, {
-    method: "PUT",
-    data: node,
-    dataType: "json"
-  });
-}
-
 //currently rootId and depth are ignored
 function getTree(rootId = null, depth = null){
-  let endpoint = mainUrl + "/tree/";
+  let endpoint = mainUrl + `/${courseId}/tree/`;
   return $.ajax(endpoint,{
     method: "GET",
     dataType: "json"
   });
+}
+
+//gets user credentials
+function getUserInfo(userId: number){
+  let endpoint = mainUrl + `/static/piazza-credentials.json`;
+  return $.ajax(endpoint, {
+    method: "GET",
+    dataType: "json"
+  });
+}
+
+var posts = new Map();
+var cached = null;
+function getPiazzaPosts(courseId: number){
+  let endpoint = mainUrl + `/${courseId}/course/getpiazzaposts/`;
+  http.get(endpoint, function(res){
+    res.on('data', function(buf){
+      console.log(buf.toString());
+      if(!posts.has(courseId)){
+        posts = posts.set(courseId, List());
+      }
+
+      let toparse;
+      try{
+        if(cached){
+          toparse = cached + buf.toString();
+          cached = null;
+        } else {
+          toparse = buf.toString();
+        }
+
+        posts = posts.set(courseId,
+          posts.get(courseId).push(JSON.parse(buf.toString()))
+        );
+
+        piazzaPostsFetched(posts.get(courseId));
+      } catch(e) {
+        cached = toparse;
+      }
+    });
+
+    res.on('end', function(){
+      piazzaPostsFetched(posts.get(courseId));
+    });
+  })
 }
 
 
@@ -68,16 +131,13 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
 
   createNode(child) //create node
     .then((data) => { //modify parent
-      console.log(data);
-
       data.contents = child.contents;
       data.renderer = child.renderer;
       data.children = {};
 
       initialized_child = new Node(data);
-      let create = Object.keys(node.children).length === 0;
       node.children[tag] = initialized_child.id;
-      return overwriteChildren(node, create);
+      return overwriteNode(node);
     }, (jqXHR, textStatus, errorThrown) => {
       console.error(textStatus);
       throw errorThrown;
@@ -90,11 +150,15 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
     });
 }
 
-export function getInitialTree(callback: any){
+export function init(callback: any){
+  let tree;
   getTree().then((data) => {
+    setTimeout(function(){
+      getPiazzaPosts(courseId);
+    }, 2000);
     callback(data);
   }, (jqXHR, textStatus, errorThrown) => {
-    console.error(textStatus);
+    console.error("Error requesting tree:",textStatus);
     throw errorThrown;
   });
 }

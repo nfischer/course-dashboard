@@ -6,6 +6,33 @@ A simplified way of organizing all information and materials for a course
 Inspiration
 -----------
 
+Quick Start
+-----------
+
+in a new terminal, execute
+```
+git clone https://github.com/nfischer/course-dashboard.git
+
+sudo apt-get install sqlite3
+sudo apt-get install python-pip
+
+sudo pip install Flask
+sudo pip install flask-restful
+
+cd course-dashboard/backend
+ln -s ../frontend static
+
+./setup.sh
+```
+
+this should start the server, but with a blank database. in a new terminal, execute the following:
+
+```
+./addSampleData.py
+```
+
+this should insert data from the sample json file located in frontend/ into the database. At this point, you can visit [localhost:5000/static/index.html](http://localhost:5000/static/index.html) to see a running page.
+
 Installation
 ------------
 
@@ -74,8 +101,15 @@ npm install
 gulp build_browser
 ```
 
+in order to have the backend serve frontend files and have the frontend talk to the backend, execute the following commands:
+
+```
+cd ../backend
+ln -s ../frontend static
+```
+
 The page should now be available at
-[http://localhost:5000/static/index.html](http://localhost:5000/static/index.html).
+[http://localhost:5000/static/index.html](http://localhost:5000/static/index.html), served by the backend server.
 
 ### Migration
 

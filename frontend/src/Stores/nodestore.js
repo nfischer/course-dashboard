@@ -30,7 +30,7 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
     super.__invokeOnDispatch(payload);
   }
 
-  reduce(state: ?LayerStoreState, action: Action) : ?NodeStoreState {
+  reduce(state: ?LayerStoreState, action: Action) : ?NodeStoreState { //TODO: make the state enforcably immutable
     switch(action.name){
     case "open":
       //handle creation of tree given data format from server
@@ -46,8 +46,8 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
       //parent node links are updated as a part of comitting changes to db
       let newNode = action.data;
       newNode.id = (typeof newNode.id === "string") ? newNode.id : newNode.id.toString();
-      newState = state;
-      newState.nodes = newState.nodes.set(newNode.id, newNode);
+      newState = new NodeStoreState(state.rootId);
+      newState.nodes = state.nodes.set(newNode.id, newNode);
 
       return newState;
     case "editResource":

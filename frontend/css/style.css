@@ -35,6 +35,7 @@
     font-style: normal;
 }
 
+
 body {
     font-family: sans-serif;
     font-weight: bold;
@@ -45,9 +46,27 @@ body {
     align-items: center;
 }
 
+a {
+    text-decoration: none;
+    color: hsla(215, 100%, 43%, 1);
+}
+
 h1, h2, h3, h4, h5 {
   font-family: 'League Spartan', sans-serif;
 }
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+form {
+    border-bottom: 1px solid hsla(0,0%,80%,1);
+}
+
 
 .node {
     background: white;
@@ -57,35 +76,11 @@ h1, h2, h3, h4, h5 {
     padding-top: 100px;
 }
 
-week {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px auto;
-}
-
-
 div.appArea {
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 100%;
-}
-
-collapsedweek, .listelement {
-    cursor: pointer;
-}
-
-fullweek {
-    border: 2px solid black;
-    display: block;
-    margin: 20px 0px;
-/*     padding: 20px; */
-/*     width: 1500px; */
-}
-
-fullweek > children {
-    flex-direction: row;
 }
 
 children {
@@ -95,16 +90,52 @@ children {
     flex-direction: column;
     justify-content: space-around;
     align-items: stretch;
-
-/*     width: 100%; */
 }
 
-form {
-    border-bottom: 1px solid hsla(0,0%,80%,1);
+.contents, contents {
+    width: 100%;
+}
+
+.modal-content children {
+    width: 100%;
+}
+
+.listelement, piazza-item {
+    display: block;
+    border-bottom: 1px dotted black;
+}
+
+.listelement:last-child, piazza-item:last-child {
+    border-bottom: none;
+}
+
+collapsedweek, .listelement, fullweek > h1, piazza-item {
+    cursor: pointer;
+}
+
+
+
+week {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+}
+
+fullweek {
+    border: 2px solid black;
+    display: block;
+    margin: 20px 0px;
+}
+
+fullweek > children {
+    flex-direction: row;
 }
 
 fullweek > children > list, fullweek > children > announcements {
-    min-width: 300px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: scroll;
     margin: 20px 10px;
     border: 1px solid black;
 }
@@ -115,53 +146,24 @@ fullweek > children {
 }
 
 fullweek > h1 {
-/*     margin-left: 20px; */
     margin-top: 25px;
     text-align:center;
     width: 100%;
-/*     margin-bottom: -15px; */
-    cursor: pointer;
 }
 
 list, announcements{
-/*     display: inline-block; */
     display: block;
-/*     border: 1px solid red; */
     padding: 0px 10px;
 }
 
-announcements {
-    padding-top: 10px;
+announcements > h1 {
+    color: hsl(0, 94%, 71%);
 }
 
-
-.contents, contents {
-    width: 100%;
+.assignments > h1 {
+  color: hsl(142, 76%, 46%);
 }
 
-
-h1 {
-    font-size: 20px;
-}
-
-h2 {
-    font-size: 16px;
-}
-
-.listelement {
-    display: block;
-    border-bottom: 1px dotted black;
-}
-
-.listelement:last-child {
-    border-bottom: none;
-}
-
-a {
-    text-decoration: none;
-    color: hsla(215, 100%, 43%, 1);
-}
-
-.modal-content children {
-    width: 100%;
+.topics > h1 {
+  color: hsl(220, 77%, 68%);
 }
