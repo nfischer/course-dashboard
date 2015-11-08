@@ -119062,10 +119062,11 @@ var NodeStore = (function (_ReduceStore) {
     key: 'reduce',
     value: function reduce(state, action) {
       //TODO: make the state enforcably immutable
+      var newState = undefined;
       switch (action.name) {
         case "open":
           //handle creation of tree given data format from server
-          var newState = state || new NodeStoreState(action.data.rootId); //Object.assign({}, state);
+          newState = state || new NodeStoreState(action.data.rootId); //Object.assign({}, state);
           action.data.nodes.forEach(function (node) {
             node.id = typeof node.id === "string" ? node.id : node.id.toString();
             newState.nodes = newState.nodes.set(node.id, new _ModelsNodeJs2['default'](node));
