@@ -31,7 +31,7 @@ a {
 h1 {
   font-family: 'bariol_boldbold', sans-serif;
   font-weight: bold;
-  font-size: 23px;
+  font-size: 25px;
 }
 
 h2, h3, h4, h5 {
@@ -119,10 +119,11 @@ fullweek > children {
 
 fullweek > children > list, fullweek > children > announcements {
     width: 300px;
-    max-height: 400px;
+    height: 400px;
     overflow-y: auto;
     margin: 20px 10px;
-    border: 1px solid black;
+    border: 2px solid hsla(0, 0%, 0%, 0.3);
+    border-radius: 3px;
 }
 
 fullweek > children > list > h1, fullweek > children > announcements > h1 {

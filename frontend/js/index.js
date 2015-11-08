@@ -107270,15 +107270,15 @@ var UIStateStore = (function (_ReduceStore) {
         case "piazzaPostsFetched":
           newState = new UIState(state.currentWeek);
           newState.piazzaPosts = action.data.posts;
-          break;
+          return newState;
         case "expandWeek":
           //TODO: this is really ugly. may want to use Object.assign
           newState = new UIState(action.data);
           newState.piazzaPosts = state.piazzaPosts;
-          break;
+          return newState;
       }
 
-      return newState;
+      return state;
     }
   }]);
 
@@ -107548,7 +107548,7 @@ var mainUrl = "";
 // runtime based on which user is actually viewing
 var userId = 1;
 
-//TODO: this is hardcoded. fix plz
+//TODO: this is not the right place to put this. we might want to add this to global ui state
 var piazzaClassId = null;exports.piazzaClassId = piazzaClassId;
 //"if44ov1fn5a505"
 
