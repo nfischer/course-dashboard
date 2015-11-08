@@ -50,9 +50,14 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
       newState.nodes = state.nodes.set(newNode.id, newNode);
 
       return newState;
-    case "editResource":
-      //TODO: edit node
-    case "removeResource":
+    case "editNode":
+      let editedNode = action.data;
+      editedNode.id = (typeof editedNode.id === "string") ? editedNode.id : editedNode.id.toString();
+      newState = new NodeStoreState(state.rootId);
+      newState.nodes = state.nodes.set(editedNode.id, editedNode);
+
+      return newState;
+    case "removeNode":
       //TODO: delete node
     }
 

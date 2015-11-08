@@ -21,7 +21,7 @@ function getNode(nodeId: string){
   });
 }
 
-function overwriteNode(node: Node){
+export function overwriteNode(node: Node){
   let endpoint = mainUrl + `/${courseId}/node/update/${node.id}/`;
   let data = {contents: node.contents, renderer: node.renderer, children: JSON.stringify(node.children)};
   return $.ajax(endpoint, {

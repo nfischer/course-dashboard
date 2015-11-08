@@ -12,6 +12,7 @@ import nodeStore from '../Stores/nodestore.js';
 import getRenderedElement from './createelement.js';
 import expandWeek from '../Actions/expandweek.js';
 import addNode from '../Actions/addnode.js';
+import editNode from '../Actions/editnode.js';
 
 import titleCaps from '../utils/titlecaps.js';
 
@@ -125,19 +126,25 @@ export class ListElement extends React.Component {
   constructor(){
     super();
     this.state = {
-      show: false
+      show: false,
+      showEditor: false
     }
   }
 
   render() : React.Element {
     return (
       React.createElement(this.props.node.renderer,
-                          {onClick: this.handleClick.bind(this),
-                           className: "listelement"},
-                          <h2>{titleCaps(this.props.tag)}</h2>,
+                          {className: "listelement"},
+                          <h2 onClick={this.handleClick.bind(this)}>{titleCaps(this.props.tag)}</h2>,
+                          <h2 onClick={this.handleClickEditor.bind(this)}>Edit</h2>,
                           <Modal show={this.state.show} onHide={this.close.bind(this)}>
                             <ModalBody>
                               {getRenderedElement(this.props.tag, this.props.node, this.props.ui)}
+                            </ModalBody>
+                          </Modal>,
+                          <Modal show={this.state.showEditor} onHide={this.closeEditor.bind(this)}>
+                            <ModalBody>
+                              <ListElementInput onClick={this.editNode.bind(this)} />
                             </ModalBody>
                           </Modal>
                           )
@@ -150,6 +157,18 @@ export class ListElement extends React.Component {
 
   close(){
     this.setState({show: false});
+  }
+
+  handleClickEditor(event){
+    this.setState({showEditor: true});
+  }
+
+  closeEditor(){
+    this.setState({showEditor: false});
+  }
+
+  editNode(title: string, markdown: string){
+    editNode(this.props.node.id, markdown, this.props.node.renderer);
   }
 }
 
