@@ -32,15 +32,15 @@ class UIStateStore extends ReduceStore<?UIState> {
     case "piazzaPostsFetched":
       newState = new UIState(state.currentWeek);
       newState.piazzaPosts = action.data.posts;
-      break;
+      return newState;
     case "expandWeek":
       //TODO: this is really ugly. may want to use Object.assign
       newState = new UIState(action.data);
       newState.piazzaPosts = state.piazzaPosts;
-      break;
+      return newState;
     }
 
-    return newState;
+    return state;
   }
 }
 
