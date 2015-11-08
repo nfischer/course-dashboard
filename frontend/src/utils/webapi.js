@@ -24,7 +24,7 @@ var mainUrl = "";
 var userId = 1;
 
 //TODO: this is hardcoded. fix plz
-export var classId = "if44ov1fn5a505";
+export var piazzaClassId = null;//"if44ov1fn5a505"
 
 function getNode(nodeId: string){
   let endpoint = mainUrl + `/${courseId}/node/${nodeId}/`;
@@ -65,9 +65,17 @@ function createNode(node: Node){ //mock for creation process
 }
 
 //currently rootId and depth are ignored
-function getTree(rootId = null, depth = null){
+function getTree(){
   let endpoint = mainUrl + `/${courseId}/tree/`;
   return $.ajax(endpoint,{
+    method: "GET",
+    dataType: "json"
+  });
+}
+
+function getRoot(){
+  let endpoint = mainUrl + `/${courseId}/root/get/`;
+  return $.ajax(endpoint, {
     method: "GET",
     dataType: "json"
   });
@@ -76,6 +84,14 @@ function getTree(rootId = null, depth = null){
 //gets user credentials
 function getUserInfo(userId: number){
   let endpoint = mainUrl + `/static/piazza-credentials.json`;
+  return $.ajax(endpoint, {
+    method: "GET",
+    dataType: "json"
+  });
+}
+
+function getPiazzaClassId(courseId: number){
+  let endpoint = mainUrl + `/${courseId}/course/getpiazza/`;
   return $.ajax(endpoint, {
     method: "GET",
     dataType: "json"
@@ -130,7 +146,7 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
   let initialized_child;
 
   createNode(child) //create node
-    .then((data) => { //modify parent
+  .then((data) => { //modify parent
       data.contents = child.contents;
       data.renderer = child.renderer;
       data.children = {};
@@ -141,19 +157,25 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
     }, (jqXHR, textStatus, errorThrown) => {
       console.error(textStatus);
       throw errorThrown;
-    })
-    .then((data) => { //call passed in callback
+  })
+  .then((data) => { //call passed in callback
       callback(initialized_child);
     }, (jqXHR, textStatus, errorThrown) => {
       console.error(textStatus);
       throw errorThrown;
-    });
+  });
 }
 
 export function init(callback: any){
   let tree;
   getTree().then((data) => {
     setTimeout(function(){
+      getPiazzaClassId(courseId).then((data) => {
+          piazzaClassId = data.piazza_cid;
+        }, (jqXHR, textStatus, errorThrown) => { //make this a separate function
+          console.error(textStatus);
+          throw errorThrown;
+      });
       getPiazzaPosts(courseId);
     }, 2000);
     callback(data);
