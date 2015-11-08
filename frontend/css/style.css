@@ -47,6 +47,10 @@ form {
     border-bottom: 1px solid hsla(0,0%,80%,1);
 }
 
+timeline {
+  background: none!important;
+}
+
 
 .node {
     background: white;
@@ -103,7 +107,7 @@ week {
 }
 
 fullweek {
-    border: 2px solid black;
+    border: 3px solid black;
     display: block;
     margin: 20px 0px;
     border-radius: 10px;
