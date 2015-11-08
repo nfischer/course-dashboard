@@ -67,7 +67,7 @@ export class Week extends React.Component {
   render() : React.Element {
     let fullyRendered = React.createElement("fullweek",
                           {className: "node"},
-                          <h1 onClick={this.collapse.bind(this)}>{titleCaps(this.props.tag)}</h1>,
+                          <h1 className="weektitle" onClick={this.collapse.bind(this)}>{titleCaps(this.props.tag)}</h1>,
                           <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
                           <children>
                               {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
@@ -101,7 +101,7 @@ export class WeekCollapsed extends React.Component{
       <collapsedweek onClick={this.props.onClick}>
         <svg height={w} width={w}>
           <circle cx={w/2} cy={w/2} r={w/2-5} stroke="black" strokeWidth="3" fill="white" />
-          <text  x="50%" y="50%" dy="5px" textAnchor="middle" fill="black">{this.props.tag}</text>
+          <text  x="50%" y="50%" dy="9px" textAnchor="middle" fill="black">{titleCaps(this.props.tag)}</text>
         </svg>
       </collapsedweek>
     );
