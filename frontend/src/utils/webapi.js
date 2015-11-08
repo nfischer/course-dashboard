@@ -167,20 +167,27 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
 }
 
 export function init(callback: any){
-  let tree;
+  let nodes, rootId;
   getTree().then((data) => {
-    setTimeout(function(){
-      getPiazzaClassId(courseId).then((data) => {
-          piazzaClassId = data.piazza_cid;
-        }, (jqXHR, textStatus, errorThrown) => { //make this a separate function
-          console.error(textStatus);
-          throw errorThrown;
-      });
-      getPiazzaPosts(courseId);
-    }, 2000);
-    callback(data);
-  }, (jqXHR, textStatus, errorThrown) => {
-    console.error("Error requesting tree:",textStatus);
-    throw errorThrown;
+      nodes = data.nodes;
+      return getRoot();
+    }, (jqXHR, textStatus, errorThrown) => {
+      console.error("Error requesting tree:",textStatus);
+      throw errorThrown;
+  }).then((data) => {
+      rootId = data[0].id.toString();
+      setTimeout(function(){
+        getPiazzaClassId(courseId).then((data) => {
+            piazzaClassId = data.piazza_cid;
+          }, (jqXHR, textStatus, errorThrown) => { //make this a separate function
+            console.error(textStatus);
+            throw errorThrown;
+        });
+        getPiazzaPosts(courseId);
+      }, 2000);
+      callback({rootId, nodes});
+    }, (jqXHR, textStatus, errorThrown) => {
+      console.error("Error requesting roots:", textStatus);
+      throw errorThrown;
   });
 }
