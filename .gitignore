@@ -6,6 +6,7 @@
 .DS_Store
 
 db/
+sample_user.txt
 *.pyc
 
 README.pdf
