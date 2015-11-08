@@ -237,7 +237,7 @@ class Course(Resource):
             piazza_id_row = cursor.fetchone()
             if piazza_id_row is None:
                 raise InvalidUsage('Given course does not have a Piazza ID')
-            else: #TODO: handle errors
+            else:
                 piazza_id_str = piazza_id_row['piazza_cid']
                 p = Piazza()
                 try:
