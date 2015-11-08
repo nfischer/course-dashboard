@@ -164,7 +164,7 @@ export class Announcements extends React.Component{ //this should pretty much be
             //create artificial node for this item
             let artificialNode = new Node({
               id: "-1",
-              contents: `[${latest.subject}](http://piazza.com/class/${WebAPI.classId}?cid=${item.id})`,
+              contents: `[${latest.subject}](http://piazza.com/class/${WebAPI.piazzaClassId}?cid=${item.id})`,
               renderer: "Piazza-Item",
               children: {}
             });

@@ -23,7 +23,7 @@ var mainUrl = "";
 // runtime based on which user is actually viewing
 var userId = 1;
 
-//TODO: this is hardcoded. fix plz
+//TODO: this is not the right place to put this. we might want to add this to global ui state
 export var piazzaClassId = null;//"if44ov1fn5a505"
 
 function getNode(nodeId: string){
@@ -176,18 +176,18 @@ export function init(callback: any){
       throw errorThrown;
   }).then((data) => {
       rootId = data[0].id.toString();
+      return getPiazzaClassId(courseId);
+    }, (jqXHR, textStatus, errorThrown) => {
+      console.error("Error requesting roots:", textStatus);
+      throw errorThrown;
+  }).then((data) => {
+      piazzaClassId = data.piazza_cid;
       setTimeout(function(){
-        getPiazzaClassId(courseId).then((data) => {
-            piazzaClassId = data.piazza_cid;
-          }, (jqXHR, textStatus, errorThrown) => { //make this a separate function
-            console.error(textStatus);
-            throw errorThrown;
-        });
         getPiazzaPosts(courseId);
       }, 2000);
       callback({rootId, nodes});
-    }, (jqXHR, textStatus, errorThrown) => {
-      console.error("Error requesting roots:", textStatus);
+    }, (jqXHR, textStatus, errorThrown) => { //make this a separate function
+      console.error(textStatus);
       throw errorThrown;
   });
 }
