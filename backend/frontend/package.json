@@ -6,6 +6,18 @@
   "scripts": {
     "test": "jest"
   },
+  "jest": {
+    "scriptPreprocessor": "./node_modules/babel-jest",
+    "testFileExtensions": [
+      "es6",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/nfischer/course-dashboard.git"
@@ -31,6 +43,7 @@
     "stream-http": "^2.0.2"
   },
   "devDependencies": {
+    "babel-jest": "^6.0.1",
     "babelify": "^6.3.0",
     "brfs": "^1.4.1",
     "browserify": "^11.2.0",
