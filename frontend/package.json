@@ -45,6 +45,7 @@
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.5",
     "invariant": "^2.1.1",
+    "jest-cli": "^0.7.1",
     "merge-stream": "^1.0.0",
     "mocha": "^2.3.3",
     "orchestrator": "^0.3.7",
