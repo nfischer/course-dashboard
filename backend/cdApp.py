@@ -5,6 +5,7 @@ from flask_restful import Resource, Api
 import json
 from piazza_api import Piazza
 from piazza_api.exceptions import AuthenticationError
+import os
 
 # configuration
 DATABASE = 'db/course-dashboard.db'
@@ -14,7 +15,12 @@ USERNAME = 'admin'
 PASSWORD = 'default'
 USER_FILE = 'sample_user.txt'
 
-app = Flask(__name__, static_url_path='/static')
+if os.name == 'posix':
+    STATIC_PATH = '/static'
+else:
+    STATIC_PATH = '/staticwin'
+
+app = Flask(__name__, static_url_path=STATIC_PATH)
 app.config.from_object(__name__)
 api = Api(app)
 
