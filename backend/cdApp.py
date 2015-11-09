@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3, logging
 from flask import Flask, request, g, render_template, \
     jsonify #, flash, url_for, session, abort, redirect
 # from contextlib import closing
@@ -80,16 +80,47 @@ class Node(Resource):
             g.db.commit()
             added_node = cursor.fetchone()
             return jsonify(message='New node was successfully created', id=added_node['id'])
+        #update operation
         elif operation == 'update':
             try:
+                # updating fields should be optional
+                # you don't have to update children, content and renderer each for 
+                # each update
                 node_id = str(node_id)
-                contents = request.form['contents']
-                renderer = request.form['renderer']
-                children = request.form['children']
-                cursor = g.db.execute('''UPDATE nodes
-                                         SET contents=(?),renderer=(?),children=(?)
-                                         WHERE id=(?) AND course_id=(?) AND isalive=1''',
-                                      [contents, renderer, children, int(node_id), int(course_id)])
+
+                contents = request.form['contents'] if request.form.has_key('contents') else None
+                renderer = request.form['renderer'] if request.form.has_key('renderer') else None
+                children = request.form['children'] if request.form.has_key('children') else None
+                data = []
+                sql = 'UPDATE nodes SET '
+                
+                if contents:
+                    sql += 'contents=(?),'
+                    data.append(contents)
+                if renderer:
+                    sql += 'renderer=(?),'
+                    data.append(renderer)
+                if children:
+                    sql += 'children=(?)'
+                    data.append(children)
+                
+
+                # if not contents and not renderer and not children:
+                #     raise InvalidUsage('POST header is empty')
+
+                if sql[-1] == ',':
+                    sql = sql[:-1]
+
+                sql += ' WHERE id=(?) AND course_id=(?) AND isalive=1'
+
+                logging.debug('sql :: %s', sql)
+
+                data.append(int(node_id))
+                data.append(int(course_id))
+
+                logging.debug(data)
+
+                cursor = g.db.execute(sql, data)
                 g.db.commit()
                 if cursor.rowcount == 0:
                     raise InvalidUsage('Unable to update node %s' % node_id)
@@ -99,6 +130,7 @@ class Node(Resource):
                 print str(e)
                 raise InvalidUsage('Internal error', status_code=500)
             return jsonify(message='Node was successfully updated.', id=node_id)
+
         elif operation == 'delete':
             # Allows for repeated calls without failure
             cursor = g.db.execute('''UPDATE nodes
@@ -285,4 +317,5 @@ api.add_resource(Course, '/<course_id>/course/<operation>/')
 # @app.route('/addNode', methods=['POST'])
 
 if __name__ == '__main__':
+    logging.basicConfig(filename='csApp.log',level=logging.DEBUG)
     app.run(debug=True)

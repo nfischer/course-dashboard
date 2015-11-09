@@ -7,6 +7,7 @@
 
 db/
 *.pyc
+*.log
 
 README.pdf
 *.pdf
