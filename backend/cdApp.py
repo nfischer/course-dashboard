@@ -4,6 +4,8 @@ from flask import Flask, request, g, render_template, \
 from flask_restful import Resource, Api
 import json
 from piazza_api import Piazza
+from piazza_api.exceptions import AuthenticationError
+import os
 
 # configuration
 DATABASE = 'db/course-dashboard.db'
@@ -11,8 +13,10 @@ DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
+USER_FILE = 'sample_user.txt'
 
 app = Flask(__name__, static_folder='frontend')
+
 app.config.from_object(__name__)
 api = Api(app)
 
@@ -235,11 +239,19 @@ class Course(Resource):
             piazza_id_row = cursor.fetchone()
             if piazza_id_row is None:
                 raise InvalidUsage('Given course does not have a Piazza ID')
-            else: #TODO: handle errors
+            else:
                 piazza_id_str = piazza_id_row['piazza_cid']
                 p = Piazza()
-                p.user_login(email="sakekasi@ucla.edu", password="password")
-                piazza_class = p.network(piazza_id_str)
+                try:
+                    with open(USER_FILE, 'r') as fname:
+                        lines = fname.read().split('\n')
+                        p.user_login(email=lines[0], password=lines[1])
+                    piazza_class = p.network(piazza_id_str)
+                except IOError:
+                    raise InvalidUsage('Unable to find piazza credentials',
+                                       status_code=500)
+                except AuthenticationError:
+                    raise InvalidUsage('Invalid pizza credentials')
 
                 def get_posts():
                     for post in piazza_class.iter_all_posts():

@@ -32,8 +32,22 @@ execute the following:
 ./addSampleData.py
 ```
 
-This should insert data from the sample JSON file located in frontend/ into the
-database. At this point, you can visit
+This should insert data from the sample JSON file located in `frontend/` into
+the database.
+
+As a final step, in order to get piazza integration, please enter in your Piazza
+credentials in a new file named `backend/sample_user.txt' following the two-line
+format:
+
+```
+myemail@domain.com
+mypassword
+```
+
+If you're enrolled in CS 130 with that info, you're good to go and should have
+no issues displaying piazza information on the web UI.
+
+At this point, you can visit
 [localhost:5000/static/index.html](http://localhost:5000/static/index.html) to
 see a running page.
 

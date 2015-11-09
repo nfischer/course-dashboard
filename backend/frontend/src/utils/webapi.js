@@ -104,7 +104,7 @@ function getPiazzaPosts(courseId: number){
   let endpoint = mainUrl + `/${courseId}/course/getpiazzaposts/`;
   http.get(endpoint, function(res){
     res.on('data', function(buf){
-      console.log(buf.toString());
+      // console.log(buf.toString());
       if(!posts.has(courseId)){
         posts = posts.set(courseId, List());
       }
