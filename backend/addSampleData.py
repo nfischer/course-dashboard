@@ -11,7 +11,7 @@ from requests import get, post
 
 URL = 'http://localhost:5000/42'
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-SAMPLE_JSON_FILE = os.path.join(PROJECT_DIR, 'frontend', 'sampledata.json')
+SAMPLE_JSON_FILE = os.path.join(PROJECT_DIR, 'backend/frontend', 'sampledata.json')
 
 def create_node(contents='foo', renderer='bar'):
     """Uses the backend API to create a node"""

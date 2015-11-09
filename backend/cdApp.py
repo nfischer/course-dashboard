@@ -1,6 +1,6 @@
 import sqlite3
 from flask import Flask, request, g, render_template, \
-    jsonify, Response
+    jsonify, Response, send_from_directory
 from flask_restful import Resource, Api
 import json
 from piazza_api import Piazza
@@ -12,7 +12,7 @@ SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
 
-app = Flask(__name__, static_url_path='/static')
+app = Flask(__name__, static_folder='frontend')
 app.config.from_object(__name__)
 api = Api(app)
 
@@ -254,6 +254,9 @@ class Course(Resource):
 def posterator():
     return render_template('posterator.html')
 
+@app.route('/', methods=['GET'])
+def index():
+    return send_from_directory('frontend','index.html');
 
 api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<operation>/<node_id>/')
 # api.add_resource(Children, '/children/<operation>/<node_id>/')
