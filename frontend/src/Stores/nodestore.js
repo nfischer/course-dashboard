@@ -31,10 +31,11 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
   }
 
   reduce(state: ?LayerStoreState, action: Action) : ?NodeStoreState { //TODO: make the state enforcably immutable
+    let newState;
     switch(action.name){
     case "open":
       //handle creation of tree given data format from server
-      let newState = state || new NodeStoreState(action.data.rootId);//Object.assign({}, state);
+      newState = state || new NodeStoreState(action.data.rootId);//Object.assign({}, state);
       action.data.nodes.forEach(node => {
         node.id = (typeof node.id === "string") ? node.id : node.id.toString();
         newState.nodes = newState.nodes.set(node.id, new Node(node));

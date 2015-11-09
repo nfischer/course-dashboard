@@ -62,6 +62,13 @@ def add_root(root_id):
         raise ValueError('Unable to add root %s' % root_id)
     return ret
 
+def add_course(piazza_id):
+    """Uses the backend API to add a course to the course list"""
+    ret = post(os.path.join(URL, 'course/setpiazza/'), data={'piazza_cid': piazza_id})
+    if ret.status_code != 200:
+        raise ValueError('Unable to add piazza id %s' % piazza_id)
+    return ret
+
 ## @private
 def node_compare(node1, node2):
     id1 = int(node1['id'])
@@ -90,5 +97,7 @@ if __name__ == '__main__':
         mychildren = json.dumps(node['children'])
         print update_node(myid, children=mychildren).json()
 
+    # add the cs 130 piazza ID
+    print add_course('if44ov1fn5a505').json()
     # Set the root to be node 54
     print add_root(54).json()

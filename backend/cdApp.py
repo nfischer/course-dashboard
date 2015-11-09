@@ -1,8 +1,11 @@
 import sqlite3
 from flask import Flask, request, g, render_template, \
-    jsonify #, flash, url_for, session, abort, redirect
-# from contextlib import closing
-from flask_restful import Resource, Api # , reqparse
+    jsonify, Response
+from flask_restful import Resource, Api
+import json
+from piazza_api import Piazza
+from piazza_api.exceptions import AuthenticationError
+import os
 
 # configuration
 DATABASE = 'db/course-dashboard.db'
@@ -10,8 +13,14 @@ DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
+USER_FILE = 'sample_user.txt'
 
-app = Flask(__name__, static_url_path='/static')
+if os.name == 'posix':
+    STATIC_PATH = '/static'
+else:
+    STATIC_PATH = '/staticwin'
+
+app = Flask(__name__, static_url_path=STATIC_PATH)
 app.config.from_object(__name__)
 api = Api(app)
 
@@ -126,34 +135,11 @@ class Node(Resource):
                                  FROM nodes AS n
                                  WHERE n.id=(?) AND n.course_id=(?) AND n.isalive=1''',
                               [int(node_id), int(course_id)])
+
         return_val = cursor.fetchone()
         if return_val is None:
             raise InvalidUsage('node_id is out of range')
         return return_val
-
-# @deprecated
-# class Children(Resource):
-    # def put(self, node_id):
-    #     # TODO(nfischer): Fix this to work with multi-digit node_ids (use %s
-    #     # formatting)
-    #     g.db.execute('INSERT INTO children (parent_id, children) values (?, ?)',
-    #                  [node_id, request.form['children']])
-    #     g.db.commit()
-    #     return jsonify(message='Children were successfully added to the node', id=node_id)
-
-    # def post(self, operation, node_id):
-    #     """
-    #     This updates/adds children to <node_id>, regardless of if it had
-    #     children before or not
-    #     """
-    #     # TODO(nfischer): Fix this to work with multi-digit node_ids (use %s
-    #     # formatting)
-    #     g.db.execute('''UPDATE children
-    #                     SET children=(?)
-    #                     WHERE parent_id=(?)''', [request.form['children'], node_id])
-    #     g.db.commit()
-    #     return jsonify(message='Children were successfully updated.', id=node_id)
-
 
 class Tree(Resource):
     def get(self, course_id):
@@ -185,6 +171,7 @@ class Root(Resource):
             if cursor.rowcount == 0:
                 raise InvalidUsage('Could not find non-root node %s' % root_id)
             return jsonify(message='Successfully labeled node as a root.', id=root_id)
+
         elif operation == 'delete':
             cursor = g.db.execute('''UPDATE nodes
                                      SET isroot=0
@@ -221,6 +208,7 @@ class Course(Resource):
                 return jsonify(message='Successfully added piazza ID for course', course_id=course_id)
             except Exception as e:
                 raise InvalidUsage('Cannot set more than once')
+
         elif operation == 'resetpiazza':
             cursor = g.db.execute('''UPDATE courses
                                      SET piazza_cid=(?)
@@ -230,45 +218,53 @@ class Course(Resource):
             if cursor.rowcount == 0:
                 raise InvalidUsage('Entry not found in database. Please use `setpiazza` instead')
             return jsonify(message='Successfully updated piazza ID for course', course_id=course_id)
+
         else:
             raise InvalidUsage('Unknown operation type')
 
     def get(self, course_id, operation):
-        if operation != 'getpiazza':
+        if operation == 'getpiazza':
+            cursor = g.db.execute('''SELECT piazza_cid
+                                     FROM courses
+                                     WHERE course_id=(?)''',
+                                  [int(course_id)])
+            piazza_id_row = cursor.fetchone()
+            if piazza_id_row is None:
+                raise InvalidUsage('Given course does not have a Piazza ID')
+            else:
+                piazza_id_str = piazza_id_row['piazza_cid']
+                return jsonify(message='Returning piazza ID for course', course_id=course_id, piazza_cid=piazza_id_str)
+
+        elif operation == 'getpiazzaposts':
+            cursor = g.db.execute('''SELECT piazza_cid
+                                     FROM courses
+                                     WHERE course_id=(?)''',
+                                  [int(course_id)])
+            piazza_id_row = cursor.fetchone()
+            if piazza_id_row is None:
+                raise InvalidUsage('Given course does not have a Piazza ID')
+            else:
+                piazza_id_str = piazza_id_row['piazza_cid']
+                p = Piazza()
+                try:
+                    with open(USER_FILE, 'r') as fname:
+                        lines = fname.read().split('\n')
+                        p.user_login(email=lines[0], password=lines[1])
+                    piazza_class = p.network(piazza_id_str)
+                except IOError:
+                    raise InvalidUsage('Unable to find piazza credentials',
+                                       status_code=500)
+                except AuthenticationError:
+                    raise InvalidUsage('Invalid pizza credentials')
+
+                def get_posts():
+                    for post in piazza_class.iter_all_posts():
+                        yield json.dumps(post)
+
+                return Response(get_posts(), mimetype="application/json")
+        else:
             raise InvalidUsage('Unknown operation type')
 
-        cursor = g.db.execute('''SELECT piazza_cid
-                                 FROM courses
-                                 WHERE course_id=(?)''',
-                              [int(course_id)])
-        piazza_id_str = cursor.fetchone()
-        if piazza_id_str is None:
-            raise InvalidUsage('Given course does not have a Piazza ID')
-        else:
-            return jsonify(message='Returning piazza ID for course', course_id=course_id, piazza_cid=piazza_id_str)
-
-# @deprecated
-# class Link(Resource):
-#     def post(self):
-#         if request.form['_method'] == 'put':
-#             return self.put()
-#         else:
-#             # g.db.execute('insert into nodes (contents, renderer) values (?, ?)',
-#             #             [request.form['contents'], request.form['renderer']])
-#             # g.db.commit()
-#             raise InvalidUsage('Not implemented: Editing a link', status_code=500)
-#             # return 'Not implemented: Editing a link' #jsonify(message='New node was successfully created')
-
-#     def put(self):
-#         try:
-#             g.db.execute('insert into links values (?, ?, ?)',
-#                          [request.form['origin'], request.form['name'],
-#                           request.form['dest']])
-#             g.db.commit()
-#             result = 'New link was successfully created'
-#             return jsonify(message=result)
-#         except Exception:
-#             raise InvalidUsage('Origin or destination nodes could not be found')
 
 @app.route('/posterator', methods=['GET'])
 def posterator():
