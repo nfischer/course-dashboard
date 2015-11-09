@@ -9,29 +9,47 @@ Inspiration
 Quick Start
 -----------
 
-in a new terminal, execute
+In a new terminal, execute
+
 ```
-git clone https://github.com/nfischer/course-dashboard.git
+$ git clone https://github.com/nfischer/course-dashboard.git
 
-sudo apt-get install sqlite3
-sudo apt-get install python-pip
+$ sudo apt-get install sqlite3
+$ sudo apt-get install python-pip
 
-sudo pip install Flask
-sudo pip install flask-restful
+$ sudo pip install Flask
+$ sudo pip install flask-restful
+$ sudo pip install piazza_api
 
-cd course-dashboard/backend
-ln -s ../frontend static
-
-./setup.sh
+$ cd course-dashboard/backend
+$ ./setup.sh
 ```
 
-this should start the server, but with a blank database. in a new terminal, execute the following:
+This should start the server, but with a blank database. in a new terminal,
+execute the following:
 
 ```
 ./addSampleData.py
 ```
 
-this should insert data from the sample json file located in frontend/ into the database. At this point, you can visit [localhost:5000/static/index.html](http://localhost:5000/static/index.html) to see a running page.
+This should insert data from the sample JSON file located in `frontend/` into
+the database.
+
+As a final step, in order to get piazza integration, please enter in your Piazza
+credentials in a new file named `backend/sample_user.txt' following the two-line
+format:
+
+```
+myemail@domain.com
+mypassword
+```
+
+If you're enrolled in CS 130 with that info, you're good to go and should have
+no issues displaying piazza information on the web UI.
+
+At this point, you can visit
+[localhost:5000/static/index.html](http://localhost:5000/static/index.html) to
+see a running page.
 
 Installation
 ------------
@@ -43,12 +61,13 @@ $ sudo apt-get install sqlite3
 $ sudo apt-get install python-pip
 ```
 
-To install `flask` for the backend framework, you'll need to install two
+To install `flask` for the backend framework, you'll need to install three
 packages with `pip`:
 
 ```
 $ sudo pip install Flask
 $ sudo pip install flask-restful
+$ sudo pip install piazza_api
 ```
 
 To install gulp for frontend work, you'll need to run:
@@ -101,7 +120,8 @@ npm install
 gulp build_browser
 ```
 
-in order to have the backend serve frontend files and have the frontend talk to the backend, execute the following commands:
+in order to have the backend serve frontend files and have the frontend talk to
+the backend, execute the following commands:
 
 ```
 cd ../backend
@@ -109,7 +129,8 @@ ln -s ../frontend static
 ```
 
 The page should now be available at
-[http://localhost:5000/static/index.html](http://localhost:5000/static/index.html), served by the backend server.
+[http://localhost:5000/static/index.html](http://localhost:5000/static/index.html),
+served by the backend server.
 
 ### Migration
 

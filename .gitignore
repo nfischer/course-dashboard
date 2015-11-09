@@ -6,6 +6,7 @@
 .DS_Store
 
 db/
+sample_user.txt
 *.pyc
 *.log
 
@@ -16,3 +17,11 @@ node_modules/
 dist_node/
 dist_browser/
 frontend/npm-debug.log
+frontend/piazza-credentials.json
+backend/bin
+backend/include
+backend/lib
+backend/local
+backend/pip-selfcheck.json
+
+npm-debug.log
