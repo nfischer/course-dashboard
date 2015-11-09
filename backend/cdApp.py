@@ -114,15 +114,15 @@ class Node(Resource):
                     data.append(children)
                 
 
-                # if not contents and not renderer and not children:
-                #     raise InvalidUsage('POST header is empty')
+                if not contents and not renderer and not children:
+                    raise InvalidUsage('POST header is empty', status_code=400)
 
                 if sql[-1] == ',':
                     sql = sql[:-1]
 
                 sql += ' WHERE id=(?) AND course_id=(?) AND isalive=1'
 
-                logging.debug('sql :: %s', sql)
+                #logging.debug('sql :: %s', sql)
 
                 data.append(int(node_id))
                 data.append(int(course_id))
@@ -170,7 +170,9 @@ class Node(Resource):
 
         return_val = cursor.fetchone()
         if return_val is None:
-            raise InvalidUsage('node_id is out of range')
+            # if node is not alive, this message will be returned which is 
+            # incorrect
+            raise InvalidUsage('No nodes found.')
         return return_val
 
 class Tree(Resource):
@@ -313,5 +315,5 @@ api.add_resource(Course, '/<course_id>/course/<operation>/')
 # @app.route('/addNode', methods=['POST'])
 
 if __name__ == '__main__':
-    logging.basicConfig(filename='csApp.log',level=logging.DEBUG)
+    logging.basicConfig(filename='cdApp.log',level=logging.DEBUG)
     app.run(debug=True)
