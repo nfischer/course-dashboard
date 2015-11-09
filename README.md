@@ -108,23 +108,23 @@ $ sudo npm install gulp -g
 2. Install Python and Pip
   - **Pip** is a package manager that is include with Python 2.7.9+ and 3.4+ and we use it to install the other technologies we      use for this project.
   - Install Python here: https://www.python.org/downloads/windows/
-    a. Make sure to specify to install Pip if given the option during installation
+    - Make sure to specify to install Pip if given the option during installation
 3. Installation of Python Packages
-  Execute the following commands from the command line
-  ```
-  > pip install Flask
-  > pip install flask-restful
-  > pip install piazza_api
-  ```
+    Execute the following commands from the command line
+    ```
+    > pip install Flask
+    > pip install flask-restful
+    > pip install piazza_api
+    ```
 
 To install gulp for frontend work:
-1. Install Node
-  Download the MSI for your appropriate OS here: https://nodejs.org/en/download/
-2. Execute the following commands to install npm and gulp
-  ```
-  > install npm
-  > npm install gulp -g
-  ```
+  1. Install Node
+    Download the MSI for your appropriate OS here: https://nodejs.org/en/download/
+  2. Execute the following commands to install npm and gulp
+    ```
+    > install npm
+    > npm install gulp -g
+    ```
 
 Backend
 -------
