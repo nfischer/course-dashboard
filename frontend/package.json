@@ -4,7 +4,7 @@
   "description": "frontend for Course Dashboard",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -17,14 +17,18 @@
     "bootstrap": "^3.3.5",
     "classnames": "^2.2.0",
     "dom-helpers": "^2.4.0",
+    "event-source-polyfill": "0.0.6",
     "flux": "^2.1.1",
     "immutable": "^3.7.5",
     "jquery": "^2.1.4",
     "marked": "^0.3.5",
     "normalize.css": "^3.0.3",
+    "partial": "0.0.3",
+    "piazza-api": "^0.1.4",
     "react": "^0.14.0",
     "react-bootstrap": "^0.27.3",
-    "react-dom": "^0.14.0"
+    "react-dom": "^0.14.0",
+    "stream-http": "^2.0.2"
   },
   "devDependencies": {
     "babelify": "^6.3.0",

@@ -205,3 +205,11 @@ Piazza Integration
   "piazza_cid": "123456789"
 }
 ```
+
+### Accessing Piazza Post Data
+
+- end point: `/<course_id>/course/getpiazzaposts/` where `<course_id>` is some integer
+- request: HTTP GET
+- data (input): None
+- return data:
+streaming json objects for each post in the class
