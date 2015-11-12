@@ -24,8 +24,8 @@ describe('nodestore', function() {
     contents: '',
     renderer: 'Renderer',
     children: {
-      testID: testNode,
-      newID: newNode
+      testID: "testID",
+      newID: "newID"
     }
   });
 
