@@ -1,6 +1,13 @@
 //
 jest.autoMockOff();
 
+// jest
+//   .dontMock('flux')
+//   .dontMock('flux/utils')
+//   .dontMock('../dispatcher')
+//   .dontMock('../Stores/nodestore')
+//   .dontMock('immutable');
+
 var Node = require('../Models/node').default;
 var Map = require('immutable').Map;
 
@@ -59,13 +66,15 @@ describe('nodestore', function() {
     data: 'foo'
   }; */
 
-  var dispatcher;
+  var onChange;
   var nodeStore;
-  var callback;
+  var dispatch;
 
   beforeEach(function() {
+    var dispatcher = require('../dispatcher').default;
     nodeStore = require('../Stores/nodestore').default;
-    callback = nodeStore.__invokeOnDispatch.bind(nodeStore);
+    dispatch = dispatcher.dispatch.bind(dispatcher);
+    onChange = nodeStore.__emitter.emit;// callback = nodeStore.__invokeOnDispatch.bind(nodeStore);
   });
 
   // it('registers a callback with the dispatcher', function() {
@@ -77,11 +86,8 @@ describe('nodestore', function() {
   });
 
   it('Open: creates node tree using a map of nodes', function() {
-    try{
-      callback(actionOpen);
-    } catch(e) {
-      console.error(e.toString());
-    }
+    dispatch(actionOpen);
+
     var all = nodeStore.getState().nodes;
     expect(all.size).toBe(2);
     expect(all.get('testID')).toEqual(testNode);
