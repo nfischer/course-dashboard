@@ -2,6 +2,8 @@ import $ from 'jquery';
 import * as piazza from 'piazza-api';
 import * as http from 'stream-http';
 import { Map, List } from 'immutable';
+import URL from 'url-parse';
+import pathParse from 'path-parse';
 
 import Node from '../Models/node.js';
 import piazzaPostsFetched from '../Actions/piazzapostsfetched.js'
@@ -16,7 +18,7 @@ import piazzaPostsFetched from '../Actions/piazzapostsfetched.js'
 
 // TODO(nate): This is a hardcoded <courseId>. Change this dynamically during
 // runtime based on which course we're actually viewing
-var courseId = "1";
+var courseId = pathParse(new URL(window.location.href).pathname).name;
 var mainUrl = "";
 
 // TODO(nate): This is a hardcoded user id. change this dynamically during
