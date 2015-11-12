@@ -18,7 +18,7 @@ import piazzaPostsFetched from '../Actions/piazzapostsfetched.js'
 
 // TODO(nate): This is a hardcoded <courseId>. Change this dynamically during
 // runtime based on which course we're actually viewing
-var courseId = pathParse(new URL(window.location.href).pathname).name;
+var courseId = pathParse(new URL(window.location.href).pathname).name; //this should be part of global ui state
 var mainUrl = "";
 
 // TODO(nate): This is a hardcoded user id. change this dynamically during

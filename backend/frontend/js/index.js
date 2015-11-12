@@ -107150,7 +107150,8 @@ var Announcements = (function (_React$Component4) {
     };
   }
 
-  //List renderer. List items are shown in a modal dialog
+  //===== MODAL LIST
+  //  children are expanded in a modal dialog
 
   _createClass(Announcements, [{
     key: 'componentWillMount',
@@ -107207,16 +107208,16 @@ var Announcements = (function (_React$Component4) {
 
 exports.Announcements = Announcements;
 
-var List = (function (_React$Component5) {
-  _inherits(List, _React$Component5);
+var ModalList = (function (_React$Component5) {
+  _inherits(ModalList, _React$Component5);
 
-  function List() {
-    _classCallCheck(this, List);
+  function ModalList() {
+    _classCallCheck(this, ModalList);
 
-    _get(Object.getPrototypeOf(List.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(ModalList.prototype), 'constructor', this).apply(this, arguments);
   }
 
-  _createClass(List, [{
+  _createClass(ModalList, [{
     key: 'render',
     value: function render() {
       var _this4 = this;
@@ -107230,16 +107231,16 @@ var List = (function (_React$Component5) {
           (0, _utilsTitlecapsJs2['default'])(this.props.tag)
         ),
         mapObject(this.props.node.children, function (id, tag) {
-          return _react2['default'].createElement(ListElement, { tag: tag, key: id, node: _StoresNodestoreJs2['default'].getState().nodes.get(id), ui: _this4.props.ui });
+          return _react2['default'].createElement(ModalListElement, { tag: tag, key: id, node: _StoresNodestoreJs2['default'].getState().nodes.get(id), ui: _this4.props.ui });
         })
       );
     }
   }]);
 
-  return List;
+  return ModalList;
 })(_react2['default'].Component);
 
-exports.List = List;
+exports.ModalList = ModalList;
 
 var ModalListElement = (function (_React$Component6) {
   _inherits(ModalListElement, _React$Component6);
@@ -107297,6 +107298,11 @@ var EditableModalList = (function (_React$Component7) {
     _get(Object.getPrototypeOf(EditableModalList.prototype), 'constructor', this).apply(this, arguments);
   }
 
+  //===== DEFAULT LIST
+  // children are expanded inline
+
+  //List renderer. List items are shown in a modal dialog
+
   _createClass(EditableModalList, [{
     key: 'render',
     value: function render() {
@@ -107308,9 +107314,9 @@ var EditableModalList = (function (_React$Component7) {
           null,
           (0, _utilsTitlecapsJs2['default'])(this.props.tag)
         ),
-        _react2['default'].createElement(ListElementInput, { onClick: this.addNewChild.bind(this) }),
+        _react2['default'].createElement(ListElementCreator, { onClick: this.addNewChild.bind(this) }),
         mapObject(this.props.node.children, function (id, tag) {
-          return _react2['default'].createElement(ListElement, { key: id, tag: tag, node: _StoresNodestoreJs2['default'].getState().nodes.get(id) });
+          return _react2['default'].createElement(ModalListElement, { key: id, tag: tag, node: _StoresNodestoreJs2['default'].getState().nodes.get(id) });
         })
       );
     }
@@ -107326,15 +107332,49 @@ var EditableModalList = (function (_React$Component7) {
 
 exports.EditableModalList = EditableModalList;
 
-var ListElement = (function (_React$Component8) {
-  _inherits(ListElement, _React$Component8);
+var List = (function (_React$Component8) {
+  _inherits(List, _React$Component8);
+
+  function List() {
+    _classCallCheck(this, List);
+
+    _get(Object.getPrototypeOf(List.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(List, [{
+    key: 'render',
+    value: function render() {
+      var _this5 = this;
+
+      return _react2['default'].createElement(
+        'list',
+        { className: this.props.tag },
+        _react2['default'].createElement(
+          'h1',
+          null,
+          (0, _utilsTitlecapsJs2['default'])(this.props.tag)
+        ),
+        mapObject(this.props.node.children, function (id, tag) {
+          return _react2['default'].createElement(ListElement, { tag: tag, key: id, node: _StoresNodestoreJs2['default'].getState().nodes.get(id), ui: _this5.props.ui });
+        })
+      );
+    }
+  }]);
+
+  return List;
+})(_react2['default'].Component);
+
+exports.List = List;
+
+var ListElement = (function (_React$Component9) {
+  _inherits(ListElement, _React$Component9);
 
   function ListElement() {
     _classCallCheck(this, ListElement);
 
     _get(Object.getPrototypeOf(ListElement.prototype), 'constructor', this).call(this);
     this.state = {
-      show: false
+      editing: false
     };
   }
 
@@ -107344,30 +107384,36 @@ var ListElement = (function (_React$Component8) {
   _createClass(ListElement, [{
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement(this.props.node.renderer, { onClick: this.handleClick.bind(this),
-        className: "listelement" }, _react2['default'].createElement(
+      return _react2['default'].createElement(this.props.node.renderer, { className: "listelement" }, _react2['default'].createElement(
         'h2',
         null,
         (0, _utilsTitlecapsJs2['default'])(this.props.tag)
+      ), this.state.editing ? _react2['default'].createElement(ListElementEditor, { onClick: this.endEdit.bind(this),
+        contents: this.props.node.contents }) : (0, _createelementJs2['default'])(this.props.tag, this.props.node, this.props.ui), this.state.editing ? null : _react2['default'].createElement(
+        'h2',
+        { onClick: this.startEdit.bind(this) },
+        'Edit'
       ), _react2['default'].createElement(
-        _reactBootstrapLibModal2['default'],
-        { show: this.state.show, onHide: this.close.bind(this) },
-        _react2['default'].createElement(
-          _reactBootstrapLibModalBody2['default'],
-          null,
-          (0, _createelementJs2['default'])(this.props.tag, this.props.node, this.props.ui)
-        )
+        'h2',
+        { onClick: this.deleteNode.bind(this) },
+        'Delete'
       ));
     }
   }, {
-    key: 'handleClick',
-    value: function handleClick(event) {
-      this.setState({ show: true });
+    key: 'startEdit',
+    value: function startEdit(event) {
+      this.setState({ editing: true });
     }
   }, {
-    key: 'close',
-    value: function close() {
-      this.setState({ show: false });
+    key: 'endEdit',
+    value: function endEdit(contents) {
+      this.setState({ editing: false });
+      editNode(this.props.node, contents, this.props.node.renderer, this.props.node.children);
+    }
+  }, {
+    key: 'deleteNode',
+    value: function deleteNode(event) {
+      removeNode(this.props.node);
     }
   }]);
 
@@ -107376,8 +107422,8 @@ var ListElement = (function (_React$Component8) {
 
 exports.ListElement = ListElement;
 
-var EditableList = (function (_React$Component9) {
-  _inherits(EditableList, _React$Component9);
+var EditableList = (function (_React$Component10) {
+  _inherits(EditableList, _React$Component10);
 
   function EditableList() {
     _classCallCheck(this, EditableList);
@@ -107396,7 +107442,7 @@ var EditableList = (function (_React$Component9) {
           null,
           (0, _utilsTitlecapsJs2['default'])(this.props.tag)
         ),
-        _react2['default'].createElement(ListElementInput, { onClick: this.addNewChild.bind(this) }),
+        _react2['default'].createElement(ListElementCreator, { onClick: this.addNewChild.bind(this) }),
         mapObject(this.props.node.children, function (id, tag) {
           return _react2['default'].createElement(ListElement, { key: id, tag: tag, node: _StoresNodestoreJs2['default'].getState().nodes.get(id) });
         })
@@ -107414,19 +107460,19 @@ var EditableList = (function (_React$Component9) {
 
 exports.EditableList = EditableList;
 
-var ListElementInput = (function (_React$Component10) {
-  _inherits(ListElementInput, _React$Component10);
+var ListElementCreator = (function (_React$Component11) {
+  _inherits(ListElementCreator, _React$Component11);
 
-  function ListElementInput() {
-    _classCallCheck(this, ListElementInput);
+  function ListElementCreator() {
+    _classCallCheck(this, ListElementCreator);
 
-    _get(Object.getPrototypeOf(ListElementInput.prototype), 'constructor', this).call(this);
+    _get(Object.getPrototypeOf(ListElementCreator.prototype), 'constructor', this).call(this);
     this.state = {
       alert: null
     };
   }
 
-  _createClass(ListElementInput, [{
+  _createClass(ListElementCreator, [{
     key: 'render',
     value: function render() {
       //add type that is element or component
@@ -107463,11 +107509,47 @@ var ListElementInput = (function (_React$Component10) {
     }
   }]);
 
-  return ListElementInput;
+  return ListElementCreator;
 })(_react2['default'].Component);
 
-var AlertDismissable = (function (_React$Component11) {
-  _inherits(AlertDismissable, _React$Component11);
+var ListElementEditor = (function (_React$Component12) {
+  _inherits(ListElementEditor, _React$Component12);
+
+  function ListElementEditor() {
+    _classCallCheck(this, ListElementEditor);
+
+    _get(Object.getPrototypeOf(ListElementEditor.prototype), 'constructor', this).call(this);
+    this.state = {};
+  }
+
+  _createClass(ListElementEditor, [{
+    key: 'render',
+    value: function render() {
+      //add type that is element or component
+      return _react2['default'].createElement(
+        'listelementinput',
+        null,
+        _react2['default'].createElement(
+          'form',
+          { ref: 'formelement' },
+          _react2['default'].createElement(_reactBootstrapLibInput2['default'], { type: 'textarea', ref: 'contents', placeholder: this.props.contents }),
+          _react2['default'].createElement(_reactBootstrapLibButtonInput2['default'], { value: 'Save', onClick: this.save.bind(this) })
+        )
+      );
+    }
+  }, {
+    key: 'save',
+    value: function save() {
+      var newContents = this.refs["contents"].getValue();
+      this.props.onClick(newContents);
+    }
+  }]);
+
+  return ListElementEditor;
+})(_react2['default'].Component);
+
+var AlertDismissable = (function (_React$Component13) {
+  _inherits(AlertDismissable, _React$Component13);
 
   function AlertDismissable() {
     _classCallCheck(this, AlertDismissable);
@@ -107995,7 +108077,7 @@ var _ActionsPiazzapostsfetchedJs2 = _interopRequireDefault(_ActionsPiazzapostsfe
 
 // TODO(nate): This is a hardcoded <courseId>. Change this dynamically during
 // runtime based on which course we're actually viewing
-var courseId = (0, _pathParse2['default'])(new _urlParse2['default'](window.location.href).pathname).name;
+var courseId = (0, _pathParse2['default'])(new _urlParse2['default'](window.location.href).pathname).name; //this should be part of global ui state
 var mainUrl = "";
 
 // TODO(nate): This is a hardcoded user id. change this dynamically during
