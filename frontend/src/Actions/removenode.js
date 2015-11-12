@@ -3,15 +3,15 @@ import dispatcher from '../dispatcher.js';
 import Node from '../Models/node.js';
 import * as WebAPI from '../utils/webapi.js';
 
-class EditNode extends Action {
+class RemoveNode extends Action {
   constructor(node: Node){
-    super("editNode", node);
+    super("removeNode", node);
   }
 }
 
-export default function editNode(node, markdown, renderer, children){
-  WebAPI.editNode(node, markdown, renderer, children, (node) => {
-    let action = new EditNode(node);
+export default function removeNode(node){
+  WebAPI.removeNode(node, (node) => {
+    let action = new RemoveNode(node);
     dispatcher.dispatch(action);
   });
 }

@@ -6,11 +6,12 @@ import { Map } from 'immutable';
 import Action from '../Actions/action.js';
 import Node from '../Models/node.js';
 import dispatcher from '../dispatcher.js';
+import * as WebAPI from '../utils/webapi.js';
 
 //add to NodeStoreState by appending to map
 class NodeStoreState {
   rootId: string;
-  nodes: Map<string, string>;
+  nodes: Map<string, Node>;
 
   constructor(rootId: string){
     this.rootId = rootId;
@@ -58,7 +59,26 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
 
       return newState;
     case "removeNode":
-      //TODO: delete node
+      let nodeToRemove = action.data;
+      nodeToRemove.id = (typeof nodeToRemove.id === "string") ? nodeToRemove.id : nodeToRemove.id.toString();
+      newState = new NodeStoreState(state.rootId);
+      // delete node
+      newState.nodes = state.nodes.delete(nodeToRemove.id);
+      // modify parent nodes to no longer point to deleted node
+      newState.nodes.forEach(node => {
+        let wasModified = false;
+        let name;
+        for (name in node.children) {
+          if (node.children.hasOwnProperty(name) && node.children[name] === nodeToRemove.id) {
+            delete node.children[name];
+            wasModified = true;
+          }
+        }
+        if (wasModified === true) {
+          WebAPI.editNode(node, node.contents, node.renderer, node.children, () => {});
+        }
+      });
+      return newState;
     }
 
     return state;
