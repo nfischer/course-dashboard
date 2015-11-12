@@ -106945,6 +106945,7 @@ var Announcements = (function (_React$Component4) {
     value: function render() {
       var _this3 = this;
 
+      var artificialId = -1;
       return _react2['default'].createElement(
         'announcements',
         null,
@@ -106957,16 +106958,17 @@ var Announcements = (function (_React$Component4) {
           var latest = item.history[0];
           //create artificial node for this item
           var artificialNode = new _ModelsNodeJs2['default']({
-            id: "-1",
+            id: item.id,
             contents: '[' + latest.subject + '](http://piazza.com/class/' + WebAPI.piazzaClassId + '?cid=' + item.id + ')',
             renderer: "Piazza-Item",
             children: {}
           });
 
-          return _react2['default'].createElement(ListElement, { tag: latest.subject,
-            key: item.id,
-            node: artificialNode,
-            ui: _this3.props.ui });
+          return (0, _createelementJs2['default'])(latest.subject, artificialNode, _this3.props.ui);
+          // <ListElement tag={latest.subject}
+          //                     key={item.id}
+          //                     node={artificialNode}
+          //                     ui={this.props.ui} />
         })
       );
     }

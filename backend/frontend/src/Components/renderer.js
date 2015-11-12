@@ -158,6 +158,7 @@ export class Announcements extends React.Component{ //this should pretty much be
   }
 
   render(){
+    let artificialId = -1;
     return (
       <announcements>
         <h1>{titleCaps(this.props.tag)}</h1>
@@ -166,16 +167,17 @@ export class Announcements extends React.Component{ //this should pretty much be
             let latest = item.history[0];
             //create artificial node for this item
             let artificialNode = new Node({
-              id: "-1",
+              id: item.id,
               contents: `[${latest.subject}](http://piazza.com/class/${WebAPI.piazzaClassId}?cid=${item.id})`,
               renderer: "Piazza-Item",
               children: {}
             });
 
-            return <ListElement tag={latest.subject}
-                                key={item.id}
-                                node={artificialNode}
-                                ui={this.props.ui} />
+            return getRenderedElement(latest.subject, artificialNode, this.props.ui);
+            // <ListElement tag={latest.subject}
+            //                     key={item.id}
+            //                     node={artificialNode}
+            //                     ui={this.props.ui} />
           })
         }
       </announcements>

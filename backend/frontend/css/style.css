@@ -154,6 +154,20 @@ announcements > h1 {
     color: hsl(0, 94%, 71%);
 }
 
+piazza-item {
+  padding-top: 10px;
+}
+
+piazza-item a {
+    text-decoration: none;
+    color: black;
+}
+
+piazza-item a:hover {
+    text-decoration: none;
+    color: black;
+}
+
 .assignments > h1 {
   color: hsl(142, 76%, 46%);
 }
