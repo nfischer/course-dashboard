@@ -1,11 +1,14 @@
 /* @flow */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import partial from 'partial';
+
 import Input from 'react-bootstrap/lib/Input';
 import ButtonInput from 'react-bootstrap/lib/ButtonInput';
 import Alert from 'react-bootstrap/lib/Alert';
 import marked from 'marked';
-import partial from 'partial';
+import Modal from 'react-bootstrap/lib/Modal';
+import ModalBody from 'react-bootstrap/lib/ModalBody';
 
 import Node from '../Models/node.js';
 
@@ -195,6 +198,84 @@ export class List extends React.Component {
     )
   }
 }
+
+export class ModalListElement extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      show: false
+    }
+  }
+
+  render() : React.Element {
+    return (
+      React.createElement(this.props.node.renderer,
+                          {onClick: this.handleClick.bind(this),
+                           className: "listelement"},
+                          <h2>{titleCaps(this.props.tag)}</h2>,
+                          <Modal show={this.state.show} onHide={this.close.bind(this)}>
+                            <ModalBody>
+                              {getRenderedElement(this.props.tag, this.props.node, this.props.ui)}
+                            </ModalBody>
+                          </Modal>
+                          )
+    );
+  }
+
+  handleClick(event){
+    this.setState({show: true});
+  }
+
+  close(){
+    this.setState({show: false});
+  }
+}
+
+export class EditableModalList extends React.Component {
+  componentWillReceiveProps(){
+    console.log("updated editableList");
+  }
+
+  render() : React.Element {
+    return (
+      <list>
+        <h1>{titleCaps(this.props.tag)}</h1>
+        <ListElementInput onClick={this.addNewChild.bind(this)}/>
+        {
+          mapObject(this.props.node.children, (id: string, tag: string) =>
+            <ListElement key={id} tag={tag} node={nodeStore.getState().nodes.get(id)} />
+          )
+        }
+      </list>
+    )
+  }
+
+  addNewChild(title: string, markdown: string){
+    console.log("addNewChild", title, markdown);
+    addNode(this.props.node, title, markdown, "Resource");
+  }
+}
+
+export class ListElementInput extends React.Component {
+  render() : React.Component { //add type that is element or component
+    return (
+      <form>
+        <Input type="text" ref="title" placeholder="title"/>
+        <Input type="textarea" ref="contents" placeholder="type markdown here"/>
+        <ButtonInput type="reset" value="Create" onClick={this.clickWrapper.bind(this)}/>
+      </form>
+    );
+  }
+  clickWrapper(){
+    let title=this.refs["title"].getValue(), value=this.refs["contents"].getValue();
+
+    console.log("clickwrapper");
+    console.log(title, value);
+    this.props.onClick(title, value);
+  }
+}
+
+
 
 export class ListElement extends React.Component {
   constructor(){

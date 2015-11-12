@@ -33,6 +33,7 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
 
   reduce(state: ?LayerStoreState, action: Action) : ?NodeStoreState { //TODO: make the state enforcably immutable
     let newState;
+
     switch(action.name){
     case "open":
       //handle creation of tree given data format from server
