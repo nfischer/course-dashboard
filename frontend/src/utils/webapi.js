@@ -11,6 +11,8 @@ import piazzaPostsFetched from '../Actions/piazzapostsfetched.js'
 //this is a module exclusively for sending specific actions to the web api.
 //complex actions can be defined here in terms of the basic RESTful API
 
+//please always import this module with "import * as WebAPI" since names may conflict
+
 //Primitive actions supported by webapi.
 //----------------------------------------
 
@@ -28,7 +30,7 @@ export var piazzaClassId = null;//"if44ov1fn5a505"
 
 function getNode(nodeId: string){
   let endpoint = mainUrl + `/${courseId}/node/${nodeId}/`;
-  return $.ajax(endpoint,{
+  return $.ajax(endpoint, {
     method: "GET",
     dataType: "json"
   });
@@ -40,6 +42,14 @@ function overwriteNode(node: Node){
   return $.ajax(endpoint, {
     method: "POST",
     data: data,
+    dataType: "json"
+  });
+}
+
+function deleteNode(nodeId: string){
+  let endpoint = mainUrl + `/${courseId}/node/delete/${nodeId}/`;
+  return $.ajax(endpoint, {
+    method: "POST",
     dataType: "json"
   });
 }
@@ -161,6 +171,26 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
   .then((data) => { //call passed in callback
       callback(initialized_child);
     }, (jqXHR, textStatus, errorThrown) => {
+      console.error(textStatus);
+      throw errorThrown;
+  });
+}
+
+export function editNode(node: Node, markdown: string, renderer: string, children: Object, callback: any){
+  let newNode = new Node({id: node.id, contents: markdown, renderer: renderer, children: children});
+
+  overwriteNode(newNode).then((data) => {
+    callback(newNode);
+  }, (jqXHR, textStatus, errorThrown) => {
+      console.error(textStatus);
+      throw errorThrown;
+  });
+}
+
+export function removeNode(node: Node, callback: any){
+  deleteNode(node.id).then((data) => {
+    callback(node);
+  }, (jqXHR, textStatus, errorThrown) => {
       console.error(textStatus);
       throw errorThrown;
   });
