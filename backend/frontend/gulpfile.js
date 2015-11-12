@@ -21,7 +21,8 @@ var b = browserify({
     debug: true
   })
   .plugin(resolutions, ['react', 'react-dom', 'jquery'])
-  .transform(babelify);
+  .transform(babelify, {presets: ['es2015', 'react'],
+                        plugins: ["transform-class-properties"]});
 
 function watch_browser(){
   w = watchify(b);
@@ -39,5 +40,31 @@ var updateBundle = function(b){
     .pipe(gulp.dest('./js'));
 };
 
+function build_node(){
+  var polyfill = './node_modules/gulp-babel/node_modules/babel-core/browser-polyfill.js';
+
+  return gulp.src("src/**/*.js")
+      .pipe(sourcemaps.init())
+      .pipe(babel({ optional: ['runtime'] }))
+      //.pipe(concat("all.js"))
+      .pipe(sourcemaps.write("."))
+      .pipe(gulp.dest("dist_node"));
+}
+
+function watch_node(){
+  var polyfill = './node_modules/gulp-babel/node_modules/babel-core/browser-polyfill.js';
+
+  return gulp.src("src/**/*.js")
+      .pipe(watch("src/**/*.js", {verbose: true}))
+      .pipe(sourcemaps.init())
+      .pipe(babel({ optional: ['runtime'] }))
+      //.pipe(concat("all.js"))
+      .pipe(sourcemaps.write("."))
+      .pipe(gulp.dest("dist_node"));
+}
+
 gulp.task('build_browser', partial(updateBundle, b));
 gulp.task('watch_browser', watch_browser);
+
+gulp.task('build_node', build_node);
+gulp.task('watch_node', watch_node);

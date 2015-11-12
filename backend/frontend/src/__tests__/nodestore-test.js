@@ -1,42 +1,53 @@
 jest.dontMock('../Stores/nodestore');
 jest.dontMock('object-assign');
+jest.dontMock('immutable');
+
+var Node = require('../Models/node').default;
+var Map = require('immutable').Map;
 
 describe('nodestore', function() {
 
-  var AppDispatcher;
-  var nodeStore;
-  var callback;
-  var testNode = require('../Models/node');
-  testNode.id = 'testID';
-  testNode.contents = 'test contents';
-  testNode.renderer = 'Renderer';
-  
-  var rootNode = require('../Models/node');
-  rootNode.id = 'rootID';
-  rootNode.contents = '';
-  rootNode.renderer = 'Renderer';
-  rootNode.children = {};
-  rootNode.children['testID'] = testNode;
-  rootNode.children['newID'] = newNode;
-  
-  var nodeMap = {};
-  nodeMap['rootID'] = rootNode;
-  nodeMap['testID'] = testNode;
-  
-  var newNode = require('../Models/node');
-  newNode.id = 'newID';
-  newNode.contents = 'new contents';
-  newNode.renderer = 'Renderer';
 
-  // mock actions 
+  var testNode = new Node({
+    id: 'testID',
+    contents: 'test contents',
+    renderer: 'Renderer'
+  });
+
+  var rootNode = new Node({
+    id: 'rootID',
+    contents: '',
+    renderer: 'Renderer',
+    children: {
+      testID: testNode,
+      newID: newNode
+    }
+  });
+
+  var nodeMap = new Map({
+    rootID: rootNode,
+    testID: testNode
+  });
+
+  var newNode = new Node({
+    id: 'newID',
+    contents: 'new contents',
+    renderer: 'Renderer'
+  });
+
+  // mock actions
   var actionOpen = {
     name: 'open',
-    data: {rootId: 'testRootID', nodes: nodeMap}
+    data: {rootId: 'testRootID', nodes: [
+      rootNode,
+      testNode
+    ]}
   };
-  var actionAddNode = {
-    name: 'addNode',
-    data: newNode
-  };
+
+  // var actionAddNode = {
+  //   name: 'addNode',
+  //   data: newNode
+  // };
 /*  var actionRemoveResource = {
     name: 'removeResource',
     data: 'foo'
@@ -50,9 +61,13 @@ describe('nodestore', function() {
     data: 'foo'
   }; */
 
+  var dispatcher;
+  var nodeStore;
+  var callback;
+
   beforeEach(function() {
-    dispatcher = require('../dispatcher');
-    nodeStore = require('../Stores/nodestore');
+    dispatcher = require('../dispatcher').default;
+    nodeStore = require('../Stores/nodestore').default;
     callback = dispatcher.register.mock.calls[0][0];
   });
 
@@ -61,37 +76,36 @@ describe('nodestore', function() {
   });
 
   it('initializes with no nodes', function() {
-    expect(nodeStore.nodes).toEqual({});
-    expect(nodeStore.rootID).toEqual('');
-  });
-  
-  it('Open: creates node tree using a map of nodes', function() {
-    callback(actionOpen);
-    var all = nodeStore.nodes;
-    var keys = Object.keys(all);
-    expect(keys.length).toBe(2);
-    expect(nodeStore.nodes['testID']).toEqual(testNode);
-    expect(nodeStore.nodes['testID'].id).toEqual('testID');
-    expect(nodeStore.nodes['testID'].contents).toEqual('test contents');
-    expect(nodeStore.nodes['testID'].renderer).toEqual('Renderer'); 
-    expect(nodeStore.nodes['rootID']).toEqual(rootNode);
-    expect(nodeStore.nodes['rootID'].id).toEqual('rootID');
-    expect(nodeStore.nodes['rootID'].contents).toEqual('');
-    expect(nodeStore.nodes['rootID'].renderer).toEqual('Renderer');     
-    expect(nodeStore.rootID).toEqual('rootID');
+    expect(nodeStore.getState().nodes.size).toBe(0);
+    expect(nodeStore.getState().rootID).toEqual('');
   });
 
-  it('AddNode: adds a node', function() {
+  it('Open: creates node tree using a map of nodes', function() {
     callback(actionOpen);
-    callback(actionAddNode);
-    var all = nodeStore.nodes;
-    var keys = Object.keys(all);
-    expect(keys.length).toBe(3);
-    expect(nodeStore.nodes['newID']).toEqual(newNode);
-    expect(nodeStore.nodes['newID'].id).toEqual('newID');
-    expect(nodeStore.nodes['newID'].contents).toEqual('new contents');
-    expect(nodeStore.nodes['newID'].renderer).toEqual('Renderer');
+    var all = nodeStore.getState().nodes;
+    expect(all.size).toBe(2);
+    expect(all['testID']).toEqual(testNode);
+    expect(all['testID'].id).toEqual('testID');
+    expect(all['testID'].contents).toEqual('test contents');
+    expect(all['testID'].renderer).toEqual('Renderer');
+    expect(all['rootID']).toEqual(rootNode);
+    expect(all['rootID'].id).toEqual('rootID');
+    expect(all['rootID'].contents).toEqual('');
+    expect(all['rootID'].renderer).toEqual('Renderer');
+    expect(nodeStore.getState().rootID).toEqual('rootID');
   });
+  //
+  // it('AddNode: adds a node', function() {
+  //   callback(actionOpen);
+  //   callback(actionAddNode);
+  //   var all = nodeStore.nodes;
+  //   var keys = Object.keys(all);
+  //   expect(keys.length).toBe(3);
+  //   expect(nodeStore.nodes['newID']).toEqual(newNode);
+  //   expect(nodeStore.nodes['newID'].id).toEqual('newID');
+  //   expect(nodeStore.nodes['newID'].contents).toEqual('new contents');
+  //   expect(nodeStore.nodes['newID'].renderer).toEqual('Renderer');
+  // });
 
 /*   it('EditResource: removes a resource', function() {
     callback(actionOpen);
