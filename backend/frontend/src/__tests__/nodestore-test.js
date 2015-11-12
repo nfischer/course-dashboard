@@ -1,12 +1,10 @@
-jest.dontMock('../Stores/nodestore');
-jest.dontMock('object-assign');
-jest.dontMock('immutable');
+//
+jest.autoMockOff();
 
 var Node = require('../Models/node').default;
 var Map = require('immutable').Map;
 
 describe('nodestore', function() {
-
 
   var testNode = new Node({
     id: 'testID',
@@ -66,33 +64,35 @@ describe('nodestore', function() {
   var callback;
 
   beforeEach(function() {
-    dispatcher = require('../dispatcher').default;
     nodeStore = require('../Stores/nodestore').default;
-    callback = dispatcher.register.mock.calls[0][0];
+    callback = nodeStore.__invokeOnDispatch.bind(nodeStore);
   });
 
-  it('registers a callback with the dispatcher', function() {
-    expect(dispatcher.register.mock.calls.length).toBe(1);
-  });
+  // it('registers a callback with the dispatcher', function() {
+  //   expect(dispatcher.register.mock.calls.length).toBe(1);
+  // });
 
   it('initializes with no nodes', function() {
-    expect(nodeStore.getState().nodes.size).toBe(0);
-    expect(nodeStore.getState().rootID).toEqual('');
+    expect(nodeStore.getState()).toEqual(null);
   });
 
   it('Open: creates node tree using a map of nodes', function() {
-    callback(actionOpen);
+    try{
+      callback(actionOpen);
+    } catch(e) {
+      console.error(e.toString());
+    }
     var all = nodeStore.getState().nodes;
     expect(all.size).toBe(2);
-    expect(all['testID']).toEqual(testNode);
-    expect(all['testID'].id).toEqual('testID');
-    expect(all['testID'].contents).toEqual('test contents');
-    expect(all['testID'].renderer).toEqual('Renderer');
-    expect(all['rootID']).toEqual(rootNode);
-    expect(all['rootID'].id).toEqual('rootID');
-    expect(all['rootID'].contents).toEqual('');
-    expect(all['rootID'].renderer).toEqual('Renderer');
-    expect(nodeStore.getState().rootID).toEqual('rootID');
+    expect(all.get('testID')).toEqual(testNode);
+    expect(all.get('testID').id).toEqual('testID');
+    expect(all.get('testID').contents).toEqual('test contents');
+    expect(all.get('testID').renderer).toEqual('Renderer');
+    expect(all.get('rootID')).toEqual(rootNode);
+    expect(all.get('rootID').id).toEqual('rootID');
+    expect(all.get('rootID').contents).toEqual('');
+    expect(all.get('rootID').renderer).toEqual('Renderer');
+    expect(nodeStore.getState().rootId).toEqual('testRootID');
   });
   //
   // it('AddNode: adds a node', function() {
