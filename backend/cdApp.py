@@ -194,13 +194,33 @@ class Root(Resource):
 
 class Course(Resource):
     def post(self, course_id, operation):
-        if operation == 'setpiazza':
+        if operation == 'setcourse':
             try:
                 g.db.execute('''INSERT INTO courses
-                                (course_id, piazza_cid) VALUES (?, ?)''',
-                             [int(course_id), request.form['piazza_cid']])
+                                (course_id, piazza_cid, course_name) VALUES (?, ?, ?)''',
+                             [int(course_id), request.form['piazza_cid'], request.form['course_name']])
                 g.db.commit()
-                return jsonify(message='Successfully added piazza ID for course', course_id=course_id)
+                return jsonify(message='Successfully added piazza ID and course name for course', course_id=course_id)
+            except Exception as e:
+                raise InvalidUsage('Cannot set more than once')
+
+        elif operation == 'resetname':
+            cursor = g.db.execute('''UPDATE courses
+                                     SET course_name=(?)
+                                     WHERE course_id=(?)''',
+                                  [request.form['course_name'], int(course_id)])
+            g.db.commit()
+            if cursor.rowcount == 0:
+                raise InvalidUsage('Entry not found in database. Please use `setcourse` first')
+            return jsonify(message='Successfully updated course name for course', course_id=course_id)
+
+        elif operation == 'setpiazza':
+            try:
+                g.db.execute('''INSERT INTO courses
+                                (course_id, piazza_cid, course_name) VALUES (?, ?)''',
+                             [int(course_id), request.form['piazza_cid'], ""])
+                g.db.commit()
+                return jsonify(message='Successfully added piazza ID andfor course', course_id=course_id)
             except Exception as e:
                 raise InvalidUsage('Cannot set more than once')
 
@@ -218,7 +238,32 @@ class Course(Resource):
             raise InvalidUsage('Unknown operation type')
 
     def get(self, course_id, operation):
-        if operation == 'getpiazza':
+        if operation == 'get':
+            cursor = g.db.execute('''SELECT course_name, piazza_cid
+                                     FROM courses
+                                     WHERE course_id=(?)''',
+                                  [int(course_id)])
+
+            row = cursor.fetchone()
+            if row is None:
+                raise InvalidUsage('Given course does not exist')
+            else:
+                course_name_str = row['course_name']
+                piazza_id_str = row['piazza_cid']
+                return jsonify(message='Returning course info', course_id=course_id, course_name=course_name_str, piazza_cid=piazza_id_str)
+        if operation == 'getname':
+            cursor = g.db.execute('''SELECT course_name
+                                     FROM courses
+                                     WHERE course_id=(?)''',
+                                  [int(course_id)])
+
+            course_name_row = cursor.fetchone()
+            if course_name_row is None:
+                raise InvalidUsage('Given course does not have a name')
+            else:
+                course_name_str = course_name_row['course_name']
+                return jsonify(message='Returning name for course', course_id=course_id, course_name=course_name_str)
+        elif operation == 'getpiazza':
             cursor = g.db.execute('''SELECT piazza_cid
                                      FROM courses
                                      WHERE course_id=(?)''',
@@ -261,8 +306,8 @@ class Course(Resource):
         else:
             raise InvalidUsage('Unknown operation type')
 
-@app.route('/', methods=['GET'])
-def index():
+@app.route('/<course_id>/', methods=['GET'])
+def index(course_id):
     return send_from_directory('frontend','index.html');
 
 api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<operation>/<node_id>/')

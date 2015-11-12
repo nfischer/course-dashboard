@@ -63,11 +63,11 @@ def add_root(root_id):
         raise ValueError('Unable to add root %s' % root_id)
     return ret
 
-def add_course(piazza_id):
+def add_course(piazza_id, course_name):
     """Uses the backend API to add a course to the course list"""
-    ret = post(urljoin(URL, 'course/setpiazza/'), data={'piazza_cid': piazza_id})
+    ret = post(urljoin(URL, 'course/setcourse/'), data={'piazza_cid': piazza_id, 'course_name': course_name})
     if ret.status_code != 200:
-        raise ValueError('Unable to add piazza id %s' % piazza_id)
+        raise ValueError('Unable to add course %s, %s' % piazza_id, course_name)
     return ret
 
 def add_root(root_id):
@@ -105,6 +105,6 @@ if __name__ == '__main__':
         print update_node(myid, children=mychildren).json()
 
     # add the cs 130 piazza ID
-    print add_course('if44ov1fn5a505').json()
+    print add_course('if44ov1fn5a505', 'CS 130').json()
     # Set the root to be node 54
     print add_root(54).json()
