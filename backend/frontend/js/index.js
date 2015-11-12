@@ -106359,7 +106359,7 @@ var AddNode = (function (_Action) {
 })(_actionJs2['default']);
 
 function addNode(node, title, markdown, renderer) {
-  WebAPI.addNewChild(node, title, markdown, renderer, function (node) {
+  WebAPI.addNewChild(node, title, markdown, "Resource", function (node) {
     var action = new AddNode(node);
     _dispatcherJs2['default'].dispatch(action);
   });
@@ -106367,63 +106367,7 @@ function addNode(node, title, markdown, renderer) {
 
 module.exports = exports['default'];
 
-},{"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"./action.js":623}],625:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-exports['default'] = editNode;
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _actionJs = require('./action.js');
-
-var _actionJs2 = _interopRequireDefault(_actionJs);
-
-var _dispatcherJs = require('../dispatcher.js');
-
-var _dispatcherJs2 = _interopRequireDefault(_dispatcherJs);
-
-var _ModelsNodeJs = require('../Models/node.js');
-
-var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
-
-var _utilsWebapiJs = require('../utils/webapi.js');
-
-var WebAPI = _interopRequireWildcard(_utilsWebapiJs);
-
-var EditNode = (function (_Action) {
-  _inherits(EditNode, _Action);
-
-  function EditNode(node) {
-    _classCallCheck(this, EditNode);
-
-    _get(Object.getPrototypeOf(EditNode.prototype), 'constructor', this).call(this, "editNode", node);
-  }
-
-  return EditNode;
-})(_actionJs2['default']);
-
-function editNode(node, markdown, renderer, children) {
-  WebAPI.editNode(node, markdown, renderer, children, function (node) {
-    var action = new EditNode(node);
-    _dispatcherJs2['default'].dispatch(action);
-  });
-}
-
-module.exports = exports['default'];
-
-},{"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"./action.js":623}],626:[function(require,module,exports){
+},{"../Models/node.js":630,"../dispatcher.js":634,"../utils/webapi.js":637,"./action.js":623}],625:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -106471,7 +106415,7 @@ function expandWeek(tag) {
 
 module.exports = exports['default'];
 
-},{"../Models/node.js":632,"../dispatcher.js":636,"./action.js":623}],627:[function(require,module,exports){
+},{"../Models/node.js":630,"../dispatcher.js":634,"./action.js":623}],626:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -106521,7 +106465,7 @@ function open(rootId, nodes) {
 
 module.exports = exports['default'];
 
-},{"../Models/node.js":632,"../dispatcher.js":636,"./action.js":623,"immutable":318}],628:[function(require,module,exports){
+},{"../Models/node.js":630,"../dispatcher.js":634,"./action.js":623,"immutable":318}],627:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -106567,63 +106511,7 @@ function piazzaPostsFetched(posts) {
 
 module.exports = exports['default'];
 
-},{"../dispatcher.js":636,"./action.js":623,"immutable":318}],629:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-exports['default'] = removeNode;
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _actionJs = require('./action.js');
-
-var _actionJs2 = _interopRequireDefault(_actionJs);
-
-var _dispatcherJs = require('../dispatcher.js');
-
-var _dispatcherJs2 = _interopRequireDefault(_dispatcherJs);
-
-var _ModelsNodeJs = require('../Models/node.js');
-
-var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
-
-var _utilsWebapiJs = require('../utils/webapi.js');
-
-var WebAPI = _interopRequireWildcard(_utilsWebapiJs);
-
-var RemoveNode = (function (_Action) {
-  _inherits(RemoveNode, _Action);
-
-  function RemoveNode(node) {
-    _classCallCheck(this, RemoveNode);
-
-    _get(Object.getPrototypeOf(RemoveNode.prototype), 'constructor', this).call(this, "removeNode", node);
-  }
-
-  return RemoveNode;
-})(_actionJs2['default']);
-
-function removeNode(node) {
-  WebAPI.removeNode(node, function (node) {
-    var action = new RemoveNode(node);
-    _dispatcherJs2['default'].dispatch(action);
-  });
-}
-
-module.exports = exports['default'];
-
-},{"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"./action.js":623}],630:[function(require,module,exports){
+},{"../dispatcher.js":634,"./action.js":623,"immutable":318}],628:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -106659,7 +106547,7 @@ function getRenderedElement(tag, node, ui) {
 
 module.exports = exports['default'];
 
-},{"./renderer.js":631,"react":615}],631:[function(require,module,exports){
+},{"./renderer.js":629,"react":615}],629:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -106733,14 +106621,6 @@ var _ActionsExpandweekJs2 = _interopRequireDefault(_ActionsExpandweekJs);
 var _ActionsAddnodeJs = require('../Actions/addnode.js');
 
 var _ActionsAddnodeJs2 = _interopRequireDefault(_ActionsAddnodeJs);
-
-var _ActionsEditnodeJs = require('../Actions/editnode.js');
-
-var _ActionsEditnodeJs2 = _interopRequireDefault(_ActionsEditnodeJs);
-
-var _ActionsRemovenodeJs = require('../Actions/removenode.js');
-
-var _ActionsRemovenodeJs2 = _interopRequireDefault(_ActionsRemovenodeJs);
 
 var _utilsTitlecapsJs = require('../utils/titlecaps.js');
 
@@ -107098,50 +106978,15 @@ var EditableModalList = (function (_React$Component7) {
 
 exports.EditableModalList = EditableModalList;
 
-var ListElementInput = (function (_React$Component8) {
-  _inherits(ListElementInput, _React$Component8);
-
-  function ListElementInput() {
-    _classCallCheck(this, ListElementInput);
-
-    _get(Object.getPrototypeOf(ListElementInput.prototype), 'constructor', this).apply(this, arguments);
-  }
-
-  _createClass(ListElementInput, [{
-    key: 'render',
-    value: function render() {
-      //add type that is element or component
-      return _react2['default'].createElement(
-        'form',
-        null,
-        _react2['default'].createElement(_reactBootstrapLibInput2['default'], { type: 'text', ref: 'title', placeholder: 'title' }),
-        _react2['default'].createElement(_reactBootstrapLibInput2['default'], { type: 'textarea', ref: 'contents', placeholder: 'type markdown here' }),
-        _react2['default'].createElement(_reactBootstrapLibButtonInput2['default'], { type: 'reset', value: 'Create', onClick: this.clickWrapper.bind(this) })
-      );
-    }
-  }, {
-    key: 'clickWrapper',
-    value: function clickWrapper() {
-      var title = this.refs["title"].getValue(),
-          value = this.refs["contents"].getValue();
-      this.props.onClick(title, value);
-    }
-  }]);
-
-  return ListElementInput;
-})(_react2['default'].Component);
-
-exports.ListElementInput = ListElementInput;
-
-var ListElement = (function (_React$Component9) {
-  _inherits(ListElement, _React$Component9);
+var ListElement = (function (_React$Component8) {
+  _inherits(ListElement, _React$Component8);
 
   function ListElement() {
     _classCallCheck(this, ListElement);
 
     _get(Object.getPrototypeOf(ListElement.prototype), 'constructor', this).call(this);
     this.state = {
-      editing: false
+      show: false
     };
   }
 
@@ -107151,36 +106996,30 @@ var ListElement = (function (_React$Component9) {
   _createClass(ListElement, [{
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement(this.props.node.renderer, { className: "listelement" }, _react2['default'].createElement(
+      return _react2['default'].createElement(this.props.node.renderer, { onClick: this.handleClick.bind(this),
+        className: "listelement" }, _react2['default'].createElement(
         'h2',
         null,
         (0, _utilsTitlecapsJs2['default'])(this.props.tag)
-      ), this.state.editing ? _react2['default'].createElement(ListElementEditor, { onClick: this.endEdit.bind(this),
-        contents: this.props.node.contents }) : (0, _createelementJs2['default'])(this.props.tag, this.props.node, this.props.ui), this.state.editing ? null : _react2['default'].createElement(
-        'h2',
-        { onClick: this.startEdit.bind(this) },
-        'Edit'
       ), _react2['default'].createElement(
-        'h2',
-        { onClick: this.deleteNode.bind(this) },
-        'Delete'
+        _reactBootstrapLibModal2['default'],
+        { show: this.state.show, onHide: this.close.bind(this) },
+        _react2['default'].createElement(
+          _reactBootstrapLibModalBody2['default'],
+          null,
+          (0, _createelementJs2['default'])(this.props.tag, this.props.node, this.props.ui)
+        )
       ));
     }
   }, {
-    key: 'startEdit',
-    value: function startEdit(event) {
-      this.setState({ editing: true });
+    key: 'handleClick',
+    value: function handleClick(event) {
+      this.setState({ show: true });
     }
   }, {
-    key: 'endEdit',
-    value: function endEdit(contents) {
-      this.setState({ editing: false });
-      (0, _ActionsEditnodeJs2['default'])(this.props.node, contents, this.props.node.renderer, this.props.node.children);
-    }
-  }, {
-    key: 'deleteNode',
-    value: function deleteNode(event) {
-      (0, _ActionsRemovenodeJs2['default'])(this.props.node);
+    key: 'close',
+    value: function close() {
+      this.setState({ show: false });
     }
   }]);
 
@@ -107189,8 +107028,8 @@ var ListElement = (function (_React$Component9) {
 
 exports.ListElement = ListElement;
 
-var EditableList = (function (_React$Component10) {
-  _inherits(EditableList, _React$Component10);
+var EditableList = (function (_React$Component9) {
+  _inherits(EditableList, _React$Component9);
 
   function EditableList() {
     _classCallCheck(this, EditableList);
@@ -107209,7 +107048,7 @@ var EditableList = (function (_React$Component10) {
           null,
           (0, _utilsTitlecapsJs2['default'])(this.props.tag)
         ),
-        _react2['default'].createElement(ListElementCreator, { onClick: this.addNewChild.bind(this) }),
+        _react2['default'].createElement(ListElementInput, { onClick: this.addNewChild.bind(this) }),
         mapObject(this.props.node.children, function (id, tag) {
           return _react2['default'].createElement(ListElement, { key: id, tag: tag, node: _StoresNodestoreJs2['default'].getState().nodes.get(id) });
         })
@@ -107227,19 +107066,19 @@ var EditableList = (function (_React$Component10) {
 
 exports.EditableList = EditableList;
 
-var ListElementCreator = (function (_React$Component11) {
-  _inherits(ListElementCreator, _React$Component11);
+var ListElementInput = (function (_React$Component10) {
+  _inherits(ListElementInput, _React$Component10);
 
-  function ListElementCreator() {
-    _classCallCheck(this, ListElementCreator);
+  function ListElementInput() {
+    _classCallCheck(this, ListElementInput);
 
-    _get(Object.getPrototypeOf(ListElementCreator.prototype), 'constructor', this).call(this);
+    _get(Object.getPrototypeOf(ListElementInput.prototype), 'constructor', this).call(this);
     this.state = {
       alert: null
     };
   }
 
-  _createClass(ListElementCreator, [{
+  _createClass(ListElementInput, [{
     key: 'render',
     value: function render() {
       //add type that is element or component
@@ -107276,47 +107115,11 @@ var ListElementCreator = (function (_React$Component11) {
     }
   }]);
 
-  return ListElementCreator;
+  return ListElementInput;
 })(_react2['default'].Component);
 
-var ListElementEditor = (function (_React$Component12) {
-  _inherits(ListElementEditor, _React$Component12);
-
-  function ListElementEditor() {
-    _classCallCheck(this, ListElementEditor);
-
-    _get(Object.getPrototypeOf(ListElementEditor.prototype), 'constructor', this).call(this);
-    this.state = {};
-  }
-
-  _createClass(ListElementEditor, [{
-    key: 'render',
-    value: function render() {
-      //add type that is element or component
-      return _react2['default'].createElement(
-        'listelementinput',
-        null,
-        _react2['default'].createElement(
-          'form',
-          { ref: 'formelement' },
-          _react2['default'].createElement(_reactBootstrapLibInput2['default'], { type: 'textarea', ref: 'contents', placeholder: this.props.contents }),
-          _react2['default'].createElement(_reactBootstrapLibButtonInput2['default'], { value: 'Save', onClick: this.save.bind(this) })
-        )
-      );
-    }
-  }, {
-    key: 'save',
-    value: function save() {
-      var newContents = this.refs["contents"].getValue();
-      this.props.onClick(newContents);
-    }
-  }]);
-
-  return ListElementEditor;
-})(_react2['default'].Component);
-
-var AlertDismissable = (function (_React$Component13) {
-  _inherits(AlertDismissable, _React$Component13);
+var AlertDismissable = (function (_React$Component11) {
+  _inherits(AlertDismissable, _React$Component11);
 
   function AlertDismissable() {
     _classCallCheck(this, AlertDismissable);
@@ -107355,7 +107158,7 @@ var AlertDismissable = (function (_React$Component13) {
   return AlertDismissable;
 })(_react2['default'].Component);
 
-},{"../Actions/addnode.js":624,"../Actions/editnode.js":625,"../Actions/expandweek.js":626,"../Actions/removenode.js":629,"../Models/node.js":632,"../Stores/nodestore.js":633,"../utils/titlecaps.js":638,"../utils/webapi.js":639,"./createelement.js":630,"marked":320,"partial":321,"react":615,"react-bootstrap/lib/Alert":424,"react-bootstrap/lib/ButtonInput":427,"react-bootstrap/lib/Input":433,"react-bootstrap/lib/Modal":435,"react-bootstrap/lib/ModalBody":436,"react-dom":459}],632:[function(require,module,exports){
+},{"../Actions/addnode.js":624,"../Actions/expandweek.js":625,"../Models/node.js":630,"../Stores/nodestore.js":631,"../utils/titlecaps.js":636,"../utils/webapi.js":637,"./createelement.js":628,"marked":320,"partial":321,"react":615,"react-bootstrap/lib/Alert":424,"react-bootstrap/lib/ButtonInput":427,"react-bootstrap/lib/Input":433,"react-bootstrap/lib/Modal":435,"react-bootstrap/lib/ModalBody":436,"react-dom":459}],630:[function(require,module,exports){
 
 
 //internal model for a Node. used across the frontend
@@ -107387,7 +107190,7 @@ var Node = function Node(node) {
 exports["default"] = Node;
 module.exports = exports["default"];
 
-},{}],633:[function(require,module,exports){
+},{}],631:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -107397,8 +107200,6 @@ Object.defineProperty(exports, '__esModule', {
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -107423,10 +107224,6 @@ var _ModelsNodeJs2 = _interopRequireDefault(_ModelsNodeJs);
 var _dispatcherJs = require('../dispatcher.js');
 
 var _dispatcherJs2 = _interopRequireDefault(_dispatcherJs);
-
-var _utilsWebapiJs = require('../utils/webapi.js');
-
-var WebAPI = _interopRequireWildcard(_utilsWebapiJs);
 
 //add to NodeStoreState by appending to map
 
@@ -107485,34 +107282,10 @@ var NodeStore = (function (_ReduceStore) {
           newState.nodes = state.nodes.set(newNode.id, newNode);
 
           return newState;
-        case "editNode":
-          var editedNode = action.data;
-          editedNode.id = typeof editedNode.id === "string" ? editedNode.id : editedNode.id.toString();
-          newState = new NodeStoreState(state.rootId);
-          newState.nodes = state.nodes.set(editedNode.id, editedNode);
-
-          return newState;
-        case "removeNode":
-          var nodeToRemove = action.data;
-          nodeToRemove.id = typeof nodeToRemove.id === "string" ? nodeToRemove.id : nodeToRemove.id.toString();
-          newState = new NodeStoreState(state.rootId);
-          // delete node
-          newState.nodes = state.nodes['delete'](nodeToRemove.id);
-          // modify parent nodes to no longer point to deleted node
-          newState.nodes.forEach(function (node) {
-            var wasModified = false;
-            var name = undefined;
-            for (name in node.children) {
-              if (node.children.hasOwnProperty(name) && node.children[name] === nodeToRemove.id) {
-                delete node.children[name];
-                wasModified = true;
-              }
-            }
-            if (wasModified === true) {
-              WebAPI.editNode(node, node.contents, node.renderer, node.children, function () {});
-            }
-          });
-          return newState;
+        case "editResource":
+        //TODO: edit node
+        case "removeResource":
+        //TODO: delete node
       }
 
       return state;
@@ -107526,7 +107299,7 @@ var nodeStore = new NodeStore(_dispatcherJs2['default']);
 exports['default'] = nodeStore;
 module.exports = exports['default'];
 
-},{"../Actions/action.js":623,"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"flux":300,"flux/utils":317,"immutable":318}],634:[function(require,module,exports){
+},{"../Actions/action.js":623,"../Models/node.js":630,"../dispatcher.js":634,"flux":300,"flux/utils":317,"immutable":318}],632:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -107614,7 +107387,7 @@ var uiStateStore = new UIStateStore(_dispatcherJs2['default']);
 exports['default'] = uiStateStore;
 module.exports = exports['default'];
 
-},{"../Actions/action.js":623,"../Models/node.js":632,"../dispatcher.js":636,"flux":300,"flux/utils":317,"immutable":318}],635:[function(require,module,exports){
+},{"../Actions/action.js":623,"../Models/node.js":630,"../dispatcher.js":634,"flux":300,"flux/utils":317,"immutable":318}],633:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -107716,7 +107489,7 @@ var ApplicationContainer = _fluxUtils.Container.create(ApplicationComponent);
 exports['default'] = ApplicationContainer;
 module.exports = exports['default'];
 
-},{"./Actions/open.js":627,"./Components/createelement.js":630,"./Models/node.js":632,"./Stores/nodestore.js":633,"./Stores/uistatestore.js":634,"./utils/webapi.js":639,"flux/utils":317,"jquery":319,"react":615}],636:[function(require,module,exports){
+},{"./Actions/open.js":626,"./Components/createelement.js":628,"./Models/node.js":630,"./Stores/nodestore.js":631,"./Stores/uistatestore.js":632,"./utils/webapi.js":637,"flux/utils":317,"jquery":319,"react":615}],634:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -107729,7 +107502,7 @@ var dispatcher = new _flux.Dispatcher();
 exports['default'] = dispatcher;
 module.exports = exports['default'];
 
-},{"flux":300}],637:[function(require,module,exports){
+},{"flux":300}],635:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -107769,7 +107542,7 @@ global.HTTP = http;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./application.js":635,"./utils/webapi.js":639,"jquery":319,"react":615,"react-dom":459,"stream-http":616}],638:[function(require,module,exports){
+},{"./application.js":633,"./utils/webapi.js":637,"jquery":319,"react":615,"react-dom":459,"stream-http":616}],636:[function(require,module,exports){
 /*
  * Title Caps
  *
@@ -107821,15 +107594,13 @@ function upper(word) {
 }
 module.exports = exports["default"];
 
-},{}],639:[function(require,module,exports){
+},{}],637:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 exports.addNewChild = addNewChild;
-exports.editNode = editNode;
-exports.removeNode = removeNode;
 exports.init = init;
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
@@ -107863,8 +107634,6 @@ var _ActionsPiazzapostsfetchedJs2 = _interopRequireDefault(_ActionsPiazzapostsfe
 //this is a module exclusively for sending specific actions to the web api.
 //complex actions can be defined here in terms of the basic RESTful API
 
-//please always import this module with "import * as WebAPI" since names may conflict
-
 //Primitive actions supported by webapi.
 //----------------------------------------
 
@@ -107895,14 +107664,6 @@ function overwriteNode(node) {
   return _jquery2['default'].ajax(endpoint, {
     method: "POST",
     data: data,
-    dataType: "json"
-  });
-}
-
-function deleteNode(nodeId) {
-  var endpoint = mainUrl + ('/' + courseId + '/node/delete/' + nodeId + '/');
-  return _jquery2['default'].ajax(endpoint, {
-    method: "POST",
     dataType: "json"
   });
 }
@@ -108029,26 +107790,6 @@ function addNewChild(node, tag, markdown, renderer, callback) {
   });
 }
 
-function editNode(node, markdown, renderer, children, callback) {
-  var newNode = new _ModelsNodeJs2['default']({ id: node.id, contents: markdown, renderer: renderer, children: children });
-
-  overwriteNode(newNode).then(function (data) {
-    callback(newNode);
-  }, function (jqXHR, textStatus, errorThrown) {
-    console.error(textStatus);
-    throw errorThrown;
-  });
-}
-
-function removeNode(node, callback) {
-  deleteNode(node.id).then(function (data) {
-    callback(node);
-  }, function (jqXHR, textStatus, errorThrown) {
-    console.error(textStatus);
-    throw errorThrown;
-  });
-}
-
 function init(callback) {
   var nodes = undefined,
       rootId = undefined;
@@ -108077,7 +107818,7 @@ function init(callback) {
   });
 }
 
-},{"../Actions/piazzapostsfetched.js":628,"../Models/node.js":632,"immutable":318,"jquery":319,"piazza-api":423,"stream-http":616}]},{},[637])
+},{"../Actions/piazzapostsfetched.js":627,"../Models/node.js":630,"immutable":318,"jquery":319,"piazza-api":423,"stream-http":616}]},{},[635])
 
 
 //# sourceMappingURL=index.js.map

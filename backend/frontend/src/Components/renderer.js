@@ -16,8 +16,6 @@ import nodeStore from '../Stores/nodestore.js';
 import getRenderedElement from './createelement.js';
 import expandWeek from '../Actions/expandweek.js';
 import addNode from '../Actions/addnode.js';
-import editNode from '../Actions/editnode.js';
-import removeNode from '../Actions/removenode.js';
 
 import titleCaps from '../utils/titlecaps.js';
 import * as WebAPI from '../utils/webapi.js';
@@ -254,57 +252,37 @@ export class EditableModalList extends React.Component {
   }
 }
 
-export class ListElementInput extends React.Component {
-  render() : React.Component { //add type that is element or component
-    return (
-      <form>
-        <Input type="text" ref="title" placeholder="title"/>
-        <Input type="textarea" ref="contents" placeholder="type markdown here"/>
-        <ButtonInput type="reset" value="Create" onClick={this.clickWrapper.bind(this)}/>
-      </form>
-    );
-  }
-  clickWrapper(){
-    let title=this.refs["title"].getValue(), value=this.refs["contents"].getValue();
-    this.props.onClick(title, value);
-  }
-}
-
 
 
 export class ListElement extends React.Component {
   constructor(){
     super();
     this.state = {
-      editing: false
+      show: false
     }
   }
 
   render() : React.Element {
     return (
       React.createElement(this.props.node.renderer,
-                          {className: "listelement"},
+                          {onClick: this.handleClick.bind(this),
+                           className: "listelement"},
                           <h2>{titleCaps(this.props.tag)}</h2>,
-                          this.state.editing ? <ListElementEditor onClick={this.endEdit.bind(this)}
-                                                                  contents={this.props.node.contents} /> :
-                                               getRenderedElement(this.props.tag, this.props.node, this.props.ui),
-                          this.state.editing ? null : <h2 onClick={this.startEdit.bind(this)}>Edit</h2>,
-                          <h2 onClick={this.deleteNode.bind(this)}>Delete</h2>
+                          <Modal show={this.state.show} onHide={this.close.bind(this)}>
+                            <ModalBody>
+                              {getRenderedElement(this.props.tag, this.props.node, this.props.ui)}
+                            </ModalBody>
+                          </Modal>
                           )
     );
   }
 
-  startEdit(event){
-    this.setState({editing: true});
+  handleClick(event){
+    this.setState({show: true});
   }
 
-  endEdit(contents: string){
-    this.setState({editing: false});
-    editNode(this.props.node, contents, this.props.node.renderer, this.props.node.children);
-  }
-
-  deleteNode(event){
-    removeNode(this.props.node);
+  close(){
+    this.setState({show: false});
   }
 }
 
@@ -316,7 +294,7 @@ export class EditableList extends React.Component {
     return (
       <list>
         <h1>{titleCaps(this.props.tag)}</h1>
-        <ListElementCreator onClick={this.addNewChild.bind(this)}/>
+        <ListElementInput onClick={this.addNewChild.bind(this)}/>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>
             <ListElement key={id} tag={tag} node={nodeStore.getState().nodes.get(id)} />
@@ -331,7 +309,7 @@ export class EditableList extends React.Component {
   }
 }
 
-class ListElementCreator extends React.Component {
+class ListElementInput extends React.Component {
   constructor(){
     super();
     this.state = {
@@ -365,29 +343,6 @@ class ListElementCreator extends React.Component {
 
   onDismiss(){
     this.setState({alert: []});
-  }
-}
-
-class ListElementEditor extends React.Component {
-  constructor(){
-    super();
-    this.state = {};
-  }
-
-  render() : React.Component { //add type that is element or component
-    return (
-      <listelementinput>
-        <form ref="formelement">
-          <Input type="textarea" ref="contents" placeholder={this.props.contents} />
-          <ButtonInput value="Save" onClick={this.save.bind(this)}/>
-        </form>
-      </listelementinput>
-    );
-  }
-
-  save(){
-    let newContents=this.refs["contents"].getValue();
-    this.props.onClick(newContents);
   }
 }
 
