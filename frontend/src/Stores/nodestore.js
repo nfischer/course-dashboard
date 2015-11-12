@@ -6,12 +6,11 @@ import { Map } from 'immutable';
 import Action from '../Actions/action.js';
 import Node from '../Models/node.js';
 import dispatcher from '../dispatcher.js';
-import * as WebAPI from '../utils/webapi.js';
 
 //add to NodeStoreState by appending to map
 class NodeStoreState {
   rootId: string;
-  nodes: Map<string, Node>;
+  nodes: Map<string, string>;
 
   constructor(rootId: string){
     this.rootId = rootId;
@@ -52,34 +51,10 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
       newState.nodes = state.nodes.set(newNode.id, newNode);
 
       return newState;
-    case "editNode":
-      let editedNode = action.data;
-      editedNode.id = (typeof editedNode.id === "string") ? editedNode.id : editedNode.id.toString();
-      newState = new NodeStoreState(state.rootId);
-      newState.nodes = state.nodes.set(editedNode.id, editedNode);
-
-      return newState;
-    case "removeNode":
-      let nodeToRemove = action.data;
-      nodeToRemove.id = (typeof nodeToRemove.id === "string") ? nodeToRemove.id : nodeToRemove.id.toString();
-      newState = new NodeStoreState(state.rootId);
-      // delete node
-      newState.nodes = state.nodes.delete(nodeToRemove.id);
-      // modify parent nodes to no longer point to deleted node
-      newState.nodes.forEach(node => {
-        let wasModified = false;
-        let name;
-        for (name in node.children) {
-          if (node.children.hasOwnProperty(name) && node.children[name] === nodeToRemove.id) {
-            delete node.children[name];
-            wasModified = true;
-          }
-        }
-        if (wasModified === true) {
-          WebAPI.editNode(node, node.contents, node.renderer, node.children, () => {});
-        }
-      });
-      return newState;
+    case "editResource":
+      //TODO: edit node
+    case "removeResource":
+      //TODO: delete node
     }
 
     return state;
