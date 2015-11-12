@@ -80,7 +80,6 @@ exports["default"] = function (obj) {
     return obj;
   } else {
     var newObj = {};
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 
     if (obj != null) {
       for (var key in obj) {
@@ -264,71 +263,6 @@ var $        = require('./$')
   , toObject = require('./$.to-object')
   , IObject  = require('./$.iobject');
 
-=======
-
-    if (obj != null) {
-      for (var key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
-      }
-    }
-
-    newObj["default"] = obj;
-    return newObj;
-  }
-};
-
-exports.__esModule = true;
-},{}],11:[function(require,module,exports){
-"use strict";
-
-exports["default"] = function (obj, keys) {
-  var target = {};
-
-  for (var i in obj) {
-    if (keys.indexOf(i) >= 0) continue;
-    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
-    target[i] = obj[i];
-  }
-
-  return target;
-};
-
-exports.__esModule = true;
-},{}],12:[function(require,module,exports){
-require('../../modules/es6.object.assign');
-module.exports = require('../../modules/$.core').Object.assign;
-},{"../../modules/$.core":21,"../../modules/es6.object.assign":33}],13:[function(require,module,exports){
-var $ = require('../../modules/$');
-module.exports = function create(P, D){
-  return $.create(P, D);
-};
-},{"../../modules/$":29}],14:[function(require,module,exports){
-require('../../modules/es6.object.is-frozen');
-module.exports = require('../../modules/$.core').Object.isFrozen;
-},{"../../modules/$.core":21,"../../modules/es6.object.is-frozen":34}],15:[function(require,module,exports){
-require('../../modules/es6.object.keys');
-module.exports = require('../../modules/$.core').Object.keys;
-},{"../../modules/$.core":21,"../../modules/es6.object.keys":35}],16:[function(require,module,exports){
-require('../../modules/es6.object.set-prototype-of');
-module.exports = require('../../modules/$.core').Object.setPrototypeOf;
-},{"../../modules/$.core":21,"../../modules/es6.object.set-prototype-of":36}],17:[function(require,module,exports){
-module.exports = function(it){
-  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
-  return it;
-};
-},{}],18:[function(require,module,exports){
-var isObject = require('./$.is-object');
-module.exports = function(it){
-  if(!isObject(it))throw TypeError(it + ' is not an object!');
-  return it;
-};
-},{"./$.is-object":28}],19:[function(require,module,exports){
-// 19.1.2.1 Object.assign(target, source, ...)
-var $        = require('./$')
-  , toObject = require('./$.to-object')
-  , IObject  = require('./$.iobject');
-
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // should work with symbols and should have deterministic property order (V8 bug)
 module.exports = require('./$.fails')(function(){
   var a = Object.assign
@@ -357,7 +291,6 @@ module.exports = require('./$.fails')(function(){
   }
   return T;
 } : Object.assign;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./$":28,"./$.fails":24,"./$.iobject":26,"./$.to-object":32}],30:[function(require,module,exports){
 // most Object methods by ES6 should accept primitives
 var $export = require('./$.export')
@@ -370,139 +303,6 @@ module.exports = function(KEY, exec){
   $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
 };
 },{"./$.core":20,"./$.export":23,"./$.fails":24}],31:[function(require,module,exports){
-=======
-},{"./$":29,"./$.fails":25,"./$.iobject":27,"./$.to-object":32}],20:[function(require,module,exports){
-var toString = {}.toString;
-
-module.exports = function(it){
-  return toString.call(it).slice(8, -1);
-};
-},{}],21:[function(require,module,exports){
-var core = module.exports = {version: '1.2.3'};
-if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-},{}],22:[function(require,module,exports){
-// optional / simple context binding
-var aFunction = require('./$.a-function');
-module.exports = function(fn, that, length){
-  aFunction(fn);
-  if(that === undefined)return fn;
-  switch(length){
-    case 1: return function(a){
-      return fn.call(that, a);
-    };
-    case 2: return function(a, b){
-      return fn.call(that, a, b);
-    };
-    case 3: return function(a, b, c){
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function(/* ...args */){
-    return fn.apply(that, arguments);
-  };
-};
-},{"./$.a-function":17}],23:[function(require,module,exports){
-var global    = require('./$.global')
-  , core      = require('./$.core')
-  , PROTOTYPE = 'prototype';
-var ctx = function(fn, that){
-  return function(){
-    return fn.apply(that, arguments);
-  };
-};
-var $def = function(type, name, source){
-  var key, own, out, exp
-    , isGlobal = type & $def.G
-    , isProto  = type & $def.P
-    , target   = isGlobal ? global : type & $def.S
-        ? global[name] : (global[name] || {})[PROTOTYPE]
-    , exports  = isGlobal ? core : core[name] || (core[name] = {});
-  if(isGlobal)source = name;
-  for(key in source){
-    // contains in native
-    own = !(type & $def.F) && target && key in target;
-    if(own && key in exports)continue;
-    // export native or passed
-    out = own ? target[key] : source[key];
-    // prevent global pollution for namespaces
-    if(isGlobal && typeof target[key] != 'function')exp = source[key];
-    // bind timers to global for call from export context
-    else if(type & $def.B && own)exp = ctx(out, global);
-    // wrap global constructors for prevent change them in library
-    else if(type & $def.W && target[key] == out)!function(C){
-      exp = function(param){
-        return this instanceof C ? new C(param) : C(param);
-      };
-      exp[PROTOTYPE] = C[PROTOTYPE];
-    }(out);
-    else exp = isProto && typeof out == 'function' ? ctx(Function.call, out) : out;
-    // export
-    exports[key] = exp;
-    if(isProto)(exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
-  }
-};
-// type bitmap
-$def.F = 1;  // forced
-$def.G = 2;  // global
-$def.S = 4;  // static
-$def.P = 8;  // proto
-$def.B = 16; // bind
-$def.W = 32; // wrap
-module.exports = $def;
-},{"./$.core":21,"./$.global":26}],24:[function(require,module,exports){
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function(it){
-  if(it == undefined)throw TypeError("Can't call method on  " + it);
-  return it;
-};
-},{}],25:[function(require,module,exports){
-module.exports = function(exec){
-  try {
-    return !!exec();
-  } catch(e){
-    return true;
-  }
-};
-},{}],26:[function(require,module,exports){
-// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-var global = module.exports = typeof window != 'undefined' && window.Math == Math
-  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
-if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
-},{}],27:[function(require,module,exports){
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = require('./$.cof');
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
-  return cof(it) == 'String' ? it.split('') : Object(it);
-};
-},{"./$.cof":20}],28:[function(require,module,exports){
-module.exports = function(it){
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-},{}],29:[function(require,module,exports){
-var $Object = Object;
-module.exports = {
-  create:     $Object.create,
-  getProto:   $Object.getPrototypeOf,
-  isEnum:     {}.propertyIsEnumerable,
-  getDesc:    $Object.getOwnPropertyDescriptor,
-  setDesc:    $Object.defineProperty,
-  setDescs:   $Object.defineProperties,
-  getKeys:    $Object.keys,
-  getNames:   $Object.getOwnPropertyNames,
-  getSymbols: $Object.getOwnPropertySymbols,
-  each:       [].forEach
-};
-},{}],30:[function(require,module,exports){
-// most Object methods by ES6 should accept primitives
-module.exports = function(KEY, exec){
-  var $def = require('./$.def')
-    , fn   = (require('./$.core').Object || {})[KEY] || Object[KEY]
-    , exp  = {};
-  exp[KEY] = exec(fn);
-  $def($def.S + $def.F * require('./$.fails')(function(){ fn(1); }), 'Object', exp);
-};
-},{"./$.core":21,"./$.def":23,"./$.fails":25}],31:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
 var getDesc  = require('./$').getDesc
@@ -529,31 +329,18 @@ module.exports = {
     }({}, false) : undefined),
   check: check
 };
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./$":28,"./$.an-object":18,"./$.ctx":21,"./$.is-object":27}],32:[function(require,module,exports){
-=======
-},{"./$":29,"./$.an-object":18,"./$.ctx":22,"./$.is-object":28}],32:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // 7.1.13 ToObject(argument)
 var defined = require('./$.defined');
 module.exports = function(it){
   return Object(defined(it));
 };
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./$.defined":22}],33:[function(require,module,exports){
 // 19.1.3.1 Object.assign(target, source)
 var $export = require('./$.export');
 
 $export($export.S + $export.F, 'Object', {assign: require('./$.object-assign')});
 },{"./$.export":23,"./$.object-assign":29}],34:[function(require,module,exports){
-=======
-},{"./$.defined":24}],33:[function(require,module,exports){
-// 19.1.3.1 Object.assign(target, source)
-var $def = require('./$.def');
-
-$def($def.S + $def.F, 'Object', {assign: require('./$.assign')});
-},{"./$.assign":19,"./$.def":23}],34:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // 19.1.2.12 Object.isFrozen(O)
 var isObject = require('./$.is-object');
 
@@ -562,11 +349,7 @@ require('./$.object-sap')('isFrozen', function($isFrozen){
     return isObject(it) ? $isFrozen ? $isFrozen(it) : false : true;
   };
 });
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./$.is-object":27,"./$.object-sap":30}],35:[function(require,module,exports){
-=======
-},{"./$.is-object":28,"./$.object-sap":30}],35:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // 19.1.2.14 Object.keys(O)
 var toObject = require('./$.to-object');
 
@@ -577,15 +360,9 @@ require('./$.object-sap')('keys', function($keys){
 });
 },{"./$.object-sap":30,"./$.to-object":32}],36:[function(require,module,exports){
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 var $export = require('./$.export');
 $export($export.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
 },{"./$.export":23,"./$.set-proto":31}],37:[function(require,module,exports){
-=======
-var $def = require('./$.def');
-$def($def.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
-},{"./$.def":23,"./$.set-proto":31}],37:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 
 },{}],38:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
@@ -948,11 +725,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"util/":286}],39:[function(require,module,exports){
-=======
-},{"util/":280}],39:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 arguments[4][37][0].apply(exports,arguments)
 },{"dup":37}],40:[function(require,module,exports){
 'use strict';
@@ -6601,11 +6374,7 @@ exports.Zlib = Zlib;
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255,"buffer":53,"pako/lib/zlib/constants":42,"pako/lib/zlib/deflate.js":44,"pako/lib/zlib/inflate.js":46,"pako/lib/zlib/messages":48,"pako/lib/zlib/zstream":50}],52:[function(require,module,exports){
-=======
-},{"_process":249,"buffer":53,"pako/lib/zlib/constants":42,"pako/lib/zlib/deflate.js":44,"pako/lib/zlib/inflate.js":46,"pako/lib/zlib/messages":48,"pako/lib/zlib/zstream":50}],52:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process,Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -7220,11 +6989,7 @@ util.inherits(Unzip, Zlib);
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./binding":51,"_process":255,"_stream_transform":271,"assert":38,"buffer":53,"util":286}],53:[function(require,module,exports){
-=======
-},{"./binding":51,"_process":249,"_stream_transform":265,"assert":38,"buffer":53,"util":280}],53:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -9099,11 +8864,7 @@ var publicEncrypt = require('public-encrypt')
   }
 })
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"browserify-cipher":58,"browserify-sign":88,"browserify-sign/algos":87,"create-ecdh":155,"create-hash":181,"create-hmac":194,"diffie-hellman":195,"pbkdf2":202,"public-encrypt":203,"randombytes":248}],58:[function(require,module,exports){
-=======
-},{"browserify-cipher":58,"browserify-sign":88,"browserify-sign/algos":87,"create-ecdh":152,"create-hash":175,"create-hmac":188,"diffie-hellman":189,"pbkdf2":196,"public-encrypt":197,"randombytes":242}],58:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var ebtk = require('evp_bytestokey')
 var aes = require('browserify-aes/browser')
 var DES = require('browserify-des')
@@ -9462,11 +9223,7 @@ function xorTest (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":59,"./ghash":64,"buffer":53,"buffer-xor":73,"cipher-base":74,"inherits":251}],61:[function(require,module,exports){
-=======
-},{"./aes":59,"./ghash":64,"buffer":53,"buffer-xor":73,"cipher-base":74,"inherits":245}],61:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var ciphers = require('./encrypter')
 exports.createCipher = exports.Cipher = ciphers.createCipher
 exports.createCipheriv = exports.Cipheriv = ciphers.createCipheriv
@@ -9620,11 +9377,7 @@ exports.createDecipheriv = createDecipheriv
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":59,"./authCipher":60,"./modes":65,"./modes/cbc":66,"./modes/cfb":67,"./modes/cfb1":68,"./modes/cfb8":69,"./modes/ctr":70,"./modes/ecb":71,"./modes/ofb":72,"./streamCipher":75,"buffer":53,"cipher-base":74,"evp_bytestokey":86,"inherits":251}],63:[function(require,module,exports){
-=======
-},{"./aes":59,"./authCipher":60,"./modes":65,"./modes/cbc":66,"./modes/cfb":67,"./modes/cfb1":68,"./modes/cfb8":69,"./modes/ctr":70,"./modes/ecb":71,"./modes/ofb":72,"./streamCipher":75,"buffer":53,"cipher-base":74,"evp_bytestokey":86,"inherits":245}],63:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -9750,11 +9503,7 @@ exports.createCipher = createCipher
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":59,"./authCipher":60,"./modes":65,"./modes/cbc":66,"./modes/cfb":67,"./modes/cfb1":68,"./modes/cfb8":69,"./modes/ctr":70,"./modes/ecb":71,"./modes/ofb":72,"./streamCipher":75,"buffer":53,"cipher-base":74,"evp_bytestokey":86,"inherits":251}],64:[function(require,module,exports){
-=======
-},{"./aes":59,"./authCipher":60,"./modes":65,"./modes/cbc":66,"./modes/cfb":67,"./modes/cfb1":68,"./modes/cfb8":69,"./modes/ctr":70,"./modes/ecb":71,"./modes/ofb":72,"./streamCipher":75,"buffer":53,"cipher-base":74,"evp_bytestokey":86,"inherits":245}],64:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var zeros = new Buffer(16)
 zeros.fill(0)
@@ -10319,11 +10068,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"inherits":251,"stream":273,"string_decoder":283}],75:[function(require,module,exports){
-=======
-},{"buffer":53,"inherits":245,"stream":267,"string_decoder":277}],75:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -10353,11 +10098,7 @@ StreamCipher.prototype._final = function () {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":59,"buffer":53,"cipher-base":74,"inherits":251}],76:[function(require,module,exports){
-=======
-},{"./aes":59,"buffer":53,"cipher-base":74,"inherits":245}],76:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var CipherBase = require('cipher-base')
 var des = require('des.js')
@@ -10405,11 +10146,7 @@ DES.prototype._final = function () {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"cipher-base":78,"des.js":79,"inherits":251}],77:[function(require,module,exports){
-=======
-},{"buffer":53,"cipher-base":78,"des.js":79,"inherits":245}],77:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 exports['des-ecb'] = {
   key: 8,
   iv: 0
@@ -10530,11 +10267,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"inherits":251,"stream":273,"string_decoder":283}],79:[function(require,module,exports){
-=======
-},{"buffer":53,"inherits":245,"stream":267,"string_decoder":277}],79:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.utils = require('./des/utils');
@@ -10610,11 +10343,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
   }
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"inherits":251,"minimalistic-assert":85}],81:[function(require,module,exports){
-=======
-},{"inherits":245,"minimalistic-assert":85}],81:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -10902,11 +10631,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
   utils.rip(l, r, out, off);
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../des":79,"inherits":251,"minimalistic-assert":85}],83:[function(require,module,exports){
-=======
-},{"../des":79,"inherits":245,"minimalistic-assert":85}],83:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -10963,11 +10688,7 @@ EDE.prototype._update = function _update(inp, inOff, out, outOff) {
 EDE.prototype._pad = DES.prototype._pad;
 EDE.prototype._unpad = DES.prototype._unpad;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../des":79,"inherits":251,"minimalistic-assert":85}],84:[function(require,module,exports){
-=======
-},{"../des":79,"inherits":245,"minimalistic-assert":85}],84:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.readUInt32BE = function readUInt32BE(bytes, off) {
@@ -11311,11 +11032,7 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"create-hash/md5":183}],87:[function(require,module,exports){
-=======
-},{"buffer":53,"create-hash/md5":177}],87:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 'use strict'
 exports['RSA-SHA224'] = exports.sha224WithRSAEncryption = {
@@ -11500,11 +11217,7 @@ module.exports = {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./algos":87,"./sign":153,"./verify":154,"buffer":53,"create-hash":181,"inherits":251,"stream":273}],89:[function(require,module,exports){
-=======
-},{"./algos":87,"./sign":150,"./verify":151,"buffer":53,"create-hash":175,"inherits":245,"stream":267}],89:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict'
 exports['1.3.132.0.10'] = 'secp256k1'
 
@@ -11514,13 +11227,10 @@ exports['1.2.840.10045.3.1.1'] = 'p192'
 
 exports['1.2.840.10045.3.1.7'] = 'p256'
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 exports['1.3.132.0.34'] = 'p384'
 
 exports['1.3.132.0.35'] = 'p521'
 
-=======
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 },{}],90:[function(require,module,exports){
 (function (module, exports) {
 
@@ -14054,11 +13764,7 @@ function getr(priv) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"bn.js":90,"buffer":53,"randombytes":248}],92:[function(require,module,exports){
-=======
-},{"bn.js":90,"buffer":53,"randombytes":242}],92:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var elliptic = exports;
@@ -14074,11 +13780,7 @@ elliptic.curves = require('./elliptic/curves');
 elliptic.ec = require('./elliptic/ec');
 elliptic.eddsa = require('./elliptic/eddsa');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../package.json":115,"./elliptic/curve":95,"./elliptic/curves":98,"./elliptic/ec":99,"./elliptic/eddsa":102,"./elliptic/hmac-drbg":105,"./elliptic/utils":107,"brorand":108}],93:[function(require,module,exports){
-=======
-},{"../package.json":112,"./elliptic/curve":95,"./elliptic/curves":98,"./elliptic/ec":99,"./elliptic/hmac-drbg":102,"./elliptic/utils":104,"brorand":105}],93:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var bn = require('bn.js');
@@ -14839,11 +14541,7 @@ Point.prototype.eq = function eq(other) {
 Point.prototype.toP = Point.prototype.normalize;
 Point.prototype.mixedAdd = Point.prototype.add;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../../elliptic":92,"../curve":95,"bn.js":90,"inherits":251}],95:[function(require,module,exports){
-=======
-},{"../../elliptic":92,"../curve":95,"bn.js":90,"inherits":245}],95:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var curve = exports;
@@ -15031,11 +14729,7 @@ Point.prototype.getX = function getX() {
   return this.x.fromRed();
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../../elliptic":92,"../curve":95,"bn.js":90,"inherits":251}],97:[function(require,module,exports){
-=======
-},{"../curve":95,"bn.js":90,"inherits":245}],97:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var curve = require('../curve');
@@ -15944,11 +15638,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
   return this.z.cmpn(0) === 0;
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../../elliptic":92,"../curve":95,"bn.js":90,"inherits":251}],98:[function(require,module,exports){
-=======
-},{"../../elliptic":92,"../curve":95,"bn.js":90,"inherits":245}],98:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var curves = exports;
@@ -16155,11 +15845,7 @@ defineCurve('secp256k1', {
   ]
 });
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../elliptic":92,"./precomputed/secp256k1":106,"hash.js":109}],99:[function(require,module,exports){
-=======
-},{"../elliptic":92,"./precomputed/secp256k1":103,"hash.js":106}],99:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var bn = require('bn.js');
@@ -16486,11 +16172,7 @@ KeyPair.prototype.inspect = function inspect() {
          ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"bn.js":90}],101:[function(require,module,exports){
-=======
-},{"../../elliptic":92,"bn.js":90}],101:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var bn = require('bn.js');
@@ -16628,7 +16310,6 @@ Signature.prototype.toDER = function toDER(enc) {
 };
 
 },{"../../elliptic":92,"bn.js":90}],102:[function(require,module,exports){
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 'use strict';
 
 var hash = require('hash.js');
@@ -16915,8 +16596,6 @@ Signature.prototype.toHex = function toHex() {
 module.exports = Signature;
 
 },{"../../elliptic":92,"bn.js":90}],105:[function(require,module,exports){
-=======
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var hash = require('hash.js');
@@ -17032,11 +16711,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
   return utils.encode(res, enc);
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../elliptic":92,"hash.js":109}],106:[function(require,module,exports){
-=======
-},{"../elliptic":92,"hash.js":106}],103:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports = {
   doubles: {
     step: 4,
@@ -17818,11 +17493,7 @@ module.exports = {
   }
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],107:[function(require,module,exports){
-=======
-},{}],104:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var utils = exports;
@@ -17975,7 +17646,6 @@ function getJSF(k1, k2) {
 }
 utils.getJSF = getJSF;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 function cachedProperty(obj, computer) {
   var name = computer.name;
   var key = '_' + name;
@@ -17999,9 +17669,6 @@ utils.intFromLE = intFromLE;
 
 
 },{"bn.js":90}],108:[function(require,module,exports){
-=======
-},{}],105:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var r;
 
 module.exports = function rand(len) {
@@ -18060,11 +17727,7 @@ if (typeof window === 'object') {
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],109:[function(require,module,exports){
-=======
-},{}],106:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var hash = exports;
 
 hash.utils = require('./hash/utils');
@@ -18081,11 +17744,7 @@ hash.sha384 = hash.sha.sha384;
 hash.sha512 = hash.sha.sha512;
 hash.ripemd160 = hash.ripemd.ripemd160;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./hash/common":110,"./hash/hmac":111,"./hash/ripemd":112,"./hash/sha":113,"./hash/utils":114}],110:[function(require,module,exports){
-=======
-},{"./hash/common":107,"./hash/hmac":108,"./hash/ripemd":109,"./hash/sha":110,"./hash/utils":111}],107:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -18178,11 +17837,7 @@ BlockHash.prototype._pad = function pad() {
   return res;
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../hash":109}],111:[function(require,module,exports){
-=======
-},{"../hash":106}],108:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var hmac = exports;
 
 var hash = require('../hash');
@@ -18232,11 +17887,7 @@ Hmac.prototype.digest = function digest(enc) {
   return this.outer.digest(enc);
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../hash":109}],112:[function(require,module,exports){
-=======
-},{"../hash":106}],109:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var hash = require('../hash');
 var utils = hash.utils;
 
@@ -18382,11 +18033,7 @@ var sh = [
   8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
 ];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../hash":109}],113:[function(require,module,exports){
-=======
-},{"../hash":106}],110:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -18952,11 +18599,7 @@ function g1_512_lo(xh, xl) {
   return r;
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../hash":109}],114:[function(require,module,exports){
-=======
-},{"../hash":106}],111:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var utils = exports;
 var inherits = require('inherits');
 
@@ -19215,11 +18858,7 @@ function shr64_lo(ah, al, num) {
 };
 exports.shr64_lo = shr64_lo;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"inherits":251}],115:[function(require,module,exports){
-=======
-},{"inherits":245}],112:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "name": "elliptic",
   "version": "6.0.2",
@@ -19287,17 +18926,10 @@ module.exports={
     }
   ],
   "directories": {},
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.0.2.tgz"
 }
 
 },{}],116:[function(require,module,exports){
-=======
-  "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-3.1.0.tgz"
-}
-
-},{}],113:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.2": "aes-128-cbc",
 "2.16.840.1.101.3.4.1.3": "aes-128-ofb",
@@ -19311,11 +18943,7 @@ module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.43": "aes-256-ofb",
 "2.16.840.1.101.3.4.1.44": "aes-256-cfb"
 }
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],117:[function(require,module,exports){
-=======
-},{}],114:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 // Fedor, you are amazing.
 
@@ -19434,11 +19062,7 @@ exports.signature = asn1.define('signature', function () {
   )
 })
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"asn1.js":120}],118:[function(require,module,exports){
-=======
-},{"asn1.js":117}],115:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 // adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED\r?\nDEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)\r?\n\r?\n([0-9A-z\n\r\+\/\=]+)\r?\n/m
@@ -19473,11 +19097,7 @@ module.exports = function (okey, password) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"browserify-aes":137,"buffer":53,"evp_bytestokey":152}],119:[function(require,module,exports){
-=======
-},{"browserify-aes":134,"buffer":53,"evp_bytestokey":149}],116:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
@@ -19583,11 +19203,7 @@ function decrypt (data, password) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aesid.json":116,"./asn1":117,"./fixProc":118,"browserify-aes":137,"buffer":53,"pbkdf2":202}],120:[function(require,module,exports){
-=======
-},{"./aesid.json":113,"./asn1":114,"./fixProc":115,"browserify-aes":134,"buffer":53,"pbkdf2":196}],117:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var asn1 = exports;
 
 asn1.bignum = require('bn.js');
@@ -19598,11 +19214,7 @@ asn1.constants = require('./asn1/constants');
 asn1.decoders = require('./asn1/decoders');
 asn1.encoders = require('./asn1/encoders');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./asn1/api":121,"./asn1/base":123,"./asn1/constants":127,"./asn1/decoders":129,"./asn1/encoders":132,"bn.js":90}],121:[function(require,module,exports){
-=======
-},{"./asn1/api":118,"./asn1/base":120,"./asn1/constants":124,"./asn1/decoders":126,"./asn1/encoders":129,"bn.js":90}],118:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var asn1 = require('../asn1');
 var inherits = require('inherits');
 
@@ -19663,11 +19275,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
   return this._getEncoder(enc).encode(data, reporter);
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../asn1":120,"inherits":251,"vm":287}],122:[function(require,module,exports){
-=======
-},{"../asn1":117,"inherits":245,"vm":281}],119:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var inherits = require('inherits');
 var Reporter = require('../base').Reporter;
 var Buffer = require('buffer').Buffer;
@@ -19785,11 +19393,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
   return out;
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../base":123,"buffer":53,"inherits":251}],123:[function(require,module,exports){
-=======
-},{"../base":120,"buffer":53,"inherits":245}],120:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var base = exports;
 
 base.Reporter = require('./reporter').Reporter;
@@ -19797,11 +19401,7 @@ base.DecoderBuffer = require('./buffer').DecoderBuffer;
 base.EncoderBuffer = require('./buffer').EncoderBuffer;
 base.Node = require('./node');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./buffer":122,"./node":124,"./reporter":125}],124:[function(require,module,exports){
-=======
-},{"./buffer":119,"./node":121,"./reporter":122}],121:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var Reporter = require('../base').Reporter;
 var EncoderBuffer = require('../base').EncoderBuffer;
 var assert = require('minimalistic-assert');
@@ -20401,11 +20001,7 @@ Node.prototype._encodePrimitive = function encodePrimitive(tag, data) {
     throw new Error('Unsupported tag: ' + tag);
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../base":123,"minimalistic-assert":134}],125:[function(require,module,exports){
-=======
-},{"../base":120,"minimalistic-assert":131}],122:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var inherits = require('inherits');
 
 function Reporter(options) {
@@ -20509,11 +20105,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
   return this;
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"inherits":251}],126:[function(require,module,exports){
-=======
-},{"inherits":245}],123:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var constants = require('../constants');
 
 exports.tagClass = {
@@ -20557,11 +20149,7 @@ exports.tag = {
 };
 exports.tagByName = constants._reverse(exports.tag);
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../constants":127}],127:[function(require,module,exports){
-=======
-},{"../constants":124}],124:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var constants = exports;
 
 // Helper
@@ -20582,11 +20170,7 @@ constants._reverse = function reverse(map) {
 
 constants.der = require('./der');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./der":126}],128:[function(require,module,exports){
-=======
-},{"./der":123}],125:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var inherits = require('inherits');
 
 var asn1 = require('../../asn1');
@@ -20879,21 +20463,13 @@ function derDecodeLen(buf, primitive, fail) {
   return len;
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../../asn1":120,"inherits":251}],129:[function(require,module,exports){
-=======
-},{"../../asn1":117,"inherits":245}],126:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var decoders = exports;
 
 decoders.der = require('./der');
 decoders.pem = require('./pem');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./der":128,"./pem":130}],130:[function(require,module,exports){
-=======
-},{"./der":125,"./pem":127}],127:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -20945,11 +20521,7 @@ PEMDecoder.prototype.decode = function decode(data, options) {
   return DERDecoder.prototype.decode.call(this, input, options);
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../../asn1":120,"./der":128,"buffer":53,"inherits":251}],131:[function(require,module,exports){
-=======
-},{"../../asn1":117,"./der":125,"buffer":53,"inherits":245}],128:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -21223,21 +20795,13 @@ function encodeTag(tag, primitive, cls, reporter) {
   return res;
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../../asn1":120,"buffer":53,"inherits":251}],132:[function(require,module,exports){
-=======
-},{"../../asn1":117,"buffer":53,"inherits":245}],129:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var encoders = exports;
 
 encoders.der = require('./der');
 encoders.pem = require('./pem');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./der":131,"./pem":133}],133:[function(require,module,exports){
-=======
-},{"./der":128,"./pem":130}],130:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
 
@@ -21262,15 +20826,9 @@ PEMEncoder.prototype.encode = function encode(data, options) {
   return out.join('\n');
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../../asn1":120,"./der":131,"buffer":53,"inherits":251}],134:[function(require,module,exports){
 arguments[4][85][0].apply(exports,arguments)
 },{"dup":85}],135:[function(require,module,exports){
-=======
-},{"../../asn1":117,"./der":128,"buffer":53,"inherits":245}],131:[function(require,module,exports){
-arguments[4][85][0].apply(exports,arguments)
-},{"dup":85}],132:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 // based on the aes implimentation in triple sec
 // https://github.com/keybase/triplesec
@@ -21452,11 +21010,7 @@ exports.AES = AES
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],136:[function(require,module,exports){
-=======
-},{"buffer":53}],133:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -21558,15 +21112,9 @@ function xorTest (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":135,"./ghash":140,"buffer":53,"buffer-xor":149,"cipher-base":150,"inherits":251}],137:[function(require,module,exports){
 arguments[4][61][0].apply(exports,arguments)
 },{"./decrypter":138,"./encrypter":139,"./modes":141,"dup":61}],138:[function(require,module,exports){
-=======
-},{"./aes":132,"./ghash":137,"buffer":53,"buffer-xor":146,"cipher-base":147,"inherits":245}],134:[function(require,module,exports){
-arguments[4][61][0].apply(exports,arguments)
-},{"./decrypter":135,"./encrypter":136,"./modes":138,"dup":61}],135:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -21707,11 +21255,7 @@ exports.createDecipheriv = createDecipheriv
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":135,"./authCipher":136,"./modes":141,"./modes/cbc":142,"./modes/cfb":143,"./modes/cfb1":144,"./modes/cfb8":145,"./modes/ctr":146,"./modes/ecb":147,"./modes/ofb":148,"./streamCipher":151,"buffer":53,"cipher-base":150,"evp_bytestokey":152,"inherits":251}],139:[function(require,module,exports){
-=======
-},{"./aes":132,"./authCipher":133,"./modes":138,"./modes/cbc":139,"./modes/cfb":140,"./modes/cfb1":141,"./modes/cfb8":142,"./modes/ctr":143,"./modes/ecb":144,"./modes/ofb":145,"./streamCipher":148,"buffer":53,"cipher-base":147,"evp_bytestokey":149,"inherits":245}],136:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -21837,11 +21381,7 @@ exports.createCipher = createCipher
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":135,"./authCipher":136,"./modes":141,"./modes/cbc":142,"./modes/cfb":143,"./modes/cfb1":144,"./modes/cfb8":145,"./modes/ctr":146,"./modes/ecb":147,"./modes/ofb":148,"./streamCipher":151,"buffer":53,"cipher-base":150,"evp_bytestokey":152,"inherits":251}],140:[function(require,module,exports){
-=======
-},{"./aes":132,"./authCipher":133,"./modes":138,"./modes/cbc":139,"./modes/cfb":140,"./modes/cfb1":141,"./modes/cfb8":142,"./modes/ctr":143,"./modes/ecb":144,"./modes/ofb":145,"./streamCipher":148,"buffer":53,"cipher-base":147,"evp_bytestokey":149,"inherits":245}],137:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var zeros = new Buffer(16)
 zeros.fill(0)
@@ -21944,19 +21484,11 @@ function xor (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],141:[function(require,module,exports){
 arguments[4][65][0].apply(exports,arguments)
 },{"dup":65}],142:[function(require,module,exports){
 arguments[4][66][0].apply(exports,arguments)
 },{"buffer-xor":149,"dup":66}],143:[function(require,module,exports){
-=======
-},{"buffer":53}],138:[function(require,module,exports){
-arguments[4][65][0].apply(exports,arguments)
-},{"dup":65}],139:[function(require,module,exports){
-arguments[4][66][0].apply(exports,arguments)
-},{"buffer-xor":146,"dup":66}],140:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -21992,11 +21524,7 @@ function encryptStart (self, data, decrypt) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"buffer-xor":149}],144:[function(require,module,exports){
-=======
-},{"buffer":53,"buffer-xor":146}],141:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad
@@ -22035,11 +21563,7 @@ function shiftIn (buffer, value) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],145:[function(require,module,exports){
-=======
-},{"buffer":53}],142:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad = self._cipher.encryptBlock(self._prev)
@@ -22059,11 +21583,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],146:[function(require,module,exports){
-=======
-},{"buffer":53}],143:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -22099,15 +21619,9 @@ exports.encrypt = function (self, chunk) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"buffer-xor":149}],147:[function(require,module,exports){
 arguments[4][71][0].apply(exports,arguments)
 },{"dup":71}],148:[function(require,module,exports){
-=======
-},{"buffer":53,"buffer-xor":146}],144:[function(require,module,exports){
-arguments[4][71][0].apply(exports,arguments)
-},{"dup":71}],145:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -22128,11 +21642,7 @@ exports.encrypt = function (self, chunk) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"buffer-xor":149}],149:[function(require,module,exports){
-=======
-},{"buffer":53,"buffer-xor":146}],146:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 module.exports = function xor (a, b) {
   var length = Math.min(a.length, b.length)
@@ -22147,11 +21657,7 @@ module.exports = function xor (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],150:[function(require,module,exports){
-=======
-},{"buffer":53}],147:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var Transform = require('stream').Transform
 var inherits = require('inherits')
@@ -22246,11 +21752,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"inherits":251,"stream":273,"string_decoder":283}],151:[function(require,module,exports){
-=======
-},{"buffer":53,"inherits":245,"stream":267,"string_decoder":277}],148:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -22280,11 +21782,7 @@ StreamCipher.prototype._final = function () {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":135,"buffer":53,"cipher-base":150,"inherits":251}],152:[function(require,module,exports){
-=======
-},{"./aes":132,"buffer":53,"cipher-base":147,"inherits":245}],149:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var md5 = require('create-hash/md5')
 module.exports = EVP_BytesToKey
@@ -22357,11 +21855,7 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"create-hash/md5":183}],153:[function(require,module,exports){
-=======
-},{"buffer":53,"create-hash/md5":177}],150:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var createHmac = require('create-hmac')
@@ -22551,11 +22045,7 @@ module.exports.makeKey = makeKey
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./curves":89,"bn.js":90,"browserify-rsa":91,"buffer":53,"create-hmac":194,"elliptic":92,"parse-asn1":119}],154:[function(require,module,exports){
-=======
-},{"./curves":89,"bn.js":90,"browserify-rsa":91,"buffer":53,"create-hmac":188,"elliptic":92,"parse-asn1":116}],151:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var curves = require('./curves')
@@ -22663,11 +22153,7 @@ module.exports = verify
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./curves":89,"bn.js":90,"buffer":53,"elliptic":92,"parse-asn1":119}],155:[function(require,module,exports){
-=======
-},{"./curves":89,"bn.js":90,"buffer":53,"elliptic":92,"parse-asn1":116}],152:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var elliptic = require('elliptic');
 var BN = require('bn.js');
@@ -22794,7 +22280,6 @@ function formatReturnValue(bn, enc, len) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"bn.js":156,"buffer":53,"elliptic":157}],156:[function(require,module,exports){
 arguments[4][90][0].apply(exports,arguments)
 },{"dup":90}],157:[function(require,module,exports){
@@ -22846,53 +22331,6 @@ arguments[4][114][0].apply(exports,arguments)
 },{"dup":114,"inherits":251}],180:[function(require,module,exports){
 arguments[4][115][0].apply(exports,arguments)
 },{"dup":115}],181:[function(require,module,exports){
-=======
-},{"bn.js":153,"buffer":53,"elliptic":154}],153:[function(require,module,exports){
-arguments[4][90][0].apply(exports,arguments)
-},{"dup":90}],154:[function(require,module,exports){
-arguments[4][92][0].apply(exports,arguments)
-},{"../package.json":174,"./elliptic/curve":157,"./elliptic/curves":160,"./elliptic/ec":161,"./elliptic/hmac-drbg":164,"./elliptic/utils":166,"brorand":167,"dup":92}],155:[function(require,module,exports){
-arguments[4][93][0].apply(exports,arguments)
-},{"../../elliptic":154,"bn.js":153,"dup":93}],156:[function(require,module,exports){
-arguments[4][94][0].apply(exports,arguments)
-},{"../../elliptic":154,"../curve":157,"bn.js":153,"dup":94,"inherits":245}],157:[function(require,module,exports){
-arguments[4][95][0].apply(exports,arguments)
-},{"./base":155,"./edwards":156,"./mont":158,"./short":159,"dup":95}],158:[function(require,module,exports){
-arguments[4][96][0].apply(exports,arguments)
-},{"../curve":157,"bn.js":153,"dup":96,"inherits":245}],159:[function(require,module,exports){
-arguments[4][97][0].apply(exports,arguments)
-},{"../../elliptic":154,"../curve":157,"bn.js":153,"dup":97,"inherits":245}],160:[function(require,module,exports){
-arguments[4][98][0].apply(exports,arguments)
-},{"../elliptic":154,"./precomputed/secp256k1":165,"dup":98,"hash.js":168}],161:[function(require,module,exports){
-arguments[4][99][0].apply(exports,arguments)
-},{"../../elliptic":154,"./key":162,"./signature":163,"bn.js":153,"dup":99}],162:[function(require,module,exports){
-arguments[4][100][0].apply(exports,arguments)
-},{"../../elliptic":154,"bn.js":153,"dup":100}],163:[function(require,module,exports){
-arguments[4][101][0].apply(exports,arguments)
-},{"../../elliptic":154,"bn.js":153,"dup":101}],164:[function(require,module,exports){
-arguments[4][102][0].apply(exports,arguments)
-},{"../elliptic":154,"dup":102,"hash.js":168}],165:[function(require,module,exports){
-arguments[4][103][0].apply(exports,arguments)
-},{"dup":103}],166:[function(require,module,exports){
-arguments[4][104][0].apply(exports,arguments)
-},{"dup":104}],167:[function(require,module,exports){
-arguments[4][105][0].apply(exports,arguments)
-},{"dup":105}],168:[function(require,module,exports){
-arguments[4][106][0].apply(exports,arguments)
-},{"./hash/common":169,"./hash/hmac":170,"./hash/ripemd":171,"./hash/sha":172,"./hash/utils":173,"dup":106}],169:[function(require,module,exports){
-arguments[4][107][0].apply(exports,arguments)
-},{"../hash":168,"dup":107}],170:[function(require,module,exports){
-arguments[4][108][0].apply(exports,arguments)
-},{"../hash":168,"dup":108}],171:[function(require,module,exports){
-arguments[4][109][0].apply(exports,arguments)
-},{"../hash":168,"dup":109}],172:[function(require,module,exports){
-arguments[4][110][0].apply(exports,arguments)
-},{"../hash":168,"dup":110}],173:[function(require,module,exports){
-arguments[4][111][0].apply(exports,arguments)
-},{"dup":111,"inherits":245}],174:[function(require,module,exports){
-arguments[4][112][0].apply(exports,arguments)
-},{"dup":112}],175:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 'use strict';
 var inherits = require('inherits')
@@ -22949,11 +22387,7 @@ module.exports = function createHash (alg) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./md5":183,"buffer":53,"cipher-base":184,"inherits":251,"ripemd160":185,"sha.js":187}],182:[function(require,module,exports){
-=======
-},{"./md5":177,"buffer":53,"cipher-base":178,"inherits":245,"ripemd160":179,"sha.js":181}],176:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 'use strict';
 var intSize = 4;
@@ -22991,11 +22425,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 exports.hash = hash;
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],183:[function(require,module,exports){
-=======
-},{"buffer":53}],177:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
@@ -23152,11 +22582,7 @@ function bit_rol(num, cnt)
 module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./helpers":182}],184:[function(require,module,exports){
-=======
-},{"./helpers":176}],178:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var Transform = require('stream').Transform
 var inherits = require('inherits')
@@ -23251,11 +22677,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"inherits":251,"stream":273,"string_decoder":283}],185:[function(require,module,exports){
-=======
-},{"buffer":53,"inherits":245,"stream":267,"string_decoder":277}],179:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 /*
 CryptoJS v3.1.2
@@ -23470,11 +22892,7 @@ module.exports = ripemd160
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],186:[function(require,module,exports){
-=======
-},{"buffer":53}],180:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 // prototype class for hash functions
 function Hash (blockSize, finalSize) {
@@ -23548,11 +22966,7 @@ module.exports = Hash
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],187:[function(require,module,exports){
-=======
-},{"buffer":53}],181:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var exports = module.exports = function SHA (algorithm) {
   algorithm = algorithm.toLowerCase()
 
@@ -23569,11 +22983,7 @@ exports.sha256 = require('./sha256')
 exports.sha384 = require('./sha384')
 exports.sha512 = require('./sha512')
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./sha":188,"./sha1":189,"./sha224":190,"./sha256":191,"./sha384":192,"./sha512":193}],188:[function(require,module,exports){
-=======
-},{"./sha":182,"./sha1":183,"./sha224":184,"./sha256":185,"./sha384":186,"./sha512":187}],182:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-0, as defined
@@ -23678,11 +23088,7 @@ module.exports = Sha
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./hash":186,"buffer":53,"inherits":251}],189:[function(require,module,exports){
-=======
-},{"./hash":180,"buffer":53,"inherits":245}],183:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
@@ -23783,11 +23189,7 @@ module.exports = Sha1
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./hash":186,"buffer":53,"inherits":251}],190:[function(require,module,exports){
-=======
-},{"./hash":180,"buffer":53,"inherits":245}],184:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -23844,11 +23246,7 @@ module.exports = Sha224
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./hash":186,"./sha256":191,"buffer":53,"inherits":251}],191:[function(require,module,exports){
-=======
-},{"./hash":180,"./sha256":185,"buffer":53,"inherits":245}],185:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -23994,11 +23392,7 @@ module.exports = Sha256
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./hash":186,"buffer":53,"inherits":251}],192:[function(require,module,exports){
-=======
-},{"./hash":180,"buffer":53,"inherits":245}],186:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var inherits = require('inherits')
 var SHA512 = require('./sha512')
@@ -24059,11 +23453,7 @@ module.exports = Sha384
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./hash":186,"./sha512":193,"buffer":53,"inherits":251}],193:[function(require,module,exports){
-=======
-},{"./hash":180,"./sha512":187,"buffer":53,"inherits":245}],187:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var inherits = require('inherits')
 var Hash = require('./hash')
@@ -24334,11 +23724,7 @@ module.exports = Sha512
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./hash":186,"buffer":53,"inherits":251}],194:[function(require,module,exports){
-=======
-},{"./hash":180,"buffer":53,"inherits":245}],188:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 'use strict';
 var createHash = require('create-hash/browser');
@@ -24411,11 +23797,7 @@ module.exports = function createHmac(alg, key) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"create-hash/browser":181,"inherits":251,"stream":273}],195:[function(require,module,exports){
-=======
-},{"buffer":53,"create-hash/browser":175,"inherits":245,"stream":267}],189:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var generatePrime = require('./lib/generatePrime');
 var primes = require('./lib/primes');
@@ -24460,11 +23842,7 @@ exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman;
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./lib/dh":196,"./lib/generatePrime":197,"./lib/primes":198,"buffer":53}],196:[function(require,module,exports){
-=======
-},{"./lib/dh":190,"./lib/generatePrime":191,"./lib/primes":192,"buffer":53}],190:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var BN = require('bn.js');
 var MillerRabin = require('miller-rabin');
@@ -24633,11 +24011,7 @@ function formatReturnValue(bn, enc) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./generatePrime":197,"bn.js":199,"buffer":53,"miller-rabin":200,"randombytes":248}],197:[function(require,module,exports){
-=======
-},{"./generatePrime":191,"bn.js":193,"buffer":53,"miller-rabin":194,"randombytes":242}],191:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var randomBytes = require('randombytes');
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
@@ -24743,12 +24117,8 @@ function findPrime(bits, gen) {
   }
 
 }
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 
 },{"bn.js":199,"miller-rabin":200,"randombytes":248}],198:[function(require,module,exports){
-=======
-},{"bn.js":193,"miller-rabin":194,"randombytes":242}],192:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
     "modp1": {
         "gen": "02",
@@ -24783,15 +24153,9 @@ module.exports={
         "prime": "ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"
     }
 }
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],199:[function(require,module,exports){
 arguments[4][90][0].apply(exports,arguments)
 },{"dup":90}],200:[function(require,module,exports){
-=======
-},{}],193:[function(require,module,exports){
-arguments[4][90][0].apply(exports,arguments)
-},{"dup":90}],194:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var bn = require('bn.js');
 var brorand = require('brorand');
 
@@ -24906,15 +24270,9 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
   return false;
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"bn.js":199,"brorand":201}],201:[function(require,module,exports){
 arguments[4][108][0].apply(exports,arguments)
 },{"dup":108}],202:[function(require,module,exports){
-=======
-},{"bn.js":193,"brorand":195}],195:[function(require,module,exports){
-arguments[4][105][0].apply(exports,arguments)
-},{"dup":105}],196:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var createHmac = require('create-hmac')
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
@@ -24999,11 +24357,7 @@ function pbkdf2Sync (password, salt, iterations, keylen, digest) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"create-hmac":194}],203:[function(require,module,exports){
-=======
-},{"buffer":53,"create-hmac":188}],197:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 exports.publicEncrypt = require('./publicEncrypt');
 exports.privateDecrypt = require('./privateDecrypt');
 
@@ -25014,11 +24368,7 @@ exports.privateEncrypt = function privateEncrypt(key, buf) {
 exports.publicDecrypt = function publicDecrypt(key, buf) {
   return exports.privateDecrypt(key, buf, true);
 };
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./privateDecrypt":244,"./publicEncrypt":245}],204:[function(require,module,exports){
-=======
-},{"./privateDecrypt":238,"./publicEncrypt":239}],198:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var createHash = require('create-hash');
 module.exports = function (seed, len) {
@@ -25038,15 +24388,9 @@ function i2ops(c) {
 }
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"create-hash":181}],205:[function(require,module,exports){
 arguments[4][90][0].apply(exports,arguments)
 },{"dup":90}],206:[function(require,module,exports){
-=======
-},{"buffer":53,"create-hash":175}],199:[function(require,module,exports){
-arguments[4][90][0].apply(exports,arguments)
-},{"dup":90}],200:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var bn = require('bn.js');
 var randomBytes = require('randombytes');
@@ -25091,19 +24435,11 @@ function getr(priv) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"bn.js":205,"buffer":53,"randombytes":248}],207:[function(require,module,exports){
 arguments[4][116][0].apply(exports,arguments)
 },{"dup":116}],208:[function(require,module,exports){
 arguments[4][117][0].apply(exports,arguments)
 },{"asn1.js":211,"dup":117}],209:[function(require,module,exports){
-=======
-},{"bn.js":199,"buffer":53,"randombytes":242}],201:[function(require,module,exports){
-arguments[4][113][0].apply(exports,arguments)
-},{"dup":113}],202:[function(require,module,exports){
-arguments[4][114][0].apply(exports,arguments)
-},{"asn1.js":205,"dup":114}],203:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 // adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED\r?\nDEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)\r?\n\r?\n([0-9A-z\n\r\+\/\=]+)\r?\n/m
@@ -25138,11 +24474,7 @@ module.exports = function (okey, password) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"browserify-aes":228,"buffer":53,"evp_bytestokey":243}],210:[function(require,module,exports){
-=======
-},{"browserify-aes":222,"buffer":53,"evp_bytestokey":237}],204:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
@@ -25248,7 +24580,6 @@ function decrypt (data, password) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aesid.json":207,"./asn1":208,"./fixProc":209,"browserify-aes":228,"buffer":53,"pbkdf2":202}],211:[function(require,module,exports){
 arguments[4][120][0].apply(exports,arguments)
 },{"./asn1/api":212,"./asn1/base":214,"./asn1/constants":218,"./asn1/decoders":220,"./asn1/encoders":223,"bn.js":205,"dup":120}],212:[function(require,module,exports){
@@ -25280,39 +24611,6 @@ arguments[4][133][0].apply(exports,arguments)
 },{"../../asn1":211,"./der":222,"buffer":53,"dup":133,"inherits":251}],225:[function(require,module,exports){
 arguments[4][85][0].apply(exports,arguments)
 },{"dup":85}],226:[function(require,module,exports){
-=======
-},{"./aesid.json":201,"./asn1":202,"./fixProc":203,"browserify-aes":222,"buffer":53,"pbkdf2":196}],205:[function(require,module,exports){
-arguments[4][117][0].apply(exports,arguments)
-},{"./asn1/api":206,"./asn1/base":208,"./asn1/constants":212,"./asn1/decoders":214,"./asn1/encoders":217,"bn.js":199,"dup":117}],206:[function(require,module,exports){
-arguments[4][118][0].apply(exports,arguments)
-},{"../asn1":205,"dup":118,"inherits":245,"vm":281}],207:[function(require,module,exports){
-arguments[4][119][0].apply(exports,arguments)
-},{"../base":208,"buffer":53,"dup":119,"inherits":245}],208:[function(require,module,exports){
-arguments[4][120][0].apply(exports,arguments)
-},{"./buffer":207,"./node":209,"./reporter":210,"dup":120}],209:[function(require,module,exports){
-arguments[4][121][0].apply(exports,arguments)
-},{"../base":208,"dup":121,"minimalistic-assert":219}],210:[function(require,module,exports){
-arguments[4][122][0].apply(exports,arguments)
-},{"dup":122,"inherits":245}],211:[function(require,module,exports){
-arguments[4][123][0].apply(exports,arguments)
-},{"../constants":212,"dup":123}],212:[function(require,module,exports){
-arguments[4][124][0].apply(exports,arguments)
-},{"./der":211,"dup":124}],213:[function(require,module,exports){
-arguments[4][125][0].apply(exports,arguments)
-},{"../../asn1":205,"dup":125,"inherits":245}],214:[function(require,module,exports){
-arguments[4][126][0].apply(exports,arguments)
-},{"./der":213,"./pem":215,"dup":126}],215:[function(require,module,exports){
-arguments[4][127][0].apply(exports,arguments)
-},{"../../asn1":205,"./der":213,"buffer":53,"dup":127,"inherits":245}],216:[function(require,module,exports){
-arguments[4][128][0].apply(exports,arguments)
-},{"../../asn1":205,"buffer":53,"dup":128,"inherits":245}],217:[function(require,module,exports){
-arguments[4][129][0].apply(exports,arguments)
-},{"./der":216,"./pem":218,"dup":129}],218:[function(require,module,exports){
-arguments[4][130][0].apply(exports,arguments)
-},{"../../asn1":205,"./der":216,"buffer":53,"dup":130,"inherits":245}],219:[function(require,module,exports){
-arguments[4][85][0].apply(exports,arguments)
-},{"dup":85}],220:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 // based on the aes implimentation in triple sec
 // https://github.com/keybase/triplesec
@@ -25494,11 +24792,7 @@ exports.AES = AES
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],227:[function(require,module,exports){
-=======
-},{"buffer":53}],221:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -25600,15 +24894,9 @@ function xorTest (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":226,"./ghash":231,"buffer":53,"buffer-xor":240,"cipher-base":241,"inherits":251}],228:[function(require,module,exports){
 arguments[4][61][0].apply(exports,arguments)
 },{"./decrypter":229,"./encrypter":230,"./modes":232,"dup":61}],229:[function(require,module,exports){
-=======
-},{"./aes":220,"./ghash":225,"buffer":53,"buffer-xor":234,"cipher-base":235,"inherits":245}],222:[function(require,module,exports){
-arguments[4][61][0].apply(exports,arguments)
-},{"./decrypter":223,"./encrypter":224,"./modes":226,"dup":61}],223:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -25749,11 +25037,7 @@ exports.createDecipheriv = createDecipheriv
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":226,"./authCipher":227,"./modes":232,"./modes/cbc":233,"./modes/cfb":234,"./modes/cfb1":235,"./modes/cfb8":236,"./modes/ctr":237,"./modes/ecb":238,"./modes/ofb":239,"./streamCipher":242,"buffer":53,"cipher-base":241,"evp_bytestokey":243,"inherits":251}],230:[function(require,module,exports){
-=======
-},{"./aes":220,"./authCipher":221,"./modes":226,"./modes/cbc":227,"./modes/cfb":228,"./modes/cfb1":229,"./modes/cfb8":230,"./modes/ctr":231,"./modes/ecb":232,"./modes/ofb":233,"./streamCipher":236,"buffer":53,"cipher-base":235,"evp_bytestokey":237,"inherits":245}],224:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -25879,11 +25163,7 @@ exports.createCipher = createCipher
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":226,"./authCipher":227,"./modes":232,"./modes/cbc":233,"./modes/cfb":234,"./modes/cfb1":235,"./modes/cfb8":236,"./modes/ctr":237,"./modes/ecb":238,"./modes/ofb":239,"./streamCipher":242,"buffer":53,"cipher-base":241,"evp_bytestokey":243,"inherits":251}],231:[function(require,module,exports){
-=======
-},{"./aes":220,"./authCipher":221,"./modes":226,"./modes/cbc":227,"./modes/cfb":228,"./modes/cfb1":229,"./modes/cfb8":230,"./modes/ctr":231,"./modes/ecb":232,"./modes/ofb":233,"./streamCipher":236,"buffer":53,"cipher-base":235,"evp_bytestokey":237,"inherits":245}],225:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var zeros = new Buffer(16)
 zeros.fill(0)
@@ -25986,19 +25266,11 @@ function xor (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],232:[function(require,module,exports){
 arguments[4][65][0].apply(exports,arguments)
 },{"dup":65}],233:[function(require,module,exports){
 arguments[4][66][0].apply(exports,arguments)
 },{"buffer-xor":240,"dup":66}],234:[function(require,module,exports){
-=======
-},{"buffer":53}],226:[function(require,module,exports){
-arguments[4][65][0].apply(exports,arguments)
-},{"dup":65}],227:[function(require,module,exports){
-arguments[4][66][0].apply(exports,arguments)
-},{"buffer-xor":234,"dup":66}],228:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -26034,11 +25306,7 @@ function encryptStart (self, data, decrypt) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"buffer-xor":240}],235:[function(require,module,exports){
-=======
-},{"buffer":53,"buffer-xor":234}],229:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad
@@ -26077,11 +25345,7 @@ function shiftIn (buffer, value) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],236:[function(require,module,exports){
-=======
-},{"buffer":53}],230:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 function encryptByte (self, byteParam, decrypt) {
   var pad = self._cipher.encryptBlock(self._prev)
@@ -26101,11 +25365,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],237:[function(require,module,exports){
-=======
-},{"buffer":53}],231:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -26141,15 +25401,9 @@ exports.encrypt = function (self, chunk) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"buffer-xor":240}],238:[function(require,module,exports){
 arguments[4][71][0].apply(exports,arguments)
 },{"dup":71}],239:[function(require,module,exports){
-=======
-},{"buffer":53,"buffer-xor":234}],232:[function(require,module,exports){
-arguments[4][71][0].apply(exports,arguments)
-},{"dup":71}],233:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var xor = require('buffer-xor')
 
@@ -26170,11 +25424,7 @@ exports.encrypt = function (self, chunk) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"buffer-xor":240}],240:[function(require,module,exports){
-=======
-},{"buffer":53,"buffer-xor":234}],234:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 module.exports = function xor (a, b) {
   var length = Math.min(a.length, b.length)
@@ -26189,11 +25439,7 @@ module.exports = function xor (a, b) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],241:[function(require,module,exports){
-=======
-},{"buffer":53}],235:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var Transform = require('stream').Transform
 var inherits = require('inherits')
@@ -26288,11 +25534,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"inherits":251,"stream":273,"string_decoder":283}],242:[function(require,module,exports){
-=======
-},{"buffer":53,"inherits":245,"stream":267,"string_decoder":277}],236:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var aes = require('./aes')
 var Transform = require('cipher-base')
@@ -26322,11 +25564,7 @@ StreamCipher.prototype._final = function () {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./aes":226,"buffer":53,"cipher-base":241,"inherits":251}],243:[function(require,module,exports){
-=======
-},{"./aes":220,"buffer":53,"cipher-base":235,"inherits":245}],237:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var md5 = require('create-hash/md5')
 module.exports = EVP_BytesToKey
@@ -26399,11 +25637,7 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"create-hash/md5":183}],244:[function(require,module,exports){
-=======
-},{"buffer":53,"create-hash/md5":177}],238:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var parseKeys = require('parse-asn1');
 var mgf = require('./mgf');
@@ -26515,11 +25749,7 @@ function compare(a, b){
 }
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./mgf":204,"./withPublic":246,"./xor":247,"bn.js":205,"browserify-rsa":206,"buffer":53,"create-hash":181,"parse-asn1":210}],245:[function(require,module,exports){
-=======
-},{"./mgf":198,"./withPublic":240,"./xor":241,"bn.js":199,"browserify-rsa":200,"buffer":53,"create-hash":175,"parse-asn1":204}],239:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var parseKeys = require('parse-asn1');
 var randomBytes = require('randombytes');
@@ -26618,11 +25848,7 @@ function nonZero(len, crypto) {
 }
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./mgf":204,"./withPublic":246,"./xor":247,"bn.js":205,"browserify-rsa":206,"buffer":53,"create-hash":181,"parse-asn1":210,"randombytes":248}],246:[function(require,module,exports){
-=======
-},{"./mgf":198,"./withPublic":240,"./xor":241,"bn.js":199,"browserify-rsa":200,"buffer":53,"create-hash":175,"parse-asn1":204,"randombytes":242}],240:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var bn = require('bn.js');
 function withPublic(paddedMsg, key) {
@@ -26636,11 +25862,7 @@ function withPublic(paddedMsg, key) {
 module.exports = withPublic;
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"bn.js":205,"buffer":53}],247:[function(require,module,exports){
-=======
-},{"bn.js":199,"buffer":53}],241:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports = function xor(a, b) {
   var len = a.length;
   var i = -1;
@@ -26649,11 +25871,7 @@ module.exports = function xor(a, b) {
   }
   return a
 };
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],248:[function(require,module,exports){
-=======
-},{}],242:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process,global,Buffer){
 'use strict';
 
@@ -26686,11 +25904,7 @@ function oldBrowser() {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255,"buffer":53}],249:[function(require,module,exports){
-=======
-},{"_process":249,"buffer":53}],243:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -26993,11 +26207,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],250:[function(require,module,exports){
-=======
-},{}],244:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var http = require('http');
 
 var https = module.exports;
@@ -27013,11 +26223,7 @@ https.request = function (params, cb) {
     return http.request.call(this, params, cb);
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"http":274}],251:[function(require,module,exports){
-=======
-},{"http":268}],245:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -27042,11 +26248,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],252:[function(require,module,exports){
-=======
-},{}],246:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Determine if an object is Buffer
  *
@@ -27065,20 +26267,12 @@ module.exports = function (obj) {
     ))
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],253:[function(require,module,exports){
-=======
-},{}],247:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],254:[function(require,module,exports){
-=======
-},{}],248:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -27307,11 +26501,7 @@ var substr = 'ab'.substr(-1) === 'b'
 
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255}],255:[function(require,module,exports){
-=======
-},{"_process":249}],249:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -27404,11 +26594,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],256:[function(require,module,exports){
-=======
-},{}],250:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (global){
 /*! https://mths.be/punycode v1.3.2 by @mathias */
 ;(function(root) {
@@ -27943,11 +27129,7 @@ process.umask = function() { return 0; };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],257:[function(require,module,exports){
-=======
-},{}],251:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -28033,11 +27215,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],258:[function(require,module,exports){
-=======
-},{}],252:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -28124,27 +27302,16 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],259:[function(require,module,exports){
-=======
-},{}],253:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./decode":257,"./encode":258}],260:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
 },{"./lib/_stream_duplex.js":261}],261:[function(require,module,exports){
-=======
-},{"./decode":251,"./encode":252}],254:[function(require,module,exports){
-module.exports = require("./lib/_stream_duplex.js")
-
-},{"./lib/_stream_duplex.js":255}],255:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -28228,11 +27395,7 @@ function forEach (xs, f) {
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./_stream_readable":263,"./_stream_writable":265,"core-util-is":266,"inherits":251,"process-nextick-args":267}],262:[function(require,module,exports){
-=======
-},{"./_stream_readable":257,"./_stream_writable":259,"core-util-is":260,"inherits":245,"process-nextick-args":261}],256:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -28261,11 +27424,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./_stream_transform":264,"core-util-is":266,"inherits":251}],263:[function(require,module,exports){
-=======
-},{"./_stream_transform":258,"core-util-is":260,"inherits":245}],257:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 'use strict';
 
@@ -29243,11 +28402,7 @@ function indexOf (xs, x) {
 
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./_stream_duplex":261,"_process":255,"buffer":53,"core-util-is":266,"events":249,"inherits":251,"isarray":253,"process-nextick-args":267,"string_decoder/":283,"util":39}],264:[function(require,module,exports){
-=======
-},{"./_stream_duplex":255,"_process":249,"buffer":53,"core-util-is":260,"events":243,"inherits":245,"isarray":247,"process-nextick-args":261,"string_decoder/":277,"util":39}],258:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -29446,11 +28601,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./_stream_duplex":261,"core-util-is":266,"inherits":251}],265:[function(require,module,exports){
-=======
-},{"./_stream_duplex":255,"core-util-is":260,"inherits":245}],259:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, encoding, cb), and it'll handle all
 // the drain event emission and buffering.
@@ -29979,11 +29130,7 @@ function endWritable(stream, state, cb) {
   state.ended = true;
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./_stream_duplex":261,"buffer":53,"core-util-is":266,"events":249,"inherits":251,"process-nextick-args":267,"util-deprecate":268}],266:[function(require,module,exports){
-=======
-},{"./_stream_duplex":255,"buffer":53,"core-util-is":260,"events":243,"inherits":245,"process-nextick-args":261,"util-deprecate":262}],260:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -30094,11 +29241,7 @@ function objectToString(o) {
 }
 }).call(this,{"isBuffer":require("../../../../insert-module-globals/node_modules/is-buffer/index.js")})
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../../../../insert-module-globals/node_modules/is-buffer/index.js":252}],267:[function(require,module,exports){
-=======
-},{"../../../../insert-module-globals/node_modules/is-buffer/index.js":246}],261:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 'use strict';
 module.exports = nextTick;
@@ -30116,11 +29259,7 @@ function nextTick(fn) {
 
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255}],268:[function(require,module,exports){
-=======
-},{"_process":249}],262:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (global){
 
 /**
@@ -30192,17 +29331,10 @@ function config (name) {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],269:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
 },{"./lib/_stream_passthrough.js":262}],270:[function(require,module,exports){
-=======
-},{}],263:[function(require,module,exports){
-module.exports = require("./lib/_stream_passthrough.js")
-
-},{"./lib/_stream_passthrough.js":256}],264:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var Stream = (function (){
   try {
     return require('st' + 'ream'); // hack to fix a circular dependency issue when used with browserify
@@ -30216,7 +29348,6 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./lib/_stream_duplex.js":261,"./lib/_stream_passthrough.js":262,"./lib/_stream_readable.js":263,"./lib/_stream_transform.js":264,"./lib/_stream_writable.js":265}],271:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
@@ -30224,15 +29355,6 @@ module.exports = require("./lib/_stream_transform.js")
 module.exports = require("./lib/_stream_writable.js")
 
 },{"./lib/_stream_writable.js":265}],273:[function(require,module,exports){
-=======
-},{"./lib/_stream_duplex.js":255,"./lib/_stream_passthrough.js":256,"./lib/_stream_readable.js":257,"./lib/_stream_transform.js":258,"./lib/_stream_writable.js":259}],265:[function(require,module,exports){
-module.exports = require("./lib/_stream_transform.js")
-
-},{"./lib/_stream_transform.js":258}],266:[function(require,module,exports){
-module.exports = require("./lib/_stream_writable.js")
-
-},{"./lib/_stream_writable.js":259}],267:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -30361,11 +29483,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"events":249,"inherits":251,"readable-stream/duplex.js":260,"readable-stream/passthrough.js":269,"readable-stream/readable.js":270,"readable-stream/transform.js":271,"readable-stream/writable.js":272}],274:[function(require,module,exports){
-=======
-},{"events":243,"inherits":245,"readable-stream/duplex.js":254,"readable-stream/passthrough.js":263,"readable-stream/readable.js":264,"readable-stream/transform.js":265,"readable-stream/writable.js":266}],268:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var ClientRequest = require('./lib/request')
 var extend = require('xtend')
 var statusCodes = require('builtin-status-codes')
@@ -30440,11 +29558,7 @@ http.METHODS = [
 	'UNLOCK',
 	'UNSUBSCRIBE'
 ]
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./lib/request":276,"builtin-status-codes":278,"url":284,"xtend":289}],275:[function(require,module,exports){
-=======
-},{"./lib/request":270,"builtin-status-codes":272,"url":278,"xtend":283}],269:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (global){
 exports.fetch = isFunction(global.fetch) && isFunction(global.ReadableByteStream)
 
@@ -30489,11 +29603,7 @@ xhr = null // Help gc
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],276:[function(require,module,exports){
-=======
-},{}],270:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process,global,Buffer){
 // var Base64 = require('Base64')
 var capability = require('./capability')
@@ -30776,11 +29886,7 @@ var unsafeHeaders = [
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./capability":275,"./response":277,"_process":255,"buffer":53,"foreach":279,"indexof":280,"inherits":251,"object-keys":281,"stream":273}],277:[function(require,module,exports){
-=======
-},{"./capability":269,"./response":271,"_process":249,"buffer":53,"foreach":273,"indexof":274,"inherits":245,"object-keys":275,"stream":267}],271:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process,global,Buffer){
 var capability = require('./capability')
 var foreach = require('foreach')
@@ -30958,11 +30064,7 @@ IncomingMessage.prototype._onXHRProgress = function () {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./capability":275,"_process":255,"buffer":53,"foreach":279,"inherits":251,"stream":273}],278:[function(require,module,exports){
-=======
-},{"./capability":269,"_process":249,"buffer":53,"foreach":273,"inherits":245,"stream":267}],272:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports = {
   "100": "Continue",
   "101": "Switching Protocols",
@@ -31023,11 +30125,7 @@ module.exports = {
   "511": "Network Authentication Required"
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],279:[function(require,module,exports){
-=======
-},{}],273:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 
 var hasOwn = Object.prototype.hasOwnProperty;
 var toString = Object.prototype.toString;
@@ -31051,11 +30149,7 @@ module.exports = function forEach (obj, fn, ctx) {
 };
 
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],280:[function(require,module,exports){
-=======
-},{}],274:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 
 var indexOf = [].indexOf;
 
@@ -31066,11 +30160,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],281:[function(require,module,exports){
-=======
-},{}],275:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 // modified from https://github.com/es-shims/es5-shim
@@ -31200,11 +30290,7 @@ keysShim.shim = function shimObjectKeys() {
 
 module.exports = keysShim;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./isArguments":282}],282:[function(require,module,exports){
-=======
-},{"./isArguments":276}],276:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -31223,11 +30309,7 @@ module.exports = function isArguments(value) {
 	return isArgs;
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],283:[function(require,module,exports){
-=======
-},{}],277:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -31450,11 +30532,7 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53}],284:[function(require,module,exports){
-=======
-},{"buffer":53}],278:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -32163,22 +31241,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"punycode":256,"querystring":259}],285:[function(require,module,exports){
-=======
-},{"punycode":250,"querystring":253}],279:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],286:[function(require,module,exports){
-=======
-},{}],280:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -32769,11 +31839,7 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./support/isBuffer":285,"_process":255,"inherits":251}],287:[function(require,module,exports){
-=======
-},{"./support/isBuffer":279,"_process":249,"inherits":245}],281:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var indexOf = require('indexof');
 
 var Object_keys = function (obj) {
@@ -32913,15 +31979,9 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"indexof":288}],288:[function(require,module,exports){
 arguments[4][280][0].apply(exports,arguments)
 },{"dup":280}],289:[function(require,module,exports){
-=======
-},{"indexof":282}],282:[function(require,module,exports){
-arguments[4][274][0].apply(exports,arguments)
-},{"dup":274}],283:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -32942,11 +32002,7 @@ function extend() {
     return target
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],290:[function(require,module,exports){
-=======
-},{}],284:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*!
   Copyright (c) 2015 Jed Watson.
   Licensed under the MIT License (MIT), see
@@ -32996,11 +32052,7 @@ function extend() {
 	}
 }());
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],291:[function(require,module,exports){
-=======
-},{}],285:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -33025,11 +32077,7 @@ function activeElement() {
 }
 
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./ownerDocument":293,"./util/babelHelpers.js":297}],292:[function(require,module,exports){
-=======
-},{"./ownerDocument":287,"./util/babelHelpers.js":291}],286:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 var canUseDOM = require('../util/inDOM');
 var on = function on() {};
@@ -33046,11 +32094,7 @@ if (canUseDOM) {
 }
 
 module.exports = on;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../util/inDOM":298}],293:[function(require,module,exports){
-=======
-},{"../util/inDOM":292}],287:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 "use strict";
 
 exports.__esModule = true;
@@ -33061,11 +32105,7 @@ function ownerDocument(node) {
 }
 
 module.exports = exports["default"];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],294:[function(require,module,exports){
-=======
-},{}],288:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var babelHelpers = require('./util/babelHelpers.js');
@@ -33083,11 +32123,7 @@ function ownerWindow(node) {
 }
 
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./ownerDocument":293,"./util/babelHelpers.js":297}],295:[function(require,module,exports){
-=======
-},{"./ownerDocument":287,"./util/babelHelpers.js":291}],289:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 var canUseDOM = require('../util/inDOM');
 
@@ -33108,11 +32144,7 @@ var contains = (function () {
 })();
 
 module.exports = contains;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../util/inDOM":298}],296:[function(require,module,exports){
-=======
-},{"../util/inDOM":292}],290:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 var canUseDOM = require('../util/inDOM');
 
@@ -33168,11 +32200,7 @@ function getTransitionProperties() {
 
   return { end: endEvent, prefix: prefix };
 }
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../util/inDOM":298}],297:[function(require,module,exports){
-=======
-},{"../util/inDOM":292}],291:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (root, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports"], factory);
@@ -33204,17 +32232,10 @@ function getTransitionProperties() {
     return target;
   };
 })
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],298:[function(require,module,exports){
 'use strict';
 module.exports = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 },{}],299:[function(require,module,exports){
-=======
-},{}],292:[function(require,module,exports){
-'use strict';
-module.exports = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-},{}],293:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var canUseDOM = require('./inDOM');
@@ -33240,11 +32261,7 @@ module.exports = function (recalc) {
 
   return size;
 };
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./inDOM":298}],300:[function(require,module,exports){
-=======
-},{"./inDOM":292}],294:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -33256,11 +32273,7 @@ module.exports = function (recalc) {
 
 module.exports.Dispatcher = require('./lib/Dispatcher');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./lib/Dispatcher":301}],301:[function(require,module,exports){
-=======
-},{"./lib/Dispatcher":295}],295:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -33495,11 +32508,7 @@ var Dispatcher = (function () {
 module.exports = Dispatcher;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255,"fbjs/lib/invariant":315}],302:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/invariant":309}],296:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -33680,11 +32689,7 @@ function enforceInterface(o) {
 module.exports = { create: create };
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./FluxStoreGroup":307,"_process":255,"fbjs/lib/invariant":315,"fbjs/lib/shallowEqual":316}],303:[function(require,module,exports){
-=======
-},{"./FluxStoreGroup":301,"_process":249,"fbjs/lib/invariant":309,"fbjs/lib/shallowEqual":310}],297:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -33832,11 +32837,7 @@ var FluxMapStore = (function (_FluxReduceStore) {
 module.exports = FluxMapStore;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./FluxReduceStore":305,"_process":255,"fbjs/lib/invariant":315,"immutable":318}],304:[function(require,module,exports){
-=======
-},{"./FluxReduceStore":299,"_process":249,"fbjs/lib/invariant":309,"immutable":312}],298:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -33957,11 +32958,7 @@ function enforceInterface(o) {
 module.exports = FluxMixinLegacy;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./FluxStoreGroup":307,"_process":255,"fbjs/lib/invariant":315}],305:[function(require,module,exports){
-=======
-},{"./FluxStoreGroup":301,"_process":249,"fbjs/lib/invariant":309}],299:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -34066,11 +33063,7 @@ var FluxReduceStore = (function (_FluxStore) {
 module.exports = FluxReduceStore;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./FluxStore":306,"./abstractMethod":308,"_process":255,"fbjs/lib/invariant":315}],306:[function(require,module,exports){
-=======
-},{"./FluxStore":300,"./abstractMethod":302,"_process":249,"fbjs/lib/invariant":309}],300:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -34251,11 +33244,7 @@ module.exports = FluxStore;
 // protected, available to subclasses
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255,"fbemitter":309,"fbjs/lib/invariant":315}],307:[function(require,module,exports){
-=======
-},{"_process":249,"fbemitter":303,"fbjs/lib/invariant":309}],301:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -34334,11 +33323,7 @@ function _getUniformDispatcher(stores) {
 module.exports = FluxStoreGroup;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255,"fbjs/lib/invariant":315}],308:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/invariant":309}],302:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -34363,11 +33348,7 @@ function abstractMethod(className, methodName) {
 module.exports = abstractMethod;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255,"fbjs/lib/invariant":315}],309:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/invariant":309}],303:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -34383,11 +33364,7 @@ var fbemitter = {
 
 module.exports = fbemitter;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./lib/BaseEventEmitter":310}],310:[function(require,module,exports){
-=======
-},{"./lib/BaseEventEmitter":304}],304:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -34582,11 +33559,7 @@ var BaseEventEmitter = (function () {
 module.exports = BaseEventEmitter;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./EmitterSubscription":311,"./EventSubscriptionVendor":313,"_process":255,"fbjs/lib/emptyFunction":314,"fbjs/lib/invariant":315}],311:[function(require,module,exports){
-=======
-},{"./EmitterSubscription":305,"./EventSubscriptionVendor":307,"_process":249,"fbjs/lib/emptyFunction":308,"fbjs/lib/invariant":309}],305:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -34635,11 +33608,7 @@ var EmitterSubscription = (function (_EventSubscription) {
 })(EventSubscription);
 
 module.exports = EmitterSubscription;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./EventSubscription":312}],312:[function(require,module,exports){
-=======
-},{"./EventSubscription":306}],306:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -34686,11 +33655,7 @@ var EventSubscription = (function () {
 })();
 
 module.exports = EventSubscription;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],313:[function(require,module,exports){
-=======
-},{}],307:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -34797,11 +33762,7 @@ var EventSubscriptionVendor = (function () {
 module.exports = EventSubscriptionVendor;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255,"fbjs/lib/invariant":315}],314:[function(require,module,exports){
-=======
-},{"_process":249,"fbjs/lib/invariant":309}],308:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -34840,11 +33801,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],315:[function(require,module,exports){
-=======
-},{}],309:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -34897,11 +33854,7 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255}],316:[function(require,module,exports){
-=======
-},{"_process":249}],310:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -34952,11 +33905,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],317:[function(require,module,exports){
-=======
-},{}],311:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -34972,11 +33921,7 @@ module.exports.Mixin = require('./lib/FluxMixinLegacy');
 module.exports.ReduceStore = require('./lib/FluxReduceStore');
 module.exports.Store = require('./lib/FluxStore');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./lib/FluxContainer":302,"./lib/FluxMapStore":303,"./lib/FluxMixinLegacy":304,"./lib/FluxReduceStore":305,"./lib/FluxStore":306}],318:[function(require,module,exports){
-=======
-},{"./lib/FluxContainer":296,"./lib/FluxMapStore":297,"./lib/FluxMixinLegacy":298,"./lib/FluxReduceStore":299,"./lib/FluxStore":300}],312:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  *  Copyright (c) 2014-2015, Facebook, Inc.
  *  All rights reserved.
@@ -39937,11 +38882,7 @@ module.exports.Store = require('./lib/FluxStore');
   return Immutable;
 
 }));
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],319:[function(require,module,exports){
-=======
-},{}],313:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -49153,11 +48094,7 @@ return jQuery;
 
 }));
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],320:[function(require,module,exports){
-=======
-},{}],314:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (global){
 /**
  * marked - a markdown parser
@@ -50447,11 +49384,7 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],321:[function(require,module,exports){
-=======
-},{}],315:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var exports = module.exports = function() {
 	var fn = arguments[0];	
 	var args = [].concat.apply([],arguments).slice(1);
@@ -50477,11 +49410,7 @@ exports.rapply = function() {
 	};
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],322:[function(require,module,exports){
-=======
-},{}],316:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var _ = require("lodash");
 
 var School = require("./School");
@@ -50593,11 +49522,7 @@ Class.prototype.search = function(query) {
 }
 
 module.exports = Class;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../petty":422,"./Content":323,"./FeedItem":324,"./School":325,"lodash":327}],323:[function(require,module,exports){
-=======
-},{"../petty":416,"./Content":317,"./FeedItem":318,"./School":319,"lodash":321}],317:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var _ = require("lodash");
 
 var callPetty = require("../petty");
@@ -50688,11 +49613,7 @@ Content.prototype.getFollowups = function() {
 }
 
 module.exports = Content;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../petty":422,"lodash":327}],324:[function(require,module,exports){
-=======
-},{"../petty":416,"lodash":321}],318:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var Content = require("./Content");
 var callPetty = require("../petty")
 
@@ -50721,22 +49642,14 @@ FeedItem.prototype.toContent = function() {
 }
 
 module.exports = FeedItem;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../petty":422,"./Content":323}],325:[function(require,module,exports){
-=======
-},{"../petty":416,"./Content":317}],319:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var School = function(name, id) {
 	this.id = id;
 	this.name = name;
 }
 
 module.exports = School;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],326:[function(require,module,exports){
-=======
-},{}],320:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var _ = require("lodash");
 
 var Class = require("./Class");
@@ -50782,11 +49695,7 @@ User.prototype.isTakingClass = function(class_id) {
 }
 
 module.exports = User;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../petty":422,"./Class":322,"lodash":327}],327:[function(require,module,exports){
-=======
-},{"../petty":416,"./Class":316,"lodash":321}],321:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (global){
 /**
  * @license
@@ -63142,11 +62051,7 @@ module.exports = User;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],328:[function(require,module,exports){
-=======
-},{}],322:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright 2010-2012 Mikeal Rogers
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
@@ -63304,11 +62209,7 @@ Object.defineProperty(request, 'debug', {
   }
 })
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./lib/cookies":330,"./lib/helpers":333,"./request":421,"extend":354}],329:[function(require,module,exports){
-=======
-},{"./lib/cookies":324,"./lib/helpers":327,"./request":415,"extend":348}],323:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict'
 
 var caseless = require('caseless')
@@ -63478,11 +62379,7 @@ Auth.prototype.onResponse = function (response) {
 
 exports.Auth = Auth
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./helpers":333,"caseless":351,"node-uuid":406}],330:[function(require,module,exports){
-=======
-},{"./helpers":327,"caseless":345,"node-uuid":400}],324:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict'
 
 var tough = require('tough-cookie')
@@ -63523,11 +62420,7 @@ exports.jar = function(store) {
   return new RequestJar(store)
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"tough-cookie":413}],331:[function(require,module,exports){
-=======
-},{"tough-cookie":407}],325:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 'use strict'
 
@@ -63611,11 +62504,7 @@ module.exports = getProxyFromURI
 
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255}],332:[function(require,module,exports){
-=======
-},{"_process":249}],326:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict'
 
 var fs = require('fs')
@@ -63822,11 +62711,7 @@ Har.prototype.options = function (options) {
 
 exports.Har = Har
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"fs":37,"har-validator":358,"querystring":259,"util":286}],333:[function(require,module,exports){
-=======
-},{"fs":37,"har-validator":352,"querystring":253,"util":280}],327:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process,Buffer){
 'use strict'
 
@@ -63905,11 +62790,7 @@ exports.defer                 = deferMethod()
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255,"buffer":53,"crypto":57,"json-stringify-safe":402}],334:[function(require,module,exports){
-=======
-},{"_process":249,"buffer":53,"crypto":57,"json-stringify-safe":396}],328:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 'use strict'
 
@@ -64023,11 +62904,7 @@ exports.Multipart = Multipart
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"combined-stream":352,"isstream":401,"node-uuid":406}],335:[function(require,module,exports){
-=======
-},{"buffer":53,"combined-stream":346,"isstream":395,"node-uuid":400}],329:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 'use strict'
 
@@ -64179,11 +63056,7 @@ exports.OAuth = OAuth
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"caseless":351,"crypto":57,"node-uuid":406,"oauth-sign":407,"qs":408,"url":284}],336:[function(require,module,exports){
-=======
-},{"buffer":53,"caseless":345,"crypto":57,"node-uuid":400,"oauth-sign":401,"qs":402,"url":278}],330:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict'
 
 var qs = require('qs')
@@ -64236,11 +63109,7 @@ Querystring.prototype.unescape = querystring.unescape
 
 exports.Querystring = Querystring
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"qs":408,"querystring":259}],337:[function(require,module,exports){
-=======
-},{"qs":402,"querystring":253}],331:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict'
 
 var url = require('url')
@@ -64396,11 +63265,7 @@ Redirect.prototype.onResponse = function (response) {
 
 exports.Redirect = Redirect
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"url":284}],338:[function(require,module,exports){
-=======
-},{"url":278}],332:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict'
 
 var url = require('url')
@@ -64585,11 +63450,7 @@ Tunnel.defaultProxyHeaderWhiteList = defaultProxyHeaderWhiteList
 Tunnel.defaultProxyHeaderExclusiveList = defaultProxyHeaderExclusiveList
 exports.Tunnel = Tunnel
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"tunnel-agent":420,"url":284}],339:[function(require,module,exports){
-=======
-},{"tunnel-agent":414,"url":278}],333:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 
 /*!
  *  Copyright 2010 LearnBoost <dev@learnboost.com>
@@ -64803,11 +63664,7 @@ function canonicalizeResource (resource) {
 }
 module.exports.canonicalizeResource = canonicalizeResource
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"crypto":57,"url":284}],340:[function(require,module,exports){
-=======
-},{"crypto":57,"url":278}],334:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var DuplexStream = require('readable-stream/duplex')
   , util         = require('util')
@@ -65028,19 +63885,11 @@ module.exports = BufferList
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"readable-stream/duplex":341,"util":286}],341:[function(require,module,exports){
 arguments[4][260][0].apply(exports,arguments)
 },{"./lib/_stream_duplex.js":342,"dup":260}],342:[function(require,module,exports){
 arguments[4][261][0].apply(exports,arguments)
 },{"./_stream_readable":343,"./_stream_writable":344,"core-util-is":345,"dup":261,"inherits":346,"process-nextick-args":348}],343:[function(require,module,exports){
-=======
-},{"buffer":53,"readable-stream/duplex":335,"util":280}],335:[function(require,module,exports){
-arguments[4][254][0].apply(exports,arguments)
-},{"./lib/_stream_duplex.js":336,"dup":254}],336:[function(require,module,exports){
-arguments[4][255][0].apply(exports,arguments)
-},{"./_stream_readable":337,"./_stream_writable":338,"core-util-is":339,"dup":255,"inherits":340,"process-nextick-args":342}],337:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 'use strict';
 
@@ -66018,7 +64867,6 @@ function indexOf (xs, x) {
 
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./_stream_duplex":342,"_process":255,"buffer":53,"core-util-is":345,"events":249,"inherits":346,"isarray":347,"process-nextick-args":348,"string_decoder/":349,"util":39}],344:[function(require,module,exports){
 arguments[4][265][0].apply(exports,arguments)
 },{"./_stream_duplex":342,"buffer":53,"core-util-is":345,"dup":265,"events":249,"inherits":346,"process-nextick-args":348,"util-deprecate":350}],345:[function(require,module,exports){
@@ -66043,20 +64891,6 @@ arguments[4][265][0].apply(exports,arguments)
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
-=======
-},{"./_stream_duplex":336,"_process":249,"buffer":53,"core-util-is":339,"events":243,"inherits":340,"isarray":341,"process-nextick-args":342,"string_decoder/":343,"util":39}],338:[function(require,module,exports){
-// A bit simpler than readable streams.
-// Implement an async ._write(chunk, encoding, cb), and it'll handle all
-// the drain event emission and buffering.
-
-'use strict';
-
-module.exports = Writable;
-
-/*<replacement>*/
-var processNextTick = require('process-nextick-args');
-/*</replacement>*/
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 
 // NOTE: These type checking functions intentionally don't use `instanceof`
 // because it is fragile and can be easily faked with `Object.create()`.
@@ -66612,33 +65446,8 @@ DelayedStream.prototype._checkIfMaxDataSizeExceeded = function() {
   this.emit('error', new Error(message));
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"stream":273,"util":286}],354:[function(require,module,exports){
 'use strict';
-=======
-},{"./_stream_duplex":336,"buffer":53,"core-util-is":339,"events":243,"inherits":340,"process-nextick-args":342,"util-deprecate":344}],339:[function(require,module,exports){
-(function (Buffer){
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 
 var hasOwn = Object.prototype.hasOwnProperty;
 var toStr = Object.prototype.toString;
@@ -66725,20 +65534,9 @@ module.exports = function extend() {
 };
 
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],355:[function(require,module,exports){
 module.exports = ForeverAgent
 ForeverAgent.SSL = ForeverAgentSSL
-=======
-},{"../../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246}],340:[function(require,module,exports){
-arguments[4][245][0].apply(exports,arguments)
-},{"dup":245}],341:[function(require,module,exports){
-arguments[4][247][0].apply(exports,arguments)
-},{"dup":247}],342:[function(require,module,exports){
-(function (process){
-'use strict';
-module.exports = nextTick;
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 
 var util = require('util')
   , Agent = require('http').Agent
@@ -66754,46 +65552,8 @@ function getConnectionName(host, port) {
     // For node.js v012.0 and iojs-v1.5.1, host is an object. And any existing localAddress is part of the connection name.
     name = host.host + ':' + host.port + ':' + (host.localAddress ? (host.localAddress + ':') : ':')
   }
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
   return name
 }    
-=======
-  process.nextTick(function afterTick() {
-    fn.apply(null, args);
-  });
-}
-
-}).call(this,require('_process'))
-
-},{"_process":249}],343:[function(require,module,exports){
-arguments[4][277][0].apply(exports,arguments)
-},{"buffer":53,"dup":277}],344:[function(require,module,exports){
-(function (global){
-
-/**
- * Module exports.
- */
-
-module.exports = deprecate;
-
-/**
- * Mark that a method should not be used.
- * Returns a modified function which warns once by default.
- *
- * If `localStorage.noDeprecation = true` is set, then it is a no-op.
- *
- * If `localStorage.throwDeprecation = true` is set, then deprecated functions
- * will throw an Error when invoked.
- *
- * If `localStorage.traceDeprecation = true` is set, then deprecated functions
- * will invoke `console.trace()` instead of `console.error()`.
- *
- * @param {Function} fn - the function to deprecate
- * @param {String} msg - the string to print to the console when `fn` is invoked
- * @returns {Function} a new "deprecated" version of `fn`
- * @api public
- */
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 
 function ForeverAgent(options) {
   var self = this
@@ -66844,24 +65604,12 @@ ForeverAgent.prototype.addRequest = function(req, host, port) {
     host = options.host
   }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
   if (this.freeSockets[name] && this.freeSockets[name].length > 0 && !req.useChunkedEncodingByDefault) {
     var idleSocket = this.freeSockets[name].pop()
     idleSocket.removeListener('error', idleSocket._onIdleError)
     delete idleSocket._onIdleError
     req._reusedSocket = true
     req.onSocket(idleSocket)
-=======
-},{}],345:[function(require,module,exports){
-function Caseless (dict) {
-  this.dict = dict || {}
-}
-Caseless.prototype.set = function (name, value, clobber) {
-  if (typeof name === 'object') {
-    for (var i in name) {
-      this.set(i, name[i], value)
-    }
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
   } else {
     this.addRequestNoreuse(req, host, port)
   }
@@ -66896,28 +65644,8 @@ ForeverAgent.prototype.removeSocket = function(s, name, host, port) {
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 function ForeverAgentSSL (options) {
   ForeverAgent.call(this, options)
-=======
-},{}],346:[function(require,module,exports){
-(function (Buffer){
-var util = require('util');
-var Stream = require('stream').Stream;
-var DelayedStream = require('delayed-stream');
-
-module.exports = CombinedStream;
-function CombinedStream() {
-  this.writable = false;
-  this.readable = true;
-  this.dataSize = 0;
-  this.maxDataSize = 2 * 1024 * 1024;
-  this.pauseStreams = true;
-
-  this._released = false;
-  this._streams = [];
-  this._currentStream = null;
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 }
 util.inherits(ForeverAgentSSL, ForeverAgent)
 
@@ -67011,28 +65739,6 @@ module.exports = function (schema, data, cb) {
   if (typeof cb === 'function') {
     return cb(validate.errors ? new ValidationError(validate.errors) : null, valid)
   }
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-=======
-};
-
-CombinedStream.prototype._emitError = function(err) {
-  this._reset();
-  this.emit('error', err);
-};
-
-}).call(this,{"isBuffer":require("../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")})
-
-},{"../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"delayed-stream":347,"stream":267,"util":280}],347:[function(require,module,exports){
-var Stream = require('stream').Stream;
-var util = require('util');
-
-module.exports = DelayedStream;
-function DelayedStream() {
-  this.source = null;
-  this.dataSize = 0;
-  this.maxDataSize = 1024 * 1024;
-  this.pauseStream = true;
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 
   return valid
 }
@@ -67052,407 +65758,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],361:[function(require,module,exports){
-=======
-  delayedStream.source = source;
-
-  var realEmit = source.emit;
-  source.emit = function() {
-    delayedStream._handleEmit(arguments);
-    return realEmit.apply(source, arguments);
-  };
-
-  source.on('error', function() {});
-  if (delayedStream.pauseStream) {
-    source.pause();
-  }
-
-  return delayedStream;
-};
-
-Object.defineProperty(DelayedStream.prototype, 'readable', {
-  configurable: true,
-  enumerable: true,
-  get: function() {
-    return this.source.readable;
-  }
-});
-
-DelayedStream.prototype.setEncoding = function() {
-  return this.source.setEncoding.apply(this.source, arguments);
-};
-
-DelayedStream.prototype.resume = function() {
-  if (!this._released) {
-    this.release();
-  }
-
-  this.source.resume();
-};
-
-DelayedStream.prototype.pause = function() {
-  this.source.pause();
-};
-
-DelayedStream.prototype.release = function() {
-  this._released = true;
-
-  this._bufferedEvents.forEach(function(args) {
-    this.emit.apply(this, args);
-  }.bind(this));
-  this._bufferedEvents = [];
-};
-
-DelayedStream.prototype.pipe = function() {
-  var r = Stream.prototype.pipe.apply(this, arguments);
-  this.resume();
-  return r;
-};
-
-DelayedStream.prototype._handleEmit = function(args) {
-  if (this._released) {
-    this.emit.apply(this, args);
-    return;
-  }
-
-  if (args[0] === 'data') {
-    this.dataSize += args[1].length;
-    this._checkIfMaxDataSizeExceeded();
-  }
-
-  this._bufferedEvents.push(args);
-};
-
-DelayedStream.prototype._checkIfMaxDataSizeExceeded = function() {
-  if (this._maxDataSizeExceeded) {
-    return;
-  }
-
-  if (this.dataSize <= this.maxDataSize) {
-    return;
-  }
-
-  this._maxDataSizeExceeded = true;
-  var message =
-    'DelayedStream#maxDataSize of ' + this.maxDataSize + ' bytes exceeded.'
-  this.emit('error', new Error(message));
-};
-
-},{"stream":267,"util":280}],348:[function(require,module,exports){
-'use strict';
-
-var hasOwn = Object.prototype.hasOwnProperty;
-var toStr = Object.prototype.toString;
-
-var isArray = function isArray(arr) {
-	if (typeof Array.isArray === 'function') {
-		return Array.isArray(arr);
-	}
-
-	return toStr.call(arr) === '[object Array]';
-};
-
-var isPlainObject = function isPlainObject(obj) {
-	if (!obj || toStr.call(obj) !== '[object Object]') {
-		return false;
-	}
-
-	var hasOwnConstructor = hasOwn.call(obj, 'constructor');
-	var hasIsPrototypeOf = obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
-	// Not own constructor property must be Object
-	if (obj.constructor && !hasOwnConstructor && !hasIsPrototypeOf) {
-		return false;
-	}
-
-	// Own properties are enumerated firstly, so to speed up,
-	// if last one is own, then all properties are own.
-	var key;
-	for (key in obj) {/**/}
-
-	return typeof key === 'undefined' || hasOwn.call(obj, key);
-};
-
-module.exports = function extend() {
-	var options, name, src, copy, copyIsArray, clone,
-		target = arguments[0],
-		i = 1,
-		length = arguments.length,
-		deep = false;
-
-	// Handle a deep copy situation
-	if (typeof target === 'boolean') {
-		deep = target;
-		target = arguments[1] || {};
-		// skip the boolean and the target
-		i = 2;
-	} else if ((typeof target !== 'object' && typeof target !== 'function') || target == null) {
-		target = {};
-	}
-
-	for (; i < length; ++i) {
-		options = arguments[i];
-		// Only deal with non-null/undefined values
-		if (options != null) {
-			// Extend the base object
-			for (name in options) {
-				src = target[name];
-				copy = options[name];
-
-				// Prevent never-ending loop
-				if (target !== copy) {
-					// Recurse if we're merging plain objects or arrays
-					if (deep && copy && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
-						if (copyIsArray) {
-							copyIsArray = false;
-							clone = src && isArray(src) ? src : [];
-						} else {
-							clone = src && isPlainObject(src) ? src : {};
-						}
-
-						// Never move original objects, clone them
-						target[name] = extend(deep, clone, copy);
-
-					// Don't bring in undefined values
-					} else if (typeof copy !== 'undefined') {
-						target[name] = copy;
-					}
-				}
-			}
-		}
-	}
-
-	// Return the modified object
-	return target;
-};
-
-
-},{}],349:[function(require,module,exports){
-module.exports = ForeverAgent
-ForeverAgent.SSL = ForeverAgentSSL
-
-var util = require('util')
-  , Agent = require('http').Agent
-  , net = require('net')
-  , tls = require('tls')
-  , AgentSSL = require('https').Agent
-  
-function getConnectionName(host, port) {  
-  var name = ''
-  if (typeof host === 'string') {
-    name = host + ':' + port
-  } else {
-    // For node.js v012.0 and iojs-v1.5.1, host is an object. And any existing localAddress is part of the connection name.
-    name = host.host + ':' + host.port + ':' + (host.localAddress ? (host.localAddress + ':') : ':')
-  }
-  return name
-}    
-
-function ForeverAgent(options) {
-  var self = this
-  self.options = options || {}
-  self.requests = {}
-  self.sockets = {}
-  self.freeSockets = {}
-  self.maxSockets = self.options.maxSockets || Agent.defaultMaxSockets
-  self.minSockets = self.options.minSockets || ForeverAgent.defaultMinSockets
-  self.on('free', function(socket, host, port) {
-    var name = getConnectionName(host, port)
-
-    if (self.requests[name] && self.requests[name].length) {
-      self.requests[name].shift().onSocket(socket)
-    } else if (self.sockets[name].length < self.minSockets) {
-      if (!self.freeSockets[name]) self.freeSockets[name] = []
-      self.freeSockets[name].push(socket)
-      
-      // if an error happens while we don't use the socket anyway, meh, throw the socket away
-      var onIdleError = function() {
-        socket.destroy()
-      }
-      socket._onIdleError = onIdleError
-      socket.on('error', onIdleError)
-    } else {
-      // If there are no pending requests just destroy the
-      // socket and it will get removed from the pool. This
-      // gets us out of timeout issues and allows us to
-      // default to Connection:keep-alive.
-      socket.destroy()
-    }
-  })
-
-}
-util.inherits(ForeverAgent, Agent)
-
-ForeverAgent.defaultMinSockets = 5
-
-
-ForeverAgent.prototype.createConnection = net.createConnection
-ForeverAgent.prototype.addRequestNoreuse = Agent.prototype.addRequest
-ForeverAgent.prototype.addRequest = function(req, host, port) {
-  var name = getConnectionName(host, port)
-  
-  if (typeof host !== 'string') {
-    var options = host
-    port = options.port
-    host = options.host
-  }
-
-  if (this.freeSockets[name] && this.freeSockets[name].length > 0 && !req.useChunkedEncodingByDefault) {
-    var idleSocket = this.freeSockets[name].pop()
-    idleSocket.removeListener('error', idleSocket._onIdleError)
-    delete idleSocket._onIdleError
-    req._reusedSocket = true
-    req.onSocket(idleSocket)
-  } else {
-    this.addRequestNoreuse(req, host, port)
-  }
-}
-
-ForeverAgent.prototype.removeSocket = function(s, name, host, port) {
-  if (this.sockets[name]) {
-    var index = this.sockets[name].indexOf(s)
-    if (index !== -1) {
-      this.sockets[name].splice(index, 1)
-    }
-  } else if (this.sockets[name] && this.sockets[name].length === 0) {
-    // don't leak
-    delete this.sockets[name]
-    delete this.requests[name]
-  }
-  
-  if (this.freeSockets[name]) {
-    var index = this.freeSockets[name].indexOf(s)
-    if (index !== -1) {
-      this.freeSockets[name].splice(index, 1)
-      if (this.freeSockets[name].length === 0) {
-        delete this.freeSockets[name]
-      }
-    }
-  }
-
-  if (this.requests[name] && this.requests[name].length) {
-    // If we have pending requests and a socket gets closed a new one
-    // needs to be created to take over in the pool for the one that closed.
-    this.createSocket(name, host, port).emit('free')
-  }
-}
-
-function ForeverAgentSSL (options) {
-  ForeverAgent.call(this, options)
-}
-util.inherits(ForeverAgentSSL, ForeverAgent)
-
-ForeverAgentSSL.prototype.createConnection = createConnectionSSL
-ForeverAgentSSL.prototype.addRequestNoreuse = AgentSSL.prototype.addRequest
-
-function createConnectionSSL (port, host, options) {
-  if (typeof port === 'object') {
-    options = port;
-  } else if (typeof host === 'object') {
-    options = host;
-  } else if (typeof options === 'object') {
-    options = options;
-  } else {
-    options = {};
-  }
-
-  if (typeof port === 'number') {
-    options.port = port;
-  }
-
-  if (typeof host === 'string') {
-    options.host = host;
-  }
-
-  return tls.connect(options);
-}
-
-},{"http":268,"https":244,"net":37,"tls":37,"util":280}],350:[function(require,module,exports){
-module.exports = FormData;
-},{}],351:[function(require,module,exports){
-'use strict'
-
-function ValidationError (errors) {
-  this.name = 'ValidationError'
-  this.errors = errors
-}
-
-ValidationError.prototype = Error.prototype
-
-module.exports = ValidationError
-
-},{}],352:[function(require,module,exports){
-'use strict'
-
-var Promise = require('pinkie-promise')
-var runner = require('./runner')
-var schemas = require('./schemas')
-
-var promisify = function (schema) {
-  return function (data) {
-    return new Promise(function (resolve, reject) {
-      runner(schema, data, function (err, valid) {
-        return err === null ? resolve(data) : reject(err)
-      })
-    })
-  }
-}
-
-module.exports = promisify(schemas.har)
-
-// utility methods for all parts of the schema
-Object.keys(schemas).map(function (name) {
-  module.exports[name] = promisify(schemas[name])
-})
-
-},{"./runner":353,"./schemas":361,"pinkie-promise":377}],353:[function(require,module,exports){
-'use strict'
-
-var schemas = require('./schemas')
-var ValidationError = require('./error')
-var validator = require('is-my-json-valid')
-
-module.exports = function (schema, data, cb) {
-  // default value
-  var valid = false
-
-  // validator config
-  var validate = validator(schema, {
-    greedy: true,
-    verbose: true,
-    schemas: schemas
-  })
-
-  // execute is-my-json-valid
-  if (data !== undefined) {
-    valid = validate(data)
-  }
-
-  // callback?
-  if (typeof cb === 'function') {
-    return cb(validate.errors ? new ValidationError(validate.errors) : null, valid)
-  }
-
-  return valid
-}
-
-},{"./error":351,"./schemas":361,"is-my-json-valid":371}],354:[function(require,module,exports){
-module.exports={
-  "properties": {
-    "beforeRequest": {
-      "$ref": "#cacheEntry"
-    },
-    "afterRequest": {
-      "$ref": "#cacheEntry"
-    },
-    "comment": {
-      "type": "string"
-    }
-  }
-}
-
-},{}],355:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "oneOf": [{
     "type": "object",
@@ -67485,11 +65791,7 @@ module.exports={
   }]
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],362:[function(require,module,exports){
-=======
-},{}],356:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -67518,11 +65820,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],363:[function(require,module,exports){
-=======
-},{}],357:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -67558,11 +65856,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],364:[function(require,module,exports){
-=======
-},{}],358:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -67582,11 +65876,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],365:[function(require,module,exports){
-=======
-},{}],359:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "optional": true,
@@ -67639,11 +65929,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],366:[function(require,module,exports){
-=======
-},{}],360:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -67656,11 +65942,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],367:[function(require,module,exports){
-=======
-},{}],361:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict'
 
 var schemas = {
@@ -67711,11 +65993,7 @@ schemas.har.properties.log = schemas.log
 
 module.exports = schemas
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./cache.json":360,"./cacheEntry.json":361,"./content.json":362,"./cookie.json":363,"./creator.json":364,"./entry.json":365,"./har.json":366,"./log.json":368,"./page.json":369,"./pageTimings.json":370,"./postData.json":371,"./record.json":372,"./request.json":373,"./response.json":374,"./timings.json":375}],368:[function(require,module,exports){
-=======
-},{"./cache.json":354,"./cacheEntry.json":355,"./content.json":356,"./cookie.json":357,"./creator.json":358,"./entry.json":359,"./har.json":360,"./log.json":362,"./page.json":363,"./pageTimings.json":364,"./postData.json":365,"./record.json":366,"./request.json":367,"./response.json":368,"./timings.json":369}],362:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -67751,11 +66029,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],369:[function(require,module,exports){
-=======
-},{}],363:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "optional": true,
@@ -67787,11 +66061,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],370:[function(require,module,exports){
-=======
-},{}],364:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "properties": {
@@ -67809,11 +66079,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],371:[function(require,module,exports){
-=======
-},{}],365:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "optional": true,
@@ -67856,11 +66122,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],372:[function(require,module,exports){
-=======
-},{}],366:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -67880,11 +66142,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],373:[function(require,module,exports){
-=======
-},{}],367:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -67941,11 +66199,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],374:[function(require,module,exports){
-=======
-},{}],368:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "type": "object",
   "required": [
@@ -67999,11 +66253,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],375:[function(require,module,exports){
-=======
-},{}],369:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "required": [
     "send",
@@ -68045,11 +66295,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],376:[function(require,module,exports){
-=======
-},{}],370:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 exports['date-time'] = /^\d{4}-(?:0[0-9]{1}|1[0-2]{1})-[0-9]{2}[tT ]\d{2}:\d{2}:\d{2}(\.\d+)?([zZ]|[+-]\d{2}:\d{2})$/
 exports['date'] = /^\d{4}-(?:0[0-9]{1}|1[0-2]{1})-[0-9]{2}$/
 exports['time'] = /^\d{2}:\d{2}:\d{2}$/
@@ -68065,11 +66311,7 @@ exports['style'] = /\s*(.+?):\s*([^;]+);?/g
 exports['phone'] = /^\+(?:[0-9] ?){6,14}[0-9]$/
 exports['utc-millisec'] = /^[0-9]+(\.?[0-9]+)?$/
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],377:[function(require,module,exports){
-=======
-},{}],371:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var genobj = require('generate-object-property')
 var genfun = require('generate-function')
 var jsonpointer = require('jsonpointer')
@@ -68646,11 +66888,7 @@ module.exports.filter = function(schema, opts) {
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./formats":376,"generate-function":378,"generate-object-property":379,"jsonpointer":381,"xtend":382}],378:[function(require,module,exports){
-=======
-},{"./formats":370,"generate-function":372,"generate-object-property":373,"jsonpointer":375,"xtend":376}],372:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var util = require('util')
 
 var INDENT_START = /[\{\[]/
@@ -68713,11 +66951,7 @@ module.exports = function() {
   return line
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"util":286}],379:[function(require,module,exports){
-=======
-},{"util":280}],373:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var isProperty = require('is-property')
 
 var gen = function(obj, prop) {
@@ -68731,21 +66965,13 @@ gen.property = function (prop) {
 
 module.exports = gen
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"is-property":380}],380:[function(require,module,exports){
-=======
-},{"is-property":374}],374:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 "use strict"
 function isProperty(str) {
   return /^[$A-Z\_a-z\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05d0-\u05ea\u05f0-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u08a0\u08a2-\u08ac\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0977\u0979-\u097f\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c33\u0c35-\u0c39\u0c3d\u0c58\u0c59\u0c60\u0c61\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d05-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d60\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e87\u0e88\u0e8a\u0e8d\u0e94-\u0e97\u0e99-\u0e9f\u0ea1-\u0ea3\u0ea5\u0ea7\u0eaa\u0eab\u0ead-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f4\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f0\u1700-\u170c\u170e-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1877\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191c\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19c1-\u19c7\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4b\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1ce9-\u1cec\u1cee-\u1cf1\u1cf5\u1cf6\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126\u2128\u212a-\u212d\u212f-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2c2e\u2c30-\u2c5e\u2c60-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u2e2f\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309d-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312d\u3131-\u318e\u31a0-\u31ba\u31f0-\u31ff\u3400-\u4db5\u4e00-\u9fcc\ua000-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua697\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua78e\ua790-\ua793\ua7a0-\ua7aa\ua7f8-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa80-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uabc0-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc][$A-Z\_a-z\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05d0-\u05ea\u05f0-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u08a0\u08a2-\u08ac\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0977\u0979-\u097f\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c33\u0c35-\u0c39\u0c3d\u0c58\u0c59\u0c60\u0c61\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d05-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d60\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e87\u0e88\u0e8a\u0e8d\u0e94-\u0e97\u0e99-\u0e9f\u0ea1-\u0ea3\u0ea5\u0ea7\u0eaa\u0eab\u0ead-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f4\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f0\u1700-\u170c\u170e-\u1711\u1720-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1877\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191c\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19c1-\u19c7\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4b\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1ce9-\u1cec\u1cee-\u1cf1\u1cf5\u1cf6\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2119-\u211d\u2124\u2126\u2128\u212a-\u212d\u212f-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2c2e\u2c30-\u2c5e\u2c60-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u2e2f\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309d-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312d\u3131-\u318e\u31a0-\u31ba\u31f0-\u31ff\u3400-\u4db5\u4e00-\u9fcc\ua000-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua697\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua78e\ua790-\ua793\ua7a0-\ua7aa\ua7f8-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa80-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uabc0-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc0-9\u0300-\u036f\u0483-\u0487\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7\u0610-\u061a\u064b-\u0669\u0670\u06d6-\u06dc\u06df-\u06e4\u06e7\u06e8\u06ea-\u06ed\u06f0-\u06f9\u0711\u0730-\u074a\u07a6-\u07b0\u07c0-\u07c9\u07eb-\u07f3\u0816-\u0819\u081b-\u0823\u0825-\u0827\u0829-\u082d\u0859-\u085b\u08e4-\u08fe\u0900-\u0903\u093a-\u093c\u093e-\u094f\u0951-\u0957\u0962\u0963\u0966-\u096f\u0981-\u0983\u09bc\u09be-\u09c4\u09c7\u09c8\u09cb-\u09cd\u09d7\u09e2\u09e3\u09e6-\u09ef\u0a01-\u0a03\u0a3c\u0a3e-\u0a42\u0a47\u0a48\u0a4b-\u0a4d\u0a51\u0a66-\u0a71\u0a75\u0a81-\u0a83\u0abc\u0abe-\u0ac5\u0ac7-\u0ac9\u0acb-\u0acd\u0ae2\u0ae3\u0ae6-\u0aef\u0b01-\u0b03\u0b3c\u0b3e-\u0b44\u0b47\u0b48\u0b4b-\u0b4d\u0b56\u0b57\u0b62\u0b63\u0b66-\u0b6f\u0b82\u0bbe-\u0bc2\u0bc6-\u0bc8\u0bca-\u0bcd\u0bd7\u0be6-\u0bef\u0c01-\u0c03\u0c3e-\u0c44\u0c46-\u0c48\u0c4a-\u0c4d\u0c55\u0c56\u0c62\u0c63\u0c66-\u0c6f\u0c82\u0c83\u0cbc\u0cbe-\u0cc4\u0cc6-\u0cc8\u0cca-\u0ccd\u0cd5\u0cd6\u0ce2\u0ce3\u0ce6-\u0cef\u0d02\u0d03\u0d3e-\u0d44\u0d46-\u0d48\u0d4a-\u0d4d\u0d57\u0d62\u0d63\u0d66-\u0d6f\u0d82\u0d83\u0dca\u0dcf-\u0dd4\u0dd6\u0dd8-\u0ddf\u0df2\u0df3\u0e31\u0e34-\u0e3a\u0e47-\u0e4e\u0e50-\u0e59\u0eb1\u0eb4-\u0eb9\u0ebb\u0ebc\u0ec8-\u0ecd\u0ed0-\u0ed9\u0f18\u0f19\u0f20-\u0f29\u0f35\u0f37\u0f39\u0f3e\u0f3f\u0f71-\u0f84\u0f86\u0f87\u0f8d-\u0f97\u0f99-\u0fbc\u0fc6\u102b-\u103e\u1040-\u1049\u1056-\u1059\u105e-\u1060\u1062-\u1064\u1067-\u106d\u1071-\u1074\u1082-\u108d\u108f-\u109d\u135d-\u135f\u1712-\u1714\u1732-\u1734\u1752\u1753\u1772\u1773\u17b4-\u17d3\u17dd\u17e0-\u17e9\u180b-\u180d\u1810-\u1819\u18a9\u1920-\u192b\u1930-\u193b\u1946-\u194f\u19b0-\u19c0\u19c8\u19c9\u19d0-\u19d9\u1a17-\u1a1b\u1a55-\u1a5e\u1a60-\u1a7c\u1a7f-\u1a89\u1a90-\u1a99\u1b00-\u1b04\u1b34-\u1b44\u1b50-\u1b59\u1b6b-\u1b73\u1b80-\u1b82\u1ba1-\u1bad\u1bb0-\u1bb9\u1be6-\u1bf3\u1c24-\u1c37\u1c40-\u1c49\u1c50-\u1c59\u1cd0-\u1cd2\u1cd4-\u1ce8\u1ced\u1cf2-\u1cf4\u1dc0-\u1de6\u1dfc-\u1dff\u200c\u200d\u203f\u2040\u2054\u20d0-\u20dc\u20e1\u20e5-\u20f0\u2cef-\u2cf1\u2d7f\u2de0-\u2dff\u302a-\u302f\u3099\u309a\ua620-\ua629\ua66f\ua674-\ua67d\ua69f\ua6f0\ua6f1\ua802\ua806\ua80b\ua823-\ua827\ua880\ua881\ua8b4-\ua8c4\ua8d0-\ua8d9\ua8e0-\ua8f1\ua900-\ua909\ua926-\ua92d\ua947-\ua953\ua980-\ua983\ua9b3-\ua9c0\ua9d0-\ua9d9\uaa29-\uaa36\uaa43\uaa4c\uaa4d\uaa50-\uaa59\uaa7b\uaab0\uaab2-\uaab4\uaab7\uaab8\uaabe\uaabf\uaac1\uaaeb-\uaaef\uaaf5\uaaf6\uabe3-\uabea\uabec\uabed\uabf0-\uabf9\ufb1e\ufe00-\ufe0f\ufe20-\ufe26\ufe33\ufe34\ufe4d-\ufe4f\uff10-\uff19\uff3f]*$/.test(str)
 }
 module.exports = isProperty
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],381:[function(require,module,exports){
-=======
-},{}],375:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var untilde = function(str) {
   return str.replace(/~./g, function(m) {
     switch (m) {
@@ -68823,34 +67049,9 @@ var set = function(obj, pointer, value) {
 exports.get = get
 exports.set = set
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],382:[function(require,module,exports){
 arguments[4][289][0].apply(exports,arguments)
 },{"dup":289}],383:[function(require,module,exports){
-=======
-},{}],376:[function(require,module,exports){
-module.exports = extend
-
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-function extend() {
-    var target = {}
-
-    for (var i = 0; i < arguments.length; i++) {
-        var source = arguments[i]
-
-        for (var key in source) {
-            if (hasOwnProperty.call(source, key)) {
-                target[key] = source[key]
-            }
-        }
-    }
-
-    return target
-}
-
-},{}],377:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (global){
 'use strict';
 
@@ -68858,11 +67059,7 @@ module.exports = global.Promise || require('pinkie');
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"pinkie":384}],384:[function(require,module,exports){
-=======
-},{"pinkie":378}],378:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var PENDING = 'pending';
@@ -69140,11 +67337,7 @@ Promise.reject = function (reason) {
 
 module.exports = Promise;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],385:[function(require,module,exports){
-=======
-},{}],379:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*
     HTTP Hawk Authentication Scheme
     Copyright (c) 2012-2014, Eran Hammer <eran@hammer.io>
@@ -69783,11 +67976,7 @@ if (typeof module !== 'undefined' && module.exports) {
 /* eslint-enable */
 // $lab:coverage:on$
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],386:[function(require,module,exports){
-=======
-},{}],380:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright 2015 Joyent, Inc.
 
 var parser = require('./parser');
@@ -69816,11 +68005,7 @@ module.exports = {
   verifyHMAC: verify.verifyHMAC
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./parser":387,"./signer":388,"./util":389,"./verify":390}],387:[function(require,module,exports){
-=======
-},{"./parser":381,"./signer":382,"./util":383,"./verify":384}],381:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright 2012 Joyent, Inc.  All rights reserved.
 
 var assert = require('assert-plus');
@@ -70126,11 +68311,7 @@ module.exports = {
 
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"assert-plus":397,"util":286}],388:[function(require,module,exports){
-=======
-},{"assert-plus":391,"util":280}],382:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright 2012 Joyent, Inc.  All rights reserved.
 
 var assert = require('assert-plus');
@@ -70310,11 +68491,7 @@ module.exports = {
 
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"assert-plus":397,"crypto":57,"http":274,"util":286}],389:[function(require,module,exports){
-=======
-},{"assert-plus":391,"crypto":57,"http":268,"util":280}],383:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 // Copyright 2012 Joyent, Inc.  All rights reserved.
 
@@ -70625,11 +68802,7 @@ module.exports = {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"asn1":396,"assert-plus":397,"buffer":53,"crypto":57,"ctype":400}],390:[function(require,module,exports){
-=======
-},{"asn1":390,"assert-plus":391,"buffer":53,"crypto":57,"ctype":394}],384:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright 2015 Joyent, Inc.
 
 var assert = require('assert-plus');
@@ -70687,11 +68860,7 @@ module.exports = {
   }
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"assert-plus":397,"crypto":57}],391:[function(require,module,exports){
-=======
-},{"assert-plus":391,"crypto":57}],385:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 
@@ -70706,11 +68875,7 @@ module.exports = {
 
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],392:[function(require,module,exports){
-=======
-},{}],386:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 var errors = require('./errors');
@@ -70739,11 +68904,7 @@ for (var e in errors) {
     module.exports[e] = errors[e];
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./errors":391,"./reader":393,"./types":394,"./writer":395}],393:[function(require,module,exports){
-=======
-},{"./errors":385,"./reader":387,"./types":388,"./writer":389}],387:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
@@ -71015,11 +69176,7 @@ module.exports = Reader;
 
 }).call(this,{"isBuffer":require("../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")})
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":252,"./errors":391,"./types":394,"assert":38}],394:[function(require,module,exports){
-=======
-},{"../../../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"./errors":385,"./types":388,"assert":38}],388:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 
@@ -71057,11 +69214,7 @@ module.exports = {
   Context: 128
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],395:[function(require,module,exports){
-=======
-},{}],389:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
@@ -71383,11 +69536,7 @@ module.exports = Writer;
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./errors":391,"./types":394,"assert":38,"buffer":53}],396:[function(require,module,exports){
-=======
-},{"./errors":385,"./types":388,"assert":38,"buffer":53}],390:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 // If you have no idea what ASN.1 or BER is, see this:
@@ -71409,11 +69558,7 @@ module.exports = {
 
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./ber/index":392}],397:[function(require,module,exports){
-=======
-},{"./ber/index":386}],391:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer,process){
 // Copyright (c) 2012, Mark Cavage. All rights reserved.
 
@@ -71663,11 +69808,7 @@ Object.keys(assert).forEach(function (k) {
 
 }).call(this,{"isBuffer":require("../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")},require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":252,"_process":255,"assert":38,"stream":273,"util":286}],398:[function(require,module,exports){
-=======
-},{"../../../../../../../browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":246,"_process":249,"assert":38,"stream":267,"util":280}],392:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*
  * ctf.js
  *
@@ -71914,11 +70055,7 @@ function ctfParseJson(json, ctype)
 
 exports.ctfParseJson = ctfParseJson;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"assert":38}],399:[function(require,module,exports){
-=======
-},{"assert":38}],393:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*
  * rm - Feb 2011
  * ctio.js:
@@ -73405,11 +71542,7 @@ exports.rdouble = rdouble;
 exports.wfloat = wfloat;
 exports.wdouble = wdouble;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"assert":38}],400:[function(require,module,exports){
-=======
-},{"assert":38}],394:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 /*
  * rm - Feb 2011
@@ -74358,11 +72491,7 @@ exports.wdouble = mod_ctio.wdouble;
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./ctf.js":398,"./ctio.js":399,"assert":38,"buffer":53}],401:[function(require,module,exports){
-=======
-},{"./ctf.js":392,"./ctio.js":393,"assert":38,"buffer":53}],395:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var stream = require('stream')
 
 
@@ -74391,11 +72520,7 @@ module.exports.isReadable = isReadable
 module.exports.isWritable = isWritable
 module.exports.isDuplex   = isDuplex
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"stream":273}],402:[function(require,module,exports){
-=======
-},{"stream":267}],396:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 exports = module.exports = stringify
 exports.getSerialize = serializer
 
@@ -74424,11 +72549,7 @@ function serializer(replacer, cycleReplacer) {
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],403:[function(require,module,exports){
-=======
-},{}],397:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*!
  * mime-types
  * Copyright(c) 2014 Jonathan Ong
@@ -74618,11 +72739,7 @@ function populateMaps(extensions, types) {
   })
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"mime-db":405,"path":254}],404:[function(require,module,exports){
-=======
-},{"mime-db":399,"path":248}],398:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "application/1d-interleaved-parityfec": {
     "source": "iana"
@@ -81098,11 +79215,7 @@ module.exports={
   }
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],405:[function(require,module,exports){
-=======
-},{}],399:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*!
  * mime-db
  * Copyright(c) 2014 Jonathan Ong
@@ -81115,11 +79228,7 @@ module.exports={
 
 module.exports = require('./db.json')
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./db.json":404}],406:[function(require,module,exports){
-=======
-},{"./db.json":398}],400:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 //     uuid.js
 //
 //     Copyright (c) 2010-2012 Robert Kieffer
@@ -81372,11 +79481,7 @@ module.exports = require('./db.json')
   }
 }).call(this);
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"crypto":57}],407:[function(require,module,exports){
-=======
-},{}],401:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var crypto = require('crypto')
   , qs = require('querystring')
   ;
@@ -81512,11 +79617,7 @@ exports.plaintext = plaintext
 exports.sign = sign
 exports.rfc3986 = rfc3986
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"crypto":57,"querystring":259}],408:[function(require,module,exports){
-=======
-},{"crypto":57,"querystring":253}],402:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Load modules
 
 var Stringify = require('./stringify');
@@ -81533,11 +79634,7 @@ module.exports = {
     parse: Parse
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./parse":409,"./stringify":410}],409:[function(require,module,exports){
-=======
-},{"./parse":403,"./stringify":404}],403:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Load modules
 
 var Utils = require('./utils');
@@ -81726,11 +79823,7 @@ module.exports = function (str, options) {
     return Utils.compact(obj);
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./utils":411}],410:[function(require,module,exports){
-=======
-},{"./utils":405}],404:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Load modules
 
 var Utils = require('./utils');
@@ -81886,11 +79979,7 @@ module.exports = function (obj, options) {
     return keys.join(delimiter);
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./utils":411}],411:[function(require,module,exports){
-=======
-},{"./utils":405}],405:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 // Load modules
 
 
@@ -82082,11 +80171,7 @@ exports.isBuffer = function (obj) {
               obj.constructor.isBuffer(obj));
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],412:[function(require,module,exports){
-=======
-},{}],406:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (Buffer){
 var util = require('util')
 var Stream = require('stream')
@@ -82193,11 +80278,7 @@ function alignedWrite(buffer) {
 
 }).call(this,require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"buffer":53,"stream":273,"string_decoder":283,"util":286}],413:[function(require,module,exports){
-=======
-},{"buffer":53,"stream":267,"string_decoder":277,"util":280}],407:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -83541,11 +81622,7 @@ module.exports = {
   canonicalDomain: canonicalDomain
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../package.json":419,"./memstore":414,"./pathMatch":415,"./permuteDomain":416,"./pubsuffix":417,"./store":418,"net":37,"punycode":256,"url":284}],414:[function(require,module,exports){
-=======
-},{"../package.json":413,"./memstore":408,"./pathMatch":409,"./permuteDomain":410,"./pubsuffix":411,"./store":412,"net":37,"punycode":250,"url":278}],408:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -83717,11 +81794,7 @@ MemoryCookieStore.prototype.getAllCookies = function(cb) {
   cb(null, cookies);
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./pathMatch":415,"./permuteDomain":416,"./store":418,"util":286}],415:[function(require,module,exports){
-=======
-},{"./pathMatch":409,"./permuteDomain":410,"./store":412,"util":280}],409:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -83784,11 +81857,7 @@ function pathMatch (reqPath, cookiePath) {
 
 exports.pathMatch = pathMatch;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],416:[function(require,module,exports){
-=======
-},{}],410:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -83846,11 +81915,7 @@ function permuteDomain (domain) {
 
 exports.permuteDomain = permuteDomain;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./pubsuffix":417}],417:[function(require,module,exports){
-=======
-},{"./pubsuffix":411}],411:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /****************************************************
  * AUTOMATICALLY GENERATED by generate-pubsuffix.js *
  *                  DO NOT EDIT!                    *
@@ -83950,11 +82015,7 @@ var index = module.exports.index = Object.freeze(
 
 // END of automatically generated file
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"punycode":256}],418:[function(require,module,exports){
-=======
-},{"punycode":250}],412:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*!
  * Copyright (c) 2015, Salesforce.com, Inc.
  * All rights reserved.
@@ -84027,11 +82088,7 @@ Store.prototype.getAllCookies = function(cb) {
   throw new Error('getAllCookies is not implemented (therefore jar cannot be serialized)');
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],419:[function(require,module,exports){
-=======
-},{}],413:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 module.exports={
   "author": {
     "name": "Jeremy Stashewsky",
@@ -84119,14 +82176,11 @@ module.exports={
     }
   ],
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.2.0.tgz"
+  "_resolved": "https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.2.0.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],420:[function(require,module,exports){
-=======
-},{}],414:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process,Buffer){
 'use strict'
 
@@ -84372,11 +82426,7 @@ exports.debug = debug // for test
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255,"assert":38,"buffer":53,"events":249,"http":274,"https":250,"net":37,"tls":37,"util":286}],421:[function(require,module,exports){
-=======
-},{"_process":249,"assert":38,"buffer":53,"events":243,"http":268,"https":244,"net":37,"tls":37,"util":280}],415:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process,Buffer){
 'use strict'
 
@@ -85819,11 +83869,7 @@ module.exports = Request
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./lib/auth":329,"./lib/cookies":330,"./lib/getProxyFromURI":331,"./lib/har":332,"./lib/helpers":333,"./lib/multipart":334,"./lib/oauth":335,"./lib/querystring":336,"./lib/redirect":337,"./lib/tunnel":338,"_process":255,"aws-sign2":339,"bl":340,"buffer":53,"caseless":351,"forever-agent":355,"form-data":356,"hawk":385,"http":274,"http-signature":386,"https":250,"mime-types":403,"stream":273,"stringstream":412,"url":284,"util":286,"zlib":52}],422:[function(require,module,exports){
-=======
-},{"./lib/auth":323,"./lib/cookies":324,"./lib/getProxyFromURI":325,"./lib/har":326,"./lib/helpers":327,"./lib/multipart":328,"./lib/oauth":329,"./lib/querystring":330,"./lib/redirect":331,"./lib/tunnel":332,"_process":249,"aws-sign2":333,"bl":334,"buffer":53,"caseless":345,"forever-agent":349,"form-data":350,"hawk":379,"http":268,"http-signature":380,"https":244,"mime-types":397,"stream":267,"stringstream":406,"url":278,"util":280,"zlib":52}],416:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var request = require("request");
 
 var apiUrl = "https://piazza.com/logic/api";
@@ -85854,11 +83900,7 @@ var callPetty = function(method, params) {
 }
 
 module.exports = callPetty;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"request":328}],423:[function(require,module,exports){
-=======
-},{"request":322}],417:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 var User = require("./models/User");
 var callPetty = require("./petty");
 
@@ -85877,11 +83919,7 @@ module.exports = {
     return loginPromise;
   }
 };
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./models/User":326,"./petty":422}],424:[function(require,module,exports){
-=======
-},{"./models/User":320,"./petty":416}],418:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -85976,11 +84014,7 @@ var Alert = _react2['default'].createClass({
 
 exports['default'] = Alert;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./BootstrapMixin":425,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],425:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":419,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],419:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -86051,11 +84085,7 @@ var BootstrapMixin = {
 
 exports['default'] = BootstrapMixin;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./styleMaps":441,"babel-runtime/helpers/interop-require-default":9,"react":615,"react-prop-types/lib/keyOf":456}],426:[function(require,module,exports){
-=======
-},{"./styleMaps":435,"babel-runtime/helpers/interop-require-default":9,"react":609,"react-prop-types/lib/keyOf":450}],420:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -86181,11 +84211,7 @@ Button.types = types;
 
 exports['default'] = Button;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./BootstrapMixin":425,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615,"react-prop-types/lib/elementType":455}],427:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":419,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609,"react-prop-types/lib/elementType":449}],421:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86275,11 +84301,7 @@ ButtonInput.propTypes = {
 
 exports['default'] = ButtonInput;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./Button":426,"./FormGroup":431,"./InputBase":434,"./utils/childrenValueInputValidation":443,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"react":615}],428:[function(require,module,exports){
-=======
-},{"./Button":420,"./FormGroup":425,"./InputBase":428,"./utils/childrenValueInputValidation":437,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"react":609}],422:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86399,11 +84421,7 @@ Fade.defaultProps = {
 
 exports['default'] = Fade;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":615,"react-overlays/lib/Transition":448,"react-prop-types/lib/deprecated":454}],429:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":609,"react-overlays/lib/Transition":442,"react-prop-types/lib/deprecated":448}],423:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86467,11 +84485,7 @@ Static.propTypes = {
 
 exports['default'] = Static;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../InputBase":434,"../utils/childrenValueInputValidation":443,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],430:[function(require,module,exports){
-=======
-},{"../InputBase":428,"../utils/childrenValueInputValidation":437,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],424:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -86483,11 +84497,7 @@ var _Static2 = require('./Static');
 var _Static3 = _interopRequireDefault(_Static2);
 
 exports.Static = _Static3['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./Static":429,"babel-runtime/helpers/interop-require-default":9}],431:[function(require,module,exports){
-=======
-},{"./Static":423,"babel-runtime/helpers/interop-require-default":9}],425:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86557,11 +84567,7 @@ FormGroup.propTypes = {
 
 exports['default'] = FormGroup;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],432:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],426:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _extends = require('babel-runtime/helpers/extends')['default'];
@@ -86620,11 +84626,7 @@ var Glyphicon = _react2['default'].createClass({
 
 exports['default'] = Glyphicon;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],433:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],427:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86680,11 +84682,7 @@ Input.propTypes = {
 
 exports['default'] = Input;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./FormControls":430,"./InputBase":434,"./utils/deprecationWarning":445,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/interop-require-wildcard":10,"react":615}],434:[function(require,module,exports){
-=======
-},{"./FormControls":424,"./InputBase":428,"./utils/deprecationWarning":439,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/interop-require-wildcard":10,"react":609}],428:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -86947,11 +84945,7 @@ InputBase.defaultProps = {
 
 exports['default'] = InputBase;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./FormGroup":431,"./Glyphicon":432,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],435:[function(require,module,exports){
-=======
-},{"./FormGroup":425,"./Glyphicon":426,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],429:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /* eslint-disable react/prop-types */
 
 'use strict';
@@ -87471,11 +85465,7 @@ Modal.BACKDROP_TRANSITION_DURATION = 150;
 
 exports['default'] = Modal;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./Fade":428,"./ModalBody":436,"./ModalDialog":437,"./ModalFooter":438,"./ModalHeader":439,"./ModalTitle":440,"./utils/EventListener":442,"./utils/createChainedFunction":444,"./utils/domUtils":446,"babel-runtime/core-js/object/is-frozen":3,"babel-runtime/core-js/object/keys":4,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"classnames":290,"dom-helpers/activeElement":291,"dom-helpers/query/contains":295,"dom-helpers/util/inDOM":298,"dom-helpers/util/scrollbarSize":299,"react":615,"react-dom":459,"react-overlays/lib/Portal":447,"react-prop-types/lib/elementType":455}],436:[function(require,module,exports){
-=======
-},{"./Fade":422,"./ModalBody":430,"./ModalDialog":431,"./ModalFooter":432,"./ModalHeader":433,"./ModalTitle":434,"./utils/EventListener":436,"./utils/createChainedFunction":438,"./utils/domUtils":440,"babel-runtime/core-js/object/is-frozen":3,"babel-runtime/core-js/object/keys":4,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"babel-runtime/helpers/object-without-properties":11,"classnames":284,"dom-helpers/activeElement":285,"dom-helpers/query/contains":289,"dom-helpers/util/inDOM":292,"dom-helpers/util/scrollbarSize":293,"react":609,"react-dom":453,"react-overlays/lib/Portal":441,"react-prop-types/lib/elementType":449}],430:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -87530,11 +85520,7 @@ ModalBody.defaultProps = {
 
 exports['default'] = ModalBody;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],437:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],431:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /* eslint-disable react/prop-types */
 'use strict';
 
@@ -87616,11 +85602,7 @@ var ModalDialog = _react2['default'].createClass({
 
 exports['default'] = ModalDialog;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./BootstrapMixin":425,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],438:[function(require,module,exports){
-=======
-},{"./BootstrapMixin":419,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],432:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -87675,11 +85657,7 @@ ModalFooter.defaultProps = {
 
 exports['default'] = ModalFooter;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],439:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],433:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -87769,11 +85747,7 @@ ModalHeader.defaultProps = {
 
 exports['default'] = ModalHeader;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],440:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],434:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -87828,11 +85802,7 @@ ModalTitle.defaultProps = {
 
 exports['default'] = ModalTitle;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":290,"react":615}],441:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/extends":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"classnames":284,"react":609}],435:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -87878,11 +85848,7 @@ var styleMaps = {
 
 exports['default'] = styleMaps;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],442:[function(require,module,exports){
-=======
-},{}],436:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2014 Facebook, Inc.
  *
@@ -87941,11 +85907,7 @@ var EventListener = {
 
 exports['default'] = EventListener;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],443:[function(require,module,exports){
-=======
-},{}],437:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -87972,11 +85934,7 @@ function valueValidation(props, propName, componentName) {
 }
 
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"babel-runtime/helpers/interop-require-default":9,"react":615,"react-prop-types/lib/singlePropFrom":457}],444:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/interop-require-default":9,"react":609,"react-prop-types/lib/singlePropFrom":451}],438:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Safe chained function
  *
@@ -88018,11 +85976,7 @@ function createChainedFunction() {
 
 exports['default'] = createChainedFunction;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],445:[function(require,module,exports){
-=======
-},{}],439:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -88094,11 +86048,7 @@ deprecationWarning.wrapper = function (Component) {
 
 exports['default'] = deprecationWarning;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"warning":458}],446:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"warning":452}],440:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -88166,11 +86116,7 @@ exports['default'] = {
   getSize: getSize
 };
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"babel-runtime/helpers/interop-require-default":9,"dom-helpers/ownerDocument":293,"dom-helpers/ownerWindow":294,"react-dom":459}],447:[function(require,module,exports){
-=======
-},{"babel-runtime/helpers/interop-require-default":9,"dom-helpers/ownerDocument":287,"dom-helpers/ownerWindow":288,"react-dom":453}],441:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -88294,11 +86240,7 @@ var Portal = _react2['default'].createClass({
 
 exports['default'] = Portal;
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./utils/getContainer":449,"./utils/ownerDocument":450,"react":615,"react-dom":459,"react-prop-types/lib/mountable":452}],448:[function(require,module,exports){
-=======
-},{"./utils/getContainer":443,"./utils/ownerDocument":444,"react":609,"react-dom":453,"react-prop-types/lib/mountable":446}],442:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -88636,11 +86578,7 @@ Transition.defaultProps = {
 };
 
 exports['default'] = Transition;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"classnames":290,"dom-helpers/events/on":292,"dom-helpers/transition/properties":296,"react":615,"react-dom":459}],449:[function(require,module,exports){
-=======
-},{"classnames":284,"dom-helpers/events/on":286,"dom-helpers/transition/properties":290,"react":609,"react-dom":453}],443:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -88658,11 +86596,7 @@ function getContainer(container, defaultContainer) {
 }
 
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"react-dom":459}],450:[function(require,module,exports){
-=======
-},{"react-dom":453}],444:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -88682,11 +86616,7 @@ exports['default'] = function (componentOrElement) {
 };
 
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"dom-helpers/ownerDocument":293,"react-dom":459}],451:[function(require,module,exports){
-=======
-},{"dom-helpers/ownerDocument":287,"react-dom":453}],445:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -88721,11 +86651,7 @@ function createChainableTypeChecker(validate) {
 
   return chainedCheckType;
 }
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],452:[function(require,module,exports){
-=======
-},{}],446:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -88753,15 +86679,9 @@ function validate(props, propName, componentName) {
 
 exports['default'] = _common.createChainableTypeChecker(validate);
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./common":451}],453:[function(require,module,exports){
 arguments[4][451][0].apply(exports,arguments)
 },{"dup":451}],454:[function(require,module,exports){
-=======
-},{"./common":445}],447:[function(require,module,exports){
-arguments[4][445][0].apply(exports,arguments)
-},{"dup":445}],448:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -88784,11 +86704,7 @@ function deprecated(propType, explanation) {
 }
 
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"warning":458}],455:[function(require,module,exports){
-=======
-},{"warning":452}],449:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -88830,11 +86746,7 @@ function validate(props, propName, componentName) {
 
 exports['default'] = _common.createChainableTypeChecker(validate);
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./common":453,"react":615}],456:[function(require,module,exports){
-=======
-},{"./common":447,"react":609}],450:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 exports.__esModule = true;
@@ -88863,11 +86775,7 @@ function keyOf(obj) {
 }
 
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./common":453}],457:[function(require,module,exports){
-=======
-},{"./common":447}],451:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Checks if only one of the listed properties is in use. An error is given
  * if multiple have a value
@@ -88906,11 +86814,7 @@ function createSinglePropFromChecker() {
 }
 
 module.exports = exports['default'];
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],458:[function(require,module,exports){
-=======
-},{}],452:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -88975,20 +86879,12 @@ module.exports = warning;
 
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255}],459:[function(require,module,exports){
-=======
-},{"_process":249}],453:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 module.exports = require('react/lib/ReactDOM');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"react/lib/ReactDOM":494}],460:[function(require,module,exports){
-=======
-},{"react/lib/ReactDOM":488}],454:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -89025,11 +86921,7 @@ var AutoFocusUtils = {
 };
 
 module.exports = AutoFocusUtils;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./ReactMount":524,"./findDOMNode":567,"fbjs/lib/focusNode":597}],461:[function(require,module,exports){
-=======
-},{"./ReactMount":518,"./findDOMNode":561,"fbjs/lib/focusNode":591}],455:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015 Facebook, Inc.
  * All rights reserved.
@@ -89435,11 +87327,7 @@ var BeforeInputEventPlugin = {
 };
 
 module.exports = BeforeInputEventPlugin;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./EventConstants":473,"./EventPropagators":477,"./FallbackCompositionState":478,"./SyntheticCompositionEvent":549,"./SyntheticInputEvent":553,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/keyOf":607}],462:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./EventPropagators":471,"./FallbackCompositionState":472,"./SyntheticCompositionEvent":543,"./SyntheticInputEvent":547,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/keyOf":601}],456:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -89579,17 +87467,8 @@ var CSSProperty = {
 };
 
 module.exports = CSSProperty;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],463:[function(require,module,exports){
 (function (process){
-=======
-},{}],456:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],457:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -89765,21 +87644,10 @@ ReactPerf.measureMethods(CSSPropertyOperations, 'CSSPropertyOperations', {
 });
 
 module.exports = CSSPropertyOperations;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./CSSProperty":462,"./ReactPerf":530,"./dangerousStyleValue":564,"_process":255,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/camelizeStyleName":591,"fbjs/lib/hyphenateStyleName":602,"fbjs/lib/memoizeStringOnly":609,"fbjs/lib/warning":614}],464:[function(require,module,exports){
 (function (process){
-=======
-},{"./CSSProperty":455,"./ReactPerf":523,"./dangerousStyleValue":556,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/camelizeStyleName":583,"fbjs/lib/hyphenateStyleName":594,"fbjs/lib/memoizeStringOnly":601,"fbjs/lib/warning":606}],457:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./CSSProperty":456,"./ReactPerf":524,"./dangerousStyleValue":558,"_process":249,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/camelizeStyleName":585,"fbjs/lib/hyphenateStyleName":596,"fbjs/lib/memoizeStringOnly":603,"fbjs/lib/warning":608}],458:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -89873,19 +87741,9 @@ assign(CallbackQueue.prototype, {
 PooledClass.addPoolingTo(CallbackQueue);
 
 module.exports = CallbackQueue;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"./PooledClass":482,"_process":255,"fbjs/lib/invariant":603}],465:[function(require,module,exports){
-=======
-},{"./Object.assign":474,"./PooledClass":475,"fbjs/lib/invariant":595}],458:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"./PooledClass":476,"_process":249,"fbjs/lib/invariant":597}],459:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -90207,11 +88065,7 @@ var ChangeEventPlugin = {
 };
 
 module.exports = ChangeEventPlugin;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./EventConstants":473,"./EventPluginHub":474,"./EventPropagators":477,"./ReactUpdates":542,"./SyntheticEvent":551,"./getEventTarget":573,"./isEventSupported":578,"./isTextInputElement":579,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/keyOf":607}],466:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./EventPluginHub":468,"./EventPropagators":471,"./ReactUpdates":536,"./SyntheticEvent":545,"./getEventTarget":567,"./isEventSupported":572,"./isTextInputElement":573,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/keyOf":601}],460:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -90235,17 +88089,8 @@ var ClientReactRootIndex = {
 };
 
 module.exports = ClientReactRootIndex;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],467:[function(require,module,exports){
 (function (process){
-=======
-},{}],460:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],461:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -90375,21 +88220,10 @@ ReactPerf.measureMethods(DOMChildrenOperations, 'DOMChildrenOperations', {
 });
 
 module.exports = DOMChildrenOperations;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Danger":470,"./ReactMultiChildUpdateTypes":526,"./ReactPerf":530,"./setInnerHTML":583,"./setTextContent":584,"_process":255,"fbjs/lib/invariant":603}],468:[function(require,module,exports){
 (function (process){
-=======
-},{"./Danger":463,"./ReactMultiChildUpdateTypes":519,"./ReactPerf":523,"./setInnerHTML":575,"./setTextContent":576,"fbjs/lib/invariant":595}],461:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Danger":464,"./ReactMultiChildUpdateTypes":520,"./ReactPerf":524,"./setInnerHTML":577,"./setTextContent":578,"_process":249,"fbjs/lib/invariant":597}],462:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -90624,21 +88458,10 @@ var DOMProperty = {
 };
 
 module.exports = DOMProperty;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255,"fbjs/lib/invariant":603}],469:[function(require,module,exports){
 (function (process){
-=======
-},{"fbjs/lib/invariant":595}],462:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"_process":249,"fbjs/lib/invariant":597}],463:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -90864,21 +88687,10 @@ ReactPerf.measureMethods(DOMPropertyOperations, 'DOMPropertyOperations', {
 });
 
 module.exports = DOMPropertyOperations;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./DOMProperty":468,"./ReactPerf":530,"./quoteAttributeValueForBrowser":581,"_process":255,"fbjs/lib/warning":614}],470:[function(require,module,exports){
 (function (process){
-=======
-},{"./DOMProperty":461,"./ReactPerf":523,"./quoteAttributeValueForBrowser":573,"fbjs/lib/warning":606}],463:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./DOMProperty":462,"./ReactPerf":524,"./quoteAttributeValueForBrowser":575,"_process":249,"fbjs/lib/warning":608}],464:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -91024,19 +88836,9 @@ var Danger = {
 };
 
 module.exports = Danger;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/createNodesFromMarkup":594,"fbjs/lib/emptyFunction":595,"fbjs/lib/getMarkupWrap":599,"fbjs/lib/invariant":603}],471:[function(require,module,exports){
-=======
-},{"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/createNodesFromMarkup":586,"fbjs/lib/emptyFunction":587,"fbjs/lib/getMarkupWrap":591,"fbjs/lib/invariant":595}],464:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"_process":249,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/createNodesFromMarkup":588,"fbjs/lib/emptyFunction":589,"fbjs/lib/getMarkupWrap":593,"fbjs/lib/invariant":597}],465:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -91064,11 +88866,7 @@ var keyOf = require('fbjs/lib/keyOf');
 var DefaultEventPluginOrder = [keyOf({ ResponderEventPlugin: null }), keyOf({ SimpleEventPlugin: null }), keyOf({ TapEventPlugin: null }), keyOf({ EnterLeaveEventPlugin: null }), keyOf({ ChangeEventPlugin: null }), keyOf({ SelectEventPlugin: null }), keyOf({ BeforeInputEventPlugin: null })];
 
 module.exports = DefaultEventPluginOrder;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"fbjs/lib/keyOf":607}],472:[function(require,module,exports){
-=======
-},{"fbjs/lib/keyOf":601}],466:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -91193,11 +88991,7 @@ var EnterLeaveEventPlugin = {
 };
 
 module.exports = EnterLeaveEventPlugin;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./EventConstants":473,"./EventPropagators":477,"./ReactMount":524,"./SyntheticMouseEvent":555,"fbjs/lib/keyOf":607}],473:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./EventPropagators":471,"./ReactMount":518,"./SyntheticMouseEvent":549,"fbjs/lib/keyOf":601}],467:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -91290,17 +89084,8 @@ var EventConstants = {
 };
 
 module.exports = EventConstants;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"fbjs/lib/keyMirror":606}],474:[function(require,module,exports){
 (function (process){
-=======
-},{"fbjs/lib/keyMirror":598}],467:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"fbjs/lib/keyMirror":600}],468:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -91580,21 +89365,10 @@ var EventPluginHub = {
 };
 
 module.exports = EventPluginHub;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./EventPluginRegistry":475,"./EventPluginUtils":476,"./ReactErrorUtils":515,"./accumulateInto":561,"./forEachAccumulated":569,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],475:[function(require,module,exports){
 (function (process){
-=======
-},{"./EventPluginRegistry":468,"./EventPluginUtils":469,"./ReactErrorUtils":508,"./accumulateInto":554,"./forEachAccumulated":561,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],468:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./EventPluginRegistry":469,"./EventPluginUtils":470,"./ReactErrorUtils":509,"./accumulateInto":555,"./forEachAccumulated":563,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],469:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -91815,21 +89589,10 @@ var EventPluginRegistry = {
 };
 
 module.exports = EventPluginRegistry;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255,"fbjs/lib/invariant":603}],476:[function(require,module,exports){
 (function (process){
-=======
-},{"fbjs/lib/invariant":595}],469:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"_process":249,"fbjs/lib/invariant":597}],470:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -92032,21 +89795,10 @@ var EventPluginUtils = {
 };
 
 module.exports = EventPluginUtils;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./EventConstants":473,"./ReactErrorUtils":515,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],477:[function(require,module,exports){
 (function (process){
-=======
-},{"./EventConstants":466,"./ReactErrorUtils":508,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],470:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./EventConstants":467,"./ReactErrorUtils":509,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],471:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -92182,19 +89934,9 @@ var EventPropagators = {
 };
 
 module.exports = EventPropagators;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./EventConstants":473,"./EventPluginHub":474,"./accumulateInto":561,"./forEachAccumulated":569,"_process":255,"fbjs/lib/warning":614}],478:[function(require,module,exports){
-=======
-},{"./EventConstants":466,"./EventPluginHub":467,"./accumulateInto":554,"./forEachAccumulated":561,"fbjs/lib/warning":606}],471:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./EventConstants":467,"./EventPluginHub":468,"./accumulateInto":555,"./forEachAccumulated":563,"_process":249,"fbjs/lib/warning":608}],472:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -92290,11 +90032,7 @@ assign(FallbackCompositionState.prototype, {
 PooledClass.addPoolingTo(FallbackCompositionState);
 
 module.exports = FallbackCompositionState;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./Object.assign":481,"./PooledClass":482,"./getTextContentAccessor":576}],479:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./PooledClass":476,"./getTextContentAccessor":570}],473:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -92525,17 +90263,8 @@ var HTMLDOMPropertyConfig = {
 };
 
 module.exports = HTMLDOMPropertyConfig;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./DOMProperty":468,"fbjs/lib/ExecutionEnvironment":589}],480:[function(require,module,exports){
 (function (process){
-=======
-},{"./DOMProperty":461,"fbjs/lib/ExecutionEnvironment":581}],473:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./DOMProperty":462,"fbjs/lib/ExecutionEnvironment":583}],474:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -92670,19 +90399,9 @@ var LinkedValueUtils = {
 };
 
 module.exports = LinkedValueUtils;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactPropTypeLocations":532,"./ReactPropTypes":533,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],481:[function(require,module,exports){
-=======
-},{"./ReactPropTypeLocations":525,"./ReactPropTypes":526,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],474:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactPropTypeLocations":526,"./ReactPropTypes":527,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],475:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -92730,17 +90449,8 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],482:[function(require,module,exports){
 (function (process){
-=======
-},{}],475:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],476:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -92860,16 +90570,9 @@ var PooledClass = {
 };
 
 module.exports = PooledClass;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255,"fbjs/lib/invariant":603}],483:[function(require,module,exports){
-=======
-}).call(this,require('_process'))
-
-},{"_process":249,"fbjs/lib/invariant":597}],477:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -92909,18 +90612,8 @@ assign(React, {
 React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
 
 module.exports = React;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./Object.assign":481,"./ReactDOM":494,"./ReactDOMServer":504,"./ReactIsomorphic":522,"./deprecated":565}],484:[function(require,module,exports){
 (function (process){
-=======
-},{"fbjs/lib/invariant":595}],476:[function(require,module,exports){
-arguments[4][633][0].apply(exports,arguments)
-},{"./Object.assign":474,"./ReactDOM":487,"./ReactDOMServer":497,"./ReactIsomorphic":515,"./deprecated":557,"dup":633}],477:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./Object.assign":475,"./ReactDOM":488,"./ReactDOMServer":498,"./ReactIsomorphic":516,"./deprecated":559}],478:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -92957,19 +90650,9 @@ var ReactBrowserComponentMixin = {
 };
 
 module.exports = ReactBrowserComponentMixin;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactInstanceMap":521,"./findDOMNode":567,"_process":255,"fbjs/lib/warning":614}],485:[function(require,module,exports){
-=======
-},{"./ReactInstanceMap":514,"./findDOMNode":559,"fbjs/lib/warning":606}],478:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactInstanceMap":515,"./findDOMNode":561,"_process":249,"fbjs/lib/warning":608}],479:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -93294,17 +90977,8 @@ ReactPerf.measureMethods(ReactBrowserEventEmitter, 'ReactBrowserEventEmitter', {
 });
 
 module.exports = ReactBrowserEventEmitter;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./EventConstants":473,"./EventPluginHub":474,"./EventPluginRegistry":475,"./Object.assign":481,"./ReactEventEmitterMixin":516,"./ReactPerf":530,"./ViewportMetrics":560,"./isEventSupported":578}],486:[function(require,module,exports){
 (function (process){
-=======
-},{"./EventConstants":466,"./EventPluginHub":467,"./EventPluginRegistry":468,"./Object.assign":474,"./ReactEventEmitterMixin":509,"./ReactPerf":523,"./ViewportMetrics":553,"./isEventSupported":570}],479:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./EventConstants":467,"./EventPluginHub":468,"./EventPluginRegistry":469,"./Object.assign":475,"./ReactEventEmitterMixin":510,"./ReactPerf":524,"./ViewportMetrics":554,"./isEventSupported":572}],480:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -93427,19 +91101,9 @@ var ReactChildReconciler = {
 };
 
 module.exports = ReactChildReconciler;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactReconciler":535,"./instantiateReactComponent":577,"./shouldUpdateReactComponent":585,"./traverseAllChildren":586,"_process":255,"fbjs/lib/warning":614}],487:[function(require,module,exports){
-=======
-},{"./ReactReconciler":528,"./instantiateReactComponent":569,"./shouldUpdateReactComponent":577,"./traverseAllChildren":578,"fbjs/lib/warning":606}],480:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactReconciler":529,"./instantiateReactComponent":571,"./shouldUpdateReactComponent":579,"./traverseAllChildren":580,"_process":249,"fbjs/lib/warning":608}],481:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -93622,17 +91286,8 @@ var ReactChildren = {
 };
 
 module.exports = ReactChildren;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./PooledClass":482,"./ReactElement":511,"./traverseAllChildren":586,"fbjs/lib/emptyFunction":595}],488:[function(require,module,exports){
 (function (process){
-=======
-},{"./PooledClass":475,"./ReactElement":504,"./traverseAllChildren":578,"fbjs/lib/emptyFunction":587}],481:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./PooledClass":476,"./ReactElement":505,"./traverseAllChildren":580,"fbjs/lib/emptyFunction":589}],482:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -94404,21 +92059,10 @@ var ReactClass = {
 };
 
 module.exports = ReactClass;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"./ReactComponent":489,"./ReactElement":511,"./ReactNoopUpdateQueue":528,"./ReactPropTypeLocationNames":531,"./ReactPropTypeLocations":532,"_process":255,"fbjs/lib/emptyObject":596,"fbjs/lib/invariant":603,"fbjs/lib/keyMirror":606,"fbjs/lib/keyOf":607,"fbjs/lib/warning":614}],489:[function(require,module,exports){
 (function (process){
-=======
-},{"./Object.assign":474,"./ReactComponent":482,"./ReactElement":504,"./ReactNoopUpdateQueue":521,"./ReactPropTypeLocationNames":524,"./ReactPropTypeLocations":525,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/keyMirror":598,"fbjs/lib/keyOf":599,"fbjs/lib/warning":606}],482:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"./ReactComponent":483,"./ReactElement":505,"./ReactNoopUpdateQueue":522,"./ReactPropTypeLocationNames":525,"./ReactPropTypeLocations":526,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/keyMirror":600,"fbjs/lib/keyOf":601,"fbjs/lib/warning":608}],483:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -94541,19 +92185,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = ReactComponent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactNoopUpdateQueue":528,"./canDefineProperty":563,"_process":255,"fbjs/lib/emptyObject":596,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],490:[function(require,module,exports){
-=======
-},{"./ReactNoopUpdateQueue":521,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],483:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactNoopUpdateQueue":522,"./canDefineProperty":557,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],484:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -94595,17 +92229,8 @@ var ReactComponentBrowserEnvironment = {
 };
 
 module.exports = ReactComponentBrowserEnvironment;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./ReactDOMIDOperations":499,"./ReactMount":524}],491:[function(require,module,exports){
 (function (process){
-=======
-},{"./ReactDOMIDOperations":492,"./ReactMount":517}],484:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./ReactDOMIDOperations":493,"./ReactMount":518}],485:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -94657,21 +92282,10 @@ var ReactComponentEnvironment = {
 };
 
 module.exports = ReactComponentEnvironment;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255,"fbjs/lib/invariant":603}],492:[function(require,module,exports){
 (function (process){
-=======
-},{"fbjs/lib/invariant":595}],485:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"_process":249,"fbjs/lib/invariant":597}],486:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -95366,19 +92980,9 @@ var ReactCompositeComponent = {
 };
 
 module.exports = ReactCompositeComponent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"./ReactComponentEnvironment":491,"./ReactCurrentOwner":493,"./ReactElement":511,"./ReactInstanceMap":521,"./ReactPerf":530,"./ReactPropTypeLocationNames":531,"./ReactPropTypeLocations":532,"./ReactReconciler":535,"./ReactUpdateQueue":541,"./shouldUpdateReactComponent":585,"_process":255,"fbjs/lib/emptyObject":596,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],493:[function(require,module,exports){
-=======
-},{"./Object.assign":474,"./ReactComponentEnvironment":484,"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactInstanceMap":514,"./ReactPerf":523,"./ReactPropTypeLocationNames":524,"./ReactPropTypeLocations":525,"./ReactReconciler":528,"./ReactUpdateQueue":534,"./shouldUpdateReactComponent":577,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],486:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"./ReactComponentEnvironment":485,"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactInstanceMap":515,"./ReactPerf":524,"./ReactPropTypeLocationNames":525,"./ReactPropTypeLocations":526,"./ReactReconciler":529,"./ReactUpdateQueue":535,"./shouldUpdateReactComponent":579,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],487:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -95409,12 +93013,7 @@ var ReactCurrentOwner = {
 };
 
 module.exports = ReactCurrentOwner;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],494:[function(require,module,exports){
-=======
-},{}],488:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -95510,16 +93109,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = React;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./ReactCurrentOwner":493,"./ReactDOMTextComponent":505,"./ReactDefaultInjection":508,"./ReactInstanceHandles":520,"./ReactMount":524,"./ReactPerf":530,"./ReactReconciler":535,"./ReactUpdates":542,"./ReactVersion":543,"./findDOMNode":567,"./renderSubtreeIntoContainer":582,"_process":255,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/warning":614}],495:[function(require,module,exports){
-=======
-},{}],487:[function(require,module,exports){
-arguments[4][644][0].apply(exports,arguments)
-},{"./ReactCurrentOwner":486,"./ReactDOMTextComponent":498,"./ReactDefaultInjection":501,"./ReactInstanceHandles":513,"./ReactMount":517,"./ReactPerf":523,"./ReactReconciler":528,"./ReactUpdates":535,"./ReactVersion":536,"./findDOMNode":559,"./renderSubtreeIntoContainer":574,"dup":644,"fbjs/lib/ExecutionEnvironment":581,"fbjs/lib/warning":606}],488:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./ReactCurrentOwner":487,"./ReactDOMTextComponent":499,"./ReactDefaultInjection":502,"./ReactInstanceHandles":514,"./ReactMount":518,"./ReactPerf":524,"./ReactReconciler":529,"./ReactUpdates":536,"./ReactVersion":537,"./findDOMNode":561,"./renderSubtreeIntoContainer":576,"_process":249,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/warning":608}],489:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -95570,17 +93160,8 @@ var ReactDOMButton = {
 };
 
 module.exports = ReactDOMButton;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],496:[function(require,module,exports){
 (function (process){
-=======
-},{}],489:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],490:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -95784,18 +93365,8 @@ function assertValidProps(component, props) {
     }
   }
   if (props.dangerouslySetInnerHTML != null) {
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
     !(props.children == null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Can only set one of `children` or `props.dangerouslySetInnerHTML`.') : invariant(false) : undefined;
     !(typeof props.dangerouslySetInnerHTML === 'object' && HTML in props.dangerouslySetInnerHTML) ? process.env.NODE_ENV !== 'production' ? invariant(false, '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' + 'Please visit https://fb.me/react-invariant-dangerously-set-inner-html ' + 'for more information.') : invariant(false) : undefined;
-=======
-    !(props.children == null) ? "production" !== 'production' ? invariant(false, 'Can only set one of `children` or `props.dangerouslySetInnerHTML`.') : invariant(false) : undefined;
-    !(typeof props.dangerouslySetInnerHTML === 'object' && '__html' in props.dangerouslySetInnerHTML) ? "production" !== 'production' ? invariant(false, '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' + 'Please visit https://fb.me/react-invariant-dangerously-set-inner-html ' + 'for more information.') : invariant(false) : undefined;
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-    !(props.children == null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Can only set one of `children` or `props.dangerouslySetInnerHTML`.') : invariant(false) : undefined;
-    !(typeof props.dangerouslySetInnerHTML === 'object' && HTML in props.dangerouslySetInnerHTML) ? process.env.NODE_ENV !== 'production' ? invariant(false, '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' + 'Please visit https://fb.me/react-invariant-dangerously-set-inner-html ' + 'for more information.') : invariant(false) : undefined;
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
   }
   if (process.env.NODE_ENV !== 'production') {
     process.env.NODE_ENV !== 'production' ? warning(props.innerHTML == null, 'Directly setting property `innerHTML` is not permitted. ' + 'For more information, lookup documentation on `dangerouslySetInnerHTML`.') : undefined;
@@ -96553,21 +94124,10 @@ ReactPerf.measureMethods(ReactDOMComponent, 'ReactDOMComponent', {
 assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mixin);
 
 module.exports = ReactDOMComponent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./AutoFocusUtils":460,"./CSSPropertyOperations":463,"./DOMProperty":468,"./DOMPropertyOperations":469,"./EventConstants":473,"./Object.assign":481,"./ReactBrowserEventEmitter":485,"./ReactComponentBrowserEnvironment":490,"./ReactDOMButton":495,"./ReactDOMInput":500,"./ReactDOMOption":501,"./ReactDOMSelect":502,"./ReactDOMTextarea":506,"./ReactMount":524,"./ReactMultiChild":525,"./ReactPerf":530,"./ReactUpdateQueue":541,"./canDefineProperty":563,"./escapeTextContentForBrowser":566,"./isEventSupported":578,"./setInnerHTML":583,"./setTextContent":584,"./validateDOMNesting":587,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/keyOf":607,"fbjs/lib/shallowEqual":612,"fbjs/lib/warning":614}],497:[function(require,module,exports){
 (function (process){
-=======
-},{"./AutoFocusUtils":453,"./CSSPropertyOperations":456,"./DOMProperty":461,"./DOMPropertyOperations":462,"./EventConstants":466,"./Object.assign":474,"./ReactBrowserEventEmitter":478,"./ReactComponentBrowserEnvironment":483,"./ReactDOMButton":488,"./ReactDOMInput":493,"./ReactDOMOption":494,"./ReactDOMSelect":495,"./ReactDOMTextarea":499,"./ReactMount":517,"./ReactMultiChild":518,"./ReactPerf":523,"./ReactUpdateQueue":534,"./escapeTextContentForBrowser":558,"./isEventSupported":570,"./setInnerHTML":575,"./setTextContent":576,"./validateDOMNesting":579,"fbjs/lib/invariant":595,"fbjs/lib/keyOf":599,"fbjs/lib/shallowEqual":604,"fbjs/lib/warning":606}],490:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./AutoFocusUtils":454,"./CSSPropertyOperations":457,"./DOMProperty":462,"./DOMPropertyOperations":463,"./EventConstants":467,"./Object.assign":475,"./ReactBrowserEventEmitter":479,"./ReactComponentBrowserEnvironment":484,"./ReactDOMButton":489,"./ReactDOMInput":494,"./ReactDOMOption":495,"./ReactDOMSelect":496,"./ReactDOMTextarea":500,"./ReactMount":518,"./ReactMultiChild":519,"./ReactPerf":524,"./ReactUpdateQueue":535,"./canDefineProperty":557,"./escapeTextContentForBrowser":560,"./isEventSupported":572,"./setInnerHTML":577,"./setTextContent":578,"./validateDOMNesting":581,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/keyOf":601,"fbjs/lib/shallowEqual":606,"fbjs/lib/warning":608}],491:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -96745,19 +94305,9 @@ var ReactDOMFactories = mapObject({
 }, createDOMFactory);
 
 module.exports = ReactDOMFactories;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactElement":511,"./ReactElementValidator":512,"_process":255,"fbjs/lib/mapObject":608}],498:[function(require,module,exports){
-=======
-},{"./ReactElement":504,"./ReactElementValidator":505,"fbjs/lib/mapObject":600}],491:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactElement":505,"./ReactElementValidator":506,"_process":249,"fbjs/lib/mapObject":602}],492:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -96776,17 +94326,8 @@ var ReactDOMFeatureFlags = {
 };
 
 module.exports = ReactDOMFeatureFlags;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],499:[function(require,module,exports){
 (function (process){
-=======
-},{}],492:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],493:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -96881,21 +94422,10 @@ ReactPerf.measureMethods(ReactDOMIDOperations, 'ReactDOMIDOperations', {
 });
 
 module.exports = ReactDOMIDOperations;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./DOMChildrenOperations":467,"./DOMPropertyOperations":469,"./ReactMount":524,"./ReactPerf":530,"_process":255,"fbjs/lib/invariant":603}],500:[function(require,module,exports){
 (function (process){
-=======
-},{"./DOMChildrenOperations":460,"./DOMPropertyOperations":462,"./ReactMount":517,"./ReactPerf":523,"fbjs/lib/invariant":595}],493:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./DOMChildrenOperations":461,"./DOMPropertyOperations":463,"./ReactMount":518,"./ReactPerf":524,"_process":249,"fbjs/lib/invariant":597}],494:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97049,21 +94579,10 @@ function _handleChange(event) {
 }
 
 module.exports = ReactDOMInput;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./LinkedValueUtils":480,"./Object.assign":481,"./ReactDOMIDOperations":499,"./ReactMount":524,"./ReactUpdates":542,"_process":255,"fbjs/lib/invariant":603}],501:[function(require,module,exports){
 (function (process){
-=======
-},{"./LinkedValueUtils":473,"./Object.assign":474,"./ReactDOMIDOperations":492,"./ReactMount":517,"./ReactUpdates":535,"fbjs/lib/invariant":595}],494:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./LinkedValueUtils":474,"./Object.assign":475,"./ReactDOMIDOperations":493,"./ReactMount":518,"./ReactUpdates":536,"_process":249,"fbjs/lib/invariant":597}],495:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97150,21 +94669,10 @@ var ReactDOMOption = {
 };
 
 module.exports = ReactDOMOption;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"./ReactChildren":487,"./ReactDOMSelect":502,"_process":255,"fbjs/lib/warning":614}],502:[function(require,module,exports){
 (function (process){
-=======
-},{"./Object.assign":474,"./ReactChildren":480,"./ReactDOMSelect":495,"fbjs/lib/warning":606}],495:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"./ReactChildren":481,"./ReactDOMSelect":496,"_process":249,"fbjs/lib/warning":608}],496:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97353,19 +94861,9 @@ function _handleChange(event) {
 }
 
 module.exports = ReactDOMSelect;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./LinkedValueUtils":480,"./Object.assign":481,"./ReactMount":524,"./ReactUpdates":542,"_process":255,"fbjs/lib/warning":614}],503:[function(require,module,exports){
-=======
-},{"./LinkedValueUtils":473,"./Object.assign":474,"./ReactMount":517,"./ReactUpdates":535,"fbjs/lib/warning":606}],496:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./LinkedValueUtils":474,"./Object.assign":475,"./ReactMount":518,"./ReactUpdates":536,"_process":249,"fbjs/lib/warning":608}],497:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97578,11 +95076,7 @@ var ReactDOMSelection = {
 };
 
 module.exports = ReactDOMSelection;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./getNodeForCharacterOffset":575,"./getTextContentAccessor":576,"fbjs/lib/ExecutionEnvironment":589}],504:[function(require,module,exports){
-=======
-},{"./getNodeForCharacterOffset":569,"./getTextContentAccessor":570,"fbjs/lib/ExecutionEnvironment":583}],498:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97609,17 +95103,8 @@ var ReactDOMServer = {
 };
 
 module.exports = ReactDOMServer;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./ReactDefaultInjection":508,"./ReactServerRendering":539,"./ReactVersion":543}],505:[function(require,module,exports){
 (function (process){
-=======
-},{"./ReactDefaultInjection":501,"./ReactServerRendering":532,"./ReactVersion":536}],498:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./ReactDefaultInjection":502,"./ReactServerRendering":533,"./ReactVersion":537}],499:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97747,21 +95232,10 @@ assign(ReactDOMTextComponent.prototype, {
 });
 
 module.exports = ReactDOMTextComponent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./DOMChildrenOperations":467,"./DOMPropertyOperations":469,"./Object.assign":481,"./ReactComponentBrowserEnvironment":490,"./ReactMount":524,"./escapeTextContentForBrowser":566,"./setTextContent":584,"./validateDOMNesting":587,"_process":255}],506:[function(require,module,exports){
 (function (process){
-=======
-},{"./DOMChildrenOperations":460,"./DOMPropertyOperations":462,"./Object.assign":474,"./ReactComponentBrowserEnvironment":483,"./ReactMount":517,"./escapeTextContentForBrowser":558,"./setTextContent":576,"./validateDOMNesting":579}],499:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./DOMChildrenOperations":461,"./DOMPropertyOperations":463,"./Object.assign":475,"./ReactComponentBrowserEnvironment":484,"./ReactMount":518,"./escapeTextContentForBrowser":560,"./setTextContent":578,"./validateDOMNesting":581,"_process":249}],500:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97875,19 +95349,9 @@ function _handleChange(event) {
 }
 
 module.exports = ReactDOMTextarea;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./LinkedValueUtils":480,"./Object.assign":481,"./ReactDOMIDOperations":499,"./ReactUpdates":542,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],507:[function(require,module,exports){
-=======
-},{"./LinkedValueUtils":473,"./Object.assign":474,"./ReactDOMIDOperations":492,"./ReactUpdates":535,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],500:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./LinkedValueUtils":474,"./Object.assign":475,"./ReactDOMIDOperations":493,"./ReactUpdates":536,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],501:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -97955,17 +95419,8 @@ var ReactDefaultBatchingStrategy = {
 };
 
 module.exports = ReactDefaultBatchingStrategy;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./Object.assign":481,"./ReactUpdates":542,"./Transaction":559,"fbjs/lib/emptyFunction":595}],508:[function(require,module,exports){
 (function (process){
-=======
-},{"./Object.assign":474,"./ReactUpdates":535,"./Transaction":552,"fbjs/lib/emptyFunction":587}],501:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./Object.assign":475,"./ReactUpdates":536,"./Transaction":553,"fbjs/lib/emptyFunction":589}],502:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -98063,19 +95518,9 @@ function inject() {
 module.exports = {
   inject: inject
 };
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./BeforeInputEventPlugin":461,"./ChangeEventPlugin":465,"./ClientReactRootIndex":466,"./DefaultEventPluginOrder":471,"./EnterLeaveEventPlugin":472,"./HTMLDOMPropertyConfig":479,"./ReactBrowserComponentMixin":484,"./ReactComponentBrowserEnvironment":490,"./ReactDOMComponent":496,"./ReactDOMTextComponent":505,"./ReactDefaultBatchingStrategy":507,"./ReactDefaultPerf":509,"./ReactEventListener":517,"./ReactInjection":518,"./ReactInstanceHandles":520,"./ReactMount":524,"./ReactReconcileTransaction":534,"./SVGDOMPropertyConfig":544,"./SelectEventPlugin":545,"./ServerReactRootIndex":546,"./SimpleEventPlugin":547,"_process":255,"fbjs/lib/ExecutionEnvironment":589}],509:[function(require,module,exports){
-=======
-},{"./BeforeInputEventPlugin":454,"./ChangeEventPlugin":458,"./ClientReactRootIndex":459,"./DefaultEventPluginOrder":464,"./EnterLeaveEventPlugin":465,"./HTMLDOMPropertyConfig":472,"./ReactBrowserComponentMixin":477,"./ReactComponentBrowserEnvironment":483,"./ReactDOMComponent":489,"./ReactDOMTextComponent":498,"./ReactDefaultBatchingStrategy":500,"./ReactDefaultPerf":502,"./ReactEventListener":510,"./ReactInjection":511,"./ReactInstanceHandles":513,"./ReactMount":517,"./ReactReconcileTransaction":527,"./SVGDOMPropertyConfig":537,"./SelectEventPlugin":538,"./ServerReactRootIndex":539,"./SimpleEventPlugin":540,"fbjs/lib/ExecutionEnvironment":581}],502:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./BeforeInputEventPlugin":455,"./ChangeEventPlugin":459,"./ClientReactRootIndex":460,"./DefaultEventPluginOrder":465,"./EnterLeaveEventPlugin":466,"./HTMLDOMPropertyConfig":473,"./ReactBrowserComponentMixin":478,"./ReactComponentBrowserEnvironment":484,"./ReactDOMComponent":490,"./ReactDOMTextComponent":499,"./ReactDefaultBatchingStrategy":501,"./ReactDefaultPerf":503,"./ReactEventListener":511,"./ReactInjection":512,"./ReactInstanceHandles":514,"./ReactMount":518,"./ReactReconcileTransaction":528,"./SVGDOMPropertyConfig":538,"./SelectEventPlugin":539,"./ServerReactRootIndex":540,"./SimpleEventPlugin":541,"_process":249,"fbjs/lib/ExecutionEnvironment":583}],503:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -98313,11 +95758,7 @@ var ReactDefaultPerf = {
 };
 
 module.exports = ReactDefaultPerf;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./DOMProperty":468,"./ReactDefaultPerfAnalysis":510,"./ReactMount":524,"./ReactPerf":530,"fbjs/lib/performanceNow":611}],510:[function(require,module,exports){
-=======
-},{"./DOMProperty":462,"./ReactDefaultPerfAnalysis":504,"./ReactMount":518,"./ReactPerf":524,"fbjs/lib/performanceNow":605}],504:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -98517,17 +95958,8 @@ var ReactDefaultPerfAnalysis = {
 };
 
 module.exports = ReactDefaultPerfAnalysis;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./Object.assign":481}],511:[function(require,module,exports){
 (function (process){
-=======
-},{"./Object.assign":474}],504:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./Object.assign":475}],505:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -98557,22 +95989,6 @@ var RESERVED_PROPS = {
   __source: true
 };
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
-=======
-var canDefineProperty = false;
-if ("production" !== 'production') {
-  try {
-    Object.defineProperty({}, 'x', {});
-    canDefineProperty = true;
-  } catch (x) {
-    // IE will fail on defineProperty
-  }
-}
-
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Base constructor for all React elements. This is only used to make this
  * work with a dynamic instanceof check. Nothing should live on this prototype.
@@ -98791,21 +96207,10 @@ ReactElement.isValidElement = function (object) {
 };
 
 module.exports = ReactElement;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"./ReactCurrentOwner":493,"./canDefineProperty":563,"_process":255}],512:[function(require,module,exports){
 (function (process){
-=======
-},{"./Object.assign":474,"./ReactCurrentOwner":486}],505:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"./ReactCurrentOwner":487,"./canDefineProperty":557,"_process":249}],506:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -99057,18 +96462,8 @@ var ReactElementValidator = {
     // Legacy hook TODO: Warn if this is accessed
     validatedFactory.type = type;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
     if (process.env.NODE_ENV !== 'production') {
       if (canDefineProperty) {
-=======
-    if ("production" !== 'production') {
-      try {
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-    if (process.env.NODE_ENV !== 'production') {
-      if (canDefineProperty) {
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
         Object.defineProperty(validatedFactory, 'type', {
           enumerable: false,
           get: function () {
@@ -99097,19 +96492,9 @@ var ReactElementValidator = {
 };
 
 module.exports = ReactElementValidator;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactCurrentOwner":493,"./ReactElement":511,"./ReactPropTypeLocationNames":531,"./ReactPropTypeLocations":532,"./canDefineProperty":563,"./getIteratorFn":574,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],513:[function(require,module,exports){
-=======
-},{"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactPropTypeLocationNames":524,"./ReactPropTypeLocations":525,"./getIteratorFn":566,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],506:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactPropTypeLocationNames":525,"./ReactPropTypeLocations":526,"./canDefineProperty":557,"./getIteratorFn":568,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],507:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -99161,11 +96546,7 @@ assign(ReactEmptyComponent.prototype, {
 ReactEmptyComponent.injection = ReactEmptyComponentInjection;
 
 module.exports = ReactEmptyComponent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./Object.assign":481,"./ReactElement":511,"./ReactEmptyComponentRegistry":514,"./ReactReconciler":535}],514:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./ReactElement":505,"./ReactEmptyComponentRegistry":508,"./ReactReconciler":529}],508:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -99214,17 +96595,8 @@ var ReactEmptyComponentRegistry = {
 };
 
 module.exports = ReactEmptyComponentRegistry;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],515:[function(require,module,exports){
 (function (process){
-=======
-},{}],508:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],509:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -99291,38 +96663,20 @@ if (process.env.NODE_ENV !== 'production') {
     var fakeNode = document.createElement('react');
     ReactErrorUtils.invokeGuardedCallback = function (name, func, a, b) {
       var boundFunc = func.bind(null, a, b);
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
       var evtType = 'react-' + name;
       fakeNode.addEventListener(evtType, boundFunc, false);
       var evt = document.createEvent('Event');
       evt.initEvent(evtType, false, false);
       fakeNode.dispatchEvent(evt);
       fakeNode.removeEventListener(evtType, boundFunc, false);
-=======
-      fakeNode.addEventListener(name, boundFunc, false);
-      var evt = document.createEvent('Event');
-      evt.initEvent(name, false, false);
-      fakeNode.dispatchEvent(evt);
-      fakeNode.removeEventListener(name, boundFunc, false);
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
     };
   }
 }
 
 module.exports = ReactErrorUtils;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255}],516:[function(require,module,exports){
-=======
-},{}],509:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"_process":249}],510:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -99361,11 +96715,7 @@ var ReactEventEmitterMixin = {
 };
 
 module.exports = ReactEventEmitterMixin;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./EventPluginHub":474}],517:[function(require,module,exports){
-=======
-},{"./EventPluginHub":468}],511:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -99577,11 +96927,7 @@ var ReactEventListener = {
 };
 
 module.exports = ReactEventListener;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./Object.assign":481,"./PooledClass":482,"./ReactInstanceHandles":520,"./ReactMount":524,"./ReactUpdates":542,"./getEventTarget":573,"fbjs/lib/EventListener":588,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/getUnboundedScrollPosition":600}],518:[function(require,module,exports){
-=======
-},{"./Object.assign":475,"./PooledClass":476,"./ReactInstanceHandles":514,"./ReactMount":518,"./ReactUpdates":536,"./getEventTarget":567,"fbjs/lib/EventListener":582,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/getUnboundedScrollPosition":594}],512:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -99620,11 +96966,7 @@ var ReactInjection = {
 };
 
 module.exports = ReactInjection;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./DOMProperty":468,"./EventPluginHub":474,"./ReactBrowserEventEmitter":485,"./ReactClass":488,"./ReactComponentEnvironment":491,"./ReactEmptyComponent":513,"./ReactNativeComponent":527,"./ReactPerf":530,"./ReactRootIndex":537,"./ReactUpdates":542}],519:[function(require,module,exports){
-=======
-},{"./DOMProperty":462,"./EventPluginHub":468,"./ReactBrowserEventEmitter":479,"./ReactClass":482,"./ReactComponentEnvironment":485,"./ReactEmptyComponent":507,"./ReactNativeComponent":521,"./ReactPerf":524,"./ReactRootIndex":531,"./ReactUpdates":536}],513:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -99749,17 +97091,8 @@ var ReactInputSelection = {
 };
 
 module.exports = ReactInputSelection;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./ReactDOMSelection":503,"fbjs/lib/containsNode":592,"fbjs/lib/focusNode":597,"fbjs/lib/getActiveElement":598}],520:[function(require,module,exports){
 (function (process){
-=======
-},{"./ReactDOMSelection":496,"fbjs/lib/containsNode":584,"fbjs/lib/focusNode":589,"fbjs/lib/getActiveElement":590}],513:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./ReactDOMSelection":497,"fbjs/lib/containsNode":586,"fbjs/lib/focusNode":591,"fbjs/lib/getActiveElement":592}],514:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -100062,19 +97395,9 @@ var ReactInstanceHandles = {
 };
 
 module.exports = ReactInstanceHandles;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactRootIndex":537,"_process":255,"fbjs/lib/invariant":603}],521:[function(require,module,exports){
-=======
-},{"./ReactRootIndex":530,"fbjs/lib/invariant":595}],514:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactRootIndex":531,"_process":249,"fbjs/lib/invariant":597}],515:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -100122,17 +97445,8 @@ var ReactInstanceMap = {
 };
 
 module.exports = ReactInstanceMap;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],522:[function(require,module,exports){
 (function (process){
-=======
-},{}],515:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],516:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -100207,19 +97521,9 @@ var React = {
 };
 
 module.exports = React;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"./ReactChildren":487,"./ReactClass":488,"./ReactComponent":489,"./ReactDOMFactories":497,"./ReactElement":511,"./ReactElementValidator":512,"./ReactPropTypes":533,"./ReactVersion":543,"./onlyChild":580,"_process":255}],523:[function(require,module,exports){
-=======
-},{"./Object.assign":474,"./ReactChildren":480,"./ReactClass":481,"./ReactComponent":482,"./ReactDOMFactories":490,"./ReactElement":504,"./ReactElementValidator":505,"./ReactPropTypes":526,"./ReactVersion":536,"./onlyChild":572}],516:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"./ReactChildren":481,"./ReactClass":482,"./ReactComponent":483,"./ReactDOMFactories":491,"./ReactElement":505,"./ReactElementValidator":506,"./ReactPropTypes":527,"./ReactVersion":537,"./onlyChild":574,"_process":249}],517:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -100265,17 +97569,8 @@ var ReactMarkupChecksum = {
 };
 
 module.exports = ReactMarkupChecksum;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./adler32":562}],524:[function(require,module,exports){
 (function (process){
-=======
-},{"./adler32":555}],517:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./adler32":556}],518:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101126,21 +98421,10 @@ ReactPerf.measureMethods(ReactMount, 'ReactMount', {
 });
 
 module.exports = ReactMount;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./DOMProperty":468,"./Object.assign":481,"./ReactBrowserEventEmitter":485,"./ReactCurrentOwner":493,"./ReactDOMFeatureFlags":498,"./ReactElement":511,"./ReactEmptyComponentRegistry":514,"./ReactInstanceHandles":520,"./ReactInstanceMap":521,"./ReactMarkupChecksum":523,"./ReactPerf":530,"./ReactReconciler":535,"./ReactUpdateQueue":541,"./ReactUpdates":542,"./instantiateReactComponent":577,"./setInnerHTML":583,"./shouldUpdateReactComponent":585,"./validateDOMNesting":587,"_process":255,"fbjs/lib/containsNode":592,"fbjs/lib/emptyObject":596,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],525:[function(require,module,exports){
 (function (process){
-=======
-},{"./DOMProperty":461,"./Object.assign":474,"./ReactBrowserEventEmitter":478,"./ReactCurrentOwner":486,"./ReactDOMFeatureFlags":491,"./ReactElement":504,"./ReactEmptyComponentRegistry":507,"./ReactInstanceHandles":513,"./ReactInstanceMap":514,"./ReactMarkupChecksum":516,"./ReactPerf":523,"./ReactReconciler":528,"./ReactUpdateQueue":534,"./ReactUpdates":535,"./instantiateReactComponent":569,"./setInnerHTML":575,"./shouldUpdateReactComponent":577,"./validateDOMNesting":579,"fbjs/lib/containsNode":584,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],518:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./DOMProperty":462,"./Object.assign":475,"./ReactBrowserEventEmitter":479,"./ReactCurrentOwner":487,"./ReactDOMFeatureFlags":492,"./ReactElement":505,"./ReactEmptyComponentRegistry":508,"./ReactInstanceHandles":514,"./ReactInstanceMap":515,"./ReactMarkupChecksum":517,"./ReactPerf":524,"./ReactReconciler":529,"./ReactUpdateQueue":535,"./ReactUpdates":536,"./instantiateReactComponent":571,"./setInnerHTML":577,"./shouldUpdateReactComponent":579,"./validateDOMNesting":581,"_process":249,"fbjs/lib/containsNode":586,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],519:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101637,19 +98921,9 @@ var ReactMultiChild = {
 };
 
 module.exports = ReactMultiChild;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactChildReconciler":486,"./ReactComponentEnvironment":491,"./ReactCurrentOwner":493,"./ReactMultiChildUpdateTypes":526,"./ReactReconciler":535,"./flattenChildren":568,"_process":255}],526:[function(require,module,exports){
-=======
-},{"./ReactChildReconciler":479,"./ReactComponentEnvironment":484,"./ReactCurrentOwner":486,"./ReactMultiChildUpdateTypes":519,"./ReactReconciler":528,"./flattenChildren":560}],519:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactChildReconciler":480,"./ReactComponentEnvironment":485,"./ReactCurrentOwner":487,"./ReactMultiChildUpdateTypes":520,"./ReactReconciler":529,"./flattenChildren":562,"_process":249}],520:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -101682,17 +98956,8 @@ var ReactMultiChildUpdateTypes = keyMirror({
 });
 
 module.exports = ReactMultiChildUpdateTypes;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"fbjs/lib/keyMirror":606}],527:[function(require,module,exports){
 (function (process){
-=======
-},{"fbjs/lib/keyMirror":598}],520:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"fbjs/lib/keyMirror":600}],521:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -101787,21 +99052,10 @@ var ReactNativeComponent = {
 };
 
 module.exports = ReactNativeComponent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"_process":255,"fbjs/lib/invariant":603}],528:[function(require,module,exports){
 (function (process){
-=======
-},{"./Object.assign":474,"fbjs/lib/invariant":595}],521:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"_process":249,"fbjs/lib/invariant":597}],522:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2015, Facebook, Inc.
  * All rights reserved.
@@ -101920,21 +99174,10 @@ var ReactNoopUpdateQueue = {
 };
 
 module.exports = ReactNoopUpdateQueue;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255,"fbjs/lib/warning":614}],529:[function(require,module,exports){
 (function (process){
-=======
-},{"fbjs/lib/warning":606}],522:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"_process":249,"fbjs/lib/warning":608}],523:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102026,21 +99269,10 @@ var ReactOwner = {
 };
 
 module.exports = ReactOwner;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255,"fbjs/lib/invariant":603}],530:[function(require,module,exports){
 (function (process){
-=======
-},{"fbjs/lib/invariant":595}],523:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"_process":249,"fbjs/lib/invariant":597}],524:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102137,21 +99369,10 @@ function _noMeasure(objName, fnName, func) {
 }
 
 module.exports = ReactPerf;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255}],531:[function(require,module,exports){
 (function (process){
-=======
-},{}],524:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"_process":249}],525:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102176,19 +99397,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = ReactPropTypeLocationNames;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255}],532:[function(require,module,exports){
-=======
-},{}],525:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"_process":249}],526:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102211,11 +99422,7 @@ var ReactPropTypeLocations = keyMirror({
 });
 
 module.exports = ReactPropTypeLocations;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"fbjs/lib/keyMirror":606}],533:[function(require,module,exports){
-=======
-},{"fbjs/lib/keyMirror":600}],527:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102572,11 +99779,7 @@ function getClassName(propValue) {
 }
 
 module.exports = ReactPropTypes;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./ReactElement":511,"./ReactPropTypeLocationNames":531,"./getIteratorFn":574,"fbjs/lib/emptyFunction":595}],534:[function(require,module,exports){
-=======
-},{"./ReactElement":505,"./ReactPropTypeLocationNames":525,"./getIteratorFn":568,"fbjs/lib/emptyFunction":589}],528:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102728,11 +99931,7 @@ assign(ReactReconcileTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./CallbackQueue":464,"./Object.assign":481,"./PooledClass":482,"./ReactBrowserEventEmitter":485,"./ReactDOMFeatureFlags":498,"./ReactInputSelection":519,"./Transaction":559}],535:[function(require,module,exports){
-=======
-},{"./CallbackQueue":458,"./Object.assign":475,"./PooledClass":476,"./ReactBrowserEventEmitter":479,"./ReactDOMFeatureFlags":492,"./ReactInputSelection":513,"./Transaction":553}],529:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102840,11 +100039,7 @@ var ReactReconciler = {
 };
 
 module.exports = ReactReconciler;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./ReactRef":536}],536:[function(require,module,exports){
-=======
-},{"./ReactRef":530}],530:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102923,11 +100118,7 @@ ReactRef.detachRefs = function (instance, element) {
 };
 
 module.exports = ReactRef;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./ReactOwner":529}],537:[function(require,module,exports){
-=======
-},{"./ReactOwner":523}],531:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -102957,11 +100148,7 @@ var ReactRootIndex = {
 };
 
 module.exports = ReactRootIndex;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],538:[function(require,module,exports){
-=======
-},{}],532:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -102985,17 +100172,8 @@ var ReactServerBatchingStrategy = {
 };
 
 module.exports = ReactServerBatchingStrategy;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],539:[function(require,module,exports){
 (function (process){
-=======
-},{}],532:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],533:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103079,19 +100257,9 @@ module.exports = {
   renderToString: renderToString,
   renderToStaticMarkup: renderToStaticMarkup
 };
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactDefaultBatchingStrategy":507,"./ReactElement":511,"./ReactInstanceHandles":520,"./ReactMarkupChecksum":523,"./ReactServerBatchingStrategy":538,"./ReactServerRenderingTransaction":540,"./ReactUpdates":542,"./instantiateReactComponent":577,"_process":255,"fbjs/lib/emptyObject":596,"fbjs/lib/invariant":603}],540:[function(require,module,exports){
-=======
-},{"./ReactDefaultBatchingStrategy":500,"./ReactElement":504,"./ReactInstanceHandles":513,"./ReactMarkupChecksum":516,"./ReactServerBatchingStrategy":531,"./ReactServerRenderingTransaction":533,"./ReactUpdates":535,"./instantiateReactComponent":569,"fbjs/lib/emptyObject":588,"fbjs/lib/invariant":595}],533:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactDefaultBatchingStrategy":501,"./ReactElement":505,"./ReactInstanceHandles":514,"./ReactMarkupChecksum":517,"./ReactServerBatchingStrategy":532,"./ReactServerRenderingTransaction":534,"./ReactUpdates":536,"./instantiateReactComponent":571,"_process":249,"fbjs/lib/emptyObject":590,"fbjs/lib/invariant":597}],534:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -103179,17 +100347,8 @@ assign(ReactServerRenderingTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./CallbackQueue":464,"./Object.assign":481,"./PooledClass":482,"./Transaction":559,"fbjs/lib/emptyFunction":595}],541:[function(require,module,exports){
 (function (process){
-=======
-},{"./CallbackQueue":457,"./Object.assign":474,"./PooledClass":475,"./Transaction":552,"fbjs/lib/emptyFunction":587}],534:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./CallbackQueue":458,"./Object.assign":475,"./PooledClass":476,"./Transaction":553,"fbjs/lib/emptyFunction":589}],535:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2015, Facebook, Inc.
  * All rights reserved.
@@ -103447,21 +100606,10 @@ var ReactUpdateQueue = {
 };
 
 module.exports = ReactUpdateQueue;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"./ReactCurrentOwner":493,"./ReactElement":511,"./ReactInstanceMap":521,"./ReactUpdates":542,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],542:[function(require,module,exports){
 (function (process){
-=======
-},{"./Object.assign":474,"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactInstanceMap":514,"./ReactUpdates":535,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],535:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactInstanceMap":515,"./ReactUpdates":536,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],536:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103685,19 +100833,9 @@ var ReactUpdates = {
 };
 
 module.exports = ReactUpdates;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./CallbackQueue":464,"./Object.assign":481,"./PooledClass":482,"./ReactPerf":530,"./ReactReconciler":535,"./Transaction":559,"_process":255,"fbjs/lib/invariant":603}],543:[function(require,module,exports){
-=======
-},{"./CallbackQueue":457,"./Object.assign":474,"./PooledClass":475,"./ReactPerf":523,"./ReactReconciler":528,"./Transaction":552,"fbjs/lib/invariant":595}],536:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./CallbackQueue":458,"./Object.assign":475,"./PooledClass":476,"./ReactPerf":524,"./ReactReconciler":529,"./Transaction":553,"_process":249,"fbjs/lib/invariant":597}],537:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103711,13 +100849,8 @@ module.exports = ReactUpdates;
 
 'use strict';
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 module.exports = '0.14.2';
 },{}],544:[function(require,module,exports){
-=======
-module.exports = '0.14.1';
-},{}],538:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -103845,11 +100978,7 @@ var SVGDOMPropertyConfig = {
 };
 
 module.exports = SVGDOMPropertyConfig;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./DOMProperty":468}],545:[function(require,module,exports){
-=======
-},{"./DOMProperty":462}],539:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104051,11 +101180,7 @@ var SelectEventPlugin = {
 };
 
 module.exports = SelectEventPlugin;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./EventConstants":473,"./EventPropagators":477,"./ReactInputSelection":519,"./SyntheticEvent":551,"./isTextInputElement":579,"fbjs/lib/ExecutionEnvironment":589,"fbjs/lib/getActiveElement":598,"fbjs/lib/keyOf":607,"fbjs/lib/shallowEqual":612}],546:[function(require,module,exports){
-=======
-},{"./EventConstants":467,"./EventPropagators":471,"./ReactInputSelection":513,"./SyntheticEvent":545,"./isTextInputElement":573,"fbjs/lib/ExecutionEnvironment":583,"fbjs/lib/getActiveElement":592,"fbjs/lib/keyOf":601,"fbjs/lib/shallowEqual":606}],540:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104085,17 +101210,8 @@ var ServerReactRootIndex = {
 };
 
 module.exports = ServerReactRootIndex;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],547:[function(require,module,exports){
 (function (process){
-=======
-},{}],540:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],541:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104683,19 +101799,9 @@ var SimpleEventPlugin = {
 };
 
 module.exports = SimpleEventPlugin;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./EventConstants":473,"./EventPropagators":477,"./ReactMount":524,"./SyntheticClipboardEvent":548,"./SyntheticDragEvent":550,"./SyntheticEvent":551,"./SyntheticFocusEvent":552,"./SyntheticKeyboardEvent":554,"./SyntheticMouseEvent":555,"./SyntheticTouchEvent":556,"./SyntheticUIEvent":557,"./SyntheticWheelEvent":558,"./getEventCharCode":570,"_process":255,"fbjs/lib/EventListener":588,"fbjs/lib/emptyFunction":595,"fbjs/lib/invariant":603,"fbjs/lib/keyOf":607}],548:[function(require,module,exports){
-=======
-},{"./EventConstants":466,"./EventPropagators":470,"./ReactMount":517,"./SyntheticClipboardEvent":541,"./SyntheticDragEvent":543,"./SyntheticEvent":544,"./SyntheticFocusEvent":545,"./SyntheticKeyboardEvent":547,"./SyntheticMouseEvent":548,"./SyntheticTouchEvent":549,"./SyntheticUIEvent":550,"./SyntheticWheelEvent":551,"./getEventCharCode":562,"fbjs/lib/EventListener":580,"fbjs/lib/emptyFunction":587,"fbjs/lib/invariant":595,"fbjs/lib/keyOf":599}],541:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./EventConstants":467,"./EventPropagators":471,"./ReactMount":518,"./SyntheticClipboardEvent":542,"./SyntheticDragEvent":544,"./SyntheticEvent":545,"./SyntheticFocusEvent":546,"./SyntheticKeyboardEvent":548,"./SyntheticMouseEvent":549,"./SyntheticTouchEvent":550,"./SyntheticUIEvent":551,"./SyntheticWheelEvent":552,"./getEventCharCode":564,"_process":249,"fbjs/lib/EventListener":582,"fbjs/lib/emptyFunction":589,"fbjs/lib/invariant":597,"fbjs/lib/keyOf":601}],542:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104735,11 +101841,7 @@ function SyntheticClipboardEvent(dispatchConfig, dispatchMarker, nativeEvent, na
 SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 module.exports = SyntheticClipboardEvent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./SyntheticEvent":551}],549:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":545}],543:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104777,11 +101879,7 @@ function SyntheticCompositionEvent(dispatchConfig, dispatchMarker, nativeEvent, 
 SyntheticEvent.augmentClass(SyntheticCompositionEvent, CompositionEventInterface);
 
 module.exports = SyntheticCompositionEvent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./SyntheticEvent":551}],550:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":545}],544:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -104819,17 +101917,8 @@ function SyntheticDragEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeE
 SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./SyntheticMouseEvent":555}],551:[function(require,module,exports){
 (function (process){
-=======
-},{"./SyntheticMouseEvent":548}],544:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./SyntheticMouseEvent":549}],545:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105007,19 +102096,9 @@ SyntheticEvent.augmentClass = function (Class, Interface) {
 PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
 
 module.exports = SyntheticEvent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"./PooledClass":482,"_process":255,"fbjs/lib/emptyFunction":595,"fbjs/lib/warning":614}],552:[function(require,module,exports){
-=======
-},{"./Object.assign":474,"./PooledClass":475,"fbjs/lib/emptyFunction":587,"fbjs/lib/warning":606}],545:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"./PooledClass":476,"_process":249,"fbjs/lib/emptyFunction":589,"fbjs/lib/warning":608}],546:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105057,11 +102136,7 @@ function SyntheticFocusEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./SyntheticUIEvent":557}],553:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":551}],547:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105100,11 +102175,7 @@ function SyntheticInputEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticEvent.augmentClass(SyntheticInputEvent, InputEventInterface);
 
 module.exports = SyntheticInputEvent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./SyntheticEvent":551}],554:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":545}],548:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105190,11 +102261,7 @@ function SyntheticKeyboardEvent(dispatchConfig, dispatchMarker, nativeEvent, nat
 SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./SyntheticUIEvent":557,"./getEventCharCode":570,"./getEventKey":571,"./getEventModifierState":572}],555:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":551,"./getEventCharCode":564,"./getEventKey":565,"./getEventModifierState":566}],549:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105268,11 +102335,7 @@ function SyntheticMouseEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./SyntheticUIEvent":557,"./ViewportMetrics":560,"./getEventModifierState":572}],556:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":551,"./ViewportMetrics":554,"./getEventModifierState":566}],550:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105319,11 +102382,7 @@ function SyntheticTouchEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./SyntheticUIEvent":557,"./getEventModifierState":572}],557:[function(require,module,exports){
-=======
-},{"./SyntheticUIEvent":551,"./getEventModifierState":566}],551:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105384,11 +102443,7 @@ function SyntheticUIEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEve
 SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./SyntheticEvent":551,"./getEventTarget":573}],558:[function(require,module,exports){
-=======
-},{"./SyntheticEvent":545,"./getEventTarget":567}],552:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105444,17 +102499,8 @@ function SyntheticWheelEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./SyntheticMouseEvent":555}],559:[function(require,module,exports){
 (function (process){
-=======
-},{"./SyntheticMouseEvent":548}],552:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./SyntheticMouseEvent":549}],553:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105686,19 +102732,9 @@ var Transaction = {
 };
 
 module.exports = Transaction;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255,"fbjs/lib/invariant":603}],560:[function(require,module,exports){
-=======
-},{"fbjs/lib/invariant":595}],553:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"_process":249,"fbjs/lib/invariant":597}],554:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105726,17 +102762,8 @@ var ViewportMetrics = {
 };
 
 module.exports = ViewportMetrics;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],561:[function(require,module,exports){
 (function (process){
-=======
-},{}],554:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],555:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -105796,19 +102823,9 @@ function accumulateInto(current, next) {
 }
 
 module.exports = accumulateInto;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"_process":255,"fbjs/lib/invariant":603}],562:[function(require,module,exports){
-=======
-},{"fbjs/lib/invariant":595}],555:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"_process":249,"fbjs/lib/invariant":597}],556:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105851,11 +102868,7 @@ function adler32(data) {
 }
 
 module.exports = adler32;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],563:[function(require,module,exports){
-=======
-},{}],557:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -105873,11 +102886,7 @@ module.exports = adler32;
 var canDefineProperty = false;
 if (process.env.NODE_ENV !== 'production') {
   try {
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
     Object.defineProperty({}, 'x', { get: function () {} });
-=======
-    Object.defineProperty({}, 'x', {});
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
     canDefineProperty = true;
   } catch (x) {
     // IE will fail on defineProperty
@@ -105887,11 +102896,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = canDefineProperty;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255}],564:[function(require,module,exports){
-=======
-},{"_process":249}],558:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -105947,17 +102952,8 @@ function dangerousStyleValue(name, value) {
 }
 
 module.exports = dangerousStyleValue;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./CSSProperty":462}],565:[function(require,module,exports){
 (function (process){
-=======
-},{"./CSSProperty":455}],557:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./CSSProperty":456}],559:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106006,19 +103002,9 @@ function deprecated(fnName, newModule, newPackage, ctx, fn) {
 }
 
 module.exports = deprecated;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"_process":255,"fbjs/lib/warning":614}],566:[function(require,module,exports){
-=======
-},{"./Object.assign":474,"fbjs/lib/warning":606}],558:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"_process":249,"fbjs/lib/warning":608}],560:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106057,17 +103043,8 @@ function escapeTextContentForBrowser(text) {
 }
 
 module.exports = escapeTextContentForBrowser;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],567:[function(require,module,exports){
 (function (process){
-=======
-},{}],559:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],561:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106117,21 +103094,10 @@ function findDOMNode(componentOrElement) {
 }
 
 module.exports = findDOMNode;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactCurrentOwner":493,"./ReactInstanceMap":521,"./ReactMount":524,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],568:[function(require,module,exports){
 (function (process){
-=======
-},{"./ReactCurrentOwner":486,"./ReactInstanceMap":514,"./ReactMount":517,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],560:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactCurrentOwner":487,"./ReactInstanceMap":515,"./ReactMount":518,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],562:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106180,19 +103146,9 @@ function flattenChildren(children) {
 }
 
 module.exports = flattenChildren;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./traverseAllChildren":586,"_process":255,"fbjs/lib/warning":614}],569:[function(require,module,exports){
-=======
-},{"./traverseAllChildren":578,"fbjs/lib/warning":606}],561:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./traverseAllChildren":580,"_process":249,"fbjs/lib/warning":608}],563:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106222,11 +103178,7 @@ var forEachAccumulated = function (arr, cb, scope) {
 };
 
 module.exports = forEachAccumulated;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],570:[function(require,module,exports){
-=======
-},{}],564:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106277,11 +103229,7 @@ function getEventCharCode(nativeEvent) {
 }
 
 module.exports = getEventCharCode;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],571:[function(require,module,exports){
-=======
-},{}],565:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106385,11 +103333,7 @@ function getEventKey(nativeEvent) {
 }
 
 module.exports = getEventKey;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./getEventCharCode":570}],572:[function(require,module,exports){
-=======
-},{"./getEventCharCode":564}],566:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106434,11 +103378,7 @@ function getEventModifierState(nativeEvent) {
 }
 
 module.exports = getEventModifierState;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],573:[function(require,module,exports){
-=======
-},{}],567:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106468,11 +103408,7 @@ function getEventTarget(nativeEvent) {
 }
 
 module.exports = getEventTarget;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],574:[function(require,module,exports){
-=======
-},{}],568:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106513,11 +103449,7 @@ function getIteratorFn(maybeIterable) {
 }
 
 module.exports = getIteratorFn;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],575:[function(require,module,exports){
-=======
-},{}],569:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106591,11 +103523,7 @@ function getNodeForCharacterOffset(root, offset) {
 }
 
 module.exports = getNodeForCharacterOffset;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],576:[function(require,module,exports){
-=======
-},{}],570:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106629,17 +103557,8 @@ function getTextContentAccessor() {
 }
 
 module.exports = getTextContentAccessor;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"fbjs/lib/ExecutionEnvironment":589}],577:[function(require,module,exports){
 (function (process){
-=======
-},{"fbjs/lib/ExecutionEnvironment":581}],569:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"fbjs/lib/ExecutionEnvironment":583}],571:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106719,27 +103638,11 @@ function instantiateReactComponent(node) {
   } else if (typeof node === 'string' || typeof node === 'number') {
     instance = ReactNativeComponent.createInstanceForText(node);
   } else {
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
     !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Encountered invalid React node of type %s', typeof node) : invariant(false) : undefined;
   }
 
   if (process.env.NODE_ENV !== 'production') {
     process.env.NODE_ENV !== 'production' ? warning(typeof instance.construct === 'function' && typeof instance.mountComponent === 'function' && typeof instance.receiveComponent === 'function' && typeof instance.unmountComponent === 'function', 'Only React Components can be mounted.') : undefined;
-=======
-    !false ? "production" !== 'production' ? invariant(false, 'Encountered invalid React node of type %s', typeof node) : invariant(false) : undefined;
-  }
-
-  if ("production" !== 'production') {
-    "production" !== 'production' ? warning(typeof instance.construct === 'function' && typeof instance.mountComponent === 'function' && typeof instance.receiveComponent === 'function' && typeof instance.unmountComponent === 'function', 'Only React Components can be mounted.') : undefined;
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-    !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Encountered invalid React node of type %s', typeof node) : invariant(false) : undefined;
-  }
-
-  if (process.env.NODE_ENV !== 'production') {
-    process.env.NODE_ENV !== 'production' ? warning(typeof instance.construct === 'function' && typeof instance.mountComponent === 'function' && typeof instance.receiveComponent === 'function' && typeof instance.unmountComponent === 'function', 'Only React Components can be mounted.') : undefined;
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
   }
 
   // Sets up the instance. This can probably just move into the constructor now.
@@ -106751,30 +103654,14 @@ function instantiateReactComponent(node) {
   instance._mountIndex = 0;
   instance._mountImage = null;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
   if (process.env.NODE_ENV !== 'production') {
-=======
-  if ("production" !== 'production') {
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-  if (process.env.NODE_ENV !== 'production') {
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
     instance._isOwnerNecessary = false;
     instance._warnedAboutRefsInRender = false;
   }
 
   // Internal instances should fully constructed at this point, so they should
   // not get any new fields added to them at this point.
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
   if (process.env.NODE_ENV !== 'production') {
-=======
-  if ("production" !== 'production') {
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-  if (process.env.NODE_ENV !== 'production') {
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
     if (Object.preventExtensions) {
       Object.preventExtensions(instance);
     }
@@ -106784,19 +103671,9 @@ function instantiateReactComponent(node) {
 }
 
 module.exports = instantiateReactComponent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"./ReactCompositeComponent":492,"./ReactEmptyComponent":513,"./ReactNativeComponent":527,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],578:[function(require,module,exports){
-=======
-},{"./Object.assign":474,"./ReactCompositeComponent":485,"./ReactEmptyComponent":506,"./ReactNativeComponent":520,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],570:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"./ReactCompositeComponent":486,"./ReactEmptyComponent":507,"./ReactNativeComponent":521,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],572:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106857,15 +103734,7 @@ function isEventSupported(eventNameSuffix, capture) {
 }
 
 module.exports = isEventSupported;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"fbjs/lib/ExecutionEnvironment":589}],579:[function(require,module,exports){
-=======
-},{"fbjs/lib/ExecutionEnvironment":581}],571:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"fbjs/lib/ExecutionEnvironment":583}],573:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106906,17 +103775,8 @@ function isTextInputElement(elem) {
 }
 
 module.exports = isTextInputElement;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],580:[function(require,module,exports){
 (function (process){
-=======
-},{}],572:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],574:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106945,32 +103805,14 @@ var invariant = require('fbjs/lib/invariant');
  * structure.
  */
 function onlyChild(children) {
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
   !ReactElement.isValidElement(children) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'onlyChild must be passed a children with exactly one child.') : invariant(false) : undefined;
-=======
-  !ReactElement.isValidElement(children) ? "production" !== 'production' ? invariant(false, 'onlyChild must be passed a children with exactly one child.') : invariant(false) : undefined;
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-  !ReactElement.isValidElement(children) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'onlyChild must be passed a children with exactly one child.') : invariant(false) : undefined;
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
   return children;
 }
 
 module.exports = onlyChild;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactElement":511,"_process":255,"fbjs/lib/invariant":603}],581:[function(require,module,exports){
-=======
-},{"./ReactElement":504,"fbjs/lib/invariant":595}],573:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactElement":505,"_process":249,"fbjs/lib/invariant":597}],575:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -106997,15 +103839,7 @@ function quoteAttributeValueForBrowser(value) {
 }
 
 module.exports = quoteAttributeValueForBrowser;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./escapeTextContentForBrowser":566}],582:[function(require,module,exports){
-=======
-},{"./escapeTextContentForBrowser":558}],574:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./escapeTextContentForBrowser":560}],576:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107022,15 +103856,7 @@ module.exports = quoteAttributeValueForBrowser;
 var ReactMount = require('./ReactMount');
 
 module.exports = ReactMount.renderSubtreeIntoContainer;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./ReactMount":524}],583:[function(require,module,exports){
-=======
-},{"./ReactMount":517}],575:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./ReactMount":518}],577:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107121,15 +103947,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setInnerHTML;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"fbjs/lib/ExecutionEnvironment":589}],584:[function(require,module,exports){
-=======
-},{"fbjs/lib/ExecutionEnvironment":581}],576:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"fbjs/lib/ExecutionEnvironment":583}],578:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107170,15 +103988,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setTextContent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./escapeTextContentForBrowser":566,"./setInnerHTML":583,"fbjs/lib/ExecutionEnvironment":589}],585:[function(require,module,exports){
-=======
-},{"./escapeTextContentForBrowser":558,"./setInnerHTML":575,"fbjs/lib/ExecutionEnvironment":581}],577:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./escapeTextContentForBrowser":560,"./setInnerHTML":577,"fbjs/lib/ExecutionEnvironment":583}],579:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107222,17 +104032,8 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 }
 
 module.exports = shouldUpdateReactComponent;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],586:[function(require,module,exports){
 (function (process){
-=======
-},{}],578:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],580:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107361,18 +104162,8 @@ function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext)
           subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);
         }
       } else {
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
         if (process.env.NODE_ENV !== 'production') {
           process.env.NODE_ENV !== 'production' ? warning(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.') : undefined;
-=======
-        if ("production" !== 'production') {
-          "production" !== 'production' ? warning(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.') : undefined;
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.') : undefined;
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
           didWarnAboutMaps = true;
         }
         // Iterator will provide entry [k,v] tuples rather than values.
@@ -107387,15 +104178,7 @@ function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext)
       }
     } else if (type === 'object') {
       var addendum = '';
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
       if (process.env.NODE_ENV !== 'production') {
-=======
-      if ("production" !== 'production') {
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-      if (process.env.NODE_ENV !== 'production') {
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
         addendum = ' If you meant to render a collection of children, use an array ' + 'instead or wrap the object using createFragment(object) from the ' + 'React add-ons.';
         if (children._isReactElement) {
           addendum = ' It looks like you\'re using an element created by a different ' + 'version of React. Make sure to use only one copy of React.';
@@ -107408,15 +104191,7 @@ function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext)
         }
       }
       var childrenString = String(children);
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
       !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Objects are not valid as a React child (found: %s).%s', childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString, addendum) : invariant(false) : undefined;
-=======
-      !false ? "production" !== 'production' ? invariant(false, 'Objects are not valid as a React child (found: %s).%s', childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString, addendum) : invariant(false) : undefined;
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-      !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Objects are not valid as a React child (found: %s).%s', childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString, addendum) : invariant(false) : undefined;
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
     }
   }
 
@@ -107448,21 +104223,10 @@ function traverseAllChildren(children, callback, traverseContext) {
 }
 
 module.exports = traverseAllChildren;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ReactCurrentOwner":493,"./ReactElement":511,"./ReactInstanceHandles":520,"./getIteratorFn":574,"_process":255,"fbjs/lib/invariant":603,"fbjs/lib/warning":614}],587:[function(require,module,exports){
 (function (process){
-=======
-},{"./ReactCurrentOwner":486,"./ReactElement":504,"./ReactInstanceHandles":513,"./getIteratorFn":566,"fbjs/lib/invariant":595,"fbjs/lib/warning":606}],579:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./ReactCurrentOwner":487,"./ReactElement":505,"./ReactInstanceHandles":514,"./getIteratorFn":568,"_process":249,"fbjs/lib/invariant":597,"fbjs/lib/warning":608}],581:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2015, Facebook, Inc.
  * All rights reserved.
@@ -107482,15 +104246,7 @@ var warning = require('fbjs/lib/warning');
 
 var validateDOMNesting = emptyFunction;
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 if (process.env.NODE_ENV !== 'production') {
-=======
-if ("production" !== 'production') {
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-if (process.env.NODE_ENV !== 'production') {
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
   // This validation code was written based on the HTML5 parsing spec:
   // https://html.spec.whatwg.org/multipage/syntax.html#has-an-element-in-scope
   //
@@ -107813,21 +104569,9 @@ if (process.env.NODE_ENV !== 'production') {
         if (ancestorTag === 'table' && childTag === 'tr') {
           info += ' Add a <tbody> to your code to match the DOM tree generated by ' + 'the browser.';
         }
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
         process.env.NODE_ENV !== 'production' ? warning(false, 'validateDOMNesting(...): <%s> cannot appear as a child of <%s>. ' + 'See %s.%s', childTag, ancestorTag, ownerInfo, info) : undefined;
       } else {
         process.env.NODE_ENV !== 'production' ? warning(false, 'validateDOMNesting(...): <%s> cannot appear as a descendant of ' + '<%s>. See %s.', childTag, ancestorTag, ownerInfo) : undefined;
-=======
-        "production" !== 'production' ? warning(false, 'validateDOMNesting(...): <%s> cannot appear as a child of <%s>. ' + 'See %s.%s', childTag, ancestorTag, ownerInfo, info) : undefined;
-      } else {
-        "production" !== 'production' ? warning(false, 'validateDOMNesting(...): <%s> cannot appear as a descendant of ' + '<%s>. See %s.', childTag, ancestorTag, ownerInfo) : undefined;
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-        process.env.NODE_ENV !== 'production' ? warning(false, 'validateDOMNesting(...): <%s> cannot appear as a child of <%s>. ' + 'See %s.%s', childTag, ancestorTag, ownerInfo, info) : undefined;
-      } else {
-        process.env.NODE_ENV !== 'production' ? warning(false, 'validateDOMNesting(...): <%s> cannot appear as a descendant of ' + '<%s>. See %s.', childTag, ancestorTag, ownerInfo) : undefined;
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
       }
     }
   };
@@ -107846,21 +104590,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = validateDOMNesting;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./Object.assign":481,"_process":255,"fbjs/lib/emptyFunction":595,"fbjs/lib/warning":614}],588:[function(require,module,exports){
 (function (process){
-=======
-},{"./Object.assign":474,"fbjs/lib/emptyFunction":587,"fbjs/lib/warning":606}],580:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-}).call(this,require('_process'))
-
-},{"./Object.assign":475,"_process":249,"fbjs/lib/emptyFunction":589,"fbjs/lib/warning":608}],582:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  *
@@ -107932,15 +104665,7 @@ var EventListener = {
         }
       };
     } else {
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
       if (process.env.NODE_ENV !== 'production') {
-=======
-      if ("production" !== 'production') {
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-      if (process.env.NODE_ENV !== 'production') {
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
         console.error('Attempted to listen to events during the capture phase on a ' + 'browser that does not support the capture phase. Your application ' + 'will not receive some events.');
       }
       return {
@@ -107953,14 +104678,9 @@ var EventListener = {
 };
 
 module.exports = EventListener;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./emptyFunction":595,"_process":255}],589:[function(require,module,exports){
-=======
-},{"./emptyFunction":587}],581:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -107997,11 +104717,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],590:[function(require,module,exports){
-=======
-},{}],582:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -108034,11 +104750,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{}],591:[function(require,module,exports){
-=======
-},{}],583:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -108079,11 +104791,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./camelize":590}],592:[function(require,module,exports){
-=======
-},{"./camelize":582}],584:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -108139,11 +104847,7 @@ function containsNode(_x, _x2) {
 }
 
 module.exports = containsNode;
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./isTextNode":605}],593:[function(require,module,exports){
-=======
-},{"./isTextNode":597}],585:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -108229,12 +104933,8 @@ function createArrayFromMixed(obj) {
 }
 
 module.exports = createArrayFromMixed;
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 },{"./toArray":613}],594:[function(require,module,exports){
 (function (process){
-=======
-},{"./toArray":605}],586:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -108290,11 +104990,7 @@ function getNodeName(markup) {
  */
 function createNodesFromMarkup(markup, handleScript) {
   var node = dummyNode;
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
   !!!dummyNode ? process.env.NODE_ENV !== 'production' ? invariant(false, 'createNodesFromMarkup dummy not initialized') : invariant(false) : undefined;
-=======
-  !!!dummyNode ? "production" !== 'production' ? invariant(false, 'createNodesFromMarkup dummy not initialized') : invariant(false) : undefined;
->>>>>>> fixed url rendering bug:frontend/js/index.js
   var nodeName = getNodeName(markup);
 
   var wrap = nodeName && getMarkupWrap(nodeName);
@@ -108311,11 +105007,7 @@ function createNodesFromMarkup(markup, handleScript) {
 
   var scripts = node.getElementsByTagName('script');
   if (scripts.length) {
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
     !handleScript ? process.env.NODE_ENV !== 'production' ? invariant(false, 'createNodesFromMarkup(...): Unexpected <script> element rendered.') : invariant(false) : undefined;
-=======
-    !handleScript ? "production" !== 'production' ? invariant(false, 'createNodesFromMarkup(...): Unexpected <script> element rendered.') : invariant(false) : undefined;
->>>>>>> fixed url rendering bug:frontend/js/index.js
     createArrayFromMixed(scripts).forEach(handleScript);
   }
 
@@ -108327,18 +105019,12 @@ function createNodesFromMarkup(markup, handleScript) {
 }
 
 module.exports = createNodesFromMarkup;
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
 }).call(this,require('_process'))
 
 },{"./ExecutionEnvironment":589,"./createArrayFromMixed":593,"./getMarkupWrap":599,"./invariant":603,"_process":255}],595:[function(require,module,exports){
 arguments[4][314][0].apply(exports,arguments)
 },{"dup":314}],596:[function(require,module,exports){
 (function (process){
-=======
-},{"./ExecutionEnvironment":581,"./createArrayFromMixed":585,"./getMarkupWrap":591,"./invariant":595}],587:[function(require,module,exports){
-arguments[4][262][0].apply(exports,arguments)
-},{"dup":262}],588:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -108351,17 +105037,17 @@ arguments[4][262][0].apply(exports,arguments)
  */
 
 'use strict';
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
-=======
 
 var emptyObject = {};
 
-if ("production" !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   Object.freeze(emptyObject);
 }
 
 module.exports = emptyObject;
-},{}],589:[function(require,module,exports){
+}).call(this,require('_process'))
+
+},{"_process":255}],597:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -108388,7 +105074,7 @@ function focusNode(node) {
 }
 
 module.exports = focusNode;
-},{}],590:[function(require,module,exports){
+},{}],598:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -108422,7 +105108,8 @@ function getActiveElement() /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
-},{}],591:[function(require,module,exports){
+},{}],599:[function(require,module,exports){
+(function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -108502,7 +105189,7 @@ svgElements.forEach(function (nodeName) {
  * @return {?array} Markup wrap configuration, if applicable.
  */
 function getMarkupWrap(nodeName) {
-  !!!dummyNode ? "production" !== 'production' ? invariant(false, 'Markup wrapping node not initialized') : invariant(false) : undefined;
+  !!!dummyNode ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Markup wrapping node not initialized') : invariant(false) : undefined;
   if (!markupWrap.hasOwnProperty(nodeName)) {
     nodeName = '*';
   }
@@ -108518,1000 +105205,9 @@ function getMarkupWrap(nodeName) {
 }
 
 module.exports = getMarkupWrap;
-},{"./ExecutionEnvironment":581,"./invariant":595}],592:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule getUnboundedScrollPosition
- * @typechecks
- */
-
-'use strict';
-
-/**
- * Gets the scroll position of the supplied element or window.
- *
- * The return values are unbounded, unlike `getScrollPosition`. This means they
- * may be negative or exceed the element boundaries (which is possible using
- * inertial scrolling).
- *
- * @param {DOMWindow|DOMElement} scrollable
- * @return {object} Map with `x` and `y` keys.
- */
-function getUnboundedScrollPosition(scrollable) {
-  if (scrollable === window) {
-    return {
-      x: window.pageXOffset || document.documentElement.scrollLeft,
-      y: window.pageYOffset || document.documentElement.scrollTop
-    };
-  }
-  return {
-    x: scrollable.scrollLeft,
-    y: scrollable.scrollTop
-  };
-}
-
-module.exports = getUnboundedScrollPosition;
-},{}],593:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule hyphenate
- * @typechecks
- */
-
-'use strict';
-
-var _uppercasePattern = /([A-Z])/g;
-
-/**
- * Hyphenates a camelcased string, for example:
- *
- *   > hyphenate('backgroundColor')
- *   < "background-color"
- *
- * For CSS style names, use `hyphenateStyleName` instead which works properly
- * with all vendor prefixes, including `ms`.
- *
- * @param {string} string
- * @return {string}
- */
-function hyphenate(string) {
-  return string.replace(_uppercasePattern, '-$1').toLowerCase();
-}
-
-module.exports = hyphenate;
-},{}],594:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule hyphenateStyleName
- * @typechecks
- */
-
-'use strict';
-
-var hyphenate = require('./hyphenate');
-
-var msPattern = /^ms-/;
-
-/**
- * Hyphenates a camelcased CSS property name, for example:
- *
- *   > hyphenateStyleName('backgroundColor')
- *   < "background-color"
- *   > hyphenateStyleName('MozTransition')
- *   < "-moz-transition"
- *   > hyphenateStyleName('msTransition')
- *   < "-ms-transition"
- *
- * As Modernizr suggests (http://modernizr.com/docs/#prefixed), an `ms` prefix
- * is converted to `-ms-`.
- *
- * @param {string} string
- * @return {string}
- */
-function hyphenateStyleName(string) {
-  return hyphenate(string).replace(msPattern, '-ms-');
-}
-
-module.exports = hyphenateStyleName;
-},{"./hyphenate":593}],595:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule invariant
- */
-
-'use strict';
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var invariant = function (condition, format, a, b, c, d, e, f) {
-  if ("production" !== 'production') {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  }
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
-        return args[argIndex++];
-      }));
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-};
-
-module.exports = invariant;
-},{}],596:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule isNode
- * @typechecks
- */
-
-/**
- * @param {*} object The object to check.
- * @return {boolean} Whether or not the object is a DOM node.
- */
-'use strict';
-
-function isNode(object) {
-  return !!(object && (typeof Node === 'function' ? object instanceof Node : typeof object === 'object' && typeof object.nodeType === 'number' && typeof object.nodeName === 'string'));
-}
-
-module.exports = isNode;
-},{}],597:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule isTextNode
- * @typechecks
- */
-
-'use strict';
-
-var isNode = require('./isNode');
-
-/**
- * @param {*} object The object to check.
- * @return {boolean} Whether or not the object is a DOM text node.
- */
-function isTextNode(object) {
-  return isNode(object) && object.nodeType == 3;
-}
-
-module.exports = isTextNode;
-},{"./isNode":596}],598:[function(require,module,exports){
-=======
 }).call(this,require('_process'))
 
-},{"./emptyFunction":589,"_process":249}],583:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule keyMirror
- * @typechecks static-only
- */
-
-'use strict';
-
-var invariant = require('./invariant');
-
-/**
- * Constructs an enumeration with keys equal to their value.
- *
- * For example:
- *
- *   var COLORS = keyMirror({blue: null, red: null});
- *   var myColor = COLORS.blue;
- *   var isColorValid = !!COLORS[myColor];
- *
- * The last line could not be performed if the values of the generated enum were
- * not equal to their keys.
- *
- *   Input:  {key1: val1, key2: val2}
- *   Output: {key1: key1, key2: key2}
- *
- * @param {object} obj
- * @return {object}
- */
-var keyMirror = function (obj) {
-  var ret = {};
-  var key;
-  !(obj instanceof Object && !Array.isArray(obj)) ? "production" !== 'production' ? invariant(false, 'keyMirror(...): Argument must be an object.') : invariant(false) : undefined;
-  for (key in obj) {
-    if (!obj.hasOwnProperty(key)) {
-      continue;
-    }
-    ret[key] = key;
-  }
-  return ret;
-};
-
-module.exports = keyMirror;
-},{"./invariant":595}],599:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule keyOf
- */
-
-/**
- * Allows extraction of a minified key. Let's the build system minify keys
- * without losing the ability to dynamically use key strings as values
- * themselves. Pass in an object with a single key/val pair and it will return
- * you the string key of that single record. Suppose you want to grab the
- * value for a key 'className' inside of an object. Key/val minification may
- * have aliased that key to be 'xa12'. keyOf({className: null}) will return
- * 'xa12' in that case. Resolve keys you want to use once at startup time, then
- * reuse those resolutions.
- */
-"use strict";
-
-var keyOf = function (oneKeyObj) {
-  var key;
-  for (key in oneKeyObj) {
-    if (!oneKeyObj.hasOwnProperty(key)) {
-      continue;
-    }
-    return key;
-  }
-  return null;
-};
-
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-module.exports = keyOf;
-},{}],600:[function(require,module,exports){
-=======
-module.exports = ExecutionEnvironment;
-},{}],584:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule mapObject
- */
-
-'use strict';
-
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-/**
- * Executes the provided `callback` once for each enumerable own property in the
- * object and constructs a new object from the results. The `callback` is
- * invoked with three arguments:
- *
- *  - the property value
- *  - the property name
- *  - the object being traversed
- *
- * Properties that are added after the call to `mapObject` will not be visited
- * by `callback`. If the values of existing properties are changed, the value
- * passed to `callback` will be the value at the time `mapObject` visits them.
- * Properties that are deleted before being visited are not visited.
- *
- * @grep function objectMap()
- * @grep function objMap()
- *
- * @param {?object} object
- * @param {function} callback
- * @param {*} context
- * @return {?object}
- */
-function mapObject(object, callback, context) {
-  if (!object) {
-    return null;
-  }
-  var result = {};
-  for (var name in object) {
-    if (hasOwnProperty.call(object, name)) {
-      result[name] = callback.call(context, object[name], name, object);
-    }
-  }
-  return result;
-}
-
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-module.exports = mapObject;
-},{}],601:[function(require,module,exports){
-=======
-module.exports = camelize;
-},{}],585:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule memoizeStringOnly
- * @typechecks static-only
- */
-
-'use strict';
-
-/**
- * Memoizes the return value of a function that accepts one string argument.
- *
- * @param {function} callback
- * @return {function}
- */
-function memoizeStringOnly(callback) {
-  var cache = {};
-  return function (string) {
-    if (!cache.hasOwnProperty(string)) {
-      cache[string] = callback.call(this, string);
-    }
-    return cache[string];
-  };
-}
-
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-module.exports = memoizeStringOnly;
-},{}],602:[function(require,module,exports){
-=======
-module.exports = camelizeStyleName;
-},{"./camelize":584}],586:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule performance
- * @typechecks
- */
-
-'use strict';
-
-var ExecutionEnvironment = require('./ExecutionEnvironment');
-
-var performance;
-
-if (ExecutionEnvironment.canUseDOM) {
-  performance = window.performance || window.msPerformance || window.webkitPerformance;
-}
-
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-module.exports = performance || {};
-},{"./ExecutionEnvironment":581}],603:[function(require,module,exports){
-=======
-module.exports = containsNode;
-},{"./isTextNode":599}],587:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule performanceNow
- * @typechecks
- */
-
-'use strict';
-
-var performance = require('./performance');
-var curPerformance = performance;
-
-/**
- * Detect if we can use `window.performance.now()` and gracefully fallback to
- * `Date.now()` if it doesn't exist. We need to support Firefox < 15 for now
- * because of Facebook's testing infrastructure.
- */
-if (!curPerformance || !curPerformance.now) {
-  curPerformance = Date;
-}
-
-var performanceNow = curPerformance.now.bind(curPerformance);
-
-module.exports = performanceNow;
-},{"./performance":602}],604:[function(require,module,exports){
-arguments[4][264][0].apply(exports,arguments)
-},{"dup":264}],605:[function(require,module,exports){
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule toArray
- * @typechecks
- */
-
-'use strict';
-
-var invariant = require('./invariant');
-
-/**
- * Convert array-like objects to arrays.
- *
- * This API assumes the caller knows the contents of the data type. For less
- * well defined inputs use createArrayFromMixed.
- *
- * @param {object|function|filelist} obj
- * @return {array}
- */
-function toArray(obj) {
-  var length = obj.length;
-
-  // Some browse builtin objects can report typeof 'function' (e.g. NodeList in
-  // old versions of Safari).
-  !(!Array.isArray(obj) && (typeof obj === 'object' || typeof obj === 'function')) ? "production" !== 'production' ? invariant(false, 'toArray: Array-like object expected') : invariant(false) : undefined;
-
-  !(typeof length === 'number') ? "production" !== 'production' ? invariant(false, 'toArray: Object needs a length property') : invariant(false) : undefined;
-
-  !(length === 0 || length - 1 in obj) ? "production" !== 'production' ? invariant(false, 'toArray: Object should have keys for indices') : invariant(false) : undefined;
-
-  // Old IE doesn't give collections access to hasOwnProperty. Assume inputs
-  // without method will throw during the slice call and skip straight to the
-  // fallback.
-  if (obj.hasOwnProperty) {
-    try {
-      return Array.prototype.slice.call(obj);
-    } catch (e) {
-      // IE < 9 does not support Array#slice on collections objects
-    }
-  }
-
-  // Fall back to copying key by key. This assumes all keys have a value,
-  // so will not preserve sparsely populated inputs.
-  var ret = Array(length);
-  for (var ii = 0; ii < length; ii++) {
-    ret[ii] = obj[ii];
-  }
-  return ret;
-}
-
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-module.exports = toArray;
-},{"./invariant":595}],606:[function(require,module,exports){
-=======
-module.exports = createArrayFromMixed;
-},{"./toArray":607}],588:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule warning
- */
-
-'use strict';
-
-var emptyFunction = require('./emptyFunction');
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var warning = emptyFunction;
-
-if ("production" !== 'production') {
-  warning = function (condition, format) {
-    for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-      args[_key - 2] = arguments[_key];
-    }
-
-    if (format === undefined) {
-      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-    }
-
-    if (format.indexOf('Failed Composite propType: ') === 0) {
-      return; // Ignore CompositeComponent proptype check.
-    }
-
-    if (!condition) {
-      var argIndex = 0;
-      var message = 'Warning: ' + format.replace(/%s/g, function () {
-        return args[argIndex++];
-      });
-      if (typeof console !== 'undefined') {
-        console.error(message);
-      }
-      try {
-        // --- Welcome to debugging React ---
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-      } catch (x) {}
-    }
-  };
-}
-
-module.exports = warning;
-},{"./emptyFunction":587}],607:[function(require,module,exports){
-module.exports = require(764);
-},{"./lib/React":476,"dup":764}],608:[function(require,module,exports){
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
-'use strict';
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-=======
-function createNodesFromMarkup(markup, handleScript) {
-  var node = dummyNode;
-  !!!dummyNode ? process.env.NODE_ENV !== 'production' ? invariant(false, 'createNodesFromMarkup dummy not initialized') : invariant(false) : undefined;
-  var nodeName = getNodeName(markup);
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-
-var warning = function() {};
-
-if ("production" !== 'production') {
-  warning = function(condition, format, args) {
-    var len = arguments.length;
-    args = new Array(len > 2 ? len - 2 : 0);
-    for (var key = 2; key < len; key++) {
-      args[key - 2] = arguments[key];
-    }
-    if (format === undefined) {
-      throw new Error(
-        '`warning(condition, format, ...args)` requires a warning ' +
-        'message argument'
-      );
-    }
-
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
-      throw new Error(
-        'The warning format should be able to uniquely identify this ' +
-        'warning. Please, use a more descriptive format than: ' + format
-      );
-    }
-=======
-  var scripts = node.getElementsByTagName('script');
-  if (scripts.length) {
-    !handleScript ? process.env.NODE_ENV !== 'production' ? invariant(false, 'createNodesFromMarkup(...): Unexpected <script> element rendered.') : invariant(false) : undefined;
-    createArrayFromMixed(scripts).forEach(handleScript);
-  }
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-
-    if (!condition) {
-      var argIndex = 0;
-      var message = 'Warning: ' +
-        format.replace(/%s/g, function() {
-          return args[argIndex++];
-        });
-      if (typeof console !== 'undefined') {
-        console.error(message);
-      }
-      try {
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-      } catch(x) {}
-    }
-  };
-}
-
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-module.exports = warning;
-
-},{}],609:[function(require,module,exports){
-'use strict';
-
-module.exports = require('react/lib/ReactDOM');
-
-},{"react/lib/ReactDOM":644}],610:[function(require,module,exports){
-arguments[4][453][0].apply(exports,arguments)
-},{"./ReactMount":674,"./findDOMNode":716,"dup":453,"fbjs/lib/focusNode":746}],611:[function(require,module,exports){
-arguments[4][454][0].apply(exports,arguments)
-},{"./EventConstants":623,"./EventPropagators":627,"./FallbackCompositionState":628,"./SyntheticCompositionEvent":699,"./SyntheticInputEvent":703,"dup":454,"fbjs/lib/ExecutionEnvironment":738,"fbjs/lib/keyOf":756}],612:[function(require,module,exports){
-arguments[4][455][0].apply(exports,arguments)
-},{"dup":455}],613:[function(require,module,exports){
-arguments[4][456][0].apply(exports,arguments)
-},{"./CSSProperty":612,"./ReactPerf":680,"./dangerousStyleValue":713,"dup":456,"fbjs/lib/ExecutionEnvironment":738,"fbjs/lib/camelizeStyleName":740,"fbjs/lib/hyphenateStyleName":751,"fbjs/lib/memoizeStringOnly":758,"fbjs/lib/warning":763}],614:[function(require,module,exports){
-arguments[4][457][0].apply(exports,arguments)
-},{"./Object.assign":631,"./PooledClass":632,"dup":457,"fbjs/lib/invariant":752}],615:[function(require,module,exports){
-arguments[4][458][0].apply(exports,arguments)
-},{"./EventConstants":623,"./EventPluginHub":624,"./EventPropagators":627,"./ReactUpdates":692,"./SyntheticEvent":701,"./getEventTarget":722,"./isEventSupported":727,"./isTextInputElement":728,"dup":458,"fbjs/lib/ExecutionEnvironment":738,"fbjs/lib/keyOf":756}],616:[function(require,module,exports){
-arguments[4][459][0].apply(exports,arguments)
-},{"dup":459}],617:[function(require,module,exports){
-arguments[4][460][0].apply(exports,arguments)
-},{"./Danger":620,"./ReactMultiChildUpdateTypes":676,"./ReactPerf":680,"./setInnerHTML":732,"./setTextContent":733,"dup":460,"fbjs/lib/invariant":752}],618:[function(require,module,exports){
-arguments[4][461][0].apply(exports,arguments)
-},{"dup":461,"fbjs/lib/invariant":752}],619:[function(require,module,exports){
-arguments[4][462][0].apply(exports,arguments)
-},{"./DOMProperty":618,"./ReactPerf":680,"./quoteAttributeValueForBrowser":730,"dup":462,"fbjs/lib/warning":763}],620:[function(require,module,exports){
-arguments[4][463][0].apply(exports,arguments)
-},{"dup":463,"fbjs/lib/ExecutionEnvironment":738,"fbjs/lib/createNodesFromMarkup":743,"fbjs/lib/emptyFunction":744,"fbjs/lib/getMarkupWrap":748,"fbjs/lib/invariant":752}],621:[function(require,module,exports){
-arguments[4][464][0].apply(exports,arguments)
-},{"dup":464,"fbjs/lib/keyOf":756}],622:[function(require,module,exports){
-arguments[4][465][0].apply(exports,arguments)
-},{"./EventConstants":623,"./EventPropagators":627,"./ReactMount":674,"./SyntheticMouseEvent":705,"dup":465,"fbjs/lib/keyOf":756}],623:[function(require,module,exports){
-arguments[4][466][0].apply(exports,arguments)
-},{"dup":466,"fbjs/lib/keyMirror":755}],624:[function(require,module,exports){
-arguments[4][467][0].apply(exports,arguments)
-},{"./EventPluginRegistry":625,"./EventPluginUtils":626,"./ReactErrorUtils":665,"./accumulateInto":711,"./forEachAccumulated":718,"dup":467,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],625:[function(require,module,exports){
-arguments[4][468][0].apply(exports,arguments)
-},{"dup":468,"fbjs/lib/invariant":752}],626:[function(require,module,exports){
-arguments[4][469][0].apply(exports,arguments)
-},{"./EventConstants":623,"./ReactErrorUtils":665,"dup":469,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],627:[function(require,module,exports){
-arguments[4][470][0].apply(exports,arguments)
-},{"./EventConstants":623,"./EventPluginHub":624,"./accumulateInto":711,"./forEachAccumulated":718,"dup":470,"fbjs/lib/warning":763}],628:[function(require,module,exports){
-arguments[4][471][0].apply(exports,arguments)
-},{"./Object.assign":631,"./PooledClass":632,"./getTextContentAccessor":725,"dup":471}],629:[function(require,module,exports){
-arguments[4][472][0].apply(exports,arguments)
-},{"./DOMProperty":618,"dup":472,"fbjs/lib/ExecutionEnvironment":738}],630:[function(require,module,exports){
-arguments[4][473][0].apply(exports,arguments)
-},{"./ReactPropTypeLocations":682,"./ReactPropTypes":683,"dup":473,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],631:[function(require,module,exports){
-arguments[4][474][0].apply(exports,arguments)
-},{"dup":474}],632:[function(require,module,exports){
-arguments[4][475][0].apply(exports,arguments)
-},{"dup":475,"fbjs/lib/invariant":752}],633:[function(require,module,exports){
-=======
-module.exports = createNodesFromMarkup;
-}).call(this,require('_process'))
-
-},{"./ExecutionEnvironment":583,"./createArrayFromMixed":587,"./getMarkupWrap":593,"./invariant":597,"_process":249}],589:[function(require,module,exports){
-arguments[4][308][0].apply(exports,arguments)
-},{"dup":308}],590:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule React
- */
-
-'use strict';
-
-var ReactDOM = require('./ReactDOM');
-var ReactDOMServer = require('./ReactDOMServer');
-var ReactIsomorphic = require('./ReactIsomorphic');
-
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-var assign = require('./Object.assign');
-var deprecated = require('./deprecated');
-
-// `version` will be added here by ReactIsomorphic.
-var React = {};
-
-assign(React, ReactIsomorphic);
->>>>>>> fixed url rendering bug:frontend/js/index.js
-
-assign(React, {
-  // ReactDOM
-  findDOMNode: deprecated('findDOMNode', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.findDOMNode),
-  render: deprecated('render', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.render),
-  unmountComponentAtNode: deprecated('unmountComponentAtNode', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.unmountComponentAtNode),
-
-  // ReactDOMServer
-  renderToString: deprecated('renderToString', 'ReactDOMServer', 'react-dom/server', ReactDOMServer, ReactDOMServer.renderToString),
-  renderToStaticMarkup: deprecated('renderToStaticMarkup', 'ReactDOMServer', 'react-dom/server', ReactDOMServer, ReactDOMServer.renderToStaticMarkup)
-});
-
-React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
-
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
-},{"_process":255}],597:[function(require,module,exports){
-=======
-if (process.env.NODE_ENV !== 'production') {
-  Object.freeze(emptyObject);
-}
-
-module.exports = emptyObject;
-}).call(this,require('_process'))
-
-},{"_process":249}],591:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule focusNode
- */
-
-'use strict';
-
-/**
- * @param {DOMElement} node input/textarea to focus
- */
-function focusNode(node) {
-  // IE8 can throw "Can't move focus to the control because it is invisible,
-  // not enabled, or of a type that does not accept the focus." for all kinds of
-  // reasons that are too expensive and fragile to test.
-  try {
-    node.focus();
-  } catch (e) {}
-}
-
-module.exports = focusNode;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-},{}],598:[function(require,module,exports){
-=======
-},{}],592:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule getActiveElement
- * @typechecks
- */
-
-/**
- * Same as document.activeElement but wraps in a try-catch block. In IE it is
- * not safe to call document.activeElement if there is nothing focused.
- *
- * The activeElement will be null only if the document or document body is not yet defined.
- */
-'use strict';
-
-function getActiveElement() /*?DOMElement*/{
-  if (typeof document === 'undefined') {
-    return null;
-  }
-
-  try {
-    return document.activeElement || document.body;
-  } catch (e) {
-    return document.body;
-  }
-}
-
-module.exports = getActiveElement;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-},{}],599:[function(require,module,exports){
-(function (process){
-=======
-module.exports = React;
-},{"./Object.assign":631,"./ReactDOM":644,"./ReactDOMServer":654,"./ReactIsomorphic":672,"./deprecated":714}],634:[function(require,module,exports){
-arguments[4][477][0].apply(exports,arguments)
-},{"./ReactInstanceMap":671,"./findDOMNode":716,"dup":477,"fbjs/lib/warning":763}],635:[function(require,module,exports){
-arguments[4][478][0].apply(exports,arguments)
-},{"./EventConstants":623,"./EventPluginHub":624,"./EventPluginRegistry":625,"./Object.assign":631,"./ReactEventEmitterMixin":666,"./ReactPerf":680,"./ViewportMetrics":710,"./isEventSupported":727,"dup":478}],636:[function(require,module,exports){
-arguments[4][479][0].apply(exports,arguments)
-},{"./ReactReconciler":685,"./instantiateReactComponent":726,"./shouldUpdateReactComponent":734,"./traverseAllChildren":735,"dup":479,"fbjs/lib/warning":763}],637:[function(require,module,exports){
-arguments[4][480][0].apply(exports,arguments)
-},{"./PooledClass":632,"./ReactElement":661,"./traverseAllChildren":735,"dup":480,"fbjs/lib/emptyFunction":744}],638:[function(require,module,exports){
-arguments[4][481][0].apply(exports,arguments)
-},{"./Object.assign":631,"./ReactComponent":639,"./ReactElement":661,"./ReactNoopUpdateQueue":678,"./ReactPropTypeLocationNames":681,"./ReactPropTypeLocations":682,"dup":481,"fbjs/lib/emptyObject":745,"fbjs/lib/invariant":752,"fbjs/lib/keyMirror":755,"fbjs/lib/keyOf":756,"fbjs/lib/warning":763}],639:[function(require,module,exports){
-arguments[4][482][0].apply(exports,arguments)
-},{"./ReactNoopUpdateQueue":678,"dup":482,"fbjs/lib/emptyObject":745,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],640:[function(require,module,exports){
-arguments[4][483][0].apply(exports,arguments)
-},{"./ReactDOMIDOperations":649,"./ReactMount":674,"dup":483}],641:[function(require,module,exports){
-arguments[4][484][0].apply(exports,arguments)
-},{"dup":484,"fbjs/lib/invariant":752}],642:[function(require,module,exports){
-arguments[4][485][0].apply(exports,arguments)
-},{"./Object.assign":631,"./ReactComponentEnvironment":641,"./ReactCurrentOwner":643,"./ReactElement":661,"./ReactInstanceMap":671,"./ReactPerf":680,"./ReactPropTypeLocationNames":681,"./ReactPropTypeLocations":682,"./ReactReconciler":685,"./ReactUpdateQueue":691,"./shouldUpdateReactComponent":734,"dup":485,"fbjs/lib/emptyObject":745,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],643:[function(require,module,exports){
-arguments[4][486][0].apply(exports,arguments)
-},{"dup":486}],644:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{}],593:[function(require,module,exports){
-(function (process){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule ReactDOM
- */
-
-/* globals __REACT_DEVTOOLS_GLOBAL_HOOK__*/
-
-'use strict';
-
-var ReactCurrentOwner = require('./ReactCurrentOwner');
-var ReactDOMTextComponent = require('./ReactDOMTextComponent');
-var ReactDefaultInjection = require('./ReactDefaultInjection');
-var ReactInstanceHandles = require('./ReactInstanceHandles');
-var ReactMount = require('./ReactMount');
-var ReactPerf = require('./ReactPerf');
-var ReactReconciler = require('./ReactReconciler');
-var ReactUpdates = require('./ReactUpdates');
-var ReactVersion = require('./ReactVersion');
-
-var findDOMNode = require('./findDOMNode');
-var renderSubtreeIntoContainer = require('./renderSubtreeIntoContainer');
-var warning = require('fbjs/lib/warning');
-
-ReactDefaultInjection.inject();
-
-var render = ReactPerf.measure('React', 'render', ReactMount.render);
-
-var React = {
-  findDOMNode: findDOMNode,
-  render: render,
-  unmountComponentAtNode: ReactMount.unmountComponentAtNode,
-  version: ReactVersion,
-
-  /* eslint-disable camelcase */
-  unstable_batchedUpdates: ReactUpdates.batchedUpdates,
-  unstable_renderSubtreeIntoContainer: renderSubtreeIntoContainer
-};
-
-// Inject the runtime into a devtools global hook regardless of browser.
-// Allows for debugging when the hook is injected on the page.
-/* eslint-enable camelcase */
-if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.inject === 'function') {
-  __REACT_DEVTOOLS_GLOBAL_HOOK__.inject({
-    CurrentOwner: ReactCurrentOwner,
-    InstanceHandles: ReactInstanceHandles,
-    Mount: ReactMount,
-    Reconciler: ReactReconciler,
-    TextComponent: ReactDOMTextComponent
-  });
-}
-
-if ("production" !== 'production') {
-  var ExecutionEnvironment = require('fbjs/lib/ExecutionEnvironment');
-  if (ExecutionEnvironment.canUseDOM && window.top === window.self) {
-
-    // First check if devtools is not installed
-    if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined') {
-      // If we're in Chrome or Firefox, provide a download link if not installed.
-      if (navigator.userAgent.indexOf('Chrome') > -1 && navigator.userAgent.indexOf('Edge') === -1 || navigator.userAgent.indexOf('Firefox') > -1) {
-        console.debug('Download the React DevTools for a better development experience: ' + 'https://fb.me/react-devtools');
-      }
-    }
-
-    // If we're in IE8, check to see if we are in compatibility mode and provide
-    // information on preventing compatibility mode
-    var ieCompatibilityMode = document.documentMode && document.documentMode < 8;
-
-    "production" !== 'production' ? warning(!ieCompatibilityMode, 'Internet Explorer is running in compatibility mode; please add the ' + 'following tag to your HTML to prevent this from happening: ' + '<meta http-equiv="X-UA-Compatible" content="IE=edge" />') : undefined;
-
-    var expectedFeatures = [
-    // shims
-    Array.isArray, Array.prototype.every, Array.prototype.forEach, Array.prototype.indexOf, Array.prototype.map, Date.now, Function.prototype.bind, Object.keys, String.prototype.split, String.prototype.trim,
-
-    // shams
-    Object.create, Object.freeze];
-
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
-    for (var i = 0; i < expectedFeatures.length; i++) {
-      if (!expectedFeatures[i]) {
-        console.error('One or more ES5 shim/shams expected by React are not available: ' + 'https://fb.me/react-warning-polyfills');
-        break;
-      }
-=======
-/**
- * Gets the markup wrap configuration for the supplied `nodeName`.
- *
- * NOTE: This lazily detects which wraps are necessary for the current browser.
- *
- * @param {string} nodeName Lowercase `nodeName`.
- * @return {?array} Markup wrap configuration, if applicable.
- */
-function getMarkupWrap(nodeName) {
-  !!!dummyNode ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Markup wrapping node not initialized') : invariant(false) : undefined;
-  if (!markupWrap.hasOwnProperty(nodeName)) {
-    nodeName = '*';
-  }
-  if (!shouldWrap.hasOwnProperty(nodeName)) {
-    if (nodeName === '*') {
-      dummyNode.innerHTML = '<link />';
-    } else {
-      dummyNode.innerHTML = '<' + nodeName + '></' + nodeName + '>';
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
-    }
-  }
-}
-
-<<<<<<< 18460d090470adf63286e674efe8ac5b3a3b00c0:backend/frontend/js/index.js
-module.exports = getMarkupWrap;
-}).call(this,require('_process'))
-
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./ExecutionEnvironment":589,"./invariant":603,"_process":255}],600:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":583,"./invariant":597,"_process":249}],594:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -109550,11 +105246,7 @@ function getUnboundedScrollPosition(scrollable) {
 }
 
 module.exports = getUnboundedScrollPosition;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],601:[function(require,module,exports){
-=======
-},{}],595:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -109588,11 +105280,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],602:[function(require,module,exports){
-=======
-},{}],596:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -109632,11 +105320,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./hyphenate":601}],603:[function(require,module,exports){
-=======
-},{"./hyphenate":595}],597:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -109689,11 +105373,7 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"_process":255}],604:[function(require,module,exports){
-=======
-},{"_process":249}],598:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -109717,11 +105397,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],605:[function(require,module,exports){
-=======
-},{}],599:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -109747,11 +105423,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./isNode":604}],606:[function(require,module,exports){
-=======
-},{"./isNode":598}],600:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -109803,11 +105475,7 @@ var keyMirror = function (obj) {
 module.exports = keyMirror;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./invariant":603,"_process":255}],607:[function(require,module,exports){
-=======
-},{"./invariant":597,"_process":249}],601:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -109843,11 +105511,7 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],608:[function(require,module,exports){
-=======
-},{}],602:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -109899,11 +105563,7 @@ function mapObject(object, callback, context) {
 }
 
 module.exports = mapObject;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],609:[function(require,module,exports){
-=======
-},{}],603:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -109935,11 +105595,7 @@ function memoizeStringOnly(callback) {
 }
 
 module.exports = memoizeStringOnly;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],610:[function(require,module,exports){
-=======
-},{}],604:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -109963,11 +105619,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = performance || {};
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./ExecutionEnvironment":589}],611:[function(require,module,exports){
-=======
-},{"./ExecutionEnvironment":583}],605:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -109997,15 +105649,9 @@ if (!curPerformance || !curPerformance.now) {
 var performanceNow = curPerformance.now.bind(curPerformance);
 
 module.exports = performanceNow;
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./performance":610}],612:[function(require,module,exports){
 arguments[4][316][0].apply(exports,arguments)
 },{"dup":316}],613:[function(require,module,exports){
-=======
-},{"./performance":604}],606:[function(require,module,exports){
-arguments[4][310][0].apply(exports,arguments)
-},{"dup":310}],607:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -110066,11 +105712,7 @@ function toArray(obj) {
 module.exports = toArray;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./invariant":603,"_process":255}],614:[function(require,module,exports){
-=======
-},{"./invariant":597,"_process":249}],608:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -110131,266 +105773,14 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = warning;
 }).call(this,require('_process'))
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./emptyFunction":595,"_process":255}],615:[function(require,module,exports){
-=======
-module.exports = React;
-},{"./ReactCurrentOwner":643,"./ReactDOMTextComponent":655,"./ReactDefaultInjection":658,"./ReactInstanceHandles":670,"./ReactMount":674,"./ReactPerf":680,"./ReactReconciler":685,"./ReactUpdates":692,"./ReactVersion":693,"./findDOMNode":716,"./renderSubtreeIntoContainer":731,"fbjs/lib/ExecutionEnvironment":738,"fbjs/lib/warning":763}],645:[function(require,module,exports){
-arguments[4][488][0].apply(exports,arguments)
-},{"dup":488}],646:[function(require,module,exports){
-arguments[4][489][0].apply(exports,arguments)
-},{"./AutoFocusUtils":610,"./CSSPropertyOperations":613,"./DOMProperty":618,"./DOMPropertyOperations":619,"./EventConstants":623,"./Object.assign":631,"./ReactBrowserEventEmitter":635,"./ReactComponentBrowserEnvironment":640,"./ReactDOMButton":645,"./ReactDOMInput":650,"./ReactDOMOption":651,"./ReactDOMSelect":652,"./ReactDOMTextarea":656,"./ReactMount":674,"./ReactMultiChild":675,"./ReactPerf":680,"./ReactUpdateQueue":691,"./escapeTextContentForBrowser":715,"./isEventSupported":727,"./setInnerHTML":732,"./setTextContent":733,"./validateDOMNesting":736,"dup":489,"fbjs/lib/invariant":752,"fbjs/lib/keyOf":756,"fbjs/lib/shallowEqual":761,"fbjs/lib/warning":763}],647:[function(require,module,exports){
-arguments[4][490][0].apply(exports,arguments)
-},{"./ReactElement":661,"./ReactElementValidator":662,"dup":490,"fbjs/lib/mapObject":757}],648:[function(require,module,exports){
-arguments[4][491][0].apply(exports,arguments)
-},{"dup":491}],649:[function(require,module,exports){
-arguments[4][492][0].apply(exports,arguments)
-},{"./DOMChildrenOperations":617,"./DOMPropertyOperations":619,"./ReactMount":674,"./ReactPerf":680,"dup":492,"fbjs/lib/invariant":752}],650:[function(require,module,exports){
-arguments[4][493][0].apply(exports,arguments)
-},{"./LinkedValueUtils":630,"./Object.assign":631,"./ReactDOMIDOperations":649,"./ReactMount":674,"./ReactUpdates":692,"dup":493,"fbjs/lib/invariant":752}],651:[function(require,module,exports){
-arguments[4][494][0].apply(exports,arguments)
-},{"./Object.assign":631,"./ReactChildren":637,"./ReactDOMSelect":652,"dup":494,"fbjs/lib/warning":763}],652:[function(require,module,exports){
-arguments[4][495][0].apply(exports,arguments)
-},{"./LinkedValueUtils":630,"./Object.assign":631,"./ReactMount":674,"./ReactUpdates":692,"dup":495,"fbjs/lib/warning":763}],653:[function(require,module,exports){
-arguments[4][496][0].apply(exports,arguments)
-},{"./getNodeForCharacterOffset":724,"./getTextContentAccessor":725,"dup":496,"fbjs/lib/ExecutionEnvironment":738}],654:[function(require,module,exports){
-arguments[4][497][0].apply(exports,arguments)
-},{"./ReactDefaultInjection":658,"./ReactServerRendering":689,"./ReactVersion":693,"dup":497}],655:[function(require,module,exports){
-arguments[4][498][0].apply(exports,arguments)
-},{"./DOMChildrenOperations":617,"./DOMPropertyOperations":619,"./Object.assign":631,"./ReactComponentBrowserEnvironment":640,"./ReactMount":674,"./escapeTextContentForBrowser":715,"./setTextContent":733,"./validateDOMNesting":736,"dup":498}],656:[function(require,module,exports){
-arguments[4][499][0].apply(exports,arguments)
-},{"./LinkedValueUtils":630,"./Object.assign":631,"./ReactDOMIDOperations":649,"./ReactUpdates":692,"dup":499,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],657:[function(require,module,exports){
-arguments[4][500][0].apply(exports,arguments)
-},{"./Object.assign":631,"./ReactUpdates":692,"./Transaction":709,"dup":500,"fbjs/lib/emptyFunction":744}],658:[function(require,module,exports){
-arguments[4][501][0].apply(exports,arguments)
-},{"./BeforeInputEventPlugin":611,"./ChangeEventPlugin":615,"./ClientReactRootIndex":616,"./DefaultEventPluginOrder":621,"./EnterLeaveEventPlugin":622,"./HTMLDOMPropertyConfig":629,"./ReactBrowserComponentMixin":634,"./ReactComponentBrowserEnvironment":640,"./ReactDOMComponent":646,"./ReactDOMTextComponent":655,"./ReactDefaultBatchingStrategy":657,"./ReactDefaultPerf":659,"./ReactEventListener":667,"./ReactInjection":668,"./ReactInstanceHandles":670,"./ReactMount":674,"./ReactReconcileTransaction":684,"./SVGDOMPropertyConfig":694,"./SelectEventPlugin":695,"./ServerReactRootIndex":696,"./SimpleEventPlugin":697,"dup":501,"fbjs/lib/ExecutionEnvironment":738}],659:[function(require,module,exports){
-arguments[4][502][0].apply(exports,arguments)
-},{"./DOMProperty":618,"./ReactDefaultPerfAnalysis":660,"./ReactMount":674,"./ReactPerf":680,"dup":502,"fbjs/lib/performanceNow":760}],660:[function(require,module,exports){
-arguments[4][503][0].apply(exports,arguments)
-},{"./Object.assign":631,"dup":503}],661:[function(require,module,exports){
-arguments[4][504][0].apply(exports,arguments)
-},{"./Object.assign":631,"./ReactCurrentOwner":643,"dup":504}],662:[function(require,module,exports){
-arguments[4][505][0].apply(exports,arguments)
-},{"./ReactCurrentOwner":643,"./ReactElement":661,"./ReactPropTypeLocationNames":681,"./ReactPropTypeLocations":682,"./getIteratorFn":723,"dup":505,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],663:[function(require,module,exports){
-arguments[4][506][0].apply(exports,arguments)
-},{"./Object.assign":631,"./ReactElement":661,"./ReactEmptyComponentRegistry":664,"./ReactReconciler":685,"dup":506}],664:[function(require,module,exports){
-arguments[4][507][0].apply(exports,arguments)
-},{"dup":507}],665:[function(require,module,exports){
-arguments[4][508][0].apply(exports,arguments)
-},{"dup":508}],666:[function(require,module,exports){
-arguments[4][509][0].apply(exports,arguments)
-},{"./EventPluginHub":624,"dup":509}],667:[function(require,module,exports){
-arguments[4][510][0].apply(exports,arguments)
-},{"./Object.assign":631,"./PooledClass":632,"./ReactInstanceHandles":670,"./ReactMount":674,"./ReactUpdates":692,"./getEventTarget":722,"dup":510,"fbjs/lib/EventListener":737,"fbjs/lib/ExecutionEnvironment":738,"fbjs/lib/getUnboundedScrollPosition":749}],668:[function(require,module,exports){
-arguments[4][511][0].apply(exports,arguments)
-},{"./DOMProperty":618,"./EventPluginHub":624,"./ReactBrowserEventEmitter":635,"./ReactClass":638,"./ReactComponentEnvironment":641,"./ReactEmptyComponent":663,"./ReactNativeComponent":677,"./ReactPerf":680,"./ReactRootIndex":687,"./ReactUpdates":692,"dup":511}],669:[function(require,module,exports){
-arguments[4][512][0].apply(exports,arguments)
-},{"./ReactDOMSelection":653,"dup":512,"fbjs/lib/containsNode":741,"fbjs/lib/focusNode":746,"fbjs/lib/getActiveElement":747}],670:[function(require,module,exports){
-arguments[4][513][0].apply(exports,arguments)
-},{"./ReactRootIndex":687,"dup":513,"fbjs/lib/invariant":752}],671:[function(require,module,exports){
-arguments[4][514][0].apply(exports,arguments)
-},{"dup":514}],672:[function(require,module,exports){
-arguments[4][515][0].apply(exports,arguments)
-},{"./Object.assign":631,"./ReactChildren":637,"./ReactClass":638,"./ReactComponent":639,"./ReactDOMFactories":647,"./ReactElement":661,"./ReactElementValidator":662,"./ReactPropTypes":683,"./ReactVersion":693,"./onlyChild":729,"dup":515}],673:[function(require,module,exports){
-arguments[4][516][0].apply(exports,arguments)
-},{"./adler32":712,"dup":516}],674:[function(require,module,exports){
-arguments[4][517][0].apply(exports,arguments)
-},{"./DOMProperty":618,"./Object.assign":631,"./ReactBrowserEventEmitter":635,"./ReactCurrentOwner":643,"./ReactDOMFeatureFlags":648,"./ReactElement":661,"./ReactEmptyComponentRegistry":664,"./ReactInstanceHandles":670,"./ReactInstanceMap":671,"./ReactMarkupChecksum":673,"./ReactPerf":680,"./ReactReconciler":685,"./ReactUpdateQueue":691,"./ReactUpdates":692,"./instantiateReactComponent":726,"./setInnerHTML":732,"./shouldUpdateReactComponent":734,"./validateDOMNesting":736,"dup":517,"fbjs/lib/containsNode":741,"fbjs/lib/emptyObject":745,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],675:[function(require,module,exports){
-arguments[4][518][0].apply(exports,arguments)
-},{"./ReactChildReconciler":636,"./ReactComponentEnvironment":641,"./ReactCurrentOwner":643,"./ReactMultiChildUpdateTypes":676,"./ReactReconciler":685,"./flattenChildren":717,"dup":518}],676:[function(require,module,exports){
-arguments[4][519][0].apply(exports,arguments)
-},{"dup":519,"fbjs/lib/keyMirror":755}],677:[function(require,module,exports){
-arguments[4][520][0].apply(exports,arguments)
-},{"./Object.assign":631,"dup":520,"fbjs/lib/invariant":752}],678:[function(require,module,exports){
-arguments[4][521][0].apply(exports,arguments)
-},{"dup":521,"fbjs/lib/warning":763}],679:[function(require,module,exports){
-arguments[4][522][0].apply(exports,arguments)
-},{"dup":522,"fbjs/lib/invariant":752}],680:[function(require,module,exports){
-arguments[4][523][0].apply(exports,arguments)
-},{"dup":523}],681:[function(require,module,exports){
-arguments[4][524][0].apply(exports,arguments)
-},{"dup":524}],682:[function(require,module,exports){
-arguments[4][525][0].apply(exports,arguments)
-},{"dup":525,"fbjs/lib/keyMirror":755}],683:[function(require,module,exports){
-arguments[4][526][0].apply(exports,arguments)
-},{"./ReactElement":661,"./ReactPropTypeLocationNames":681,"./getIteratorFn":723,"dup":526,"fbjs/lib/emptyFunction":744}],684:[function(require,module,exports){
-arguments[4][527][0].apply(exports,arguments)
-},{"./CallbackQueue":614,"./Object.assign":631,"./PooledClass":632,"./ReactBrowserEventEmitter":635,"./ReactDOMFeatureFlags":648,"./ReactInputSelection":669,"./Transaction":709,"dup":527}],685:[function(require,module,exports){
-arguments[4][528][0].apply(exports,arguments)
-},{"./ReactRef":686,"dup":528}],686:[function(require,module,exports){
-arguments[4][529][0].apply(exports,arguments)
-},{"./ReactOwner":679,"dup":529}],687:[function(require,module,exports){
-arguments[4][530][0].apply(exports,arguments)
-},{"dup":530}],688:[function(require,module,exports){
-arguments[4][531][0].apply(exports,arguments)
-},{"dup":531}],689:[function(require,module,exports){
-arguments[4][532][0].apply(exports,arguments)
-},{"./ReactDefaultBatchingStrategy":657,"./ReactElement":661,"./ReactInstanceHandles":670,"./ReactMarkupChecksum":673,"./ReactServerBatchingStrategy":688,"./ReactServerRenderingTransaction":690,"./ReactUpdates":692,"./instantiateReactComponent":726,"dup":532,"fbjs/lib/emptyObject":745,"fbjs/lib/invariant":752}],690:[function(require,module,exports){
-arguments[4][533][0].apply(exports,arguments)
-},{"./CallbackQueue":614,"./Object.assign":631,"./PooledClass":632,"./Transaction":709,"dup":533,"fbjs/lib/emptyFunction":744}],691:[function(require,module,exports){
-arguments[4][534][0].apply(exports,arguments)
-},{"./Object.assign":631,"./ReactCurrentOwner":643,"./ReactElement":661,"./ReactInstanceMap":671,"./ReactUpdates":692,"dup":534,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],692:[function(require,module,exports){
-arguments[4][535][0].apply(exports,arguments)
-},{"./CallbackQueue":614,"./Object.assign":631,"./PooledClass":632,"./ReactPerf":680,"./ReactReconciler":685,"./Transaction":709,"dup":535,"fbjs/lib/invariant":752}],693:[function(require,module,exports){
-arguments[4][536][0].apply(exports,arguments)
-},{"dup":536}],694:[function(require,module,exports){
-arguments[4][537][0].apply(exports,arguments)
-},{"./DOMProperty":618,"dup":537}],695:[function(require,module,exports){
-arguments[4][538][0].apply(exports,arguments)
-},{"./EventConstants":623,"./EventPropagators":627,"./ReactInputSelection":669,"./SyntheticEvent":701,"./isTextInputElement":728,"dup":538,"fbjs/lib/ExecutionEnvironment":738,"fbjs/lib/getActiveElement":747,"fbjs/lib/keyOf":756,"fbjs/lib/shallowEqual":761}],696:[function(require,module,exports){
-arguments[4][539][0].apply(exports,arguments)
-},{"dup":539}],697:[function(require,module,exports){
-arguments[4][540][0].apply(exports,arguments)
-},{"./EventConstants":623,"./EventPropagators":627,"./ReactMount":674,"./SyntheticClipboardEvent":698,"./SyntheticDragEvent":700,"./SyntheticEvent":701,"./SyntheticFocusEvent":702,"./SyntheticKeyboardEvent":704,"./SyntheticMouseEvent":705,"./SyntheticTouchEvent":706,"./SyntheticUIEvent":707,"./SyntheticWheelEvent":708,"./getEventCharCode":719,"dup":540,"fbjs/lib/EventListener":737,"fbjs/lib/emptyFunction":744,"fbjs/lib/invariant":752,"fbjs/lib/keyOf":756}],698:[function(require,module,exports){
-arguments[4][541][0].apply(exports,arguments)
-},{"./SyntheticEvent":701,"dup":541}],699:[function(require,module,exports){
-arguments[4][542][0].apply(exports,arguments)
-},{"./SyntheticEvent":701,"dup":542}],700:[function(require,module,exports){
-arguments[4][543][0].apply(exports,arguments)
-},{"./SyntheticMouseEvent":705,"dup":543}],701:[function(require,module,exports){
-arguments[4][544][0].apply(exports,arguments)
-},{"./Object.assign":631,"./PooledClass":632,"dup":544,"fbjs/lib/emptyFunction":744,"fbjs/lib/warning":763}],702:[function(require,module,exports){
-arguments[4][545][0].apply(exports,arguments)
-},{"./SyntheticUIEvent":707,"dup":545}],703:[function(require,module,exports){
-arguments[4][546][0].apply(exports,arguments)
-},{"./SyntheticEvent":701,"dup":546}],704:[function(require,module,exports){
-arguments[4][547][0].apply(exports,arguments)
-},{"./SyntheticUIEvent":707,"./getEventCharCode":719,"./getEventKey":720,"./getEventModifierState":721,"dup":547}],705:[function(require,module,exports){
-arguments[4][548][0].apply(exports,arguments)
-},{"./SyntheticUIEvent":707,"./ViewportMetrics":710,"./getEventModifierState":721,"dup":548}],706:[function(require,module,exports){
-arguments[4][549][0].apply(exports,arguments)
-},{"./SyntheticUIEvent":707,"./getEventModifierState":721,"dup":549}],707:[function(require,module,exports){
-arguments[4][550][0].apply(exports,arguments)
-},{"./SyntheticEvent":701,"./getEventTarget":722,"dup":550}],708:[function(require,module,exports){
-arguments[4][551][0].apply(exports,arguments)
-},{"./SyntheticMouseEvent":705,"dup":551}],709:[function(require,module,exports){
-arguments[4][552][0].apply(exports,arguments)
-},{"dup":552,"fbjs/lib/invariant":752}],710:[function(require,module,exports){
-arguments[4][553][0].apply(exports,arguments)
-},{"dup":553}],711:[function(require,module,exports){
-arguments[4][554][0].apply(exports,arguments)
-},{"dup":554,"fbjs/lib/invariant":752}],712:[function(require,module,exports){
-arguments[4][555][0].apply(exports,arguments)
-},{"dup":555}],713:[function(require,module,exports){
-arguments[4][556][0].apply(exports,arguments)
-},{"./CSSProperty":612,"dup":556}],714:[function(require,module,exports){
-arguments[4][557][0].apply(exports,arguments)
-},{"./Object.assign":631,"dup":557,"fbjs/lib/warning":763}],715:[function(require,module,exports){
-arguments[4][558][0].apply(exports,arguments)
-},{"dup":558}],716:[function(require,module,exports){
-arguments[4][559][0].apply(exports,arguments)
-},{"./ReactCurrentOwner":643,"./ReactInstanceMap":671,"./ReactMount":674,"dup":559,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],717:[function(require,module,exports){
-arguments[4][560][0].apply(exports,arguments)
-},{"./traverseAllChildren":735,"dup":560,"fbjs/lib/warning":763}],718:[function(require,module,exports){
-arguments[4][561][0].apply(exports,arguments)
-},{"dup":561}],719:[function(require,module,exports){
-arguments[4][562][0].apply(exports,arguments)
-},{"dup":562}],720:[function(require,module,exports){
-arguments[4][563][0].apply(exports,arguments)
-},{"./getEventCharCode":719,"dup":563}],721:[function(require,module,exports){
-arguments[4][564][0].apply(exports,arguments)
-},{"dup":564}],722:[function(require,module,exports){
-arguments[4][565][0].apply(exports,arguments)
-},{"dup":565}],723:[function(require,module,exports){
-arguments[4][566][0].apply(exports,arguments)
-},{"dup":566}],724:[function(require,module,exports){
-arguments[4][567][0].apply(exports,arguments)
-},{"dup":567}],725:[function(require,module,exports){
-arguments[4][568][0].apply(exports,arguments)
-},{"dup":568,"fbjs/lib/ExecutionEnvironment":738}],726:[function(require,module,exports){
-arguments[4][569][0].apply(exports,arguments)
-},{"./Object.assign":631,"./ReactCompositeComponent":642,"./ReactEmptyComponent":663,"./ReactNativeComponent":677,"dup":569,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],727:[function(require,module,exports){
-arguments[4][570][0].apply(exports,arguments)
-},{"dup":570,"fbjs/lib/ExecutionEnvironment":738}],728:[function(require,module,exports){
-arguments[4][571][0].apply(exports,arguments)
-},{"dup":571}],729:[function(require,module,exports){
-arguments[4][572][0].apply(exports,arguments)
-},{"./ReactElement":661,"dup":572,"fbjs/lib/invariant":752}],730:[function(require,module,exports){
-arguments[4][573][0].apply(exports,arguments)
-},{"./escapeTextContentForBrowser":715,"dup":573}],731:[function(require,module,exports){
-arguments[4][574][0].apply(exports,arguments)
-},{"./ReactMount":674,"dup":574}],732:[function(require,module,exports){
-arguments[4][575][0].apply(exports,arguments)
-},{"dup":575,"fbjs/lib/ExecutionEnvironment":738}],733:[function(require,module,exports){
-arguments[4][576][0].apply(exports,arguments)
-},{"./escapeTextContentForBrowser":715,"./setInnerHTML":732,"dup":576,"fbjs/lib/ExecutionEnvironment":738}],734:[function(require,module,exports){
-arguments[4][577][0].apply(exports,arguments)
-},{"dup":577}],735:[function(require,module,exports){
-arguments[4][578][0].apply(exports,arguments)
-},{"./ReactCurrentOwner":643,"./ReactElement":661,"./ReactInstanceHandles":670,"./getIteratorFn":723,"dup":578,"fbjs/lib/invariant":752,"fbjs/lib/warning":763}],736:[function(require,module,exports){
-arguments[4][579][0].apply(exports,arguments)
-},{"./Object.assign":631,"dup":579,"fbjs/lib/emptyFunction":744,"fbjs/lib/warning":763}],737:[function(require,module,exports){
-arguments[4][580][0].apply(exports,arguments)
-},{"./emptyFunction":744,"dup":580}],738:[function(require,module,exports){
-arguments[4][581][0].apply(exports,arguments)
-},{"dup":581}],739:[function(require,module,exports){
-arguments[4][582][0].apply(exports,arguments)
-},{"dup":582}],740:[function(require,module,exports){
-arguments[4][583][0].apply(exports,arguments)
-},{"./camelize":739,"dup":583}],741:[function(require,module,exports){
-arguments[4][584][0].apply(exports,arguments)
-},{"./isTextNode":754,"dup":584}],742:[function(require,module,exports){
-arguments[4][585][0].apply(exports,arguments)
-},{"./toArray":762,"dup":585}],743:[function(require,module,exports){
-arguments[4][586][0].apply(exports,arguments)
-},{"./ExecutionEnvironment":738,"./createArrayFromMixed":742,"./getMarkupWrap":748,"./invariant":752,"dup":586}],744:[function(require,module,exports){
-arguments[4][262][0].apply(exports,arguments)
-},{"dup":262}],745:[function(require,module,exports){
-arguments[4][588][0].apply(exports,arguments)
-},{"dup":588}],746:[function(require,module,exports){
-arguments[4][589][0].apply(exports,arguments)
-},{"dup":589}],747:[function(require,module,exports){
-arguments[4][590][0].apply(exports,arguments)
-},{"dup":590}],748:[function(require,module,exports){
-arguments[4][591][0].apply(exports,arguments)
-},{"./ExecutionEnvironment":738,"./invariant":752,"dup":591}],749:[function(require,module,exports){
-arguments[4][592][0].apply(exports,arguments)
-},{"dup":592}],750:[function(require,module,exports){
-arguments[4][593][0].apply(exports,arguments)
-},{"dup":593}],751:[function(require,module,exports){
-arguments[4][594][0].apply(exports,arguments)
-},{"./hyphenate":750,"dup":594}],752:[function(require,module,exports){
-arguments[4][595][0].apply(exports,arguments)
-},{"dup":595}],753:[function(require,module,exports){
-arguments[4][596][0].apply(exports,arguments)
-},{"dup":596}],754:[function(require,module,exports){
-arguments[4][597][0].apply(exports,arguments)
-},{"./isNode":753,"dup":597}],755:[function(require,module,exports){
-arguments[4][598][0].apply(exports,arguments)
-},{"./invariant":752,"dup":598}],756:[function(require,module,exports){
-arguments[4][599][0].apply(exports,arguments)
-},{"dup":599}],757:[function(require,module,exports){
-arguments[4][600][0].apply(exports,arguments)
-},{"dup":600}],758:[function(require,module,exports){
-arguments[4][601][0].apply(exports,arguments)
-},{"dup":601}],759:[function(require,module,exports){
-arguments[4][602][0].apply(exports,arguments)
-},{"./ExecutionEnvironment":738,"dup":602}],760:[function(require,module,exports){
-arguments[4][603][0].apply(exports,arguments)
-},{"./performance":759,"dup":603}],761:[function(require,module,exports){
-arguments[4][264][0].apply(exports,arguments)
-},{"dup":264}],762:[function(require,module,exports){
-arguments[4][605][0].apply(exports,arguments)
-},{"./invariant":752,"dup":605}],763:[function(require,module,exports){
-arguments[4][606][0].apply(exports,arguments)
-},{"./emptyFunction":744,"dup":606}],764:[function(require,module,exports){
->>>>>>> fixed url rendering bug:frontend/js/index.js
-=======
-},{"./emptyFunction":589,"_process":249}],609:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 module.exports = require('./lib/React');
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./lib/React":483}],616:[function(require,module,exports){
 arguments[4][274][0].apply(exports,arguments)
 },{"./lib/request":618,"builtin-status-codes":620,"dup":274,"url":284,"xtend":622}],617:[function(require,module,exports){
-=======
-},{"./lib/React":477}],610:[function(require,module,exports){
-arguments[4][268][0].apply(exports,arguments)
-},{"./lib/request":612,"builtin-status-codes":614,"dup":268,"url":278,"xtend":616}],611:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (global){
 exports.fetch = isFunction(global.fetch) && isFunction(global.ReadableByteStream)
 
@@ -110435,11 +105825,7 @@ xhr = null // Help gc
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],618:[function(require,module,exports){
-=======
-},{}],612:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process,global,Buffer){
 // var Base64 = require('Base64')
 var capability = require('./capability')
@@ -110719,11 +106105,7 @@ var unsafeHeaders = [
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./capability":617,"./response":619,"_process":255,"buffer":53,"inherits":621,"stream":273}],619:[function(require,module,exports){
-=======
-},{"./capability":611,"./response":613,"_process":249,"buffer":53,"inherits":615,"stream":267}],613:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (process,global,Buffer){
 var capability = require('./capability')
 var inherits = require('inherits')
@@ -110900,7 +106282,6 @@ IncomingMessage.prototype._onXHRProgress = function () {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./capability":617,"_process":255,"buffer":53,"inherits":621,"stream":273}],620:[function(require,module,exports){
 arguments[4][278][0].apply(exports,arguments)
 },{"dup":278}],621:[function(require,module,exports){
@@ -110908,15 +106289,6 @@ arguments[4][251][0].apply(exports,arguments)
 },{"dup":251}],622:[function(require,module,exports){
 arguments[4][289][0].apply(exports,arguments)
 },{"dup":289}],623:[function(require,module,exports){
-=======
-},{"./capability":611,"_process":249,"buffer":53,"inherits":615,"stream":267}],614:[function(require,module,exports){
-arguments[4][272][0].apply(exports,arguments)
-},{"dup":272}],615:[function(require,module,exports){
-arguments[4][245][0].apply(exports,arguments)
-},{"dup":245}],616:[function(require,module,exports){
-arguments[4][376][0].apply(exports,arguments)
-},{"dup":376}],617:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -110939,11 +106311,7 @@ var Action = function Action(name, data) {
 exports["default"] = Action;
 module.exports = exports["default"];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],624:[function(require,module,exports){
-=======
-},{}],618:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -110999,7 +106367,6 @@ function addNode(node, title, markdown, renderer) {
 
 module.exports = exports['default'];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"./action.js":623}],625:[function(require,module,exports){
 'use strict';
 
@@ -111057,9 +106424,6 @@ function editNode(node, markdown, renderer, children) {
 module.exports = exports['default'];
 
 },{"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"./action.js":623}],626:[function(require,module,exports){
-=======
-},{"../Models/node.js":624,"../dispatcher.js":628,"../utils/webapi.js":631,"./action.js":617}],619:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -111107,11 +106471,7 @@ function expandWeek(tag) {
 
 module.exports = exports['default'];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../Models/node.js":632,"../dispatcher.js":636,"./action.js":623}],627:[function(require,module,exports){
-=======
-},{"../Models/node.js":624,"../dispatcher.js":628,"./action.js":617}],620:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -111161,11 +106521,7 @@ function open(rootId, nodes) {
 
 module.exports = exports['default'];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../Models/node.js":632,"../dispatcher.js":636,"./action.js":623,"immutable":318}],628:[function(require,module,exports){
-=======
-},{"../Models/node.js":624,"../dispatcher.js":628,"./action.js":617,"immutable":312}],621:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -111211,7 +106567,6 @@ function piazzaPostsFetched(posts) {
 
 module.exports = exports['default'];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../dispatcher.js":636,"./action.js":623,"immutable":318}],629:[function(require,module,exports){
 'use strict';
 
@@ -111269,9 +106624,6 @@ function removeNode(node) {
 module.exports = exports['default'];
 
 },{"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"./action.js":623}],630:[function(require,module,exports){
-=======
-},{"../dispatcher.js":628,"./action.js":617,"immutable":312}],622:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -111307,11 +106659,7 @@ function getRenderedElement(tag, node, ui) {
 
 module.exports = exports['default'];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./renderer.js":631,"react":615}],631:[function(require,module,exports){
-=======
-},{"./renderer.js":623,"react":609}],623:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -112005,11 +107353,7 @@ var AlertDismissable = (function (_React$Component13) {
   return AlertDismissable;
 })(_react2['default'].Component);
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../Actions/addnode.js":624,"../Actions/editnode.js":625,"../Actions/expandweek.js":626,"../Actions/removenode.js":629,"../Models/node.js":632,"../Stores/nodestore.js":633,"../utils/titlecaps.js":638,"../utils/webapi.js":639,"./createelement.js":630,"marked":320,"partial":321,"react":615,"react-bootstrap/lib/Alert":424,"react-bootstrap/lib/ButtonInput":427,"react-bootstrap/lib/Input":433,"react-bootstrap/lib/Modal":435,"react-bootstrap/lib/ModalBody":436,"react-dom":459}],632:[function(require,module,exports){
-=======
-},{"../Actions/addnode.js":618,"../Actions/expandweek.js":619,"../Models/node.js":624,"../Stores/nodestore.js":625,"../utils/titlecaps.js":630,"../utils/webapi.js":631,"./createelement.js":622,"marked":314,"partial":315,"react":609,"react-bootstrap/lib/Alert":418,"react-bootstrap/lib/ButtonInput":421,"react-bootstrap/lib/Input":427,"react-bootstrap/lib/Modal":429,"react-bootstrap/lib/ModalBody":430,"react-dom":453}],624:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 
 
 //internal model for a Node. used across the frontend
@@ -112041,11 +107385,7 @@ var Node = function Node(node) {
 exports["default"] = Node;
 module.exports = exports["default"];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],633:[function(require,module,exports){
-=======
-},{}],625:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -112184,11 +107524,7 @@ var nodeStore = new NodeStore(_dispatcherJs2['default']);
 exports['default'] = nodeStore;
 module.exports = exports['default'];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../Actions/action.js":623,"../Models/node.js":632,"../dispatcher.js":636,"../utils/webapi.js":639,"flux":300,"flux/utils":317,"immutable":318}],634:[function(require,module,exports){
-=======
-},{"../Actions/action.js":617,"../Models/node.js":624,"../dispatcher.js":628,"flux":294,"flux/utils":311,"immutable":312}],626:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -112276,11 +107612,7 @@ var uiStateStore = new UIStateStore(_dispatcherJs2['default']);
 exports['default'] = uiStateStore;
 module.exports = exports['default'];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../Actions/action.js":623,"../Models/node.js":632,"../dispatcher.js":636,"flux":300,"flux/utils":317,"immutable":318}],635:[function(require,module,exports){
-=======
-},{"../Actions/action.js":617,"../Models/node.js":624,"../dispatcher.js":628,"flux":294,"flux/utils":311,"immutable":312}],627:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -112382,11 +107714,7 @@ var ApplicationContainer = _fluxUtils.Container.create(ApplicationComponent);
 exports['default'] = ApplicationContainer;
 module.exports = exports['default'];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./Actions/open.js":627,"./Components/createelement.js":630,"./Models/node.js":632,"./Stores/nodestore.js":633,"./Stores/uistatestore.js":634,"./utils/webapi.js":639,"flux/utils":317,"jquery":319,"react":615}],636:[function(require,module,exports){
-=======
-},{"./Actions/open.js":620,"./Components/createelement.js":622,"./Models/node.js":624,"./Stores/nodestore.js":625,"./Stores/uistatestore.js":626,"./utils/webapi.js":631,"flux/utils":311,"jquery":313,"react":609}],628:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -112399,11 +107727,7 @@ var dispatcher = new _flux.Dispatcher();
 exports['default'] = dispatcher;
 module.exports = exports['default'];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"flux":300}],637:[function(require,module,exports){
-=======
-},{"flux":294}],629:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 (function (global){
 'use strict';
 
@@ -112443,11 +107767,7 @@ global.HTTP = http;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"./application.js":635,"./utils/webapi.js":639,"jquery":319,"react":615,"react-dom":459,"stream-http":616}],638:[function(require,module,exports){
-=======
-},{"./application.js":627,"./utils/webapi.js":631,"jquery":313,"react":609,"react-dom":453,"stream-http":610}],630:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 /*
  * Title Caps
  *
@@ -112499,11 +107819,7 @@ function upper(word) {
 }
 module.exports = exports["default"];
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{}],639:[function(require,module,exports){
-=======
-},{}],631:[function(require,module,exports){
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -112759,11 +108075,7 @@ function init(callback) {
   });
 }
 
-<<<<<<< d0346721c67fe779169036a01fd39337fbdaf3ad:backend/frontend/js/index.js
 },{"../Actions/piazzapostsfetched.js":628,"../Models/node.js":632,"immutable":318,"jquery":319,"piazza-api":423,"stream-http":616}]},{},[637])
-=======
-},{"../Actions/piazzapostsfetched.js":621,"../Models/node.js":624,"immutable":312,"jquery":313,"piazza-api":417,"stream-http":610}]},{},[629])
->>>>>>> Removing print statement for loading piazza posts:frontend/js/index.js
 
 
 //# sourceMappingURL=index.js.map
