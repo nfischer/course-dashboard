@@ -12,7 +12,7 @@ from requests import get, post
 
 URL = 'http://localhost:5000/42'
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-SAMPLE_JSON_FILE = os.path.join(PROJECT_DIR, 'frontend', 'sampledata.json')
+SAMPLE_JSON_FILE = os.path.join(PROJECT_DIR, 'backend/frontend', 'sampledata.json')
 
 def create_node(contents='foo', renderer='bar'):
     """Uses the backend API to create a node"""
@@ -68,6 +68,12 @@ def add_course(piazza_id):
     ret = post(urljoin(URL, 'course/setpiazza/'), data={'piazza_cid': piazza_id})
     if ret.status_code != 200:
         raise ValueError('Unable to add piazza id %s' % piazza_id)
+    return ret
+
+def add_root(root_id):
+    """Uses the backend API to add a root to the tree"""
+    root_id = str(root_id)
+    ret = post(os.path.join(URL, 'root/set', root_id, ''), data={})
     return ret
 
 ## @private
