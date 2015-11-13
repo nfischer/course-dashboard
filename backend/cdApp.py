@@ -122,12 +122,8 @@ class Node(Resource):
 
                 sql += ' WHERE id=(?) AND course_id=(?) AND isalive=1'
 
-                #logging.debug('sql :: %s', sql)
-
                 data.append(int(node_id))
                 data.append(int(course_id))
-
-                logging.debug(data)
 
                 cursor = g.db.execute(sql, data)
                 g.db.commit()
@@ -315,5 +311,4 @@ api.add_resource(Course, '/<course_id>/course/<operation>/')
 # @app.route('/addNode', methods=['POST'])
 
 if __name__ == '__main__':
-    logging.basicConfig(filename='cdApp.log',level=logging.DEBUG)
     app.run(debug=True)
