@@ -8,8 +8,8 @@ Inspiration
 
 Quick Start
 -----------
-
-In a new terminal, execute
+#####Users on Posix based Machines
+In a new terminal execute the following
 
 ```
 $ git clone https://github.com/nfischer/course-dashboard.git
@@ -25,11 +25,35 @@ $ cd course-dashboard/backend
 $ ./setup.sh
 ```
 
+#####Users on Windows Machines
+
+1. Clone the project
+  ```
+    > git clone https://github.com/nfischer/course-dashboard.git
+  ```
+
+2. Install sqlite3
+  - Follow the steps laid out in: http://www.tutorialspoint.com/sqlite/sqlite_installation.htm
+3. Install Python and Pip
+  - **Pip** is a package manager that is include with Python 2.7.9+ and 3.4+ and we use it to install the other technologies we      use for this project.
+  - Install Python here: https://www.python.org/downloads/windows/
+    a. Make sure to specify to install Pip if given the option during installation
+4. Installation of Python Packages
+  Execute the following commands from the command line
+  ```
+  > pip install Flask
+  > pip install flask-restful
+  > pip install piazza_api
+
+  > cd course-dashboard/backend
+  > setup.bat
+  ```
+
 This should start the server, but with a blank database. in a new terminal,
 execute the following:
 
 ```
-./addSampleData.py
+python addSampleData.py
 ```
 
 This should insert data from the sample JSON file located in `frontend/` into
@@ -54,6 +78,7 @@ see a running page.
 Installation
 ------------
 
+#####Users on Posix based Machines
 To run our database, you'll need `sqlite3` as well as `pip`:
 
 ```
@@ -76,6 +101,30 @@ To install gulp for frontend work, you'll need to run:
 $ sudo apt-get install npm
 $ sudo npm install gulp -g
 ```
+
+#####Users on Windows Machines
+1. Install sqlite3
+  - Follow the steps laid out in: http://www.tutorialspoint.com/sqlite/sqlite_installation.htm
+2. Install Python and Pip
+  - **Pip** is a package manager that is include with Python 2.7.9+ and 3.4+ and we use it to install the other technologies we      use for this project.
+  - Install Python here: https://www.python.org/downloads/windows/
+    - Make sure to specify to install Pip if given the option during installation
+3. Installation of Python Packages
+    Execute the following commands from the command line
+    ```
+    > pip install Flask
+    > pip install flask-restful
+    > pip install piazza_api
+    ```
+
+To install gulp for frontend work:
+  1. Install Node
+    Download the MSI for your appropriate OS here: https://nodejs.org/en/download/
+  2. Execute the following commands to install npm and gulp
+    ```
+    > install npm
+    > npm install gulp -g
+    ```
 
 Backend
 -------
