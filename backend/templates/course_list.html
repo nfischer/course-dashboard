@@ -1,0 +1,14 @@
+<html>
+<head>
+  <title>Course Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="/frontend/css/course_list.css">
+</head>
+<body>
+  <h1 class=title>Course Dashboard</h1>
+  <ul class=courses>
+    {% for course in courses %}
+    <li><h2><a target="_blank" href="/{{ course.course_id }}/">{{ course.course_name }}</a></h2></li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

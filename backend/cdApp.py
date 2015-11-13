@@ -306,8 +306,19 @@ class Course(Resource):
         else:
             raise InvalidUsage('Unknown operation type')
 
+@app.route('/', methods=['GET'])
+def index():
+    cursor = g.db.execute('''SELECT *
+                             FROM courses''')
+
+    # if row is None:
+    #     raise InvalidUsage('Given course does not exist')
+    # else:
+    courses = [dict(course_id=row['course_id'], course_name=row["course_name"]) for row in cursor.fetchall()]
+    return render_template('course_list.html', courses=courses)
+
 @app.route('/<course_id>/', methods=['GET'])
-def index(course_id):
+def course_index(course_id):
     return send_from_directory('frontend','index.html');
 
 api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<operation>/<node_id>/')

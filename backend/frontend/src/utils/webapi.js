@@ -46,6 +46,13 @@ function overwriteNode(node: Node){
   });
 }
 
+function deleteNode(nodeId: string){
+  let endpoint = mainUrl + `/${courseId}/node/delete/${nodeId}/`;
+  return $.ajax(endpoint, {
+    method: "POST",
+    dataType: "json"
+  });
+}
 // @deprecated
 function overwriteChildren(node: Node){
   let endpoint = mainUrl + `/${courseId}/node/update/${node.id}/`;
@@ -163,6 +170,26 @@ export function addNewChild(node: Node, tag: string, markdown: string, renderer:
   .then((data) => { //call passed in callback
       callback(initialized_child);
     }, (jqXHR, textStatus, errorThrown) => {
+      console.error(textStatus);
+      throw errorThrown;
+  });
+}
+
+export function editNode(node: Node, markdown: string, renderer: string, children: Object, callback: any){
+  let newNode = new Node({id: node.id, contents: markdown, renderer: renderer, children: children});
+
+  overwriteNode(newNode).then((data) => {
+    callback(newNode);
+  }, (jqXHR, textStatus, errorThrown) => {
+      console.error(textStatus);
+      throw errorThrown;
+  });
+}
+
+export function removeNode(node: Node, callback: any){
+  deleteNode(node.id).then((data) => {
+    callback(node);
+  }, (jqXHR, textStatus, errorThrown) => {
       console.error(textStatus);
       throw errorThrown;
   });
