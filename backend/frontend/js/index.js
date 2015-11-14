@@ -106851,23 +106851,26 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var AddNode = (function (_Action) {
   _inherits(AddNode, _Action);
 
-  function AddNode(node) {
+  function AddNode(parent, title, markdown, renderer) {
     _classCallCheck(this, AddNode);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AddNode).call(this, "addNode", node));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(AddNode).call(this, "addNode", {
+      parent: parent,
+      title: title,
+      markdown: markdown,
+      renderer: renderer
+    }));
   }
 
   return AddNode;
 })(_action2.default);
 
-function addNode(node, title, markdown, renderer) {
-  WebAPI.addNewChild(node, title, markdown, "Resource", function (node) {
-    var action = new AddNode(node);
-    _dispatcher2.default.dispatch(action);
-  });
+function addNode(parent, title, markdown, renderer) {
+  var action = new AddNode(parent, title, markdown, renderer);
+  _dispatcher2.default.dispatch(action);
 }
 
-},{"../Models/node.js":637,"../dispatcher.js":641,"../utils/webapi.js":644,"./action.js":628}],630:[function(require,module,exports){
+},{"../Models/node.js":638,"../dispatcher.js":642,"../utils/webapi.js":645,"./action.js":628}],630:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -106913,14 +106916,19 @@ var EditNode = (function (_Action) {
   return EditNode;
 })(_action2.default);
 
-function editNode(node, markdown, renderer, children) {
-  WebAPI.editNode(node, markdown, renderer, children, function (node) {
-    var action = new EditNode(node);
-    _dispatcher2.default.dispatch(action);
+function editNode(node, markdown) {
+  var editedNode = new _node2.default({
+    id: node.id,
+    contents: markdown,
+    renderer: node.renderer,
+    children: node.children
   });
+
+  var action = new EditNode(editedNode);
+  _dispatcher2.default.dispatch(action);
 }
 
-},{"../Models/node.js":637,"../dispatcher.js":641,"../utils/webapi.js":644,"./action.js":628}],631:[function(require,module,exports){
+},{"../Models/node.js":638,"../dispatcher.js":642,"../utils/webapi.js":645,"./action.js":628}],631:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -106965,7 +106973,7 @@ function expandWeek(tag) {
   _dispatcher2.default.dispatch(action);
 }
 
-},{"../Models/node.js":637,"../dispatcher.js":641,"./action.js":628}],632:[function(require,module,exports){
+},{"../Models/node.js":638,"../dispatcher.js":642,"./action.js":628}],632:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -107012,7 +107020,7 @@ function open(rootId, nodes) {
   _dispatcher2.default.dispatch(action);
 }
 
-},{"../Models/node.js":637,"../dispatcher.js":641,"./action.js":628,"immutable":282}],633:[function(require,module,exports){
+},{"../Models/node.js":638,"../dispatcher.js":642,"./action.js":628,"immutable":282}],633:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -107055,7 +107063,7 @@ function piazzaPostsFetched(posts) {
   _dispatcher2.default.dispatch(action);
 }
 
-},{"../dispatcher.js":641,"./action.js":628,"immutable":282}],634:[function(require,module,exports){
+},{"../dispatcher.js":642,"./action.js":628,"immutable":282}],634:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -107102,13 +107110,65 @@ var RemoveNode = (function (_Action) {
 })(_action2.default);
 
 function removeNode(node) {
-  WebAPI.removeNode(node, function (node) {
-    var action = new RemoveNode(node);
-    _dispatcher2.default.dispatch(action);
-  });
+  var action = new RemoveNode(node);
+  _dispatcher2.default.dispatch(action);
 }
 
-},{"../Models/node.js":637,"../dispatcher.js":641,"../utils/webapi.js":644,"./action.js":628}],635:[function(require,module,exports){
+},{"../Models/node.js":638,"../dispatcher.js":642,"../utils/webapi.js":645,"./action.js":628}],635:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = updateParentAndChild;
+
+var _action = require('./action.js');
+
+var _action2 = _interopRequireDefault(_action);
+
+var _dispatcher = require('../dispatcher.js');
+
+var _dispatcher2 = _interopRequireDefault(_dispatcher);
+
+var _node = require('../Models/node.js');
+
+var _node2 = _interopRequireDefault(_node);
+
+var _webapi = require('../utils/webapi.js');
+
+var WebAPI = _interopRequireWildcard(_webapi);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var UpdateParentAndChild = (function (_Action) {
+  _inherits(UpdateParentAndChild, _Action);
+
+  function UpdateParentAndChild(child, parent) {
+    _classCallCheck(this, UpdateParentAndChild);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(UpdateParentAndChild).call(this, "updateParentAndChild", {
+      child: child,
+      parent: parent
+    }));
+  }
+
+  return UpdateParentAndChild;
+})(_action2.default);
+
+function updateParentAndChild(child, parent) {
+  var action = new UpdateParentAndChild(child, parent);
+  _dispatcher2.default.dispatch(action);
+}
+
+},{"../Models/node.js":638,"../dispatcher.js":642,"../utils/webapi.js":645,"./action.js":628}],636:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -107141,7 +107201,7 @@ function getRenderedElement(tag, node, ui) {
   }, []);
 }
 
-},{"./renderer.js":636,"react":616}],636:[function(require,module,exports){
+},{"./renderer.js":637,"react":616}],637:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -107650,7 +107710,7 @@ var ListElement = exports.ListElement = (function (_React$Component9) {
     key: 'endEdit',
     value: function endEdit(contents) {
       this.setState({ editing: false });
-      (0, _editnode2.default)(this.props.node, contents, this.props.node.renderer, this.props.node.children);
+      (0, _editnode2.default)(this.props.node, contents);
     }
   }, {
     key: 'deleteNode',
@@ -107835,7 +107895,7 @@ var AlertDismissable = (function (_React$Component13) {
   return AlertDismissable;
 })(_react2.default.Component);
 
-},{"../Actions/addnode.js":629,"../Actions/editnode.js":630,"../Actions/expandweek.js":631,"../Actions/removenode.js":634,"../Models/node.js":637,"../Stores/nodestore.js":638,"../utils/titlecaps.js":643,"../utils/webapi.js":644,"./createelement.js":635,"marked":284,"partial":285,"react":616,"react-bootstrap/lib/Alert":389,"react-bootstrap/lib/ButtonInput":392,"react-bootstrap/lib/Input":398,"react-bootstrap/lib/Modal":400,"react-bootstrap/lib/ModalBody":401,"react-dom":460}],637:[function(require,module,exports){
+},{"../Actions/addnode.js":629,"../Actions/editnode.js":630,"../Actions/expandweek.js":631,"../Actions/removenode.js":634,"../Models/node.js":638,"../Stores/nodestore.js":639,"../utils/titlecaps.js":644,"../utils/webapi.js":645,"./createelement.js":636,"marked":284,"partial":285,"react":616,"react-bootstrap/lib/Alert":389,"react-bootstrap/lib/ButtonInput":392,"react-bootstrap/lib/Input":398,"react-bootstrap/lib/Modal":400,"react-bootstrap/lib/ModalBody":401,"react-dom":460}],638:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -107865,7 +107925,7 @@ var Node = function Node(node) {
 
 exports.default = Node;
 
-},{}],638:[function(require,module,exports){
+},{}],639:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -107898,6 +107958,10 @@ var _webapi = require('../utils/webapi.js');
 
 var WebAPI = _interopRequireWildcard(_webapi);
 
+var _updateparentandchild = require('../Actions/updateparentandchild.js');
+
+var _updateparentandchild2 = _interopRequireDefault(_updateparentandchild);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -107916,6 +107980,8 @@ var NodeStoreState = function NodeStoreState(rootId) {
   this.rootId = rootId;
   this.nodes = new _immutable.Map();
 };
+
+var nextSpoofedId = -1;
 
 //this store contains the internal representation of all nodes in use by the frontend.
 //the tree/graph can be traversed by starting at a root and looking up children in the map of id->node.
@@ -107956,20 +108022,39 @@ var NodeStore = (function (_ReduceStore) {
 
           return newState;
         case "addNode":
-          //TODO: insert created node into tree at appropriate place
-          //parent node links are updated as a part of comitting changes to db
-          var newNode = action.data;
-          newNode.id = typeof newNode.id === "string" ? newNode.id : newNode.id.toString();
+          //we keep the store internally consistent using a spoofed id, which is resolved
+          // once the request to update the backend goes through
+          var newNode = new _node2.default({
+            id: (nextSpoofedId--).toString(),
+            contents: action.data.markdown,
+            renderer: action.data.renderer,
+            children: {}
+          });
+
+          var newParent = Object.assign({}, action.data.parent);
+          newParent.children[action.data.title] = newNode.id;
+
           newState = new NodeStoreState(state.rootId);
           newState.nodes = state.nodes.set(newNode.id, newNode);
+          newState.nodes = newState.nodes.set(newParent.id, newParent);
+
+          WebAPI.addNewChild(newParent, newNode, function (initializedChild, updatedParent) {
+            (0, _updateparentandchild2.default)(initializedChild, updatedParent);
+          });
+          return newState;
+        case "updateParentAndChild":
+          //this resolves the spoofed ID issues introduced in add
+          newState = new NodeStoreState(state.rootId);
+          newState.nodes = state.nodes.set(action.data.child.id, action.data.child);
+          newState.nodes = newState.nodes.set(action.data.parent.id, action.data.parent);
 
           return newState;
         case "editNode":
           var editedNode = action.data;
-          editedNode.id = typeof editedNode.id === "string" ? editedNode.id : editedNode.id.toString();
           newState = new NodeStoreState(state.rootId);
           newState.nodes = state.nodes.set(editedNode.id, editedNode);
 
+          WebAPI.editNode(editedNode, function () {});
           return newState;
         case "removeNode":
           var nodeToRemove = action.data;
@@ -107977,7 +108062,9 @@ var NodeStore = (function (_ReduceStore) {
           newState = new NodeStoreState(state.rootId);
           // delete node
           newState.nodes = state.nodes.delete(nodeToRemove.id);
+
           // modify parent nodes to no longer point to deleted node
+          var parents = [];
           newState.nodes.forEach(function (node) {
             var wasModified = false;
             var name = undefined;
@@ -107987,12 +108074,14 @@ var NodeStore = (function (_ReduceStore) {
                 wasModified = true;
               }
             }
-            if (wasModified === true) {
-              WebAPI.editNode(node, node.contents, node.renderer, node.children, function () {});
+            if (wasModified) {
+              parents.push(node);
             }
           });
+
+          WebAPI.removeNode(nodeToRemove, parents, function () {});
           return newState;
-      }
+      } //end of switch statement
 
       return state;
     }
@@ -108004,7 +108093,7 @@ var NodeStore = (function (_ReduceStore) {
 var nodeStore = new NodeStore(_dispatcher2.default);
 exports.default = nodeStore;
 
-},{"../Actions/action.js":628,"../Models/node.js":637,"../dispatcher.js":641,"../utils/webapi.js":644,"flux":264,"flux/utils":281,"immutable":282}],639:[function(require,module,exports){
+},{"../Actions/action.js":628,"../Actions/updateparentandchild.js":635,"../Models/node.js":638,"../dispatcher.js":642,"../utils/webapi.js":645,"flux":264,"flux/utils":281,"immutable":282}],640:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -108090,7 +108179,7 @@ var UIStateStore = (function (_ReduceStore) {
 var uiStateStore = new UIStateStore(_dispatcher2.default);
 exports.default = uiStateStore;
 
-},{"../Actions/action.js":628,"../Models/node.js":637,"../dispatcher.js":641,"flux":264,"flux/utils":281,"immutable":282}],640:[function(require,module,exports){
+},{"../Actions/action.js":628,"../Models/node.js":638,"../dispatcher.js":642,"flux":264,"flux/utils":281,"immutable":282}],641:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -108193,7 +108282,7 @@ var ApplicationComponent = (function (_React$Component) {
 var ApplicationContainer = _utils.Container.create(ApplicationComponent);
 exports.default = ApplicationContainer;
 
-},{"./Actions/open.js":632,"./Components/createelement.js":635,"./Models/node.js":637,"./Stores/nodestore.js":638,"./Stores/uistatestore.js":639,"./utils/webapi.js":644,"flux/utils":281,"jquery":283,"react":616}],641:[function(require,module,exports){
+},{"./Actions/open.js":632,"./Components/createelement.js":636,"./Models/node.js":638,"./Stores/nodestore.js":639,"./Stores/uistatestore.js":640,"./utils/webapi.js":645,"flux/utils":281,"jquery":283,"react":616}],642:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -108205,7 +108294,7 @@ var _flux = require('flux');
 var dispatcher = new _flux.Dispatcher();
 exports.default = dispatcher;
 
-},{"flux":264}],642:[function(require,module,exports){
+},{"flux":264}],643:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -108245,7 +108334,7 @@ global.HTTP = http;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"./application.js":640,"./utils/webapi.js":644,"jquery":283,"react":616,"react-dom":460,"stream-http":617}],643:[function(require,module,exports){
+},{"./application.js":641,"./utils/webapi.js":645,"jquery":283,"react":616,"react-dom":460,"stream-http":617}],644:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -108296,7 +108385,7 @@ function upper(word) {
 	return word.substr(0, 1).toUpperCase() + word.substr(1);
 }
 
-},{}],644:[function(require,module,exports){
+},{}],645:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -108364,82 +108453,84 @@ var piazzaClassId = exports.piazzaClassId = null; //"if44ov1fn5a505"
 
 function getNode(nodeId) {
   var endpoint = mainUrl + ('/' + courseId + '/node/' + nodeId + '/');
-  return _jquery2.default.ajax(endpoint, {
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
     method: "GET",
     dataType: "json"
-  });
+  }));
 }
 
 function overwriteNode(node) {
   var endpoint = mainUrl + ('/' + courseId + '/node/update/' + node.id + '/');
   var data = { contents: node.contents, renderer: node.renderer, children: JSON.stringify(node.children) };
-  return _jquery2.default.ajax(endpoint, {
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
     method: "POST",
     data: data,
     dataType: "json"
-  });
+  }));
 }
 
 function deleteNode(nodeId) {
   var endpoint = mainUrl + ('/' + courseId + '/node/delete/' + nodeId + '/');
-  return _jquery2.default.ajax(endpoint, {
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
     method: "POST",
     dataType: "json"
-  });
+  }));
 }
 // @deprecated
 function overwriteChildren(node) {
   var endpoint = mainUrl + ('/' + courseId + '/node/update/' + node.id + '/');
   var data = { children: JSON.stringify(node.children) };
-  return _jquery2.default.ajax(endpoint, {
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
     method: "POST",
     data: data,
     dataType: "json"
-  });
+  }));
 }
 
 function createNode(node) {
-  //mock for creation process
   var endpoint = mainUrl + ('/' + courseId + '/node/add/');
-  return _jquery2.default.ajax(endpoint, {
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
     method: "POST",
-    data: node,
+    data: {
+      contents: node.contents,
+      renderer: node.renderer
+    },
     dataType: "json"
-  });
+  }));
 }
 
 //currently rootId and depth are ignored
 function getTree() {
   var endpoint = mainUrl + ('/' + courseId + '/tree/');
-  return _jquery2.default.ajax(endpoint, {
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
     method: "GET",
     dataType: "json"
-  });
+  }));
 }
 
 function getRoot() {
   var endpoint = mainUrl + ('/' + courseId + '/root/get/');
-  return _jquery2.default.ajax(endpoint, {
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
     method: "GET",
     dataType: "json"
-  });
+  }));
 }
 
 //gets user credentials
 function getUserInfo(userId) {
   var endpoint = mainUrl + '/static/piazza-credentials.json';
-  return _jquery2.default.ajax(endpoint, {
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
     method: "GET",
     dataType: "json"
-  });
+  }));
 }
 
 function getPiazzaClassId(courseId) {
   var endpoint = mainUrl + ('/' + courseId + '/course/getpiazza/');
-  return _jquery2.default.ajax(endpoint, {
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
     method: "GET",
     dataType: "json"
-  });
+  }));
 }
 
 var posts = new _immutable.Map();
@@ -108481,12 +108572,9 @@ function getPiazzaPosts(courseId) {
 //More complex actions defined in terms of primitives
 // promises are used to make the order of asynchronous steps more transparent
 //---------------------------------------------------
-function addNewChild(node, tag, markdown, renderer, callback) {
-  var child = new _node2.default({
-    contents: markdown,
-    renderer: renderer
-  });
-  var initialized_child = undefined;
+function addNewChild(parent, child, callback) {
+  var initializedChild = undefined,
+      updatedParent = undefined;
 
   createNode(child) //create node
   .then(function (data) {
@@ -108495,39 +108583,36 @@ function addNewChild(node, tag, markdown, renderer, callback) {
     data.renderer = child.renderer;
     data.children = {};
 
-    initialized_child = new _node2.default(data);
-    node.children[tag] = initialized_child.id;
-    return overwriteNode(node);
-  }, function (jqXHR, textStatus, errorThrown) {
-    console.error(textStatus);
-    throw errorThrown;
-  }).then(function (data) {
+    initializedChild = new _node2.default(data);
+    updatedParent = Object.assign({}, parent);
+    for (var tag in updatedParent.children) {
+      if (updatedParent.children[tag] === child.id) {
+        updatedParent.children[tag] = initializedChild.id;
+      }
+    }
+
+    return overwriteNode(updatedParent);
+  }, handleError("addNewChild: Error creating new node:")).then(function (data) {
     //call passed in callback
-    callback(initialized_child);
-  }, function (jqXHR, textStatus, errorThrown) {
-    console.error(textStatus);
-    throw errorThrown;
-  });
+    callback(initializedChild, updatedParent);
+  }, handleError("addNewChild: Error overwriting parent:"));
 }
 
-function editNode(node, markdown, renderer, children, callback) {
-  var newNode = new _node2.default({ id: node.id, contents: markdown, renderer: renderer, children: children });
-
-  overwriteNode(newNode).then(function (data) {
-    callback(newNode);
-  }, function (jqXHR, textStatus, errorThrown) {
-    console.error(textStatus);
-    throw errorThrown;
-  });
-}
-
-function removeNode(node, callback) {
-  deleteNode(node.id).then(function (data) {
+function editNode(node, callback) {
+  overwriteNode(node).then(function (data) {
     callback(node);
-  }, function (jqXHR, textStatus, errorThrown) {
-    console.error(textStatus);
-    throw errorThrown;
-  });
+  }, handleError("editNode: Error updating node:"));
+}
+
+function removeNode(node, parents, callback) {
+  deleteNode(node.id).then(function () {
+    //wait for all the parents to be updated
+    return Promise.all(parents.map(function (parent_node) {
+      return overwriteNode(parent_node);
+    }));
+  }, handleError("removeNode: Error deleting node:")).then(function () {
+    callback(node, parents);
+  }, handleError("removeNode: Error updating children for deleted node:"));
 }
 
 function init(callback) {
@@ -108536,29 +108621,26 @@ function init(callback) {
   getTree().then(function (data) {
     nodes = data.nodes;
     return getRoot();
-  }, function (jqXHR, textStatus, errorThrown) {
-    console.error("Error requesting tree:", textStatus);
-    throw errorThrown;
-  }).then(function (data) {
+  }, handleError("init: Error requesting tree:")).then(function (data) {
     rootId = data[0].id.toString();
     return getPiazzaClassId(courseId);
-  }, function (jqXHR, textStatus, errorThrown) {
-    console.error("Error requesting roots:", textStatus);
-    throw errorThrown;
-  }).then(function (data) {
+  }, handleError("init: Error requesting roots:")).then(function (data) {
     exports.piazzaClassId = piazzaClassId = data.piazza_cid;
     setTimeout(function () {
       getPiazzaPosts(courseId);
     }, 2000);
     callback({ rootId: rootId, nodes: nodes });
-  }, function (jqXHR, textStatus, errorThrown) {
-    //make this a separate function
-    console.error(textStatus);
-    throw errorThrown;
-  });
+  }, handleError("init: Error getting piazza class id:"));
 }
 
-},{"../Actions/piazzapostsfetched.js":633,"../Models/node.js":637,"immutable":282,"jquery":283,"path-parse":286,"piazza-api":388,"stream-http":617,"url-parse":624}]},{},[642])
+function handleError(errorStr) {
+  return function (jqXHR, textStatus, errorThrown) {
+    console.error(errorStr, textStatus);
+    throw errorThrown;
+  };
+}
+
+},{"../Actions/piazzapostsfetched.js":633,"../Models/node.js":638,"immutable":282,"jquery":283,"path-parse":286,"piazza-api":388,"stream-http":617,"url-parse":624}]},{},[643])
 
 
 //# sourceMappingURL=index.js.map
