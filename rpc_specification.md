@@ -152,6 +152,19 @@ Root
 Piazza Integration
 ------------------
 
+### Create a brand new course
+
+ - end point: `/0/course/add/`. **Note**: this must use the fake course ID `0`
+ - request: HTTP POST
+ - data (input): None
+ - return data:
+```
+{
+  "message": "New course was successfully initialized",
+  "course_id": "1"
+}
+```
+
 ### Adding a Piazza course ID
 
  - end point: `/<course_id>/course/setpiazza/`, where `<course_id>` is some integer

@@ -238,9 +238,11 @@ class Course(Resource):
                                          ORDER BY course_id DESC limit 1''')
                 g.db.commit()
                 added_course = cursor.fetchone()
-                return jsonify(message='New course was successfully initialized', course_id=added_course['course_id'])
+                return jsonify(message='New course was successfully initialized',
+                               course_id=added_course['course_id'])
             except Exception:
-                raise InvalidUsage('Unable to create new course', status_code=500)
+                raise InvalidUsage('Unable to create new course',
+                                   status_code=500)
         elif operation == 'setpiazza':
             try:
                 g.db.execute('''UPDATE courses
