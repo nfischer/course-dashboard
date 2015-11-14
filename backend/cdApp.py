@@ -7,7 +7,6 @@ from flask_restful import Resource, Api
 import json
 from piazza_api import Piazza
 from piazza_api.exceptions import AuthenticationError
-import os
 
 # configuration
 DATABASE = 'db/course-dashboard.db'
@@ -29,7 +28,7 @@ def connect_db():
 def before_request():
     g.db = connect_db()
     g.db.row_factory = dict_factory
-    g.db.execute("PRAGMA foreign_keys = ON;")
+    g.db.execute('PRAGMA foreign_keys = ON;')
 
 @app.teardown_request
 def teardown_request(exception):
@@ -177,13 +176,12 @@ class Tree(Resource):
         rootId is hard coded right now. Need clarification on that
         """
         try:
-            cursor = g.db.execute('''SELECT n.id, n.contents, n.renderer, n.children
-                                     FROM nodes AS n
-                                     WHERE n.course_id=(?) AND n.isalive=1''',
+            cursor = g.db.execute('''SELECT id, contents, renderer, children
+                                     FROM nodes
+                                     WHERE course_id=(?) AND isalive=1''',
                                   [int(course_id)])
             tree = {}
-            tree["nodes"] = cursor.fetchall()
-            tree["rootId"] = '54' #this is a HACK. we will be adding a few more endpoints to address the root
+            tree['nodes'] = cursor.fetchall()
             return tree
         except Exception:
             raise InvalidUsage('Unable to find the tree', status_code=500)
@@ -198,7 +196,8 @@ class Root(Resource):
             g.db.commit()
             if cursor.rowcount == 0:
                 raise InvalidUsage('Could not find non-root node %s' % root_id)
-            return jsonify(message='Successfully labeled node as a root.', id=root_id)
+            return jsonify(message='Successfully labeled node as a root.',
+                           id=root_id)
 
         elif operation == 'delete':
             cursor = g.db.execute('''UPDATE nodes
@@ -252,7 +251,8 @@ class Course(Resource):
                                 WHERE course_id=(?)''',
                              [request.form['piazza_cid'], int(course_id)])
                 g.db.commit()
-                return jsonify(message='Successfully added piazza ID for course', course_id=course_id)
+                return jsonify(message='Successfully added piazza ID for course',
+                               course_id=course_id)
             except Exception as e:
                 print str(e)
                 raise InvalidUsage('Cannot set more than once')
@@ -265,7 +265,8 @@ class Course(Resource):
             g.db.commit()
             if cursor.rowcount == 0:
                 raise InvalidUsage('Entry not found in database. Please use `setpiazza` instead')
-            return jsonify(message='Successfully updated piazza ID for course', course_id=course_id)
+            return jsonify(message='Successfully updated piazza ID for course',
+                           course_id=course_id)
 
         else:
             raise InvalidUsage('Unknown operation type')
@@ -282,7 +283,8 @@ class Course(Resource):
                 raise InvalidUsage('Given course does not have a Piazza ID')
             else:
                 piazza_id_str = piazza_id_row['piazza_cid']
-                return jsonify(message='Returning piazza ID for course', course_id=course_id, piazza_cid=piazza_id_str)
+                return jsonify(message='Returning piazza ID for course',
+                               course_id=course_id, piazza_cid=piazza_id_str)
 
         elif operation == 'getpiazzaposts':
             cursor = g.db.execute('''SELECT piazza_cid
@@ -310,22 +312,20 @@ class Course(Resource):
                     for post in piazza_class.iter_all_posts():
                         yield json.dumps(post)
 
-                return Response(get_posts(), mimetype="application/json")
+                return Response(get_posts(), mimetype='application/json')
         else:
             raise InvalidUsage('Unknown operation type')
 
 @app.route('/', methods=['GET'])
 def index():
-    return send_from_directory('frontend','index.html');
+    return send_from_directory('frontend', 'index.html')
 
-api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<operation>/<node_id>/')
-# api.add_resource(Children, '/children/<operation>/<node_id>/')
+api.add_resource(Node, '/<course_id>/node/<operation>/',
+                 '/<course_id>/node/<operation>/<node_id>/')
 api.add_resource(Tree, '/<course_id>/tree/')
-# api.add_resource(Link, '/link/')
-api.add_resource(Root, '/<course_id>/root/<operation>/', '/<course_id>/root/<operation>/<root_id>/')
+api.add_resource(Root, '/<course_id>/root/<operation>/',
+                 '/<course_id>/root/<operation>/<root_id>/')
 api.add_resource(Course, '/<course_id>/course/<operation>/')
-
-# @app.route('/addNode', methods=['POST'])
 
 if __name__ == '__main__':
     app.run(debug=True)
