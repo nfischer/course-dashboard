@@ -19,14 +19,14 @@ To install our project and its dependencies, please run:
   - `pip` is a package manager that is include with Python 2.7.9+ and 3.4+ and
     we use it to install the other technologies we use for this project.
   - Install [Python 2.7](https://www.python.org/downloads/windows/)
-    a. Make sure to specify to install Pip if given the option during
-    installation
+    - Make sure to specify to install Pip if given the option during
+      installation
   - Then edit your `PATH` environmental variable to include the path to both
     `python` and `pip` following [this
     guide](http://www.computerhope.com/issues/ch000549.htm)
 
 4. Installation of Python Packages
-  - Execute the following commands from the command line
+  - Execute the following commands from the command line:
 ```
 > pip install Flask
 > pip install flask-restful

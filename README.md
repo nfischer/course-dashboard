@@ -13,7 +13,7 @@ Please follow our system-specific setup steps first:
  - [Windows](windows-setup.md)
 
 Before running the project, make sure you enter in your Piazza credentials in a
-new file named `backend/sample_user.txt' following the two-line format:
+new file named `backend/sample_user.txt` following the two-line format:
 
 ```
 myemail@domain.com
@@ -24,7 +24,8 @@ If you're enrolled in CS 130 with that info, you're good to go and should have
 no issues displaying piazza information on the web UI.
 
 At this point, you can visit [127.0.0.1:5000/](http://127.0.0.1:5000/) to see a
-running page of our project.
+running page of our project. If that's good enough for you, then you're done at
+this point, and can skip the steps below.
 
 Installation for Development
 ----------------------------
@@ -47,11 +48,11 @@ To install gulp for frontend work:
     - Download the MSI for your appropriate OS
       [here](https://nodejs.org/en/download/)
   2. Execute the following commands to install npm and gulp
-    ```
-    > install npm
-    > npm install gulp -g
-    > npm i
-    ```
+```
+> install npm
+> npm install gulp -g
+> npm i
+```
 
 Backend
 -------
@@ -77,11 +78,11 @@ The frontend is written using node.js and browserify. In order to build, execute
 the following commands from the frontend directory:
 
 ```
-npm install
-gulp build_browser
+$ npm install
+$ gulp build_browser
 ```
 
-in order to have the backend serve frontend files and have the frontend talk to
+In order to have the backend serve frontend files and have the frontend talk to
 the backend, execute the following commands:
 
 ```
@@ -89,8 +90,8 @@ $ cd ../backend
 $ setup.sh
 ```
 
-The page should now be available at
-[http://127.0.0.1:5000/](http://127.0.0.1:5000/), served by the backend server.
+The page should now be available at [127.0.0.1:5000/](http://127.0.0.1:5000/),
+served by the backend server.
 
 ### Migration
 
