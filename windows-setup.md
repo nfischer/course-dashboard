@@ -7,7 +7,7 @@ One-time Installation
 To install our project and its dependencies, please run:
 
 1. Clone the project
-```bat
+```batchfile
 > git clone https://github.com/nfischer/course-dashboard.git
 ```
 
@@ -27,7 +27,7 @@ To install our project and its dependencies, please run:
 
 4. Installation of Python Packages
   - Execute the following commands from the command line:
-```bat
+```batchfile
 > pip install Flask
 > pip install flask-restful
 > pip install piazza_api
@@ -38,7 +38,7 @@ Running the project
 
 To run our project, in your first terminal please run:
 
-```bat
+```batchfile
 > cd course-dashboard/backend
 > REM start the server with an empty database
 > setup.bat
@@ -46,7 +46,7 @@ To run our project, in your first terminal please run:
 
 And in a second terminal, please run:
 
-```bat
+```batchfile
 > REM Initialize the backend with sample data
 > python addSampleData.py
 ```
