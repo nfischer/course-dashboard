@@ -2,18 +2,20 @@ class NewClassForm extends React.Component {
   render() {
     return (
       <form>
-        <ClassFormDetails/>
+        <ClassDetailsInput/>
         <ModuleInputList/>
       </form>
     );
   }
 }
 
-class ClassFormDetails extends React.Component {
+class ClassDetailsInput extends React.Component {
   render() {
     return (
-      <input type="text" name="course_name" placeholder="course name"/>
-      <input type="text" name="piazza_cid" placeholder="piazza course id"/>
+      <classdetailsinput>
+        <input type="text" name="course_name" placeholder="course name"/>
+        <input type="text" name="piazza_cid" placeholder="piazza course id"/>
+      </classdetailsinput>
     );
   }
 }
@@ -21,10 +23,10 @@ class ClassFormDetails extends React.Component {
 class ModuleInputList extends React.Component {
   render(){
     return (
-      <modulelist>
-        {this.state.modules.map()}
+      <moduleinputlist>
+        {this.state.modules.map()} //ids assigned at this level
         <button className="addModule"/>
-      </modulelist>
+      </moduleinputlist>
     );
   }
 }
@@ -32,11 +34,11 @@ class ModuleInputList extends React.Component {
 class ModuleInput extends React.Component {
   render() {
     return (
-      <moduleinput>
+      <moduleinput className={this.props.id}>
         <input type="text" name={`${this.props.id}-title`} placeholder="module name"/>
-        <DateRangeInput id={`${this.props.id}-daterangeinput`}/>
-        <AssignmentInputList/>
-        <TopicInputList/>
+        <DateRangeInput className={`${this.props.id}-daterangeinput`}/>
+        <AssignmentInputList className={`${this.props.id}-assignments`}/>
+        <TopicInputList className={`${this.props.id}-topics`}/>
       </moduleinput>
     );
   }
@@ -45,7 +47,7 @@ class ModuleInput extends React.Component {
 class DateRangeInput extends React.Component {
   render() {
     return (
-      <daterangeinput>
+      <daterangeinput className={this.props.id}>
         <input type="date" name={`${this.props.id}-start`} placeholder="start date"/>
         <input type="date" name={`${this.props.id}-end`} placeholder="end date"/>
       </daterangeinput>
@@ -53,10 +55,41 @@ class DateRangeInput extends React.Component {
   }
 }
 
+//ASSIGNMENTINPUTLIST
+
 class AssignmentInput extends React.Component {
   render() {
     return (
-      <input type="text" name={`module-`}
+      <assignmentinput className={this.props.id}>
+        <input type="text" name={`${this.props.id}-title`}/>
+        <textarea type="textarea" name={`${this.props.id}-markdown`} placeholder="type markdown here"></textarea>
+      </assignmentinput>
+    );
+  }
+}
+
+//TOPICINPUTLIST
+
+class TopicInput extends React.Component {
+  render() {
+    return (
+      <topicinput className={this.props.id}>
+        <input type="text" name={`${this.props.id}-title`}/>
+        <ResourceInputList className={this.props.id}/>
+      </topicinput>
+    );
+  }
+}
+
+//RESOURCEINPUTLIST
+
+class ResourceInput extends React.Component {
+  render() {
+    return (
+      <resourceinput className={this.props.id}>
+        <input type="text" name={`${this.props.id}-title`}/>
+        <textarea type="textarea" placeholder="type markdown here"></textarea>
+      </resourceinput>
     );
   }
 }
