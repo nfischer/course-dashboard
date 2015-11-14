@@ -31,6 +31,28 @@ Nodes
 ```
  - Node ID will be auto-assigned (constantly increasing)
 
+### Editing a node
+
+ - end point: `/<course_id>/node/update/<id>/` where `<course_id>` and `<id>`
+   are some integers
+ - request: HTTP POST
+ - data (input):
+```
+{
+  "contents": "foo",
+  "renderer": "bar",
+  "children": "json string in here"
+}
+```
+ - return data:
+```
+{
+  "message": "Node was successfully updated.",
+  "id": "1"
+}
+```
+ - All fields in the form are optional (but at least one must be specified)
+
 ### Accessing a node
 
  - end point: `/<course_id>/node/get/<id>/` where `<course_id>` and `<id>` are
