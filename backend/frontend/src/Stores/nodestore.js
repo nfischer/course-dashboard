@@ -8,6 +8,8 @@ import Node from '../Models/node.js';
 import dispatcher from '../dispatcher.js';
 import * as WebAPI from '../utils/webapi.js';
 
+import updateParentAndChild from '../Actions/updateparentandchild.js';
+
 //add to NodeStoreState by appending to map
 class NodeStoreState {
   rootId: string;
@@ -18,6 +20,8 @@ class NodeStoreState {
     this.nodes = new Map();
   }
 }
+
+var nextSpoofedId = -1;
 
 //this store contains the internal representation of all nodes in use by the frontend.
 //the tree/graph can be traversed by starting at a root and looking up children in the map of id->node.
@@ -45,20 +49,38 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
 
       return newState;
     case "addNode":
-      //TODO: insert created node into tree at appropriate place
-      //parent node links are updated as a part of comitting changes to db
-      let newNode = action.data;
-      newNode.id = (typeof newNode.id === "string") ? newNode.id : newNode.id.toString();
+      //we keep the store internally consistent using a spoofed id, which is resolved
+      // once the request to update the backend goes through
+      let newNode = new Node({
+        id: (nextSpoofedId--).toString(),
+        contents: action.data.markdown,
+        renderer: action.data.renderer,
+        children: {}
+      });
+
+      let newParent = Object.assign({}, action.data.parent);
+      newParent.children[action.data.title] = newNode.id;
+
       newState = new NodeStoreState(state.rootId);
       newState.nodes = state.nodes.set(newNode.id, newNode);
+      newState.nodes = newState.nodes.set(newParent.id, newParent);
+
+      WebAPI.addNewChild(newParent, newNode, (initializedChild, updatedParent) => {
+        updateParentAndChild(initializedChild, updatedParent);
+      });
+      return newState;
+    case "updateParentAndChild": //this resolves the spoofed ID issues introduced in add
+      newState = new NodeStoreState(state.rootId);
+      newState.nodes = state.nodes.set(action.data.child.id, action.data.child);
+      newState.nodes = newState.nodes.set(action.data.parent.id, action.data.parent);
 
       return newState;
     case "editNode":
       let editedNode = action.data;
-      editedNode.id = (typeof editedNode.id === "string") ? editedNode.id : editedNode.id.toString();
       newState = new NodeStoreState(state.rootId);
       newState.nodes = state.nodes.set(editedNode.id, editedNode);
 
+      WebAPI.editNode(editedNode, ()=>{});
       return newState;
     case "removeNode":
       let nodeToRemove = action.data;
@@ -66,7 +88,9 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
       newState = new NodeStoreState(state.rootId);
       // delete node
       newState.nodes = state.nodes.delete(nodeToRemove.id);
+
       // modify parent nodes to no longer point to deleted node
+      let parents = [];
       newState.nodes.forEach(node => {
         let wasModified = false;
         let name;
@@ -76,12 +100,14 @@ class NodeStore extends ReduceStore<?NodeStoreState> {
             wasModified = true;
           }
         }
-        if (wasModified === true) {
-          WebAPI.editNode(node, node.contents, node.renderer, node.children, () => {});
+        if (wasModified) {
+          parents.push(node);
         }
       });
+
+      WebAPI.removeNode(nodeToRemove, parents, () => {});
       return newState;
-    }
+    } //end of switch statement
 
     return state;
   }

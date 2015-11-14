@@ -306,7 +306,7 @@ export class ListElement extends React.Component {
 
   endEdit(contents: string){
     this.setState({editing: false});
-    editNode(this.props.node, contents, this.props.node.renderer, this.props.node.children);
+    editNode(this.props.node, contents);
   }
 
   deleteNode(event){
