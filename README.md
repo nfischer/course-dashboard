@@ -47,10 +47,11 @@ To install gulp for frontend work:
   1. Install Node
     - Download the MSI for your appropriate OS
       [here](https://nodejs.org/en/download/)
-  2. Execute the following commands to install npm and gulp
-	```
-	> install npm
-	> npm install gulp -g
+  2. Execute the following commands to install npm and gulp  
+ 
+	```  
+	> install npm  
+	> npm install gulp -g  
 	> npm i	
 	```
 
