@@ -48,11 +48,11 @@ To install gulp for frontend work:
     - Download the MSI for your appropriate OS
       [here](https://nodejs.org/en/download/)
   2. Execute the following commands to install npm and gulp
-```
-> install npm
-> npm install gulp -g
-> npm i
-```
+	```
+	> install npm
+	> npm install gulp -g
+	> npm i	
+	```
 
 Backend
 -------
@@ -74,12 +74,12 @@ $ python
 Frontend
 --------
 
-The frontend is written using node.js and browserify. In order to build, execute
-the following commands from the frontend directory:
+The frontend is written using node.js and browserify. In order to build, navigate
+to the **frontend** directory and execute the following commands:
 
 ```
-$ npm install
-$ gulp build_browser
+  npm install
+  gulp build_browser
 ```
 
 In order to have the backend serve frontend files and have the frontend talk to
@@ -88,6 +88,9 @@ the backend, execute the following commands:
 ```
 $ cd ../backend
 $ setup.sh
+or
+> cd ..\backend
+> setup.bat
 ```
 
 The page should now be available at [127.0.0.1:5000/](http://127.0.0.1:5000/),
