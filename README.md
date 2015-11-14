@@ -3,65 +3,17 @@ Course Dashboard
 
 A simplified way of organizing all information and materials for a course
 
-Inspiration
------------
-
 Quick Start
 -----------
-#####Users on Posix based Machines
-In a new terminal execute the following
 
-```
-$ git clone https://github.com/nfischer/course-dashboard.git
+Please follow our system-specific setup steps first:
 
-$ sudo apt-get install sqlite3
-$ sudo apt-get install python-pip
+ - [Linux](linux-setup.md)
+ - [Mac OS X](mac-setup.md)
+ - [Windows](windows-setup.md)
 
-$ sudo pip install Flask
-$ sudo pip install flask-restful
-$ sudo pip install piazza_api
-
-$ cd course-dashboard/backend
-$ ./setup.sh
-```
-
-#####Users on Windows Machines
-
-1. Clone the project
-  ```
-    > git clone https://github.com/nfischer/course-dashboard.git
-  ```
-
-2. Install sqlite3
-  - Follow the steps laid out in: http://www.tutorialspoint.com/sqlite/sqlite_installation.htm
-3. Install Python and Pip
-  - **Pip** is a package manager that is include with Python 2.7.9+ and 3.4+ and we use it to install the other technologies we      use for this project.
-  - Install Python here: https://www.python.org/downloads/windows/
-    a. Make sure to specify to install Pip if given the option during installation
-4. Installation of Python Packages
-  Execute the following commands from the command line
-  ```
-  > pip install Flask
-  > pip install flask-restful
-  > pip install piazza_api
-
-  > cd course-dashboard/backend
-  > setup.bat
-  ```
-
-This should start the server, but with a blank database. in a new terminal,
-execute the following:
-
-```
-python addSampleData.py
-```
-
-This should insert data from the sample JSON file located in `frontend/` into
-the database.
-
-As a final step, in order to get piazza integration, please enter in your Piazza
-credentials in a new file named `backend/sample_user.txt' following the two-line
-format:
+Before running the project, make sure you enter in your Piazza credentials in a
+new file named `backend/sample_user.txt' following the two-line format:
 
 ```
 myemail@domain.com
@@ -71,73 +23,38 @@ mypassword
 If you're enrolled in CS 130 with that info, you're good to go and should have
 no issues displaying piazza information on the web UI.
 
-At this point, you can visit
-[localhost:5000/static/index.html](http://localhost:5000/static/index.html) to
-see a running page.
+At this point, you can visit [localhost:5000/](http://localhost:5000/) to see a
+running page of our project.
 
-Installation
-------------
+Installation for Development
+----------------------------
 
-#####Users on Posix based Machines
-To run our database, you'll need `sqlite3` as well as `pip`:
-
-```
-$ sudo apt-get install sqlite3
-$ sudo apt-get install python-pip
-```
-
-To install `flask` for the backend framework, you'll need to install three
-packages with `pip`:
-
-```
-$ sudo pip install Flask
-$ sudo pip install flask-restful
-$ sudo pip install piazza_api
-```
+### Users on Posix based Machines
 
 To install gulp for frontend work, you'll need to run:
 
-```
+```Bash
 $ sudo apt-get install npm
 $ sudo npm install gulp -g
+$ npm i
+$ # or do similar commands for your system
 ```
 
-#####Users on Windows Machines
-1. Install sqlite3
-  - Follow the steps laid out in: http://www.tutorialspoint.com/sqlite/sqlite_installation.htm
-2. Install Python and Pip
-  - **Pip** is a package manager that is include with Python 2.7.9+ and 3.4+ and we use it to install the other technologies we      use for this project.
-  - Install Python here: https://www.python.org/downloads/windows/
-    - Make sure to specify to install Pip if given the option during installation
-3. Installation of Python Packages
-    Execute the following commands from the command line
-    ```
-    > pip install Flask
-    > pip install flask-restful
-    > pip install piazza_api
-    ```
+### Users on Windows Machines
 
 To install gulp for frontend work:
   1. Install Node
-    Download the MSI for your appropriate OS here: https://nodejs.org/en/download/
+    - Download the MSI for your appropriate OS
+      [here](https://nodejs.org/en/download/)
   2. Execute the following commands to install npm and gulp
     ```
     > install npm
     > npm install gulp -g
+    > npm i
     ```
 
 Backend
 -------
-
-To begin testing the backend by itself, you can try running the following
-commands:
-
-```
-$ cd backend/
-$ mkdir db/ # only do this once
-$ sqlite3 db/course-dashboard.db < schema.sql # start a fresh database
-$ python cdApp.py # launch the backend
-```
 
 ### Python
 
@@ -145,18 +62,13 @@ Then in another terminal, you can launch python to interact with the database:
 
 ```Python
 $ python
->>> from requests import put, get
->>> put('http://localhost:5000/nodes', data={'contents': 'foo', 'renderer': 'bar'}).json()
+>>> from requests import post, get
+>>> post('http://localhost:5000/1/node/add/', data={'contents': 'foo', 'renderer': 'bar'}).json()
 >>> # output should be: {u'message': u'New node was successfully created'}
 >>> # more commands here...
+>>> # see rpc_specification.md for details on commands
 >>> exit()
 ```
-
-### HTML interface
-
-As an alternative, you can launch your web browser and point it to
-[http://localhost:5000/posterator](http://localhost:5000/posterator) and use the
-interface there.
 
 Frontend
 --------
@@ -173,13 +85,12 @@ in order to have the backend serve frontend files and have the frontend talk to
 the backend, execute the following commands:
 
 ```
-cd ../backend
-ln -s ../frontend static
+$ cd ../backend
+$ setup.sh
 ```
 
 The page should now be available at
-[http://localhost:5000/static/index.html](http://localhost:5000/static/index.html),
-served by the backend server.
+[http://localhost:5000/](http://localhost:5000/), served by the backend server.
 
 ### Migration
 
