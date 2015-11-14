@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3, logging
 from flask import Flask, request, g, render_template, \
     jsonify, Response, send_from_directory
 from flask_restful import Resource, Api
@@ -84,16 +84,44 @@ class Node(Resource):
             g.db.commit()
             added_node = cursor.fetchone()
             return jsonify(message='New node was successfully created', id=added_node['id'])
+        #update operation
         elif operation == 'update':
             try:
+                # updating fields should be optional you don't have to update
+                # children, content and renderer each for each update
                 node_id = str(node_id)
-                contents = request.form['contents']
-                renderer = request.form['renderer']
-                children = request.form['children']
-                cursor = g.db.execute('''UPDATE nodes
-                                         SET contents=(?),renderer=(?),children=(?)
-                                         WHERE id=(?) AND course_id=(?) AND isalive=1''',
-                                      [contents, renderer, children, int(node_id), int(course_id)])
+
+                contents = request.form['contents'] if request.form.has_key('contents') else None
+                renderer = request.form['renderer'] if request.form.has_key('renderer') else None
+                children = request.form['children'] if request.form.has_key('children') else None
+                data = []
+                sql_list = []
+
+                if contents:
+                    sql_list.append('contents=(?)')
+                    data.append(contents)
+                if renderer:
+                    sql_list.append('renderer=(?)')
+                    data.append(renderer)
+                if children:
+                    sql_list.append('children=(?)')
+                    data.append(children)
+
+                if not contents and not renderer and not children:
+                    raise InvalidUsage('POST header is empty')
+
+                # Build the SQL query
+                sql_str = 'UPDATE nodes SET '
+
+                # Concatenate all SQL set statements
+                sql_str += ', '.join(sql_list)
+
+                sql_str += ' WHERE id=(?) AND course_id=(?) AND isalive=1'
+
+                data.append(int(node_id))
+                data.append(int(course_id))
+
+                cursor = g.db.execute(sql_str, data)
                 g.db.commit()
                 if cursor.rowcount == 0:
                     raise InvalidUsage('Unable to update node %s' % node_id)
@@ -103,6 +131,7 @@ class Node(Resource):
                 print str(e)
                 raise InvalidUsage('Internal error', status_code=500)
             return jsonify(message='Node was successfully updated.', id=node_id)
+
         elif operation == 'delete':
             # Allows for repeated calls without failure
             cursor = g.db.execute('''UPDATE nodes
@@ -133,7 +162,9 @@ class Node(Resource):
 
         return_val = cursor.fetchone()
         if return_val is None:
-            raise InvalidUsage('node_id is out of range')
+            # if node is not alive, this message will be returned which is
+            # incorrect
+            raise InvalidUsage('No nodes found.')
         return return_val
 
 class Tree(Resource):
@@ -194,14 +225,34 @@ class Root(Resource):
 
 class Course(Resource):
     def post(self, course_id, operation):
-        if operation == 'setpiazza':
+        if operation == 'add':
+            if course_id != '0':
+                raise InvalidUsage('To create a new course, please use id 0')
             try:
                 g.db.execute('''INSERT INTO courses
-                                (course_id, piazza_cid) VALUES (?, ?)''',
-                             [int(course_id), request.form['piazza_cid']])
+                                (piazza_cid) VALUES (?)''',
+                             [''])
+                # set to empty string initially to get a database entry
+                cursor = g.db.execute('''SELECT course_id
+                                         FROM courses
+                                         ORDER BY course_id DESC limit 1''')
+                g.db.commit()
+                added_course = cursor.fetchone()
+                return jsonify(message='New course was successfully initialized',
+                               course_id=added_course['course_id'])
+            except Exception:
+                raise InvalidUsage('Unable to create new course',
+                                   status_code=500)
+        elif operation == 'setpiazza':
+            try:
+                g.db.execute('''UPDATE courses
+                                set piazza_cid=(?)
+                                WHERE course_id=(?)''',
+                             [request.form['piazza_cid'], int(course_id)])
                 g.db.commit()
                 return jsonify(message='Successfully added piazza ID for course', course_id=course_id)
             except Exception as e:
+                print str(e)
                 raise InvalidUsage('Cannot set more than once')
 
         elif operation == 'resetpiazza':
