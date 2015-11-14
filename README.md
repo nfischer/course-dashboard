@@ -23,7 +23,7 @@ mypassword
 If you're enrolled in CS 130 with that info, you're good to go and should have
 no issues displaying piazza information on the web UI.
 
-At this point, you can visit [localhost:5000/](http://localhost:5000/) to see a
+At this point, you can visit [127.0.0.1:5000/](http://127.0.0.1:5000/) to see a
 running page of our project.
 
 Installation for Development
@@ -63,7 +63,7 @@ Then in another terminal, you can launch python to interact with the database:
 ```Python
 $ python
 >>> from requests import post, get
->>> post('http://localhost:5000/1/node/add/', data={'contents': 'foo', 'renderer': 'bar'}).json()
+>>> post('http://127.0.0.1:5000/1/node/add/', data={'contents': 'foo', 'renderer': 'bar'}).json()
 >>> # output should be: {u'message': u'New node was successfully created'}
 >>> # more commands here...
 >>> # see rpc_specification.md for details on commands
@@ -90,7 +90,7 @@ $ setup.sh
 ```
 
 The page should now be available at
-[http://localhost:5000/](http://localhost:5000/), served by the backend server.
+[http://127.0.0.1:5000/](http://127.0.0.1:5000/), served by the backend server.
 
 ### Migration
 
