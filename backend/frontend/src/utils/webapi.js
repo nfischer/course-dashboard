@@ -16,7 +16,7 @@ import piazzaPostsFetched from '../Actions/piazzapostsfetched.js'
 
 // TODO(nate): This is a hardcoded <courseId>. Change this dynamically during
 // runtime based on which course we're actually viewing
-var courseId = "42";
+var courseId = "1";
 var mainUrl = "";
 
 // TODO(nate): This is a hardcoded user id. change this dynamically during
