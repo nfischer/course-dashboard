@@ -16,6 +16,8 @@ import nodeStore from '../Stores/nodestore.js';
 import getRenderedElement from './createelement.js';
 import expandWeek from '../Actions/expandweek.js';
 import addNode from '../Actions/addnode.js';
+import editNode from '../Actions/editnode.js';
+import removeNode from '../Actions/removenode.js';
 
 import titleCaps from '../utils/titlecaps.js';
 import * as WebAPI from '../utils/webapi.js';
