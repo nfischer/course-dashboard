@@ -6,6 +6,27 @@
   "scripts": {
     "test": "jest"
   },
+  "jest": {
+    "scriptPreprocessor": "./node_modules/babel-jest",
+    "testFileExtensions": [
+      "es6",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ],
+    "plugins": [
+      "transform-class-properties"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/nfischer/course-dashboard.git"
@@ -13,7 +34,6 @@
   "author": "ucla cs 130",
   "license": "ISC",
   "dependencies": {
-    "babel-runtime": "^5.8.25",
     "bootstrap": "^3.3.5",
     "classnames": "^2.2.0",
     "dom-helpers": "^2.4.0",
@@ -24,15 +44,24 @@
     "marked": "^0.3.5",
     "normalize.css": "^3.0.3",
     "partial": "0.0.3",
+    "path-parse": "^1.0.5",
     "piazza-api": "^0.1.4",
-    "react": "^0.14.0",
+    "react": "^0.14.2",
     "react-bootstrap": "^0.27.3",
-    "react-dom": "^0.14.0",
+    "react-dom": "^0.14.2",
     "stream-http": "^2.0.2",
     "url-parse": "^1.0.5"
   },
   "devDependencies": {
-    "babelify": "^6.3.0",
+    "babel": "^6.0.15",
+    "babel-jest": "^6.0.1",
+    "babel-plugin-syntax-flow": "^6.1.4",
+    "babel-plugin-transform-class-properties": "^6.1.4",
+    "babel-plugin-transform-flow-strip-types": "^6.1.4",
+    "babel-preset-es2015": "^6.1.4",
+    "babel-preset-react": "^6.1.4",
+    "babel-runtime": "^6.1.4",
+    "babelify": "^7.2.0",
     "brfs": "^1.4.1",
     "browserify": "^11.2.0",
     "browserify-resolutions": "^1.0.6",
@@ -46,11 +75,11 @@
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.5",
     "invariant": "^2.1.1",
+    "jest-cli": "^0.7.1",
     "merge-stream": "^1.0.0",
     "mocha": "^2.3.3",
     "orchestrator": "^0.3.7",
     "partial": "0.0.3",
-    "path-parse": "^1.0.5",
     "source-map-support": "^0.3.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",

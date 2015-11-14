@@ -143,6 +143,8 @@ function getPiazzaPosts(courseId: number){
   })
 }
 
+// getPiazzaPostsWorker
+
 
 //More complex actions defined in terms of primitives
 // promises are used to make the order of asynchronous steps more transparent
