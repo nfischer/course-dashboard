@@ -10,7 +10,7 @@ from posixpath import join as urljoin
 import json
 from requests import get, post
 
-URL = 'http://localhost:5000'
+URL = 'http://127.0.0.1:5000'
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 SAMPLE_JSON_FILE = os.path.join(PROJECT_DIR, 'backend/frontend', 'sampledata.json')
 
