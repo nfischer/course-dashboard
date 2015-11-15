@@ -4,8 +4,8 @@ python:
 # command to install dependencies
 install: "pip install -r requirements.txt"
 # command to run tests
-beforescript:
+before_script:
   - cd backend/
   - ./setup.sh &>/dev/null &
 script: python testCRUD.py
-afterscript: killall setup.sh
+after_script: killall setup.sh
