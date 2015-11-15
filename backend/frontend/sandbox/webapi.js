@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 var URL = 'http://localhost:5000';
 
 //uses the backend API to create a node
@@ -51,11 +53,11 @@ function addRoot(courseId, rootId){
 }
 
 function initializeCourse(courseName){
-  if(name === ""){
-    name = CS130;
+  if(courseName === ""){
+    courseName = "CS130";
   }
 
-  let endpoint = URL + `0/course/add/`;
+  let endpoint = URL + `/0/course/add/`;
   return Promise.resolve($.ajax(endpoint, {
     method: "POST",
     data: {name},
@@ -68,7 +70,7 @@ function setPiazza(courseId, piazzaId){
     "piazza_cid": piazzaId
   };
 
-  let endpoint = URL + `${courseId}/course/setPiazza/`;
+  let endpoint = URL + `/${courseId}/course/setPiazza/`;
   return Promise.resolve($.ajax(endpoint, {
     method: "POST",
     data,
@@ -85,10 +87,106 @@ function handleError(errorStr){
   }
 }
 
+
+//=================================
+
+function flatten(course: Object){
+  let nodes = [];
+
+  let courseNode = {};
+  courseNode.renderer = "Timeline";
+  courseNode.contents = "";
+  courseNode.children = pairsToObject(course.weeks.map((week, i)=> weekToNode(week, i)));
+
+  return bfs(courseNode);
+}
+
+function bfs(root){
+  let workingQueue = [root];
+  let returnQueue = [];
+
+  while(!(workingQueue.length === 0)){
+    let current = workingQueue.shift();
+    returnQueue.push(current);
+
+    for(let tag in current.children){
+      workingQueue.push(current.children[tag]);
+    }
+  }
+
+  return returnQueue;
+}
+
+function weekToNode(week, i){
+  let weekNode = {
+    contents: "",
+    renderer: "Week",
+    children: {
+      announcements : {
+        contents: JSON.stringify(week.dateRangeInput),
+        renderer: "Announcements",
+        children: {}
+      },
+      assignments : assignmentsToNode(week.assignments),
+      topics : topicsToNode(week.topics)
+    }
+  }
+  return [`Week ${i}`, weekNode];
+}
+
+function assignmentsToNode(assignments){
+  return {
+    contents: "Assignments\n==",
+    renderer: "List",
+    children: pairsToObject(assignments.map((assign)=> [assign.title, {
+      contents: assign.markdown,
+      renderer: "Assignment",
+      children: {}
+    }]))
+  };
+}
+
+function topicsToNode(topics){
+  return {
+    contents: "",
+    renderer: "List",
+    children: pairsToObject(topics.map(topicToNode))
+  };
+}
+
+function topicToNode(topic){
+  return [topic.title.toLowerCase(), {
+    contents: `${topic.title}\n==`,
+    renderer: "Topic",
+    children: {
+      resources: resourcesToNode(topic.resources)
+    }
+  }];
+}
+
+function resourcesToNode(resources){
+  return {
+    contents: "",
+    renderer: "EditableList",
+    children: pairsToObject(resources.map((resource)=> [resource.title, {
+      contents: resource.markdown,
+      renderer: "Resource",
+      children: {}
+    }]))
+  };
+}
+
+function pairsToObject(pairs){
+  return pairs.reduce((o, pair) => {
+    o[pair[0]] = pair[1];
+    return o;
+  }, {});
+}
+
 //===================================
 
 export function processSubmittedCourse(course: Object){
-  //TODO: convert tree into flat set of nodes
+  //convert the tree to a flat list of nodes
   let nodes = flatten(course);
   let courseId;
   //call appropriate primitives to create the course
@@ -116,31 +214,11 @@ export function processSubmittedCourse(course: Object){
       return Promise.all(nodes.map((node)=> updateNode(courseId, node)));
     }, handleError("Error creating nodes:"))
   .then(()=> {
-      //ADD ROOT HERE
-    }, handleError("Error updating node children"))
+      return addRoot(nodes[0].id)
+    }, handleError("Error updating node children:"))
   .then(()=> {
       //BLEP
-    }, handleError("Error adding root"));
+    }, handleError("Error adding root:"));
 }
 
-function flatten(course: Object){
-  let nodes = [];
-
-  course.renderer = "Timeline";
-  course.contents = "";
-  course.children = pairsToObject(course.weeks.map((week, i)=>{
-    let weekNode = {
-      contents: "",
-      renderer: "Week",
-      //beginning to enter callback hell here. plz fix
-    }
-    return [`Week ${i}`, week];
-  }));
-}
-
-function pairsToObject(pairs){
-  return pairs.reduce((o, pair){
-    o[pair[0]] = pair[1];
-    return o;
-  }, {});
-}
+global.processSubmittedCourse = processSubmittedCourse;
