@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sqlite3, logging
 from flask import Flask, request, g, render_template, \
     jsonify, Response, send_from_directory

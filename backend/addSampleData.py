@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """
 Python script that, when run, uses API calls to populate the backend with sample
