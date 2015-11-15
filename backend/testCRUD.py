@@ -21,13 +21,13 @@ class TestCRUD(unittest.TestCase):
 			self.assertEqual(res.status_code, 200)
 			jd = json.loads(res.text)
 
-	# def test_create(self):
-	# 	node_value = {'contents': 'foo{0}'.format(self.nodeId), 'renderer': 'rendition'}
-	# 	res = post(self.url + '/{0}/node/add/'.format(self.classId), data=node_value)
-	# 	self.assertEqual(res.status_code, 200)
-	# 	jd = json.loads(res.text)
-	# 	self.nodeId = int(jd['id'])
-	# 	self.assertGreater(self.nodeId, 0)
+	def test_create(self):
+		node_value = {'contents': 'foo{0}'.format(self.nodeId), 'renderer': 'rendition'}
+		res = post(self.url + '/{0}/node/add/'.format(self.classId), data=node_value)
+		self.assertEqual(res.status_code, 200)
+		jd = json.loads(res.text)
+		self.nodeId = int(jd['id'])
+		self.assertGreater(self.nodeId, 0)
 
 
 	def test_update(self):
@@ -43,24 +43,27 @@ class TestCRUD(unittest.TestCase):
 		res = post(self.url + '/{0}/node/update/1'.format(self.classId), data=node_value)
 		self.assertNotEqual(res.status_code, 400)
 
-		node_value = {'contents': 'foo{0}'.format(self.nodeId), 'renderer': 'test renderer'}
-		res = post(self.url + '/{0}/node/update/{1}/'.format(self.classId,self.nodeId), data=node_value)
-		self.assertNotEqual(res.status_code, 400)
+		if self.nodeId:
+			node_value = {'contents': 'foo{0}'.format(self.nodeId), 'renderer': 'test renderer'}
+			res = post(self.url + '/{0}/node/update/{1}/'.format(self.classId,self.nodeId), data=node_value)
+			self.assertNotEqual(res.status_code, 400)
 
 		node_value = {'contents': 'foo{0}'.format(self.nodeId), 
 					'renderer': 'test renderer', 'children' : "{'week1':2, 'week1':3}"}
 		res = post(self.url + '/{0}/node/update/{1}/'.format(self.classId,self.nodeId), data=node_value)
 		self.assertNotEqual(res.status_code, 400)
 
-	# def test_delete(self):
-	# 	if self.nodeId:
-	# 		res = post(self.url + '/{0}/node/delete/{1}/'.format(self.classId, self.nodeId))
-	# 		self.assertEqual(res.status_code, 500)
+	def test_delete(self):
+		if self.nodeId:
+			res = post(self.url + '/{0}/node/delete/2/'.format(self.classId))
+			self.assertEqual(res.status_code, 500)
+			res = post(self.url + '/{0}/node/update/2/'.format(self.classId), data={'isalive' : '1'})
 
-	# 	else:
-	# 		res = post(self.url + '/{0}/node/delete/1/'.format(self.classId))
-	# 		self.assertEqual(res.status_code, 200)
-	# 		jd = json.loads(res.text)
+		else:
+			res = post(self.url + '/{0}/node/delete/2/'.format(self.classId))
+			self.assertEqual(res.status_code, 200)
+			jd = json.loads(res.text)
+			res = post(self.url + '/{0}/node/update/2/'.format(self.classId), data={'isalive' : '1'})
 
 
 if __name__ == '__main__':
