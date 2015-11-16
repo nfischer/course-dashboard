@@ -107,7 +107,6 @@ Tree
  - return data:
 ```
 {
-  "rootId": "0",
   "nodes":
     [
       {
