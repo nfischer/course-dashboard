@@ -6,9 +6,9 @@ install: "pip install -r requirements.txt"
 # command to run tests
 before_script:
   - cd backend/
-script:
-  - sqlite3 -version
+  - mkdir -p db/
   - sqlite3 db/course-dashboard.db < schema.sql
+script:
   - python cdApp.py &
   - sleep 1
   - python testCRUD.py
