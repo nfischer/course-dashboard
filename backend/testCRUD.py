@@ -73,9 +73,7 @@ class CourseTests(unittest.TestCase):
 class NodeTests(unittest.TestCase):
     """ Test module for CRUD operations using Python's unittest """
     def setUp(self):
-        self.classId = 1
         self.url = 'http://localhost:5000'
-        self.nodeId = None
 
     def test_create(self):
         # Create course
@@ -84,7 +82,7 @@ class NodeTests(unittest.TestCase):
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
         # Create a node
-        node_value = {'contents': 'foo{0}'.format(self.nodeId), 'renderer': 'rendition'}
+        node_value = {'contents': 'foo', 'renderer': 'rendition'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
         self.assertEqual(res.status_code, 200)
         jd = json.loads(res.text)
@@ -99,7 +97,7 @@ class NodeTests(unittest.TestCase):
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
         # Create a node
-        node_value = {'contents': 'foo{0}'.format(self.nodeId), 'renderer': 'rendition'}
+        node_value = {'contents': 'foo', 'renderer': 'rendition'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
         self.assertEqual(res.status_code, 200)
         jd = json.loads(res.text)
@@ -123,7 +121,7 @@ class NodeTests(unittest.TestCase):
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
         # Create a node
-        node_value = {'contents': 'foo{0}'.format(self.nodeId), 'renderer': 'rendition'}
+        node_value = {'contents': 'foo', 'renderer': 'rendition'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
         self.assertEqual(res.status_code, 200)
         jd = json.loads(res.text)
@@ -151,7 +149,7 @@ class NodeTests(unittest.TestCase):
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
         # Create a node
-        node_value = {'contents': 'foo{0}'.format(self.nodeId), 'renderer': 'rendition'}
+        node_value = {'contents': 'foo', 'renderer': 'rendition'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
         self.assertEqual(res.status_code, 200)
         jd = json.loads(res.text)
