@@ -3,9 +3,12 @@
 import unittest, json
 from requests import get, post
 URL = 'http://localhost:5000'
+UNICODE_TYPE = type(u'unicode string')
+INT_TYPE = type(int())
 
 class CourseTests(unittest.TestCase):
-    """ Test module """
+    """ Test the Course end point and various piazza operations """
+
     def setUp(self):
         self.url = URL
 
@@ -13,7 +16,7 @@ class CourseTests(unittest.TestCase):
         res = post(self.url + '/0/course/add/', data={})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
-        self.assertEqual(type(cid), type(1))
+        self.assertEqual(type(cid), INT_TYPE)
         self.assertGreater(cid, 0)
 
     def test_set_piazza(self):
@@ -25,7 +28,7 @@ class CourseTests(unittest.TestCase):
         # test piazza call success
         res = post(self.url + '/{0}/course/setpiazza/'.format(cid), data={'piazza_cid': 'ielkajf48l2k3'})
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(type(res.json()['course_id']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['course_id']), UNICODE_TYPE)
         self.assertEqual(cid, int(res.json()['course_id']))
 
     def test_reset_piazza(self):
@@ -37,7 +40,7 @@ class CourseTests(unittest.TestCase):
         # set the piazza ID to something to begin with
         res = post(self.url + '/{0}/course/setpiazza/'.format(cid), data={'piazza_cid': 'ielkajf48l2k3'})
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(type(res.json()['course_id']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['course_id']), UNICODE_TYPE)
         self.assertEqual(cid, int(res.json()['course_id']))
         # reset the piazza ID to something
         res = post(self.url + '/{0}/course/resetpiazza/'.format(cid), data={'piazza_cid': 'ielkajf48l2k3'})
@@ -57,21 +60,25 @@ class CourseTests(unittest.TestCase):
         piazza_id = 'ielkajf48l2k3'
         res = post(self.url + '/{0}/course/setpiazza/'.format(cid), data={'piazza_cid': piazza_id})
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(type(res.json()['course_id']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['course_id']), UNICODE_TYPE)
         self.assertEqual(cid, int(res.json()['course_id']))
         # test piazza call success
         res = get(self.url + '/{0}/course/getpiazza/'.format(cid))
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(type(res.json()['course_id']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['course_id']), UNICODE_TYPE)
         self.assertEqual(cid, int(res.json()['course_id']))
-        self.assertEqual(type(res.json()['piazza_cid']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['piazza_cid']), UNICODE_TYPE)
         self.assertEqual(piazza_id, str(res.json()['piazza_cid']))
         # test piazza call failure for an ID that is not yet set
         res = get(self.url + '/{0}/course/getpiazza/'.format(cid+1), data={'piazza_cid': 'ielkajf48l2k3'})
         self.assertEqual(res.status_code, 400)
 
 class NodeTests(unittest.TestCase):
-    """ Test module for CRUD operations using Python's unittest """
+    """
+    Test module for CRUD operations on the Node end point using Python's
+    unittest
+    """
+
     def setUp(self):
         self.url = 'http://localhost:5000'
 
@@ -131,7 +138,7 @@ class NodeTests(unittest.TestCase):
         node_value = {'contents': 'foobar'}
         res = post(self.url + '/{0}/node/update/{1}/'.format(cid, node_id), data=node_value)
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(type(res.json()['id']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['id']), UNICODE_TYPE)
         self.assertEqual(node_id, int(res.json()['id']))
         # Attempt to update no values of a node
         node_value = {}
@@ -158,7 +165,7 @@ class NodeTests(unittest.TestCase):
         # Delete a node that's there
         res = post(self.url + '/{0}/node/delete/{1}/'.format(cid, node_id))
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(type(res.json()['id']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['id']), UNICODE_TYPE)
         self.assertEqual(node_id, int(res.json()['id']))
         # Try to access the dead node
         res = get(self.url + '/{0}/node/get/{1}/'.format(cid, node_id))
@@ -166,14 +173,15 @@ class NodeTests(unittest.TestCase):
         # Redelete the node (which should be successful)
         res = post(self.url + '/{0}/node/delete/{1}/'.format(cid, node_id))
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(type(res.json()['id']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['id']), UNICODE_TYPE)
         self.assertEqual(node_id, int(res.json()['id']))
         # Try to delete a node that doesn't exist
         res = post(self.url + '/{0}/node/delete/{1}/'.format(cid, node_id+1))
         self.assertEqual(res.status_code, 400)
 
 class TreeTests(unittest.TestCase):
-    """ Test module """
+    """ Test module for the tree end point """
+
     def setUp(self):
         self.url = URL
 
@@ -216,7 +224,7 @@ class TreeTests(unittest.TestCase):
         tree_nodes.sort()
         counter = 0
         for tnode, nid in zip(tree_nodes, node_list):
-            self.assertEqual(type(tnode['id']), type(1))
+            self.assertEqual(type(tnode['id']), INT_TYPE)
             self.assertEqual(tnode['id'], nid)
             self.assertEqual(tnode['contents'], u'foo{0}'.format(counter))
             self.assertEqual(tnode['renderer'], u'rendition{0}'.format(counter))
@@ -225,7 +233,8 @@ class TreeTests(unittest.TestCase):
         self.assertEqual(counter, len(tree_nodes))
 
 class RootTests(unittest.TestCase):
-    """ Test module """
+    """ Test module for the Root end point """
+
     def setUp(self):
         self.url = URL
 
@@ -248,7 +257,7 @@ class RootTests(unittest.TestCase):
         # Set a root
         res = post(self.url + '/{0}/root/set/{1}/'.format(cid, node_id))
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(type(res.json()['id']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['id']), UNICODE_TYPE)
         self.assertEqual(int(res.json()['id']), node_id)
         # Get a root (which should be successful)
         res = get(self.url + '/{0}/root/get/'.format(cid))
@@ -257,7 +266,7 @@ class RootTests(unittest.TestCase):
         root_list = res.json()
         self.assertEqual(len(root_list), 1)
         root = root_list[0]
-        self.assertEqual(type(root['id']), type(node_id))
+        self.assertEqual(type(root['id']), INT_TYPE)
         self.assertEqual(root['id'], node_id)
         self.assertEqual(root['renderer'], u'rendition')
 
@@ -277,7 +286,7 @@ class RootTests(unittest.TestCase):
         # Set a root
         res = post(self.url + '/{0}/root/set/{1}/'.format(cid, node_id))
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(type(res.json()['id']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['id']), UNICODE_TYPE)
         self.assertEqual(int(res.json()['id']), node_id)
         # Try to set a node that doesn't exist
         res = post(self.url + '/{0}/root/set/{1}/'.format(cid, node_id+1))
@@ -299,12 +308,12 @@ class RootTests(unittest.TestCase):
         # Set a root
         res = post(self.url + '/{0}/root/set/{1}/'.format(cid, node_id))
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(type(res.json()['id']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['id']), UNICODE_TYPE)
         self.assertEqual(int(res.json()['id']), node_id)
         # Unset a root
         res = post(self.url + '/{0}/root/delete/{1}/'.format(cid, node_id))
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(type(res.json()['id']), type(u'unicode string'))
+        self.assertEqual(type(res.json()['id']), UNICODE_TYPE)
         self.assertEqual(int(res.json()['id']), node_id)
         # Unset a root that doesn't exist
         res = post(self.url + '/{0}/root/delete/{1}/'.format(cid, node_id+1))
