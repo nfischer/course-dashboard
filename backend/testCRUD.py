@@ -224,5 +224,91 @@ class TreeTests(unittest.TestCase):
         self.assertEqual(counter, len(node_list))
         self.assertEqual(counter, len(tree_nodes))
 
+class RootTests(unittest.TestCase):
+    """ Test module """
+    def setUp(self):
+        self.url = URL
+
+    def test_get_root(self):
+        # Create course
+        res = post(self.url + '/0/course/add/', data={})
+        self.assertEqual(res.status_code, 200)
+        cid = res.json()['course_id']
+        self.assertGreater(cid, 0)
+        # Create a node
+        node_value = {'contents': 'foo', 'renderer': 'rendition'}
+        res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
+        self.assertEqual(res.status_code, 200)
+        jd = json.loads(res.text)
+        node_id = int(jd['id'])
+        self.assertGreater(node_id, 0)
+        # Attempt to view a root (and fail)
+        res = get(self.url + '/{0}/root/get/'.format(cid))
+        self.assertEqual(res.status_code, 400)
+        # Set a root
+        res = post(self.url + '/{0}/root/set/{1}/'.format(cid, node_id))
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(type(res.json()['id']), type(u'unicode string'))
+        self.assertEqual(int(res.json()['id']), node_id)
+        # Get a root (which should be successful)
+        res = get(self.url + '/{0}/root/get/'.format(cid))
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(type(res.json()), type(list()))
+        root_list = res.json()
+        self.assertEqual(len(root_list), 1)
+        root = root_list[0]
+        self.assertEqual(type(root['id']), type(node_id))
+        self.assertEqual(root['id'], node_id)
+        self.assertEqual(root['renderer'], u'rendition')
+
+    def test_set_root(self):
+        # Create course
+        res = post(self.url + '/0/course/add/', data={})
+        self.assertEqual(res.status_code, 200)
+        cid = res.json()['course_id']
+        self.assertGreater(cid, 0)
+        # Create a node
+        node_value = {'contents': 'foo', 'renderer': 'rendition'}
+        res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
+        self.assertEqual(res.status_code, 200)
+        jd = json.loads(res.text)
+        node_id = int(jd['id'])
+        self.assertGreater(node_id, 0)
+        # Set a root
+        res = post(self.url + '/{0}/root/set/{1}/'.format(cid, node_id))
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(type(res.json()['id']), type(u'unicode string'))
+        self.assertEqual(int(res.json()['id']), node_id)
+        # Try to set a node that doesn't exist
+        res = post(self.url + '/{0}/root/set/{1}/'.format(cid, node_id+1))
+        self.assertEqual(res.status_code, 400)
+
+    def test_delete_root(self):
+        # Create course
+        res = post(self.url + '/0/course/add/', data={})
+        self.assertEqual(res.status_code, 200)
+        cid = res.json()['course_id']
+        self.assertGreater(cid, 0)
+        # Create a node
+        node_value = {'contents': 'foo', 'renderer': 'rendition'}
+        res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
+        self.assertEqual(res.status_code, 200)
+        jd = json.loads(res.text)
+        node_id = int(jd['id'])
+        self.assertGreater(node_id, 0)
+        # Set a root
+        res = post(self.url + '/{0}/root/set/{1}/'.format(cid, node_id))
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(type(res.json()['id']), type(u'unicode string'))
+        self.assertEqual(int(res.json()['id']), node_id)
+        # Unset a root
+        res = post(self.url + '/{0}/root/delete/{1}/'.format(cid, node_id))
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(type(res.json()['id']), type(u'unicode string'))
+        self.assertEqual(int(res.json()['id']), node_id)
+        # Unset a root that doesn't exist
+        res = post(self.url + '/{0}/root/delete/{1}/'.format(cid, node_id+1))
+        self.assertEqual(res.status_code, 400)
+
 if __name__ == '__main__':
     unittest.main()
