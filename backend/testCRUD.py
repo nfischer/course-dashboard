@@ -172,5 +172,57 @@ class NodeTests(unittest.TestCase):
         res = post(self.url + '/{0}/node/delete/{1}/'.format(cid, node_id+1))
         self.assertEqual(res.status_code, 400)
 
+class TreeTests(unittest.TestCase):
+    """ Test module """
+    def setUp(self):
+        self.url = URL
+
+    def test_get_tree(self):
+        node_list = []
+        # Create course
+        res = post(self.url + '/0/course/add/', data={})
+        self.assertEqual(res.status_code, 200)
+        cid = res.json()['course_id']
+        self.assertGreater(cid, 0)
+        # Create a node
+        node_value = {'contents': 'foo0', 'renderer': 'rendition0'}
+        res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
+        self.assertEqual(res.status_code, 200)
+        jd = json.loads(res.text)
+        node_id = int(jd['id'])
+        node_list.append(node_id)
+        self.assertGreater(node_id, 0)
+        # Create another node
+        node_value = {'contents': 'foo1', 'renderer': 'rendition1'}
+        res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
+        self.assertEqual(res.status_code, 200)
+        jd = json.loads(res.text)
+        node_id = int(jd['id'])
+        node_list.append(node_id)
+        # Create another node
+        node_value = {'contents': 'foo2', 'renderer': 'rendition2'}
+        res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
+        self.assertEqual(res.status_code, 200)
+        jd = json.loads(res.text)
+        node_id = int(jd['id'])
+        node_list.append(node_id)
+        # Check that nodes are in increasing order
+        self.assertTrue(sorted(node_list))
+        # Get the tree
+        res = get(self.url + '/{0}/tree/'.format(cid))
+        self.assertEqual(res.status_code, 200)
+        tree_nodes = res.json()['nodes']
+        self.assertEqual(type(tree_nodes), type(node_list))
+        tree_nodes.sort()
+        counter = 0
+        for tnode, nid in zip(tree_nodes, node_list):
+            self.assertEqual(type(tnode['id']), type(1))
+            self.assertEqual(tnode['id'], nid)
+            self.assertEqual(tnode['contents'], u'foo{0}'.format(counter))
+            self.assertEqual(tnode['renderer'], u'rendition{0}'.format(counter))
+            counter = counter + 1
+        self.assertEqual(counter, len(node_list))
+        self.assertEqual(counter, len(tree_nodes))
+
 if __name__ == '__main__':
     unittest.main()
