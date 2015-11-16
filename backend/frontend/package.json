@@ -19,8 +19,13 @@
     ]
   },
   "babel": {
-    "presets": ["es2015", "react"],
-    "plugins": ["transform-class-properties"]
+    "presets": [
+      "es2015",
+      "react"
+    ],
+    "plugins": [
+      "transform-class-properties"
+    ]
   },
   "repository": {
     "type": "git",
