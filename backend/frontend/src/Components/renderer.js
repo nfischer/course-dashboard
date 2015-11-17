@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import partial from 'partial';
 
 import Input from 'react-bootstrap/lib/Input';
-import ButtonInput from 'react-bootstrap/lib/ButtonInput';
+import Button from 'react-bootstrap/lib/Button';
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Alert from 'react-bootstrap/lib/Alert';
 import marked from 'marked';
 import Modal from 'react-bootstrap/lib/Modal';
@@ -62,7 +63,8 @@ export class Renderer extends React.Component{
   }
 }
 
-//Week renderer. if this week is the current one in the ui state, then the week is shown expanded. otherwise, a collapsedweek is shown.
+//Week renderer. if this week is the current one in the ui state, then the week is shown expanded.
+//otherwise, a collapsedweek is shown.
 export class Week extends React.Component {
   constructor(){
     super();
@@ -260,7 +262,6 @@ export class EditableModalList extends React.Component {
 //===== DEFAULT LIST
 // children are expanded inline
 
-//List renderer. List items are shown in a modal dialog
 export class List extends React.Component {
   render() : React.Element {
     return (
@@ -268,49 +269,11 @@ export class List extends React.Component {
         <h1>{titleCaps(this.props.tag)}</h1>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>
-            <ListElement tag={tag} key={id} node={nodeStore.getState().nodes.get(id)} ui={this.props.ui} />
+            getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
           )
         }
       </list>
     )
-  }
-}
-
-
-
-export class ListElement extends React.Component {
-  constructor(){
-    super();
-    this.state = {
-      editing: false
-    }
-  }
-
-  render() : React.Element {
-    return (
-      React.createElement(this.props.node.renderer,
-                          {className: "listelement"},
-                          <h2>{titleCaps(this.props.tag)}</h2>,
-                          this.state.editing ? <ListElementEditor onClick={this.endEdit.bind(this)}
-                                                                  contents={this.props.node.contents} /> :
-                                               getRenderedElement(this.props.tag, this.props.node, this.props.ui),
-                          this.state.editing ? null : <h2 onClick={this.startEdit.bind(this)}>Edit</h2>,
-                          <h2 onClick={this.deleteNode.bind(this)}>Delete</h2>
-                          )
-    );
-  }
-
-  startEdit(event){
-    this.setState({editing: true});
-  }
-
-  endEdit(contents: string){
-    this.setState({editing: false});
-    editNode(this.props.node, contents);
-  }
-
-  deleteNode(event){
-    removeNode(this.props.node);
   }
 }
 
@@ -325,7 +288,7 @@ export class EditableList extends React.Component {
         <ListElementCreator onClick={this.addNewChild.bind(this)}/>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>
-            <ListElement key={id} tag={tag} node={nodeStore.getState().nodes.get(id)} />
+            getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
           )
         }
       </list>
@@ -337,65 +300,115 @@ export class EditableList extends React.Component {
   }
 }
 
+export class Topic extends React.Component{
+  render() : React.Element {
+    return (
+      <topic>
+        <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
+        <children>
+          {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
+            getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
+          )}
+        </children>
+      </topic>
+    );
+  }
+}
+
+export class Resource extends React.Component{
+  constructor(){
+    super();
+    this.state = {
+      editing: false
+    }
+  }
+
+  render() : React.Element {
+    return (
+      <resource>
+        {this.state.editing ? <Input type="textarea" ref="contents" defaultValue={this.props.node.contents}/> :
+                              <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>}
+        {this.state.editing ? <Button onClick={this.endEdit.bind(this)}>Save</Button> :
+                              <Button onClick={this.startEdit.bind(this)}>Edit</Button>}
+        <Button onClick={this.deleteNode.bind(this)}>Delete</Button>
+      </resource>
+    );
+  }
+
+  startEdit(event){
+    this.setState({editing: true});
+  }
+
+  endEdit(event){
+    this.setState({editing: false});
+    editNode(this.props.node, this.refs["contents"].getValue());
+  }
+
+  deleteNode(event){
+    removeNode(this.props.node);
+  }
+}
+
+export class Assignment extends React.Component{
+  render() : React.Element {
+    return (
+      <assignment>
+        <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
+      </assignment>
+    );
+  }
+}
+
 class ListElementCreator extends React.Component {
   constructor(){
     super();
     this.state = {
-      alert: null
+      visible: false,
+      alert: false
     };
   }
 
   render() : React.Component { //add type that is element or component
     return (
       <listelementinput>
-        {this.state.alert ? this.state.alert : <placeholder/>}
-        <form ref="formelement">
-          <Input type="text" ref="title" placeholder="title"/>
-          <Input type="textarea" ref="contents" placeholder="type markdown here"/>
-          <ButtonInput value="Create" onClick={this.clickWrapper.bind(this)}/>
-        </form>
+        {this.state.alert ?
+          <Alert bsStyle="danger">
+            <p>Error: No title specified</p>
+          </Alert> :
+          <placeholder/>}
+        {this.state.visible ?
+          <creator>
+            <Input type="text" ref="title" placeholder="title"/>
+            <Input type="textarea" ref="contents" placeholder="type markdown here"/>
+            <Button onClick={this.createResource.bind(this)}>Create</Button>
+            <Button onClick={this.hideCreator.bind(this)}>Cancel</Button>
+          </creator> :
+          <Button onClick={this.showCreator.bind(this)}>Create</Button>}
       </listelementinput>
     );
   }
 
-  clickWrapper(){
-    let title=this.refs["title"].getValue().trim(), value=this.refs["contents"].getValue();
+  showCreator(){
+    this.setState({visible: true, alert: false});
+  }
+
+  hideCreator(){
+    this.setState({visible: false, alert: false});
+  }
+
+  createResource(){
+    let title = this.refs["title"].getValue().trim();
+    let value = this.refs["contents"].getValue();
     if(title === ""){
-      this.setState({alert: <AlertDismissable text="ERROR: must have a title"
-                                              onDismiss={this.onDismiss.bind(this)}/>});
+      this.setState({visible: true, alert: true});
     } else {
-      ReactDOM.findDOMNode(this.refs["formelement"]).reset();
       this.props.onClick(title, value);
+      this.setState({visible: false, alert: false})
     }
   }
-
-  onDismiss(){
-    this.setState({alert: []});
-  }
 }
 
-class ListElementEditor extends React.Component {
-  constructor(){
-    super();
-    this.state = {};
-  }
-
-  render() : React.Component { //add type that is element or component
-    return (
-      <listelementinput>
-        <form ref="formelement">
-          <Input type="textarea" ref="contents" placeholder={this.props.contents} />
-          <ButtonInput value="Save" onClick={this.save.bind(this)}/>
-        </form>
-      </listelementinput>
-    );
-  }
-
-  save(){
-    let newContents=this.refs["contents"].getValue();
-    this.props.onClick(newContents);
-  }
-}
+// deprecated
 class AlertDismissable extends React.Component {
   constructor(){
     super();
@@ -419,5 +432,65 @@ class AlertDismissable extends React.Component {
   handleAlertDismiss(){
     this.setState({alertVisible: false});
     this.props.onDismiss();
+  }
+}
+
+// deprecated
+class ListElementEditor extends React.Component {
+  constructor(){
+    super();
+    this.state = {};
+  }
+
+  render() : React.Component { //add type that is element or component
+    return (
+      <listelementinput>
+        <form ref="formelement">
+          <Input type="textarea" ref="contents" defaultValue={this.props.contents} />
+          <Button onClick={this.save.bind(this)}>Save</Button>
+        </form>
+      </listelementinput>
+    );
+  }
+
+  save(){
+    let newContents=this.refs["contents"].getValue();
+    this.props.onClick(newContents);
+  }
+}
+
+// deprecated
+export class ListElement extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      editing: false
+    }
+  }
+
+  render() : React.Element {
+    return (
+      React.createElement(this.props.node.renderer,
+                          {className: "listelement"},
+                          this.state.editing ? <ListElementEditor onClick={this.endEdit.bind(this)}
+                                                                  contents={this.props.node.contents} /> :
+                                               getRenderedElement(this.props.tag, this.props.node, this.props.ui),
+                          this.state.editing ? <placeholder/> : <h2 onClick={this.startEdit.bind(this)}>Edit</h2>,
+                          <h2 onClick={this.deleteNode.bind(this)}>Delete</h2>
+                          )
+    );
+  }
+
+  startEdit(event){
+    this.setState({editing: true});
+  }
+
+  endEdit(contents: string){
+    this.setState({editing: false});
+    editNode(this.props.node, contents);
+  }
+
+  deleteNode(event){
+    removeNode(this.props.node);
   }
 }
