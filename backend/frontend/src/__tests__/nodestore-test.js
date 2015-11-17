@@ -39,8 +39,8 @@ describe('nodestore', function() {
     name: 'addNode',
     data: {
       parent: rootNode,
-      title: 'newNode',
-      markdown: 'markdown',
+      title: 'newID',
+      markdown: 'new contents',
       renderer: 'Renderer'
     }
   };
@@ -86,6 +86,7 @@ describe('nodestore', function() {
     expect(all.get('rootID').id).toEqual('rootID');
     expect(all.get('rootID').contents).toEqual('');
     expect(all.get('rootID').renderer).toEqual('Renderer');
+    expect(all.get('rootID').children.testID).toEqual('testID');
     expect(nodeStore.getState().rootId).toEqual('testRootID');
   });
 
@@ -102,6 +103,8 @@ describe('nodestore', function() {
     expect(all.get['newID'].renderer).toEqual('Renderer');
     expect(all.get('testID').id).toEqual('testID');
     expect(all.get('rootID').id).toEqual('rootID');
+    expect(all.get('rootID').children.testID).toEqual('testID');
+    expect(all.get('rootID').children.newID).toEqual('newID');
     expect(nodeStore.getState().rootId).toEqual('testRootID');
   });
 
