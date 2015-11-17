@@ -16,8 +16,7 @@ describe('nodestore', function() {
     contents: '',
     renderer: 'Renderer',
     children: {
-      testID: "testID",
-      newID: "newID"
+      testID: "testID"
     }
   });
 
@@ -38,7 +37,12 @@ describe('nodestore', function() {
 
   var actionAddNode = {
     name: 'addNode',
-    data: newNode
+    data: {
+      parent: rootNode,
+      title: 'newNode',
+      markdown: 'markdown',
+      renderer: 'Renderer'
+    }
   };
   
 /*  var actionRemoveResource = {
@@ -86,10 +90,12 @@ describe('nodestore', function() {
   });
 
   it('AddNode: adds a node', function() {
+    //dispatch(actionOpen);
     dispatch(actionAddNode);
     
     var all = nodeStore.getState().nodes;
     expect(all.size).toBe(3);
+    expect(nodeStore.getState()).toNotEqual(null);
     expect(all.get['newID']).toEqual(newNode);
     expect(all.get['newID'].id).toEqual('newID');
     expect(all.get['newID'].contents).toEqual('new contents');

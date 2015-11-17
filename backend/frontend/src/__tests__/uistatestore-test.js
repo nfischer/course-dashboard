@@ -29,6 +29,8 @@ describe('uistatestore', function() {
     renderer: 'Renderer'
   });
 
+  var tempList = new List();
+
   var piazzaPostList = new List();
   
   // add nodes to list
@@ -66,38 +68,40 @@ describe('uistatestore', function() {
   });
 
   it('initializes with no week expanded', function() {
-    expect(uiStateStore.currentWeek).toEqual('');
-    expect(uiStateStore.piazzaPosts).toEqual({});
+    var all = uiStateStore.getState();
+
+    expect(all.currentWeek).toEqual('');
+    expect(all.piazzaPosts.size).toEqual(tempList.size);
   });
 
   it('Open: creates an empty UI state store', function() {
     dispatch(actionOpen);
     
-    expect(uiStateStore.currentWeek).toEqual('');
-    expect(uiStateStore.piazzaPosts).toEqual({});
+    var all = uiStateStore.getState();
+    expect(all.currentWeek).toEqual('');
+    expect(all.piazzaPosts.size).toEqual(tempList.size);
   });
   
   it('ExpandWeek: expands a week, setting it to the current week', function() {
     dispatch(actionExpandWeek);
     
-    expect(uiStateStore.currentWeek).toEqual('Week 2');
-    expect(uiStateStore.piazzaPosts).toEqual({});
+    var all = uiStateStore.getState();
+    expect(all.currentWeek).toEqual('Week 2');
+    expect(all.piazzaPosts.size).toEqual(tempList.size);
   });
 
   it('PiazzaPostsFetched: stores the fetched piazza posts', function() {
     dispatch(actionPiazzaPostsFetched);
     
-    var all = nodeStore.getState().piazzaPosts;
+    var all = uiStateStore.getState().piazzaPosts;
+    expect(all).toEqual(piazzaPostList);
     expect(all.size).toBe(3);
     expect(all.get('testNode')).toEqual(testNode); //Syntax?
     expect(all.get('testNode').id).toEqual('testID');
     expect(all.get('rootNode')).toEqual(rootNode);
     expect(all.get('rootNode').children['newID']).toEqual('newID');
     expect(all.get('newNode')).toEqual(newNode);
-    expect(uiStateStore.getState().piazzaPosts).toEqual(piazzaPostList);
     expect(uiStateStore.getState().currentWeek).toEqual('Week 2');
   });
-
-
 
 });
