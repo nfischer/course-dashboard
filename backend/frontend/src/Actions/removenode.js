@@ -10,8 +10,6 @@ class RemoveNode extends Action {
 }
 
 export default function removeNode(node){
-  WebAPI.removeNode(node, (node) => {
-    let action = new RemoveNode(node);
-    dispatcher.dispatch(action);
-  });
+  let action = new RemoveNode(node);
+  dispatcher.dispatch(action);
 }

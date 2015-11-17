@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Getting started with JSON Form</title>
+    <link rel="stylesheet" style="text/css" href="/frontend/sandbox/deps/opt/bootstrap.css" />
+    <link rel="stylesheet" style="text/css" href="/frontend/sandbox/style.css" />
+  </head>
+  <body>
+    <h1>Getting started with JSON Form</h1>
+    <form></form>
+    <div id="res" class="alert"></div>
+    <script type="text/javascript" src="/frontend/sandbox/deps/jquery.min.js"></script>
+    <script type="text/javascript" src="/frontend/sandbox/deps/underscore.js"></script>
+    <script type="text/javascript" src="/frontend/sandbox/deps/opt/jsv.js"></script>
+    <script type="text/javascript" src="/frontend/sandbox/lib/jsonform.js"></script>
+    <script type="text/javascript" src="/frontend/sandbox/index.js"></script>
+    <script type="text/javascript">
+      $('form').jsonForm({
+        "schema": {
+          "course": {
+            "type": "object",
+            "title": "Add/Edit Course",
+            "properties": {
+              "courseDetails": {
+                "type": "object",
+                "htmlClass": "courseDetails",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "title"
+                  },
+                  "piazzaCourseId": {
+                    "type": "string",
+                    "description": "piazza course id"
+                  }
+                }
+              },
+              "weeks": {
+                "type": "array",
+                "htmlClass": "weeks",
+                "title": "weeks",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "object",
+                  "title": "Week {{idx}}",
+                  "htmlClass": "week",
+                  "properties": {
+                    "dateRangeInput": {
+                      "type": "object",
+                      "properties": {
+                        "start": {
+                          "type": "date",
+                          "description": "start date"
+                        },
+                        "end": {
+                          "type": "date",
+                          "description": "end date"
+                        }
+                      }
+                    },
+                    "assignments": {
+                      "type": "array",
+                      "title": "assignments",
+                      "htmlClass": "assignments",
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "description": "title"
+                          },
+                          "markdown": {
+                            "type": "textarea",
+                            "description": "contents"
+                          }
+                        }
+                      }
+                    },
+                    "topics": {
+                      "type": "array",
+                      "title": "topics",
+                      "htmlClass": "topics",
+                      "minItems": 1,
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "description": "title"
+                          },
+                          "resources": {
+                            "type": "array",
+                            "title": "resources",
+                            "htmlClass": "resources",
+                            "minItems": 1,
+                            "uniqueItems": true,
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "title": {
+                                  "type": "string",
+                                  "description": "title"
+                                },
+                                "markdown": {
+                                  "type": "textarea",
+                                  "description": "contents"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "form": [
+          {
+            type: "fieldset",
+            htmlClass: "course",
+            items: [
+              {
+                key: "course.courseDetails",
+                htmlClass: "courseDetails"
+              },
+              {
+                type: "tabarray",
+                htmlClass: "weeks",
+                title: "Weeks",
+                items: {
+                  type: "fieldset",
+                  htmlClass: "week",
+                  legend: "Week {{idx}}",
+                  items: [
+                    {
+                      key: "course.weeks[].dateRangeInput",
+                      htmlClass: "dateRangeInput"
+                    },
+                    {
+                      type: "array",
+                      htmlClass: "assignments",
+                      title: "Assignments",
+                      items: {
+                        type: "section",
+                        items: [
+                          {
+                            key: "course.weeks[].assignments[]",
+                            htmlClass: "assignment"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      type: "array",
+                      htmlClass: "topics",
+                      title: "Topics",
+                      items: {
+                        type: "fieldset",
+                        htmlClass: "topic",
+                        items: [
+                          {
+                            key: "course.weeks[].topics[].title",
+                            htmlClass: "title"
+                          },
+                          {
+                            type: "array",
+                            htmlClass: "resources",
+                            items: {
+                              type: "section",
+                              items: [
+                                {
+                                  key: "course.weeks[].topics[].resources[]",
+                                  htmlClass: "resource"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type": "submit",
+            "title": "Submit"
+          }
+        ],
+        onSubmit: function (errors, values) {
+          if (errors) {
+            $('#res').html(JSON.stringify(errors));
+          }
+          else {
+            $('#res').html(JSON.stringify(values));
+            setTimeout(function(){processSubmittedCourse(values.course)}, 5000);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

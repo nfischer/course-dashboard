@@ -24,12 +24,20 @@ var b = browserify({
   .transform(babelify, {presets: ['es2015', 'react'],
                         plugins: ["transform-class-properties"]});
 
+var b2 = browserify({
+    entries: 'webapi.js',
+    basedir: 'sandbox/',
+    debug: true
+  })
+  .plugin(resolutions, ['react', 'react-dom', 'jquery'])
+  .transform(babelify);
+
 function watch_browser(){
   w = watchify(b);
   w.on("update", partial(updateBundle, w));
   updateBundle(w);
 }
-//
+
 var updateBundle = function(b){
   b.bundle()
     //.on('error', gutil.log)
@@ -63,7 +71,18 @@ function watch_node(){
       .pipe(gulp.dest("dist_node"));
 }
 
+var updateBundle2 = function(b){
+  b2.bundle()
+    //.on('error', gutil.log)
+    .pipe(source('index.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./sandbox'));
+};
+
 gulp.task('build_browser', partial(updateBundle, b));
+gulp.task('build_browser2', partial(updateBundle2, b));
 gulp.task('watch_browser', watch_browser);
 
 gulp.task('build_node', build_node);

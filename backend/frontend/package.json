@@ -44,11 +44,13 @@
     "marked": "^0.3.5",
     "normalize.css": "^3.0.3",
     "partial": "0.0.3",
+    "path-parse": "^1.0.5",
     "piazza-api": "^0.1.4",
     "react": "^0.14.2",
     "react-bootstrap": "^0.27.3",
     "react-dom": "^0.14.2",
-    "stream-http": "^2.0.2"
+    "stream-http": "^2.0.2",
+    "url-parse": "^1.0.5"
   },
   "devDependencies": {
     "babel": "^6.0.15",

@@ -16,6 +16,8 @@ import nodeStore from '../Stores/nodestore.js';
 import getRenderedElement from './createelement.js';
 import expandWeek from '../Actions/expandweek.js';
 import addNode from '../Actions/addnode.js';
+import editNode from '../Actions/editnode.js';
+import removeNode from '../Actions/removenode.js';
 
 import titleCaps from '../utils/titlecaps.js';
 import * as WebAPI from '../utils/webapi.js';
@@ -183,15 +185,18 @@ export class Announcements extends React.Component{ //this should pretty much be
   }
 }
 
-//List renderer. List items are shown in a modal dialog
-export class List extends React.Component {
+
+//===== MODAL LIST
+//  children are expanded in a modal dialog
+
+export class ModalList extends React.Component {
   render() : React.Element {
     return (
       <list className={this.props.tag}>
         <h1>{titleCaps(this.props.tag)}</h1>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>
-            <ListElement tag={tag} key={id} node={nodeStore.getState().nodes.get(id)} ui={this.props.ui} />
+            <ModalListElement tag={tag} key={id} node={nodeStore.getState().nodes.get(id)} ui={this.props.ui} />
           )
         }
       </list>
@@ -237,10 +242,10 @@ export class EditableModalList extends React.Component {
     return (
       <list>
         <h1>{titleCaps(this.props.tag)}</h1>
-        <ListElementInput onClick={this.addNewChild.bind(this)}/>
+        <ListElementCreator onClick={this.addNewChild.bind(this)}/>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>
-            <ListElement key={id} tag={tag} node={nodeStore.getState().nodes.get(id)} />
+            <ModalListElement key={id} tag={tag} node={nodeStore.getState().nodes.get(id)} />
           )
         }
       </list>
@@ -252,37 +257,60 @@ export class EditableModalList extends React.Component {
   }
 }
 
+//===== DEFAULT LIST
+// children are expanded inline
+
+//List renderer. List items are shown in a modal dialog
+export class List extends React.Component {
+  render() : React.Element {
+    return (
+      <list className={this.props.tag}>
+        <h1>{titleCaps(this.props.tag)}</h1>
+        {
+          mapObject(this.props.node.children, (id: string, tag: string) =>
+            <ListElement tag={tag} key={id} node={nodeStore.getState().nodes.get(id)} ui={this.props.ui} />
+          )
+        }
+      </list>
+    )
+  }
+}
+
 
 
 export class ListElement extends React.Component {
   constructor(){
     super();
     this.state = {
-      show: false
+      editing: false
     }
   }
 
   render() : React.Element {
     return (
       React.createElement(this.props.node.renderer,
-                          {onClick: this.handleClick.bind(this),
-                           className: "listelement"},
+                          {className: "listelement"},
                           <h2>{titleCaps(this.props.tag)}</h2>,
-                          <Modal show={this.state.show} onHide={this.close.bind(this)}>
-                            <ModalBody>
-                              {getRenderedElement(this.props.tag, this.props.node, this.props.ui)}
-                            </ModalBody>
-                          </Modal>
+                          this.state.editing ? <ListElementEditor onClick={this.endEdit.bind(this)}
+                                                                  contents={this.props.node.contents} /> :
+                                               getRenderedElement(this.props.tag, this.props.node, this.props.ui),
+                          this.state.editing ? null : <h2 onClick={this.startEdit.bind(this)}>Edit</h2>,
+                          <h2 onClick={this.deleteNode.bind(this)}>Delete</h2>
                           )
     );
   }
 
-  handleClick(event){
-    this.setState({show: true});
+  startEdit(event){
+    this.setState({editing: true});
   }
 
-  close(){
-    this.setState({show: false});
+  endEdit(contents: string){
+    this.setState({editing: false});
+    editNode(this.props.node, contents);
+  }
+
+  deleteNode(event){
+    removeNode(this.props.node);
   }
 }
 
@@ -294,7 +322,7 @@ export class EditableList extends React.Component {
     return (
       <list>
         <h1>{titleCaps(this.props.tag)}</h1>
-        <ListElementInput onClick={this.addNewChild.bind(this)}/>
+        <ListElementCreator onClick={this.addNewChild.bind(this)}/>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>
             <ListElement key={id} tag={tag} node={nodeStore.getState().nodes.get(id)} />
@@ -309,7 +337,7 @@ export class EditableList extends React.Component {
   }
 }
 
-class ListElementInput extends React.Component {
+class ListElementCreator extends React.Component {
   constructor(){
     super();
     this.state = {
@@ -346,6 +374,28 @@ class ListElementInput extends React.Component {
   }
 }
 
+class ListElementEditor extends React.Component {
+  constructor(){
+    super();
+    this.state = {};
+  }
+
+  render() : React.Component { //add type that is element or component
+    return (
+      <listelementinput>
+        <form ref="formelement">
+          <Input type="textarea" ref="contents" placeholder={this.props.contents} />
+          <ButtonInput value="Save" onClick={this.save.bind(this)}/>
+        </form>
+      </listelementinput>
+    );
+  }
+
+  save(){
+    let newContents=this.refs["contents"].getValue();
+    this.props.onClick(newContents);
+  }
+}
 class AlertDismissable extends React.Component {
   constructor(){
     super();

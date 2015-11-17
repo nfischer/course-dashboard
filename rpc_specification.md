@@ -149,8 +149,29 @@ Root
 }
 ```
 
-Piazza Integration
+Course Info
 ------------------
+
+### Adding a Piazza course ID and name
+
+ - end point: `/<course_id>/course/setcourse/`, where `<course_id>` is some integer
+ - request: HTTP POST
+ - data (input):
+```
+{
+  "piazza_cid": "123456789",
+  "course_name": "ENGR 180"
+}
+```
+ - return data:
+```
+{
+  "message": "Successfully added piazza ID and course name for course",
+  "course_id": "1"
+}
+```
+ - This will fail if the course already has a Piazza ID/name (because we don't want
+   to overwrite it unless we **really** mean to)
 
 ### Adding a Piazza course ID
 
@@ -172,7 +193,27 @@ Piazza Integration
  - This will fail if the course already has a Piazza ID (because we don't want
    to overwrite it unless we **really** mean to)
 
-### Restting a Piazza course ID
+### Resetting a course name
+
+- end point: `/<course_id>/course/resetname/` where `<course_id>` is an integer
+- request: HTTP POST
+- data (input):
+```
+{
+ "course_name": "ENGR 180"
+}
+```
+- return data:
+```
+{
+ "message": "Successfully updated course name for course",
+ "course_id": "1"
+}
+```
+- This will fail if the course ID is not already present (by design to prevent
+  this from being accidentally changed)
+
+### Resetting a Piazza course ID
 
  - end point: `/<course_id>/course/resetpiazza/` where `<course_id>` is an integer
  - request: HTTP POST
@@ -192,7 +233,36 @@ Piazza Integration
  - This will fail if the course ID is not already present (by design to prevent
    this from being accidentally changed)
 
-### Accessing
+### Accessing Course Name
+
+- end point: `/<course_id>/course/get/` where `<course_id>` is some integer
+- request: HTTP GET
+- data (input): None
+- return data:
+```
+{
+  "message": "Returning course info",
+  "course_id": "1",
+  "course_name": "ENGR 180",
+  "piazza_cid": "123456789"
+}
+```
+
+### Accessing Course Name
+
+- end point: `/<course_id>/course/getname/` where `<course_id>` is some integer
+- request: HTTP GET
+- data (input): None
+- return data:
+```
+{
+ "message": "Returning name for course",
+ "course_id": "1",
+ "course_name": "ENGR 180"
+}
+```
+
+### Accessing Piazza ID
 
  - end point: `/<course_id>/course/getpiazza/` where `<course_id>` is some integer
  - request: HTTP GET

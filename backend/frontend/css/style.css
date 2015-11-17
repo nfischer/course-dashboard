@@ -6,6 +6,25 @@
 @import url('fonts/Bariol Regular Webfont/stylesheet.css');
 @import url('fonts/Bariol Thin Webfont/stylesheet.css');
 
+html {
+    position: relative;
+    background: hsla(194,20%,100%,1);
+    overflow: hidden;
+}
+
+html:before {
+    content: ' '; 
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('/frontend/img/bg1.jpg');
+    opacity: 0.1;
+    background-size: cover;
+}
 
 body {
     font-family: 'bariol_regularregular', sans-serif;
@@ -15,6 +34,8 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    z-index: 2;
+    background: none;
 }
 
 text {
