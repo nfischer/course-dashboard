@@ -45,16 +45,17 @@ describe('nodestore', function() {
     }
   };
   
-/*  var actionRemoveResource = {
-    name: 'removeResource',
+/*  TODO:
+	var actionUpdateParentAndChild = {
+    name: 'updateParentAndChild',
     data: 'foo'
   };
-  var actionEditResource = {
-    name: 'editResource',
+  var actionEditNode = {
+    name: 'editNode',
     data: 'foo'
   };
-  var actionExpandWeek = {
-    name: 'expandWeek',
+  var actionRemoveNode = {
+    name: 'removeNode',
     data: 'foo'
   }; */
 
@@ -108,14 +109,14 @@ describe('nodestore', function() {
     expect(nodeStore.getState().rootId).toEqual('testRootID');
   });
 
-/*   it('EditResource: removes a resource', function() {
+/*   it('RemoveNode: removes a node', function() {
     callback(actionOpen);
     var all = nodeStore.getAll();
     var keys = Object.keys(all);
-    expect(keys.length).toBe(1);
-    actionDestroy.id = keys[0];
-    callback(actionRemoveResource);
-    expect(all[keys[0]]).toBeUndefined();
+    expect(keys.length).toBe(2);
+    actionRemoveNode.id = keys[1];
+    callback(actionRemoveNode);
+    expect(all[keys[1]]).toBeUndefined();
   }); */
 
 });

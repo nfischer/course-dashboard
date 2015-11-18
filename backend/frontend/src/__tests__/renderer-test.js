@@ -7,15 +7,50 @@ import TestUtils from 'react-addons-test-utils';
 
 var Node = require('../Models/node').default;
 
-const renderer = require('../Components/renderer.js');
+// Tests createelement.js as well
+var CreateElement = require('../Components/createelement.js');
 
-describe('renderer', function() {
+const Renderer = require('../Components/renderer.js').default;
+
+describe('Renderer', function() {
 		
+  var testUI = {}; // ???
+  
   var testNode = new Node({
     id: 'testID',
     contents: 'test contents',
-    renderer: 'Renderer'
+    renderer: ''
   });
+  	
+  it('Renders a node that has no renderer specified', function() {
+	var defaultRenderer = Renderer.getRenderedElement('testTag', testNode, testUI);
+	var component = TestUtils.renderIntoDocument(
+	  <defaultRenderer.render() />
+	);
+	
+	var foundNode = TestUtils.findRenderedDOMComponentWithTag(
+	  component, 'test'
+	);
+	
+	expect(foundNode.getDOMNode()[1].className).toEqual('node');
+	expect(foundNode.getDOMNode()[1].key).toEqual('testID');
+	expect(foundNode.getDOMNode()[1][2]).toEqual('testTag');
+	expect(foundNode.getDOMNode()[1][3]).toEqual('node');
+	expect(foundNode.getDOMNode()[1][4]).toEqual({});
+	
+/* return React.createElement(renderClass,
+					 {
+					   className: "node",
+					   key: node.id, //this should work because a node cannot link to another node twice
+					   tag,
+					   node,
+					   ui
+					 },
+					 []); */
+	
+  });
+	
+/*  
 
   var rootNode = new Node({
     id: 'rootID',
@@ -46,19 +81,6 @@ describe('renderer', function() {
     name: 'addNode',
     data: newNode
   };
-  
-/*  var actionRemoveResource = {
-    name: 'removeResource',
-    data: 'foo'
-  };
-  var actionEditResource = {
-    name: 'editResource',
-    data: 'foo'
-  };
-  var actionExpandWeek = {
-    name: 'expandWeek',
-    data: 'foo'
-  }; */
 
   var onChange;
   var nodeStore;
@@ -66,7 +88,7 @@ describe('renderer', function() {
 
   beforeEach(function() {
     var dispatcher = require('../dispatcher').default;
-    nodeStore = require('../Stores/nodestore').default;
+    renderer = require('../Components/renderer').default;
     dispatch = dispatcher.dispatch.bind(dispatcher);
     onChange = nodeStore.__emitter.emit;// callback = nodeStore.__invokeOnDispatch.bind(nodeStore);
   });
@@ -103,6 +125,6 @@ describe('renderer', function() {
     expect(all.get('testID').id).toEqual('testID');
     expect(all.get('rootID').id).toEqual('rootID');
     expect(nodeStore.getState().rootId).toEqual('testRootID');
-  });
+  }); */
 		
 });
