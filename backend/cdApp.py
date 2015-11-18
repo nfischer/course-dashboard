@@ -231,8 +231,8 @@ class Course(Resource):
                 raise InvalidUsage('To create a new course, please use id 0')
             try:
                 g.db.execute('''INSERT INTO courses
-                                (piazza_cid) VALUES (?)''',
-                             [''])
+                                (piazza_cid, course_name) VALUES (?,?)''',
+                             ['', request.form['name']])
                 # set to empty string initially to get a database entry
                 cursor = g.db.execute('''SELECT course_id
                                          FROM courses

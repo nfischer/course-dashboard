@@ -12,7 +12,7 @@ function createNode(courseId, contents, renderer){
   let endpoint = URL + `/${courseId}/node/add/`;
   return Promise.resolve($.ajax(endpoint, {
     method: "POST",
-    data: node_values,
+    data: node_value,
     dataType: "json"
   }));
 }
@@ -26,11 +26,7 @@ function getNode(courseId, nodeId){
 }
 
 function updateNode(courseId, node){
-<<<<<<< HEAD
-  let endpoint = URL + `/${courseId}/node/update/${id}/`;
-=======
-  let endpoint = mainUrl + `/${courseId}/node/update/${id}/`;
->>>>>>> dede43bafa83dd35007c660bd965488a18d872d5
+  let endpoint = URL + `/${courseId}/node/update/${node.id}/`;
   let data = {contents: node.contents, renderer: node.renderer, children: JSON.stringify(node.children)};
   return Promise.resolve($.ajax(endpoint, {
     method: "POST",
@@ -40,11 +36,7 @@ function updateNode(courseId, node){
 }
 
 function deleteNode(courseId, nodeId: string){
-<<<<<<< HEAD
   let endpoint = URL + `/${courseId}/node/delete/${nodeId}/`;
-=======
-  let endpoint = mainUrl + `/${courseId}/node/delete/${nodeId}/`;
->>>>>>> dede43bafa83dd35007c660bd965488a18d872d5
   return Promise.resolve($.ajax(endpoint, {
     method: "POST",
     dataType: "json"
@@ -68,7 +60,7 @@ function initializeCourse(courseName){
   let endpoint = URL + `/0/course/add/`;
   return Promise.resolve($.ajax(endpoint, {
     method: "POST",
-    data: {name},
+    data: {name: courseName},
     dataType: "json"
   }));
 }
@@ -78,7 +70,7 @@ function setPiazza(courseId, piazzaId){
     "piazza_cid": piazzaId
   };
 
-  let endpoint = URL + `/${courseId}/course/setPiazza/`;
+  let endpoint = URL + `/${courseId}/course/setpiazza/`;
   return Promise.resolve($.ajax(endpoint, {
     method: "POST",
     data,
@@ -90,7 +82,7 @@ function setPiazza(courseId, piazzaId){
 
 function handleError(errorStr){
   return (jqXHR, textStatus, errorThrown) => {
-    console.error(errorStr, textStatus);
+    console.error(errorStr, jqXHR, textStatus, errorThrown);
     throw errorThrown;
   }
 }
@@ -139,7 +131,7 @@ function weekToNode(week, i){
       topics : topicsToNode(week.topics)
     }
   }
-  return [`Week ${i}`, weekNode];
+  return [`Week ${i+1}`, weekNode];
 }
 
 function assignmentsToNode(assignments){
@@ -200,7 +192,7 @@ export function processSubmittedCourse(course: Object){
   //call appropriate primitives to create the course
   initializeCourse(course.courseDetails.title)
   .then((cId)=>{
-      courseId = cId;
+      courseId = cId.course_id;
       return setPiazza(courseId, course.courseDetails.piazzaCourseId);
     }, handleError("Error initializing course:"))
   .then(()=> {
@@ -222,7 +214,7 @@ export function processSubmittedCourse(course: Object){
       return Promise.all(nodes.map((node)=> updateNode(courseId, node)));
     }, handleError("Error creating nodes:"))
   .then(()=> {
-      return addRoot(nodes[0].id)
+      return addRoot(courseId, nodes[0].id)
     }, handleError("Error updating node children:"))
   .then(()=> {
       //BLEP
