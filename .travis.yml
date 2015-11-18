@@ -1,0 +1,15 @@
+language: python
+python:
+  - "2.7"
+# command to install dependencies
+install: "pip install -r requirements.txt"
+# command to run tests
+before_script:
+  - cd backend/
+  - mkdir -p db/
+  - sqlite3 db/course-dashboard.db < schema.sql
+script:
+  - python cdApp.py &
+  - sleep 1
+  - python testCRUD.py
+after_script: killall setup.sh
