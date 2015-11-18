@@ -1,4 +1,250 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.processSubmittedCourse = processSubmittedCourse;
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var URL = 'http://localhost:5000';
+
+//uses the backend API to create a node
+function createNode(courseId, contents, renderer) {
+  var node_value = {
+    contents: contents,
+    renderer: renderer
+  };
+
+  var endpoint = URL + ('/' + courseId + '/node/add/');
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
+    method: "POST",
+    data: node_value,
+    dataType: "json"
+  }));
+}
+
+function getNode(courseId, nodeId) {
+  var endpoint = URL + ('/' + courseId + '/node/' + nodeId + '/');
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
+    method: "GET",
+    dataType: "json"
+  }));
+}
+
+function updateNode(courseId, node) {
+  var endpoint = URL + ('/' + courseId + '/node/update/' + node.id + '/');
+  var data = { contents: node.contents, renderer: node.renderer, children: JSON.stringify(node.children) };
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
+    method: "POST",
+    data: data,
+    dataType: "json"
+  }));
+}
+
+function deleteNode(courseId, nodeId) {
+  var endpoint = URL + ('/' + courseId + '/node/delete/' + nodeId + '/');
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
+    method: "POST",
+    dataType: "json"
+  }));
+}
+
+function addRoot(courseId, rootId) {
+  rootId = rootId.toString();
+
+  var endpoint = URL + ('/' + courseId + '/root/set/' + rootId + '/');
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
+    method: "POST"
+  }));
+}
+
+function initializeCourse(courseName) {
+  if (courseName === "") {
+    courseName = "CS130";
+  }
+
+  var endpoint = URL + '/0/course/add/';
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
+    method: "POST",
+    data: { name: courseName },
+    dataType: "json"
+  }));
+}
+
+function setPiazza(courseId, piazzaId) {
+  var data = {
+    "piazza_cid": piazzaId
+  };
+
+  var endpoint = URL + ('/' + courseId + '/course/setpiazza/');
+  return Promise.resolve(_jquery2.default.ajax(endpoint, {
+    method: "POST",
+    data: data,
+    dataType: "json"
+  }));
+}
+
+//===================================
+
+function handleError(errorStr) {
+  return function (jqXHR, textStatus, errorThrown) {
+    console.error(errorStr, jqXHR, textStatus, errorThrown);
+    throw errorThrown;
+  };
+}
+
+//=================================
+
+function flatten(course) {
+  var nodes = [];
+
+  var courseNode = {};
+  courseNode.renderer = "Timeline";
+  courseNode.contents = "";
+  courseNode.children = pairsToObject(course.weeks.map(function (week, i) {
+    return weekToNode(week, i);
+  }));
+
+  return bfs(courseNode);
+}
+
+function bfs(root) {
+  var workingQueue = [root];
+  var returnQueue = [];
+
+  while (!(workingQueue.length === 0)) {
+    var current = workingQueue.shift();
+    returnQueue.push(current);
+
+    for (var tag in current.children) {
+      workingQueue.push(current.children[tag]);
+    }
+  }
+
+  return returnQueue;
+}
+
+function weekToNode(week, i) {
+  var weekNode = {
+    contents: "",
+    renderer: "Week",
+    children: {
+      announcements: {
+        contents: JSON.stringify(week.dateRangeInput),
+        renderer: "Announcements",
+        children: {}
+      },
+      assignments: assignmentsToNode(week.assignments),
+      topics: topicsToNode(week.topics)
+    }
+  };
+  return ['Week ' + (i + 1), weekNode];
+}
+
+function assignmentsToNode(assignments) {
+  return {
+    contents: "Assignments\n==",
+    renderer: "ModalList",
+    children: pairsToObject(assignments.map(function (assign) {
+      return [assign.title, {
+        contents: assign.markdown,
+        renderer: "Assignment",
+        children: {}
+      }];
+    }))
+  };
+}
+
+function topicsToNode(topics) {
+  return {
+    contents: "",
+    renderer: "ModalList",
+    children: pairsToObject(topics.map(topicToNode))
+  };
+}
+
+function topicToNode(topic) {
+  return [topic.title.toLowerCase(), {
+    contents: topic.title + '\n==',
+    renderer: "Topic",
+    children: {
+      resources: resourcesToNode(topic.resources)
+    }
+  }];
+}
+
+function resourcesToNode(resources) {
+  return {
+    contents: "",
+    renderer: "EditableList",
+    children: pairsToObject(resources.map(function (resource) {
+      return [resource.title, {
+        contents: resource.markdown,
+        renderer: "Resource",
+        children: {}
+      }];
+    }))
+  };
+}
+
+function pairsToObject(pairs) {
+  return pairs.reduce(function (o, pair) {
+    o[pair[0]] = pair[1];
+    return o;
+  }, {});
+}
+
+//===================================
+
+function processSubmittedCourse(course) {
+  //convert the tree to a flat list of nodes
+  var nodes = flatten(course);
+  var courseId = undefined;
+  //call appropriate primitives to create the course
+  initializeCourse(course.courseDetails.title).then(function (cId) {
+    courseId = cId.course_id;
+    return setPiazza(courseId, course.courseDetails.piazzaCourseId);
+  }, handleError("Error initializing course:")).then(function () {
+    return Promise.all(nodes.map(function (node) {
+      return createNode(courseId, node.contents, node.renderer);
+    }));
+  }, handleError("Error setting course piazza ID:")).then(function (ids) {
+    //HANDLE LACK OF STRINGINESS
+    ids = ids.map(function (obj) {
+      return typeof obj.id === "string" ? obj.id : obj.id.toString();
+    });
+    //REPLACE MAPPING TO NODE WITH MAPPING TO ID
+    nodes.forEach(function (node, i) {
+      return node.id = ids[i];
+    });
+    nodes.forEach(function (node) {
+      for (var tag in node.children) {
+        node.children[tag] = node.children[tag].id;
+      }
+    });
+
+    return Promise.all(nodes.map(function (node) {
+      return updateNode(courseId, node);
+    }));
+  }, handleError("Error creating nodes:")).then(function () {
+    return addRoot(courseId, nodes[0].id);
+  }, handleError("Error updating node children:")).then(function () {
+    //BLEP
+  }, handleError("Error adding root:"));
+}
+
+global.processSubmittedCourse = processSubmittedCourse;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+
+},{"jquery":2}],2:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -9210,253 +9456,7 @@ return jQuery;
 
 }));
 
-},{}],2:[function(require,module,exports){
-(function (global){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.processSubmittedCourse = processSubmittedCourse;
-
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var URL = 'http://localhost:5000';
-
-//uses the backend API to create a node
-function createNode(courseId, contents, renderer) {
-  var node_value = {
-    contents: contents,
-    renderer: renderer
-  };
-
-  var endpoint = URL + ('/' + courseId + '/node/add/');
-  return Promise.resolve(_jquery2.default.ajax(endpoint, {
-    method: "POST",
-    data: node_value,
-    dataType: "json"
-  }));
-}
-
-function getNode(courseId, nodeId) {
-  var endpoint = URL + ('/' + courseId + '/node/' + nodeId + '/');
-  return Promise.resolve(_jquery2.default.ajax(endpoint, {
-    method: "GET",
-    dataType: "json"
-  }));
-}
-
-function updateNode(courseId, node) {
-  var endpoint = URL + ('/' + courseId + '/node/update/' + node.id + '/');
-  var data = { contents: node.contents, renderer: node.renderer, children: JSON.stringify(node.children) };
-  return Promise.resolve(_jquery2.default.ajax(endpoint, {
-    method: "POST",
-    data: data,
-    dataType: "json"
-  }));
-}
-
-function deleteNode(courseId, nodeId) {
-  var endpoint = URL + ('/' + courseId + '/node/delete/' + nodeId + '/');
-  return Promise.resolve(_jquery2.default.ajax(endpoint, {
-    method: "POST",
-    dataType: "json"
-  }));
-}
-
-function addRoot(courseId, rootId) {
-  rootId = rootId.toString();
-
-  var endpoint = URL + ('/' + courseId + '/root/set/' + rootId + '/');
-  return Promise.resolve(_jquery2.default.ajax(endpoint, {
-    method: "POST"
-  }));
-}
-
-function initializeCourse(courseName) {
-  if (courseName === "") {
-    courseName = "CS130";
-  }
-
-  var endpoint = URL + '/0/course/add/';
-  return Promise.resolve(_jquery2.default.ajax(endpoint, {
-    method: "POST",
-    data: { name: courseName },
-    dataType: "json"
-  }));
-}
-
-function setPiazza(courseId, piazzaId) {
-  var data = {
-    "piazza_cid": piazzaId
-  };
-
-  var endpoint = URL + ('/' + courseId + '/course/setpiazza/');
-  return Promise.resolve(_jquery2.default.ajax(endpoint, {
-    method: "POST",
-    data: data,
-    dataType: "json"
-  }));
-}
-
-//===================================
-
-function handleError(errorStr) {
-  return function (jqXHR, textStatus, errorThrown) {
-    console.error(errorStr, jqXHR, textStatus, errorThrown);
-    throw errorThrown;
-  };
-}
-
-//=================================
-
-function flatten(course) {
-  var nodes = [];
-
-  var courseNode = {};
-  courseNode.renderer = "Timeline";
-  courseNode.contents = "";
-  courseNode.children = pairsToObject(course.weeks.map(function (week, i) {
-    return weekToNode(week, i);
-  }));
-
-  return bfs(courseNode);
-}
-
-function bfs(root) {
-  var workingQueue = [root];
-  var returnQueue = [];
-
-  while (!(workingQueue.length === 0)) {
-    var current = workingQueue.shift();
-    returnQueue.push(current);
-
-    for (var tag in current.children) {
-      workingQueue.push(current.children[tag]);
-    }
-  }
-
-  return returnQueue;
-}
-
-function weekToNode(week, i) {
-  var weekNode = {
-    contents: "",
-    renderer: "Week",
-    children: {
-      announcements: {
-        contents: JSON.stringify(week.dateRangeInput),
-        renderer: "Announcements",
-        children: {}
-      },
-      assignments: assignmentsToNode(week.assignments),
-      topics: topicsToNode(week.topics)
-    }
-  };
-  return ['Week ' + (i + 1), weekNode];
-}
-
-function assignmentsToNode(assignments) {
-  return {
-    contents: "Assignments\n==",
-    renderer: "ModalList",
-    children: pairsToObject(assignments.map(function (assign) {
-      return [assign.title, {
-        contents: assign.markdown,
-        renderer: "Assignment",
-        children: {}
-      }];
-    }))
-  };
-}
-
-function topicsToNode(topics) {
-  return {
-    contents: "",
-    renderer: "ModalList",
-    children: pairsToObject(topics.map(topicToNode))
-  };
-}
-
-function topicToNode(topic) {
-  return [topic.title.toLowerCase(), {
-    contents: topic.title + '\n==',
-    renderer: "Topic",
-    children: {
-      resources: resourcesToNode(topic.resources)
-    }
-  }];
-}
-
-function resourcesToNode(resources) {
-  return {
-    contents: "",
-    renderer: "EditableList",
-    children: pairsToObject(resources.map(function (resource) {
-      return [resource.title, {
-        contents: resource.markdown,
-        renderer: "Resource",
-        children: {}
-      }];
-    }))
-  };
-}
-
-function pairsToObject(pairs) {
-  return pairs.reduce(function (o, pair) {
-    o[pair[0]] = pair[1];
-    return o;
-  }, {});
-}
-
-//===================================
-
-function processSubmittedCourse(course) {
-  //convert the tree to a flat list of nodes
-  var nodes = flatten(course);
-  var courseId = undefined;
-  //call appropriate primitives to create the course
-  initializeCourse(course.courseDetails.title).then(function (cId) {
-    courseId = cId.course_id;
-    return setPiazza(courseId, course.courseDetails.piazzaCourseId);
-  }, handleError("Error initializing course:")).then(function () {
-    return Promise.all(nodes.map(function (node) {
-      return createNode(courseId, node.contents, node.renderer);
-    }));
-  }, handleError("Error setting course piazza ID:")).then(function (ids) {
-    //HANDLE LACK OF STRINGINESS
-    ids = ids.map(function (obj) {
-      return typeof obj.id === "string" ? obj.id : obj.id.toString();
-    });
-    //REPLACE MAPPING TO NODE WITH MAPPING TO ID
-    nodes.forEach(function (node, i) {
-      return node.id = ids[i];
-    });
-    nodes.forEach(function (node) {
-      for (var tag in node.children) {
-        node.children[tag] = node.children[tag].id;
-      }
-    });
-
-    return Promise.all(nodes.map(function (node) {
-      return updateNode(courseId, node);
-    }));
-  }, handleError("Error creating nodes:")).then(function () {
-    return addRoot(courseId, nodes[0].id);
-  }, handleError("Error updating node children:")).then(function () {
-    //BLEP
-  }, handleError("Error adding root:"));
-}
-
-global.processSubmittedCourse = processSubmittedCourse;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-
-},{"jquery":1}]},{},[2])
+},{}]},{},[1])
 
 
 //# sourceMappingURL=index.js.map

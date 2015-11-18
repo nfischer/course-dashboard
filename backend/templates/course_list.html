@@ -7,8 +7,12 @@
   <h1 class=title>Course Dashboard</h1>
   <ul class=courses>
     {% for course in courses %}
-    <li><h2><a target="_blank" href="/{{ course.course_id }}/">{{ course.course_name }}</a></h2></li>
+    <li>
+      <h2><a target="_blank" href="/{{ course.course_id }}/" >{{ course.course_name }}</a></h2>
+      <h2><a target="_blank" href="/{{ course.course_id }}/edit/" >Edit</a></h2>
+    </li>
     {% endfor %}
   </ul>
+  <h1><a target="_blank" href="/newcourse/">Create a new course</a></h1>
 </body>
 </html>

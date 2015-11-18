@@ -357,10 +357,13 @@ def index():
 def course_index(course_id):
     return send_from_directory('frontend','index.html');
 
+@app.route('/<course_id>/edit/', methods=['GET'])
+def course_edit(course_id):
+    return send_from_directory('frontend/coursecreation', 'createcourse.html')
 
 @app.route('/newcourse/', methods=['GET'])
 def newcourse():
-    return send_from_directory('frontend/sandbox', 'createcourse.html');
+    return send_from_directory('frontend/coursecreation', 'createcourse.html')
 
 api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<operation>/<node_id>/')
 # api.add_resource(Children, '/children/<operation>/<node_id>/')
