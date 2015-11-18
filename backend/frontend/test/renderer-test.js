@@ -1,41 +1,66 @@
-//
-jest.autoMockOff();
+// //
+// jest.autoMockOff();
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 
-var Node = require('../Models/node').default;
+var Node = require('../src/Models/node').default;
+
+var assert = require('chai').assert;
+var expect = require('chai').expect;
+
+var sinon = require('sinon');
+var mockery = require('mockery');
 
 // Tests createelement.js as well
-var CreateElement = require('../Components/createelement.js');
+var CreateElement;
+var Renderer;
 
-const Renderer = require('../Components/renderer.js').default;
+var sinon = require('sinon');
+var mockery = require('mockery');
 
 describe('Renderer', function() {
-		
+
+	before(function(){
+    // console.error("before called");
+    // mockery.enable({
+    //   warnOnReplace: false,
+    //   warnOnUnregistered: false,
+    //   useCleanCache: true
+    // });
+		//
+    // var WebAPI = sinon.stub(require('../src/utils/webapi.js'));
+		//
+    // mockery.registerMock('../utils/webapi.js', WebAPI);
+    // mockery.registerMock('../src/utils/webapi.js', WebAPI);
+
+		CreateElement = require('../src/Components/createelement.js').default;
+		Renderer = require('../src/Components/renderer.js').default;
+  })
+
   var testUI = {}; // ???
-  
+
   var testNode = new Node({
     id: 'testID',
     contents: 'test contents',
     renderer: ''
   });
-  	
+
   it('Renders a node that has no renderer specified', function() {
-	var defaultRenderer = Renderer.getRenderedElement('testTag', testNode, testUI);
+	var defaultRenderer = CreateElement('testTag', testNode, testUI);
 	var component = TestUtils.renderIntoDocument(defaultRenderer.render());
-	
+
 	var foundNode = TestUtils.findRenderedDOMComponentWithTag(
 	  component, 'test'
 	);
-	
+
 	expect(foundNode.getDOMNode()[1].className).toEqual('node');
 	expect(foundNode.getDOMNode()[1].key).toEqual('testID');
 	expect(foundNode.getDOMNode()[1][2]).toEqual('testTag');
 	expect(foundNode.getDOMNode()[1][3]).toEqual('node');
 	expect(foundNode.getDOMNode()[1][4]).toEqual({});
-	
+
 /* return React.createElement(renderClass,
 					 {
 					   className: "node",
@@ -45,10 +70,10 @@ describe('Renderer', function() {
 					   ui
 					 },
 					 []); */
-	
+
   });
-	
-/*  
+
+/*
 
   var rootNode = new Node({
     id: 'rootID',
@@ -65,7 +90,7 @@ describe('Renderer', function() {
     contents: 'new contents',
     renderer: 'Renderer'
   });
-		
+
   // mock actions
   var actionOpen = {
     name: 'open',
@@ -113,7 +138,7 @@ describe('Renderer', function() {
 
   it('AddNode: adds a node', function() {
     dispatch(actionAddNode);
-    
+
     var all = nodeStore.getState().nodes;
     expect(all.size).toBe(3);
     expect(all.get['newID']).toEqual(newNode);
@@ -124,5 +149,5 @@ describe('Renderer', function() {
     expect(all.get('rootID').id).toEqual('rootID');
     expect(nodeStore.getState().rootId).toEqual('testRootID');
   }); */
-		
+
 });

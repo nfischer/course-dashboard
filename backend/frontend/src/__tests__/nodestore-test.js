@@ -1,5 +1,7 @@
-//
-jest.autoMockOff();
+// //
+// jest.autoMockOff();
+var assert = require('chai').assert;
+var expect = require('chai').expect;
 
 var Node = require('../Models/node').default;
 
@@ -44,7 +46,7 @@ describe('nodestore', function() {
       renderer: 'Renderer'
     }
   };
-  
+
 /*  TODO:
 	var actionUpdateParentAndChild = {
     name: 'updateParentAndChild',
@@ -94,7 +96,7 @@ describe('nodestore', function() {
   it('AddNode: adds a node', function() {
     //dispatch(actionOpen);
     dispatch(actionAddNode);
-    
+
     var all = nodeStore.getState().nodes;
     expect(all.size).toBe(3);
     expect(nodeStore.getState()).toNotEqual(null);
