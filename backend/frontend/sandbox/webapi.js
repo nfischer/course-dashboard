@@ -26,7 +26,11 @@ function getNode(courseId, nodeId){
 }
 
 function updateNode(courseId, node){
+<<<<<<< HEAD
   let endpoint = URL + `/${courseId}/node/update/${id}/`;
+=======
+  let endpoint = mainUrl + `/${courseId}/node/update/${id}/`;
+>>>>>>> dede43bafa83dd35007c660bd965488a18d872d5
   let data = {contents: node.contents, renderer: node.renderer, children: JSON.stringify(node.children)};
   return Promise.resolve($.ajax(endpoint, {
     method: "POST",
@@ -36,7 +40,11 @@ function updateNode(courseId, node){
 }
 
 function deleteNode(courseId, nodeId: string){
+<<<<<<< HEAD
   let endpoint = URL + `/${courseId}/node/delete/${nodeId}/`;
+=======
+  let endpoint = mainUrl + `/${courseId}/node/delete/${nodeId}/`;
+>>>>>>> dede43bafa83dd35007c660bd965488a18d872d5
   return Promise.resolve($.ajax(endpoint, {
     method: "POST",
     dataType: "json"
