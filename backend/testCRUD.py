@@ -13,7 +13,7 @@ class CourseTests(unittest.TestCase):
         self.url = URL
 
     def test_create(self):
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertEqual(type(cid), INT_TYPE)
@@ -21,7 +21,7 @@ class CourseTests(unittest.TestCase):
 
     def test_set_piazza(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
@@ -33,7 +33,7 @@ class CourseTests(unittest.TestCase):
 
     def test_reset_piazza(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
@@ -52,7 +52,7 @@ class CourseTests(unittest.TestCase):
 
     def test_get_piazza(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
@@ -84,7 +84,7 @@ class NodeTests(unittest.TestCase):
 
     def test_create(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
@@ -99,7 +99,7 @@ class NodeTests(unittest.TestCase):
     """ Tests requests.get operation """
     def test_get(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
@@ -123,7 +123,7 @@ class NodeTests(unittest.TestCase):
 
     def test_update(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
@@ -151,7 +151,7 @@ class NodeTests(unittest.TestCase):
 
     def test_delete(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
@@ -188,7 +188,7 @@ class TreeTests(unittest.TestCase):
     def test_get_tree(self):
         node_list = []
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
@@ -240,7 +240,7 @@ class RootTests(unittest.TestCase):
 
     def test_get_root(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
@@ -272,7 +272,7 @@ class RootTests(unittest.TestCase):
 
     def test_set_root(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
@@ -294,7 +294,7 @@ class RootTests(unittest.TestCase):
 
     def test_delete_root(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        res = post(self.url + '/0/course/add/', data={"name": "CS130"})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
