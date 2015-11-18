@@ -24,9 +24,7 @@ describe('Renderer', function() {
   	
   it('Renders a node that has no renderer specified', function() {
 	var defaultRenderer = Renderer.getRenderedElement('testTag', testNode, testUI);
-	var component = TestUtils.renderIntoDocument(
-	  <defaultRenderer.render() />
-	);
+	var component = TestUtils.renderIntoDocument(defaultRenderer.render());
 	
 	var foundNode = TestUtils.findRenderedDOMComponentWithTag(
 	  component, 'test'
