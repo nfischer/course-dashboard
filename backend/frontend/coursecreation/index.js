@@ -141,7 +141,7 @@ function weekToNode(week, i) {
         renderer: "Announcements",
         children: {}
       },
-      assignments: assignmentsToNode(week.assignments),
+      assignments: assignmentsToNode(week.assignments || []),
       topics: topicsToNode(week.topics)
     }
   };

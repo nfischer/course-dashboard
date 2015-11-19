@@ -28,11 +28,13 @@
                 "properties": {
                   "title": {
                     "type": "string",
-                    "description": "title"
+                    "description": "title",
+                    "required": true
                   },
                   "piazzaCourseId": {
                     "type": "string",
-                    "description": "piazza course id"
+                    "description": "piazza course id",
+                    "required": true
                   }
                 }
               },
@@ -52,11 +54,13 @@
                       "properties": {
                         "start": {
                           "type": "date",
-                          "description": "start date"
+                          "description": "start date",
+                          "required": true
                         },
                         "end": {
                           "type": "date",
-                          "description": "end date"
+                          "description": "end date",
+                          "required": true
                         }
                       }
                     },
@@ -70,11 +74,13 @@
                         "properties": {
                           "title": {
                             "type": "string",
-                            "description": "title"
+                            "description": "title",
+                            "required": true
                           },
                           "markdown": {
                             "type": "textarea",
-                            "description": "contents"
+                            "description": "contents",
+                            "required": true
                           }
                         }
                       }
@@ -90,7 +96,8 @@
                         "properties": {
                           "title": {
                             "type": "string",
-                            "description": "title"
+                            "description": "title",
+                            "required": true
                           },
                           "resources": {
                             "type": "array",
@@ -103,11 +110,13 @@
                               "properties": {
                                 "title": {
                                   "type": "string",
-                                  "description": "title"
+                                  "description": "title",
+                                  "required": true
                                 },
                                 "markdown": {
                                   "type": "textarea",
-                                  "description": "contents"
+                                  "description": "contents",
+                                  "required": true
                                 }
                               }
                             }
@@ -147,6 +156,7 @@
                       type: "array",
                       htmlClass: "assignments",
                       title: "Assignments",
+                      allowEmpty: true,
                       items: {
                         type: "section",
                         items: [
