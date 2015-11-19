@@ -107782,15 +107782,29 @@ var Resource = exports.Resource = (function (_React$Component11) {
   _createClass(Resource, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
+      return this.props.node.id < 0 ? _react2.default.createElement(
         'resource',
         null,
-        this.state.editing ? _react2.default.createElement(_Input2.default, { type: 'textarea', ref: 'contents', defaultValue: this.props.node.contents }) : _react2.default.createElement('contents', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.node.contents) } }),
-        this.state.editing ? _react2.default.createElement(
+        _react2.default.createElement('contents', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.node.contents) } })
+      ) : this.state.editing ? _react2.default.createElement(
+        'resource',
+        null,
+        _react2.default.createElement(_Input2.default, { type: 'textarea', ref: 'contents', defaultValue: this.props.node.contents }),
+        _react2.default.createElement(
           _Button2.default,
           { onClick: this.endEdit.bind(this) },
           'Save'
-        ) : _react2.default.createElement(
+        ),
+        _react2.default.createElement(
+          _Button2.default,
+          { onClick: this.deleteNode.bind(this) },
+          'Delete'
+        )
+      ) : _react2.default.createElement(
+        'resource',
+        null,
+        _react2.default.createElement('contents', { dangerouslySetInnerHTML: { __html: (0, _marked2.default)(this.props.node.contents) } }),
+        _react2.default.createElement(
           _Button2.default,
           { onClick: this.startEdit.bind(this) },
           'Edit'
@@ -108755,6 +108769,7 @@ function addNewChild(parent, child, callback) {
 
     initializedChild = new _node2.default(data);
     updatedParent = Object.assign({}, parent);
+    updatedParent.children = Object.assign({}, parent.children);
     for (var tag in updatedParent.children) {
       if (updatedParent.children[tag] === child.id) {
         updatedParent.children[tag] = initializedChild.id;

@@ -163,6 +163,7 @@ export function addNewChild(parent: Node, child: Node, callback: any){
 
       initializedChild = new Node(data);
       updatedParent = Object.assign({}, parent);
+      updatedParent.children = Object.assign({}, parent.children);
       for(var tag in updatedParent.children){
         if(updatedParent.children[tag] === child.id){
           updatedParent.children[tag] = initializedChild.id;

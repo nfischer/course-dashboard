@@ -325,13 +325,21 @@ export class Resource extends React.Component{
 
   render() : React.Element {
     return (
-      <resource>
-        {this.state.editing ? <Input type="textarea" ref="contents" defaultValue={this.props.node.contents}/> :
-                              <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>}
-        {this.state.editing ? <Button onClick={this.endEdit.bind(this)}>Save</Button> :
-                              <Button onClick={this.startEdit.bind(this)}>Edit</Button>}
-        <Button onClick={this.deleteNode.bind(this)}>Delete</Button>
-      </resource>
+      this.props.node.id < 0 ?
+        <resource>
+          <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
+        </resource> :
+        this.state.editing ?
+          <resource>
+            <Input type="textarea" ref="contents" defaultValue={this.props.node.contents}/>
+            <Button onClick={this.endEdit.bind(this)}>Save</Button>
+            <Button onClick={this.deleteNode.bind(this)}>Delete</Button>
+          </resource> :
+          <resource>
+            <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
+            <Button onClick={this.startEdit.bind(this)}>Edit</Button>
+            <Button onClick={this.deleteNode.bind(this)}>Delete</Button>
+          </resource>
     );
   }
 
