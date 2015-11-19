@@ -1,5 +1,15 @@
-form {
+@import url('../css/fonts/Bariol Bold Webfont/stylesheet.css');
+@import url('../css/fonts/Bariol Light Webfont/stylesheet.css');
+@import url('../css/fonts/Bariol Regular Webfont/stylesheet.css');
+@import url('../css/fonts/Bariol Thin Webfont/stylesheet.css');
+
+body {
     padding: 50px;
+    font-family: 'bariol_regularregular', sans-serif;
+}
+
+form {
+/*     padding: 50px; */
 }
 
 .topic, .assignment, .resource {
@@ -8,7 +18,7 @@ form {
 
 .topic, .assignment {
     margin: 0px 20px;
-    padding: 20px;
+/*     padding: 20px; */
 }
 
 .resource, .assignment {
@@ -29,11 +39,12 @@ form {
 
 .resource:first-child, .assignment:first-child, .topic:first-child {
     margin-left: 0px;
+    border-radius: 5px;
 }
 
 .resources > div.controls > div > ul, .assignments > div.controls > div > ul, .topics > div.controls > div > ul {
     display: flex;
-    
+
     margin-left: 0px;
 }
 
@@ -56,5 +67,30 @@ ul {
 
 .week {
     border: 2px solid green;
+    border-radius: 10px;
     padding: 30px;
+}
+
+
+legend, label.control-label, span.help-inline {
+    font-family: 'bariol_boldbold', sans-serif;
+    
+}
+
+legend {
+    font-size: 30px;
+}
+
+label.control-label {
+    font-size:  25px;
+    margin-top: 30px;
+}
+
+ul.nav.nav-tabs {
+    font-size: 20px;
+}
+
+span.help-inline {
+    font-family: 'bariol_regularregular', sans-serif;
+    font-size: 20px;
 }

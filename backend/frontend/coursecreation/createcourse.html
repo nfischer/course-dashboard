@@ -7,7 +7,7 @@
     <link rel="stylesheet" style="text/css" href="/frontend/coursecreation/style.css" />
   </head>
   <body>
-    <h1>Getting started with JSON Form</h1>
+    <h1>Create a new Course</h1>
     <form></form>
     <div id="res" class="alert"></div>
     <script type="text/javascript" src="/frontend/coursecreation/deps/jquery.min.js"></script>
@@ -201,7 +201,7 @@
           }
           else {
             $('#res').html(JSON.stringify(values));
-            setTimeout(function(){processSubmittedCourse(values.course)}, 5000);
+            setTimeout(function(){processSubmittedCourse(values.course)}, 1000);
           }
         }
       });
