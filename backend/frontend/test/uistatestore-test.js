@@ -96,7 +96,7 @@ describe('uistatestore', function() {
     expect(all.piazzaPosts.size).to.equal(tempList.size);
   });
 
-  it('PiazzaPostsFetched: stores the fetched piazza posts', function() {
+/*  it('PiazzaPostsFetched: stores the fetched piazza posts', function() {
     dispatch(actionPiazzaPostsFetched);
 
     var all = uiStateStore.getState().piazzaPosts;
@@ -108,6 +108,6 @@ describe('uistatestore', function() {
     expect(all.get('rootNode').children['newID']).to.equal('newID');
     expect(all.get('newNode')).to.equal(newNode);
     expect(uiStateStore.getState().currentWeek).to.equal('Week 2');
-  });
+  });*/
 
 });

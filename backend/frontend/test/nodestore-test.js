@@ -122,7 +122,7 @@ describe('nodestore', function() {
     expect(nodeStore.getState().rootId).to.equal('testRootID');
   });
 
-  it('AddNode: adds a node', function() {
+/*  it('AddNode: adds a node', function() {
     //dispatch(actionOpen);
     dispatch(actionAddNode);
 
@@ -138,7 +138,7 @@ describe('nodestore', function() {
     expect(all.get('rootID').children.testID).to.equal('testID');
     expect(all.get('rootID').children.newID).to.equal('newID');
     expect(nodeStore.getState().rootId).to.equal('testRootID');
-  });
+  });*/
 
 /*   it('RemoveNode: removes a node', function() {
     callback(actionOpen);
