@@ -137,7 +137,7 @@ function weekToNode(week, i){
 function assignmentsToNode(assignments){
   return {
     contents: "Assignments\n==",
-    renderer: "List",
+    renderer: "ModalList",
     children: pairsToObject(assignments.map((assign)=> [assign.title, {
       contents: assign.markdown,
       renderer: "Assignment",
@@ -149,7 +149,7 @@ function assignmentsToNode(assignments){
 function topicsToNode(topics){
   return {
     contents: "",
-    renderer: "List",
+    renderer: "ModalList",
     children: pairsToObject(topics.map(topicToNode))
   };
 }
