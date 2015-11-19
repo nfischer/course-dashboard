@@ -55,7 +55,6 @@
   "devDependencies": {
     "babel": "^6.0.15",
     "babel-core": "^6.1.21",
-    "babel-jest": "^6.0.1",
     "babel-plugin-syntax-flow": "^6.1.4",
     "babel-plugin-transform-class-properties": "^6.1.4",
     "babel-plugin-transform-flow-strip-types": "^6.1.4",
