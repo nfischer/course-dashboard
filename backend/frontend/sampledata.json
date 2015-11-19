@@ -23,7 +23,7 @@
     {
       "id": "6",
       "contents": "Assignments\n==",
-      "renderer": "List",
+      "renderer": "ModalList",
       "children": {
         "Background Survey": "17"
       }
@@ -43,7 +43,7 @@
     {
       "id": "4",
       "contents": "",
-      "renderer": "List",
+      "renderer": "ModalList",
       "children": {
         "introduction": "7",
         "design notation": "8",
@@ -136,7 +136,7 @@
     {
       "id": "18",
       "contents": "",
-      "renderer": "List",
+      "renderer": "ModalList",
       "children": {
         "Strategy" : "21",
         "Observer" : "22",
@@ -153,8 +153,8 @@
     },
     {
       "id": "20",
-      "contents": "",
-      "renderer": "List",
+      "contents": "Assignments\n===",
+      "renderer": "ModalList",
       "children": {
       }
     },
@@ -281,7 +281,7 @@
     {
       "id": "36",
       "contents": "[skeleton code snippets](https://ccle.ucla.edu/pluginfile.php/1078188/mod_resource/content/0/CS130DesignPatternSkeletons.pdf)",
-      "renderer": "List",
+      "renderer": "ModalList",
       "children": {
         "Singleton" : "39",
         "Command" : "40",
@@ -407,8 +407,8 @@
     },
     {
       "id": "38",
-      "contents": "",
-      "renderer": "List",
+      "contents": "Assignments\n===",
+      "renderer": "ModalList",
       "children": {
         "Assignment 1" : "45"
       }

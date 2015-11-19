@@ -194,3 +194,7 @@ piazza-item a:hover {
 .topics > h1 {
   color: hsl(220, 77%, 68%);
 }
+
+fullweek > children > list, fullweek > children > announcements {
+  min-width: 300px;
+}
