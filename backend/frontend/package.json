@@ -4,7 +4,7 @@
   "description": "frontend for Course Dashboard",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "mocha --compilers js:babel-core/register"
   },
   "jest": {
     "scriptPreprocessor": "./node_modules/babel-jest",
@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "babel": "^6.0.15",
+    "babel-core": "^6.1.21",
     "babel-jest": "^6.0.1",
     "babel-plugin-syntax-flow": "^6.1.4",
     "babel-plugin-transform-class-properties": "^6.1.4",
@@ -65,7 +66,7 @@
     "brfs": "^1.4.1",
     "browserify": "^11.2.0",
     "browserify-resolutions": "^1.0.6",
-    "chai": "^3.3.0",
+    "chai": "^3.4.1",
     "concat-stream": "^1.5.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
@@ -77,9 +78,12 @@
     "invariant": "^2.1.1",
     "jest-cli": "^0.7.1",
     "merge-stream": "^1.0.0",
-    "mocha": "^2.3.3",
+    "mocha": "^2.3.4",
+    "mockery": "^1.4.0",
     "orchestrator": "^0.3.7",
     "partial": "0.0.3",
+    "react-addons-test-utils": "^0.14.2",
+    "sinon": "^1.17.2",
     "source-map-support": "^0.3.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",

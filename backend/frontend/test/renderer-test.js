@@ -1,24 +1,87 @@
 // //
 // jest.autoMockOff();
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
+
+var Node = require('../src/Models/node').default;
+
 var assert = require('chai').assert;
 var expect = require('chai').expect;
 
-var Node = require('../Models/node').default;
+var sinon = require('sinon');
+var mockery = require('mockery');
 
-describe('nodestore', function() {
+// Tests createelement.js as well
+var CreateElement;
+var Renderer;
+
+var sinon = require('sinon');
+var mockery = require('mockery');
+
+describe('Renderer', function() {
+
+	before(function(){
+    // console.error("before called");
+    // mockery.enable({
+    //   warnOnReplace: false,
+    //   warnOnUnregistered: false,
+    //   useCleanCache: true
+    // });
+		//
+    // var WebAPI = sinon.stub(require('../src/utils/webapi.js'));
+		//
+    // mockery.registerMock('../utils/webapi.js', WebAPI);
+    // mockery.registerMock('../src/utils/webapi.js', WebAPI);
+
+		CreateElement = require('../src/Components/createelement.js').default;
+		Renderer = require('../src/Components/renderer.js').default;
+  })
+
+  var testUI = {}; // ???
 
   var testNode = new Node({
     id: 'testID',
     contents: 'test contents',
-    renderer: 'Renderer'
+    renderer: ''
   });
+
+  it('Renders a node that has no renderer specified', function() {
+	var defaultRenderer = CreateElement('testTag', testNode, testUI);
+	var component = TestUtils.renderIntoDocument(defaultRenderer.render());
+
+	var foundNode = TestUtils.findRenderedDOMComponentWithTag(
+	  component, 'test'
+	);
+
+	expect(foundNode.getDOMNode()[1].className).toEqual('node');
+	expect(foundNode.getDOMNode()[1].key).toEqual('testID');
+	expect(foundNode.getDOMNode()[1][2]).toEqual('testTag');
+	expect(foundNode.getDOMNode()[1][3]).toEqual('node');
+	expect(foundNode.getDOMNode()[1][4]).toEqual({});
+
+/* return React.createElement(renderClass,
+					 {
+					   className: "node",
+					   key: node.id, //this should work because a node cannot link to another node twice
+					   tag,
+					   node,
+					   ui
+					 },
+					 []); */
+
+  });
+
+/*
 
   var rootNode = new Node({
     id: 'rootID',
     contents: '',
     renderer: 'Renderer',
     children: {
-      testID: "testID"
+      testID: "testID",
+      newID: "newID"
     }
   });
 
@@ -39,27 +102,8 @@ describe('nodestore', function() {
 
   var actionAddNode = {
     name: 'addNode',
-    data: {
-      parent: rootNode,
-      title: 'newID',
-      markdown: 'new contents',
-      renderer: 'Renderer'
-    }
+    data: newNode
   };
-
-/*  TODO:
-	var actionUpdateParentAndChild = {
-    name: 'updateParentAndChild',
-    data: 'foo'
-  };
-  var actionEditNode = {
-    name: 'editNode',
-    data: 'foo'
-  };
-  var actionRemoveNode = {
-    name: 'removeNode',
-    data: 'foo'
-  }; */
 
   var onChange;
   var nodeStore;
@@ -67,7 +111,7 @@ describe('nodestore', function() {
 
   beforeEach(function() {
     var dispatcher = require('../dispatcher').default;
-    nodeStore = require('../Stores/nodestore').default;
+    renderer = require('../Components/renderer').default;
     dispatch = dispatcher.dispatch.bind(dispatcher);
     onChange = nodeStore.__emitter.emit;// callback = nodeStore.__invokeOnDispatch.bind(nodeStore);
   });
@@ -89,36 +133,21 @@ describe('nodestore', function() {
     expect(all.get('rootID').id).toEqual('rootID');
     expect(all.get('rootID').contents).toEqual('');
     expect(all.get('rootID').renderer).toEqual('Renderer');
-    expect(all.get('rootID').children.testID).toEqual('testID');
     expect(nodeStore.getState().rootId).toEqual('testRootID');
   });
 
   it('AddNode: adds a node', function() {
-    //dispatch(actionOpen);
     dispatch(actionAddNode);
 
     var all = nodeStore.getState().nodes;
     expect(all.size).toBe(3);
-    expect(nodeStore.getState()).toNotEqual(null);
     expect(all.get['newID']).toEqual(newNode);
     expect(all.get['newID'].id).toEqual('newID');
     expect(all.get['newID'].contents).toEqual('new contents');
     expect(all.get['newID'].renderer).toEqual('Renderer');
     expect(all.get('testID').id).toEqual('testID');
     expect(all.get('rootID').id).toEqual('rootID');
-    expect(all.get('rootID').children.testID).toEqual('testID');
-    expect(all.get('rootID').children.newID).toEqual('newID');
     expect(nodeStore.getState().rootId).toEqual('testRootID');
-  });
-
-/*   it('RemoveNode: removes a node', function() {
-    callback(actionOpen);
-    var all = nodeStore.getAll();
-    var keys = Object.keys(all);
-    expect(keys.length).toBe(2);
-    actionRemoveNode.id = keys[1];
-    callback(actionRemoveNode);
-    expect(all[keys[1]]).toBeUndefined();
   }); */
 
 });
