@@ -9,6 +9,10 @@ A simplified way of organizing all information and materials for a course
 Quick Start
 -----------
 
+This will allow you to easily pre-make a sample course and test it.
+
+If you want to test our course creation UI, please see the selection below.
+
 Please follow our system-specific setup steps first:
 
  - [Linux](linux-setup.md)
@@ -30,6 +34,18 @@ At this point, you can visit [127.0.0.1:5000/](http://127.0.0.1:5000/) to see a
 running page of our project. If that's good enough for you, then you're done at
 this point, and can skip the steps below.
 
+Course Creation
+---------------
+
+To test this out, follow the same steps as in the above section, but do not run
+`./addSampleData.py`. Open up the web browser to
+[http://localhost:5000/](http://localhost:5000/) (note: this cannot be
+`127.0.0.1`)
+
+From there, fill out the course creation UI as you see fit (adding in weeks,
+assignments, and resources). Adding empty elements in undefined, so don't do
+that for now.
+
 Installation for Development
 ----------------------------
 
@@ -48,17 +64,17 @@ $ # or do similar commands for your system
 ### Users on Windows Machines
 
 To install gulp for frontend work:
+
   1. Install Node
     - Download the MSI for your appropriate OS
       [here](https://nodejs.org/en/download/)
-  2. Execute the following commands to install npm and gulp  
- 
-	```  
-	> cd course-dashboard/backend/frontend
-	> install npm  
-	> npm install gulp -g  
-	> npm i	
-	```
+  2. Execute the following commands to install npm and gulp
+    ```
+    > cd course-dashboard/backend/frontend
+    > install npm
+    > npm install gulp -g
+    > npm i
+    ```
 
 Backend
 -------
@@ -84,8 +100,8 @@ The frontend is written using node.js and browserify. In order to build, navigat
 to the **frontend** directory and execute the following commands:
 
 ```
-  npm install
-  gulp build_browser
+$ npm install
+$ gulp build_browser
 ```
 
 In order to have the backend serve frontend files and have the frontend talk to
