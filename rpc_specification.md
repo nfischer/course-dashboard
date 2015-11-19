@@ -188,7 +188,8 @@ Course Info
 
 ### Adding a Piazza course ID
 
- - end point: `/<course_id>/course/setpiazza/`, where `<course_id>` is some integer
+ - end point: `/<course_id>/course/setpiazza/`, where `<course_id>` is some
+   integer
  - request: HTTP POST
  - data (input):
 ```
@@ -208,27 +209,29 @@ Course Info
 
 ### Resetting a course name
 
-- end point: `/<course_id>/course/resetname/` where `<course_id>` is an integer
-- request: HTTP POST
-- data (input):
+ - end point: `/<course_id>/course/resetname/` where `<course_id>` is an integer
+ - request: HTTP POST
+ - data (input):
 ```
 {
  "course_name": "ENGR 180"
 }
 ```
-- return data:
+ - return data:
 ```
 {
  "message": "Successfully updated course name for course",
+ "course_name": "ENGR 180",
  "course_id": "1"
 }
 ```
-- This will fail if the course ID is not already present (by design to prevent
-  this from being accidentally changed)
+ - This will fail if the course ID is not already present (by design to prevent
+   this from being accidentally changed)
 
 ### Resetting a Piazza course ID
 
- - end point: `/<course_id>/course/resetpiazza/` where `<course_id>` is an integer
+ - end point: `/<course_id>/course/resetpiazza/` where `<course_id>` is an
+   integer
  - request: HTTP POST
  - data (input):
 ```
@@ -246,12 +249,12 @@ Course Info
  - This will fail if the course ID is not already present (by design to prevent
    this from being accidentally changed)
 
-### Accessing Course Name
+### Accessing Course Info
 
-- end point: `/<course_id>/course/get/` where `<course_id>` is some integer
-- request: HTTP GET
-- data (input): None
-- return data:
+ - end point: `/<course_id>/course/get/` where `<course_id>` is some integer
+ - request: HTTP GET
+ - data (input): None
+ - return data:
 ```
 {
   "message": "Returning course info",
@@ -263,10 +266,11 @@ Course Info
 
 ### Accessing Course Name
 
-- end point: `/<course_id>/course/getname/` where `<course_id>` is some integer
-- request: HTTP GET
-- data (input): None
-- return data:
+ - **Deprecated**: use 'get'
+ - end point: `/<course_id>/course/getname/` where `<course_id>` is some integer
+ - request: HTTP GET
+ - data (input): None
+ - return data:
 ```
 {
  "message": "Returning name for course",
@@ -277,7 +281,9 @@ Course Info
 
 ### Accessing Piazza ID
 
- - end point: `/<course_id>/course/getpiazza/` where `<course_id>` is some integer
+ - **Deprecated**: use 'get'
+ - end point: `/<course_id>/course/getpiazza/` where `<course_id>` is some
+   integer
  - request: HTTP GET
  - data (input): None
  - return data:
@@ -291,8 +297,9 @@ Course Info
 
 ### Accessing Piazza Post Data
 
-- end point: `/<course_id>/course/getpiazzaposts/` where `<course_id>` is some integer
-- request: HTTP GET
-- data (input): None
-- return data:
-streaming json objects for each post in the class
+ - end point: `/<course_id>/course/getpiazzaposts/` where `<course_id>` is some
+   integer
+ - request: HTTP GET
+ - data (input): None
+ - return data:
+    - streaming json objects for each post in the class

@@ -234,13 +234,14 @@ class Course(Resource):
                                 (piazza_cid, course_name) VALUES (?,?)''',
                              ['', request.form['name']])
                 # set to empty string initially to get a database entry
-                cursor = g.db.execute('''SELECT course_id
+                cursor = g.db.execute('''SELECT course_id, course_name
                                          FROM courses
                                          ORDER BY course_id DESC limit 1''')
                 g.db.commit()
                 added_course = cursor.fetchone()
                 return jsonify(message='New course was successfully initialized',
-                               course_id=added_course['course_id'])
+                               course_id=added_course['course_id'],
+                               course_name=added_course['course_name'])
             except Exception:
                 raise InvalidUsage('Unable to create new course',
                                    status_code=500)
@@ -268,6 +269,18 @@ class Course(Resource):
             return jsonify(message='Successfully updated piazza ID for course',
                            course_id=course_id)
 
+        elif operation == 'resetname':
+            cursor = g.db.execute('''UPDATE courses
+                                     SET course_name=(?)
+                                     WHERE course_id=(?)''',
+                                  [request.form['course_name'], int(course_id)])
+            g.db.commit()
+            if cursor.rowcount == 0:
+                raise InvalidUsage('Course not found in database.')
+            return jsonify(message='Successfully updated course name for course',
+                           course_name=request.form['course_name'],
+                           course_id=course_id)
+
         else:
             raise InvalidUsage('Unknown operation type')
 
@@ -285,6 +298,7 @@ class Course(Resource):
                 course_name_str = row['course_name']
                 piazza_id_str = row['piazza_cid']
                 return jsonify(message='Returning course info', course_id=course_id, course_name=course_name_str, piazza_cid=piazza_id_str)
+        # @deprecated: use 'get' end point instead
         if operation == 'getname':
             cursor = g.db.execute('''SELECT course_name
                                      FROM courses
@@ -297,6 +311,7 @@ class Course(Resource):
             else:
                 course_name_str = course_name_row['course_name']
                 return jsonify(message='Returning name for course', course_id=course_id, course_name=course_name_str)
+        # @deprecated: use 'get' end point instead
         elif operation == 'getpiazza':
             cursor = g.db.execute('''SELECT piazza_cid
                                      FROM courses
