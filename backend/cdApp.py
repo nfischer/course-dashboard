@@ -362,10 +362,7 @@ def index():
     cursor = g.db.execute('''SELECT *
                              FROM courses''')
 
-    # if row is None:
-    #     raise InvalidUsage('Given course does not exist')
-    # else:
-    courses = [dict(course_id=row['course_id'], course_name=row["course_name"]) for row in cursor.fetchall()]
+    courses = [dict(course_id=row['course_id'], course_name=row['course_name']) for row in cursor.fetchall()]
     return render_template('course_list.html', courses=courses)
 
 @app.route('/<course_id>/', methods=['GET'])
@@ -380,8 +377,8 @@ def course_edit(course_id):
 def newcourse():
     return send_from_directory('frontend/coursecreation', 'createcourse.html')
 
-api.add_resource(Node, '/<course_id>/node/<operation>/', '/<course_id>/node/<operation>/<node_id>/')
-# api.add_resource(Children, '/children/<operation>/<node_id>/')
+api.add_resource(Node, '/<course_id>/node/<operation>/',
+                 '/<course_id>/node/<operation>/<node_id>/')
 api.add_resource(Tree, '/<course_id>/tree/')
 api.add_resource(Root, '/<course_id>/root/<operation>/',
                  '/<course_id>/root/<operation>/<root_id>/')
