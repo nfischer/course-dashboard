@@ -46,6 +46,30 @@ From there, fill out the course creation UI as you see fit (adding in weeks,
 assignments, and resources). Adding empty elements in undefined, so don't do
 that for now.
 
+Running tests
+-------------
+
+Running backend unit tests is fairly simple. Below are the steps for Linux:
+
+In one terminal, start the backend server by running:
+
+```Bash
+$ cd backend/
+$ ./setup.sh
+```
+
+In a second terminal execute the tests by running:
+
+```Bash
+$ cd backend/
+$ python testCRUD.py # all tests should pass
+```
+
+This should run all backend unit tests on CRUD operations (Create, read, update,
+delete). All tests are also run by Travis CI (continuous integration) upon each
+push and each pull request, so you can also check the build status at the top of
+this README. Adapt these steps if you're running on a different system.
+
 Installation for Development
 ----------------------------
 
