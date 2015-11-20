@@ -9,7 +9,6 @@
   <body>
     <h1>Create a new course</h1>
     <form></form>
-    <div id="res" class="alert"></div>
     <script type="text/javascript" src="/frontend/coursecreation/deps/jquery.min.js"></script>
     <script type="text/javascript" src="/frontend/coursecreation/deps/underscore.js"></script>
     <script type="text/javascript" src="/frontend/coursecreation/deps/opt/jsv.js"></script>
@@ -207,10 +206,10 @@
         ],
         onSubmit: function (errors, values) {
           if (errors) {
-            $('#res').html(JSON.stringify(errors));
+            console.error(JSON.stringify(errors));
           }
           else {
-            $('#res').html(JSON.stringify(values));
+            console.log(JSON.stringify(values));
             setTimeout(function(){processSubmittedCourse(values.course)}, 1000);
           }
         }
