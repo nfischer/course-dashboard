@@ -6,18 +6,6 @@
   "scripts": {
     "test": "mocha --compilers js:babel-core/register"
   },
-  "jest": {
-    "scriptPreprocessor": "./node_modules/babel-jest",
-    "testFileExtensions": [
-      "es6",
-      "js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "es6"
-    ]
-  },
   "babel": {
     "presets": [
       "es2015",
