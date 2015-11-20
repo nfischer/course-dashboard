@@ -9,9 +9,14 @@ class EditNode extends Action {
   }
 }
 
-export default function editNode(node, markdown, renderer, children){
-  WebAPI.editNode(node, markdown, renderer, children, (node) => {
-    let action = new EditNode(node);
-    dispatcher.dispatch(action);
+export default function editNode(node, markdown){
+  let editedNode = new Node({
+    id: node.id,
+    contents: markdown,
+    renderer: node.renderer,
+    children: node.children
   });
+
+  let action = new EditNode(editedNode);
+  dispatcher.dispatch(action);
 }

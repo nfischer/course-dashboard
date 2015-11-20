@@ -1,0 +1,110 @@
+{
+  "schema": {
+    "course": {
+      "type": "object",
+      "title": "Add/Edit Course",
+      "properties": {
+        "courseDetails": {
+          "type": "object",
+          "htmlClass": "courseDetails",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "title"
+            },
+            "piazzaCourseId": {
+              "type": "string",
+              "description": "piazza course id"
+            }
+          }
+        },
+        "weeks": {
+          "type": "array",
+          "htmlClass": "weeks",
+          "title": "weeks",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "title": "Week {{idx}}",
+            "htmlClass": "week",
+            "properties": {
+              "start": {
+                "type": "date",
+                "description": "start date"
+              },
+              "end": {
+                "type": "date",
+                "description": "end date"
+              },
+              "assignments": {
+                "type": "array",
+                "title": "assignments",
+                "htmlClass": "assignments",
+                "uniqueItems": true,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    },
+                    "markdown": {
+                      "type": "textarea",
+                      "description": "contents"
+                    }
+                  }
+                }
+              },
+              "topics": {
+                "type": "array",
+                "title": "topics",
+                "htmlClass": "topics",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    },
+                    "resources": {
+                      "type": "array",
+                      "title": "resources",
+                      "htmlClass": "resources",
+                      "minItems": 1,
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "description": "title"
+                          },
+                          "markdown": {
+                            "type": "textarea",
+                            "description": "contents"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "course"
+    },
+    {
+      "type": "submit",
+      "title": "Submit"
+    }
+  ]
+}

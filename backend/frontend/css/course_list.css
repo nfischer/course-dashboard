@@ -1,0 +1,72 @@
+@import url('normalize.css');
+@import url('bootstrap.min.css');
+
+@import url('fonts/Bariol Bold Webfont/stylesheet.css');
+@import url('fonts/Bariol Light Webfont/stylesheet.css');
+@import url('fonts/Bariol Regular Webfont/stylesheet.css');
+@import url('fonts/Bariol Thin Webfont/stylesheet.css');
+
+html {
+    position: relative;
+    background: hsla(194,25%,75%,1);
+    overflow: auto;
+}
+
+html:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('/frontend/img/bg1.jpg');
+    background-repeat: repeat-y;
+    opacity: 0.4;
+    background-size: 100% auto;
+}
+
+body {
+    overflow-x: hidden;
+    background: hsla(0,0%,100%, 0.9);
+    margin: 100px auto;
+    padding: 100px;
+    width: 1000px;
+    height: auto;
+    font-family: 'bariol_regularregular', sans-serif;
+    z-index: 2;
+}
+
+h1.title {
+    font-family: 'bariol_boldbold', sans_serif;
+    font-size: 80px;
+    text-align: center;
+    /* display: inline; */
+}
+
+h2 {
+    font-size: 45px;
+    text-align: center;
+    display: inline-block;
+}
+
+a {
+    text-decoration: none;
+    color: hsl(222, 95%, 46%);
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+
+li {
+    position: relative;
+    left: -40px;
+}
+
+ul.courses {
+    margin-top: 50px;
+}
