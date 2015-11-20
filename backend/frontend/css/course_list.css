@@ -9,7 +9,7 @@
 html {
     position: relative;
     background: hsla(194,25%,75%,1);
-    overflow: hidden;
+    overflow: auto;
 }
 
 html:before {
@@ -22,8 +22,9 @@ html:before {
     height: 100%;
     z-index: -1;
     background-image: url('/frontend/img/bg1.jpg');
+    background-repeat: repeat-y;
     opacity: 0.4;
-    background-size: cover;
+    background-size: 100% auto;
 }
 
 body {
