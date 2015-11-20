@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-var URL = 'http://localhost:5000';
+var URL = '';
 
 //uses the backend API to create a node
 function createNode(courseId, contents, renderer){
