@@ -9,6 +9,7 @@
   <body>
     <h1>Create a new course</h1>
     <form></form>
+    <div id="res" class="alert"></div>
     <script type="text/javascript" src="/frontend/coursecreation/deps/jquery.min.js"></script>
     <script type="text/javascript" src="/frontend/coursecreation/deps/underscore.js"></script>
     <script type="text/javascript" src="/frontend/coursecreation/deps/opt/jsv.js"></script>
@@ -206,10 +207,12 @@
         ],
         onSubmit: function (errors, values) {
           if (errors) {
+            $('#res').html("Error: unable to successfully create your course");
             console.error(JSON.stringify(errors));
           }
           else {
-            console.log(JSON.stringify(values));
+            $('#res').html("Course creation successful!");
+            console.log(JSON.stringify(values)); // DEBUG
             setTimeout(function(){processSubmittedCourse(values.course)}, 1000);
           }
         }
