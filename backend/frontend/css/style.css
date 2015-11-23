@@ -202,3 +202,11 @@ piazza-item a:hover {
 fullweek > children > list, fullweek > children > announcements {
   min-width: 300px;
 }
+
+.resource:nth-child(odd) {
+  background: hsl(0,0%,97%);
+}
+
+.resource {
+  padding: 10px;
+}
