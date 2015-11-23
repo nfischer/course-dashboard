@@ -44,14 +44,14 @@ export class Renderer extends React.Component{
       return (
         React.createElement(this.props.node.renderer,
                             {className: "node"},
-                            <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
+                            <div className="contents" dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
                           )
       );
     } else {
       return (
         React.createElement(this.props.node.renderer,
                             {className: "node"},
-                            <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
+                            <div className="contents" dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
                             <children>
                                 {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
                                   getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
@@ -73,7 +73,7 @@ export class Week extends React.Component {
     let fullyRendered = React.createElement("fullweek",
                           {className: "node"},
                           <h1 className="weektitle" onClick={this.collapse.bind(this)}>{titleCaps(this.props.tag)}</h1>,
-                          <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
+                          <div className="contents" dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>,
                           <children>
                               {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
                                 getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
@@ -303,14 +303,14 @@ export class EditableList extends React.Component {
 export class Topic extends React.Component{
   render() : React.Element {
     return (
-      <topic>
-        <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
+      <div className="topic">
+        <div className="contents" dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
         <children>
           {mapObject(this.props.node.children, (id: string, tag: string, obj: Object) =>
             getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
           )}
         </children>
-      </topic>
+      </div>
     );
   }
 }
@@ -326,20 +326,20 @@ export class Resource extends React.Component{
   render() : React.Element {
     return (
       this.props.node.id < 0 ?
-        <resource>
-          <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
-        </resource> :
+        <div className="resource">
+          <div className="contents" dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
+        </div> :
         this.state.editing ?
-          <resource>
+          <div className="resource">
             <Input type="textarea" ref="contents" defaultValue={this.props.node.contents}/>
             <Button onClick={this.endEdit.bind(this)}>Save</Button>
             <Button onClick={this.deleteNode.bind(this)}>Delete</Button>
-          </resource> :
-          <resource>
-            <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
+          </div> :
+          <div className="resource">
+            <div className="contents" dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
             <Button onClick={this.startEdit.bind(this)}>Edit</Button>
             <Button onClick={this.deleteNode.bind(this)}>Delete</Button>
-          </resource>
+          </div>
     );
   }
 
@@ -360,9 +360,9 @@ export class Resource extends React.Component{
 export class Assignment extends React.Component{
   render() : React.Element {
     return (
-      <assignment>
-        <contents dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
-      </assignment>
+      <div className="assignment">
+        <div className="contents" dangerouslySetInnerHTML={{__html: marked(this.props.node.contents)}}/>
+      </div>
     );
   }
 }
