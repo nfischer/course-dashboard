@@ -2,19 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Getting started with JSON Form</title>
-    <link rel="stylesheet" style="text/css" href="/frontend/sandbox/deps/opt/bootstrap.css" />
-    <link rel="stylesheet" style="text/css" href="/frontend/sandbox/style.css" />
+    <title>Create a new course</title>
+    <link rel="stylesheet" style="text/css" href="/frontend/coursecreation/deps/opt/bootstrap.css" />
+    <link rel="stylesheet" style="text/css" href="/frontend/coursecreation/style.css" />
   </head>
   <body>
-    <h1>Getting started with JSON Form</h1>
+    <h1>Create a new course</h1>
     <form></form>
-    <div id="res" class="alert"></div>
-    <script type="text/javascript" src="/frontend/sandbox/deps/jquery.min.js"></script>
-    <script type="text/javascript" src="/frontend/sandbox/deps/underscore.js"></script>
-    <script type="text/javascript" src="/frontend/sandbox/deps/opt/jsv.js"></script>
-    <script type="text/javascript" src="/frontend/sandbox/lib/jsonform.js"></script>
-    <script type="text/javascript" src="/frontend/sandbox/index.js"></script>
+    <script type="text/javascript" src="/frontend/coursecreation/deps/jquery.min.js"></script>
+    <script type="text/javascript" src="/frontend/coursecreation/deps/underscore.js"></script>
+    <script type="text/javascript" src="/frontend/coursecreation/deps/opt/jsv.js"></script>
+    <script type="text/javascript" src="/frontend/coursecreation/lib/jsonform.js"></script>
+    <script type="text/javascript" src="/frontend/coursecreation/index.js"></script>
     <script type="text/javascript">
       $('form').jsonForm({
         "schema": {
@@ -28,11 +27,13 @@
                 "properties": {
                   "title": {
                     "type": "string",
-                    "description": "title"
+                    "description": "title",
+                    "required": true
                   },
                   "piazzaCourseId": {
                     "type": "string",
-                    "description": "piazza course id"
+                    "description": "piazza course id",
+                    "required": true
                   }
                 }
               },
@@ -52,11 +53,13 @@
                       "properties": {
                         "start": {
                           "type": "date",
-                          "description": "start date"
+                          "description": "start date",
+                          "required": true
                         },
                         "end": {
                           "type": "date",
-                          "description": "end date"
+                          "description": "end date",
+                          "required": true
                         }
                       }
                     },
@@ -70,11 +73,13 @@
                         "properties": {
                           "title": {
                             "type": "string",
-                            "description": "title"
+                            "description": "title",
+                            "required": true
                           },
                           "markdown": {
                             "type": "textarea",
-                            "description": "contents"
+                            "description": "contents",
+                            "required": true
                           }
                         }
                       }
@@ -90,7 +95,8 @@
                         "properties": {
                           "title": {
                             "type": "string",
-                            "description": "title"
+                            "description": "title",
+                            "required": true
                           },
                           "resources": {
                             "type": "array",
@@ -103,11 +109,13 @@
                               "properties": {
                                 "title": {
                                   "type": "string",
-                                  "description": "title"
+                                  "description": "title",
+                                  "required": true
                                 },
                                 "markdown": {
                                   "type": "textarea",
-                                  "description": "contents"
+                                  "description": "contents",
+                                  "required": true
                                 }
                               }
                             }
@@ -147,6 +155,7 @@
                       type: "array",
                       htmlClass: "assignments",
                       title: "Assignments",
+                      allowEmpty: true,
                       items: {
                         type: "section",
                         items: [
@@ -197,11 +206,11 @@
         ],
         onSubmit: function (errors, values) {
           if (errors) {
-            $('#res').html(JSON.stringify(errors));
+            console.error(JSON.stringify(errors));
           }
           else {
-            $('#res').html(JSON.stringify(values));
-            setTimeout(function(){processSubmittedCourse(values.course)}, 5000);
+            console.log(JSON.stringify(values));
+            setTimeout(function(){processSubmittedCourse(values.course)}, 1000);
           }
         }
       });

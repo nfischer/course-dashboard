@@ -31,6 +31,28 @@ Nodes
 ```
  - Node ID will be auto-assigned (constantly increasing)
 
+### Editing a node
+
+ - end point: `/<course_id>/node/update/<id>/` where `<course_id>` and `<id>`
+   are some integers
+ - request: HTTP POST
+ - data (input):
+```
+{
+  "contents": "foo",
+  "renderer": "bar",
+  "children": "json string in here"
+}
+```
+ - return data:
+```
+{
+  "message": "Node was successfully updated.",
+  "id": "1"
+}
+```
+ - All fields in the form are optional (but at least one must be specified)
+
 ### Accessing a node
 
  - end point: `/<course_id>/node/get/<id>/` where `<course_id>` and `<id>` are
@@ -85,7 +107,6 @@ Tree
  - return data:
 ```
 {
-  "rootId": "0",
   "nodes":
     [
       {
@@ -152,30 +173,23 @@ Root
 Course Info
 ------------------
 
-### Adding a Piazza course ID and name
+### Create a brand new course
 
- - end point: `/<course_id>/course/setcourse/`, where `<course_id>` is some integer
+ - end point: `/0/course/add/`. **Note**: this must use the fake course ID `0`
  - request: HTTP POST
- - data (input):
-```
-{
-  "piazza_cid": "123456789",
-  "course_name": "ENGR 180"
-}
-```
+ - data (input): None
  - return data:
 ```
 {
-  "message": "Successfully added piazza ID and course name for course",
+  "message": "New course was successfully initialized",
   "course_id": "1"
 }
 ```
- - This will fail if the course already has a Piazza ID/name (because we don't want
-   to overwrite it unless we **really** mean to)
 
 ### Adding a Piazza course ID
 
- - end point: `/<course_id>/course/setpiazza/`, where `<course_id>` is some integer
+ - end point: `/<course_id>/course/setpiazza/`, where `<course_id>` is some
+   integer
  - request: HTTP POST
  - data (input):
 ```
@@ -195,27 +209,29 @@ Course Info
 
 ### Resetting a course name
 
-- end point: `/<course_id>/course/resetname/` where `<course_id>` is an integer
-- request: HTTP POST
-- data (input):
+ - end point: `/<course_id>/course/resetname/` where `<course_id>` is an integer
+ - request: HTTP POST
+ - data (input):
 ```
 {
  "course_name": "ENGR 180"
 }
 ```
-- return data:
+ - return data:
 ```
 {
  "message": "Successfully updated course name for course",
+ "course_name": "ENGR 180",
  "course_id": "1"
 }
 ```
-- This will fail if the course ID is not already present (by design to prevent
-  this from being accidentally changed)
+ - This will fail if the course ID is not already present (by design to prevent
+   this from being accidentally changed)
 
 ### Resetting a Piazza course ID
 
- - end point: `/<course_id>/course/resetpiazza/` where `<course_id>` is an integer
+ - end point: `/<course_id>/course/resetpiazza/` where `<course_id>` is an
+   integer
  - request: HTTP POST
  - data (input):
 ```
@@ -233,12 +249,12 @@ Course Info
  - This will fail if the course ID is not already present (by design to prevent
    this from being accidentally changed)
 
-### Accessing Course Name
+### Accessing Course Info
 
-- end point: `/<course_id>/course/get/` where `<course_id>` is some integer
-- request: HTTP GET
-- data (input): None
-- return data:
+ - end point: `/<course_id>/course/get/` where `<course_id>` is some integer
+ - request: HTTP GET
+ - data (input): None
+ - return data:
 ```
 {
   "message": "Returning course info",
@@ -250,10 +266,11 @@ Course Info
 
 ### Accessing Course Name
 
-- end point: `/<course_id>/course/getname/` where `<course_id>` is some integer
-- request: HTTP GET
-- data (input): None
-- return data:
+ - **Deprecated**: use 'get'
+ - end point: `/<course_id>/course/getname/` where `<course_id>` is some integer
+ - request: HTTP GET
+ - data (input): None
+ - return data:
 ```
 {
  "message": "Returning name for course",
@@ -264,7 +281,9 @@ Course Info
 
 ### Accessing Piazza ID
 
- - end point: `/<course_id>/course/getpiazza/` where `<course_id>` is some integer
+ - **Deprecated**: use 'get'
+ - end point: `/<course_id>/course/getpiazza/` where `<course_id>` is some
+   integer
  - request: HTTP GET
  - data (input): None
  - return data:
@@ -278,8 +297,9 @@ Course Info
 
 ### Accessing Piazza Post Data
 
-- end point: `/<course_id>/course/getpiazzaposts/` where `<course_id>` is some integer
-- request: HTTP GET
-- data (input): None
-- return data:
-streaming json objects for each post in the class
+ - end point: `/<course_id>/course/getpiazzaposts/` where `<course_id>` is some
+   integer
+ - request: HTTP GET
+ - data (input): None
+ - return data:
+    - streaming json objects for each post in the class

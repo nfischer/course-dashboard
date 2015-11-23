@@ -1,7 +1,6 @@
-drop table if exists nodes;
-drop table if exists children;
-drop table if exists links;
-drop table if exists courses;
+DROP TABLE IF EXISTS nodes;
+DROP TABLE IF EXISTS courses;
+
 CREATE TABLE `nodes` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT,
     `contents` VARCHAR(300),
@@ -9,25 +8,12 @@ CREATE TABLE `nodes` (
     `course_id` INTEGER,
     `isalive` INTEGER,
     `isroot` INTEGER,
-    `children` TEXT
-);
-CREATE TABLE `links` (
-    `origin` INTEGER NOT NULL,
-    `name` VARCHAR(100) NOT NULL,
-    `dest` INTEGER,
-    FOREIGN KEY(origin) REFERENCES nodes(node_id),
-    FOREIGN KEY(dest) REFERENCES nodes(id)
-);
-
-CREATE TABLE `children` (
-    `parent_id` INTEGER NOT NULL,
-    `children`  TEXT,
-    PRIMARY KEY(parent_id),
-    FOREIGN KEY(`parent_id`) REFERENCES nodes ( 'id' )
+    `children` TEXT,
+    FOREIGN KEY(course_id) REFERENCES courses(course_id)
 );
 
 CREATE TABLE `courses` (
-    `course_id` INTEGER PRIMARY KEY NOT NULL,
+    `course_id` INTEGER PRIMARY KEY AUTOINCREMENT,
     `piazza_cid` VARCHAR(100) NOT NULL,
     `course_name` VARCHAR(100) NOT NULL
 );

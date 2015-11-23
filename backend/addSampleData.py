@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """
 Python script that, when run, uses API calls to populate the backend with sample
@@ -10,31 +10,34 @@ from posixpath import join as urljoin
 import json
 from requests import get, post
 
-URL = 'http://localhost:5000/42'
+URL = 'http://127.0.0.1:5000'
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 SAMPLE_JSON_FILE = os.path.join(PROJECT_DIR, 'backend/frontend', 'sampledata.json')
 
-def create_node(contents='foo', renderer='bar'):
+def create_node(course_id, contents='foo', renderer='bar'):
     """Uses the backend API to create a node"""
     node_value = {'contents': contents, 'renderer': renderer}
-    ret = post(urljoin(URL, 'node/add/'), data=node_value)
+    course_id = str(course_id)
+    ret = post(urljoin(URL, course_id, 'node/add/'), data=node_value)
     if ret.status_code != 200:
         raise ValueError('Unable to create node')
     return ret
 
-def get_node(node_id):
+def get_node(course_id, node_id):
     """Uses the backend API to request a node"""
     node_id = str(node_id)
-    full_url = urljoin(URL, 'node/get', node_id, '')
+    course_id = str(course_id)
+    full_url = urljoin(URL, course_id, 'node/get', node_id, '')
     ret = get(full_url)
     if ret.status_code != 200:
         raise ValueError('Unable to access node %s' % node_id)
     return ret
 
-def update_node(node_id, contents='', renderer='', children=''):
+def update_node(course_id, node_id, contents='', renderer='', children=''):
     """Uses the backend API to update a node that already exists"""
     node_id = str(node_id)
-    old_node = get_node(node_id).json()
+    course_id = str(course_id)
+    old_node = get_node(course_id, node_id).json()
     if contents == '':
         contents = old_node['contents']
     if renderer == '':
@@ -42,50 +45,59 @@ def update_node(node_id, contents='', renderer='', children=''):
     if children == '':
         children = old_node['children']
     node_value = {'contents': contents, 'renderer': renderer, 'children': children}
-    ret = post(urljoin(URL, 'node/update', node_id, ''), data=node_value)
+    ret = post(urljoin(URL, course_id, 'node/update', node_id, ''), data=node_value)
     if ret.status_code != 200:
         raise ValueError('Unable to update node %s' % node_id)
     return ret
 
-def delete_node(node_id):
+def delete_node(course_id, node_id):
     """Uses the backend API to delete a node that already exists"""
     node_id = str(node_id)
-    ret = post(urljoin(URL, 'node/delete', node_id, ''), data={})
+    course_id = str(course_id)
+    ret = post(urljoin(URL, course_id, 'node/delete', node_id, ''), data={})
     if ret.status_code != 200:
         raise ValueError('Unable to delete node %s' % node_id)
     return ret
 
-def add_root(root_id):
+def add_root(course_id, root_id):
     """Uses the backend API to add a root to the tree"""
     root_id = str(root_id)
-    ret = post(urljoin(URL, 'root/set', root_id, ''), data={})
+    course_id = str(course_id)
+    ret = post(urljoin(URL, course_id, 'root/set', root_id, ''), data={})
     if ret.status_code != 200:
         raise ValueError('Unable to add root %s' % root_id)
     return ret
 
-def add_course(piazza_id, course_name):
-    """Uses the backend API to add a course to the course list"""
-    ret = post(urljoin(URL, 'course/setcourse/'), data={'piazza_cid': piazza_id, 'course_name': course_name})
+def initialize_course(name):
+    """
+    Uses the backend API to create a new course in the backend.
+    @returns JSON containing course_id field
+    """
+    if name == '':
+        name = 'CS 130' # default
+    ret = post(urljoin(URL, '0/course/add/'), data={'name': name})
     if ret.status_code != 200:
-        raise ValueError('Unable to add course %s, %s' % piazza_id, course_name)
+        raise ValueError('Unable to create a new course')
     return ret
 
-def add_root(root_id):
-    """Uses the backend API to add a root to the tree"""
-    root_id = str(root_id)
-    ret = post(os.path.join(URL, 'root/set', root_id, ''), data={})
+def set_piazza(course_id, piazza_id):
+    """Uses the backend API to add a course to the course list"""
+    course_id = str(course_id)
+    ret = post(urljoin(URL, course_id, 'course/setpiazza/'), data={'piazza_cid': piazza_id})
+    if ret.status_code != 200:
+        raise ValueError('Unable to add piazza id %s' % piazza_id)
     return ret
 
-## @private
 def node_compare(node1, node2):
+    """
+    Compare two nodes based on 'id' field
+    This is used to sort the nodes so that they are added in proper order (so
+    that node id=1 is added first, then node id=2, etc.)
+    @private
+    """
     id1 = int(node1['id'])
     id2 = int(node2['id'])
-    if id1 < id2:
-        return -1
-    elif id1 == id2:
-        return 0
-    else:
-        return 1
+    return id1 - id2
 
 if __name__ == '__main__':
     with open(SAMPLE_JSON_FILE) as data_file:
@@ -94,17 +106,21 @@ if __name__ == '__main__':
     nlist = data['nodes']
     nlist.sort(cmp=node_compare)
 
+    # Get an initial course
+    val = initialize_course('CS 130')
+    mycid = val.json()['course_id']
+
     for node in nlist:
         mycontents = node['contents']
         myrenderer = node['renderer']
-        print create_node(contents=mycontents, renderer=myrenderer).json()
+        print create_node(course_id=mycid, contents=mycontents, renderer=myrenderer).json()
 
     for node in nlist:
         myid = int(node['id'])
         mychildren = json.dumps(node['children'])
-        print update_node(myid, children=mychildren).json()
+        print update_node(mycid, myid, children=mychildren).json()
 
     # add the cs 130 piazza ID
-    print add_course('if44ov1fn5a505', 'CS 130').json()
+    print set_piazza(mycid, 'if44ov1fn5a505').json()
     # Set the root to be node 54
-    print add_root(54).json()
+    print add_root(mycid, 54).json()

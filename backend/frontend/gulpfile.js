@@ -26,7 +26,7 @@ var b = browserify({
 
 var b2 = browserify({
     entries: 'webapi.js',
-    basedir: 'sandbox/',
+    basedir: 'coursecreation/',
     debug: true
   })
   .plugin(resolutions, ['react', 'react-dom', 'jquery'])
@@ -78,7 +78,7 @@ var updateBundle2 = function(b){
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./sandbox'));
+    .pipe(gulp.dest('./coursecreation'));
 };
 
 gulp.task('build_browser', partial(updateBundle, b));
