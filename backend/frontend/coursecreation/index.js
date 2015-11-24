@@ -13,7 +13,7 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var URL = 'http://localhost:5000';
+var URL = '';
 
 //uses the backend API to create a node
 function createNode(courseId, contents, renderer) {

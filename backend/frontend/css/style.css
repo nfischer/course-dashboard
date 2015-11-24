@@ -44,6 +44,10 @@ text {
   fill: rgb(51,51,51);
 }
 
+p {
+    margin: 0px;
+}
+
 a {
     text-decoration: none;
     color: hsla(215, 100%, 43%, 1);
@@ -64,7 +68,7 @@ h2 {
     font-size: 17px;
 }
 
-resource {
+.resource {
     margin-top: 10px;
 }
 
@@ -97,7 +101,7 @@ children {
     align-items: stretch;
 }
 
-.contents, contents {
+.contents {
     width: 100%;
 }
 
@@ -197,4 +201,12 @@ piazza-item a:hover {
 
 fullweek > children > list, fullweek > children > announcements {
   min-width: 300px;
+}
+
+.resource:nth-child(odd) {
+  background: hsl(0,0%,97%);
+}
+
+.resource {
+  padding: 10px;
 }
