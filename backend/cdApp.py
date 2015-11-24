@@ -339,6 +339,9 @@ class Course(Resource):
                         lines = fname.read().split('\n')
                         p.user_login(email=lines[0], password=lines[1])
                     piazza_class = p.network(piazza_id_str)
+                except IndexError:
+                    raise InvalidUsage('Piazza credentials are improperly formatted',
+                                       status_code=501)
                 except IOError:
                     raise InvalidUsage('Unable to find piazza credentials',
                                        status_code=500)

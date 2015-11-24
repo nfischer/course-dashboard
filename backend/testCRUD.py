@@ -2,15 +2,28 @@
 
 import unittest, json
 from requests import get, post
+import os
 URL = 'http://localhost:5000'
 UNICODE_TYPE = type(u'unicode string')
 INT_TYPE = type(int())
+USER_FILE = 'sample_user.txt'
+TMP_NAME = 'tmp_sample_user.txt'
 
 class CourseTests(unittest.TestCase):
     """ Test the Course end point and various piazza operations """
 
     def setUp(self):
         self.url = URL
+        # Rename the credentials file to something else if it exists
+        if os.path.exists(USER_FILE):
+            os.rename(USER_FILE, TMP_NAME)
+
+    def tearDown(self):
+        # Fix the name change for the credentials file
+        if os.path.exists(USER_FILE):
+            os.remove(USER_FILE)
+        if os.path.exists(TMP_NAME):
+            os.rename(TMP_NAME, USER_FILE)
 
     def test_create(self):
         course_name = 'CS130'
@@ -21,6 +34,50 @@ class CourseTests(unittest.TestCase):
         self.assertGreater(cid, 0)
         self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
         self.assertEqual(course_name, res.json()['course_name'])
+
+    def test_get_piazzaposts(self):
+        # Create course
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
+        self.assertEqual(res.status_code, 200)
+        cid = res.json()['course_id']
+        self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
+        # set the piazza ID to something to begin with
+        fake_id = 'ielkajf48l2k3'
+        real_id = 'if44ov1fn5a505' # the ID for CS 130 Fall 2015
+        res = post(self.url + '/{0}/course/setpiazza/'.format(cid), data={'piazza_cid': real_id})
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(type(res.json()['course_id']), UNICODE_TYPE)
+        self.assertEqual(cid, int(res.json()['course_id']))
+        # If we don't have credentials saved on file, expect failure (this can
+        # be assumed due to the setUp() method)
+        res = get(self.url + '/{0}/course/getpiazzaposts/'.format(cid))
+        self.assertEqual(res.status_code, 500)
+        # Try to authenticate with made-up credentials, expect failure
+        with open(USER_FILE, 'w') as fname:
+            fname.write('\n'.join(['fake_user@gmail.com', 'password', '']))
+        res = get(self.url + '/{0}/course/getpiazzaposts/'.format(cid))
+        self.assertEqual(res.status_code, 400)
+        # Try using improperly formatted credentials
+        with open(USER_FILE, 'w') as fname:
+            fname.write('\n'.join(['fake_user@gmail.com']))
+        res = get(self.url + '/{0}/course/getpiazzaposts/'.format(cid))
+        self.assertEqual(res.status_code, 501)
+        # test piazza call failure for an ID that is not yet set
+        with open(USER_FILE, 'w') as fname:
+            fname.write('\n'.join(['fake_user@gmail.com', 'password', '']))
+        res = get(self.url + '/{0}/course/getpiazzaposts/'.format(cid))
+        self.assertEqual(res.status_code, 400)
+        # If there were credentials initally stored, assume these are valid.
+        # Note: this won't run on continuous integration, but might run on an
+        # individual tester's local machine. This will give false negatives if
+        # the local credentials are NOT valid for CS 130. This is extremely
+        # slow, however, so I'm leaving the code commented out for now
+        # if os.path.exists(USER_FILE):
+        #     res = get(self.url + '/{0}/course/getpiazzaposts/'.format(cid))
+        #     self.assertEqual(res.status_code, 200)
 
     def test_set_piazza(self):
         # Create course
