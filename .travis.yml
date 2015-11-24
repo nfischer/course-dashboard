@@ -8,8 +8,15 @@ before_script:
   - cd backend/
   - mkdir -p db/
   - sqlite3 db/course-dashboard.db < schema.sql
+  - cd frontend/
+  - nvm install 5.0
+  - nvm use 5.0
+  - npm install
+  - cd ..
 script:
   - python cdApp.py &
   - sleep 1
   - python testCRUD.py
-after_script: killall setup.sh
+  - cd frontend/
+  - npm test
+after_script: kill $!
