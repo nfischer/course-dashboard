@@ -6,7 +6,7 @@ from flask import Flask, request, g, render_template, \
 from flask_restful import Resource, Api
 import json
 from piazza_api import Piazza
-from piazza_api.exceptions import AuthenticationError
+from piazza_api.exceptions import AuthenticationError, RequestError
 
 # configuration
 DATABASE = 'db/course-dashboard.db'
@@ -46,13 +46,10 @@ def dict_factory(cursor, row):
 #---------------------HTTP Errors---------------------
 
 class InvalidUsage(Exception):
-    status_code = 400
-
-    def __init__(self, message, status_code=None, payload=None):
+    def __init__(self, message, status_code=400, payload=None):
         Exception.__init__(self)
         self.message = message
-        if status_code is not None:
-            self.status_code = status_code
+        self.status_code = status_code
         self.payload = payload
 
     def to_dict(self):
@@ -348,6 +345,15 @@ class Course(Resource):
                 except AuthenticationError:
                     raise InvalidUsage('Invalid pizza credentials')
 
+                # Attempt to pull a single post. If it doesn't work, we should
+                # throw an error
+                try:
+                    for k in piazza_class.iter_all_posts(limit=1):
+                        single_post = k
+                except RequestError:
+                    raise InvalidUsage('Invalid piazza course ID',
+                                       status_code=500)
+
                 def get_posts():
                     for post in piazza_class.iter_all_posts():
                         yield json.dumps(post)
@@ -367,7 +373,7 @@ def index():
 
 @app.route('/<course_id>/', methods=['GET'])
 def course_index(course_id):
-    return send_from_directory('frontend','index.html');
+    return send_from_directory('frontend', 'index.html')
 
 @app.route('/<course_id>/edit/', methods=['GET'])
 def course_edit(course_id):
