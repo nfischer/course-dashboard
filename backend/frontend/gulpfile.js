@@ -23,6 +23,14 @@ var b = browserify({
   .plugin(resolutions, ['react', 'react-dom', 'jquery'])
   .transform(babelify);
 
+var b2 = browserify({
+    entries: 'webapi.js',
+    basedir: 'coursecreation/',
+    debug: true
+  })
+  .plugin(resolutions, ['react', 'react-dom', 'jquery'])
+  .transform(babelify);
+
 function watch_browser(){
   w = watchify(b);
   w.on("update", partial(updateBundle, w));
@@ -39,5 +47,16 @@ var updateBundle = function(b){
     .pipe(gulp.dest('./js'));
 };
 
+var updateBundle2 = function(b){
+  b2.bundle()
+    //.on('error', gutil.log)
+    .pipe(source('index.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./coursecreation'));
+};
+
 gulp.task('build_browser', partial(updateBundle, b));
+gulp.task('build_browser2', partial(updateBundle2, b));
 gulp.task('watch_browser', watch_browser);

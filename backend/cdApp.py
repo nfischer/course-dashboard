@@ -231,16 +231,17 @@ class Course(Resource):
                 raise InvalidUsage('To create a new course, please use id 0')
             try:
                 g.db.execute('''INSERT INTO courses
-                                (piazza_cid) VALUES (?)''',
-                             [''])
+                                (piazza_cid, course_name) VALUES (?,?)''',
+                             ['', request.form['name']])
                 # set to empty string initially to get a database entry
-                cursor = g.db.execute('''SELECT course_id
+                cursor = g.db.execute('''SELECT course_id, course_name
                                          FROM courses
                                          ORDER BY course_id DESC limit 1''')
                 g.db.commit()
                 added_course = cursor.fetchone()
                 return jsonify(message='New course was successfully initialized',
-                               course_id=added_course['course_id'])
+                               course_id=added_course['course_id'],
+                               course_name=added_course['course_name'])
             except Exception:
                 raise InvalidUsage('Unable to create new course',
                                    status_code=500)
@@ -268,11 +269,50 @@ class Course(Resource):
             return jsonify(message='Successfully updated piazza ID for course',
                            course_id=course_id)
 
+        elif operation == 'resetname':
+            cursor = g.db.execute('''UPDATE courses
+                                     SET course_name=(?)
+                                     WHERE course_id=(?)''',
+                                  [request.form['course_name'], int(course_id)])
+            g.db.commit()
+            if cursor.rowcount == 0:
+                raise InvalidUsage('Course not found in database.')
+            return jsonify(message='Successfully updated course name for course',
+                           course_name=request.form['course_name'],
+                           course_id=course_id)
+
         else:
             raise InvalidUsage('Unknown operation type')
 
     def get(self, course_id, operation):
-        if operation == 'getpiazza':
+        if operation == 'get':
+            cursor = g.db.execute('''SELECT course_name, piazza_cid
+                                     FROM courses
+                                     WHERE course_id=(?)''',
+                                  [int(course_id)])
+
+            row = cursor.fetchone()
+            if row is None:
+                raise InvalidUsage('Given course does not exist')
+            else:
+                course_name_str = row['course_name']
+                piazza_id_str = row['piazza_cid']
+                return jsonify(message='Returning course info', course_id=course_id, course_name=course_name_str, piazza_cid=piazza_id_str)
+        # @deprecated: use 'get' end point instead
+        if operation == 'getname':
+            cursor = g.db.execute('''SELECT course_name
+                                     FROM courses
+                                     WHERE course_id=(?)''',
+                                  [int(course_id)])
+
+            course_name_row = cursor.fetchone()
+            if course_name_row is None:
+                raise InvalidUsage('Given course does not have a name')
+            else:
+                course_name_str = course_name_row['course_name']
+                return jsonify(message='Returning name for course', course_id=course_id, course_name=course_name_str)
+        # @deprecated: use 'get' end point instead
+        elif operation == 'getpiazza':
             cursor = g.db.execute('''SELECT piazza_cid
                                      FROM courses
                                      WHERE course_id=(?)''',
@@ -316,9 +356,26 @@ class Course(Resource):
         else:
             raise InvalidUsage('Unknown operation type')
 
+
 @app.route('/', methods=['GET'])
 def index():
-    return send_from_directory('frontend', 'index.html')
+    cursor = g.db.execute('''SELECT *
+                             FROM courses''')
+
+    courses = [dict(course_id=row['course_id'], course_name=row['course_name']) for row in cursor.fetchall()]
+    return render_template('course_list.html', courses=courses)
+
+@app.route('/<course_id>/', methods=['GET'])
+def course_index(course_id):
+    return send_from_directory('frontend','index.html');
+
+@app.route('/<course_id>/edit/', methods=['GET'])
+def course_edit(course_id):
+    return send_from_directory('frontend/coursecreation', 'createcourse.html')
+
+@app.route('/newcourse/', methods=['GET'])
+def newcourse():
+    return send_from_directory('frontend/coursecreation', 'createcourse.html')
 
 api.add_resource(Node, '/<course_id>/node/<operation>/',
                  '/<course_id>/node/<operation>/<node_id>/')

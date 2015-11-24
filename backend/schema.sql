@@ -14,7 +14,8 @@ CREATE TABLE `nodes` (
 
 CREATE TABLE `courses` (
     `course_id` INTEGER PRIMARY KEY AUTOINCREMENT,
-    `piazza_cid` VARCHAR(100) NOT NULL
+    `piazza_cid` VARCHAR(100) NOT NULL,
+    `course_name` VARCHAR(100) NOT NULL
 );
 
 PRAGMA foreign_keys = ON;

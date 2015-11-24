@@ -13,18 +13,24 @@ class CourseTests(unittest.TestCase):
         self.url = URL
 
     def test_create(self):
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertEqual(type(cid), INT_TYPE)
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
 
     def test_set_piazza(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
         # test piazza call success
         res = post(self.url + '/{0}/course/setpiazza/'.format(cid), data={'piazza_cid': 'ielkajf48l2k3'})
         self.assertEqual(res.status_code, 200)
@@ -33,10 +39,13 @@ class CourseTests(unittest.TestCase):
 
     def test_reset_piazza(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
         # set the piazza ID to something to begin with
         res = post(self.url + '/{0}/course/setpiazza/'.format(cid), data={'piazza_cid': 'ielkajf48l2k3'})
         self.assertEqual(res.status_code, 200)
@@ -50,12 +59,87 @@ class CourseTests(unittest.TestCase):
         res = post(self.url + '/{0}/course/resetpiazza/'.format(cid+1), data={'piazza_cid': 'ielkajf48l2k3'})
         self.assertEqual(res.status_code, 400)
 
-    def test_get_piazza(self):
+    def test_reset_name(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
+        # reset the name to something else
+        course_name = 'CS111'
+        res = post(self.url + '/{0}/course/resetname/'.format(cid), data={'course_name': course_name})
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(type(res.json()['course_id']), UNICODE_TYPE)
+        self.assertEqual(cid, int(res.json()['course_id']))
+        res = get(self.url + '/{0}/course/get/'.format(cid))
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
+        self.assertEqual(type(res.json()['course_id']), UNICODE_TYPE)
+        self.assertEqual(cid, int(res.json()['course_id']))
+        # attempt to reset the name for a non-existent course
+        res = post(self.url + '/{0}/course/resetname/'.format(cid+1), data={'course_name': course_name})
+        self.assertEqual(res.status_code, 400)
+
+    def test_get_name(self):
+        # Create course
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
+        self.assertEqual(res.status_code, 200)
+        cid = res.json()['course_id']
+        self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
+        # get the course name
+        res = get(self.url + '/{0}/course/getname/'.format(cid))
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(type(res.json()['course_id']), UNICODE_TYPE)
+        self.assertEqual(cid, int(res.json()['course_id']))
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, str(res.json()['course_name']))
+        # make sure this fails for courses that don't exist
+        res = get(self.url + '/{0}/course/getname/'.format(cid+1))
+        self.assertEqual(res.status_code, 400)
+
+    def test_get_course_info(self):
+        # Create course
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
+        self.assertEqual(res.status_code, 200)
+        cid = res.json()['course_id']
+        self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
+        # set the piazza ID to something to begin with
+        piazza_id = 'ielkajf48l2k3'
+        res = post(self.url + '/{0}/course/setpiazza/'.format(cid), data={'piazza_cid': piazza_id})
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(type(res.json()['course_id']), UNICODE_TYPE)
+        self.assertEqual(cid, int(res.json()['course_id']))
+        # test piazza call success
+        res = get(self.url + '/{0}/course/get/'.format(cid))
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(type(res.json()['course_id']), UNICODE_TYPE)
+        self.assertEqual(cid, int(res.json()['course_id']))
+        self.assertEqual(type(res.json()['piazza_cid']), UNICODE_TYPE)
+        self.assertEqual(piazza_id, str(res.json()['piazza_cid']))
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, str(res.json()['course_name']))
+        # test piazza call failure for an ID that is not yet set
+        res = get(self.url + '/{0}/course/getpiazza/'.format(cid+1))
+        self.assertEqual(res.status_code, 400)
+
+    def test_get_piazza(self):
+        # Create course
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
+        self.assertEqual(res.status_code, 200)
+        cid = res.json()['course_id']
+        self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
         # set the piazza ID to something to begin with
         piazza_id = 'ielkajf48l2k3'
         res = post(self.url + '/{0}/course/setpiazza/'.format(cid), data={'piazza_cid': piazza_id})
@@ -70,7 +154,7 @@ class CourseTests(unittest.TestCase):
         self.assertEqual(type(res.json()['piazza_cid']), UNICODE_TYPE)
         self.assertEqual(piazza_id, str(res.json()['piazza_cid']))
         # test piazza call failure for an ID that is not yet set
-        res = get(self.url + '/{0}/course/getpiazza/'.format(cid+1), data={'piazza_cid': 'ielkajf48l2k3'})
+        res = get(self.url + '/{0}/course/getpiazza/'.format(cid+1))
         self.assertEqual(res.status_code, 400)
 
 class NodeTests(unittest.TestCase):
@@ -84,10 +168,13 @@ class NodeTests(unittest.TestCase):
 
     def test_create(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
         # Create a node
         node_value = {'contents': 'foo', 'renderer': 'rendition'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
@@ -99,10 +186,13 @@ class NodeTests(unittest.TestCase):
     """ Tests requests.get operation """
     def test_get(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
         # Create a node
         node_value = {'contents': 'foo', 'renderer': 'rendition'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
@@ -123,10 +213,13 @@ class NodeTests(unittest.TestCase):
 
     def test_update(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
         # Create a node
         node_value = {'contents': 'foo', 'renderer': 'rendition'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
@@ -151,10 +244,13 @@ class NodeTests(unittest.TestCase):
 
     def test_delete(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
         # Create a node
         node_value = {'contents': 'foo', 'renderer': 'rendition'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
@@ -188,10 +284,13 @@ class TreeTests(unittest.TestCase):
     def test_get_tree(self):
         node_list = []
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
         # Create a node
         node_value = {'contents': 'foo0', 'renderer': 'rendition0'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
@@ -240,10 +339,13 @@ class RootTests(unittest.TestCase):
 
     def test_get_root(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
         # Create a node
         node_value = {'contents': 'foo', 'renderer': 'rendition'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
@@ -272,10 +374,13 @@ class RootTests(unittest.TestCase):
 
     def test_set_root(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
         # Create a node
         node_value = {'contents': 'foo', 'renderer': 'rendition'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
@@ -294,10 +399,13 @@ class RootTests(unittest.TestCase):
 
     def test_delete_root(self):
         # Create course
-        res = post(self.url + '/0/course/add/', data={})
+        course_name = 'CS130'
+        res = post(self.url + '/0/course/add/', data={'name': course_name})
         self.assertEqual(res.status_code, 200)
         cid = res.json()['course_id']
         self.assertGreater(cid, 0)
+        self.assertEqual(type(res.json()['course_name']), UNICODE_TYPE)
+        self.assertEqual(course_name, res.json()['course_name'])
         # Create a node
         node_value = {'contents': 'foo', 'renderer': 'rendition'}
         res = post(self.url + '/{0}/node/add/'.format(cid), data=node_value)
