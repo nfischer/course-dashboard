@@ -4,19 +4,7 @@
   "description": "frontend for Course Dashboard",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
-  },
-  "jest": {
-    "scriptPreprocessor": "./node_modules/babel-jest",
-    "testFileExtensions": [
-      "es6",
-      "js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "es6"
-    ]
+    "test": "mocha --compilers js:babel-core/register"
   },
   "babel": {
     "presets": [
@@ -46,7 +34,7 @@
     "partial": "0.0.3",
     "path-parse": "^1.0.5",
     "piazza-api": "^0.1.4",
-    "react": "^0.14.2",
+    "react": "^0.14.3",
     "react-bootstrap": "^0.27.3",
     "react-dom": "^0.14.2",
     "stream-http": "^2.0.2",
@@ -54,7 +42,7 @@
   },
   "devDependencies": {
     "babel": "^6.0.15",
-    "babel-jest": "^6.0.1",
+    "babel-core": "^6.1.21",
     "babel-plugin-syntax-flow": "^6.1.4",
     "babel-plugin-transform-class-properties": "^6.1.4",
     "babel-plugin-transform-flow-strip-types": "^6.1.4",
@@ -65,7 +53,7 @@
     "brfs": "^1.4.1",
     "browserify": "^11.2.0",
     "browserify-resolutions": "^1.0.6",
-    "chai": "^3.3.0",
+    "chai": "^3.4.1",
     "concat-stream": "^1.5.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
@@ -75,11 +63,12 @@
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.5",
     "invariant": "^2.1.1",
-    "jest-cli": "^0.7.1",
     "merge-stream": "^1.0.0",
-    "mocha": "^2.3.3",
+    "mocha": "^2.3.4",
+    "mockery": "^1.4.0",
     "orchestrator": "^0.3.7",
     "partial": "0.0.3",
+    "sinon": "^1.17.2",
     "source-map-support": "^0.3.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
