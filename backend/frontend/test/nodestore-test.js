@@ -101,8 +101,9 @@ describe('nodestore', function() {
     onChange = nodeStore.__emitter.emit;// callback = nodeStore.__invokeOnDispatch.bind(nodeStore);
   });
 
-  it('initializes with no nodes', function() {
+  it('initializes with no nodes', function(done) {
     expect(nodeStore.getState()).to.equal(null);
+    done();
   });
 
   it('Open: creates node tree using a list of nodes', function() {
