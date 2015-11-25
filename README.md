@@ -81,7 +81,7 @@ To install gulp for frontend work, you'll need to run:
 $ cd course-dashboard/backend/frontend
 $ sudo apt-get install npm
 $ sudo npm install gulp -g
-$ npm i
+$ npm install
 $ # or do similar commands for your system
 ```
 
@@ -93,11 +93,11 @@ To install gulp for frontend work:
     - Download the MSI for your appropriate OS
       [here](https://nodejs.org/en/download/)
   2. Execute the following commands to install npm and gulp
+
     ```
     > cd course-dashboard/backend/frontend
-    > install npm
     > npm install gulp -g
-    > npm i
+    > npm install
     ```
 
 Backend
