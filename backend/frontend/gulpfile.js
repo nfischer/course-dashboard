@@ -53,7 +53,7 @@ function build_node(){
 
   return gulp.src("src/**/*.js")
       .pipe(sourcemaps.init())
-      .pipe(babel({ optional: ['runtime'] }))
+      // .pipe(babel({ optional: ['runtime'] }))
       //.pipe(concat("all.js"))
       .pipe(sourcemaps.write("."))
       .pipe(gulp.dest("dist_node"));
@@ -65,7 +65,7 @@ function watch_node(){
   return gulp.src("src/**/*.js")
       .pipe(watch("src/**/*.js", {verbose: true}))
       .pipe(sourcemaps.init())
-      .pipe(babel({ optional: ['runtime'] }))
+      // .pipe(babel({ optional: ['runtime'] }))
       //.pipe(concat("all.js"))
       .pipe(sourcemaps.write("."))
       .pipe(gulp.dest("dist_node"));

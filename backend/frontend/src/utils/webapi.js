@@ -7,6 +7,7 @@ import pathParse from 'path-parse';
 
 import Node from '../Models/node.js';
 import piazzaPostsFetched from '../Actions/piazzapostsfetched.js'
+import error from '../Actions/error.js';
 
 //TODO: clean up CALLBACK HELL
 
@@ -114,8 +115,12 @@ var posts = new Map();
 var cached = null;
 function getPiazzaPosts(courseId: number){
   let endpoint = mainUrl + `/${courseId}/course/getpiazzaposts/`;
-  http.get(endpoint, function(res){
+  let ignoredata = false;
+  var req = http.get(endpoint, function(res){
     res.on('data', function(buf){
+      if(ignoredata){
+        return;
+      }
       // console.log(buf.toString());
       if(!posts.has(courseId)){
         posts = posts.set(courseId, List());
@@ -130,6 +135,13 @@ function getPiazzaPosts(courseId: number){
           toparse = buf.toString();
         }
 
+        let json = JSON.parse(buf.toString())
+        if(json.hasOwnProperty("message")){
+          error(`fetchpiazzaposts failed: ${json.message}`);
+          ignoredata = true;
+          return;
+        }
+
         posts = posts.set(courseId,
           posts.get(courseId).push(JSON.parse(buf.toString()))
         );
@@ -141,8 +153,16 @@ function getPiazzaPosts(courseId: number){
     });
 
     res.on('end', function(){
-      piazzaPostsFetched(posts.get(courseId));
+      if(this.statusCode === 200){
+        piazzaPostsFetched(posts.get(courseId));
+      }
     });
+
+  });
+
+  req.on('error', function(e){
+    console.error(e);
+    throw e;
   })
 }
 
@@ -206,9 +226,9 @@ export function init(callback: any){
     }, handleError("init: Error requesting roots:"))
   .then((data) => {
       piazzaClassId = data.piazza_cid;
-      setTimeout(function(){
+      // setTimeout(function(){
         getPiazzaPosts(courseId);
-      }, 2000);
+      // }, 2000);
       callback({rootId, nodes});
     }, handleError("init: Error getting piazza class id:"));
 }
@@ -216,6 +236,7 @@ export function init(callback: any){
 function handleError(errorStr){
   return (jqXHR, textStatus, errorThrown) => {
     console.error(errorStr, textStatus);
+    error(`${errorStr} ${textStatus}`);
     throw errorThrown;
   }
 }
