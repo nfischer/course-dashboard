@@ -95,9 +95,18 @@ should work for any system).
     ```Bash
     $ cd backend/frontend/ # unless you're already there
     $ npm install
+    $ npm list --depth=0 # should return with status 0
     ```
 
-  4. Then run the actual tests with `npm test`.
+  4. If `npm list --depth=0` succeeds, continue on to step 5. Otherwise, please
+     manually install the dependencies it lists as missing:
+
+    ```Bash
+    $ npm install babel-runtime@^5.8.25 # for example, if this dep is missing
+    ```
+
+  5. If `npm list --depth=0` now succeeds, you can run the actual tests with
+     `npm test`.
 
 Installation for Development
 ----------------------------
