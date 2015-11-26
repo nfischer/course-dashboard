@@ -1,18 +1,21 @@
 language: python
 python:
   - "2.7"
+
 # command to install dependencies
-install: "pip install -r requirements.txt"
+install:
+  - pip install -r requirements.txt
+  - cd backend/frontend/
+  - nvm install 5.0
+  - nvm use 5.0
+  - npm install
+  - cd ../..
+
 # command to run tests
 before_script:
   - cd backend/
   - mkdir -p db/
   - sqlite3 db/course-dashboard.db < schema.sql
-  - cd frontend/
-  - nvm install 5.0
-  - nvm use 5.0
-  - npm install
-  - cd ..
 script:
   - python cdApp.py &
   - sleep 1
