@@ -27,27 +27,30 @@ myemail@domain.com
 mypassword
 ```
 
-If you're enrolled in CS 130 with that info, you're good to go and should have
-no issues displaying piazza information on the web UI.
+If you're enrolled in UCLA's Fall 2015 CS 130 with that info, you're good to go
+and should have no issues displaying piazza information on the web UI.
 
 At this point, you can visit [127.0.0.1:5000/](http://127.0.0.1:5000/) to see a
-running page of our project. If that's good enough for you, then you're done at
-this point, and can skip the steps below.
+running page of our project. Click on the link for **CS 130** to be taken to the
+course page. If that's good enough for you, then you're done at this point, and
+can skip the steps below.
 
 Course Creation
 ---------------
 
 To test this out, follow the same steps as in the above section, but do not run
 `./addSampleData.py`. Open up the web browser to
-[http://localhost:5000/](http://localhost:5000/) (note: this cannot be
-`127.0.0.1`)
+[http://localhost:5000/](http://localhost:5000/)
 
 From there, fill out the course creation UI as you see fit (adding in weeks,
-assignments, and resources). Adding empty elements in undefined, so don't do
-that for now.
+assignments, and resources). We don't support leaving any elements on the page
+as empty, so if you want to not add something (i.e. you want to create a course
+with no assignments initially), click the "minus" sign.
 
 Running tests
 -------------
+
+### Backend
 
 Running backend unit tests is fairly simple. Below are the steps for Linux:
 
@@ -68,7 +71,42 @@ $ python testCRUD.py # all tests should pass
 This should run all backend unit tests on CRUD operations (Create, read, update,
 delete). All tests are also run by Travis CI (continuous integration) upon each
 push and each pull request, so you can also check the build status at the top of
-this README. Adapt these steps if you're running on a different system.
+this README. If you're running on Windows, replace `setup.sh` with `setup.bat`,
+and you should be able to get the tests running as well.
+
+### Frontend
+
+We've recently added mocha unit tests for frontend code! To get these running,
+please follow the below steps (again, these are for Ubuntu, but similar steps
+should work for any system).
+
+  1. Look at the "Installation for Development" section for steps on installing
+     NodeJS
+  2. Make sure NodeJS is updated to v5 (we've noticed that some of our tests
+     will timeout with older versions of Node)
+    - If you're having trouble getting node updated, I found some success using
+      the [Node Version Manager](https://github.com/creationix/nvm) and then
+      running `nvm install 5.0` from within the `frontend/` directory (see our
+      [Travis CI config](.travis.yml) for details on how we got this to work.
+    - Run `node --version` and make sure you see `v5.0.0` as the output. **Do
+      not proceed if your output differs significantly.**
+  3. Then run the following code to install all dependencies:
+
+    ```Bash
+    $ cd backend/frontend/ # unless you're already there
+    $ npm install
+    $ npm list --depth=0 # should return with status 0
+    ```
+
+  4. If `npm list --depth=0` succeeds, continue on to step 5. Otherwise, please
+     manually install the dependencies it lists as missing:
+
+    ```Bash
+    $ npm install babel-runtime@^5.8.25 # for example, if this dep is missing
+    ```
+
+  5. If `npm list --depth=0` now succeeds, you can run the actual tests with
+     `npm test`.
 
 Installation for Development
 ----------------------------
@@ -100,53 +138,28 @@ To install gulp for frontend work:
     > npm install
     ```
 
-Backend
--------
+Interacting directly with the backend
+-------------------------------------
 
-### Python
+If you want to interact directly with our backend (and bypass the web
+interface), you can do so via python.
 
-Then in another terminal, you can launch python to interact with the database:
+In your first terminal, launch the backend as done previously (with
+`./setup.sh`). Then in another terminal, you can launch python to interact with
+the database through the API calls:
 
 ```Python
 $ python
 >>> from requests import post, get
+>>> post('http://127.0.0.1:5000/0/course/add/').json()
+>>> # output should be: {u'message': u'New course was successfully initialized', u'course_id': '1'}
 >>> post('http://127.0.0.1:5000/1/node/add/', data={'contents': 'foo', 'renderer': 'bar'}).json()
+>>> # We use a '/1/node/add/' here because '1' is the course ID of the course we just created
 >>> # output should be: {u'message': u'New node was successfully created'}
 >>> # more commands here...
 >>> # see rpc_specification.md for details on commands
 >>> exit()
 ```
-
-Frontend
---------
-
-The frontend is written using node.js and browserify. In order to build, navigate
-to the **frontend** directory and execute the following commands:
-
-```
-$ npm install
-$ gulp build_browser
-```
-
-In order to have the backend serve frontend files and have the frontend talk to
-the backend, execute the following commands:
-
-```
-$ cd ../backend
-$ setup.sh
-or
-> cd ..\backend
-> setup.bat
-```
-
-The page should now be available at [127.0.0.1:5000/](http://127.0.0.1:5000/),
-served by the backend server.
-
-### Migration
-
-To serve the frontend code from a backend of your choice, simply copy
-index.html, the css directory, and the js directory to the location of your
-choice.
 
 Contributing
 ------------
