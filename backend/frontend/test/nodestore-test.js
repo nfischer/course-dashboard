@@ -12,7 +12,6 @@ var mockery = require('mockery');
 describe('nodestore', function() {
 
   before(function(){
-    console.error("before called");
     mockery.enable({
       warnOnReplace: false,
       warnOnUnregistered: false,
@@ -29,8 +28,6 @@ describe('nodestore', function() {
     sinon.stub(WebAPI, "editNode");
     sinon.stub(WebAPI, "removeNode");
     sinon.stub(WebAPI, "init");
-
-    // console.log(WebAPI);
 
     mockery.registerMock('../utils/webapi.js', WebAPI);
     mockery.registerMock('../src/utils/webapi.js', WebAPI);
