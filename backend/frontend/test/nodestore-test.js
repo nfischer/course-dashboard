@@ -51,15 +51,18 @@ describe('nodestore', function() {
   var newNode = new Node({
     id: 'newID',
     contents: 'new contents',
-    renderer: 'Renderer'
+    renderer: 'Renderer',
+    children: {}
   });
 
   // mock actions
   var actionOpen = {
     name: 'open',
-    data: {rootId: 'testRootID', nodes: [
-      rootNode,
-      testNode
+    data: {
+      rootId: 'testRootID', 
+      nodes: [
+        rootNode,
+        testNode
     ]}
   };
 
@@ -72,20 +75,24 @@ describe('nodestore', function() {
       renderer: 'Renderer'
     }
   };
-
-/*  TODO:
-	var actionUpdateParentAndChild = {
+    var actionUpdateParentAndChild = {
     name: 'updateParentAndChild',
-    data: 'foo'
+    data: {
+      child: newNode,
+      parent: rootNode
+    }
   };
+
+//TESTING:
+/*
   var actionEditNode = {
     name: 'editNode',
     data: 'foo'
-  };
+  };*/
   var actionRemoveNode = {
     name: 'removeNode',
-    data: 'foo'
-  }; */
+    data: newNode
+  };
 
   var onChange;
   var nodeStore;
@@ -108,11 +115,9 @@ describe('nodestore', function() {
 
     var all = nodeStore.getState().nodes;
     expect(all.size).to.equal(2);
-    // expect(all.get('testID')).to.equal(testNode);
     expect(all.get('testID').id).to.equal('testID');
     expect(all.get('testID').contents).to.equal('test contents');
     expect(all.get('testID').renderer).to.equal('Renderer');
-    // expect(all.get('rootID')).to.equal(rootNode);
     expect(all.get('rootID').id).to.equal('rootID');
     expect(all.get('rootID').contents).to.equal('');
     expect(all.get('rootID').renderer).to.equal('Renderer');
@@ -120,32 +125,77 @@ describe('nodestore', function() {
     expect(nodeStore.getState().rootId).to.equal('testRootID');
   });
 
-/*  it('AddNode: adds a node', function() {
-    //dispatch(actionOpen);
+  it('AddNode: adds a node', function() {
+    expect(nodeStore.getState().nodes.size).to.equal(2);
+
     dispatch(actionAddNode);
 
     var all = nodeStore.getState().nodes;
+
+    for (let node of all) {
+      console.log(node);
+    }
     expect(all.size).to.equal(3);
     expect(nodeStore.getState()).to.not.equal(null);
-    expect(all.get['newID']).to.equal(newNode);
-    expect(all.get['newID'].id).to.equal('newID');
+    expect(all.get['newID'].id).to.equal('-1'); // The new node's ID is -1 instead of "newID" because of our ID spoofing implementation
     expect(all.get['newID'].contents).to.equal('new contents');
     expect(all.get['newID'].renderer).to.equal('Renderer');
     expect(all.get('testID').id).to.equal('testID');
+    expect(all.get('testID').contents).to.equal('test contents');
+    expect(all.get('testID').renderer).to.equal('Renderer');
     expect(all.get('rootID').id).to.equal('rootID');
+    expect(all.get('rootID').contents).to.equal('');
+    expect(all.get('rootID').renderer).to.equal('Renderer');
+    expect(all.get('rootID').children.testID).to.equal('testID');
+    expect(all.get('rootID').children.newID).to.equal('-1');
+    expect(nodeStore.getState().rootId).to.equal('testRootID');
+  });
+
+  it('UpdateParentAndChild: updates the references to the spoofed ID of the added node to the correct ID', function() {
+    dispatch(actionUpdateParentAndChild);
+
+    var all = nodeStore.getState().nodes;
+        for (let node of all) {
+      console.log(node);
+    }
+    var all = nodeStore.getState().nodes;
+
+    expect(all.size).to.equal(3);
+    expect(nodeStore.getState()).to.not.equal(null);
+    expect(all.get['newID'].id).to.equal('newID'); // The new node's ID is -1 instead of "newID" because of our ID spoofing implementation
+    expect(all.get['newID'].contents).to.equal('new contents');
+    expect(all.get['newID'].renderer).to.equal('Renderer');
+    expect(all.get('testID').id).to.equal('testID');
+    expect(all.get('testID').contents).to.equal('test contents');
+    expect(all.get('testID').renderer).to.equal('Renderer');
+    expect(all.get('rootID').id).to.equal('rootID');
+    expect(all.get('rootID').contents).to.equal('');
+    expect(all.get('rootID').renderer).to.equal('Renderer');
     expect(all.get('rootID').children.testID).to.equal('testID');
     expect(all.get('rootID').children.newID).to.equal('newID');
     expect(nodeStore.getState().rootId).to.equal('testRootID');
-  });*/
+  });
 
-/*   it('RemoveNode: removes a node', function() {
-    callback(actionOpen);
-    var all = nodeStore.getAll();
-    var keys = Object.keys(all);
-    expect(keys.length).toBe(2);
-    actionRemoveNode.id = keys[1];
-    callback(actionRemoveNode);
-    expect(all[keys[1]]).toBeUndefined();
-  }); */
+  it('RemoveNode: removes a node', function() {
+    expect(nodeStore.getState().nodes.size).to.equal(3);
+
+    dispatch(actionRemoveNode);
+
+/*  for (let node of all) {
+      console.log(node);
+    }*/
+    var all = nodeStore.getState().nodes;
+
+    expect(all.size).to.equal(2);   
+    expect(all.get['newID']).to.be.an('undefined');
+    expect(all.get('testID').id).to.equal('testID');
+    expect(all.get('testID').contents).to.equal('test contents');
+    expect(all.get('testID').renderer).to.equal('Renderer');
+    expect(all.get('rootID').id).to.equal('rootID');
+    expect(all.get('rootID').contents).to.equal('');
+    expect(all.get('rootID').renderer).to.equal('Renderer');
+    expect(all.get('rootID').children.testID).to.equal('testID');
+    expect(nodeStore.getState().rootId).to.equal('testRootID');
+  });
 
 });
