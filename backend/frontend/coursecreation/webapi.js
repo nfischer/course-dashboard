@@ -193,7 +193,11 @@ export function processSubmittedCourse(course: Object){
   initializeCourse(course.courseDetails.title)
   .then((cId)=>{
       courseId = cId.course_id;
-      return setPiazza(courseId, course.courseDetails.piazzaCourseId);
+      if(course.courseDetails.piazzaCourseId){
+        return setPiazza(courseId, course.courseDetails.piazzaCourseId);
+      } else {
+        return setPiazza(courseId, "");
+      }
     }, handleError("Error initializing course:"))
   .then(()=> {
       return Promise.all(nodes.map((node) => createNode(courseId, node.contents, node.renderer)))

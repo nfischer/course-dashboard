@@ -85,9 +85,9 @@ timeline {
     padding-top: 100px;
 }
 
-div.appArea {
+div#appArea > div {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     height: 100%;
 }
