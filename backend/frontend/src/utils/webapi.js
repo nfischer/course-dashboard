@@ -9,16 +9,12 @@ import Node from '../Models/node.js';
 import piazzaPostsFetched from '../Actions/piazzapostsfetched.js'
 import error from '../Actions/error.js';
 
-//TODO: clean up CALLBACK HELL
-
 //this is a module exclusively for sending specific actions to the web api.
 //complex actions can be defined here in terms of the basic RESTful API
 
 //Primitive actions supported by webapi.
 //----------------------------------------
 
-// TODO(nate): This is a hardcoded <courseId>. Change this dynamically during
-// runtime based on which course we're actually viewing
 var courseId = pathParse(new URL(window.location.href).pathname).name; //this should be part of global ui state
 var mainUrl = "";
 
@@ -27,7 +23,7 @@ var mainUrl = "";
 var userId = 1;
 
 //TODO: this is not the right place to put this. we might want to add this to global ui state
-export var piazzaClassId = null;//"if44ov1fn5a505"
+export var piazzaClassId = null;
 
 function getNode(nodeId: string){
   let endpoint = mainUrl + `/${courseId}/node/${nodeId}/`;
@@ -225,10 +221,10 @@ export function init(callback: any){
       return getPiazzaClassId(courseId);
     }, handleError("init: Error requesting roots:"))
   .then((data) => {
-      piazzaClassId = data.piazza_cid;
-      // setTimeout(function(){
+      if(data.piazza_cid.trim() !== ""){
+        piazzaClassId = data.piazza_cid;
         getPiazzaPosts(courseId);
-      // }, 2000);
+      }
       callback({rootId, nodes});
     }, handleError("init: Error getting piazza class id:"));
 }
