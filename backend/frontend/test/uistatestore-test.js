@@ -100,12 +100,13 @@ describe('uistatestore', function() {
     dispatch(actionPiazzaPostsFetched);
 
     var all = uiStateStore.getState().piazzaPosts;
+    // console.log(all);
     expect(all.size).to.equal(3);
-    //expect(all.get('testNode')).to.equal(testNode); //Syntax?
+    // expect(all.get('testNode')).to.equal(testNode); //Syntax?
     expect(all.get('testNode').id).to.equal('testID');
-    expect(all.get('rootNode')).to.equal(rootNode);
+    expect(all.get('rootNode').id).to.equal('rootID');
     expect(all.get('rootNode').children['newID']).to.equal('newID');
-    expect(all.get('newNode')).to.equal(newNode);
+    expect(all.get('newNode').id).to.equal('newID');
     expect(uiStateStore.getState().currentWeek).to.equal('Week 2');
   });
 
