@@ -96,18 +96,17 @@ describe('uistatestore', function() {
     expect(all.piazzaPosts.size).to.equal(tempList.size);
   });
 
-/*  it('PiazzaPostsFetched: stores the fetched piazza posts', function() {
+  it('PiazzaPostsFetched: stores the fetched piazza posts', function() {
     dispatch(actionPiazzaPostsFetched);
 
     var all = uiStateStore.getState().piazzaPosts;
-    expect(all).to.equal(piazzaPostList);
     expect(all.size).to.equal(3);
-    expect(all.get('testNode')).to.equal(testNode); //Syntax?
+    //expect(all.get('testNode')).to.equal(testNode); //Syntax?
     expect(all.get('testNode').id).to.equal('testID');
     expect(all.get('rootNode')).to.equal(rootNode);
     expect(all.get('rootNode').children['newID']).to.equal('newID');
     expect(all.get('newNode')).to.equal(newNode);
     expect(uiStateStore.getState().currentWeek).to.equal('Week 2');
-  });*/
+  });
 
 });
