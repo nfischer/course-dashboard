@@ -108,6 +108,33 @@ should work for any system).
   5. If `npm list --depth=0` now succeeds, you can run the actual tests with
      `npm test`.
 
+### Selenium
+
+We've written out UI tests using the Selenium framework. To use these please
+follow these steps:
+
+  1. Look at the "Installation for Development" section for steps on installing
+     NodeJS
+  2. Make sure NodeJS is updated to v5 (Look above for more details on this)
+  3. Run the following commands in your first terminal:
+
+    ```Bash
+    $ cd backend/
+    $ ./setup.sh
+    ```
+
+  4. In your second terminal, run the following commands:
+
+    ```Bash
+    $ cd backend/
+    $ ./addSampleData.py
+    $ cd frontend/
+    $ npm install
+    $ npm list --depth=0 # make sure this succeeds
+    $ npm install mocha -g
+    $ mocha selenium-test.js --compilers js:babel-core/register --timeout 10000
+    ```
+
 Installation for Development
 ----------------------------
 
