@@ -70,18 +70,21 @@ class Node(Resource):
         """
         if operation == 'add':
             DEFAULT_CHILDREN = '{}'
-            g.db.execute('''INSERT INTO nodes
-                            (contents, renderer, children, course_id, isalive) VALUES(?, ?, ?, ?, ?)''',
-                         [request.form['contents'], request.form['renderer'],
-                          DEFAULT_CHILDREN, int(course_id), 1])
-            cursor = g.db.execute('''SELECT id
-                                     FROM nodes
-                                     WHERE course_id=(?) AND isalive=1
-                                     ORDER BY id DESC limit 1''',
-                                  [int(course_id)])
-            g.db.commit()
-            added_node = cursor.fetchone()
-            return jsonify(message='New node was successfully created', id=added_node['id'])
+            try:
+                g.db.execute('''INSERT INTO nodes
+                                (contents, renderer, children, course_id, isalive) VALUES(?, ?, ?, ?, ?)''',
+                             [request.form['contents'], request.form['renderer'],
+                              DEFAULT_CHILDREN, int(course_id), 1])
+                cursor = g.db.execute('''SELECT id
+                                         FROM nodes
+                                         WHERE course_id=(?) AND isalive=1
+                                         ORDER BY id DESC limit 1''',
+                                      [int(course_id)])
+                added_node = cursor.fetchone()
+                g.db.commit()
+                return jsonify(message='New node was successfully created', id=added_node['id'])
+            except:
+                raise InvalidUsage('Invalid course ID')
         #update operation
         elif operation == 'update':
             try:
