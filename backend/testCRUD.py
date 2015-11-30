@@ -239,6 +239,16 @@ class NodeTests(unittest.TestCase):
         jd = json.loads(res.text)
         node_id = int(jd['id'])
         self.assertGreater(node_id, 0)
+        # Attempt to add a node for a course that doesn't exist
+        res = post(self.url + '/{0}/node/add/'.format(self.cid+1), data=node_value)
+        self.assertEqual(res.status_code, 400)
+        # Attempt to add a node with an invalid data format
+        no_contents_value = {'renderer': 'rendition'}
+        res = post(self.url + '/{0}/node/add/'.format(self.cid), data=no_contents_value)
+        self.assertEqual(res.status_code, 400)
+        no_renderer_value = {'contents': 'foo'}
+        res = post(self.url + '/{0}/node/add/'.format(self.cid), data=no_renderer_value)
+        self.assertEqual(res.status_code, 400)
 
     """ Tests requests.get operation """
     def test_get(self):
