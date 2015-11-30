@@ -55,6 +55,16 @@ describe('nodestore', function() {
     children: {}
   });
 
+  var updatedRootNode = new Node({
+    id: 'rootID',
+    contents: '',
+    renderer: 'Renderer',
+    children: {
+      testID: "testID",
+      newID: "newID"
+    }
+  });
+
   // mock actions
   var actionOpen = {
     name: 'open',
@@ -79,7 +89,7 @@ describe('nodestore', function() {
     name: 'updateParentAndChild',
     data: {
       child: newNode,
-      parent: rootNode
+      parent: updatedRootNode
     }
   };
 
@@ -132,10 +142,10 @@ describe('nodestore', function() {
 
     var all = nodeStore.getState().nodes;
 
-    console.log('Node Added:');
+/*    console.log('Node Added:');
     for (let node of all) {
       console.log(node);
-    }
+    }*/
 
     expect(all.size).to.equal(3);
     expect(nodeStore.getState()).to.not.equal(null);
@@ -159,12 +169,12 @@ describe('nodestore', function() {
     
     var all = nodeStore.getState().nodes;
 
-    console.log('Parent/child updated:');
+/*    console.log('Parent/child updated:');
     for (let node of all) {
       console.log(node);
-    }
+    }*/
 
-    expect(all.size).to.equal(4); // Adds a new node with the correct ID without deleting the spoofed node
+    expect(all.size).to.equal(4); // We just added a new node with the correct ID but didn't delete the spoofed node
     expect(nodeStore.getState()).to.not.equal(null);
     expect(all.get('newID').id).to.equal('newID');
     expect(all.get('newID').contents).to.equal('new contents');
@@ -187,10 +197,10 @@ describe('nodestore', function() {
 
     var all = nodeStore.getState().nodes;
 
-    console.log('Node Removed:');
+/*    console.log('Node Removed:');
     for (let node of all) {
       console.log(node);
-    } 
+    } */
 
     expect(all.size).to.equal(3);   // Remaining nodes are testID, rootID, and the spoofed node
     expect(all.get['newID']).to.be.an('undefined');

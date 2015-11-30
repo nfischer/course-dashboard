@@ -37,14 +37,7 @@ describe('uistatestore', function() {
 
   var tempList = new List();
 
-  var piazzaPostList = new List();
-
-  // add nodes to list
-  piazzaPostList = { // TODO: Syntax?
-  	testNode: testNode,
-  	rootNode: rootNode,
-  	newNode: newNode
-  };
+  var piazzaPostList = new List([testNode, rootNode, newNode]);
 
   // mock actions
   var actionOpen = {
@@ -54,7 +47,7 @@ describe('uistatestore', function() {
 
   var actionPiazzaPostsFetched = {
     name: 'piazzaPostsFetched',
-    data: {piazzaPostList}
+    data: {posts: piazzaPostList}
   };
 
   var actionExpandWeek = {
@@ -100,12 +93,13 @@ describe('uistatestore', function() {
     dispatch(actionPiazzaPostsFetched);
 
     var all = uiStateStore.getState().piazzaPosts;
+    // console.log(all);
     expect(all.size).to.equal(3);
-    //expect(all.get('testNode')).to.equal(testNode); //Syntax?
-    expect(all.get('testNode').id).to.equal('testID');
-    expect(all.get('rootNode')).to.equal(rootNode);
-    expect(all.get('rootNode').children['newID']).to.equal('newID');
-    expect(all.get('newNode')).to.equal(newNode);
+    // expect(all.get('testNode')).to.equal(testNode); //Syntax?
+    expect(all.get(0).id).to.equal('testID');
+    expect(all.get(1).id).to.equal('rootID');
+    expect(all.get(1).children['newID']).to.equal('newID');
+    expect(all.get(2).id).to.equal('newID');
     expect(uiStateStore.getState().currentWeek).to.equal('Week 2');
   });
 
