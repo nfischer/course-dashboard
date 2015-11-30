@@ -4,7 +4,8 @@
   "description": "frontend for Course Dashboard",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register"
+     "//": "node-inspector & mocha --compilers js:babel-core/register --debug-brk",
+     "test": "mocha --compilers js:babel-core/register"
   },
   "babel": {
     "presets": [
