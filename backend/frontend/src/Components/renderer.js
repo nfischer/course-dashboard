@@ -269,7 +269,10 @@ export class List extends React.Component {
         <h1>{titleCaps(this.props.tag)}</h1>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>
-            getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
+            <listitem>
+              <h2>{titleCaps(tag)}</h2>
+              {getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)}
+            </listitem>
           )
         }
       </list>
@@ -288,7 +291,10 @@ export class EditableList extends React.Component {
         <ListElementCreator onClick={this.addNewChild.bind(this)}/>
         {
           mapObject(this.props.node.children, (id: string, tag: string) =>
-            getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)
+            <listitem>
+              <h2>{titleCaps(tag)}</h2>
+              {getRenderedElement(tag, nodeStore.getState().nodes.get(id), this.props.ui)}
+            </listitem>
           )
         }
       </list>
