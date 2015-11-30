@@ -24,7 +24,6 @@ script:
   - npm test
   - cd ..
   - sqlite3 db/course-dashboard.db < schema.sql
-  - python cdApp.py & sleep 1
+  - ./addSampleData.py
   - cd frontend/
   - mocha selenium-test.js --compilers js:babel-core/register --timeout 10000
-after_script: kill -- -$!
