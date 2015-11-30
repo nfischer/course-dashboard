@@ -10,10 +10,12 @@ import dispatcher from '../dispatcher.js';
 class UIState {
   currentWeek: string;
   piazzaPosts: List<Object>;
+  error: string;
 
   constructor(currentWeek: string){
     this.currentWeek = currentWeek;
     this.piazzaPosts = new List();
+    this.error = null;
   }
 }
 
@@ -37,6 +39,11 @@ class UIStateStore extends ReduceStore<?UIState> {
       //TODO: this is really ugly. may want to use Object.assign
       newState = new UIState(action.data);
       newState.piazzaPosts = state.piazzaPosts;
+      return newState;
+    case "error":
+      newState = new UIState(state.currentWeek);
+      newState.piazzaPosts = state.piazzaPosts;
+      newState.error = action.data.err;
       return newState;
     }
 

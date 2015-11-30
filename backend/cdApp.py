@@ -6,7 +6,7 @@ from flask import Flask, request, g, render_template, \
 from flask_restful import Resource, Api
 import json
 from piazza_api import Piazza
-from piazza_api.exceptions import AuthenticationError
+from piazza_api.exceptions import AuthenticationError, RequestError
 
 # configuration
 DATABASE = 'db/course-dashboard.db'
@@ -46,13 +46,10 @@ def dict_factory(cursor, row):
 #---------------------HTTP Errors---------------------
 
 class InvalidUsage(Exception):
-    status_code = 400
-
-    def __init__(self, message, status_code=None, payload=None):
+    def __init__(self, message, status_code=400, payload=None):
         Exception.__init__(self)
         self.message = message
-        if status_code is not None:
-            self.status_code = status_code
+        self.status_code = status_code
         self.payload = payload
 
     def to_dict(self):
@@ -73,18 +70,21 @@ class Node(Resource):
         """
         if operation == 'add':
             DEFAULT_CHILDREN = '{}'
-            g.db.execute('''INSERT INTO nodes
-                            (contents, renderer, children, course_id, isalive) VALUES(?, ?, ?, ?, ?)''',
-                         [request.form['contents'], request.form['renderer'],
-                          DEFAULT_CHILDREN, int(course_id), 1])
-            cursor = g.db.execute('''SELECT id
-                                     FROM nodes
-                                     WHERE course_id=(?) AND isalive=1
-                                     ORDER BY id DESC limit 1''',
-                                  [int(course_id)])
-            g.db.commit()
-            added_node = cursor.fetchone()
-            return jsonify(message='New node was successfully created', id=added_node['id'])
+            try:
+                g.db.execute('''INSERT INTO nodes
+                                (contents, renderer, children, course_id, isalive) VALUES(?, ?, ?, ?, ?)''',
+                             [request.form['contents'], request.form['renderer'],
+                              DEFAULT_CHILDREN, int(course_id), 1])
+                cursor = g.db.execute('''SELECT id
+                                         FROM nodes
+                                         WHERE course_id=(?) AND isalive=1
+                                         ORDER BY id DESC limit 1''',
+                                      [int(course_id)])
+                added_node = cursor.fetchone()
+                g.db.commit()
+                return jsonify(message='New node was successfully created', id=added_node['id'])
+            except:
+                raise InvalidUsage('Invalid course ID')
         #update operation
         elif operation == 'update':
             try:
@@ -342,11 +342,23 @@ class Course(Resource):
                         lines = fname.read().split('\n')
                         p.user_login(email=lines[0], password=lines[1])
                     piazza_class = p.network(piazza_id_str)
+                except IndexError:
+                    raise InvalidUsage('Piazza credentials are improperly formatted',
+                                       status_code=501)
                 except IOError:
                     raise InvalidUsage('Unable to find piazza credentials',
                                        status_code=500)
                 except AuthenticationError:
                     raise InvalidUsage('Invalid pizza credentials')
+
+                # Attempt to pull a single post. If it doesn't work, we should
+                # throw an error
+                try:
+                    for k in piazza_class.iter_all_posts(limit=1):
+                        single_post = k
+                except RequestError:
+                    raise InvalidUsage('Invalid piazza course ID',
+                                       status_code=500)
 
                 def get_posts():
                     for post in piazza_class.iter_all_posts():
@@ -367,7 +379,7 @@ def index():
 
 @app.route('/<course_id>/', methods=['GET'])
 def course_index(course_id):
-    return send_from_directory('frontend','index.html');
+    return send_from_directory('frontend', 'index.html')
 
 @app.route('/<course_id>/edit/', methods=['GET'])
 def course_edit(course_id):

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Container } from 'flux/utils';
 import jQuery from 'jquery';
+import Alert from 'react-bootstrap/lib/Alert';
 
 import open from './Actions/open.js';
 import * as WebAPI from './utils/webapi.js';
@@ -39,7 +40,17 @@ class ApplicationComponent extends React.Component{
   render() : React.Component {
     if(this.state.nodes && this.state.ui){
       let root = this.state.nodes.nodes.get(this.state.nodes.rootId);
-      return getRenderedElement("root", root, this.state.ui);
+      return (
+        <div>
+          {
+            this.state.ui.error ? <Alert bsStyle="danger">
+                                     <p>{`ERROR: ${this.state.ui.error}`}</p>
+                                  </Alert> :
+                                  <div/>
+          }
+          {getRenderedElement("root", root, this.state.ui)}
+        </div>
+      );
     } else {
       return <span/>
     }
