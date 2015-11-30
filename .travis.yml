@@ -22,7 +22,7 @@ script:
   - python testCRUD.py
   - cd frontend/
   - npm test
-  - kill -- -$! && cd ..
+  - cd ..
   - sqlite3 db/course-dashboard.db < schema.sql
   - python cdApp.py & sleep 1
   - cd frontend/
