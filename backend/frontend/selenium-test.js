@@ -1,5 +1,11 @@
 var selenium = require('selenium-webdriver');
+var chrome = require('selenium-webdriver/chrome');
+var path = require('chromedriver').path;
+var service = new chrome.ServiceBuilder(path).build();
+chrome.setDefaultService(service);
+
 var chai = require('chai');
+chai.use(require('chai-as-promised'));
 var assert = require('chai').assert;
 var expect = require('chai').expect;
 
@@ -15,15 +21,18 @@ after(function() {
 
 describe('Landing page test', function() {
   beforeEach(function() {
-    return this.driver.get('http://127.0.0.1:5000/');
+    return this.driver.get('http://127.0.0.1:5000/')
+    // WebDriverWait wait = new WebDriverWait(driver, 5);
+    // wait.until(ExpectedConditions.titleContains('Course Dashboard')); 
   });
+
   it('has the project name as the title', function() {
     return expect(this.driver.getTitle()).to.eventually.contain('Course Dashboard');
   });
 
   return it('links to CS130 page', function() {
     this.driver.findElement({
-      linkText: 'CS130'
+      linkText: 'CS 130'
     }).click();
     return expect(this.driver.getCurrentUrl()).to.eventually.equal('http://127.0.0.1:5000/1/');
   });

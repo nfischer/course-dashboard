@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^3.3.5",
+    "chai-as-promised": "^5.1.0",
     "chromedriver": "^2.20.0",
     "classnames": "^2.2.0",
     "dom-helpers": "^2.4.0",
