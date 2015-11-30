@@ -7,8 +7,7 @@ import pathParse from 'path-parse';
 
 import Node from '../Models/node.js';
 import piazzaPostsFetched from '../Actions/piazzapostsfetched.js'
-
-//TODO: clean up CALLBACK HELL
+import error from '../Actions/error.js';
 
 //this is a module exclusively for sending specific actions to the web api.
 //complex actions can be defined here in terms of the basic RESTful API
@@ -16,8 +15,6 @@ import piazzaPostsFetched from '../Actions/piazzapostsfetched.js'
 //Primitive actions supported by webapi.
 //----------------------------------------
 
-// TODO(nate): This is a hardcoded <courseId>. Change this dynamically during
-// runtime based on which course we're actually viewing
 var courseId = pathParse(new URL(window.location.href).pathname).name; //this should be part of global ui state
 var mainUrl = "";
 
@@ -26,7 +23,7 @@ var mainUrl = "";
 var userId = 1;
 
 //TODO: this is not the right place to put this. we might want to add this to global ui state
-export var piazzaClassId = null;//"if44ov1fn5a505"
+export var piazzaClassId = null;
 
 function getNode(nodeId: string){
   let endpoint = mainUrl + `/${courseId}/node/${nodeId}/`;
@@ -114,8 +111,12 @@ var posts = new Map();
 var cached = null;
 function getPiazzaPosts(courseId: number){
   let endpoint = mainUrl + `/${courseId}/course/getpiazzaposts/`;
-  http.get(endpoint, function(res){
+  let ignoredata = false;
+  var req = http.get(endpoint, function(res){
     res.on('data', function(buf){
+      if(ignoredata){
+        return;
+      }
       // console.log(buf.toString());
       if(!posts.has(courseId)){
         posts = posts.set(courseId, List());
@@ -130,6 +131,13 @@ function getPiazzaPosts(courseId: number){
           toparse = buf.toString();
         }
 
+        let json = JSON.parse(buf.toString())
+        if(json.hasOwnProperty("message")){
+          error(`fetchpiazzaposts failed: ${json.message}`);
+          ignoredata = true;
+          return;
+        }
+
         posts = posts.set(courseId,
           posts.get(courseId).push(JSON.parse(buf.toString()))
         );
@@ -141,8 +149,16 @@ function getPiazzaPosts(courseId: number){
     });
 
     res.on('end', function(){
-      piazzaPostsFetched(posts.get(courseId));
+      if(this.statusCode === 200){
+        piazzaPostsFetched(posts.get(courseId));
+      }
     });
+
+  });
+
+  req.on('error', function(e){
+    console.error(e);
+    throw e;
   })
 }
 
@@ -205,10 +221,10 @@ export function init(callback: any){
       return getPiazzaClassId(courseId);
     }, handleError("init: Error requesting roots:"))
   .then((data) => {
-      piazzaClassId = data.piazza_cid;
-      setTimeout(function(){
+      if(data.piazza_cid.trim() !== ""){
+        piazzaClassId = data.piazza_cid;
         getPiazzaPosts(courseId);
-      }, 2000);
+      }
       callback({rootId, nodes});
     }, handleError("init: Error getting piazza class id:"));
 }
@@ -216,6 +232,7 @@ export function init(callback: any){
 function handleError(errorStr){
   return (jqXHR, textStatus, errorThrown) => {
     console.error(errorStr, textStatus);
+    error(`${errorStr} ${textStatus}`);
     throw errorThrown;
   }
 }

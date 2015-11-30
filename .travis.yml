@@ -1,8 +1,16 @@
 language: python
 python:
   - "2.7"
+
 # command to install dependencies
-install: "pip install -r requirements.txt"
+install:
+  - pip install -r requirements.txt
+  - cd backend/frontend/
+  - nvm install 5.0
+  - nvm use 5.0
+  - npm install
+  - cd ../..
+
 # command to run tests
 before_script:
   - cd backend/
@@ -12,4 +20,6 @@ script:
   - python cdApp.py &
   - sleep 1
   - python testCRUD.py
-after_script: killall setup.sh
+  - cd frontend/
+  - npm test
+after_script: kill $!

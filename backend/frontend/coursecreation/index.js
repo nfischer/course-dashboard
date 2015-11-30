@@ -210,7 +210,11 @@ function processSubmittedCourse(course) {
   //call appropriate primitives to create the course
   initializeCourse(course.courseDetails.title).then(function (cId) {
     courseId = cId.course_id;
-    return setPiazza(courseId, course.courseDetails.piazzaCourseId);
+    if (course.courseDetails.piazzaCourseId) {
+      return setPiazza(courseId, course.courseDetails.piazzaCourseId);
+    } else {
+      return setPiazza(courseId, "");
+    }
   }, handleError("Error initializing course:")).then(function () {
     return Promise.all(nodes.map(function (node) {
       return createNode(courseId, node.contents, node.renderer);
