@@ -22,8 +22,3 @@ script:
   - python testCRUD.py
   - cd frontend/
   - npm test
-  - cd ..
-  - sqlite3 db/course-dashboard.db < schema.sql
-  - ./addSampleData.py
-  - cd frontend/
-  - mocha selenium-test.js --compilers js:babel-core/register --timeout 10000
