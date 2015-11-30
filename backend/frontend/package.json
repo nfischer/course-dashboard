@@ -4,8 +4,7 @@
   "description": "frontend for Course Dashboard",
   "main": "index.js",
   "scripts": {
-     "//": "node-inspector & mocha --compilers js:babel-core/register --debug-brk",
-     "test": "mocha --compilers js:babel-core/register"
+    "test": "mocha --compilers js:babel-core/register"
   },
   "babel": {
     "presets": [
@@ -24,6 +23,8 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^3.3.5",
+    "chai-as-promised": "^5.1.0",
+    "chromedriver": "^2.20.0",
     "classnames": "^2.2.0",
     "dom-helpers": "^2.4.0",
     "event-source-polyfill": "0.0.6",
@@ -38,6 +39,7 @@
     "react": "^0.14.3",
     "react-bootstrap": "^0.27.3",
     "react-dom": "^0.14.2",
+    "selenium-webdriver": "^2.48.2",
     "stream-http": "^2.0.2",
     "url-parse": "^1.0.5"
   },
@@ -55,6 +57,7 @@
     "browserify": "^11.2.0",
     "browserify-resolutions": "^1.0.6",
     "chai": "^3.4.1",
+    "chromedriver": "^2.20.0",
     "concat-stream": "^1.5.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.0",
@@ -69,6 +72,7 @@
     "mockery": "^1.4.0",
     "orchestrator": "^0.3.7",
     "partial": "0.0.3",
+    "selenium-webdriver": "^2.48.2",
     "sinon": "^1.17.2",
     "source-map-support": "^0.3.2",
     "vinyl-buffer": "^1.0.0",

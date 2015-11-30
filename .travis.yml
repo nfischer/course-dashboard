@@ -9,6 +9,7 @@ install:
   - nvm install 5.0
   - nvm use 5.0
   - npm install
+  - npm install mocha -g
   - cd ../..
 
 # command to run tests
@@ -17,9 +18,7 @@ before_script:
   - mkdir -p db/
   - sqlite3 db/course-dashboard.db < schema.sql
 script:
-  - python cdApp.py &
-  - sleep 1
+  - python cdApp.py & sleep 1
   - python testCRUD.py
   - cd frontend/
   - npm test
-after_script: kill $!
