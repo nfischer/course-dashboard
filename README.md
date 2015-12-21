@@ -191,7 +191,6 @@ $ python
 Contributing
 ------------
 
-Please don't contribute (yet)! This is a school project, so we unfortunately
-can't accept any contributions until after the term is over. As soon as the
-quarter ends, we plan to make this completely open source and we'll permit (and
-encourage) community involvement.
+Now that this course has ended, we can officially accept contributions from the
+open source community! If you like our project and want to contribute, feel free
+to open a pull request and one of us will review it.
