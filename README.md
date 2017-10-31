@@ -1,8 +1,7 @@
 Course Dashboard
 ================
 
-[![Build Status](https://travis-ci.org/nfischer/course-dashboard.svg?branch=master)]
-(https://travis-ci.org/nfischer/course-dashboard)
+[![Build Status](https://img.shields.io/travis/nfischer/course-dashboard/master.svg?style=flat-square)](https://travis-ci.org/nfischer/course-dashboard)
 
 A simplified way of organizing all information and materials for a course
 
