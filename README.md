@@ -1,12 +1,10 @@
-Course Dashboard
-================
+# Course Dashboard
 
 [![Build Status](https://img.shields.io/travis/nfischer/course-dashboard/master.svg?style=flat-square)](https://travis-ci.org/nfischer/course-dashboard)
 
 A simplified way of organizing all information and materials for a course
 
-Quick Start
------------
+## Quick Start
 
 This will allow you to easily pre-make a sample course and test it.
 
@@ -34,8 +32,7 @@ running page of our project. Click on the link for **CS 130** to be taken to the
 course page. If that's good enough for you, then you're done at this point, and
 can skip the steps below.
 
-Course Creation
----------------
+## Course Creation
 
 To test this out, follow the same steps as in the above section, but do not run
 `./addSampleData.py`. Open up the web browser to
@@ -46,8 +43,7 @@ assignments, and resources). We don't support leaving any elements on the page
 as empty, so if you want to not add something (i.e. you want to create a course
 with no assignments initially), click the "minus" sign.
 
-Running tests
--------------
+## Running tests
 
 ### Backend
 
@@ -91,18 +87,18 @@ should work for any system).
       not proceed if your output differs significantly.**
   3. Then run the following code to install all dependencies:
 
-    ```Bash
-    $ cd backend/frontend/ # unless you're already there
-    $ npm install
-    $ npm list --depth=0 # should return with status 0
-    ```
+     ```Bash
+     $ cd backend/frontend/ # unless you're already there
+     $ npm install
+     $ npm list --depth=0 # should return with status 0
+     ```
 
   4. If `npm list --depth=0` succeeds, continue on to step 5. Otherwise, please
      manually install the dependencies it lists as missing:
 
-    ```Bash
-    $ npm install babel-runtime@^5.8.25 # for example, if this dep is missing
-    ```
+     ```Bash
+     $ npm install babel-runtime@^5.8.25 # for example, if this dep is missing
+     ```
 
   5. If `npm list --depth=0` now succeeds, you can run the actual tests with
      `npm test`.
@@ -117,25 +113,24 @@ follow these steps:
   2. Make sure NodeJS is updated to v5 (Look above for more details on this)
   3. Run the following commands in your first terminal:
 
-    ```Bash
-    $ cd backend/
-    $ ./setup.sh
-    ```
+     ```Bash
+     $ cd backend/
+     $ ./setup.sh
+     ```
 
   4. In your second terminal, run the following commands:
 
-    ```Bash
-    $ cd backend/
-    $ ./addSampleData.py
-    $ cd frontend/
-    $ npm install
-    $ npm list --depth=0 # make sure this succeeds
-    $ npm install mocha -g
-    $ mocha selenium-test.js --compilers js:babel-core/register --timeout 10000
-    ```
+     ```Bash
+     $ cd backend/
+     $ ./addSampleData.py
+     $ cd frontend/
+     $ npm install
+     $ npm list --depth=0 # make sure this succeeds
+     $ npm install mocha -g
+     $ mocha selenium-test.js --compilers js:babel-core/register --timeout 10000
+     ```
 
-Installation for Development
-----------------------------
+## Installation for Development
 
 ### Users on Posix based Machines
 
@@ -158,14 +153,13 @@ To install gulp for frontend work:
       [here](https://nodejs.org/en/download/)
   2. Execute the following commands to install npm and gulp
 
-    ```
-    > cd course-dashboard/backend/frontend
-    > npm install gulp -g
-    > npm install
-    ```
+     ```
+     > cd course-dashboard/backend/frontend
+     > npm install gulp -g
+     > npm install
+     ```
 
-Interacting directly with the backend
--------------------------------------
+## Interacting directly with the backend
 
 If you want to interact directly with our backend (and bypass the web
 interface), you can do so via python.
@@ -187,8 +181,7 @@ $ python
 >>> exit()
 ```
 
-Contributing
-------------
+## Contributing
 
 Now that this course has ended, we can officially accept contributions from the
 open source community! If you like our project and want to contribute, feel free
