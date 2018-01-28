@@ -144,7 +144,7 @@ $ npm install
 $ # or do similar commands for your system
 ```
 
-### Users on Windows Machines
+### Users on Windows
 
 To install gulp for frontend work:
 
@@ -169,7 +169,7 @@ In your first terminal, launch the backend as done previously (with
 the database through the API calls:
 
 ```Python
-$ python
+>>> # In a python REPL
 >>> from requests import post, get
 >>> post('http://127.0.0.1:5000/0/course/add/').json()
 >>> # output should be: {u'message': u'New course was successfully initialized', u'course_id': '1'}
