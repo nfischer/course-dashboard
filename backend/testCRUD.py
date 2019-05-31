@@ -357,13 +357,13 @@ class TreeTests(unittest.TestCase):
         node_id = int(jd['id'])
         node_list.append(node_id)
         # Check that nodes are in increasing order
-        self.assertTrue(sorted(node_list))
+        self.assertEqual(node_list, sorted(node_list))
         # Get the tree
         res = get(self.url + '/{0}/tree/'.format(self.cid))
         self.assertEqual(res.status_code, 200)
         tree_nodes = res.json()['nodes']
         self.assertEqual(type(tree_nodes), type(node_list))
-        tree_nodes.sort()
+        tree_nodes.sort(key=lambda node: node.get('id'))
         counter = 0
         for tnode, nid in zip(tree_nodes, node_list):
             self.assertEqual(type(tnode['id']), INT_TYPE)
