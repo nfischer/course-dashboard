@@ -92,9 +92,9 @@ class Node(Resource):
                 # children, content and renderer each for each update
                 node_id = str(node_id)
 
-                contents = request.form['contents'] if request.form.has_key('contents') else None
-                renderer = request.form['renderer'] if request.form.has_key('renderer') else None
-                children = request.form['children'] if request.form.has_key('children') else None
+                contents = request.form.get('contents')
+                renderer = request.form.get('renderer')
+                children = request.form.get('children')
                 data = []
                 sql_list = []
 
@@ -129,7 +129,7 @@ class Node(Resource):
             except InvalidUsage:
                 raise # reraise this exception so it's public-facing
             except Exception as e:
-                print str(e)
+                print(str(e))
                 raise InvalidUsage('Internal error', status_code=500)
             return jsonify(message='Node was successfully updated.', id=node_id)
 
@@ -255,7 +255,7 @@ class Course(Resource):
                 return jsonify(message='Successfully added piazza ID for course',
                                course_id=course_id)
             except Exception as e:
-                print str(e)
+                print(str(e))
                 raise InvalidUsage('Cannot set more than once')
 
         elif operation == 'resetpiazza':
