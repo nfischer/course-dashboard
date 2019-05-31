@@ -1,4 +1,5 @@
 language: python
+sudo: false
 python:
   - "2.7"
 
@@ -6,10 +7,8 @@ python:
 install:
   - pip install -r requirements.txt
   - cd backend/frontend/
-  - nvm install 5.0
-  - nvm use 5.0
+  - nvm install node # latest stable node version
   - npm install
-  - npm install mocha -g
   - cd ../..
 
 # command to run tests
