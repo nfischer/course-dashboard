@@ -9,7 +9,7 @@ install:
   - pip install -r requirements.txt
   - cd backend/frontend/
   - nvm install node # latest stable node version
-  - npm install
+  - npm ci
   - cd ../..
 
 # command to run tests
