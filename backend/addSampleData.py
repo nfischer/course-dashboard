@@ -88,23 +88,12 @@ def set_piazza(course_id, piazza_id):
         raise ValueError('Unable to add piazza id %s' % piazza_id)
     return ret
 
-def node_compare(node1, node2):
-    """
-    Compare two nodes based on 'id' field
-    This is used to sort the nodes so that they are added in proper order (so
-    that node id=1 is added first, then node id=2, etc.)
-    @private
-    """
-    id1 = int(node1['id'])
-    id2 = int(node2['id'])
-    return id1 - id2
-
 if __name__ == '__main__':
     with open(SAMPLE_JSON_FILE) as data_file:
         data = json.load(data_file)
 
     nlist = data['nodes']
-    nlist.sort(cmp=node_compare)
+    nlist.sort(key=lambda node: node['id'])
 
     # Get an initial course
     val = initialize_course('CS 130')
@@ -113,14 +102,14 @@ if __name__ == '__main__':
     for node in nlist:
         mycontents = node['contents']
         myrenderer = node['renderer']
-        print create_node(course_id=mycid, contents=mycontents, renderer=myrenderer).json()
+        print(create_node(course_id=mycid, contents=mycontents, renderer=myrenderer).json())
 
     for node in nlist:
         myid = int(node['id'])
         mychildren = json.dumps(node['children'])
-        print update_node(mycid, myid, children=mychildren).json()
+        print(update_node(mycid, myid, children=mychildren).json())
 
     # add the cs 130 piazza ID
-    print set_piazza(mycid, 'if44ov1fn5a505').json()
+    print(set_piazza(mycid, 'if44ov1fn5a505').json())
     # Set the root to be node 54
-    print add_root(mycid, 54).json()
+    print(add_root(mycid, 54).json())
