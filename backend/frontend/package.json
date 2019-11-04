@@ -22,7 +22,7 @@
   "author": "ucla cs 130",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^3.3.5",
+    "bootstrap": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "chromedriver": "^2.20.0",
     "classnames": "^2.2.0",
