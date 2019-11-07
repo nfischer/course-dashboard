@@ -4,6 +4,13 @@
 
 A simplified way of organizing all information and materials for a course
 
+## Archived
+
+**Note:** this was for a school project. Since that work has long-since been
+submitted, we've now archived the repository to make it clear we do not intend
+to maintain this code going forward. Fork this project with caution, as there
+are probably bugs and security issues in the project's dependency tree.
+
 ## Quick Start
 
 This will allow you to easily pre-make a sample course and test it.
